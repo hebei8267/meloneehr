@@ -1,4 +1,4 @@
-package generator;
+package generator.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,11 @@ import java.util.List;
 
 import file.ExcelUtils;
 
+/**
+ * @author kaka
+ * 
+ * Dao Test 文件生成
+ */
 public class DaoTestFileGenerator extends AbstractFileGenerator {
     public static void main(String[] args) throws IOException {
         File file = new File("C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\MyGame\\generatorFiles\\Dao.xls");
@@ -31,13 +36,13 @@ public class DaoTestFileGenerator extends AbstractFileGenerator {
                     }
 
                 }
-                createFileContent(classNameStr, packageNameStr, annotationStr);
+                createCodeFile(classNameStr, packageNameStr, annotationStr);
             }
         }
     }
 
-    private static void createFileContent(String classNameStr, String packageNameStr, String annotationStr)
-            throws IOException {
+    @Override
+    public void createCodeFile(String classNameStr, String packageNameStr, String annotationStr) throws IOException {
         Writer fileWriter = null;
 
         createFolder(ROOT_PATH + getFolderName(packageNameStr));
