@@ -10,32 +10,32 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class CSVUtils {
-	public static List<List<String>> readCSVFile(String filePath) throws IOException {
+    public static List<List<String>> readCSVFile(String filePath) throws IOException {
 
-		File csvFile = new File(filePath); // CSVデータファイル
+        File csvFile = new File(filePath); // CSVデータファイル
 
-		InputStreamReader read = new InputStreamReader(new FileInputStream(csvFile), "UTF-8");
+        InputStreamReader read = new InputStreamReader(new FileInputStream(csvFile), "UTF-8");
 
-		BufferedReader br = new BufferedReader(read);
-		List<List<String>> csvFileContent = new ArrayList<List<String>>();
+        BufferedReader br = new BufferedReader(read);
+        List<List<String>> csvFileContent = new ArrayList<List<String>>();
 
-		// 最終行まで読み込む
-		while (br.ready()) {
-			String line = br.readLine();
-			List<String> lineContent = new ArrayList<String>();
+        // 最終行まで読み込む
+        while (br.ready()) {
+            String line = br.readLine();
+            List<String> lineContent = new ArrayList<String>();
 
-			// 1行をデータの要素に分割
-			StringTokenizer st = new StringTokenizer(line, "\t");
-			while (st.hasMoreTokens()) {
-				// 1行の各要素をタブ区切りで表示
-				lineContent.add(st.nextToken());
-			}
+            // 1行をデータの要素に分割
+            StringTokenizer st = new StringTokenizer(line, "\t");
+            while (st.hasMoreTokens()) {
+                // 1行の各要素をタブ区切りで表示
+                lineContent.add(st.nextToken());
+            }
 
-			csvFileContent.add(lineContent);
-		}
-		br.close();
+            csvFileContent.add(lineContent);
+        }
+        br.close();
 
-		return csvFileContent;
+        return csvFileContent;
 
-	}
+    }
 }

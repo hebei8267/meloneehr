@@ -11,7 +11,7 @@ public class DaoTestFileGenerator extends AbstractFileGenerator {
     public static void main(String[] args) throws IOException {
         File file = new File("C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\MyGame\\generatorFiles\\Dao.xls");
 
-        List<List<List<String>>> workContent = ExcelUtils.readExcel(file);
+        List<List<List<String>>> workContent = ExcelUtils.readExcelFile(file);
 
         for (List<List<String>> sheetContent : workContent) {
             for (List<String> rowContent : sheetContent) {
