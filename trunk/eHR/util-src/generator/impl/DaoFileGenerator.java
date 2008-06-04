@@ -1,14 +1,11 @@
 package generator.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import domain.FileInfo;
-
-import file.ExcelUtils;
 
 /**
  * @author kaka
@@ -17,43 +14,14 @@ import file.ExcelUtils;
  */
 public class DaoFileGenerator extends AbstractFileGenerator {
 
-    public void createCodeFile(List<FileInfo> fileInfoList) throws IOException {
-      
+    public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
+
         for (FileInfo fileInfo : fileInfoList) {
-            String classNameStr = "";
-            String packageNameStr = "";
-            String annotationStr = "";
-            
+            String classNameStr = dataMap.get(fileInfo.getFileName());
+            String packageNameStr = fileInfo.getFileName();
+            String annotationStr = fileInfo.getFileName();
+
             createCodeFile(classNameStr, packageNameStr, annotationStr);
-        }
-        
-        
-        
-        
-        File file = new File("C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\MyGame\\generatorFiles\\Dao.xls");
-
-        List<List<List<String>>> workContent = ExcelUtils.readExcelFile(file);
-
-        for (List<List<String>> sheetContent : workContent) {
-            for (List<String> rowContent : sheetContent) {
-
-                String classNameStr = "";
-                String packageNameStr = "";
-                String annotationStr = "";
-
-                for (int i = 0; i < rowContent.size(); i++) {
-                    String cellValue = rowContent.get(i);
-
-                    if (i == 0) {
-                        classNameStr = cellValue;
-                    } else if (i == 1) {
-                        packageNameStr = cellValue;
-                    } else {
-                        annotationStr = cellValue;
-                    }
-                }
-                createCodeFile(classNameStr, packageNameStr, annotationStr);
-            }
         }
 
     }

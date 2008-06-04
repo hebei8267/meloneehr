@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.Map;
+
+import domain.FileInfo;
 
 import file.ExcelUtils;
 
@@ -76,5 +79,11 @@ public class DaoTestFileGenerator extends AbstractFileGenerator {
 
         fileWriter.write(fileContentBuf.toString());
         fileWriter.close();
+    }
+
+    @Override
+    public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
+        // TODO Auto-generated method stub
+
     }
 }

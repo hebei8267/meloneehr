@@ -6,15 +6,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import domain.FileInfo;
+
 import file.ExcelUtils;
+import file.FindFilesUtils;
+import generator.impl.DaoFileGenerator;
 
 public class AllFileGenerator {
-    public final static String DATA_DICTIONARY_FILE_PATH = "";
+    public final static String DATA_DICTIONARY_FILE_PATH = "C:\\11\\123.xls";
+
+    public final static String UML_SRC_FILE_PATH = "C:\\11\\uml-src\\";
 
     public static void main(String[] args) throws IOException {
         AllFileGenerator fg = new AllFileGenerator();
 
         Map<String, String> dataMap = fg.getDataDictionaryContent(DATA_DICTIONARY_FILE_PATH);
+        System.out.println(dataMap.size());
+        FindFilesUtils utils = new FindFilesUtils();
+
+        List<FileInfo> fileInfoList = utils.getFileInfoList(UML_SRC_FILE_PATH);
+        System.out.println(fileInfoList.size());
+        DaoFileGenerator daoFg = new DaoFileGenerator();
+        daoFg.createCodeFile(fileInfoList, dataMap);
     }
 
     /**

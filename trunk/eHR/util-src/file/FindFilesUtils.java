@@ -15,12 +15,16 @@ public class FindFilesUtils {
     public static void main(String[] args) {
         FindFilesUtils utils = new FindFilesUtils();
 
-        List<FileInfo> fileInfoList = utils.getFileInfoList("C:/cn");
+        List<FileInfo> fileInfoList = utils.getFileInfoList("C:\\11\\uml-src\\");
 
         for (Object object : fileInfoList) {
             System.out.println(object);
         }
     }
+
+    public final static String JAVA_FILE = ".java";
+    public final static String HIDDEN_FILE = ".";
+    public final static String SEPARATOR = "\\";
 
     public List<FileInfo> getFileInfoList(String path) {
         List<FileInfo> fileInfoList = new ArrayList<FileInfo>();
@@ -33,17 +37,21 @@ public class FindFilesUtils {
 
             File file = new File(path);
             if (file.isFile()) {// 文件
-                FileInfo fileInfo = new FileInfo();
+                if (file.getName().endsWith(JAVA_FILE)) {// java文件
 
-                fileInfo.setFileName(file.getName());
-                fileInfo.setFilePath(file.getParent());
+                    FileInfo fileInfo = new FileInfo();
 
-                fileInfoList.add(fileInfo);
+                    fileInfo.setFileName(file.getName().replace(JAVA_FILE, ""));
+                    fileInfo.setFilePath(file.getParent());
+
+                    fileInfoList.add(fileInfo);
+                }
             } else {// 文件夹
                 String[] files = file.list();
-
                 for (String fileName : files) {
-                    getFileInfoList(path + "/" + fileName, fileInfoList);
+                    if (!fileName.startsWith(HIDDEN_FILE)) {// 非隐藏文件夹
+                        getFileInfoList(path + SEPARATOR + fileName, fileInfoList);
+                    }
                 }
             }
 

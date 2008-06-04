@@ -1,6 +1,6 @@
 package generator.impl;
 
-import generator.FileGenerator;
+import generator.IFileGenerator;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,8 +13,8 @@ import java.io.Writer;
  * 
  * 文件生成父类
  */
-public abstract class AbstractFileGenerator implements FileGenerator {
-    public static final String ROOT_PATH = "c:\\";
+public abstract class AbstractFileGenerator implements IFileGenerator {
+    public static final String ROOT_PATH = "c:\\11\\";
 
     protected static Writer getFileWriter(String fileName) throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8");
@@ -30,7 +30,11 @@ public abstract class AbstractFileGenerator implements FileGenerator {
     }
 
     protected static String getComponentName(String cellValue) {
-        return cellValue.substring(0, 1).toLowerCase() + cellValue.substring(1);
+        if (cellValue == null || cellValue.length() < 0) {
+            return cellValue;
+        } else {
+            return cellValue.substring(0, 1).toLowerCase() + cellValue.substring(1);
+        }
     }
 
     protected static String getFolderName(String cellValue) {
