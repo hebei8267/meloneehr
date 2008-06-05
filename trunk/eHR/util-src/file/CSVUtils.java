@@ -8,13 +8,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import static constant.Constant.CHARSET_NAME;
+import static constant.Constant.DELIM;
 
 public class CSVUtils {
     public static List<List<String>> readCSVFile(String filePath) throws IOException {
 
         File csvFile = new File(filePath); // CSVデータファイル
 
-        InputStreamReader read = new InputStreamReader(new FileInputStream(csvFile), "UTF-8");
+        InputStreamReader read = new InputStreamReader(new FileInputStream(csvFile), CHARSET_NAME);
 
         BufferedReader br = new BufferedReader(read);
         List<List<String>> csvFileContent = new ArrayList<List<String>>();
@@ -25,7 +27,7 @@ public class CSVUtils {
             List<String> lineContent = new ArrayList<String>();
 
             // 1行をデータの要素に分割
-            StringTokenizer st = new StringTokenizer(line, "\t");
+            StringTokenizer st = new StringTokenizer(line, DELIM);
             while (st.hasMoreTokens()) {
                 // 1行の各要素をタブ区切りで表示
                 lineContent.add(st.nextToken());

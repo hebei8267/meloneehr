@@ -1,10 +1,20 @@
 package file;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import domain.FileInfo;
+
+import static constant.Constant.JAVA_FILE;
+import static constant.Constant.SEPARATOR;
+import static constant.Constant.POINT;
+import static constant.Constant.HIDDEN_FILE;
+import static constant.Constant.CHARSET_NAME;
 
 /**
  * @author kaka
@@ -12,27 +22,14 @@ import domain.FileInfo;
  * 得到指定路径下所有文件信息（包含子文件）
  */
 public class FindFilesUtils {
-    public static void main(String[] args) {
-        FindFilesUtils utils = new FindFilesUtils();
-
-        List<FileInfo> fileInfoList = utils.getFileInfoList("C:\\11\\uml-src\\");
-
-        for (Object object : fileInfoList) {
-            System.out.println(object);
-        }
-    }
-
-    public final static String JAVA_FILE = ".java";
-    public final static String HIDDEN_FILE = ".";
-    public final static String SEPARATOR = "\\";
 
     public List<FileInfo> getFileInfoList(String path) {
         List<FileInfo> fileInfoList = new ArrayList<FileInfo>();
-        getFileInfoList(path, fileInfoList);
+        getFileInfoList(path, path, fileInfoList);
         return fileInfoList;
     }
 
-    private void getFileInfoList(String path, List<FileInfo> fileInfoList) {
+    private void getFileInfoList(String rootPath, String path, List<FileInfo> fileInfoList) {
         try {
 
             File file = new File(path);
@@ -42,7 +39,8 @@ public class FindFilesUtils {
                     FileInfo fileInfo = new FileInfo();
 
                     fileInfo.setFileName(file.getName().replace(JAVA_FILE, ""));
-                    fileInfo.setFilePath(file.getParent());
+                    fileInfo.setFilePath(file.getParent().replace(rootPath, "").replace(SEPARATOR, POINT));
+                    fileInfo.setFileContent(getFileContent(file));
 
                     fileInfoList.add(fileInfo);
                 }
@@ -50,7 +48,7 @@ public class FindFilesUtils {
                 String[] files = file.list();
                 for (String fileName : files) {
                     if (!fileName.startsWith(HIDDEN_FILE)) {// 非隐藏文件夹
-                        getFileInfoList(path + SEPARATOR + fileName, fileInfoList);
+                        getFileInfoList(rootPath, path + SEPARATOR + fileName, fileInfoList);
                     }
                 }
             }
@@ -58,5 +56,23 @@ public class FindFilesUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 取得文件内容
+     * 
+     * @return
+     * @throws IOException
+     */
+    private List<String> getFileContent(File file) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET_NAME));
+
+        List<String> fileContent = new ArrayList<String>();
+
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            fileContent.add(line);
+        }
+        return fileContent;
     }
 }

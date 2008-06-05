@@ -11,21 +11,62 @@ import domain.FileInfo;
 import file.ExcelUtils;
 import file.FindFilesUtils;
 import generator.impl.DaoFileGenerator;
+import generator.impl.DaoTestFileGenerator;
+import generator.impl.EntityFileGenerator;
 
 public class AllFileGenerator {
-    public final static String DATA_DICTIONARY_FILE_PATH = "C:\\11\\123.xls";
+    public final static String DATA_DICTIONARY_FILE_PATH = "C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\eHR\\uml-src\\Data.xls";
 
-    public final static String UML_SRC_FILE_PATH = "C:\\11\\uml-src\\";
+    public final static String UML_SRC_FILE_PATH = "C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\eHR\\uml-src\\";
 
     public static void main(String[] args) throws IOException {
         AllFileGenerator fg = new AllFileGenerator();
 
         Map<String, String> dataMap = fg.getDataDictionaryContent(DATA_DICTIONARY_FILE_PATH);
-        System.out.println(dataMap.size());
+
         FindFilesUtils utils = new FindFilesUtils();
 
         List<FileInfo> fileInfoList = utils.getFileInfoList(UML_SRC_FILE_PATH);
-        System.out.println(fileInfoList.size());
+        // entityFile生成
+        fg.entityFileGenerator(fileInfoList, dataMap);
+        // daoFile生成
+        fg.daoFileGenerator(fileInfoList, dataMap);
+        // daoTestFile生成
+        fg.daoTestFileGenerator(fileInfoList, dataMap);
+    }
+
+    /**
+     * entityFile生成
+     * 
+     * @param fileInfoList 文件内容List
+     * @param dataMap 数据字典Map
+     * @throws IOException
+     */
+    private void entityFileGenerator(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
+        EntityFileGenerator entityFg = new EntityFileGenerator();
+        entityFg.createCodeFile(fileInfoList, dataMap);
+    }
+
+    /**
+     * daoTestFile生成
+     * 
+     * @param fileInfoList 文件内容List
+     * @param dataMap 数据字典Map
+     * @throws IOException
+     */
+    private void daoTestFileGenerator(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
+        DaoTestFileGenerator daoTestFg = new DaoTestFileGenerator();
+        daoTestFg.createCodeFile(fileInfoList, dataMap);
+    }
+
+    /**
+     * daoFile生成
+     * 
+     * @param fileInfoList 文件内容List
+     * @param dataMap 数据字典Map
+     * @throws IOException
+     */
+    private void daoFileGenerator(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
         DaoFileGenerator daoFg = new DaoFileGenerator();
         daoFg.createCodeFile(fileInfoList, dataMap);
     }

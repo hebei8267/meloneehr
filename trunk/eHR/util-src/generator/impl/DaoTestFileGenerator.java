@@ -1,6 +1,5 @@
 package generator.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -8,7 +7,10 @@ import java.util.Map;
 
 import domain.FileInfo;
 
-import file.ExcelUtils;
+import static constant.Constant.ROOT_PATH;
+import static constant.Constant.DAO_TEST_FILE_PATH;
+import static constant.Constant.DAO_TEST;
+import static constant.Constant.JAVA_FILE;
 
 /**
  * @author kaka
@@ -16,46 +18,38 @@ import file.ExcelUtils;
  * Dao Test 文件生成
  */
 public class DaoTestFileGenerator extends AbstractFileGenerator {
-    public static void main(String[] args) throws IOException {
-        File file = new File("C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\MyGame\\generatorFiles\\Dao.xls");
 
-        List<List<List<String>>> workContent = ExcelUtils.readExcelFile(file);
+    @Override
+    public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
+        for (FileInfo fileInfo : fileInfoList) {
+            String classNameStr = dataMap.get(fileInfo.getFileName());
+            String packageNameStr = fileInfo.getFilePath();
+            String annotationStr = fileInfo.getFileName();
 
-        for (List<List<String>> sheetContent : workContent) {
-            for (List<String> rowContent : sheetContent) {
-
-                String classNameStr = "";
-                String packageNameStr = "";
-                String annotationStr = "";
-                for (int i = 0; i < rowContent.size(); i++) {
-                    String cellValue = rowContent.get(i);
-
-                    if (i == 0) {
-                        classNameStr = cellValue;
-                    } else if (i == 1) {
-                        packageNameStr = cellValue;
-                    } else {
-                        annotationStr = cellValue;
-                    }
-
-                }
-                createCodeFile(classNameStr, packageNameStr, annotationStr);
-            }
+            createCodeFile(classNameStr, packageNameStr, annotationStr);
         }
     }
 
-    @Override
+    /**
+     * 代码文件生成
+     * 
+     * @param classNameStr 类名
+     * @param packageNameStr 包名
+     * @param annotationStr 类注释名词
+     * @throws IOException
+     */
     public void createCodeFile(String classNameStr, String packageNameStr, String annotationStr) throws IOException {
         Writer fileWriter = null;
 
-        createFolder(ROOT_PATH + getFolderName(packageNameStr));
-        fileWriter = getFileWriter(ROOT_PATH + getFolderName(packageNameStr) + classNameStr + "DaoTest.java");
+        createFolder(ROOT_PATH + DAO_TEST_FILE_PATH + getFolderName(packageNameStr));
+        fileWriter = getFileWriter(ROOT_PATH + DAO_TEST_FILE_PATH + getFolderName(packageNameStr) + classNameStr
+                + DAO_TEST + JAVA_FILE);
 
         StringBuffer fileContentBuf = new StringBuffer();
 
-        fileContentBuf.append("package " + packageNameStr + ";\n\n");
+        fileContentBuf.append("package " + getDaoPackageName(packageNameStr) + ";\n\n");
         fileContentBuf.append("import cn.hb.core.test.dao.HibernateDaoTestCase;\n");
-        fileContentBuf.append("import " + getEntityPackageName(packageNameStr) + "." + classNameStr + ";\n");
+        fileContentBuf.append("import " + packageNameStr + "." + classNameStr + ";\n");
         fileContentBuf.append("import " + packageNameStr + "." + getDaoClassName(classNameStr) + ";\n\n/**");
         fileContentBuf.append("\n * " + annotationStr);
         fileContentBuf.append(" DaoTest\n */\npublic class ");
@@ -81,9 +75,4 @@ public class DaoTestFileGenerator extends AbstractFileGenerator {
         fileWriter.close();
     }
 
-    @Override
-    public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
-        // TODO Auto-generated method stub
-
-    }
 }

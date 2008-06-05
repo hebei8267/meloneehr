@@ -8,51 +8,137 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import static constant.Constant.CHARSET_NAME;
+import static constant.Constant.ENTITY_PACKAGE;
+import static constant.Constant.DAO_PACKAGE;
+import static constant.Constant.DAO;
+import static constant.Constant.POINT;
+import static constant.Constant.SEPARATOR;
+
 /**
  * @author kaka
  * 
  * 文件生成父类
  */
 public abstract class AbstractFileGenerator implements IFileGenerator {
-    public static final String ROOT_PATH = "c:\\11\\";
 
-    protected static Writer getFileWriter(String fileName) throws IOException {
-        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8");
+    protected Writer getFileWriter(String fileName) throws IOException {
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), CHARSET_NAME);
         return writer;
     }
 
-    protected static String getEntityPackageName(String cellValue) {
-        return cellValue.replaceAll(".dao.", ".entity.");
+    protected String getDaoPackageName(String cellValue) {
+        return cellValue.replaceAll(ENTITY_PACKAGE, DAO_PACKAGE);
     }
 
-    protected static String getDaoClassName(String classNameStr) {
-        return classNameStr + "Dao";
+    protected String getDaoClassName(String classNameStr) {
+        return classNameStr + DAO;
     }
 
-    protected static String getComponentName(String cellValue) {
-        if (cellValue == null || cellValue.length() < 0) {
-            return cellValue;
+    protected String getComponentName(String str) {
+        if (str != null && str.length() >= 1) {
+            return str.substring(0, 1).toLowerCase() + str.substring(1);
         } else {
-            return cellValue.substring(0, 1).toLowerCase() + cellValue.substring(1);
+            return str;
         }
     }
 
+    protected String get1substringUpperCase(String str) {
+        if (str != null && str.length() >= 1) {
+            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        } else {
+            return str;
+        }
+    }
+
+    /**
+     * Set方法注释生成
+     * 
+     * @param comment
+     * @return
+     */
+    protected String getSetMethodComment(String comment) {
+        StringBuffer strBuf = new StringBuffer();
+        strBuf.append("\t/**" + "\n");
+        strBuf.append("\t * 取得" + comment + "\n");
+        strBuf.append("\t * " + "\n");
+        strBuf.append("\t * @return " + comment + "\n");
+        strBuf.append("\t */" + "\n");
+        return strBuf.toString();
+    }
+
+    /**
+     * Get方法注释生成
+     * 
+     * @param filedName
+     * @param comment
+     * @return
+     */
+    protected String getGetMethodComment(String filedName, String comment) {
+        StringBuffer strBuf = new StringBuffer();
+        strBuf.append("\t/**" + "\n");
+        strBuf.append("\t * 设置" + comment + "\n");
+        strBuf.append("\t * " + "\n");
+        strBuf.append("\t * @param " + filedName + " " + comment + "\n");
+        strBuf.append("\t */" + "\n");
+        return strBuf.toString();
+    }
+
+    /**
+     * Set方法
+     * 
+     * @param filedName
+     * @return
+     */
+    protected String getSetMethodString(String filedName, String filedType) {
+        StringBuffer strBuf = new StringBuffer();
+        strBuf.append("\tpublic void set" + get1substringUpperCase(filedName) + "(" + filedType + " " + filedName
+                + ") {\n");
+        strBuf.append("\t\tthis." + filedName + " = " + filedName + ";\n");
+        strBuf.append("\t}\n\n");
+        return strBuf.toString();
+    }
+
+    /**
+     * Get方法生成
+     * 
+     * @param filedName
+     * @return
+     */
+    protected String getGetMethodString(String filedName, String filedType) {
+        StringBuffer strBuf = new StringBuffer();
+        strBuf.append("\tpublic " + filedType + " get" + get1substringUpperCase(filedName) + "() {\n");
+        strBuf.append("\t\treturn " + filedName + ";\n");
+        strBuf.append("\t}\n\n");
+        return strBuf.toString();
+    }
+
+    /**
+     * Class注释生成
+     * 
+     * @param key
+     * @return
+     */
+    protected String getClassComment(String key) {
+        return "/** " + key + " */";
+    }
+
+    /**
+     * Filed注释生成
+     * 
+     * @param key
+     * @return
+     */
+    protected String getFiledComment(String key) {
+        return "    /** " + key + " */";
+    }
+
     protected static String getFolderName(String cellValue) {
-        return cellValue.replace(".", "\\") + "\\";
+        return cellValue.replace(POINT, SEPARATOR) + SEPARATOR;
     }
 
     protected static void createFolder(String dir) {
         new File(dir).mkdirs();
     }
 
-    /**
-     * 代码文件生成
-     * 
-     * @param classNameStr 类名
-     * @param packageNameStr 包名
-     * @param annotationStr 类注释名词
-     * @throws IOException
-     */
-    protected abstract void createCodeFile(String classNameStr, String packageNameStr, String annotationStr)
-            throws IOException;
 }

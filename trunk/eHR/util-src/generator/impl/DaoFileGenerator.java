@@ -7,6 +7,11 @@ import java.util.Map;
 
 import domain.FileInfo;
 
+import static constant.Constant.ROOT_PATH;
+import static constant.Constant.DAO_FILE_PATH;
+import static constant.Constant.DAO;
+import static constant.Constant.JAVA_FILE;
+
 /**
  * @author kaka
  * 
@@ -18,7 +23,7 @@ public class DaoFileGenerator extends AbstractFileGenerator {
 
         for (FileInfo fileInfo : fileInfoList) {
             String classNameStr = dataMap.get(fileInfo.getFileName());
-            String packageNameStr = fileInfo.getFileName();
+            String packageNameStr = fileInfo.getFilePath();
             String annotationStr = fileInfo.getFileName();
 
             createCodeFile(classNameStr, packageNameStr, annotationStr);
@@ -26,18 +31,26 @@ public class DaoFileGenerator extends AbstractFileGenerator {
 
     }
 
-    @Override
+    /**
+     * 代码文件生成
+     * 
+     * @param classNameStr 类名
+     * @param packageNameStr 包名
+     * @param annotationStr 类注释名词
+     * @throws IOException
+     */
     protected void createCodeFile(String classNameStr, String packageNameStr, String annotationStr) throws IOException {
         Writer fileWriter = null;
 
-        createFolder(ROOT_PATH + getFolderName(packageNameStr));
-        fileWriter = getFileWriter(ROOT_PATH + getFolderName(packageNameStr) + classNameStr + "Dao.java");
+        createFolder(ROOT_PATH + DAO_FILE_PATH + getFolderName(packageNameStr));
+        fileWriter = getFileWriter(ROOT_PATH + DAO_FILE_PATH + getFolderName(packageNameStr) + classNameStr + DAO
+                + JAVA_FILE);
 
         StringBuffer fileContentBuf = new StringBuffer();
-        fileContentBuf.append("package " + packageNameStr + ";\n\n");
+        fileContentBuf.append("package " + getDaoPackageName(packageNameStr) + ";\n\n");
         fileContentBuf.append("import org.springframework.stereotype.Component;\n");
         fileContentBuf.append("import cn.hb.core.dao.impl.HibernateDaoImpl;\n");
-        fileContentBuf.append("import " + getEntityPackageName(packageNameStr) + "." + classNameStr + ";\n");
+        fileContentBuf.append("import " + packageNameStr + "." + classNameStr + ";\n");
         fileContentBuf.append("\n/**\n");
         fileContentBuf.append(" * " + annotationStr);
         fileContentBuf.append("Dao\n */\n");
