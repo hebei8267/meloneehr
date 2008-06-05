@@ -1,0 +1,10 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+
+body {
+	font: bold 13px;
+}
+
+/* 标题栏 */
+.titleBar {
+	background: transparent url(../ext/resources/images/default/panel/white-top-bottom.gif) repeat-x 0 -1px;
+}
