@@ -1,14 +1,22 @@
 package cn.hb.entity.common;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import cn.hb.core.bean.AbstractEntityBean;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.NaturalId;
 
 /**
  * @author kaka
  * 
  * 国家
  */
+@Entity
+@Table(name = "M_COUNTRY")
 public class Country extends AbstractEntityBean {
 
     private static final long serialVersionUID = -8552348640289521607L;
@@ -17,7 +25,7 @@ public class Country extends AbstractEntityBean {
     }
 
     /** 编号 */
-    private String number;
+    private String id;
 
     /** 名称 */
     private String name;
@@ -31,11 +39,12 @@ public class Country extends AbstractEntityBean {
     /**
      * 设置编号
      * 
-     * @param number 编号
+     * @param id 编号
      */
-
-    public String getNumber() {
-        return number;
+    @NaturalId
+    @Column(name = "COUNTRY_ID", nullable = false, length = 20)
+    public String getId() {
+        return id;
     }
 
     /**
@@ -43,7 +52,8 @@ public class Country extends AbstractEntityBean {
      * 
      * @param name 名称
      */
-
+    @Basic
+    @Column(name = "NAME", nullable = false, length = 20, unique = true)
     public String getName() {
         return name;
     }
@@ -53,7 +63,8 @@ public class Country extends AbstractEntityBean {
      * 
      * @param shortName 简称
      */
-
+    @Basic
+    @Column(name = "SHORT_NAME", length = 20, unique = true)
     public String getShortName() {
         return shortName;
     }
@@ -63,7 +74,8 @@ public class Country extends AbstractEntityBean {
      * 
      * @param description 详细描述
      */
-
+    @Basic
+    @Column(name = "DESCRIPTION")
     public String getDescription() {
         return description;
     }
@@ -73,9 +85,8 @@ public class Country extends AbstractEntityBean {
      * 
      * @return 编号
      */
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -83,7 +94,6 @@ public class Country extends AbstractEntityBean {
      * 
      * @return 名称
      */
-
     public void setName(String name) {
         this.name = name;
     }
@@ -93,7 +103,6 @@ public class Country extends AbstractEntityBean {
      * 
      * @return 简称
      */
-
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
@@ -103,7 +112,6 @@ public class Country extends AbstractEntityBean {
      * 
      * @return 详细描述
      */
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -117,7 +125,7 @@ public class Country extends AbstractEntityBean {
             return false;
         }
         Country rhs = (Country) object;
-        return new EqualsBuilder().append(this.number, rhs.number).isEquals();
+        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
     }
 
     /**
@@ -125,7 +133,7 @@ public class Country extends AbstractEntityBean {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(661786397, 2037344837).append(this.number).toHashCode();
+        return new HashCodeBuilder(661786397, 2037344837).append(this.id).toHashCode();
     }
 
 }

@@ -9,7 +9,7 @@ package constant;
  * @author kaka
  * 
  */
-public class Constant {
+public class UtilConstant {
     /** 文件编码规则 */
     public final static String CHARSET_NAME = "UTF-8";
     /** csv文件分隔符 */

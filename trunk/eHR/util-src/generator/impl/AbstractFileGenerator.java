@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import static constant.Constant.CHARSET_NAME;
-import static constant.Constant.ENTITY_PACKAGE;
-import static constant.Constant.DAO_PACKAGE;
-import static constant.Constant.DAO;
-import static constant.Constant.POINT;
-import static constant.Constant.SEPARATOR;
+import static constant.UtilConstant.CHARSET_NAME;
+import static constant.UtilConstant.ENTITY_PACKAGE;
+import static constant.UtilConstant.DAO_PACKAGE;
+import static constant.UtilConstant.DAO;
+import static constant.UtilConstant.POINT;
+import static constant.UtilConstant.SEPARATOR;
 
 /**
  * @author kaka
@@ -95,7 +95,7 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
         strBuf.append("\tpublic void set" + get1substringUpperCase(filedName) + "(" + filedType + " " + filedName
                 + ") {\n");
         strBuf.append("\t\tthis." + filedName + " = " + filedName + ";\n");
-        strBuf.append("\t}\n\n");
+        strBuf.append("\t}\n");
         return strBuf.toString();
     }
 
@@ -109,7 +109,7 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
         StringBuffer strBuf = new StringBuffer();
         strBuf.append("\tpublic " + filedType + " get" + get1substringUpperCase(filedName) + "() {\n");
         strBuf.append("\t\treturn " + filedName + ";\n");
-        strBuf.append("\t}\n\n");
+        strBuf.append("\t}\n");
         return strBuf.toString();
     }
 

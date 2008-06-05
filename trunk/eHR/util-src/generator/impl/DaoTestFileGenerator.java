@@ -7,10 +7,10 @@ import java.util.Map;
 
 import domain.FileInfo;
 
-import static constant.Constant.ROOT_PATH;
-import static constant.Constant.DAO_TEST_FILE_PATH;
-import static constant.Constant.DAO_TEST;
-import static constant.Constant.JAVA_FILE;
+import static constant.UtilConstant.ROOT_PATH;
+import static constant.UtilConstant.DAO_TEST_FILE_PATH;
+import static constant.UtilConstant.DAO_TEST;
+import static constant.UtilConstant.JAVA_FILE;
 
 /**
  * @author kaka
@@ -50,7 +50,8 @@ public class DaoTestFileGenerator extends AbstractFileGenerator {
         fileContentBuf.append("package " + getDaoPackageName(packageNameStr) + ";\n\n");
         fileContentBuf.append("import cn.hb.core.test.dao.HibernateDaoTestCase;\n");
         fileContentBuf.append("import " + packageNameStr + "." + classNameStr + ";\n");
-        fileContentBuf.append("import " + packageNameStr + "." + getDaoClassName(classNameStr) + ";\n\n/**");
+        fileContentBuf.append("import " + getDaoPackageName(packageNameStr) + "." + getDaoClassName(classNameStr)
+                + ";\n\n/**");
         fileContentBuf.append("\n * " + annotationStr);
         fileContentBuf.append(" DaoTest\n */\npublic class ");
         fileContentBuf.append(classNameStr);

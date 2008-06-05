@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import static constant.Constant.CHARSET_NAME;
-import static constant.Constant.DELIM;
+import static constant.UtilConstant.CHARSET_NAME;
+import static constant.UtilConstant.DELIM;
 
 public class CSVUtils {
     public static List<List<String>> readCSVFile(String filePath) throws IOException {

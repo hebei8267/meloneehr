@@ -10,11 +10,11 @@ import java.util.List;
 
 import domain.FileInfo;
 
-import static constant.Constant.JAVA_FILE;
-import static constant.Constant.SEPARATOR;
-import static constant.Constant.POINT;
-import static constant.Constant.HIDDEN_FILE;
-import static constant.Constant.CHARSET_NAME;
+import static constant.UtilConstant.JAVA_FILE;
+import static constant.UtilConstant.SEPARATOR;
+import static constant.UtilConstant.POINT;
+import static constant.UtilConstant.HIDDEN_FILE;
+import static constant.UtilConstant.CHARSET_NAME;
 
 /**
  * @author kaka

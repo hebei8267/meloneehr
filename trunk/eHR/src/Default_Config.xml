@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+	  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<!-- 请不要随便修改这个文件 -->
+	<!-- HQL通用动态查询Dao -->
+	<bean id="hqlQueryDao"
+		class="cn.hb.core.query.queryImp.hibernate3.HQLQueryDaoImp">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- NativeSQL通用动态查询Dao -->
+	<bean id="nativeSQLQueryDao"
+		class="cn.hb.core.query.queryImp.hibernate3.NativeSQLQueryDaoImp">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 定义事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 定义事务的处理方法（拦截器） -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*_Service">PROPAGATION_REQUIRED</prop>
+				<!--
+						PROPAGATION_REQUIRED  支持当前事务,如果当前没有事务,就新建一个事务.这是最常见的选择.
+						PROPAGATION_SUPPORTS  支持当前事务,如果当前没有事务,就以非事务方式执行.
+						PROPAGATION_MANDATORY  支持当前事务,如果当前没有事务,就抛出异常.
+						PROPAGATION_REQUIRES_NEW  新建事务,如果当前存在事务,把当前事务挂起.
+						PROPAGATION_NOT_SUPPORTED  以非事务方式执行操作,如果当前存在事务,就把当前事务挂起.
+						PROPAGATION_NEVER  以非事务方式执行,如果当前存在事务,则抛出异常.
+						PROPAGATION_NESTED  如果当前存在事务,则在嵌套事务内执行.如果当前没有事务,
+						则进行与PROPAGATION_REQUIRED类似的操作.
+					-->
+				<!--
+						<prop key="find*Service">PROPAGATION_REQUIRED,readOnly</prop>
+						<prop key="get*Service">PROPAGATION_REQUIRED,readOnly</prop>
+					-->
+			</props>
+		</property>
+	</bean>
+	<!-- 定义对哪种类型的服务（根据其服务名称）进行何种拦截 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>*Service</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+				<!-- 在这里可以添加其他拦截 -->
+			</list>
+		</property>
+	</bean>
+	<!-- 使用Spring自动代理配置事务 -->
+	<bean
+		class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+		<property name="transactionInterceptor"
+			ref="transactionInterceptor" />
+	</bean>
+</beans>

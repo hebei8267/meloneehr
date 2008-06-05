@@ -7,10 +7,10 @@ import java.util.Map;
 
 import domain.FileInfo;
 
-import static constant.Constant.ROOT_PATH;
-import static constant.Constant.DAO_FILE_PATH;
-import static constant.Constant.DAO;
-import static constant.Constant.JAVA_FILE;
+import static constant.UtilConstant.ROOT_PATH;
+import static constant.UtilConstant.DAO_FILE_PATH;
+import static constant.UtilConstant.DAO;
+import static constant.UtilConstant.JAVA_FILE;
 
 /**
  * @author kaka

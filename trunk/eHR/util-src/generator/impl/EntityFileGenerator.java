@@ -9,13 +9,13 @@ import java.util.Map.Entry;
 
 import domain.FileInfo;
 
-import static constant.Constant.ROOT_PATH;
-import static constant.Constant.ENTITY_FILE_PATH;
-import static constant.Constant.JAVA_FILE;
-import static constant.Constant.IMPORT_JAVA_KEY;
-import static constant.Constant.CLASS_JAVA_KEY;
-import static constant.Constant.PRIVATE_JAVA_KEY;
-import static constant.Constant.STRING_JAVA_KEY;
+import static constant.UtilConstant.ROOT_PATH;
+import static constant.UtilConstant.ENTITY_FILE_PATH;
+import static constant.UtilConstant.JAVA_FILE;
+import static constant.UtilConstant.IMPORT_JAVA_KEY;
+import static constant.UtilConstant.CLASS_JAVA_KEY;
+import static constant.UtilConstant.PRIVATE_JAVA_KEY;
+import static constant.UtilConstant.STRING_JAVA_KEY;
 
 /**
  * @author kaka
