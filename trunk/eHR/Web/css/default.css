@@ -1,10 +1,72 @@
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
 
-body {
-	font: bold 13px;
+body { 
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 11pt;
 }
 
 /* 标题栏 */
 .titleBar {
 	background: transparent url(../ext/resources/images/default/panel/white-top-bottom.gif) repeat-x 0 -1px;
+}
+.dr-toolbar-int{
+}
+.rich-toolbar-item{
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 9pt;
+}
+
+/* 页脚 */
+.footer {
+	text-align: center;
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 9pt;
+}
+
+.dr-pnl-h {
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 9pt;
+	background: transparent
+		url(../ext/resources/images/default/panel/white-top-bottom.gif)
+		repeat-x 0 -1px;
+}
+
+.rich-panel-header {
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 9pt;
+	overflow: hidden;
+	padding: 5px 3px 4px 5px;
+	line-height: 12px;
+	background: transparent
+		url(../ext/resources/images/default/panel/white-top-bottom.gif)
+		repeat-x 0 -1px;
+}
+
+.dr-pnl-b{
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 11pt;
+} 
+
+.rich-panel-body{
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 11pt;
+}
+
+.dr-pnl{
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 11pt;
+} 
+
+.rich-panel{
+	color: #333333; 
+	font-family: "宋体", "Arial"; 
+	font-size: 11pt;
 }
