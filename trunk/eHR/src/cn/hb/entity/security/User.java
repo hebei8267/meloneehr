@@ -3,6 +3,8 @@ package cn.hb.entity.security;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
@@ -17,6 +19,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_LOGIN_USER")
+@NamedQueries( { @NamedQuery(name = "User.getUserByID", query = "select obj from User obj where obj.id = ? ") })
 public class User extends AbstractEntityBean {
 
     private static final long serialVersionUID = -4154347867887707861L;

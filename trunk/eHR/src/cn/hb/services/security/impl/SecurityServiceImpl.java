@@ -1,0 +1,44 @@
+package cn.hb.services.security.impl;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import cn.hb.dao.security.UserDao;
+import cn.hb.entity.security.User;
+import cn.hb.services.security.ISecurityService;
+
+@Component("securityService")
+@Scope("prototype")
+public class SecurityServiceImpl implements ISecurityService {
+    // ---------------------------------------------------------------------------
+    // 接口实现
+    // ---------------------------------------------------------------------------
+    @Override
+    public boolean changeEmployeePassword_Service(String userID, String password) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public User userLogin_Service(String userID, String password) {
+        User user = userDao.getUserByID(userID);
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
+
+    // ---------------------------------------------------------------------------
+    // DAO
+    // ---------------------------------------------------------------------------
+    private UserDao userDao;
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+}

@@ -1,6 +1,7 @@
 package cn.hb.services.security;
 
 import cn.hb.core.services.IService;
+import cn.hb.entity.security.User;
 
 public interface ISecurityService extends IService {
     /**
@@ -8,9 +9,9 @@ public interface ISecurityService extends IService {
      * 
      * @param userID 用户ID
      * @param password 用户密码
-     * @return true-登录成功 false-登录失败
+     * @return true-用户信息 false-null
      */
-    public boolean userLogin_Service(String userID, String password);
+    public User userLogin_Service(String userID, String password);
 
     /**
      * 修改用户密码

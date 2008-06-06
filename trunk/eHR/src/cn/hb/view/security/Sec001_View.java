@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
+import cn.hb.entity.security.User;
+import cn.hb.services.security.ISecurityService;
 
 /**
  * @author kaka
@@ -14,14 +16,24 @@ import cn.hb.core.view.AbstractViewBean;
 public class Sec001_View extends AbstractViewBean {
     private String username;
     private String password;
-    private String loginFlag;
+    private String loginFlag = Boolean.TRUE.toString();
+    private ISecurityService securityService;
 
     public String login_Action() {
-        if (username.endsWith("0000001")) {
-            if (loginFlag.equals(Boolean.TRUE.toString())) {
-                return "";
-            } else {
-                return "";
+        if (!username.equals("")) {
+            // 用户登录
+            User user = securityService.userLogin_Service(username, password);
+
+            if (user != null) {
+                if (user.getFirstLoginFlag().equals(Boolean.TRUE)) {// 第一次登录系统
+                    return "modPassword";
+                } else {
+                    if (loginFlag.equals(Boolean.TRUE.toString())) {
+                        return "loginSucceed";
+                    } else {
+                        return "modPassword";
+                    }
+                }
             }
         }
         return null;
@@ -66,6 +78,14 @@ public class Sec001_View extends AbstractViewBean {
 
     public void setLoginFlag(String loginFlag) {
         this.loginFlag = loginFlag;
+    }
+
+    public ISecurityService getSecurityService() {
+        return securityService;
+    }
+
+    public void setSecurityService(ISecurityService securityService) {
+        this.securityService = securityService;
     }
 
 }

@@ -23,19 +23,19 @@
 					<tr>
 						<td>用户名</td>
 						<td>
-							<h:inputText id="username" value="" styleClass="inputbox" />
+							<h:inputText id="username" value="#{Sec001_View.username}" styleClass="inputbox" />
 						</td>
 					</tr>
 					<tr>
 						<td>密码</td>
 						<td>
-							<h:inputSecret id="password" value="" styleClass="inputbox" />
+							<h:inputSecret id="password" value="#{Sec001_View.password}" styleClass="inputbox" />
 						</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
-							<h:selectOneRadio id="loginFlag" value="true">
+							<h:selectOneRadio id="loginFlag" value="#{Sec001_View.loginFlag}">
 								<f:selectItem itemValue="true" itemLabel="登录系统"/>
 								<f:selectItem itemValue="false" itemLabel="修改密码"/>
 							</h:selectOneRadio>
@@ -44,7 +44,7 @@
 					<tr>
 						<td></td>
 						<td>
-							<h:commandButton value="登 录" styleClass="submitBtn"/>
+							<h:commandButton value="登 录" action="#{Sec001_View.login_Action}" styleClass="submitBtn"/>
 							<input type="button" value="清 除" class="cleanBtn"/>
 						</td>
 					</tr>
