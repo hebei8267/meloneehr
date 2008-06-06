@@ -8,8 +8,8 @@ import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
 import cn.hb.view.domain.UserInfoSessionBean;
 
-import static cn.hb.view.MsgID.LOGIN_FAILED;
-import static cn.hb.view.MsgID.FIRST_LOGIN_FLAG;
+import static cn.hb.view.MsgID.ERROR_LOGIN_FAILED;
+import static cn.hb.view.MsgID.TIP_FIRST_LOGIN_FLAG;
 
 /**
  * @author kaka
@@ -30,7 +30,7 @@ public class Sec001_View extends AbstractViewBean {
 
             if (user != null) {
                 if (user.getFirstLoginFlag().equals(Boolean.TRUE)) {// 第一次登录系统
-                    addErrorMessage(FIRST_LOGIN_FLAG);
+                    addErrorMessage(TIP_FIRST_LOGIN_FLAG);
 
                     saveUserInfoToSession(user);
                     return "modPassword";
@@ -47,7 +47,7 @@ public class Sec001_View extends AbstractViewBean {
                 }
             }
         }
-        addErrorMessage(LOGIN_FAILED);
+        addErrorMessage(ERROR_LOGIN_FAILED);
         return null;
     }
 
