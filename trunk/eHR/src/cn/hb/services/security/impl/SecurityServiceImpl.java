@@ -14,9 +14,13 @@ public class SecurityServiceImpl implements ISecurityService {
     // 接口实现
     // ---------------------------------------------------------------------------
     @Override
-    public boolean changeEmployeePassword_Service(String userID, String password) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean modUserPassword_Service(String userID, String password) {
+        User user = userDao.getUserByID(userID);
+        user.setPassword(password);
+
+        userDao.save(user);
+
+        return true;
     }
 
     @Override

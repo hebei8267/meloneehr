@@ -20,5 +20,5 @@ public interface ISecurityService extends IService {
      * @param password 用户密码
      * @return true-修改成功 false-修改失败
      */
-    public boolean changeEmployeePassword_Service(String userID, String password);
+    public boolean modUserPassword_Service(String userID, String password);
 }

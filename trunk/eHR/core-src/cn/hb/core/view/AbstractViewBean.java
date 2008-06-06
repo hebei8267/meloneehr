@@ -15,6 +15,10 @@ import cn.hb.view.domain.UserInfoSessionBean;
 public abstract class AbstractViewBean {
     private final String USER_INFO = "userInfo";
 
+    public AbstractViewBean() {
+
+    }
+
     /** Bean生命周期中初始化方法 */
     @PostConstruct
     protected void _create() {

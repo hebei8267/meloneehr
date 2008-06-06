@@ -15,7 +15,7 @@
 	<ui:define name="body">
 		<h:messages styleClass="message"/>
 		
-		<h:form id="loginForm">
+		<h:form id="modPwdForm">
 			<rich:panel>
 				<f:facet name="header">密码变更</f:facet>
 				<p>
@@ -26,6 +26,7 @@
 						<td>用户编号</td>
 						<td>
 							<h:outputLabel value="#{sessionScope.userInfo.userId}"/>
+							<h:inputHidden id="userId" value="#{Sec002_View.userId}" />
 						</td>
 					</tr>
 					<tr>
