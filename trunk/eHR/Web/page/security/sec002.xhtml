@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	template="/page/core/template/one_page_template.xhtml">
+	
+	<ui:define name="pageNum">
+		<ui:include src="/page/core/common/pageNum.xhtml">
+			<ui:param name="pageNum" value="SECURITY 002"/>
+		</ui:include>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h:form id="loginForm">
+			<rich:panel>
+				<f:facet name="header">密码变更</f:facet>
+				<p>
+				请输入变更前的密码和变更后的密码
+				</p>
+				<table>
+					<tr>
+						<td>用户名</td>
+						<td>
+							<h:outputLabel value="*******"/>
+						</td>
+					</tr>
+					<tr>
+						<td>社员信息</td>
+						<td>
+							<h:outputLabel value="*******"/>
+						</td>
+					</tr>
+					<tr>
+						<td>原密码</td>
+						<td>
+							<h:inputSecret id="oldPassword" value="" styleClass="inputbox" />
+						</td>
+					</tr>
+					<tr>
+						<td>新密码</td>
+						<td>
+							<h:inputSecret id="newPassword" value="" styleClass="inputbox" />
+						</td>
+					</tr>
+					<tr>
+						<td>新密码（确认用）</td>
+						<td>
+							<h:inputSecret id="newPassword2" value="" styleClass="inputbox" />
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h:commandButton value="变 更" styleClass="submitBtn"/>
+							<input type="button" value="清 除" class="cleanBtn"/>
+						</td>
+					</tr>
+				</table>
+			</rich:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
