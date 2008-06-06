@@ -10,4 +10,18 @@
 			org.springframework.web.jsf.DelegatingVariableResolver
 		</variable-resolver>
 	</application>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sec001</from-outcome>
+			<to-view-id>/page/security/sec001.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>sec002</from-outcome>
+			<to-view-id>/page/security/sec002.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
