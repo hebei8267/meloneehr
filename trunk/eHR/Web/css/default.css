@@ -1,5 +1,9 @@
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
 
+a:active,a:link,a:visited,a:hover {
+	color: black;
+}
+
 body { 
 	color: #333333; 
 	font-family: "宋体", "Arial"; 
@@ -69,4 +73,13 @@ body {
 	color: #333333; 
 	font-family: "宋体", "Arial"; 
 	font-size: 11pt;
+}
+
+.inputbox {
+	border: 1px solid #CCCCCC;
+	background: #FFFFFF;
+}
+
+.inputbox:hover, .inputbox:focus {
+	background: #FFFFCC;
 }
