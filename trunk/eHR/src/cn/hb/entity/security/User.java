@@ -59,7 +59,7 @@ public class User extends AbstractEntityBean {
      * @param name 名称
      */
     @Basic
-    @Column(name = "NAME", nullable = false, length = 20, unique = true)
+    @Column(name = "NAME", nullable = false, length = 20)
     public String getName() {
         return name;
     }
