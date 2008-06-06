@@ -13,6 +13,8 @@
 	</ui:define>
 	
 	<ui:define name="body">
+		<h:messages styleClass="message"/>
+		
 		<h:form id="loginForm">
 			<rich:panel>
 				<f:facet name="header">密码变更</f:facet>
@@ -21,15 +23,15 @@
 				</p>
 				<table>
 					<tr>
-						<td>用户名</td>
+						<td>用户编号</td>
 						<td>
-							<h:outputLabel value="*******"/>
+							<h:outputLabel value="#{sessionScope.userInfo.userId}"/>
 						</td>
 					</tr>
 					<tr>
-						<td>社员信息</td>
+						<td>用户信息</td>
 						<td>
-							<h:outputLabel value="*******"/>
+							<h:outputLabel value="#{sessionScope.userInfo.userName}"/>
 						</td>
 					</tr>
 					<tr>

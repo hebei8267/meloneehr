@@ -68,4 +68,13 @@
 		<property name="transactionInterceptor"
 			ref="transactionInterceptor" />
 	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<description>公共消息资源</description>
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
 </beans>

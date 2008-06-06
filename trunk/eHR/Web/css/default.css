@@ -10,6 +10,15 @@ body {
 	font-size: 11pt;
 }
 
+.message {
+	border: 1px solid #FFCC00;
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: #F0F8FF;
+	font-size: 12px;
+}
+
 /* 标题栏 */
 .titleBar {
 	background: transparent url(../ext/resources/images/default/panel/white-top-bottom.gif) repeat-x 0 -1px;

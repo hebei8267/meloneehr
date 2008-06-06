@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
+import cn.hb.view.domain.UserInfoSessionBean;
+
+import static cn.hb.view.MsgID.LOGIN_FAILED;
+import static cn.hb.view.MsgID.FIRST_LOGIN_FLAG;
 
 /**
  * @author kaka
@@ -26,17 +30,37 @@ public class Sec001_View extends AbstractViewBean {
 
             if (user != null) {
                 if (user.getFirstLoginFlag().equals(Boolean.TRUE)) {// 第一次登录系统
+                    addErrorMessage(FIRST_LOGIN_FLAG);
+
+                    saveUserInfoToSession(user);
                     return "modPassword";
                 } else {
                     if (loginFlag.equals(Boolean.TRUE.toString())) {
+                        saveUserInfoToSession(user);
+
                         return "loginSucceed";
                     } else {
+                        saveUserInfoToSession(user);
+
                         return "modPassword";
                     }
                 }
             }
         }
+        addErrorMessage(LOGIN_FAILED);
         return null;
+    }
+
+    /**
+     * 初始化 登录用户信息
+     */
+    private void saveUserInfoToSession(User user) {
+
+        UserInfoSessionBean userInfo = new UserInfoSessionBean();
+        userInfo.setUserId(user.getId());
+        userInfo.setUserName(user.getName());
+
+        saveUserInfo(userInfo);
     }
 
     @Override

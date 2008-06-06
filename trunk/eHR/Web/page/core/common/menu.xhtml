@@ -12,6 +12,7 @@
 		<h:form>
 			<h:commandLink value="登 录" action="#{Forward_To_Sec001_View.nextPage_Action}" rendered="#{sessionScope.userInfo==null}"/>
 			<h:commandLink value="修改密码" action="#{Forward_To_Sec002_View.nextPage_Action}" rendered="#{sessionScope.userInfo!=null}"/>
+			<h:outputText value="   "/>
 			<h:commandLink value="注 销" rendered="#{sessionScope.userInfo!=null}"/>
 		</h:form>
 	</rich:toolBarGroup>
