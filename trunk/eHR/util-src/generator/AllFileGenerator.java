@@ -15,9 +15,9 @@ import generator.impl.DaoTestFileGenerator;
 import generator.impl.EntityFileGenerator;
 
 public class AllFileGenerator {
-    public final static String DATA_DICTIONARY_FILE_PATH = "C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\eHR\\uml-src\\Data.xls";
+    public final static String DATA_DICTIONARY_FILE_PATH = "C:\\eHR\\code\\eHR\\uml-src\\Data.xls";
 
-    public final static String UML_SRC_FILE_PATH = "C:\\Documents and Settings\\kaka\\デスクトップ\\MyGame\\code\\eHR\\uml-src\\";
+    public final static String UML_SRC_FILE_PATH = "C:\\eHR\\code\\eHR\\uml-src\\";
 
     public static void main(String[] args) throws IOException {
         AllFileGenerator fg = new AllFileGenerator();

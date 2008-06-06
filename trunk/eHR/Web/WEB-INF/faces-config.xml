@@ -10,17 +10,30 @@
 			org.springframework.web.jsf.DelegatingVariableResolver
 		</variable-resolver>
 	</application>
-	
+	<!-- 全局迁移 用户登录 -->
 	<navigation-rule>
 		<navigation-case>
-			<from-outcome>sec001</from-outcome>
+			<from-outcome>toSec001</from-outcome>
 			<to-view-id>/page/security/sec001.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+	<!-- 全局迁移 密码修改 -->
 	<navigation-rule>
 		<navigation-case>
-			<from-outcome>sec002</from-outcome>
+			<from-outcome>toSec002</from-outcome>
+			<to-view-id>/page/security/sec002.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- 用户登录 -->
+	<navigation-rule>
+		<from-view-id>/page/security/sec001.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginSucceed</from-outcome>
+			<to-view-id>/page/security/sec001.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>modPassword</from-outcome>
 			<to-view-id>/page/security/sec002.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>

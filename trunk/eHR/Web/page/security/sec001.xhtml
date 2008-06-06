@@ -35,16 +35,16 @@
 					<tr>
 						<td></td>
 						<td>
-							<h:selectOneRadio value="0">
-								<f:selectItem itemValue="0" itemLabel="登录系统"/>
-								<f:selectItem itemValue="1" itemLabel="修改密码"/>
-							</h:selectOneRadio> 
+							<h:selectOneRadio id="loginFlag" value="true">
+								<f:selectItem itemValue="true" itemLabel="登录系统"/>
+								<f:selectItem itemValue="false" itemLabel="修改密码"/>
+							</h:selectOneRadio>
 						</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
-							<h:commandButton value="登 录" styleClass="submitBtn"/>
+							<h:commandButton value="登 录" action="" styleClass="submitBtn"/>
 							<input type="button" value="清 除" class="cleanBtn"/>
 						</td>
 					</tr>

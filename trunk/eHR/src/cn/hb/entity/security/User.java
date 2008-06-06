@@ -1,4 +1,4 @@
-package cn.hb.entity.common;
+package cn.hb.entity.security;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,15 +13,15 @@ import org.hibernate.annotations.NaturalId;
 /**
  * @author kaka
  * 
- * 国家
+ * 登录用户
  */
 @Entity
-@Table(name = "M_COUNTRY")
-public class Country extends AbstractEntityBean {
+@Table(name = "W_LOGIN_USER")
+public class User extends AbstractEntityBean {
 
-    private static final long serialVersionUID = -8552348640289521607L;
+    private static final long serialVersionUID = -4154347867887707861L;
 
-    public Country() {
+    public User() {
     }
 
     /** 编号 */
@@ -30,8 +30,11 @@ public class Country extends AbstractEntityBean {
     /** 名称 */
     private String name;
 
-    /** 简称 */
-    private String shortName;
+    /** 密码 */
+    private String password;
+
+    /** 第一次登录标记 */
+    private Boolean firstLoginFlag = Boolean.FALSE;
 
     /** 详细描述 */
     private String description;
@@ -42,7 +45,7 @@ public class Country extends AbstractEntityBean {
      * @param id 编号
      */
     @NaturalId
-    @Column(name = "COUNTRY_ID", nullable = false, length = 20)
+    @Column(name = "USER_ID", nullable = false, length = 20)
     public String getId() {
         return id;
     }
@@ -59,14 +62,25 @@ public class Country extends AbstractEntityBean {
     }
 
     /**
-     * 取得简称
+     * 取得密码
      * 
-     * @param shortName 简称
+     * @param password 密码
      */
     @Basic
-    @Column(name = "SHORT_NAME", length = 20, unique = true)
-    public String getShortName() {
-        return shortName;
+    @Column(name = "PASS_WORD", length = 20)
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * 取得第一次登录标记
+     * 
+     * @param firstLoginFlag 第一次登录标记
+     */
+    @Basic
+    @Column(name = "FIRST_LOGIN_FLAG", nullable = false)
+    public Boolean getFirstLoginFlag() {
+        return firstLoginFlag;
     }
 
     /**
@@ -99,12 +113,21 @@ public class Country extends AbstractEntityBean {
     }
 
     /**
-     * 设置简称
+     * 设置密码
      * 
-     * @return 简称
+     * @return 密码
      */
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * 设置第一次登录标记
+     * 
+     * @return 第一次登录标记
+     */
+    public void setFirstLoginFlag(Boolean firstLoginFlag) {
+        this.firstLoginFlag = firstLoginFlag;
     }
 
     /**
@@ -121,10 +144,10 @@ public class Country extends AbstractEntityBean {
      */
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Country)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Country rhs = (Country) object;
+        User rhs = (User) object;
         return new EqualsBuilder().append(this.id, rhs.id).isEquals();
     }
 
@@ -133,7 +156,7 @@ public class Country extends AbstractEntityBean {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(661786397, 2037344837).append(this.id).toHashCode();
+        return new HashCodeBuilder(-1023797237, 1200053429).append(this.id).toHashCode();
     }
 
 }

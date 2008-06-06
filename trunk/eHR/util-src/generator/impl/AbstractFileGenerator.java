@@ -60,7 +60,7 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
     protected String getSetMethodComment(String comment) {
         StringBuffer strBuf = new StringBuffer();
         strBuf.append("\t/**" + "\n");
-        strBuf.append("\t * 取得" + comment + "\n");
+        strBuf.append("\t * 设置" + comment + "\n");
         strBuf.append("\t * " + "\n");
         strBuf.append("\t * @return " + comment + "\n");
         strBuf.append("\t */" + "\n");
@@ -77,7 +77,7 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
     protected String getGetMethodComment(String filedName, String comment) {
         StringBuffer strBuf = new StringBuffer();
         strBuf.append("\t/**" + "\n");
-        strBuf.append("\t * 设置" + comment + "\n");
+        strBuf.append("\t * 取得" + comment + "\n");
         strBuf.append("\t * " + "\n");
         strBuf.append("\t * @param " + filedName + " " + comment + "\n");
         strBuf.append("\t */" + "\n");

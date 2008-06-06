@@ -46,6 +46,8 @@
 				<value>cn.hb.entity.security.RoleGroup</value>-->
 				<!-- -->	
 				<value>cn.hb.entity.common.Country</value>
+				<!-- -->
+				<value>cn.hb.entity.security.User</value>
 			<!--	<value>cn.hb.entity.common.NativePlace</value>
 				 
 				<value>cn.hb.entity.ui.MenuNode</value>-->	

@@ -70,7 +70,7 @@ public class EntityFileGenerator extends AbstractFileGenerator {
                             fileContent.add(tempLine);
 
                             if (line.startsWith(CLASS_JAVA_KEY) && !constructMethodFlag) {// 导入默认构造函数
-                                fileContent.add(getConstructMethod());
+                                fileContent.add(getConstructMethod(entry.getValue()));
                                 constructMethodFlag = true;
                             }
 
@@ -101,9 +101,9 @@ public class EntityFileGenerator extends AbstractFileGenerator {
 
     }
 
-    private String getConstructMethod() {
+    private String getConstructMethod(String key) {
         StringBuffer strBuf = new StringBuffer();
-        strBuf.append("\tpublic Country() {" + "\n");
+        strBuf.append("\tpublic " + key + "() {" + "\n");
         strBuf.append("\t}" + "\n");
         return strBuf.toString();
     }
