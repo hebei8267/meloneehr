@@ -8,11 +8,11 @@
 	</rich:toolBarGroup>
 	<!-- newMenuItem -->
 	<rich:toolBarGroup location="right">
-		<h:outputText value="您好 ${sessionScope.userInfo.userName} !" rendered="${sessionScope.userInfo!=null}"/>
+		<h:outputText value="您好 #{sessionScope.userInfo.userName} !" rendered="#{sessionScope.userInfo!=null}"/>
 		<h:form>
-			<h:commandButton value="登 录" action="#{Forward_To_Sec001_View.nextPage_Action}" rendered="${sessionScope.userInfo==null}"/>
-			<h:commandLink value="修改密码" action="#{Forward_To_Sec002_View.nextPage_Action}" rendered="${sessionScope.userInfo!=null}"/>
-			<h:commandLink value="注 销" rendered="${sessionScope.userInfo!=null}"/>
+			<h:commandLink value="登 录" action="#{Forward_To_Sec001_View.nextPage_Action}" rendered="#{sessionScope.userInfo==null}"/>
+			<h:commandLink value="修改密码" action="#{Forward_To_Sec002_View.nextPage_Action}" rendered="#{sessionScope.userInfo!=null}"/>
+			<h:commandLink value="注 销" rendered="#{sessionScope.userInfo!=null}"/>
 		</h:form>
 	</rich:toolBarGroup>
 </rich:toolBar>

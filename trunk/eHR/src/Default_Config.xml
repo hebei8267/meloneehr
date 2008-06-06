@@ -6,14 +6,14 @@
 	<!-- 请不要随便修改这个文件 -->
 	<!-- HQL通用动态查询Dao -->
 	<bean id="hqlQueryDao"
-		class="cn.hb.core.query.queryImp.hibernate3.HQLQueryDaoImp">
+		class="cn.hb.core.query.queryImpl.hibernate3.HQLQueryDaoImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<!-- NativeSQL通用动态查询Dao -->
 	<bean id="nativeSQLQueryDao"
-		class="cn.hb.core.query.queryImp.hibernate3.NativeSQLQueryDaoImp">
+		class="cn.hb.core.query.queryImpl.hibernate3.NativeSQLQueryDaoImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
