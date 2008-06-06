@@ -14,6 +14,8 @@
 	<!-- Hibernate连接配置 -->
 	<import resource="Hibernate_Config.xml" />
 	
-	<!-- 当前只扫描com.hb.base.dao包下面的@Component组建 -->
-	<context:component-scan base-package="cn.hb.dao"/>	
+	<!-- 当前只扫描cn.hb.dao包下面的@Component组建 -->
+	<context:component-scan base-package="cn.hb.dao"/>
+	<!-- 当前只扫描cn.hb.view包下面的@Component组建 -->
+	<context:component-scan base-package="cn.hb.view"/>	
 </beans>
