@@ -1,6 +1,6 @@
 package cn.hb.view;
 
 public class MsgID {
-    public final static String LOGIN_FAILED = "LOGIN_FAILED";
-    public final static String FIRST_LOGIN_FLAG = "FIRST_LOGIN_FLAG";
+    public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
+    public final static String TIP_FIRST_LOGIN_FLAG = "TIP_FIRST_LOGIN_FLAG";
 }
