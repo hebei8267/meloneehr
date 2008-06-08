@@ -108,6 +108,19 @@ public abstract class AbstractViewBean {
     }
 
     /**
+     * 取得登录用户信息
+     * 
+     * @return
+     */
+    protected UserInfoSessionBean getUserInfoInSession() {
+        HttpSession session = getSession();
+        if (session != null) {
+            return (UserInfoSessionBean) session.getAttribute(USER_INFO);
+        }
+        return null;
+    }
+
+    /**
      * 删除登录用户信息
      * 
      * @param userInfo 登录用户信息

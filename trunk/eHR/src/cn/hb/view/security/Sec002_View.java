@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
+import cn.hb.view.domain.UserInfoSessionBean;
 
 import static cn.hb.view.MsgID.ERROR_Input_New_Pwd;
 import static cn.hb.view.MsgID.ERROR_Input_Old_Pwd;
@@ -19,13 +20,14 @@ import static cn.hb.view.MsgID.ERROR_Input_Old_Pwd;
 @Scope("request")
 public class Sec002_View extends AbstractViewBean {
     private String userId;
+    private String userName;
     private String oldPassword;
     private String newPassword;
     private String newPassword2;
     private ISecurityService securityService;
 
     public String modPassword_Action() {
-        if (newPassword.equals(newPassword2)) {
+        if (!newPassword.equals(newPassword2)) {
             addErrorMessage(ERROR_Input_New_Pwd);
             return null;
         }
@@ -48,7 +50,9 @@ public class Sec002_View extends AbstractViewBean {
     // ---------------------------------------------------------------------------
     @Override
     public void create() {
-
+        UserInfoSessionBean userInfo = getUserInfoInSession();
+        userId = userInfo.getUserId();
+        userName = userInfo.getUserName();
     }
 
     @Override
@@ -64,13 +68,20 @@ public class Sec002_View extends AbstractViewBean {
     // ---------------------------------------------------------------------------
     // Get Set Method
     // ---------------------------------------------------------------------------
-
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getOldPassword() {

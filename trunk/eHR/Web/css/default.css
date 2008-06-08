@@ -87,8 +87,27 @@ body {
 .inputbox {
 	border: 1px solid #CCCCCC;
 	background: #FFFFFF;
+	height : 19px;
 }
 
 .inputbox:hover, .inputbox:focus {
 	background: #FFFFCC;
+}
+
+.submitBtn{
+	background-image : url(../images/button_bgcolor_b.jpg);
+	background-repeat : repeat-x;
+	width : 80px;
+	height : 21px;
+	border : 1px solid #000000;
+	text-decoration : none;
+}
+
+.cleanBtn{
+	background-image : url(../images/button_bgcolor_y.jpg);
+  	background-repeat : repeat-x;
+  	width : 80px;
+  	height : 21px;
+  	border : 1px solid #000000;
+  	text-decoration : none;
 }

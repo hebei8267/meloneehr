@@ -17,7 +17,7 @@ public class SecurityServiceImpl implements ISecurityService {
     public boolean modUserPassword_Service(String userID, String password) {
         User user = userDao.getUserByID(userID);
         user.setPassword(password);
-
+        user.setFirstLoginFlag(Boolean.FALSE);
         userDao.save(user);
 
         return true;
