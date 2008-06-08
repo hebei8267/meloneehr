@@ -41,36 +41,36 @@
 		<property name="annotatedClasses">
 			<list>
 				<!-- 
-				<value>cn.hb.entity.security.User</value>
-				<value>cn.hb.entity.security.Role</value>
-				<value>cn.hb.entity.security.RoleGroup</value>-->
+					<value>cn.hb.entity.security.User</value>
+					<value>cn.hb.entity.security.Role</value>
+					<value>cn.hb.entity.security.RoleGroup</value>-->
 				<!-- -->	
 				<value>cn.hb.entity.common.Country</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>
-			<!--	<value>cn.hb.entity.common.NativePlace</value>
-				 
-				<value>cn.hb.entity.ui.MenuNode</value>-->	
+				<!--	<value>cn.hb.entity.common.NativePlace</value>-->	
+				<!-- -->
+				<value>cn.hb.entity.ui.MenuNode</value>
 				<!--
-				<value>cn.hb.entity.hr.personnel.EducateSpecialty</value>
-				<value>cn.hb.entity.hr.personnel.CultureClass</value>
-				<value>cn.hb.entity.hr.personnel.PersonAddress</value>
-				<value>cn.hb.entity.hr.personnel.Educate</value>
-				<value>cn.hb.entity.hr.personnel.Person</value> -->
+					<value>cn.hb.entity.hr.personnel.EducateSpecialty</value>
+					<value>cn.hb.entity.hr.personnel.CultureClass</value>
+					<value>cn.hb.entity.hr.personnel.PersonAddress</value>
+					<value>cn.hb.entity.hr.personnel.Educate</value>
+					<value>cn.hb.entity.hr.personnel.Person</value> -->
 				<!-- 
-				<value>cn.hb.entity.hr.organization.Organization</value>
-				<value>cn.hb.entity.hr.organization.OrganizationJobLevel</value>
-				<value>cn.hb.entity.hr.organization.JobInfo</value>
-				<value>cn.hb.entity.hr.organization.JobLevel</value>-->
+					<value>cn.hb.entity.hr.organization.Organization</value>
+					<value>cn.hb.entity.hr.organization.OrganizationJobLevel</value>
+					<value>cn.hb.entity.hr.organization.JobInfo</value>
+					<value>cn.hb.entity.hr.organization.JobLevel</value>-->
 				<!-- 
-				<value>cn.hb.entity.hr.employment.EmploymentType</value>
-				<value>cn.hb.entity.hr.employment.EmployeeWorkState</value>
-				<value>cn.hb.entity.hr.employment.EmployeeJobInfo</value>
-				<value>cn.hb.entity.hr.employment.Employee</value>-->
+					<value>cn.hb.entity.hr.employment.EmploymentType</value>
+					<value>cn.hb.entity.hr.employment.EmployeeWorkState</value>
+					<value>cn.hb.entity.hr.employment.EmployeeJobInfo</value>
+					<value>cn.hb.entity.hr.employment.Employee</value>-->
 				<!-- 
-				<value>cn.hb.entity.hr.salary.SalaryType</value>
-				<value>cn.hb.entity.hr.salary.SalaryTemplate</value>
-				<value>cn.hb.entity.hr.salary.JobSalaryTemplate</value>-->
+					<value>cn.hb.entity.hr.salary.SalaryType</value>
+					<value>cn.hb.entity.hr.salary.SalaryTemplate</value>
+					<value>cn.hb.entity.hr.salary.JobSalaryTemplate</value>-->
 			</list>
 		</property>
 	</bean>
