@@ -75,10 +75,10 @@ public class EntityFileGenerator extends AbstractFileGenerator {
                             }
 
                             if (line.trim().startsWith(PRIVATE_JAVA_KEY)) {
-                                setMethodContentList.add(getSetMethodComment(entry.getKey()));
+                                setMethodContentList.add(getSetMethodComment(entry.getValue(), entry.getKey()));
                                 setMethodContentList.add(getSetMethodString(entry.getValue(), STRING_JAVA_KEY));
 
-                                getMethodContentList.add(getGetMethodComment(entry.getValue(), entry.getKey()));
+                                getMethodContentList.add(getGetMethodComment(entry.getKey()));
                                 getMethodContentList.add(getGetMethodString(entry.getValue(), STRING_JAVA_KEY));
                             }
                             containFlag = true;
