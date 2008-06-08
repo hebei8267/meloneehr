@@ -25,13 +25,13 @@
 					<tr>
 						<td>用户名</td>
 						<td>
-							<h:inputText id="userId" value="#{Sec001_View.userId}" styleClass="inputbox" />
+							<h:inputText id="userId" value="#{Sec001_View.userId}" styleClass="inputbox required" />
 						</td>
 					</tr>
 					<tr>
 						<td>密码</td>
 						<td>
-							<h:inputSecret id="password" value="#{Sec001_View.password}" styleClass="inputbox" />
+							<h:inputSecret id="password" value="#{Sec001_View.password}" styleClass="inputbox required" />
 						</td>
 					</tr>
 					<tr>
@@ -52,6 +52,11 @@
 					</tr>
 				</table>
 			</rich:panel>
+			<script type="text/javascript">
+            var valid = new Validation('loginForm', {
+                immediate: true
+            });
+			</script>
 		</h:form>
 	</ui:define>
 </ui:composition>

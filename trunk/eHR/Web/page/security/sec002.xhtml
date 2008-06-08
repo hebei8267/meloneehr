@@ -25,43 +25,48 @@
 					<tr>
 						<td>用户编号</td>
 						<td>
-							<h:outputLabel value="#{sessionScope.userInfo.userId}"/>
+							<h:outputLabel value="#{Sec002_View.userId}"/>
 							<h:inputHidden id="userId" value="#{Sec002_View.userId}" />
 						</td>
 					</tr>
 					<tr>
 						<td>用户信息</td>
 						<td>
-							<h:outputLabel value="#{sessionScope.userInfo.userName}"/>
+							<h:outputLabel value="#{Sec002_View.userName}"/>
 						</td>
 					</tr>
 					<tr>
 						<td>原密码</td>
 						<td>
-							<h:inputSecret id="oldPassword" value="" styleClass="inputbox" />
+							<h:inputSecret id="oldPassword" value="#{Sec002_View.oldPassword}" styleClass="inputbox required" />
 						</td>
 					</tr>
 					<tr>
 						<td>新密码</td>
 						<td>
-							<h:inputSecret id="newPassword" value="" styleClass="inputbox" />
+							<h:inputSecret id="newPassword" value="#{Sec002_View.newPassword}" styleClass="inputbox required" />
 						</td>
 					</tr>
 					<tr>
 						<td>新密码（确认用）</td>
 						<td>
-							<h:inputSecret id="newPassword2" value="" styleClass="inputbox" />
+							<h:inputSecret id="newPassword2" value="#{Sec002_View.newPassword2}" styleClass="inputbox required" />
 						</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
-							<h:commandButton value="变 更" styleClass="submitBtn"/>
+							<h:commandButton value="变 更" action="#{Sec002_View.modPassword_Action}" styleClass="submitBtn"/>
 							<input type="button" value="清 除" class="cleanBtn"/>
 						</td>
 					</tr>
 				</table>
 			</rich:panel>
+			<script type="text/javascript">
+            var valid = new Validation('modPwdForm', {
+                immediate: true
+            });
+			</script>
 		</h:form>
 	</ui:define>
 </ui:composition>
