@@ -39,7 +39,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 取得编号
      * 
-     * @param id 编号
+     * @return 编号
      */
     @NaturalId
     @Column(name = "COUNTRY_ID", nullable = false, length = 20)
@@ -50,7 +50,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 取得名称
      * 
-     * @param name 名称
+     * @return 名称
      */
     @Basic
     @Column(name = "NAME", nullable = false, length = 20, unique = true)
@@ -61,7 +61,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 取得简称
      * 
-     * @param shortName 简称
+     * @return 简称
      */
     @Basic
     @Column(name = "SHORT_NAME", length = 20, unique = true)
@@ -72,7 +72,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 取得详细描述
      * 
-     * @param description 详细描述
+     * @return 详细描述
      */
     @Basic
     @Column(name = "DESCRIPTION")
@@ -83,7 +83,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 设置编号
      * 
-     * @return 编号
+     * @param id 编号
      */
     public void setId(String id) {
         this.id = id;
@@ -92,7 +92,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 设置名称
      * 
-     * @return 名称
+     * @param name 名称
      */
     public void setName(String name) {
         this.name = name;
@@ -101,7 +101,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 设置简称
      * 
-     * @return 简称
+     * @param shortName 简称
      */
     public void setShortName(String shortName) {
         this.shortName = shortName;
@@ -110,7 +110,7 @@ public class Country extends AbstractEntityBean {
     /**
      * 设置详细描述
      * 
-     * @return 详细描述
+     * @param description 详细描述
      */
     public void setDescription(String description) {
         this.description = description;
