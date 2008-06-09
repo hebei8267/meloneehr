@@ -1,4 +1,4 @@
-package cn.hb.view.security.global;
+package cn.hb.view.global;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
