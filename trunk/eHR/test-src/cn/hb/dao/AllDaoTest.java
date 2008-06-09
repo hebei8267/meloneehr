@@ -3,6 +3,7 @@ package cn.hb.dao;
 import cn.hb.core.test.dao.HibernateDaoTestCase;
 import cn.hb.dao.common.CountryDaoTest;
 import cn.hb.dao.security.UserDaoTest;
+import cn.hb.dao.ui.MenuNodeDaoTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -26,6 +27,8 @@ public class AllDaoTest extends HibernateDaoTestCase {
         // suite.addTestSuite(OrganizationJobLevelDaoTest.class);
         //
         // suite.addTestSuite(CultureClassDaoTest.class);
+
+        suite.addTestSuite(MenuNodeDaoTest.class);
         return suite;
     }
 }
