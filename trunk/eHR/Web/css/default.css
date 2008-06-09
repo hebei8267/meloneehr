@@ -1,12 +1,15 @@
-html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td {
+	margin: 0;
+	padding: 0;
+}
 
 a:active,a:link,a:visited,a:hover {
 	color: black;
 }
 
-body { 
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+body {
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 11pt;
 }
 
@@ -21,27 +24,28 @@ body {
 
 /* 标题栏 */
 .titleBar {
-	background: transparent url(../ext/resources/images/default/panel/white-top-bottom.gif) repeat-x 0 -1px;
+	background: transparent
+		url(../ext/resources/images/default/panel/white-top-bottom.gif)
+		repeat-x 0 -1px;
 }
-.dr-toolbar-int{
-}
-.rich-toolbar-item{
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+
+.rich-toolbar-item {
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 9pt;
 }
 
 /* 页脚 */
 .footer {
 	text-align: center;
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 9pt;
 }
 
 .dr-pnl-h {
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 9pt;
 	background: transparent
 		url(../ext/resources/images/default/panel/white-top-bottom.gif)
@@ -49,8 +53,8 @@ body {
 }
 
 .rich-panel-header {
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 9pt;
 	overflow: hidden;
 	padding: 5px 3px 4px 5px;
@@ -60,65 +64,65 @@ body {
 		repeat-x 0 -1px;
 }
 
-.dr-pnl-b{
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
-	font-size: 11pt;
-} 
-
-.rich-panel-body{
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+.dr-pnl-b {
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 11pt;
 }
 
-.dr-pnl{
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+.rich-panel-body {
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 11pt;
-} 
+}
 
-.rich-panel{
-	color: #333333; 
-	font-family: "宋体", "Arial"; 
+.dr-pnl {
+	color: #333333;
+	font-family: "宋体", "Arial";
+	font-size: 11pt;
+}
+
+.rich-panel {
+	color: #333333;
+	font-family: "宋体", "Arial";
 	font-size: 11pt;
 }
 
 .inputbox {
 	border: 1px solid #CCCCCC;
 	background: #FFFFFF;
-	height : 19px;
+	height: 19px;
 }
 
-.inputbox:hover, .inputbox:focus {
+.inputbox:hover,.inputbox:focus {
 	background: #FFFFCC;
 }
 
-.submitBtn{
-	background-image : url(../images/button_bgcolor_b.jpg);
-	background-repeat : repeat-x;
-	width : 80px;
-	height : 21px;
-	border : 1px solid #000000;
-	text-decoration : none;
+.submitBtn {
+	background-image: url(../images/button_bgcolor_b.jpg);
+	background-repeat: repeat-x;
+	width: 80px;
+	height: 21px;
+	border: 1px solid #000000;
+	text-decoration: none;
 }
 
-.cleanBtn{
-	background-image : url(../images/button_bgcolor_y.jpg);
-  	background-repeat : repeat-x;
-  	width : 80px;
-  	height : 21px;
-  	border : 1px solid #000000;
-  	text-decoration : none;
+.cleanBtn {
+	background-image: url(../images/button_bgcolor_y.jpg);
+	background-repeat: repeat-x;
+	width: 80px;
+	height: 21px;
+	border: 1px solid #000000;
+	text-decoration: none;
 }
 
 /* tree node div select */
-.dr-tree-i-sel{
-	padding:1px 4px;
-	border:0px solid;
+.dr-tree-i-sel {
+	padding: 1px 4px;
+	border: 0px solid;
 }
 
-.dr-tree-i-hl{
-	text-decoration:none;
-	color:black;
+.dr-tree-i-hl {
+	text-decoration: none;
+	color: black;
 }
