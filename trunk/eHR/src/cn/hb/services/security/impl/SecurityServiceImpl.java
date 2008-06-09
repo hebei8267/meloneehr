@@ -36,7 +36,7 @@ public class SecurityServiceImpl implements ISecurityService {
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
-    private UserDao userDao;
+    private UserDao userDao = null;
 
     public UserDao getUserDao() {
         return userDao;

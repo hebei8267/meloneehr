@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+	<head>
+		<!-- 画面编码设置 -->
+		<ui:include src="/page/core/common/pageContent.xhtml"/>
+		<title>Melone-eHR 人力资源系统</title>
+		<!-- 画面公共部分 -->
+		<ui:include src="/page/core/common/common.xhtml"/>
+	</head>
+	
+	<f:view contentType="text/html">
+		<body>
+			<div id="toolbarDiv">
+				<!-- 画面公共菜单部分 -->
+				<ui:include src="/page/core/common/menu.xhtml"/>
+			</div>
+			
+			<div id="menutreeDiv">
+				<div id="menuTreeContent" style="overflow: auto;">
+					<h:form id="menuTreeForm">
+						<rich:tree id="menuTree" switchType="client"
+							value="#{Frm001_View.menuTreeData}" var="item" nodeFace="#{item.type}">
+							<!-- "folder" 页面文件夹类型 -->
+							<rich:treeNode type="folder">
+								<h:outputText value="#{item.nodeTxt}"/>
+							</rich:treeNode>
+							<!-- "page" 页面文件类型 -->
+							<rich:treeNode type="node">
+								<h:commandLink value="#{item.nodeTxt}" 
+									action="#{Frm001_View.nodeSelected_Action}" target="workFrame">
+									<f:param name="actionPath" value="#{item.actionContent}"/>
+								</h:commandLink>
+							</rich:treeNode>
+						</rich:tree>
+					</h:form>
+				</div>
+			</div>
+			
+			<!-- 工作区部分 -->
+			<div id="workDiv">
+			</div>
+		</body>
+	</f:view>
+</html>

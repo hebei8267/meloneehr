@@ -192,6 +192,19 @@ public class MenuNode extends AbstractEntityBean {
         this.index = index;
     }
 
+    public void addSubNode(MenuNode menuNode) {
+        int index = 1;
+        for (MenuNode _menuNode : subNodeList) {
+            if (_menuNode.getIndex() != null) {
+                _menuNode.setIndex(index);
+                index++;
+            }
+        }
+
+        menuNode.setIndex(index);
+        this.subNodeList.add(menuNode);
+    }
+
     public void setSubNodeList(List<MenuNode> subNodeList) {
         this.subNodeList = subNodeList;
     }

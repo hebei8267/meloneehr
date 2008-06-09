@@ -44,6 +44,9 @@ public class MenuNodeDaoTest extends HibernateDaoTestCase {
                     menuNode.setActionContent(value);
                 } else if (i == 5) {
                     MenuNode parentNode = menuNodeDao.getMenuNodeByID(value);
+
+                    parentNode.addSubNode(menuNode);
+
                     menuNode.setParentNode(parentNode);
                 }
             }

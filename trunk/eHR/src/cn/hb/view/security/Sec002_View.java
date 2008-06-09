@@ -8,8 +8,9 @@ import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
 import cn.hb.view.domain.UserInfoSessionBean;
 
-import static cn.hb.view.MsgID.ERROR_Input_New_Pwd;
-import static cn.hb.view.MsgID.ERROR_Input_Old_Pwd;
+import static cn.hb.view.MsgID.ERROR_INPUT_NEW_PWD;
+import static cn.hb.view.MsgID.ERROR_INPUT_OLD_PWD;
+import static cn.hb.view.MsgID.TIP_PWD_CHANGE_SUCCEED;
 
 /**
  * @author kaka
@@ -28,20 +29,21 @@ public class Sec002_View extends AbstractViewBean {
 
     public String modPassword_Action() {
         if (!newPassword.equals(newPassword2)) {
-            addErrorMessage(ERROR_Input_New_Pwd);
+            addErrorMessage(ERROR_INPUT_NEW_PWD);
             return null;
         }
 
         // 用户登录
         User user = securityService.userLogin_Service(userId, oldPassword);
         if (user == null) {// 输入原密码错误
-            addErrorMessage(ERROR_Input_Old_Pwd);
+            addErrorMessage(ERROR_INPUT_OLD_PWD);
             return null;
         }
 
         user.setPassword(newPassword);
         securityService.modUserPassword_Service(user.getId(), user.getPassword());
-
+        // 密码修改成功
+        addErrorMessage(TIP_PWD_CHANGE_SUCCEED);
         return "modPwdSucceed";
     }
 
