@@ -111,3 +111,14 @@ body {
   	border : 1px solid #000000;
   	text-decoration : none;
 }
+
+/* tree node div select */
+.dr-tree-i-sel{
+	padding:1px 4px;
+	border:0px solid;
+}
+
+.dr-tree-i-hl{
+	text-decoration:none;
+	color:black;
+}
