@@ -17,6 +17,8 @@ import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.NaturalId;
 
 import cn.hb.core.bean.AbstractEntityBean;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * @author kaka
@@ -183,7 +185,7 @@ public class MenuNode extends AbstractEntityBean {
         this.actionContent = actionContent;
     }
 
-    public void setIndex(Integer index) {
+    protected void setIndex(Integer index) {
         this.index = index;
     }
 
@@ -202,15 +204,23 @@ public class MenuNode extends AbstractEntityBean {
         this.parentNodeID = parentNodeID;
     }
 
+    /**
+     * @see java.lang.Object#equals(Object)
+     */
     @Override
-    public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean equals(Object object) {
+        if (!(object instanceof MenuNode)) {
+            return false;
+        }
+        MenuNode rhs = (MenuNode) object;
+        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
     }
 
+    /**
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        return 0;
+        return new HashCodeBuilder(586758675, 673926573).append(this.id).toHashCode();
     }
 }
