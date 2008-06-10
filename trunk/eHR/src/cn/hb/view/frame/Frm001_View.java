@@ -18,7 +18,20 @@ import cn.hb.view.domain.RichFacesTreeNodeBean;
 // session
 public class Frm001_View extends AbstractViewBean {
     private TreeNode<RichFacesTreeNodeBean> menuTreeData;
+    private final String ACTION_PATH = "actionPath";
     private IMenuTreeService menuTreeService;
+
+    /** 同步菜单树 */
+    public void synch_Action() {
+        // 空实现,Scope("request")时会自动再次调用create()
+    }
+
+    /** 菜单树结点选中 */
+    public String nodeSelected_Action() {
+        // 取得迁移页面Key
+        String actionPath = (String) getRequestParameterMap().get(ACTION_PATH);
+        return actionPath;
+    }
 
     // ---------------------------------------------------------------------------
     // Override Method
@@ -31,7 +44,6 @@ public class Frm001_View extends AbstractViewBean {
 
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
 
     }
 

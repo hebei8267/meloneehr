@@ -204,3 +204,18 @@ body {
 	font-family: "宋体", "Arial";
 	font-size: 9pt;
 }
+.pageNum{
+	color: #333333;
+	font-family: "宋体", "Arial";
+	font-size: 9pt;
+}
+.hidden {
+	position: absolute;
+	left: -10000px;
+	top: -10000px;
+	visibility: hidden;
+}
+.dr-pnl{
+	border-style:solid;
+	border-width:0px;
+}

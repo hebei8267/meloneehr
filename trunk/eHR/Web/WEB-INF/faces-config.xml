@@ -61,4 +61,14 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	
+	<!-- 菜单树 -->
+	<navigation-rule>
+		<from-view-id>/page/frame/frm001.xhtml</from-view-id>
+		<navigation-case>
+			<!-- 国家信息 -->
+			<from-outcome>countryCfg</from-outcome>
+			<to-view-id>/page/common/com001.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

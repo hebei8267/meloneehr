@@ -34,12 +34,17 @@
 							</rich:treeNode>
 							<!-- "page" 页面文件类型 -->
 							<rich:treeNode type="node">
-								<h:commandLink value="#{item.nodeTxt}" 
+								<h:commandLink value="#{item.nodeTxt}" styleClass="treeNode"
 									action="#{Frm001_View.nodeSelected_Action}" target="workFrame">
 									<f:param name="actionPath" value="#{item.actionContent}"/>
 								</h:commandLink>
 							</rich:treeNode>
 						</rich:tree>
+						<div class="hidden">
+							<a4j:commandButton value="同步菜单树" id="synchMenuTreeBtn" 
+								reRender="menuTree" oncomplete="menuTreeDivInitFinish()" 
+								action="#{Frm001_View.synch_Action}"/>
+						</div>
 					</h:form>
 				</div>
 			</div>

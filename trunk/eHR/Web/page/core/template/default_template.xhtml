@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<head>
+		<!-- 画面编码设置 -->
+		<ui:include src="/page/core/common/pageContent.xhtml"/>
+		<title>Melone-eHR 人力资源系统</title>
+		<!-- 画面公共部分 -->
+		<ui:include src="/page/core/common/common.xhtml"/>
+	</head>
+	
+	<f:view contentType="text/html">
+		<body>
+			<rich:panel>
+				<!-- 画面ID部分 -->
+				<f:facet name="header">
+					<h:outputText value="#{pageName}"/>
+				</f:facet>
+		
+				<table width="100%">
+					<tr>
+						<td style="width:10px;">
+						</td>
+						<td align="right">
+							<h:outputLabel styleClass="pageNum">
+                    			页面编号 : 
+							</h:outputLabel>
+							<h:outputText value="  #{pageNum}" styleClass="pageNum"/>
+						</td>
+						<td style="width:10px;">
+						</td>
+					</tr>
+				</table>
+				
+				<!-- 画面主体部分 -->
+				<div class="body">
+					<ui:insert name="body"/>
+				</div>
+				<br/>
+				<!-- 画面页脚部分 -->
+				<ui:include src="/page/core/common/footer.xhtml"/>
+				<br/>
+			</rich:panel>
+		</body>
+	</f:view>
+</html>
