@@ -12,16 +12,18 @@
 		<title>Melone-eHR 人力资源系统</title>
 		<!-- 画面公共部分 -->
 		<ui:include src="/page/core/common/common.xhtml"/>
+		
+		<script src="${request.contextPath}/page/frame/frm001.js" type="text/javascript"/>
 	</head>
 	
 	<f:view contentType="text/html">
 		<body>
-			<div id="toolbarDiv">
+			<div id="toolBarDiv">
 				<!-- 画面公共菜单部分 -->
 				<ui:include src="/page/core/common/menu.xhtml"/>
 			</div>
 			
-			<div id="menutreeDiv">
+			<div id="menuTreeDiv">
 				<div id="menuTreeContent" style="overflow: auto;">
 					<h:form id="menuTreeForm">
 						<rich:tree id="menuTree" switchType="client"

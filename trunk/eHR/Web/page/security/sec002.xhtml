@@ -21,6 +21,7 @@
 				<p>
 				请输入变更前的密码和变更后的密码
 				</p>
+				<br/>
 				<table>
 					<tr>
 						<td>用户编号</td>
@@ -48,14 +49,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td>新密码（确认用）</td>
+						<td>新密码（确认）</td>
 						<td>
 							<h:inputSecret id="newPassword2" value="#{Sec002_View.newPassword2}" styleClass="inputbox required" />
 						</td>
 					</tr>
+					<tr/>
 					<tr>
-						<td></td>
-						<td>
+						<td colspan="2" align="right">
 							<h:commandButton value="变 更" action="#{Sec002_View.modPassword_Action}" styleClass="submitBtn"/>
 							<input type="button" value="清 除" class="cleanBtn"/>
 						</td>
