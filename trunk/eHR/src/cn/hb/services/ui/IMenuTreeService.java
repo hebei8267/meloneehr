@@ -1,8 +1,13 @@
 package cn.hb.services.ui;
 
+import cn.hb.core.services.IService;
 import cn.hb.view.domain.RichFacesTreeNodeBean;
 
-public interface IMenuTreeService {
+/**
+ * @author kaka
+ *
+ */
+public interface IMenuTreeService extends IService {
     /**
      * 取得UI树的根节点，根据登录用户ID取得其能访问的数据
      * 

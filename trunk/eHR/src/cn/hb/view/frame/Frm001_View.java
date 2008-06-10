@@ -49,7 +49,6 @@ public class Frm001_View extends AbstractViewBean {
 
     @Override
     public void init() {
-        System.out.println("1111111111111111111111111111");
         menuTreeData = menuTreeService.getMenuTreeRootNode_Service(getUserInfoInSession().getUserId());
     }
 

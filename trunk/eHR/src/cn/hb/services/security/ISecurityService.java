@@ -3,6 +3,10 @@ package cn.hb.services.security;
 import cn.hb.core.services.IService;
 import cn.hb.entity.security.User;
 
+/**
+ * @author kaka
+ *
+ */
 public interface ISecurityService extends IService {
     /**
      * 用户登录效验

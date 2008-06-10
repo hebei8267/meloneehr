@@ -219,3 +219,15 @@ body {
 	border-style:solid;
 	border-width:0px;
 }
+
+.treeNode:active,.treeNode:link,.treeNode:visited {
+	cursor: default　;
+	color:  #333333;
+	text-decoration: none;
+}
+
+.treeNode:hover {
+	cursor: default　;
+	color: #ffcc66;
+	text-decoration: underline;
+}
