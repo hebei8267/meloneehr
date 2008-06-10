@@ -2,6 +2,7 @@ package cn.hb.view.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class Com001_DWR_View extends AbstractViewBean {
      * 
      * @return JSON格式的列表信息
      */
-    public String getCountryInfoList_Action() {
+    public String getCountryInfoList_Action(Map<String, String> requestMap) {
 
         List<Country> countryList = commonService.getCountryInfoList_Service();
 
