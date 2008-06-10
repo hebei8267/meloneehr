@@ -1,4 +1,4 @@
 00000001	系统菜单树根节点	folder	true	null	
 00000002	系统管理	folder	true	null	00000001
 00000003	数据字典	folder	true	null	00000002
-00000004	国家信息	node	true	null	00000003
+00000004	国家信息	node	true	countryCfg	00000003

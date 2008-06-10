@@ -1,6 +1,7 @@
 package cn.hb.core.view;
 
 import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -133,5 +134,16 @@ public abstract class AbstractViewBean {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 取得 RequestParameterMap
+     * 
+     * @return RequestParameterMap
+     */
+    @SuppressWarnings("unchecked")
+    protected Map getRequestParameterMap() {
+        return FacesContextUtil.getRequestParameterMap();
+
     }
 }
