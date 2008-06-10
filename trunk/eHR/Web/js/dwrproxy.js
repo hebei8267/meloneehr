@@ -40,7 +40,6 @@ Ext.data.DWRJsonReader = function(meta, recordType) {
 
 Ext.extend(Ext.data.DWRJsonReader, Ext.data.JsonReader, {
 	read : function(response) {
-		alert(response);
 		if (typeof response == 'object') {
 			alert("object");
 		}
