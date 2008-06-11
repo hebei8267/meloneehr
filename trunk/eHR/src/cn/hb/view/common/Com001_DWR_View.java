@@ -1,11 +1,7 @@
 package cn.hb.view.common;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import net.sf.json.JSONObject;
 
@@ -36,19 +32,9 @@ public class Com001_DWR_View extends AbstractViewBean {
         // 所有数据数量
         int dataCount = countryList.size();
 
-        List mmlist = new ArrayList<Countrymm>();
-        for (Country country : countryList) {
-            Countrymm mm = new Countrymm();
-            mm.setId(country.getId());
-            mm.setName(country.getName());
-            mm.setShortName(country.getShortName());
-            mm.setDescription(country.getDescription());
-            mmlist.add(mm);
-        }
+        ConvertUtil<Country> util = new ConvertUtil<Country>();
+        JSONObject json = util.javaListToJSONObject(dataCount, countryList);
 
-        ConvertUtil<Countrymm> util = new ConvertUtil<Countrymm>();
-        JSONObject json = util.javaListToJSONObject(dataCount, mmlist);
-        System.out.println(json.toString());
         return json.toString();
     }
 
