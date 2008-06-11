@@ -160,14 +160,32 @@ body {
 	font-size: 11pt;
 }
 
-.inputbox {
+.inputText {
 	border: 1px solid #CCCCCC;
 	background: #FFFFFF;
 	height: 19px;
+	width:120px;
+	font-size: 10pt;
 }
 
-.inputbox:hover,.inputbox:focus {
+.readonly{
+	border: 1px solid #CCCCCC;
+	height: 19px;
+	width:120px;
+	font-size: 10pt;
+	background: #808080;
+}
+
+.inputText:hover,.inputText:focus,.inputTextarea:hover,.inputTextarea:focus {
 	background: #FFFFCC;
+}
+
+.inputTextarea{
+	border: 1px solid #CCCCCC;
+	background: #FFFFFF;
+	height: 76px;
+	width:120px;
+	font-size: 10pt;
 }
 
 .submitBtn {
@@ -180,6 +198,15 @@ body {
 }
 
 .cleanBtn {
+	background-image: url(../images/button_bgcolor_y.jpg);
+	background-repeat: repeat-x;
+	width: 80px;
+	height: 21px;
+	border: 1px solid #000000;
+	text-decoration: none;
+}
+
+.deleteBtn {
 	background-image: url(../images/button_bgcolor_y.jpg);
 	background-repeat: repeat-x;
 	width: 80px;
