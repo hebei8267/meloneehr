@@ -25,7 +25,7 @@ Ext.onReady(function() {
 
 	var cm = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer({
 		header : '序号',// 自动行号
-		width : 32
+		width : 40
 	}), {
 		id : 'id',
 		header : "编号",
@@ -40,12 +40,12 @@ Ext.onReady(function() {
 		id : 'shortName',
 		header : "简称",
 		dataIndex : 'shortName',
-		width : 40
+		width : 50
 	}, {
 		id : 'description',
 		header : "详细描述",
 		dataIndex : 'description',
-		width : 45
+		width : 130
 	}]);
 
 	cm.defaultSortable = true;
@@ -53,7 +53,7 @@ Ext.onReady(function() {
 	var grid = new Ext.grid.GridPanel({
 		id : 'countryInfoGrid',
 		el : 'countryInfoGrid',
-		width : 740,
+		width : 365,
 		height : 330,
 		title : '员工信息列表',
 		store : store,

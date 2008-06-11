@@ -73,8 +73,8 @@ select.validation-failed,input.validation-failed,textarea.validation-failed
 	border: 1px solid #dd7870;
 	height: 19px;
 }
-/* Tooltips CSS definitions */
 
+/* Tooltips CSS definitions */
 a:active,a:link,a:visited,a:hover {
 	color: black;
 }
@@ -196,33 +196,36 @@ body {
 
 .dr-tree-i-hl {
 	text-decoration: none;
-	color:  #333333;
+	color: #333333;
 }
 
-.x-panel-header-text{
+.x-panel-header-text {
 	color: #333333;
 	font-family: "宋体", "Arial";
 	font-size: 9pt;
 }
-.pageNum{
+
+.pageNum {
 	color: #333333;
 	font-family: "宋体", "Arial";
 	font-size: 9pt;
 }
+
 .hidden {
 	position: absolute;
 	left: -10000px;
 	top: -10000px;
 	visibility: hidden;
 }
-.dr-pnl{
-	border-style:solid;
-	border-width:0px;
+
+.dr-pnl {
+	border-style: solid;
+	border-width: 0px;
 }
 
 .treeNode:active,.treeNode:link,.treeNode:visited {
 	cursor: default　;
-	color:  #333333;
+	color: #333333;
 	text-decoration: none;
 }
 
@@ -230,4 +233,10 @@ body {
 	cursor: default　;
 	color: #ffcc66;
 	text-decoration: underline;
+}
+
+.x-grid3-hd-row td,.x-grid3-row td,.x-grid3-summary-row td {
+	font: normal 10pt "宋体", "Arial", tahoma, helvetica, sans-serif;
+	-moz-outline: none;
+	-moz-user-focus: normal;
 }
