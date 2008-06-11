@@ -35,4 +35,27 @@ public class CountryDao extends HibernateDaoImpl<Country> {
         }
         return null;
     }
+
+    /**
+     * 取得当前最大国家信息ID
+     * 
+     * @return
+     */
+    public String getMaxCountryID() {
+        return formatMaxID(_getMaxCountryID());
+    }
+
+    /**
+     * 取得当前最大国家信息ID
+     * 
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected String _getMaxCountryID() {
+        List<String> resultList = getHibernateTemplate().find("Country.getMaxCountryID");
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return DEFAULT_MAX_ID;
+    }
 }

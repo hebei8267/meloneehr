@@ -26,7 +26,7 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public int updateCountryInfo_Service(Country cInfo) {
+    public Integer updateCountryInfo_Service(Country cInfo) {
         Country dbCInfo = countryDao.getCountryByID(cInfo.getId());
 
         if (dbCInfo == null) {
@@ -39,6 +39,27 @@ public class CommonServiceImpl implements ICommonService {
             countryDao.save(dbCInfo);
             return 0;
         }
+    }
+
+    @Override
+    public boolean addCountryInfo_Service(Country cInfo) {
+        cInfo.setId(countryDao.getMaxCountryID());
+        
+        countryDao.save(cInfo);
+
+        return true;
+    }
+
+    @Override
+    public Integer delCountryInfo_Service(String countryID) {
+        Country dbCInfo = countryDao.getCountryByID(countryID);
+        if (dbCInfo == null) {
+            return 1;
+        } else {
+            countryDao.remove(dbCInfo);
+            return 0;
+        }
+
     }
 
     // ---------------------------------------------------------------------------

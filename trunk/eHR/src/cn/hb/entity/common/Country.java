@@ -19,7 +19,8 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "M_COUNTRY")
-@NamedQueries( { @NamedQuery(name = "Country.getCountryByID", query = "select obj from Country obj where obj.id = ? ") })
+@NamedQueries( { @NamedQuery(name = "Country.getCountryByID", query = "select obj from Country obj where obj.id = ? "),
+        @NamedQuery(name = "Country.getMaxCountryID", query = "select max(obj.id) from Country obj ") })
 public class Country extends AbstractEntityBean {
 
     private static final long serialVersionUID = -8552348640289521607L;

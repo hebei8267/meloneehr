@@ -1,6 +1,8 @@
 package cn.hb.view.common;
 
 import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY;
+import static cn.hb.view.MsgID.ERROR_DEL_COUNTRY;
+import static cn.hb.view.MsgID.ERROR_ADD_COUNTRY;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -40,11 +42,29 @@ public class Com001_View extends AbstractViewBean {
     }
 
     public void delCountryInfo() {
+        int result = commonService.delCountryInfo_Service(id);
 
+        if (result != 0) {
+            addErrorMessage(ERROR_DEL_COUNTRY);
+        }
+        reset();
+        return;
     }
 
     public void addCountryInfo() {
+        Country cInfo = new Country();
 
+        cInfo.setName(name);
+        cInfo.setShortName(shortName);
+        cInfo.setDescription(description);
+
+        boolean result = commonService.addCountryInfo_Service(cInfo);
+
+        if (!result) {
+            addErrorMessage(ERROR_ADD_COUNTRY);
+        }
+        reset();
+        return;
     }
 
     private void reset() {
