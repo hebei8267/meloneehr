@@ -3,6 +3,8 @@ package cn.hb.entity.common;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
@@ -17,6 +19,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "M_COUNTRY")
+@NamedQueries( { @NamedQuery(name = "Country.getCountryByID", query = "select obj from Country obj where obj.id = ? ") })
 public class Country extends AbstractEntityBean {
 
     private static final long serialVersionUID = -8552348640289521607L;

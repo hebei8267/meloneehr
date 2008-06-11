@@ -15,8 +15,6 @@ import cn.hb.view.convert.ConvertUtil;
  * 
  * 国家信息列表
  */
-// @Component("Com001_DWR_View")
-// @Scope("request")
 public class Com001_DWR_View extends AbstractViewBean {
     private ICommonService commonService;
 

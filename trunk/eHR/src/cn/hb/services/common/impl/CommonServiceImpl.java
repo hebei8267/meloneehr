@@ -25,6 +25,22 @@ public class CommonServiceImpl implements ICommonService {
         return countryDao.getAll();
     }
 
+    @Override
+    public int updateCountryInfo_Service(Country cInfo) {
+        Country dbCInfo = countryDao.getCountryByID(cInfo.getId());
+
+        if (dbCInfo == null) {
+            return 1;
+        } else {
+            dbCInfo.setName(cInfo.getName());
+            dbCInfo.setShortName(cInfo.getShortName());
+            dbCInfo.setDescription(cInfo.getDescription());
+
+            countryDao.save(dbCInfo);
+            return 0;
+        }
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
@@ -37,4 +53,5 @@ public class CommonServiceImpl implements ICommonService {
     public void setCountryDao(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
+
 }

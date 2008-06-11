@@ -78,8 +78,54 @@ Ext.onReady(function() {
 });
 
 function setFromData(rec) {
+	addValidation();
+	document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = rec.data.id;
 	document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = rec.data.id;
 	document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = rec.data.name;
 	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = rec.data.shortName;
 	document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = rec.data.description;
+
+	document.forms['countryCfgForm'].elements['countryCfgForm:name'].focus();
+	document.forms['countryCfgForm'].elements['countryCfgForm:name'].blur();
+	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].focus();
+	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].blur();
+	document.forms['countryCfgForm'].elements['countryCfgForm:description'].focus();
+	document.forms['countryCfgForm'].elements['countryCfgForm:description'].blur();
+}
+
+function addValidation() {
+	var valid = new Validation('countryCfgForm', {
+		immediate : true
+	});
+}
+//更 新button check
+function updateInfoCheck() {
+	var grid = Ext.getCmp('countryInfoGrid');
+	var gridSelects = grid.getSelections();
+
+	if (gridSelects.length == 0) {
+		Ext.Msg.show({
+			title : '国家信息',
+			msg : '请选择要更新的国家信息!',
+			buttons : Ext.Msg.OK,
+			minWidth : 200,
+			icon : Ext.MessageBox.INFO
+		});
+		return false;
+	} else {
+		return true;
+	}
+}
+//复原button
+function resetFromData() {
+	if (updateInfoCheck()) {
+		var grid = Ext.getCmp('countryInfoGrid');
+		var record = grid.getSelectionModel().getSelected();
+
+		document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = record.data.id;
+		document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = record.data.id;
+		document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = record.data.name;
+		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = record.data.shortName;
+		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
+	}
 }

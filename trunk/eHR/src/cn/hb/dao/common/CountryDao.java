@@ -20,4 +20,19 @@ public class CountryDao extends HibernateDaoImpl<Country> {
     public List<Country> getCountryInfoList() {
         return getAll();
     }
+
+    /**
+     * 根据国家ID取得国家信息
+     * 
+     * @param countryID 国家信息ID
+     * @return Country 国家信息
+     */
+    @SuppressWarnings("unchecked")
+    public Country getCountryByID(String countryID) {
+        List<Country> resultList = getHibernateTemplate().findByNamedQuery("Country.getCountryByID", countryID);
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
+    }
 }
