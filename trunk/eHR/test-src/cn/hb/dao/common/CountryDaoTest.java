@@ -33,7 +33,6 @@ public class CountryDaoTest extends HibernateDaoTestCase {
 
                 String value = fileLine.get(i);
                 if (i == 0) {
-                    System.out.println(value);
                     country.setId(value);
                 } else if (i == 1) {
                     country.setDescription(value);
