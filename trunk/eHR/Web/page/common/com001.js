@@ -1,3 +1,4 @@
+var validCfgForm;
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 
@@ -88,16 +89,11 @@ function setFromData(rec) {
 	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = rec.data.shortName;
 	document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = rec.data.description;
 
-	document.forms['countryCfgForm'].elements['countryCfgForm:name'].focus();
-	document.forms['countryCfgForm'].elements['countryCfgForm:name'].blur();
-	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].focus();
-	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].blur();
-	document.forms['countryCfgForm'].elements['countryCfgForm:description'].focus();
-	document.forms['countryCfgForm'].elements['countryCfgForm:description'].blur();
+	validCfgForm.validate();
 }
 
 function addValidation() {
-	var validCfgForm = new Validation('countryCfgForm', {
+	validCfgForm = new Validation('countryCfgForm', {
 		immediate : true
 	});
 	validCfgForm.validate();
@@ -146,6 +142,8 @@ function resetFromData() {
 		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = record.data.shortName;
 		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
 	}
+	
+	validCfgForm.validate();
 }
 // 删除button
 function delInfoCheck() {

@@ -64,8 +64,9 @@
 				</table>
 			</rich:panel>
 			<script type="text/javascript">
+			var valid;
 			Ext.onReady(function() {
-	            var valid = new Validation('modPwdForm', {
+	            valid = new Validation('modPwdForm', {
 	                immediate: true
 	            });
 	            valid.validate();
@@ -76,6 +77,8 @@
             	document.forms['modPwdForm'].elements['modPwdForm:oldPassword'].value = "";
             	document.forms['modPwdForm'].elements['modPwdForm:newPassword'].value = "";
             	document.forms['modPwdForm'].elements['modPwdForm:newPassword2'].value = "";
+            	
+            	var valid
 	        }
 			</script>
 		</h:form>

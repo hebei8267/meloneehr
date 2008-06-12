@@ -33,10 +33,12 @@ public class CommonServiceImpl implements ICommonService {
             return 1;
         }
         List<Country> likenessList = countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName());
-        for (Country country : likenessList) {
-            if (!country.getId().equals(cInfo.getId())) {
-                // 存在类似的国家
-                return 2;
+        if (likenessList != null) {
+            for (Country country : likenessList) {
+                if (!country.getId().equals(cInfo.getId())) {
+                    // 存在类似的国家
+                    return 2;
+                }
             }
         }
 

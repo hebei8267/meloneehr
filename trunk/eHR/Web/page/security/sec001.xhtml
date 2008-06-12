@@ -51,8 +51,9 @@
 				</table>
 			</rich:panel>
 			<script type="text/javascript">
+			var valid;
 			Ext.onReady(function() {
-	            var valid = new Validation('loginForm', {
+	            valid = new Validation('loginForm', {
 	                immediate: true
 	            });
 	            valid.validate();
@@ -61,6 +62,8 @@
             function cleanFromItem(){
             	document.forms['loginForm'].elements['loginForm:userId'].value = "";
             	document.forms['loginForm'].elements['loginForm:password'].value = "";
+            	
+            	valid.validate();
 	        }
 			</script>
 		</h:form>
