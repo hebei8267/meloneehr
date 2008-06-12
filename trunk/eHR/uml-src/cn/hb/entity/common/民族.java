@@ -6,9 +6,7 @@ public class 民族 {
  
 	private String 编号(PK);
 	 
-	private String 名称();
-	 
-	private String 简称(unique);
+	private String 名称;
 	 
 	private String 详细描述;
 	 
