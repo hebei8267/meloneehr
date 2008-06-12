@@ -13,4 +13,10 @@
 			<dwr:include method="getCountryInfoList_Action" />
 		</dwr:remote>
 	</bean>
+	
+	<bean id="Com002_DWR_View" class="cn.hb.view.common.Com002_DWR_View" scope="prototype">
+		<dwr:remote javascript="Com002_DWR_View">
+			<dwr:include method="getNationInfoList_Service" />
+		</dwr:remote>
+	</bean>
 </beans>

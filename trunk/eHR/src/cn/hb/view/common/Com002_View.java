@@ -1,71 +1,68 @@
 package cn.hb.view.common;
 
-import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY1;
-import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY2;
-import static cn.hb.view.MsgID.ERROR_DEL_COUNTRY;
-import static cn.hb.view.MsgID.ERROR_ADD_COUNTRY;
+import static cn.hb.view.MsgID.ERROR_ADD_NATION;
+import static cn.hb.view.MsgID.ERROR_DEL_NATION;
+import static cn.hb.view.MsgID.ERROR_UPDATE_NATION1;
+import static cn.hb.view.MsgID.ERROR_UPDATE_NATION2;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
-import cn.hb.entity.common.Country;
+import cn.hb.entity.common.Nation;
 import cn.hb.services.common.ICommonService;
 
 /**
  * @author kaka
  * 
- * 国家信息列表
+ * 民族信息列表
  */
-@Component("Com001_View")
+@Component("Com002_View")
 @Scope("request")
-public class Com001_View extends AbstractViewBean {
+public class Com002_View extends AbstractViewBean {
     private String id;
     private String name;
-    private String shortName;
     private String description;
     private ICommonService commonService;
 
-    public void updateCountryInfo() {
-        Country objInfo = new Country();
+    public void updateNationInfo() {
+        Nation objInfo = new Nation();
         objInfo.setId(id);
         objInfo.setName(name);
-        objInfo.setShortName(shortName);
         objInfo.setDescription(description);
 
-        int result = commonService.updateCountryInfo_Service(objInfo);
+        int result = commonService.updateNationInfo_Service(objInfo);
 
         if (result == 1) {
-            addErrorMessage(ERROR_UPDATE_COUNTRY1);
+            addErrorMessage(ERROR_UPDATE_NATION1);
         }
         if (result == 2) {
-            addErrorMessage(ERROR_UPDATE_COUNTRY2);
+            addErrorMessage(ERROR_UPDATE_NATION2);
         }
         destroy();
         return;
     }
 
-    public void delCountryInfo() {
-        int result = commonService.delCountryInfo_Service(id);
+    public void delNationInfo() {
+        int result = commonService.delNationInfo_Service(id);
 
         if (result != 0) {
-            addErrorMessage(ERROR_DEL_COUNTRY);
+            addErrorMessage(ERROR_DEL_NATION);
         }
         destroy();
         return;
     }
 
-    public void addCountryInfo() {
-        Country objInfo = new Country();
+    public void addNationInfo() {
+        Nation objInfo = new Nation();
 
         objInfo.setName(name);
-        objInfo.setShortName(shortName);
         objInfo.setDescription(description);
 
-        int result = commonService.addCountryInfo_Service(objInfo);
+        int result = commonService.addNationInfo_Service(objInfo);
 
         if (result != 0) {
-            addErrorMessage(ERROR_ADD_COUNTRY);
+            addErrorMessage(ERROR_ADD_NATION);
         }
         destroy();
         return;
@@ -76,20 +73,17 @@ public class Com001_View extends AbstractViewBean {
     // ---------------------------------------------------------------------------
     @Override
     public void create() {
-
     }
 
     @Override
     public void destroy() {
         id = "";
         name = "";
-        shortName = "";
         description = "";
     }
 
     @Override
     public void init() {
-
     }
 
     // ---------------------------------------------------------------------------
@@ -103,12 +97,12 @@ public class Com001_View extends AbstractViewBean {
         return name;
     }
 
-    public String getShortName() {
-        return shortName;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public ICommonService getCommonService() {
+        return commonService;
     }
 
     public void setId(String id) {
@@ -119,16 +113,8 @@ public class Com001_View extends AbstractViewBean {
         this.name = name;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ICommonService getCommonService() {
-        return commonService;
     }
 
     public void setCommonService(ICommonService commonService) {

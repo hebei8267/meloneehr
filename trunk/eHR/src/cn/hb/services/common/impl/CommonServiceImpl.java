@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.dao.common.CountryDao;
+import cn.hb.dao.common.NationDao;
 import cn.hb.entity.common.Country;
+import cn.hb.entity.common.Nation;
 import cn.hb.services.common.ICommonService;
 
 /**
@@ -26,40 +28,40 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public Integer updateCountryInfo_Service(Country cInfo) {
-        Country dbCInfo = countryDao.getCountryByID(cInfo.getId());
+    public Integer updateCountryInfo_Service(Country objInfo) {
+        Country dbObjInfo = countryDao.getCountryByID(objInfo.getId());
 
-        if (dbCInfo == null) {
+        if (dbObjInfo == null) {
             return 1;
         }
-        List<Country> likenessList = countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName());
+        List<Country> likenessList = countryDao.existLikenessCountry(objInfo.getName(), objInfo.getShortName());
         if (likenessList != null) {
             for (Country country : likenessList) {
-                if (!country.getId().equals(cInfo.getId())) {
+                if (!country.getId().equals(objInfo.getId())) {
                     // 存在类似的国家
                     return 2;
                 }
             }
         }
 
-        dbCInfo.setName(cInfo.getName());
-        dbCInfo.setShortName(cInfo.getShortName());
-        dbCInfo.setDescription(cInfo.getDescription());
+        dbObjInfo.setName(objInfo.getName());
+        dbObjInfo.setShortName(objInfo.getShortName());
+        dbObjInfo.setDescription(objInfo.getDescription());
 
-        countryDao.save(dbCInfo);
+        countryDao.save(dbObjInfo);
         return 0;
 
     }
 
     @Override
-    public Integer addCountryInfo_Service(Country cInfo) {
-        if (countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName()) != null) {
+    public Integer addCountryInfo_Service(Country objInfo) {
+        if (countryDao.existLikenessCountry(objInfo.getName(), objInfo.getShortName()) != null) {
             // 存在类似的国家
             return 1;
         } else {
-            cInfo.setId(countryDao.getMaxCountryID());
+            objInfo.setId(countryDao.getMaxCountryID());
 
-            countryDao.save(cInfo);
+            countryDao.save(objInfo);
 
             return 0;
         }
@@ -67,20 +69,75 @@ public class CommonServiceImpl implements ICommonService {
 
     @Override
     public Integer delCountryInfo_Service(String countryID) {
-        Country dbCInfo = countryDao.getCountryByID(countryID);
-        if (dbCInfo == null) {
+        Country dbObjInfo = countryDao.getCountryByID(countryID);
+        if (dbObjInfo == null) {
             return 1;
         } else {
-            countryDao.remove(dbCInfo);
+            countryDao.remove(dbObjInfo);
             return 0;
         }
 
+    }
+
+    @Override
+    public Integer addNationInfo_Service(Nation objInfo) {
+        if (nationDao.existLikenessNation(objInfo.getName()) != null) {
+            // 存在类似的民族
+            return 1;
+        } else {
+            objInfo.setId(nationDao.getMaxNationID());
+
+            nationDao.save(objInfo);
+
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer delNationInfo_Service(String nationID) {
+        Nation dbObjInfo = nationDao.getNationByID(nationID);
+        if (dbObjInfo == null) {
+            return 1;
+        } else {
+            nationDao.remove(dbObjInfo);
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Nation> getNationInfoList_Service() {
+        return nationDao.getAll();
+    }
+
+    @Override
+    public Integer updateNationInfo_Service(Nation objInfo) {
+        Nation dbObjInfo = nationDao.getNationByID(objInfo.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<Nation> likenessList = nationDao.existLikenessNation(objInfo.getName());
+        if (likenessList != null) {
+            for (Nation nation : likenessList) {
+                if (!nation.getId().equals(objInfo.getId())) {
+                    // 存在类似的民族
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(objInfo.getName());
+        dbObjInfo.setDescription(objInfo.getDescription());
+
+        nationDao.save(dbObjInfo);
+        return 0;
     }
 
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     private CountryDao countryDao = null;
+    private NationDao nationDao = null;
 
     public CountryDao getCountryDao() {
         return countryDao;
@@ -88,6 +145,14 @@ public class CommonServiceImpl implements ICommonService {
 
     public void setCountryDao(CountryDao countryDao) {
         this.countryDao = countryDao;
+    }
+
+    public NationDao getNationDao() {
+        return nationDao;
+    }
+
+    public void setNationDao(NationDao nationDao) {
+        this.nationDao = nationDao;
     }
 
 }
