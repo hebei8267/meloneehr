@@ -94,9 +94,10 @@ function setFromData(rec) {
 }
 
 function addValidation() {
-	var valid = new Validation('countryCfgForm', {
+	var validCfgForm = new Validation('countryCfgForm', {
 		immediate : true
 	});
+	validCfgForm.validate();
 }
 //更 新button check
 function updateInfoCheck() {

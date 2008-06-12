@@ -84,6 +84,7 @@ body {
 	font-family: "宋体";
 	font-size: 12px;
 }
+
 td {
 	color: #333333;
 	font-family: "宋体";
@@ -170,29 +171,30 @@ td {
 	border: 1px solid #CCCCCC;
 	background: #FFFFFF;
 	height: 19px;
-	width:120px;
+	width: 120px;
 	font-family: "宋体";
 	font-size: 12px;
 }
 
-.readonly{
+.readonly {
 	border: 1px solid #CCCCCC;
 	height: 19px;
-	width:120px;
+	width: 120px;
 	font-family: "宋体";
 	font-size: 12px;
 	background: #808080;
 }
 
-.inputText:hover,.inputText:focus,.inputTextarea:hover,.inputTextarea:focus {
+.inputText:hover,.inputText:focus,.inputTextarea:hover,.inputTextarea:focus
+	{
 	background: #FFFFCC;
 }
 
-.inputTextarea{
+.inputTextarea {
 	border: 1px solid #CCCCCC;
 	background: #FFFFFF;
 	height: 76px;
-	width:120px;
+	width: 120px;
 	font-family: "宋体";
 	font-size: 12px;
 }
@@ -279,13 +281,13 @@ td {
 	-moz-user-focus: normal;
 }
 
-.x-btn-text{
+.x-btn-text {
 	color: #333333;
 	font-family: "宋体";
 	font-size: 12px;
 }
 
-.rich-mpnl-header{
+.rich-mpnl-header {
 	color: #333333;
 	font-family: "宋体";
 	font-size: 12px;
