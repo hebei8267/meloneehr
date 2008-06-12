@@ -29,7 +29,7 @@ public interface ICommonService extends IService {
      * 删除国家信息
      * 
      * @param countryID 国家信息ID
-     * @return true-删除成功 false-删除失败
+     * @return 0-更新成功 1-更新失败
      */
     public Integer delCountryInfo_Service(String countryID);
 
@@ -39,6 +39,6 @@ public interface ICommonService extends IService {
      * @param cInfo 国家信息
      * @return 0-更新成功 1-更新失败
      */
-    public boolean addCountryInfo_Service(Country cInfo);
+    public Integer addCountryInfo_Service(Country cInfo);
 
 }

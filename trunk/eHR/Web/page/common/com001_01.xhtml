@@ -16,17 +16,23 @@
 		<h:form id="countryAddForm">
 			<table width="200">
 				<tr>
-					<tr>
-						<td>名称</td>
-						<td align="right">
-							<h:inputText id="name" value="#{Com001_View.name}" styleClass="inputText required max-length-20" />
-						</td>
-					</tr>
+					<td colspan="2">
+						<h:outputLabel value="名称和简称不能和现有数据重复" styleClass="tipText"/>
+					</td>
+				</tr>
+				<tr/>
+				<tr/>
+				<tr/>
+				<tr>
+					<td>名称</td>
+					<td align="right">
+						<h:inputText id="name" value="#{Com001_View.name}" styleClass="inputText required max-length-20" />
+					</td>
 				</tr>
 				<tr>
 					<td>简称</td>
 					<td align="right">
-						<h:inputText id="shortName" value="#{Com001_View.shortName}" styleClass="inputText max-length-20" />
+						<h:inputText id="shortName" value="#{Com001_View.shortName}" styleClass="inputText required max-length-20" />
 					</td>
 				</tr>
 				<tr>

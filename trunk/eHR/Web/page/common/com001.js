@@ -29,6 +29,9 @@ Ext.onReady(function() {
 		listeners : {
 			rowselect : function(sm, row, rec) {
 				setFromData(rec);
+			},
+			rowdeselect : function(sm, row, rec) {
+				cleanFromData();
 			}
 		}
 	});
@@ -99,7 +102,7 @@ function addValidation() {
 	});
 	validCfgForm.validate();
 }
-//更 新button check
+// 更 新button check
 function updateInfoCheck() {
 	var grid = Ext.getCmp('countryInfoGrid');
 	var gridSelects = grid.getSelections();
@@ -117,7 +120,21 @@ function updateInfoCheck() {
 		return true;
 	}
 }
-//复原button
+
+function cleanFromData() {
+	var grid = Ext.getCmp('countryInfoGrid');
+	var gridSelects = grid.getSelections();
+
+	if (gridSelects.length == 0) {
+		document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = "";
+		document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = "";
+		document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = "";
+		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = "";
+		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = "";
+	}
+}
+
+// 复原button
 function resetFromData() {
 	if (updateInfoCheck()) {
 		var grid = Ext.getCmp('countryInfoGrid');
@@ -130,11 +147,11 @@ function resetFromData() {
 		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
 	}
 }
-//删除button
-function delInfoCheck(){
+// 删除button
+function delInfoCheck() {
 	var grid = Ext.getCmp('countryInfoGrid');
 	var gridSelects = grid.getSelections();
-	
+
 	if (gridSelects.length == 0) {
 		Ext.Msg.show({
 			title : '国家信息',
@@ -152,7 +169,8 @@ function delInfoCheck(){
 			minWidth : 200,
 			fn : function(btn) {
 				if (btn == 'ok') {
-					document.forms['countryCfgForm'].elements['countryCfgForm:delCountryInfoBtn'].click();
+					document.forms['countryCfgForm'].elements['countryCfgForm:delCountryInfoBtn']
+							.click();
 				}
 			},
 			icon : Ext.MessageBox.QUESTION
@@ -162,8 +180,6 @@ function delInfoCheck(){
 
 /* 打开添加国家信息窗口 */
 function openAddCountryInfoWindow() {
-	//document.forms['photoView:uploadPhotoForm'].elements['photoView:uploadPhotoForm:photoTxt'].value = '';
-
 	Richfaces.showModalPanel('addCountryInfoView');
 	return false;
 }

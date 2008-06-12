@@ -176,6 +176,12 @@ td {
 	font-size: 12px;
 }
 
+.tipText {
+	color: #FFCC00;
+	font-family: "宋体";
+	font-size: 12px;
+}
+
 .readonly {
 	border: 1px solid #CCCCCC;
 	height: 19px;

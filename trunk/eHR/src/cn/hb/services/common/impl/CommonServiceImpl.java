@@ -42,12 +42,17 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public boolean addCountryInfo_Service(Country cInfo) {
-        cInfo.setId(countryDao.getMaxCountryID());
-        
-        countryDao.save(cInfo);
+    public Integer addCountryInfo_Service(Country cInfo) {
+        if (countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName())) {
+            // 存在类似的国家
+            return 1;
+        } else {
+            cInfo.setId(countryDao.getMaxCountryID());
 
-        return true;
+            countryDao.save(cInfo);
+
+            return 0;
+        }
     }
 
     @Override

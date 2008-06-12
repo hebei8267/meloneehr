@@ -58,9 +58,9 @@ public class Com001_View extends AbstractViewBean {
         cInfo.setShortName(shortName);
         cInfo.setDescription(description);
 
-        boolean result = commonService.addCountryInfo_Service(cInfo);
+        int result = commonService.addCountryInfo_Service(cInfo);
 
-        if (!result) {
+        if (result != 0) {
             addErrorMessage(ERROR_ADD_COUNTRY);
         }
         destroy();

@@ -37,6 +37,23 @@ public class CountryDao extends HibernateDaoImpl<Country> {
     }
 
     /**
+     * 是否存在类似的国家（国家名称或国家简称一样）
+     * 
+     * @param name
+     * @param shortName
+     * @return true-存在 false-不存在
+     */
+    @SuppressWarnings("unchecked")
+    public boolean existLikenessCountry(String name, String shortName) {
+        List<Country> resultList = getHibernateTemplate().findByNamedQuery("Country.existLikenessCountry",
+                new String[] { name, shortName });
+        if (resultList.size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 取得当前最大国家信息ID
      * 
      * @return
