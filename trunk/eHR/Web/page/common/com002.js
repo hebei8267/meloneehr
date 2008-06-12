@@ -1,11 +1,12 @@
 var validCfgForm;
+
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var store = new Ext.data.Store({
 		id : 'store',
-		proxy : new Ext.data.DWRProxy(
-				Com001_DWR_View.getCountryInfoList_Action, false),
+		proxy : new Ext.data.DWRProxy(Com002_DWR_View.getNationInfoList_Action,
+				false),
 		reader : new Ext.data.DWRJsonReader({
 			totalProperty : "totalProperty",
 			root : "dataList"
@@ -15,9 +16,6 @@ Ext.onReady(function() {
 		}, {
 			name : 'name',
 			mapping : 'name'
-		}, {
-			name : 'shortName',
-			mapping : 'shortName'
 		}, {
 			name : 'description',
 			mapping : 'description'
@@ -51,11 +49,6 @@ Ext.onReady(function() {
 		dataIndex : 'name',
 		width : 70
 	}, {
-		id : 'shortName',
-		header : "简称",
-		dataIndex : 'shortName',
-		width : 50
-	}, {
 		id : 'description',
 		header : "详细描述",
 		dataIndex : 'description',
@@ -65,11 +58,11 @@ Ext.onReady(function() {
 	cm.defaultSortable = true;
 
 	var grid = new Ext.grid.GridPanel({
-		id : 'countryInfoGrid',
-		el : 'countryInfoGrid',
-		width : 385,
+		id : 'nationInfoGrid',
+		el : 'nationInfoGrid',
+		width : 335,
 		height : 330,
-		title : '国家信息列表',
+		title : '民族信息列表',
 		store : store,
 		cm : cm,
 		sm : sm,
@@ -83,17 +76,16 @@ Ext.onReady(function() {
 
 function setFromData(rec) {
 	addValidation();
-	document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = rec.data.id;
-	document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = rec.data.id;
-	document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = rec.data.name;
-	document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = rec.data.shortName;
-	document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = rec.data.description;
+	document.forms['nationCfgForm'].elements['nationCfgForm:hid'].value = rec.data.id;
+	document.forms['nationCfgForm'].elements['nationCfgForm:id'].value = rec.data.id;
+	document.forms['nationCfgForm'].elements['nationCfgForm:name'].value = rec.data.name;
+	document.forms['nationCfgForm'].elements['nationCfgForm:description'].value = rec.data.description;
 
 	validCfgForm.validate();
 }
 
 function addValidation() {
-	validCfgForm = new Validation('countryCfgForm', {
+	validCfgForm = new Validation('nationCfgForm', {
 		immediate : true
 	});
 	validCfgForm.validate();
@@ -101,13 +93,13 @@ function addValidation() {
 
 // 更 新button check
 function updateInfoCheck() {
-	var grid = Ext.getCmp('countryInfoGrid');
+	var grid = Ext.getCmp('nationInfoGrid');
 	var gridSelects = grid.getSelections();
 
 	if (gridSelects.length == 0) {
 		Ext.Msg.show({
-			title : '国家信息',
-			msg : '请选择要更新的国家信息!',
+			title : '民族信息',
+			msg : '请选择要更新的民族信息!',
 			buttons : Ext.Msg.OK,
 			minWidth : 200,
 			icon : Ext.MessageBox.INFO
@@ -119,29 +111,27 @@ function updateInfoCheck() {
 }
 
 function cleanFromData() {
-	var grid = Ext.getCmp('countryInfoGrid');
+	var grid = Ext.getCmp('nationInfoGrid');
 	var gridSelects = grid.getSelections();
 
 	if (gridSelects.length == 0) {
-		document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = "";
-		document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = "";
-		document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = "";
-		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = "";
-		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = "";
+		document.forms['nationCfgForm'].elements['nationCfgForm:hid'].value = "";
+		document.forms['nationCfgForm'].elements['nationCfgForm:id'].value = "";
+		document.forms['nationCfgForm'].elements['nationCfgForm:name'].value = "";
+		document.forms['nationCfgForm'].elements['nationCfgForm:description'].value = "";
 	}
 }
 
 // 复原button
 function resetFromData() {
 	if (updateInfoCheck()) {
-		var grid = Ext.getCmp('countryInfoGrid');
+		var grid = Ext.getCmp('nationInfoGrid');
 		var record = grid.getSelectionModel().getSelected();
 
-		document.forms['countryCfgForm'].elements['countryCfgForm:hid'].value = record.data.id;
-		document.forms['countryCfgForm'].elements['countryCfgForm:id'].value = record.data.id;
-		document.forms['countryCfgForm'].elements['countryCfgForm:name'].value = record.data.name;
-		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = record.data.shortName;
-		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
+		document.forms['nationCfgForm'].elements['nationCfgForm:hid'].value = record.data.id;
+		document.forms['nationCfgForm'].elements['nationCfgForm:id'].value = record.data.id;
+		document.forms['nationCfgForm'].elements['nationCfgForm:name'].value = record.data.name;
+		document.forms['nationCfgForm'].elements['nationCfgForm:description'].value = record.data.description;
 	}
 	
 	validCfgForm.validate();
@@ -149,13 +139,13 @@ function resetFromData() {
 
 // 删除button
 function delInfoCheck() {
-	var grid = Ext.getCmp('countryInfoGrid');
+	var grid = Ext.getCmp('nationInfoGrid');
 	var gridSelects = grid.getSelections();
 
 	if (gridSelects.length == 0) {
 		Ext.Msg.show({
-			title : '国家信息',
-			msg : '请选择要删除的国家信息!',
+			title : '民族信息',
+			msg : '请选择要民族的国家信息!',
 			buttons : Ext.Msg.OK,
 			minWidth : 200,
 			icon : Ext.MessageBox.INFO
@@ -163,13 +153,13 @@ function delInfoCheck() {
 		return false;
 	} else {
 		Ext.Msg.show({
-			title : '国家信息',
-			msg : '确定要删除选中的国家信息吗?',
+			title : '民族信息',
+			msg : '确定要删除选中的民族信息吗?',
 			buttons : Ext.Msg.OKCANCEL,
 			minWidth : 200,
 			fn : function(btn) {
 				if (btn == 'ok') {
-					document.forms['countryCfgForm'].elements['countryCfgForm:delCountryInfoBtn']
+					document.forms['nationCfgForm'].elements['nationCfgForm:delNationInfoBtn']
 							.click();
 				}
 			},
@@ -178,14 +168,14 @@ function delInfoCheck() {
 	}
 }
 
-/* 打开添加国家信息窗口 */
-function openAddCountryInfoWindow() {
-	Richfaces.showModalPanel('addCountryInfoView');
+/* 打开添加民族信息窗口 */
+function openAddNationInfoWindow() {
+	Richfaces.showModalPanel('addNationInfoView');
 	return false;
 }
 
-/* 关闭添加国家信息窗口 */
-function closeAddCountryInfoWindow() {
-	Richfaces.hideModalPanel('addCountryInfoView');
+/* 关闭添加民族信息窗口 */
+function closeAddNationInfoWindow() {
+	Richfaces.hideModalPanel('addNationInfoView');
 	return false;
 }
