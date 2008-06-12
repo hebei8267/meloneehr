@@ -22,7 +22,7 @@ import org.hibernate.annotations.NaturalId;
 @NamedQueries( {
         @NamedQuery(name = "Country.getCountryByID", query = "select obj from Country obj where obj.id = ? "),
         @NamedQuery(name = "Country.getMaxCountryID", query = "select max(obj.id) from Country obj "),
-        @NamedQuery(name = "Country.existLikenessCountry", query = "select count(obj.id) from Country obj where obj.name = ? or obj.shortName = ? ") })
+        @NamedQuery(name = "Country.existLikenessCountry", query = "select obj from Country obj where obj.name = ? or obj.shortName = ? ") })
 public class Country extends AbstractEntityBean {
 
     private static final long serialVersionUID = -8552348640289521607L;

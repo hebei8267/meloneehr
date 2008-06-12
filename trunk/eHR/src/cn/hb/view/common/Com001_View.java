@@ -1,6 +1,7 @@
 package cn.hb.view.common;
 
-import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY;
+import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY1;
+import static cn.hb.view.MsgID.ERROR_UPDATE_COUNTRY2;
 import static cn.hb.view.MsgID.ERROR_DEL_COUNTRY;
 import static cn.hb.view.MsgID.ERROR_ADD_COUNTRY;
 
@@ -34,8 +35,11 @@ public class Com001_View extends AbstractViewBean {
 
         int result = commonService.updateCountryInfo_Service(cInfo);
 
-        if (result != 0) {
-            addErrorMessage(ERROR_UPDATE_COUNTRY);
+        if (result == 1) {
+            addErrorMessage(ERROR_UPDATE_COUNTRY1);
+        }
+        if (result == 2) {
+            addErrorMessage(ERROR_UPDATE_COUNTRY2);
         }
         destroy();
         return;

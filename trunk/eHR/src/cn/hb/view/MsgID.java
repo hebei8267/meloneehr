@@ -4,7 +4,8 @@ public class MsgID {
     public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
     public final static String ERROR_INPUT_NEW_PWD = "ERROR_INPUT_NEW_PWD";
     public final static String ERROR_INPUT_OLD_PWD = "ERROR_Input_Old_Pwd";
-    public final static String ERROR_UPDATE_COUNTRY = "ERROR_UPDATE_COUNTRY";
+    public final static String ERROR_UPDATE_COUNTRY1 = "ERROR_UPDATE_COUNTRY1";
+    public final static String ERROR_UPDATE_COUNTRY2 = "ERROR_UPDATE_COUNTRY2";
     public final static String ERROR_DEL_COUNTRY = "ERROR_DEL_COUNTRY";
     public final static String ERROR_ADD_COUNTRY = "ERROR_ADD_COUNTRY";
 

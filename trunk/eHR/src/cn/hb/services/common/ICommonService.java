@@ -21,7 +21,7 @@ public interface ICommonService extends IService {
      * 更新国家信息
      * 
      * @param cInfo 国家信息
-     * @return 0-更新成功 1-更新失败
+     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的国家)
      */
     public Integer updateCountryInfo_Service(Country cInfo);
 

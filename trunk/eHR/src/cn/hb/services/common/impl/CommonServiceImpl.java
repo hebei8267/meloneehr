@@ -31,19 +31,27 @@ public class CommonServiceImpl implements ICommonService {
 
         if (dbCInfo == null) {
             return 1;
-        } else {
-            dbCInfo.setName(cInfo.getName());
-            dbCInfo.setShortName(cInfo.getShortName());
-            dbCInfo.setDescription(cInfo.getDescription());
-
-            countryDao.save(dbCInfo);
-            return 0;
         }
+        List<Country> likenessList = countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName());
+        for (Country country : likenessList) {
+            if (!country.getId().equals(cInfo.getId())) {
+                // 存在类似的国家
+                return 2;
+            }
+        }
+
+        dbCInfo.setName(cInfo.getName());
+        dbCInfo.setShortName(cInfo.getShortName());
+        dbCInfo.setDescription(cInfo.getDescription());
+
+        countryDao.save(dbCInfo);
+        return 0;
+
     }
 
     @Override
     public Integer addCountryInfo_Service(Country cInfo) {
-        if (countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName())) {
+        if (countryDao.existLikenessCountry(cInfo.getName(), cInfo.getShortName()) != null) {
             // 存在类似的国家
             return 1;
         } else {
