@@ -58,15 +58,24 @@
 					<tr>
 						<td colspan="2" align="right">
 							<h:commandButton value="变 更" action="#{Sec002_View.modPassword_Action}" styleClass="submitBtn"/>
-							<input type="button" value="清 除" class="cleanBtn"/>
+							<input type="button" value="清 除" onclick="cleanFromItem()" class="cleanBtn"/>
 						</td>
 					</tr>
 				</table>
 			</rich:panel>
 			<script type="text/javascript">
-            var valid = new Validation('modPwdForm', {
-                immediate: true
-            });
+			Ext.onReady(function() {
+	            var valid = new Validation('modPwdForm', {
+	                immediate: true
+	            });
+	        });
+	        
+	        function cleanFromItem(){
+            	document.forms['modPwdForm'].elements['modPwdForm:userId'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:oldPassword'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:newPassword'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:newPassword2'].value = "";
+	        }
 			</script>
 		</h:form>
 	</ui:define>

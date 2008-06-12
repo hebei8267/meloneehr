@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/page/core/template/default_template.xhtml">
 	
 	<ui:param name="pageName" value="国家信息"/>
@@ -18,11 +19,12 @@
 
 
 		<h:messages styleClass="message"/>
+		
 		<table width="650">
 			<tr>
 				<td colspan="2">
-					<h:commandButton value="添 加" styleClass="submitBtn"/>
-					<input type="button" value="删 除" class="deleteBtn"/>
+					<input type="button" class="submitBtn" value="添 加" onclick="openAddCountryInfoWindow()"/>
+					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
 				</td>
 			</tr>
 			<tr/>
@@ -85,9 +87,22 @@
 								</td>
 							</tr>
 						</table>
+						<div class="hidden">
+							<h:commandButton id="delCountryInfoBtn" value="删 除" action="#{Com001_View.delCountryInfo}" />
+						</div>
 					</h:form>
 				</td>
 			</tr>
 		</table>
+		
+		<rich:modalPanel id="addCountryInfoView" height="250" width="240" zindex="1000" resizeable="false" left="100" top="100">
+			<f:facet name="header">
+				<p>添加国家信息</p>
+			</f:facet>
+			<f:facet name="controls">
+				<h:graphicImage value="/images/close.gif" style="cursor:pointer" onclick="Richfaces.hideModalPanel('addCountryInfoView')"/>
+			</f:facet>
+			<a4j:include viewId="/page/common/com001_01.xhtml" id="addCountryInfoWindow"/>
+		</rich:modalPanel>
 	</ui:define>
 </ui:composition>

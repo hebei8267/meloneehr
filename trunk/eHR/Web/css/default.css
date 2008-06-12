@@ -81,8 +81,13 @@ a:active,a:link,a:visited,a:hover {
 
 body {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 11pt;
+	font-family: "宋体";
+	font-size: 12px;
+}
+td {
+	color: #333333;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .message {
@@ -91,6 +96,7 @@ body {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background-color: #F0F8FF;
+	font-family: "宋体";
 	font-size: 12px;
 }
 
@@ -103,22 +109,22 @@ body {
 
 .rich-toolbar-item {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 /* 页脚 */
 .footer {
 	text-align: center;
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .dr-pnl-h {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 	background: transparent
 		url(../ext/resources/images/default/panel/white-top-bottom.gif)
 		repeat-x 0 -1px;
@@ -126,8 +132,8 @@ body {
 
 .rich-panel-header {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 	overflow: hidden;
 	padding: 5px 3px 4px 5px;
 	line-height: 12px;
@@ -138,26 +144,26 @@ body {
 
 .dr-pnl-b {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 11pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .rich-panel-body {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 11pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .dr-pnl {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 11pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .rich-panel {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 11pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .inputText {
@@ -165,14 +171,16 @@ body {
 	background: #FFFFFF;
 	height: 19px;
 	width:120px;
-	font-size: 10pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .readonly{
 	border: 1px solid #CCCCCC;
 	height: 19px;
 	width:120px;
-	font-size: 10pt;
+	font-family: "宋体";
+	font-size: 12px;
 	background: #808080;
 }
 
@@ -185,7 +193,8 @@ body {
 	background: #FFFFFF;
 	height: 76px;
 	width:120px;
-	font-size: 10pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .submitBtn {
@@ -228,14 +237,14 @@ body {
 
 .x-panel-header-text {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .pageNum {
 	color: #333333;
-	font-family: "宋体", "Arial";
-	font-size: 9pt;
+	font-family: "宋体";
+	font-size: 12px;
 }
 
 .hidden {
@@ -263,7 +272,24 @@ body {
 }
 
 .x-grid3-hd-row td,.x-grid3-row td,.x-grid3-summary-row td {
-	font: normal 10pt "宋体", "Arial", tahoma, helvetica, sans-serif;
+	color: #333333;
+	font-family: "宋体";
+	font-size: 12px;
 	-moz-outline: none;
 	-moz-user-focus: normal;
+}
+
+.x-btn-text{
+	color: #333333;
+	font-family: "宋体";
+	font-size: 12px;
+}
+
+.rich-mpnl-header{
+	color: #333333;
+	font-family: "宋体";
+	font-size: 12px;
+	background: transparent
+		url(../ext/resources/images/default/panel/white-top-bottom.gif)
+		repeat-x 0 -1px;
 }

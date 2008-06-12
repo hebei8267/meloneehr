@@ -52,7 +52,7 @@ public class CountryDao extends HibernateDaoImpl<Country> {
      */
     @SuppressWarnings("unchecked")
     protected String _getMaxCountryID() {
-        List<String> resultList = getHibernateTemplate().find("Country.getMaxCountryID");
+        List<String> resultList = getHibernateTemplate().findByNamedQuery("Country.getMaxCountryID");
         if (resultList.size() > 0) {
             return resultList.get(0);
         }

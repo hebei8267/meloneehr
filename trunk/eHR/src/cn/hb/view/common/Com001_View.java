@@ -37,7 +37,7 @@ public class Com001_View extends AbstractViewBean {
         if (result != 0) {
             addErrorMessage(ERROR_UPDATE_COUNTRY);
         }
-        reset();
+        destroy();
         return;
     }
 
@@ -47,7 +47,7 @@ public class Com001_View extends AbstractViewBean {
         if (result != 0) {
             addErrorMessage(ERROR_DEL_COUNTRY);
         }
-        reset();
+        destroy();
         return;
     }
 
@@ -63,15 +63,8 @@ public class Com001_View extends AbstractViewBean {
         if (!result) {
             addErrorMessage(ERROR_ADD_COUNTRY);
         }
-        reset();
+        destroy();
         return;
-    }
-
-    private void reset() {
-        id = "";
-        name = "";
-        shortName = "";
-        description = "";
     }
 
     // ---------------------------------------------------------------------------
@@ -84,6 +77,10 @@ public class Com001_View extends AbstractViewBean {
 
     @Override
     public void destroy() {
+        id = "";
+        name = "";
+        shortName = "";
+        description = "";
     }
 
     @Override

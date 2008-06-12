@@ -45,15 +45,22 @@
 					<tr>
 						<td colspan="2" align="right">
 							<h:commandButton value="登 录" action="#{Sec001_View.login_Action}" styleClass="submitBtn"/>
-							<input type="button" value="清 除" class="cleanBtn"/>
+							<input type="button" value="清 除" onclick="cleanFromItem()" class="cleanBtn"/>
 						</td>
 					</tr>
 				</table>
 			</rich:panel>
 			<script type="text/javascript">
-            var valid = new Validation('loginForm', {
-                immediate: true
+			Ext.onReady(function() {
+	            var valid = new Validation('loginForm', {
+	                immediate: true
+	            });
             });
+            
+            function cleanFromItem(){
+            	document.forms['loginForm'].elements['loginForm:userId'].value = "";
+            	document.forms['loginForm'].elements['loginForm:password'].value = "";
+	        }
 			</script>
 		</h:form>
 	</ui:define>

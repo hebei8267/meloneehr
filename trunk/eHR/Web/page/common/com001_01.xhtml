@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich"
+	template="/page/core/template/pop_window_template.xhtml">
+	
+	<ui:define name="popPageNum">
+		<h:outputLabel styleClass="pageNum">
+         页面编号 : 
+		</h:outputLabel>
+		<h:outputText value="  COMMON 001_01" styleClass="pageNum"/>
+	</ui:define>
+	<ui:define name="popPageBody">
+		<h:form id="countryAddForm">
+			<table width="200">
+				<tr>
+					<tr>
+						<td>名称</td>
+						<td align="right">
+							<h:inputText id="name" value="#{Com001_View.name}" styleClass="inputText required" />
+						</td>
+					</tr>
+				</tr>
+				<tr>
+					<td>简称</td>
+					<td align="right">
+						<h:inputText id="shortName" value="#{Com001_View.shortName}" styleClass="inputText" />
+					</td>
+				</tr>
+				<tr>
+					<td valign="top">详细描述</td>
+					<td align="right">
+						<h:inputTextarea id="description" value="#{Com001_View.description}" styleClass="inputTextarea"/>
+					</td>
+				</tr>
+				<tr height="20"></tr>
+				<tr>
+					<td align="right" colspan="2">
+						<h:commandButton value="添 加" action="#{Com001_View.addCountryInfo}" 
+							styleClass="submitBtn"/>
+						<input type="button" class="cleanBtn" value="取 消" onclick="closeAddCountryInfoWindow()"/>
+					</td>
+				</tr>
+			</table>
+		</h:form>
+		<script type="text/javascript">
+			Ext.onReady(function() {
+	            var validAddForm = new Validation('addCountryInfoWindow:countryAddForm', {
+	                immediate: true
+	            });
+            });
+		</script>
+	</ui:define>
+</ui:composition>

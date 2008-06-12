@@ -129,3 +129,46 @@ function resetFromData() {
 		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
 	}
 }
+//删除button
+function delInfoCheck(){
+	var grid = Ext.getCmp('countryInfoGrid');
+	var gridSelects = grid.getSelections();
+	
+	if (gridSelects.length == 0) {
+		Ext.Msg.show({
+			title : '国家信息',
+			msg : '请选择要删除的国家信息!',
+			buttons : Ext.Msg.OK,
+			minWidth : 200,
+			icon : Ext.MessageBox.INFO
+		});
+		return false;
+	} else {
+		Ext.Msg.show({
+			title : '国家信息',
+			msg : '确定要删除选中的国家信息吗?',
+			buttons : Ext.Msg.OKCANCEL,
+			minWidth : 200,
+			fn : function(btn) {
+				if (btn == 'ok') {
+					document.forms['countryCfgForm'].elements['countryCfgForm:delCountryInfoBtn'].click();
+				}
+			},
+			icon : Ext.MessageBox.QUESTION
+		});
+	}
+}
+
+/* 打开添加国家信息窗口 */
+function openAddCountryInfoWindow() {
+	//document.forms['photoView:uploadPhotoForm'].elements['photoView:uploadPhotoForm:photoTxt'].value = '';
+
+	Richfaces.showModalPanel('addCountryInfoView');
+	return false;
+}
+
+/* 关闭添加国家信息窗口 */
+function closeAddCountryInfoWindow() {
+	Richfaces.hideModalPanel('addCountryInfoView');
+	return false;
+}
