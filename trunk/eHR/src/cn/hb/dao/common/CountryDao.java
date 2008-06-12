@@ -45,10 +45,13 @@ public class CountryDao extends HibernateDaoImpl<Country> {
      */
     @SuppressWarnings("unchecked")
     public boolean existLikenessCountry(String name, String shortName) {
-        List<Country> resultList = getHibernateTemplate().findByNamedQuery("Country.existLikenessCountry",
+        List<Long> resultList = getHibernateTemplate().findByNamedQuery("Country.existLikenessCountry",
                 new String[] { name, shortName });
-        if (resultList.size() == 0) {
-            return false;
+        if (resultList != null) {
+            if (resultList.get(0) == 0) {
+                return false;
+            }
+
         }
         return true;
     }
