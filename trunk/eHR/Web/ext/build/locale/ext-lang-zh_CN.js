@@ -23,18 +23,18 @@ if(Ext.form.Field){
 }
 
 Date.monthNames = [
-   "一月",
-   "二月",
-   "三月",
-   "四月",
-   "五月",
-   "六月",
-   "七月",
-   "八月",
-   "九月",
-   "十月",
-   "十一月",
-   "十二月"
+   "1月",
+   "2月",
+   "3月",
+   "4月",
+   "5月",
+   "6月",
+   "7月",
+   "8月",
+   "9月",
+   "10月",
+   "11月",
+   "12月"
 ];
 
 Date.dayNames = [
@@ -49,8 +49,8 @@ Date.dayNames = [
 
 if(Ext.MessageBox){
    Ext.MessageBox.buttonText = {
-      ok     : "确定",
-      cancel : "取消",
+      ok     : "确 定",
+      cancel : "取 消",
       yes    : "是",
       no     : "否"
    };
@@ -166,3 +166,8 @@ if(Ext.layout.BorderLayout.SplitRegion){
       collapsibleSplitTip : "拖动来改变尺寸. 双击隐藏."
    });
 }
+
+if(Ext.LoadMask){
+   Ext.LoadMask.prototype.msg = "加载中...";
+}
+
