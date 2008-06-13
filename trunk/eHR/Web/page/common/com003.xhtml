@@ -22,17 +22,90 @@
 			<tr/>
 			<tr>
 				<td width="400">
-					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;">
-						<div id="treeTitleDiv" class="x-panel-header x-unselectable">
-							<span class="x-panel-header-text">籍贯信息</span>
-						</div>
+					
+					<div id="treeTitleDiv" class="x-panel-header">
+						<span class="x-panel-header-text">籍贯信息</span>
+					</div>
+					
+					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;margin-top:-1px;">
 						<rich:tree id="nativeplaceInfoTree" switchType="client"
 							value="#{Com003_View.npTreeData}" var="item">
-							<rich:treeNode>
-								<h:outputText value="#{item.name}"/>
+							<rich:treeNode onclick="nodeSelected()" selectedClass="nodeSelected">
+								<h:commandLink id="node" value="#{item.name}" onclick="setFromData()" 
+									styleClass="treeNode"/>
 							</rich:treeNode>
 						</rich:tree>
 					</div>
+				</td>
+				<td valign="top">
+					<table>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<td>
+											国家详细信息
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<tr>	
+										<td colspan="2">
+											<h:outputLabel value="[名称]不能和现有数据重复" styleClass="tipText"/>
+										</td>
+									</tr>
+									<tr/>
+									<tr/>
+									<tr/>
+									<tr>
+										<td width="100">隶属于</td>
+										<td align="right">
+											<h:inputText id="hpname" styleClass="readonly" readonly="true"/>
+											<h:inputHidden id="id" value="#{Com003_View.pid}"/>
+											<h:inputHidden id="pname" value="#{Com003_View.pname}"/>
+										</td>
+									</tr>
+									<tr>
+										<td width="100">编号</td>
+										<td align="right">
+											<h:inputText id="hid" styleClass="readonly" readonly="true"/>
+											<h:inputHidden id="id" value="#{Com003_View.id}"/>
+										</td>
+									</tr>
+									<tr>
+										<td>名称</td>
+										<td align="right">
+											<h:inputText id="name" value="#{Com003_View.name}" styleClass="inputText required max-length-20" />
+										</td>
+									</tr>
+									<tr>
+										<td>简称</td>
+										<td align="right">
+											<h:inputText id="shortName" value="#{Com003_View.shortName}" styleClass="inputText required max-length-20" />
+										</td>
+									</tr>
+									<tr>
+										<td valign="top">详细描述</td>
+										<td align="right">
+											<h:inputTextarea id="description" value="#{Com003_View.description}" styleClass="inputTextarea max-length-255"/>
+										</td>
+									</tr>
+									<tr height="60"></tr>
+									<tr>
+										<td align="right" colspan="2">
+											<h:commandButton value="更 新" action="#{Com003_View.updateNativeplaceInfo}" 
+												onclick="return updateInfoCheck()" styleClass="submitBtn"/>
+											<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>

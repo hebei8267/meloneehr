@@ -156,8 +156,9 @@ public class CommonServiceImpl implements ICommonService {
     private void buildSubMenuTree(UINativeplaceTreeNodeBean parentNode, List<Nativeplace> subNativeplaceList) {
         if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
             for (Nativeplace nativeplace : subNativeplaceList) {
-                UINativeplaceTreeNodeBean treeNode = new UINativeplaceTreeNodeBean(nativeplace.getId(), nativeplace
-                        .getName(), nativeplace.getShortName(), nativeplace.getDescription());
+                UINativeplaceTreeNodeBean treeNode = new UINativeplaceTreeNodeBean(parentNode.getId(), parentNode
+                        .getName(), nativeplace.getId(), nativeplace.getName(), nativeplace.getShortName(), nativeplace
+                        .getDescription());
                 treeNode.setParent(parentNode);
 
                 parentNode.addChild(nativeplace.getId(), treeNode);

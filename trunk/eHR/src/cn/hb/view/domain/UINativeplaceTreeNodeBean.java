@@ -8,6 +8,12 @@ package cn.hb.view.domain;
 public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativeplaceTreeNodeBean> {
 
     private static final long serialVersionUID = -4514259996461825546L;
+    /** 父节点编号 */
+    private String pid;
+
+    /** 父节点名称 */
+    private String pname;
+
     /** 编号 */
     private String id;
 
@@ -24,7 +30,10 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     }
 
-    public UINativeplaceTreeNodeBean(String id, String name, String shortName, String description) {
+    public UINativeplaceTreeNodeBean(String pid, String pname, String id, String name, String shortName,
+            String description) {
+        this.pid = pid;
+        this.pname = pname;
         this.id = id;
         this.name = name;
         this.shortName = shortName;
@@ -61,6 +70,22 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
 }

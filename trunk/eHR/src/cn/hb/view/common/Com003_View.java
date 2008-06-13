@@ -17,7 +17,17 @@ import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 @Scope("request")
 public class Com003_View extends AbstractViewBean {
     private TreeNode<UINativeplaceTreeNodeBean> npTreeData;
+    private String pid;
+    private String pname;
+    private String id;
+    private String name;
+    private String shortName;
+    private String description;
     private ICommonService commonService;
+
+    public void updateNativeplaceInfo() {
+
+    }
 
     // ---------------------------------------------------------------------------
     // Override Method
@@ -43,12 +53,60 @@ public class Com003_View extends AbstractViewBean {
         return npTreeData;
     }
 
+    public String getPid() {
+        return pid;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public ICommonService getCommonService() {
         return commonService;
     }
 
     public void setNpTreeData(TreeNode<UINativeplaceTreeNodeBean> npTreeData) {
         this.npTreeData = npTreeData;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setCommonService(ICommonService commonService) {
