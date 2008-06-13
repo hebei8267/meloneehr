@@ -28,8 +28,7 @@ import cn.hb.core.dao.IGenericDao;
  * </pre>
  */
 public class HibernateDaoImpl<T> extends HibernateDaoSupport implements IGenericDao<T> {
-    /** 最大的ID */
-    protected final String DEFAULT_MAX_ID = "00000001";
+
     protected Class<T> entityClass;// DAO所管理的Entity类型.
 
     /**
