@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import cn.hb.core.dao.impl.HibernateDaoImpl;
 import cn.hb.entity.common.Nation;
+import static cn.hb.constant.Constant.DEFAULT_ID;
 
 /**
  * 民族Dao
@@ -70,6 +71,6 @@ public class NationDao extends HibernateDaoImpl<Nation> {
         if (resultList.size() > 0) {
             return resultList.get(0);
         }
-        return DEFAULT_MAX_ID;
+        return DEFAULT_ID;
     }
 }
