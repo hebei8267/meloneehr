@@ -9,7 +9,7 @@ import cn.hb.dao.ui.MenuNodeDao;
 import cn.hb.entity.ui.MenuNode;
 import cn.hb.services.ui.IMenuTreeService;
 import cn.hb.view.domain.UIMenuTreeNodeBean;
-import static cn.hb.constant.Constant.MENU_TREE_ROOT_NODE_ID;
+import static cn.hb.constant.Constant.DEFAULT_ID;
 
 @Component("menuTreeService")
 @Scope("prototype")
@@ -20,10 +20,10 @@ public class MenuTreeServiceImpl implements IMenuTreeService {
     @Override
     public UIMenuTreeNodeBean getMenuTreeRootNode_Service(String userID) {
         // TODO 权限没有校验
-        MenuNode node = menuNodeDao.getMenuNodeByID(MENU_TREE_ROOT_NODE_ID);
+        MenuNode node = menuNodeDao.getMenuNodeByID(DEFAULT_ID);
         if (node != null) {
-            UIMenuTreeNodeBean rootNode = new UIMenuTreeNodeBean(node.getId(), node.getNodeTxt(), node
-                    .getNodeType(), node.getActionContent());
+            UIMenuTreeNodeBean rootNode = new UIMenuTreeNodeBean(node.getId(), node.getNodeTxt(), node.getNodeType(),
+                    node.getActionContent());
 
             buildSubMenuTree(rootNode, node.getSubNodeList());
 

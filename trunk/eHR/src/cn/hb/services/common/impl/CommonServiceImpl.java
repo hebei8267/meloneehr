@@ -2,14 +2,19 @@ package cn.hb.services.common.impl;
 
 import java.util.List;
 
+import org.richfaces.model.TreeNode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.dao.common.CountryDao;
 import cn.hb.dao.common.NationDao;
+import cn.hb.dao.common.NativeplaceDao;
 import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
+import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.common.ICommonService;
+import cn.hb.view.domain.UINativeplaceTreeNodeBean;
+import static cn.hb.constant.Constant.DEFAULT_NATIVE_PLACE_ID;
 
 /**
  * @author kaka
@@ -133,26 +138,64 @@ public class CommonServiceImpl implements ICommonService {
         return 0;
     }
 
+    @Override
+    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceTreeInfo_Service() {
+        Nativeplace nativeplace = nativeplaceDao.getNativeplaceByID(DEFAULT_NATIVE_PLACE_ID);
+
+        if (nativeplace != null) {
+            // 空信息根结点
+            UINativeplaceTreeNodeBean rootNode = new UINativeplaceTreeNodeBean();
+
+            buildSubMenuTree(rootNode, nativeplace.getSubNativeplaceList());
+
+            return rootNode;
+        }
+        return null;
+    }
+
+    private void buildSubMenuTree(UINativeplaceTreeNodeBean parentNode, List<Nativeplace> subNativeplaceList) {
+        if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
+            for (Nativeplace nativeplace : subNativeplaceList) {
+                UINativeplaceTreeNodeBean treeNode = new UINativeplaceTreeNodeBean(nativeplace.getId(), nativeplace
+                        .getName(), nativeplace.getShortName(), nativeplace.getDescription());
+                treeNode.setParent(parentNode);
+
+                parentNode.addChild(nativeplace.getId(), treeNode);
+
+                buildSubMenuTree(treeNode, nativeplace.getSubNativeplaceList());
+            }
+        }
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     private CountryDao countryDao = null;
     private NationDao nationDao = null;
+    private NativeplaceDao nativeplaceDao = null;
 
     public CountryDao getCountryDao() {
         return countryDao;
-    }
-
-    public void setCountryDao(CountryDao countryDao) {
-        this.countryDao = countryDao;
     }
 
     public NationDao getNationDao() {
         return nationDao;
     }
 
+    public NativeplaceDao getNativeplaceDao() {
+        return nativeplaceDao;
+    }
+
+    public void setCountryDao(CountryDao countryDao) {
+        this.countryDao = countryDao;
+    }
+
     public void setNationDao(NationDao nationDao) {
         this.nationDao = nationDao;
+    }
+
+    public void setNativeplaceDao(NativeplaceDao nativeplaceDao) {
+        this.nativeplaceDao = nativeplaceDao;
     }
 
 }

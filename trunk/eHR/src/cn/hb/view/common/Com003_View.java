@@ -5,7 +5,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
-import cn.hb.view.domain.UIMenuTreeNodeBean;
+import cn.hb.services.common.ICommonService;
+import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 
 /**
  * @author kaka
@@ -15,23 +16,43 @@ import cn.hb.view.domain.UIMenuTreeNodeBean;
 @Component("Com003_View")
 @Scope("request")
 public class Com003_View extends AbstractViewBean {
-    private TreeNode<UIMenuTreeNodeBean>  npTreeData;
+    private TreeNode<UINativeplaceTreeNodeBean> npTreeData;
+    private ICommonService commonService;
+
+    // ---------------------------------------------------------------------------
+    // Override Method
+    // ---------------------------------------------------------------------------
     @Override
     public void create() {
-        // TODO Auto-generated method stub
-
+        init();
     }
 
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
+        npTreeData = commonService.getNativeplaceTreeInfo_Service();
+    }
 
+    // ---------------------------------------------------------------------------
+    // Get Set Method
+    // ---------------------------------------------------------------------------
+    public TreeNode<UINativeplaceTreeNodeBean> getNpTreeData() {
+        return npTreeData;
+    }
+
+    public ICommonService getCommonService() {
+        return commonService;
+    }
+
+    public void setNpTreeData(TreeNode<UINativeplaceTreeNodeBean> npTreeData) {
+        this.npTreeData = npTreeData;
+    }
+
+    public void setCommonService(ICommonService commonService) {
+        this.commonService = commonService;
     }
 
 }

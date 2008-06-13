@@ -2,9 +2,12 @@ package cn.hb.services.common;
 
 import java.util.List;
 
+import org.richfaces.model.TreeNode;
+
 import cn.hb.core.services.IService;
 import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
+import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 
 /**
  * @author kaka
@@ -72,5 +75,12 @@ public interface ICommonService extends IService {
      * @return 0-更新成功 1-更新失败
      */
     public Integer addNationInfo_Service(Nation objInfo);
+
+    /**
+     * 取得籍贯树信息
+     * 
+     * @return
+     */
+    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceTreeInfo_Service();
 
 }

@@ -24,6 +24,13 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     }
 
+    public UINativeplaceTreeNodeBean(String id, String name, String shortName, String description) {
+        this.id = id;
+        this.name = name;
+        this.shortName = shortName;
+        this.description = description;
+    }
+
     public String getId() {
         return id;
     }
