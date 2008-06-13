@@ -1,0 +1,36 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/page/core/template/default_template.xhtml">
+	
+	<ui:param name="pageName" value="籍贯信息"/>
+	<ui:param name="pageNum" value="COMMON 003"/>
+	
+	<ui:define name="body">
+		<table width="650">
+			<tr>
+				<td colspan="2">
+					<input type="button" class="submitBtn" value="添 加" onclick=""/>
+					<input type="button" class="deleteBtn" value="删 除" onclick=""/>
+				</td>
+			</tr>
+			<tr/>
+			<tr>
+				<td width="400">
+					<div id="nativeplaceInfoTreeDiv">
+						<rich:tree id="nativeplaceInfoTree" switchType="client"
+							value="#{Com003_View.npTreeData}" var="item">
+							<rich:treeNode>
+								<h:outputText value="#{item.nodeTxt}"/>
+							</rich:treeNode>
+						</rich:tree>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</ui:define>
+</ui:composition>

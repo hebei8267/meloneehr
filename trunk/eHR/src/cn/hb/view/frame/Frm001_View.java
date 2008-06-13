@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.services.ui.IMenuTreeService;
-import cn.hb.view.domain.RichFacesTreeNodeBean;
+import cn.hb.view.domain.UIMenuTreeNodeBean;
 
 /**
  * @author kaka
@@ -17,7 +17,7 @@ import cn.hb.view.domain.RichFacesTreeNodeBean;
 @Scope("request")
 // session
 public class Frm001_View extends AbstractViewBean {
-    private TreeNode<RichFacesTreeNodeBean> menuTreeData;
+    private TreeNode<UIMenuTreeNodeBean> menuTreeData;
     private final String ACTION_PATH = "actionPath";
     private IMenuTreeService menuTreeService;
 
@@ -55,7 +55,7 @@ public class Frm001_View extends AbstractViewBean {
     // ---------------------------------------------------------------------------
     // Get Set Method
     // ---------------------------------------------------------------------------
-    public TreeNode<RichFacesTreeNodeBean> getMenuTreeData() {
+    public TreeNode<UIMenuTreeNodeBean> getMenuTreeData() {
         return menuTreeData;
     }
 
@@ -63,7 +63,7 @@ public class Frm001_View extends AbstractViewBean {
         return menuTreeService;
     }
 
-    public void setMenuTreeData(TreeNode<RichFacesTreeNodeBean> menuTreeData) {
+    public void setMenuTreeData(TreeNode<UIMenuTreeNodeBean> menuTreeData) {
         this.menuTreeData = menuTreeData;
     }
 

@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
-import cn.hb.entity.ui.MenuNode;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.IndexColumn;
@@ -56,7 +55,7 @@ public class Nativeplace extends AbstractEntityBean {
     private List<Nativeplace> subNativeplaceList = new ArrayList<Nativeplace>();
 
     /** 父籍贯 */
-    private MenuNode parentNativeplace;
+    private Nativeplace parentNativeplace;
 
     /** 父籍贯 ID */
     private String parentNativeplaceID;
@@ -89,7 +88,8 @@ public class Nativeplace extends AbstractEntityBean {
      * @return 简称
      */
     @Basic
-    @Column(name = "SHORT_NAME", length = 20, unique = true)
+    // @Column(name = "SHORT_NAME", length = 20, unique = true)
+    @Column(name = "SHORT_NAME", length = 20)
     public String getShortName() {
         return shortName;
     }
@@ -119,7 +119,7 @@ public class Nativeplace extends AbstractEntityBean {
 
     @ManyToOne
     @JoinColumn(name = "PARENT_NATIVE_PLACE_H_ID")
-    public MenuNode getParentNativeplace() {
+    public Nativeplace getParentNativeplace() {
         return parentNativeplace;
     }
 
@@ -190,7 +190,7 @@ public class Nativeplace extends AbstractEntityBean {
         this.subNativeplaceList = subNativeplaceList;
     }
 
-    public void setParentNativeplace(MenuNode parentNativeplace) {
+    public void setParentNativeplace(Nativeplace parentNativeplace) {
         if (parentNativeplace != null) {
             this.parentNativeplaceID = parentNativeplace.getId();
         }

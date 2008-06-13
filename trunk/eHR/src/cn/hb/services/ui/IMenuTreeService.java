@@ -1,7 +1,7 @@
 package cn.hb.services.ui;
 
 import cn.hb.core.services.IService;
-import cn.hb.view.domain.RichFacesTreeNodeBean;
+import cn.hb.view.domain.UIMenuTreeNodeBean;
 
 /**
  * @author kaka
@@ -16,5 +16,5 @@ public interface IMenuTreeService extends IService {
      * @param userID 登录用户ID
      * @return
      */
-    public RichFacesTreeNodeBean getMenuTreeRootNode_Service(String userID);
+    public UIMenuTreeNodeBean getMenuTreeRootNode_Service(String userID);
 }

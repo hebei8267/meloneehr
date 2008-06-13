@@ -3,3 +3,4 @@
 00000003	数据字典	folder	true	null	00000002
 00000004	国家信息	node	true	countryCfg	00000003
 00000005	民族信息	node	true	nationCfg	00000003
+00000006	籍贯信息	node	true	nativeplaceCfg	00000003

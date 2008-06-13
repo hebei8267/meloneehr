@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.hb.dao.ui.MenuNodeDao;
 import cn.hb.entity.ui.MenuNode;
 import cn.hb.services.ui.IMenuTreeService;
-import cn.hb.view.domain.RichFacesTreeNodeBean;
+import cn.hb.view.domain.UIMenuTreeNodeBean;
 import static cn.hb.constant.Constant.MENU_TREE_ROOT_NODE_ID;
 
 @Component("menuTreeService")
@@ -18,11 +18,11 @@ public class MenuTreeServiceImpl implements IMenuTreeService {
     // 接口实现
     // ---------------------------------------------------------------------------
     @Override
-    public RichFacesTreeNodeBean getMenuTreeRootNode_Service(String userID) {
+    public UIMenuTreeNodeBean getMenuTreeRootNode_Service(String userID) {
         // TODO 权限没有校验
         MenuNode node = menuNodeDao.getMenuNodeByID(MENU_TREE_ROOT_NODE_ID);
         if (node != null) {
-            RichFacesTreeNodeBean rootNode = new RichFacesTreeNodeBean(node.getId(), node.getNodeTxt(), node
+            UIMenuTreeNodeBean rootNode = new UIMenuTreeNodeBean(node.getId(), node.getNodeTxt(), node
                     .getNodeType(), node.getActionContent());
 
             buildSubMenuTree(rootNode, node.getSubNodeList());
@@ -32,12 +32,12 @@ public class MenuTreeServiceImpl implements IMenuTreeService {
         return null;
     }
 
-    private void buildSubMenuTree(RichFacesTreeNodeBean parentNode, List<MenuNode> subNodeList) {
+    private void buildSubMenuTree(UIMenuTreeNodeBean parentNode, List<MenuNode> subNodeList) {
         // TODO 权限没有校验
         if (subNodeList != null && !subNodeList.isEmpty()) {
             for (MenuNode node : subNodeList) {
                 if (node != null) {
-                    RichFacesTreeNodeBean treeNode = new RichFacesTreeNodeBean(node.getId(), node.getNodeTxt(), node
+                    UIMenuTreeNodeBean treeNode = new UIMenuTreeNodeBean(node.getId(), node.getNodeTxt(), node
                             .getNodeType(), node.getActionContent());
                     treeNode.setParent(parentNode);
 
