@@ -33,9 +33,9 @@
 								<h:outputText value="#{item.nodeTxt}"/>
 							</rich:treeNode>
 							<!-- "page" 页面文件类型 -->
-							<rich:treeNode type="node">
+							<rich:treeNode type="node" onclick="nodeSelected()" selectedClass="nodeSelected">
 								<h:commandLink value="#{item.nodeTxt}" styleClass="treeNode"
-									action="#{Frm001_View.nodeSelected_Action}" target="workFrame">
+									id="node" action="#{Frm001_View.nodeSelected_Action}" target="workFrame">
 									<f:param name="actionPath" value="#{item.actionContent}"/>
 								</h:commandLink>
 							</rich:treeNode>

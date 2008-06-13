@@ -21,14 +21,11 @@
 			</tr>
 			<tr/>
 			<tr>
-				<td width="140" class="rich-mpnl-header" height="24px">
-					籍贯信息树结构
-				</td>
-				<td></td>
-			</tr>
-			<tr>
 				<td width="400">
-					<div id="nativeplaceInfoTreeDiv">
+					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;">
+						<div id="treeTitleDiv" class="x-panel-header x-unselectable">
+							<span class="x-panel-header-text">籍贯信息</span>
+						</div>
 						<rich:tree id="nativeplaceInfoTree" switchType="client"
 							value="#{Com003_View.npTreeData}" var="item">
 							<rich:treeNode>

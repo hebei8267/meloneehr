@@ -1,4 +1,5 @@
-html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td {
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td
+	{
 	margin: 0;
 	padding: 0;
 }
@@ -238,6 +239,10 @@ td {
 	border: 0px solid;
 }
 
+.nodeSelected {
+	border: 1px solid;
+}
+
 .dr-tree-i-hl {
 	text-decoration: none;
 	color: #333333;
@@ -268,15 +273,15 @@ td {
 }
 
 .treeNode:active,.treeNode:link,.treeNode:visited {
-	cursor: default　;
+	cursor: default;
 	color: #333333;
 	text-decoration: none;
 }
 
 .treeNode:hover {
-	cursor: default　;
+	cursor: default;
 	color: #ffcc66;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .x-grid3-hd-row td,.x-grid3-row td,.x-grid3-summary-row td {
