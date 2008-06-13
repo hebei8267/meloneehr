@@ -285,6 +285,11 @@ Validation.prototype = {
 		}
 		this.options.onFormValidate(result, this.form);
 		return result;
+	},
+	reset : function() {
+		Form.getElements(this.form).each(function(elm) {
+			Validation.hideErrorMsg(elm);
+		});
 	}
 };
 Object.extend(Validation, {
@@ -318,7 +323,7 @@ Object.extend(Validation, {
 		Validation.showErrorMsg(name, elm, Validation.get(name).error(
 				ValidationUtils.getInputValue(elm), elm, useTitle));
 	},
-	hideErrorMsg : function(name, elm) {
+	hideErrorMsg : function(elm) {
 		if (elm.tooltip) {
 			elm.tooltip.stop();
 			elm.tooltip = false;
@@ -332,7 +337,7 @@ Object.extend(Validation, {
 			Validation.showErrorMsgByValidator(name, elm, useTitle);
 			return false;
 		} else {
-			Validation.hideErrorMsg(name, elm);
+			Validation.hideErrorMsg(elm);
 			return true;
 		}
 	},
