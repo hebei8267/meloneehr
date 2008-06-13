@@ -11,6 +11,7 @@
 	<ui:param name="pageNum" value="COMMON 003"/>
 	
 	<ui:define name="body">
+		<script src="${request.contextPath}/page/common/com003.js" type="text/javascript"/>
 		<table width="650">
 			<tr>
 				<td colspan="2">
@@ -20,12 +21,18 @@
 			</tr>
 			<tr/>
 			<tr>
+				<td width="140" class="rich-mpnl-header" height="24px">
+					籍贯信息树结构
+				</td>
+				<td></td>
+			</tr>
+			<tr>
 				<td width="400">
 					<div id="nativeplaceInfoTreeDiv">
 						<rich:tree id="nativeplaceInfoTree" switchType="client"
 							value="#{Com003_View.npTreeData}" var="item">
 							<rich:treeNode>
-								<h:outputText value="#{item.nodeTxt}"/>
+								<h:outputText value="#{item.name}"/>
 							</rich:treeNode>
 						</rich:tree>
 					</div>
