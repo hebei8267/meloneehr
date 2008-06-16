@@ -1,5 +1,6 @@
 package cn.hb.view.common;
 
+import static cn.hb.view.MsgID.ERROR_DEL_NATIVE_PLACE;
 import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE1;
 import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE2;
 
@@ -41,6 +42,18 @@ public class Com003_View extends AbstractViewBean {
         }
         if (result == 2) {
             addErrorMessage(ERROR_UPDATE_NATIVE_PLACE2);
+        }
+        destroy();
+
+        init();
+        return;
+    }
+
+    public void delNativeplaceInfo() {
+        int result = commonService.delNativeplaceInfo_Service(id);
+
+        if (result != 0) {
+            addErrorMessage(ERROR_DEL_NATIVE_PLACE);
         }
         destroy();
 

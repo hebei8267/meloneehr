@@ -169,15 +169,33 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public Integer addNativeplaceInfo_Service(Nativeplace objInfo) {
-        // TODO Auto-generated method stub
-        return null;
+    public Integer addNativeplaceInfo_Service(Nativeplace objInfo, String pNativeplaceID) {
+        if (nativeplaceDao.existLikenessNativeplace(objInfo.getName()) != null) {
+            // 存在类似的籍贯
+            return 1;
+        } else {
+            objInfo.setId(nativeplaceDao.getMaxNativeplaceID());
+
+            Nativeplace parentNativeplace = nativeplaceDao.getNativeplaceByID(pNativeplaceID);
+
+            parentNativeplace.addSubNativeplace(objInfo);
+
+            objInfo.setParentNativeplace(parentNativeplace);
+
+            nativeplaceDao.save(objInfo);
+            return 0;
+        }
     }
 
     @Override
     public Integer delNativeplaceInfo_Service(String nativeplaceID) {
-        // TODO Auto-generated method stub
-        return null;
+        Nativeplace dbObjInfo = nativeplaceDao.getNativeplaceByID(nativeplaceID);
+        if (dbObjInfo == null) {
+            return 1;
+        } else {
+            nativeplaceDao.remove(dbObjInfo);
+            return 0;
+        }
     }
 
     @Override

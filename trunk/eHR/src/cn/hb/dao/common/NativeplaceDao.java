@@ -1,5 +1,7 @@
 package cn.hb.dao.common;
 
+import static cn.hb.constant.Constant.DEFAULT_NATIVE_PLACE_ID;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -41,5 +43,28 @@ public class NativeplaceDao extends HibernateDaoImpl<Nativeplace> {
             return resultList;
         }
         return null;
+    }
+
+    /**
+     * 取得当前最大籍贯信息ID
+     * 
+     * @return
+     */
+    public String getMaxNativeplaceID() {
+        return formatMaxID(_getMaxNativeplaceID());
+    }
+
+    /**
+     * 取得当前最大籍贯信息ID
+     * 
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected String _getMaxNativeplaceID() {
+        List<String> resultList = getHibernateTemplate().findByNamedQuery("Nativeplace.getMaxNativeplaceID");
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return DEFAULT_NATIVE_PLACE_ID;
     }
 }

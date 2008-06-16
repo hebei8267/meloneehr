@@ -15,6 +15,7 @@
 		<navigation-case>
 			<from-outcome>toSec001</from-outcome>
 			<to-view-id>/page/security/sec001.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<!-- 全局迁移 密码修改 -->
@@ -22,6 +23,7 @@
 		<navigation-case>
 			<from-outcome>toSec002</from-outcome>
 			<to-view-id>/page/security/sec002.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<!-- 全局迁移 用户注销 -->
@@ -29,6 +31,7 @@
 		<navigation-case>
 			<from-outcome>toHome</from-outcome>
 			<to-view-id>/home.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<!-- 全局迁移 工作区 -->

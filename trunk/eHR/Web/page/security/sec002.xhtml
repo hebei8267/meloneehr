@@ -69,7 +69,6 @@
 	            valid = new Validation('modPwdForm', {
 	                immediate: true
 	            });
-	            valid.validate();
 	        });
 	        
 	        function cleanFromItem(){
@@ -77,8 +76,6 @@
             	document.forms['modPwdForm'].elements['modPwdForm:oldPassword'].value = "";
             	document.forms['modPwdForm'].elements['modPwdForm:newPassword'].value = "";
             	document.forms['modPwdForm'].elements['modPwdForm:newPassword2'].value = "";
-            	
-            	var valid
 	        }
 			</script>
 		</h:form>

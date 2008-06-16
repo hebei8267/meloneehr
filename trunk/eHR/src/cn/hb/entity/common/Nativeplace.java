@@ -30,6 +30,7 @@ import org.hibernate.annotations.NaturalId;
 @Table(name = "M_NATIVE_PLACE")
 @NamedQueries( {
         @NamedQuery(name = "Nativeplace.getNativeplaceByID", query = "select obj from Nativeplace obj where obj.id = ? "),
+        @NamedQuery(name = "Nativeplace.getMaxNativeplaceID", query = "select max(obj.id) from Nativeplace obj "),
         @NamedQuery(name = "Nativeplace.existLikenessNativeplace", query = "select obj from Nativeplace obj where obj.name = ? ") })
 public class Nativeplace extends AbstractEntityBean {
 

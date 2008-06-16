@@ -104,8 +104,9 @@ public interface ICommonService extends IService {
      * 添加籍贯信息
      * 
      * @param objInfo 籍贯信息
+     * @param pNativeplaceID 父籍贯信息
      * @return 0-更新成功 1-更新失败
      */
-    public Integer addNativeplaceInfo_Service(Nativeplace objInfo);
+    public Integer addNativeplaceInfo_Service(Nativeplace objInfo, String pNativeplaceID);
 
 }

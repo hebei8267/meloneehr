@@ -19,7 +19,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="button" class="submitBtn" value="添 加" onclick=""/>
-					<input type="button" class="deleteBtn" value="删 除" onclick=""/>
+					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
 				</td>
 			</tr>
 			<tr/>
@@ -112,6 +112,7 @@
 							<h:inputHidden id="h_id" value=""/>
 							<h:inputHidden id="h_name" value=""/>
 							<h:inputHidden id="h_description" value=""/>
+							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{Com003_View.delNativeplaceInfo}" />
 						</div>
 					</h:form>
 				</td>

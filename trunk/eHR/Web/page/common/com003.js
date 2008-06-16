@@ -2,19 +2,10 @@ var validCfgForm;;
 
 Ext.onReady(function() {
 	initNativeplaceInfoTreeStyle();
-
-	addValidation();
 });
 
-function addValidation() {
-	validCfgForm = new Validation('nativeplaceCfgForm', {
-		immediate : false,
-		onSubmit : false
-	});
-}
-
-function updateInfoCheck() {
-	if(document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "NP00000000"){
+function modRootCheck() {
+	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "NP00000000") {
 		Ext.Msg.show({
 			title : '籍贯信息',
 			msg : '不能修改默认根节点信息!',
@@ -24,6 +15,11 @@ function updateInfoCheck() {
 		});
 		return false;
 	}
+
+	return true;
+}
+
+function needSelectedCheck() {
 	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
 		Ext.Msg.show({
 			title : '籍贯信息',
@@ -33,14 +29,26 @@ function updateInfoCheck() {
 			icon : Ext.MessageBox.INFO
 		});
 		return false;
-	} else {
-		var _result = validCfgForm.validate();
-		if (_result == false) {
-			return false;
-		} else {
-			return true;
-		}
 	}
+	return true;
+}
+
+function updateInfoCheck() {
+	if (!modRootCheck()) {
+		return false;
+	}
+
+	if (!needSelectedCheck()) {
+		return false;
+	}
+
+	var _result = validCfgForm.validate();
+	if (_result == false) {
+		return false;
+	} else {
+		return true;
+	}
+
 }
 
 function initNativeplaceInfoTreeStyle() {
@@ -57,6 +65,8 @@ function initNativeplaceInfoTreeStyle() {
 function setFromData(pid, pname, id, name, description) {
 	nodeSelected();
 
+	addValidation();
+
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = pid;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = pname;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = pname;
@@ -72,24 +82,49 @@ function setFromData(pid, pname, id, name, description) {
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value = description;
 }
 
+function addValidation() {
+	validCfgForm = new Validation('nativeplaceCfgForm', {
+		immediate : true
+	});
+}
+
 function resetFromData() {
-	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
-		Ext.Msg.show({
-			title : '籍贯信息',
-			msg : '请选择要更新的籍贯信息!',
-			buttons : Ext.Msg.OK,
-			minWidth : 200,
-			icon : Ext.MessageBox.INFO
-		});
-	} else {
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value;
-		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value;
+	if (!needSelectedCheck()) {
+		return false;
 	}
+
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value;
+
+}
+
+function delInfoCheck() {
+	if (!modRootCheck()) {
+		return false;
+	}
+
+	if (!needSelectedCheck()) {
+		return false;
+	}
+
+	Ext.Msg.show({
+		title : '籍贯信息',
+		msg : '确定要删除选中的籍贯信息吗?',
+		buttons : Ext.Msg.OKCANCEL,
+		minWidth : 200,
+		fn : function(btn) {
+			if (btn == 'ok') {
+				document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:delNativeplaceInfoBtn']
+						.click();
+			}
+		},
+		icon : Ext.MessageBox.QUESTION
+	});
 }
 
 function nodeSelected() {
