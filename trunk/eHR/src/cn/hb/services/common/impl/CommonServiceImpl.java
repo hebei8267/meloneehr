@@ -144,7 +144,8 @@ public class CommonServiceImpl implements ICommonService {
 
         if (nativeplace != null) {
             // 空信息根结点
-            UINativeplaceTreeNodeBean rootNode = new UINativeplaceTreeNodeBean();
+            UINativeplaceTreeNodeBean rootNode = new UINativeplaceTreeNodeBean(nativeplace.getId(), nativeplace
+                    .getName(), nativeplace.getDescription());
 
             buildSubMenuTree(rootNode, nativeplace.getSubNativeplaceList());
 
@@ -157,8 +158,7 @@ public class CommonServiceImpl implements ICommonService {
         if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
             for (Nativeplace nativeplace : subNativeplaceList) {
                 UINativeplaceTreeNodeBean treeNode = new UINativeplaceTreeNodeBean(parentNode.getId(), parentNode
-                        .getName(), nativeplace.getId(), nativeplace.getName(), nativeplace.getShortName(), nativeplace
-                        .getDescription());
+                        .getName(), nativeplace.getId(), nativeplace.getName(), nativeplace.getDescription());
                 treeNode.setParent(parentNode);
 
                 parentNode.addChild(nativeplace.getId(), treeNode);

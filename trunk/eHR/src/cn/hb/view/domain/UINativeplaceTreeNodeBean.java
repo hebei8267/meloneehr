@@ -20,9 +20,6 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
     /** 名称 */
     private String name;
 
-    /** 简称 */
-    private String shortName;
-
     /** 详细描述 */
     private String description;
 
@@ -30,13 +27,17 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     }
 
-    public UINativeplaceTreeNodeBean(String pid, String pname, String id, String name, String shortName,
-            String description) {
+    public UINativeplaceTreeNodeBean(String id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public UINativeplaceTreeNodeBean(String pid, String pname, String id, String name, String description) {
         this.pid = pid;
         this.pname = pname;
         this.id = id;
         this.name = name;
-        this.shortName = shortName;
         this.description = description;
     }
 
@@ -46,10 +47,6 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     public String getName() {
         return name;
-    }
-
-    public String getShortName() {
-        return shortName;
     }
 
     public String getDescription() {
@@ -62,10 +59,6 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     public void setDescription(String description) {

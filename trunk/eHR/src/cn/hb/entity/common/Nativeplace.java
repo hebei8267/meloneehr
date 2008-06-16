@@ -42,9 +42,6 @@ public class Nativeplace extends AbstractEntityBean {
     /** 名称 */
     private String name;
 
-    /** 简称 */
-    private String shortName;
-
     /** 详细描述 */
     private String description;
 
@@ -80,18 +77,6 @@ public class Nativeplace extends AbstractEntityBean {
     @Column(name = "NAME", nullable = false, length = 20, unique = true)
     public String getName() {
         return name;
-    }
-
-    /**
-     * 取得简称
-     * 
-     * @return 简称
-     */
-    @Basic
-    // @Column(name = "SHORT_NAME", length = 20, unique = true)
-    @Column(name = "SHORT_NAME", length = 20)
-    public String getShortName() {
-        return shortName;
     }
 
     /**
@@ -147,16 +132,6 @@ public class Nativeplace extends AbstractEntityBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * 设置简称
-     * 
-     * @param shortName 简称
-     */
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     /**

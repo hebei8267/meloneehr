@@ -21,7 +21,6 @@ public class Com003_View extends AbstractViewBean {
     private String pname;
     private String id;
     private String name;
-    private String shortName;
     private String description;
     private ICommonService commonService;
 
@@ -69,10 +68,6 @@ public class Com003_View extends AbstractViewBean {
         return name;
     }
 
-    public String getShortName() {
-        return shortName;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -99,10 +94,6 @@ public class Com003_View extends AbstractViewBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     public void setDescription(String description) {
