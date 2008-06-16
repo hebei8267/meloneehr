@@ -26,4 +26,20 @@ public class NativeplaceDao extends HibernateDaoImpl<Nativeplace> {
         }
         return null;
     }
+
+    /**
+     * 是否存在类似的籍贯（籍贯名称一样）
+     * 
+     * @param name
+     * @return true-存在 false-不存在
+     */
+    @SuppressWarnings("unchecked")
+    public List<Nativeplace> existLikenessNativeplace(String name) {
+        List<Nativeplace> resultList = getHibernateTemplate().findByNamedQuery("Nativeplace.existLikenessNativeplace",
+                name);
+        if (resultList.size() > 0) {
+            return resultList;
+        }
+        return null;
+    }
 }

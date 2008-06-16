@@ -12,6 +12,9 @@
 	
 	<ui:define name="body">
 		<script src="${request.contextPath}/page/common/com003.js" type="text/javascript"/>
+		
+		<h:messages styleClass="message"/>
+		
 		<table width="650">
 			<tr>
 				<td colspan="2">
@@ -30,7 +33,7 @@
 					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;margin-top:-1px;">
 						<rich:tree id="nativeplaceInfoTree" switchType="client"
 							value="#{Com003_View.npTreeData}" var="item">
-							<rich:treeNode onclick="nodeSelected()" selectedClass="nodeSelected">
+							<rich:treeNode>
 								<h:outputLabel id="node" value="#{item.name}" 
 									onclick="setFromData('#{item.pid}','#{item.pname}','#{item.id}','#{item.name}','#{item.description}')" 
 									styleClass="treeNode"/>
@@ -63,6 +66,7 @@
 										<tr/>
 										<tr/>
 										<tr/>
+										
 										<tr>
 											<td width="100">隶属于</td>
 											<td align="right">
@@ -102,6 +106,13 @@
 								</td>
 							</tr>
 						</table>
+						<div class="hidden">
+							<h:inputHidden id="h_pid" value=""/>
+							<h:inputHidden id="h_pname" value=""/>
+							<h:inputHidden id="h_id" value=""/>
+							<h:inputHidden id="h_name" value=""/>
+							<h:inputHidden id="h_description" value=""/>
+						</div>
 					</h:form>
 				</td>
 			</tr>

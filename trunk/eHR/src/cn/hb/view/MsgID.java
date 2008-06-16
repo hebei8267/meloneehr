@@ -15,6 +15,9 @@ public class MsgID {
     public final static String ERROR_DEL_NATION = "ERROR_DEL_NATION";
     public final static String ERROR_ADD_NATION = "ERROR_ADD_NATION";
 
+    public final static String ERROR_UPDATE_NATIVE_PLACE1 = "ERROR_UPDATE_NATIVE_PLACE1";
+    public final static String ERROR_UPDATE_NATIVE_PLACE2 = "ERROR_UPDATE_NATIVE_PLACE2";
+
     public final static String TIP_FIRST_LOGIN_FLAG = "TIP_FIRST_LOGIN_FLAG";
     public final static String TIP_PWD_CHANGE_SUCCEED = "TIP_PWD_CHANGE_SUCCEED";
 }

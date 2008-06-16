@@ -7,6 +7,7 @@ import org.richfaces.model.TreeNode;
 import cn.hb.core.services.IService;
 import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
+import cn.hb.entity.common.Nativeplace;
 import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 
 /**
@@ -81,6 +82,30 @@ public interface ICommonService extends IService {
      * 
      * @return
      */
-    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceTreeInfo_Service();
+    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceInfoTree_Service();
+
+    /**
+     * 更新籍贯信息
+     * 
+     * @param objInfo 籍贯信息
+     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的籍贯)
+     */
+    public Integer updateNativeplaceInfo_Service(Nativeplace objInfo);
+
+    /**
+     * 删除籍贯信息
+     * 
+     * @param nativeplaceID 籍贯信息ID
+     * @return 0-更新成功 1-更新失败
+     */
+    public Integer delNativeplaceInfo_Service(String nativeplaceID);
+
+    /**
+     * 添加籍贯信息
+     * 
+     * @param objInfo 籍贯信息
+     * @return 0-更新成功 1-更新失败
+     */
+    public Integer addNativeplaceInfo_Service(Nativeplace objInfo);
 
 }

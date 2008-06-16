@@ -25,7 +25,7 @@
 			
 			<div id="menuTreeDiv">
 				<div id="menuTreeContent" style="overflow: auto;">
-					<h:form id="menuTreeForm">
+					<h:form id="menuTreeForm" target="workFrame">
 						<rich:tree id="menuTree" switchType="client"
 							value="#{Frm001_View.menuTreeData}" var="item" nodeFace="#{item.type}">
 							<!-- "folder" 页面文件夹类型 -->
@@ -33,14 +33,16 @@
 								<h:outputText value="#{item.nodeTxt}"/>
 							</rich:treeNode>
 							<!-- "page" 页面文件类型 -->
-							<rich:treeNode type="node" onclick="nodeSelected()" selectedClass="nodeSelected">
-								<h:commandLink value="#{item.nodeTxt}" styleClass="treeNode"
-									id="node" action="#{Frm001_View.nodeSelected_Action}" target="workFrame">
-									<f:param name="actionPath" value="#{item.actionContent}"/>
-								</h:commandLink>
+							<rich:treeNode type="node">
+								<h:outputLabel id="node" value="#{item.nodeTxt}" 
+									onclick="setFromData('#{item.actionContent}')" 
+									styleClass="treeNode"/>
 							</rich:treeNode>
 						</rich:tree>
 						<div class="hidden">
+							<h:inputHidden id="actionContent" value="#{Frm001_View.actionContent}"/>
+							<h:commandButton id="nodeSelected" value="选中菜单树节点" 
+								action="#{Frm001_View.nodeSelected_Action}"/>
 							<a4j:commandButton value="同步菜单树" id="synchMenuTreeBtn" 
 								reRender="menuTree" oncomplete="menuTreeDivInitFinish()" 
 								action="#{Frm001_View.synch_Action}"/>

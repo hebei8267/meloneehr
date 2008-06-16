@@ -139,7 +139,7 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceTreeInfo_Service() {
+    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceInfoTree_Service() {
         Nativeplace nativeplace = nativeplaceDao.getNativeplaceByID(DEFAULT_NATIVE_PLACE_ID);
 
         if (nativeplace != null) {
@@ -166,6 +166,42 @@ public class CommonServiceImpl implements ICommonService {
                 buildSubMenuTree(treeNode, nativeplace.getSubNativeplaceList());
             }
         }
+    }
+
+    @Override
+    public Integer addNativeplaceInfo_Service(Nativeplace objInfo) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Integer delNativeplaceInfo_Service(String nativeplaceID) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Integer updateNativeplaceInfo_Service(Nativeplace objInfo) {
+        Nativeplace dbObjInfo = nativeplaceDao.getNativeplaceByID(objInfo.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<Nativeplace> likenessList = nativeplaceDao.existLikenessNativeplace(objInfo.getName());
+        if (likenessList != null) {
+            for (Nativeplace nativeplace : likenessList) {
+                if (!nativeplace.getId().equals(objInfo.getId())) {
+                    // 存在类似的民族
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(objInfo.getName());
+        dbObjInfo.setDescription(objInfo.getDescription());
+
+        nativeplaceDao.save(dbObjInfo);
+        return 0;
     }
 
     // ---------------------------------------------------------------------------

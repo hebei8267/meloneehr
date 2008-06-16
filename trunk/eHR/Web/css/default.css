@@ -240,7 +240,7 @@ td {
 }
 
 .nodeSelected {
-	border: 1px solid;
+	color: #ffcc66;
 }
 
 .dr-tree-i-hl {
@@ -281,7 +281,7 @@ td {
 .treeNode:hover {
 	cursor: default;
 	color: #ffcc66;
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 .x-grid3-hd-row td,.x-grid3-row td,.x-grid3-summary-row td {

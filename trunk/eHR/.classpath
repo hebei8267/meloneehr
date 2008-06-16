@@ -33,9 +33,9 @@
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/p6spy.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/postgresql-8.2-506.jdbc3.jar"/>
-	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-api-3.2.0.GA.jar"/>
-	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-impl-3.2.0.GA.jar"/>
-	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-ui-3.2.0.GA.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-api-3.2.1.GA.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-impl-3.2.1.GA.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-ui-3.2.1.GA.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring-mock.jar"/>
 	<classpathentry kind="output" path="Web/WEB-INF/classes"/>

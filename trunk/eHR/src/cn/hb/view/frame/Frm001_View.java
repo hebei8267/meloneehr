@@ -18,7 +18,7 @@ import cn.hb.view.domain.UIMenuTreeNodeBean;
 // session
 public class Frm001_View extends AbstractViewBean {
     private TreeNode<UIMenuTreeNodeBean> menuTreeData;
-    private final String ACTION_PATH = "actionPath";
+    private String actionContent;
     private IMenuTreeService menuTreeService;
 
     /** 同步菜单树 */
@@ -29,8 +29,7 @@ public class Frm001_View extends AbstractViewBean {
     /** 菜单树结点选中 */
     public String nodeSelected_Action() {
         // 取得迁移页面Key
-        String actionPath = (String) getRequestParameterMap().get(ACTION_PATH);
-        return actionPath;
+        return actionContent;
     }
 
     // ---------------------------------------------------------------------------
@@ -69,6 +68,14 @@ public class Frm001_View extends AbstractViewBean {
 
     public void setMenuTreeService(IMenuTreeService menuTreeService) {
         this.menuTreeService = menuTreeService;
+    }
+
+    public String getActionContent() {
+        return actionContent;
+    }
+
+    public void setActionContent(String actionContent) {
+        this.actionContent = actionContent;
     }
 
 }

@@ -1,10 +1,14 @@
 package cn.hb.view.common;
 
+import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE1;
+import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE2;
+
 import org.richfaces.model.TreeNode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
+import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.common.ICommonService;
 import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 
@@ -25,7 +29,23 @@ public class Com003_View extends AbstractViewBean {
     private ICommonService commonService;
 
     public void updateNativeplaceInfo() {
+        Nativeplace objInfo = new Nativeplace();
+        objInfo.setId(id);
+        objInfo.setName(name);
+        objInfo.setDescription(description);
 
+        int result = commonService.updateNativeplaceInfo_Service(objInfo);
+
+        if (result == 1) {
+            addErrorMessage(ERROR_UPDATE_NATIVE_PLACE1);
+        }
+        if (result == 2) {
+            addErrorMessage(ERROR_UPDATE_NATIVE_PLACE2);
+        }
+        destroy();
+
+        init();
+        return;
     }
 
     // ---------------------------------------------------------------------------
@@ -38,11 +58,16 @@ public class Com003_View extends AbstractViewBean {
 
     @Override
     public void destroy() {
+        pid = "";
+        pname = "";
+        id = "";
+        name = "";
+        description = "";
     }
 
     @Override
     public void init() {
-        npTreeData = commonService.getNativeplaceTreeInfo_Service();
+        npTreeData = commonService.getNativeplaceInfoTree_Service();
     }
 
     // ---------------------------------------------------------------------------
