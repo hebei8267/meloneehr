@@ -12,14 +12,6 @@ import static cn.hb.constant.Constant.DEFAULT_ID;
  */
 @Component("nationDao")
 public class NationDao extends HibernateDaoImpl<Nation> {
-    /**
-     * 取得民族信息列表
-     * 
-     * @return
-     */
-    public List<Nation> getNationInfoList() {
-        return getAll();
-    }
 
     /**
      * 根据民族ID取得民族信息

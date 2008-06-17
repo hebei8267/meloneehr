@@ -48,6 +48,8 @@
 				<value>cn.hb.entity.common.Nation</value>
 				<value>cn.hb.entity.common.Nativeplace</value>
 				<!-- -->
+				<value>cn.hb.entity.hr.organization.OrganizationType</value>
+				<!-- 未做相关业务 -->
 				<value>cn.hb.entity.hr.personnel.MarriageState</value>
 				<value>cn.hb.entity.hr.personnel.CardKind</value>
 				<!-- -->
