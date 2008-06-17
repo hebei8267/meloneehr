@@ -30,7 +30,7 @@ public class DDCom003_View extends AbstractViewBean {
     private String description;
     private IDDCommonService ddCommonService;
 
-    public void updateNativeplaceInfo() {
+    public void updateNativeplaceInfo_Action() {
         Nativeplace objInfo = new Nativeplace();
         objInfo.setId(id);
         objInfo.setName(name);
@@ -50,7 +50,7 @@ public class DDCom003_View extends AbstractViewBean {
         return;
     }
 
-    public void delNativeplaceInfo() {
+    public void delNativeplaceInfo_Action() {
         int result = ddCommonService.delNativeplaceInfo_Service(id, pid);
 
         if (result != 0) {
@@ -62,7 +62,7 @@ public class DDCom003_View extends AbstractViewBean {
         return;
     }
 
-    public void addNativeplaceInfo() {
+    public void addNativeplaceInfo_Action() {
         Nativeplace objInfo = new Nativeplace();
 
         objInfo.setName(name);

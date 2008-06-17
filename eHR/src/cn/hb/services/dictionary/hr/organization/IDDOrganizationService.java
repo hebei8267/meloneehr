@@ -29,10 +29,10 @@ public interface IDDOrganizationService extends IService {
     /**
      * 删除组织类型信息
      * 
-     * @param countryID 组织类型信息ID
+     * @param orgTypeID 组织类型信息ID
      * @return 0-更新成功 1-更新失败
      */
-    public Integer delOrganizationTypeInfo_Service(String countryID);
+    public Integer delOrganizationTypeInfo_Service(String orgTypeID);
 
     /**
      * 添加组织类型信息

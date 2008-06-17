@@ -34,9 +34,14 @@ public class DDOrganizationServiceImpl implements IDDOrganizationService {
     }
 
     @Override
-    public Integer delOrganizationTypeInfo_Service(String countryID) {
-        // TODO Auto-generated method stub
-        return null;
+    public Integer delOrganizationTypeInfo_Service(String orgTypeID) {
+        OrganizationType dbObjInfo = organizationTypeDao.getOrganizationTypeByID(orgTypeID);
+        if (dbObjInfo == null) {
+            return 1;
+        } else {
+            organizationTypeDao.remove(dbObjInfo);
+            return 0;
+        }
     }
 
     @Override
@@ -46,8 +51,26 @@ public class DDOrganizationServiceImpl implements IDDOrganizationService {
 
     @Override
     public Integer updateOrganizationTypeInfo_Service(OrganizationType objInfo) {
-        // TODO Auto-generated method stub
-        return null;
+        OrganizationType dbObjInfo = organizationTypeDao.getOrganizationTypeByID(objInfo.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<OrganizationType> likenessList = organizationTypeDao.existLikenessOrganizationType(objInfo.getName());
+        if (likenessList != null) {
+            for (OrganizationType organizationType : likenessList) {
+                if (!organizationType.getId().equals(objInfo.getId())) {
+                    // 存在类似的国家
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(objInfo.getName());
+        dbObjInfo.setDescription(objInfo.getDescription());
+
+        organizationTypeDao.save(dbObjInfo);
+        return 0;
     }
 
     // ---------------------------------------------------------------------------

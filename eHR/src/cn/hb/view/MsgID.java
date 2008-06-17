@@ -20,6 +20,11 @@ public class MsgID {
     public final static String ERROR_DEL_NATIVE_PLACE = "ERROR_DEL_NATIVE_PLACE";
     public final static String ERROR_ADD_NATIVE_PLACE = "ERROR_ADD_NATIVE_PLACE";
 
+    public final static String ERROR_ADD_ORGANIZATION_TYPE = "ERROR_ADD_ORGANIZATION_TYPE";
+    public final static String ERROR_DEL_ORGANIZATION_TYPE = "ERROR_DEL_ORGANIZATION_TYPE";
+    public final static String ERROR_UPDATE_ORGANIZATION_TYPE1 = "ERROR_UPDATE_ORGANIZATION_TYPE1";
+    public final static String ERROR_UPDATE_ORGANIZATION_TYPE2 = "ERROR_UPDATE_ORGANIZATION_TYPE2";
+
     public final static String TIP_FIRST_LOGIN_FLAG = "TIP_FIRST_LOGIN_FLAG";
     public final static String TIP_PWD_CHANGE_SUCCEED = "TIP_PWD_CHANGE_SUCCEED";
 }

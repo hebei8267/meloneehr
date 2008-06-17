@@ -25,7 +25,7 @@ public class DDCom002_View extends AbstractViewBean {
     private String description;
     private IDDCommonService ddCommonService;
 
-    public void updateNationInfo() {
+    public void updateNationInfo_Action() {
         Nation objInfo = new Nation();
         objInfo.setId(id);
         objInfo.setName(name);
@@ -43,7 +43,7 @@ public class DDCom002_View extends AbstractViewBean {
         return;
     }
 
-    public void delNationInfo() {
+    public void delNationInfo_Action() {
         int result = ddCommonService.delNationInfo_Service(id);
 
         if (result != 0) {
@@ -53,7 +53,7 @@ public class DDCom002_View extends AbstractViewBean {
         return;
     }
 
-    public void addNationInfo() {
+    public void addNationInfo_Action() {
         Nation objInfo = new Nation();
 
         objInfo.setName(name);
