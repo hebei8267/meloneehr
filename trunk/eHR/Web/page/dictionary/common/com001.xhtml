@@ -86,7 +86,7 @@
 										<tr height="60"></tr>
 										<tr>
 											<td align="right" colspan="2">
-												<h:commandButton value="更 新" action="#{DDCom001_View.updateCountryInfo}" 
+												<h:commandButton value="更 新" action="#{DDCom001_View.updateCountryInfo_Action}" 
 													onclick="return updateInfoCheck()" styleClass="submitBtn"/>
 												<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
 											</td>
@@ -96,7 +96,7 @@
 							</tr>
 						</table>
 						<div class="hidden">
-							<h:commandButton id="delCountryInfoBtn" value="删 除" action="#{DDCom001_View.delCountryInfo}" />
+							<h:commandButton id="delCountryInfoBtn" value="删 除" action="#{DDCom001_View.delCountryInfo_Action}" />
 						</div>
 					</h:form>
 				</td>

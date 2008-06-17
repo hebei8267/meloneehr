@@ -96,7 +96,7 @@
 										<tr height="60"></tr>
 										<tr>
 											<td align="right" colspan="2">
-												<h:commandButton value="更 新" action="#{DDCom003_View.updateNativeplaceInfo}" 
+												<h:commandButton value="更 新" action="#{DDCom003_View.updateNativeplaceInfo_Action}" 
 													onclick="return updateInfoCheck()" styleClass="submitBtn"/>
 												<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
 											</td>
@@ -111,7 +111,7 @@
 							<h:inputHidden id="h_id" value=""/>
 							<h:inputHidden id="h_name" value=""/>
 							<h:inputHidden id="h_description" value=""/>
-							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{DDCom003_View.delNativeplaceInfo}" />
+							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{DDCom003_View.delNativeplaceInfo_Action}" />
 						</div>
 					</h:form>
 				</td>

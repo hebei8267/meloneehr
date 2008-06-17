@@ -19,4 +19,10 @@
 			<dwr:include method="getNationInfoList_Action" />
 		</dwr:remote>
 	</bean>
+	
+	<bean id="DDOrgType001_DWR_View" class="cn.hb.view.dictionary.hr.organization.DDOrgType001_DWR_View" scope="prototype">
+		<dwr:remote javascript="DDOrgType001_DWR_View">
+			<dwr:include method="getOrganizationTypeInfoList_Action" />
+		</dwr:remote>
+	</bean>
 </beans>
