@@ -18,7 +18,7 @@
 		<table width="650">
 			<tr>
 				<td colspan="2">
-					<input type="button" class="submitBtn" value="添 加" onclick=""/>
+					<input type="button" class="submitBtn" value="添 加" onclick="openAddNativeplaceWindow()"/>
 					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
 				</td>
 			</tr>
@@ -66,7 +66,6 @@
 										<tr/>
 										<tr/>
 										<tr/>
-										
 										<tr>
 											<td width="100">隶属于</td>
 											<td align="right">
@@ -76,7 +75,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td width="100">编号</td>
+											<td>编号</td>
 											<td align="right">
 												<h:inputText id="rid" styleClass="readonly" readonly="true"/>
 												<h:inputHidden id="id" value="#{Com003_View.id}"/>
@@ -118,5 +117,15 @@
 				</td>
 			</tr>
 		</table>
+		
+		<rich:modalPanel id="addNativeplaceInfoView" height="260" width="240" zindex="1000" resizeable="false" left="100" top="100">
+			<f:facet name="header">
+				<p>添加籍贯信息</p>
+			</f:facet>
+			<f:facet name="controls">
+				<h:graphicImage value="/images/close.gif" style="cursor:pointer" onclick="Richfaces.hideModalPanel('addNativeplaceInfoView')"/>
+			</f:facet>
+			<a4j:include viewId="/page/common/com003_01.xhtml" id="addNativeplaceInfoWindow"/>
+		</rich:modalPanel>
 	</ui:define>
 </ui:composition>

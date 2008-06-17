@@ -135,3 +135,24 @@ function getEvent() { // 同时兼容IE和FF的写法
 	}
 	return null;
 }
+
+function openAddNativeplaceWindow() {
+	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
+		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pid'].value = '00000001';
+		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:rpname'].value = '籍贯信息';
+	} else {
+		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
+		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:rpname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value;
+	}
+
+	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:name'].value = '';
+	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:description'].value = '';
+
+	Richfaces.showModalPanel('addNativeplaceInfoView');
+	return false;
+}
+
+function closeAddNativeplaceInfoWindow() {
+	Richfaces.hideModalPanel('addNativeplaceInfoView');
+	return false;
+}

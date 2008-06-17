@@ -133,7 +133,7 @@ function resetFromData() {
 		document.forms['nationCfgForm'].elements['nationCfgForm:name'].value = record.data.name;
 		document.forms['nationCfgForm'].elements['nationCfgForm:description'].value = record.data.description;
 	}
-	
+
 	validCfgForm.validate();
 }
 
@@ -170,6 +170,9 @@ function delInfoCheck() {
 
 /* 打开添加民族信息窗口 */
 function openAddNationInfoWindow() {
+	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:name'].value = '';
+	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:description'].value = '';
+
 	Richfaces.showModalPanel('addNationInfoView');
 	return false;
 }

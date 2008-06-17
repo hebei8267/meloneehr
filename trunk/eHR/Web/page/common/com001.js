@@ -180,6 +180,10 @@ function delInfoCheck() {
 
 /* 打开添加国家信息窗口 */
 function openAddCountryInfoWindow() {
+	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:name'].value = '';
+	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:shortName'].value = '';
+	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:description'].value = '';
+	
 	Richfaces.showModalPanel('addCountryInfoView');
 	return false;
 }
