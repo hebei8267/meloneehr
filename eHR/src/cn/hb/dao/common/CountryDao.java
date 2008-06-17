@@ -14,15 +14,6 @@ import static cn.hb.constant.Constant.DEFAULT_ID;
 public class CountryDao extends HibernateDaoImpl<Country> {
 
     /**
-     * 取得国家信息列表
-     * 
-     * @return
-     */
-    public List<Country> getCountryInfoList() {
-        return getAll();
-    }
-
-    /**
      * 根据国家ID取得国家信息
      * 
      * @param countryID 国家信息ID

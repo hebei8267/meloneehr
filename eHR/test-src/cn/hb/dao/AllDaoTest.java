@@ -4,6 +4,7 @@ import cn.hb.core.test.dao.HibernateDaoTestCase;
 import cn.hb.dao.common.CountryDaoTest;
 import cn.hb.dao.common.NationDaoTest;
 import cn.hb.dao.common.NativeplaceDaoTest;
+import cn.hb.dao.hr.organization.OrganizationTypeDaoTest;
 import cn.hb.dao.hr.personnel.CardKindDaoTest;
 import cn.hb.dao.hr.personnel.MarriageStateDaoTest;
 import cn.hb.dao.security.UserDaoTest;
@@ -24,6 +25,8 @@ public class AllDaoTest extends HibernateDaoTestCase {
         suite.addTestSuite(CountryDaoTest.class);
         suite.addTestSuite(NationDaoTest.class);
         suite.addTestSuite(NativeplaceDaoTest.class);
+
+        suite.addTestSuite(OrganizationTypeDaoTest.class);
 
         suite.addTestSuite(MarriageStateDaoTest.class);
         suite.addTestSuite(CardKindDaoTest.class);
