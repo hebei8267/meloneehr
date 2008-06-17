@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+	<head>
+		<!-- 画面编码设置 -->
+		<ui:include src="/page/core/common/pageContent.xhtml"/>
+		<title>Melone-eHR 人力资源系统</title>
+		<!-- 画面公共部分 -->
+		<ui:include src="/page/core/common/common.xhtml"/>
+		
+		<script src="${request.contextPath}/page/frame/frm001.js" type="text/javascript"/>
+	</head>
+	
+	<f:view contentType="text/html">
+		<body>
+			<div id="toolBarDiv">
+				<!-- 画面公共菜单部分 -->
+				<ui:include src="/page/core/common/menu.xhtml"/>
+			</div>
+			
+			<div id="menuTreeDiv">
+				<div id="menuTreeContent" style="overflow: auto;">
+					<h:form id="menuTreeForm" target="workFrame">
+						<rich:tree id="menuTree" switchType="client"
+							value="#{Frm001_View.menuTreeData}" var="item" nodeFace="#{item.type}">
+							<!-- "folder" 页面文件夹类型 -->
+							<rich:treeNode type="folder">
+								<h:outputText value="#{item.nodeTxt}"/>
+							</rich:treeNode>
+							<!-- "page" 页面文件类型 -->
+							<rich:treeNode type="node">
+								<h:outputLabel id="node" value="#{item.nodeTxt}" 
+									onclick="setFromData('#{item.actionContent}')" 
+									styleClass="treeNode"/>
+							</rich:treeNode>
+						</rich:tree>
+						<div class="hidden">
+							<h:inputHidden id="actionContent" value="#{Frm001_View.actionContent}"/>
+							<h:commandButton id="nodeSelected" value="选中菜单树节点" 
+								action="#{Frm001_View.nodeSelected_Action}"/>
+							<a4j:commandButton value="同步菜单树" id="synchMenuTreeBtn" 
+								reRender="menuTree" oncomplete="menuTreeDivInitFinish()" 
+								action="#{Frm001_View.synch_Action}"/>
+						</div>
+					</h:form>
+				</div>
+			</div>
+			
+			<!-- 工作区部分 -->
+			<div id="workDiv">
+			</div>
+		</body>
+	</f:view>
+</html>

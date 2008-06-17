@@ -1,0 +1,131 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/page/core/template/default_template.xhtml">
+	
+	<ui:param name="pageName" value="籍贯信息"/>
+	<ui:param name="pageNum" value="COMMON 003"/>
+	
+	<ui:define name="body">
+		<script src="${request.contextPath}/page/dictionary/common/com003.js" type="text/javascript"/>
+		
+		<h:messages styleClass="message"/>
+		
+		<table width="650">
+			<tr>
+				<td colspan="2">
+					<input type="button" class="submitBtn" value="添 加" onclick="openAddNativeplaceWindow()"/>
+					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
+				</td>
+			</tr>
+			<tr/>
+			<tr>
+				<td width="400">
+					
+					<div id="treeTitleDiv" class="x-panel-header">
+						<span class="x-panel-header-text">籍贯信息树</span>
+					</div>
+					
+					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;margin-top:-1px;">
+						<rich:tree id="nativeplaceInfoTree" switchType="client"
+							value="#{DDCom003_View.npTreeData}" var="item">
+							<rich:treeNode>
+								<h:outputLabel id="node" value="#{item.name}" 
+									onclick="setFromData('#{item.pid}','#{item.pname}','#{item.id}','#{item.name}','#{item.description}')" 
+									styleClass="treeNode"/>
+							</rich:treeNode>
+						</rich:tree>
+					</div>
+				</td>
+				<td valign="top">
+					<h:form id="nativeplaceCfgForm">
+						<table>
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>
+											籍贯详细信息
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table>
+										<tr>	
+											<td colspan="2">
+												<h:outputLabel value="[名称]不能和现有数据重复" styleClass="tipText"/>
+											</td>
+										</tr>
+										<tr/>
+										<tr/>
+										<tr/>
+										<tr>
+											<td width="100">隶属于</td>
+											<td align="right">
+												<h:inputText id="rpname" styleClass="readonly" readonly="true"/>
+												<h:inputHidden id="pid" value="#{DDCom003_View.pid}"/>
+												<h:inputHidden id="pname" value="#{DDCom003_View.pname}"/>
+											</td>
+										</tr>
+										<tr>
+											<td>编号</td>
+											<td align="right">
+												<h:inputText id="rid" styleClass="readonly" readonly="true"/>
+												<h:inputHidden id="id" value="#{DDCom003_View.id}"/>
+											</td>
+										</tr>
+										<tr>
+											<td>名称</td>
+											<td align="right">
+												<h:inputText id="name" value="#{DDCom003_View.name}" styleClass="inputText required max-length-20" />
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">详细描述</td>
+											<td align="right">
+												<h:inputTextarea id="description" value="#{DDCom003_View.description}" styleClass="inputTextarea max-length-255"/>
+											</td>
+										</tr>
+										<tr height="60"></tr>
+										<tr>
+											<td align="right" colspan="2">
+												<h:commandButton value="更 新" action="#{DDCom003_View.updateNativeplaceInfo}" 
+													onclick="return updateInfoCheck()" styleClass="submitBtn"/>
+												<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<div class="hidden">
+							<h:inputHidden id="h_pid" value=""/>
+							<h:inputHidden id="h_pname" value=""/>
+							<h:inputHidden id="h_id" value=""/>
+							<h:inputHidden id="h_name" value=""/>
+							<h:inputHidden id="h_description" value=""/>
+							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{DDCom003_View.delNativeplaceInfo}" />
+						</div>
+					</h:form>
+				</td>
+			</tr>
+		</table>
+		
+		<rich:modalPanel id="addNativeplaceInfoView" height="260" width="240" zindex="1000" resizeable="false" left="100" top="100">
+			<f:facet name="header">
+				<p>添加籍贯信息</p>
+			</f:facet>
+			<f:facet name="controls">
+				<h:graphicImage value="/images/close.gif" style="cursor:pointer" onclick="Richfaces.hideModalPanel('addNativeplaceInfoView')"/>
+			</f:facet>
+			<a4j:include viewId="/page/dictionary/common/com003_01.xhtml" id="addNativeplaceInfoWindow"/>
+		</rich:modalPanel>
+	</ui:define>
+</ui:composition>
