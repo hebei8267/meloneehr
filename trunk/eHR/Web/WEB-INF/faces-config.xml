@@ -71,17 +71,17 @@
 		<navigation-case>
 			<!-- 国家信息 -->
 			<from-outcome>countryCfg</from-outcome>
-			<to-view-id>/page/common/com001.xhtml</to-view-id>
+			<to-view-id>/page/common/dictionary/com001.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<!-- 民族信息 -->
 			<from-outcome>nationCfg</from-outcome>
-			<to-view-id>/page/common/com002.xhtml</to-view-id>
+			<to-view-id>/page/common/dictionary/com002.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<!-- 籍贯信息 -->
 			<from-outcome>nativeplaceCfg</from-outcome>
-			<to-view-id>/page/common/com003.xhtml</to-view-id>
+			<to-view-id>/page/common/dictionary/com003.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
