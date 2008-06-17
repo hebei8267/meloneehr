@@ -1,6 +1,6 @@
 package cn.hb.dao.common;
 
-import static cn.hb.constant.Constant.DEFAULT_NATIVE_PLACE_ID;
+import static cn.hb.constant.Constant.DEFAULT_ID;
 
 import java.util.List;
 
@@ -65,6 +65,6 @@ public class NativeplaceDao extends HibernateDaoImpl<Nativeplace> {
         if (resultList.size() > 0) {
             return resultList.get(0);
         }
-        return DEFAULT_NATIVE_PLACE_ID;
+        return DEFAULT_ID;
     }
 }

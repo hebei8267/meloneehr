@@ -50,7 +50,7 @@ public class Com003_View extends AbstractViewBean {
     }
 
     public void delNativeplaceInfo() {
-        int result = commonService.delNativeplaceInfo_Service(id);
+        int result = commonService.delNativeplaceInfo_Service(id, pid);
 
         if (result != 0) {
             addErrorMessage(ERROR_DEL_NATIVE_PLACE);

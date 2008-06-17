@@ -96,9 +96,10 @@ public interface ICommonService extends IService {
      * 删除籍贯信息
      * 
      * @param nativeplaceID 籍贯信息ID
+     * @param pNativeplaceID 父籍贯信息
      * @return 0-更新成功 1-更新失败
      */
-    public Integer delNativeplaceInfo_Service(String nativeplaceID);
+    public Integer delNativeplaceInfo_Service(String nativeplaceID, String pNativeplaceID);
 
     /**
      * 添加籍贯信息

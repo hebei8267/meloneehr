@@ -164,6 +164,21 @@ public class Nativeplace extends AbstractEntityBean {
         this.subNativeplaceList.add(nativeplace);
     }
 
+    public void removeSubNativeplace(Nativeplace nativeplace) {
+        if (!subNativeplaceList.contains(nativeplace)) {
+            return;
+        }
+        subNativeplaceList.remove(nativeplace);
+
+        int index = 1;
+        for (Nativeplace _nativeplace : subNativeplaceList) {
+            if (_nativeplace.getIndex() != null) {
+                _nativeplace.setIndex(index);
+                index++;
+            }
+        }
+    }
+
     public void setSubNativeplaceList(List<Nativeplace> subNativeplaceList) {
         this.subNativeplaceList = subNativeplaceList;
     }

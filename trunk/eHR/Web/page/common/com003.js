@@ -4,21 +4,6 @@ Ext.onReady(function() {
 	initNativeplaceInfoTreeStyle();
 });
 
-function modRootCheck() {
-	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "NP00000000") {
-		Ext.Msg.show({
-			title : '籍贯信息',
-			msg : '不能修改默认根节点信息!',
-			buttons : Ext.Msg.OK,
-			minWidth : 200,
-			icon : Ext.MessageBox.ERROR
-		});
-		return false;
-	}
-
-	return true;
-}
-
 function needSelectedCheck() {
 	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
 		Ext.Msg.show({
@@ -34,10 +19,6 @@ function needSelectedCheck() {
 }
 
 function updateInfoCheck() {
-	if (!modRootCheck()) {
-		return false;
-	}
-
 	if (!needSelectedCheck()) {
 		return false;
 	}
@@ -104,10 +85,6 @@ function resetFromData() {
 }
 
 function delInfoCheck() {
-	if (!modRootCheck()) {
-		return false;
-	}
-
 	if (!needSelectedCheck()) {
 		return false;
 	}

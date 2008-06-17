@@ -14,7 +14,7 @@ import cn.hb.entity.common.Nation;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.common.ICommonService;
 import cn.hb.view.domain.UINativeplaceTreeNodeBean;
-import static cn.hb.constant.Constant.DEFAULT_NATIVE_PLACE_ID;
+import static cn.hb.constant.Constant.DEFAULT_ID;
 
 /**
  * @author kaka
@@ -140,7 +140,7 @@ public class CommonServiceImpl implements ICommonService {
 
     @Override
     public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceInfoTree_Service() {
-        Nativeplace nativeplace = nativeplaceDao.getNativeplaceByID(DEFAULT_NATIVE_PLACE_ID);
+        Nativeplace nativeplace = nativeplaceDao.getNativeplaceByID(DEFAULT_ID);
 
         if (nativeplace != null) {
             // 空信息根结点
@@ -188,11 +188,16 @@ public class CommonServiceImpl implements ICommonService {
     }
 
     @Override
-    public Integer delNativeplaceInfo_Service(String nativeplaceID) {
+    public Integer delNativeplaceInfo_Service(String nativeplaceID, String pNativeplaceID) {
         Nativeplace dbObjInfo = nativeplaceDao.getNativeplaceByID(nativeplaceID);
         if (dbObjInfo == null) {
             return 1;
         } else {
+            Nativeplace pNativeplace = nativeplaceDao.getNativeplaceByID(pNativeplaceID);
+           pNativeplace.removeSubNativeplace(dbObjInfo);
+            
+            dbObjInfo.setParentNativeplace(null);
+            
             nativeplaceDao.remove(dbObjInfo);
             return 0;
         }
