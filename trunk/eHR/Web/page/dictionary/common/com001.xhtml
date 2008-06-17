@@ -1,0 +1,116 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/page/core/template/default_template.xhtml">
+	
+	<ui:param name="pageName" value="国家信息"/>
+	<ui:param name="pageNum" value="COMMON 001"/>
+	
+	<ui:define name="body">
+		<script src="${request.contextPath}/page/common/dictionary/com001.js" type="text/javascript"/>
+		<script src="${request.contextPath}/js/dwrproxy.js" type="text/javascript"/>
+		<script type='text/javascript' src='${request.contextPath}/dwr/interface/DDCom001_DWR_View.js'></script>
+		<script type='text/javascript' src='${request.contextPath}/dwr/engine.js'></script>
+		<script type='text/javascript' src='${request.contextPath}/dwr/util.js'></script>
+
+
+		<h:messages styleClass="message"/>
+		
+		<table width="650">
+			<tr>
+				<td colspan="2">
+					<input type="button" class="submitBtn" value="添 加" onclick="openAddCountryInfoWindow()"/>
+					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
+				</td>
+			</tr>
+			<tr/>
+			<tr>
+				<td width="400">
+					<div id="countryInfoGrid">
+					</div>
+				</td>
+				<td valign="top">
+					<h:form id="countryCfgForm">
+						<table>
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>
+											国家详细信息
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td colspan="2">
+												<h:outputLabel value="[名称]和[简称]不能和现有数据重复" styleClass="tipText"/>
+											</td>
+										</tr>
+										<tr/>
+										<tr/>
+										<tr/>
+										<tr>
+											<td width="100">编号</td>
+											<td align="right">
+												<h:inputText id="hid" styleClass="readonly" readonly="true"/>
+												<h:inputHidden id="id" value="#{DDCom001_View.id}"/>
+											</td>
+										</tr>
+										<tr>
+											<td>名称</td>
+											<td align="right">
+												<h:inputText id="name" value="#{DDCom001_View.name}" styleClass="inputText required max-length-20" />
+											</td>
+										</tr>
+										<tr>
+											<td>简称</td>
+											<td align="right">
+												<h:inputText id="shortName" value="#{DDCom001_View.shortName}" styleClass="inputText required max-length-20" />
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">详细描述</td>
+											<td align="right">
+												<h:inputTextarea id="description" value="#{DDCom001_View.description}" styleClass="inputTextarea max-length-255"/>
+											</td>
+										</tr>
+										<tr height="60"></tr>
+										<tr>
+											<td align="right" colspan="2">
+												<h:commandButton value="更 新" action="#{DDCom001_View.updateCountryInfo}" 
+													onclick="return updateInfoCheck()" styleClass="submitBtn"/>
+												<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<div class="hidden">
+							<h:commandButton id="delCountryInfoBtn" value="删 除" action="#{DDCom001_View.delCountryInfo}" />
+						</div>
+					</h:form>
+				</td>
+			</tr>
+		</table>
+		
+		<rich:modalPanel id="addCountryInfoView" height="260" width="240" zindex="1000" resizeable="false" left="100" top="100">
+			<f:facet name="header">
+				<p>添加国家信息</p>
+			</f:facet>
+			<f:facet name="controls">
+				<h:graphicImage value="/images/close.gif" style="cursor:pointer" onclick="Richfaces.hideModalPanel('addCountryInfoView')"/>
+			</f:facet>
+			<a4j:include viewId="/page/common/dictionary/com001_01.xhtml" id="addCountryInfoWindow"/>
+		</rich:modalPanel>
+	</ui:define>
+</ui:composition>
