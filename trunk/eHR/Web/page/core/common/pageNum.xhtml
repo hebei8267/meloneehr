@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html">
+	<br/>
+	<table width="100%">
+		<tr>
+			<td style="width:10px;">
+			</td>
+			<td align="left">
+				<h:outputText value="#{pageName}" styleClass="pageNum"/>
+			</td>
+			<td align="right">
+				<h:outputLabel styleClass="pageNum">
+                    页面编号 : 
+				</h:outputLabel>
+				<h:outputText value="  #{pageNum}" styleClass="pageNum"/>
+			</td>
+			<td style="width:10px;">
+			</td>
+		</tr>
+	</table>
+</ui:composition>
