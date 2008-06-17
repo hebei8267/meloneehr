@@ -8,14 +8,14 @@
 	http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd"
 	default-autowire="byName">
 	
-	<bean id="Com001_DWR_View" class="cn.hb.view.common.Com001_DWR_View" scope="prototype">
-		<dwr:remote javascript="Com001_DWR_View">
+	<bean id="DDCom001_DWR_View" class="cn.hb.view.dictionary.common.DDCom001_DWR_View" scope="prototype">
+		<dwr:remote javascript="DDCom001_DWR_View">
 			<dwr:include method="getCountryInfoList_Action" />
 		</dwr:remote>
 	</bean>
 	
-	<bean id="Com002_DWR_View" class="cn.hb.view.common.Com002_DWR_View" scope="prototype">
-		<dwr:remote javascript="Com002_DWR_View">
+	<bean id="DDCom002_DWR_View" class="cn.hb.view.dictionary.common.DDCom002_DWR_View" scope="prototype">
+		<dwr:remote javascript="DDCom002_DWR_View">
 			<dwr:include method="getNationInfoList_Action" />
 		</dwr:remote>
 	</bean>
