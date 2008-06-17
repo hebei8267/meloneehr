@@ -1,0 +1,83 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:rich="http://richfaces.org/rich" 
+	template="/page/core/template/one_page_template.xhtml">
+	
+	<ui:define name="pageNum">
+		<ui:include src="/page/core/common/pageNum.xhtml">
+			<ui:param name="pageNum" value="SECURITY 002"/>
+		</ui:include>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h:messages styleClass="message"/>
+		
+		<h:form id="modPwdForm">
+			<rich:panel>
+				<f:facet name="header">密码变更</f:facet>
+				<p>
+				请输入变更前的密码和变更后的密码
+				</p>
+				<br/>
+				<table>
+					<tr>
+						<td>用户编号</td>
+						<td>
+							<h:outputLabel value="#{Sec002_View.userId}"/>
+							<h:inputHidden id="userId" value="#{Sec002_View.userId}" />
+						</td>
+					</tr>
+					<tr>
+						<td>用户信息</td>
+						<td>
+							<h:outputLabel value="#{Sec002_View.userName}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>原密码</td>
+						<td>
+							<h:inputSecret id="oldPassword" value="#{Sec002_View.oldPassword}" styleClass="inputText required max-length-20" />
+						</td>
+					</tr>
+					<tr>
+						<td>新密码</td>
+						<td>
+							<h:inputSecret id="newPassword" value="#{Sec002_View.newPassword}" styleClass="inputText required max-length-20" />
+						</td>
+					</tr>
+					<tr>
+						<td>新密码（确认）</td>
+						<td>
+							<h:inputSecret id="newPassword2" value="#{Sec002_View.newPassword2}" styleClass="inputText required max-length-20" />
+						</td>
+					</tr>
+					<tr/>
+					<tr>
+						<td colspan="2" align="right">
+							<h:commandButton value="变 更" action="#{Sec002_View.modPassword_Action}" styleClass="submitBtn"/>
+							<input type="button" value="清 除" onclick="cleanFromItem()" class="cleanBtn"/>
+						</td>
+					</tr>
+				</table>
+			</rich:panel>
+			<script type="text/javascript">
+			var valid;
+			Ext.onReady(function() {
+	            valid = new Validation('modPwdForm', {
+	                immediate: true
+	            });
+	        });
+	        
+	        function cleanFromItem(){
+            	document.forms['modPwdForm'].elements['modPwdForm:userId'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:oldPassword'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:newPassword'].value = "";
+            	document.forms['modPwdForm'].elements['modPwdForm:newPassword2'].value = "";
+	        }
+			</script>
+		</h:form>
+	</ui:define>
+</ui:composition>
