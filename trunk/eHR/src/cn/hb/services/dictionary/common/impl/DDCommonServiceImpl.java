@@ -13,7 +13,7 @@ import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.dictionary.common.IDDCommonService;
-import cn.hb.view.domain.UINativeplaceTreeNodeBean;
+import cn.hb.view.domain.UIDefaultTreeNodeBean;
 import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
 import static cn.hb.constant.Constant.DEFAULT_ID;
 
@@ -146,9 +146,8 @@ public class DDCommonServiceImpl implements IDDCommonService {
         if (nativeplace != null) { // 空信息根结点
             Object[] resultObj = new Object[2];
 
-            UINativeplaceTreeNodeBean rootNode = new UINativeplaceTreeNodeBean(nativeplace.getId(), nativeplace
-                    .getName());
-            buildSubMenuTree(rootNode, nativeplace.getSubNativeplaceList());
+            UIDefaultTreeNodeBean rootNode = new UIDefaultTreeNodeBean(nativeplace.getId(), nativeplace.getName());
+            buildSubNativeplaceTree(rootNode, nativeplace.getSubNativeplaceList());
             // 树根节点对象
             resultObj[0] = rootNode;
 
@@ -157,37 +156,37 @@ public class DDCommonServiceImpl implements IDDCommonService {
                     nativeplace.getName(), nativeplace.getDescription());
             nodeDataList.add(jsonBean);
 
-            getSubTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
+            getSubNativeplaceTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
             // 树所有节点对象数据列表
             resultObj[1] = nodeDataList;
+
             return resultObj;
         }
         return null;
     }
 
-    private void getSubTreeNodeData(List<UINativeplaceTreeNodeJsonBean> nodeDataList,
+    private void getSubNativeplaceTreeNodeData(List<UINativeplaceTreeNodeJsonBean> nodeDataList,
             UINativeplaceTreeNodeJsonBean parentNode, List<Nativeplace> subNativeplaceList) {
         if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
             for (Nativeplace nativeplace : subNativeplaceList) {
                 UINativeplaceTreeNodeJsonBean jsonBean = new UINativeplaceTreeNodeJsonBean(parentNode.getId(),
                         parentNode.getName(), nativeplace.getId(), nativeplace.getName(), nativeplace.getDescription());
                 nodeDataList.add(jsonBean);
-                getSubTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
+                getSubNativeplaceTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
             }
         }
 
     }
 
-    private void buildSubMenuTree(UINativeplaceTreeNodeBean parentNode, List<Nativeplace> subNativeplaceList) {
+    private void buildSubNativeplaceTree(UIDefaultTreeNodeBean parentNode, List<Nativeplace> subNativeplaceList) {
         if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
             for (Nativeplace nativeplace : subNativeplaceList) {
-                UINativeplaceTreeNodeBean treeNode = new UINativeplaceTreeNodeBean(nativeplace.getId(), nativeplace
-                        .getName());
+                UIDefaultTreeNodeBean treeNode = new UIDefaultTreeNodeBean(nativeplace.getId(), nativeplace.getName());
                 treeNode.setParent(parentNode);
 
                 parentNode.addChild(nativeplace.getId(), treeNode);
 
-                buildSubMenuTree(treeNode, nativeplace.getSubNativeplaceList());
+                buildSubNativeplaceTree(treeNode, nativeplace.getSubNativeplaceList());
             }
         }
     }

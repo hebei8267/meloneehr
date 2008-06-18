@@ -94,7 +94,7 @@ public interface IDDCommonService extends IService {
      * 删除籍贯信息
      * 
      * @param nativeplaceID 籍贯信息ID
-     * @param pNativeplaceID 父籍贯信息
+     * @param pNativeplaceID 父籍贯信息ID
      * @return 0-更新成功 1-更新失败
      */
     public Integer delNativeplaceInfo_Service(String nativeplaceID, String pNativeplaceID);
@@ -103,7 +103,7 @@ public interface IDDCommonService extends IService {
      * 添加籍贯信息
      * 
      * @param objInfo 籍贯信息
-     * @param pNativeplaceID 父籍贯信息
+     * @param pNativeplaceID 父籍贯信息ID
      * @return 0-更新成功 1-更新失败
      */
     public Integer addNativeplaceInfo_Service(Nativeplace objInfo, String pNativeplaceID);
