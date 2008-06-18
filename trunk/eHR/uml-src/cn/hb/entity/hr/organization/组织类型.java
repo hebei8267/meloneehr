@@ -6,8 +6,6 @@ public class 组织类型 {
 	 
 	private String 名称;
 	 
-	private String 简称(unique);
-	 
 	private String 详细描述;
 	 
 	private 组织[] 组织;

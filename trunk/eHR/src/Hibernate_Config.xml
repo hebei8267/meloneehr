@@ -49,6 +49,7 @@
 				<value>cn.hb.entity.common.Nativeplace</value>
 				<!-- -->
 				<value>cn.hb.entity.hr.organization.OrganizationType</value>
+				<value>cn.hb.entity.hr.organization.Organization</value>
 				<!-- 未做相关业务 -->
 				<value>cn.hb.entity.hr.personnel.MarriageState</value>
 				<value>cn.hb.entity.hr.personnel.CardKind</value>
@@ -63,7 +64,7 @@
 					<value>cn.hb.entity.hr.personnel.Educate</value>
 					<value>cn.hb.entity.hr.personnel.Person</value> -->
 				<!-- 
-					<value>cn.hb.entity.hr.organization.Organization</value>
+
 					<value>cn.hb.entity.hr.organization.OrganizationJobLevel</value>
 					<value>cn.hb.entity.hr.organization.JobInfo</value>
 					<value>cn.hb.entity.hr.organization.JobLevel</value>-->
