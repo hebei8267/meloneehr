@@ -145,7 +145,7 @@ function delInfoCheck() {
 	if (gridSelects.length == 0) {
 		Ext.Msg.show({
 			title : '民族信息',
-			msg : '请选择要民族的国家信息!',
+			msg : '请选择要删除的民族信息!',
 			buttons : Ext.Msg.OK,
 			minWidth : 200,
 			icon : Ext.MessageBox.INFO
