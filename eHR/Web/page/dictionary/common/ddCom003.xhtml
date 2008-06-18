@@ -8,11 +8,11 @@
 	template="/page/core/template/default_template.xhtml">
 	
 	<ui:param name="pageName" value="籍贯信息"/>
-	<ui:param name="pageNum" value="COMMON 003"/>
+	<ui:param name="pageNum" value="DD COMMON 003"/>
 	
 	<ui:define name="body">
 		<script src="${request.contextPath}/js/json2.js" type="text/javascript"/>
-		<script src="${request.contextPath}/page/dictionary/common/com003.js" type="text/javascript"/>
+		<script src="${request.contextPath}/page/dictionary/common/ddCom003.js" type="text/javascript"/>
 		
 		<h:messages styleClass="message"/>
 		
@@ -127,7 +127,7 @@
 			<f:facet name="controls">
 				<h:graphicImage value="/images/close.gif" style="cursor:pointer" onclick="Richfaces.hideModalPanel('addNativeplaceInfoView')"/>
 			</f:facet>
-			<a4j:include viewId="/page/dictionary/common/com003_01.xhtml" id="addNativeplaceInfoWindow"/>
+			<a4j:include viewId="/page/dictionary/common/ddCom003_01.xhtml" id="addNativeplaceInfoWindow"/>
 		</rich:modalPanel>
 	</ui:define>
 </ui:composition>

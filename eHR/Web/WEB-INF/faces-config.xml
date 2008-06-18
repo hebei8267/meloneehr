@@ -71,22 +71,22 @@
 		<navigation-case>
 			<!-- 国家信息 -->
 			<from-outcome>countryCfg</from-outcome>
-			<to-view-id>/page/dictionary/common/com001.xhtml</to-view-id>
+			<to-view-id>/page/dictionary/common/ddCom001.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<!-- 民族信息 -->
 			<from-outcome>nationCfg</from-outcome>
-			<to-view-id>/page/dictionary/common/com002.xhtml</to-view-id>
+			<to-view-id>/page/dictionary/common/ddCom002.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<!-- 籍贯信息 -->
 			<from-outcome>nativeplaceCfg</from-outcome>
-			<to-view-id>/page/dictionary/common/com003.xhtml</to-view-id>
+			<to-view-id>/page/dictionary/common/ddCom003.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<!-- 组织类型信息 -->
 			<from-outcome>orgTypeCfg</from-outcome>
-			<to-view-id>/page/dictionary/hr/organization/org001.xhtml</to-view-id>
+			<to-view-id>/page/dictionary/hr/organization/ddOrg001.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
