@@ -5,7 +5,7 @@ package cn.hb.view.domain;
  * 
  * 籍贯信息树节点
  */
-public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativeplaceTreeNodeBean> {
+public class UIDefaultTreeNodeBean extends AbstractUITreeNodeBean<UIDefaultTreeNodeBean> {
 
     private static final long serialVersionUID = -4514259996461825546L;
 
@@ -15,11 +15,11 @@ public class UINativeplaceTreeNodeBean extends AbstractUITreeNodeBean<UINativepl
     /** 名称 */
     private String name;
 
-    public UINativeplaceTreeNodeBean() {
+    public UIDefaultTreeNodeBean() {
 
     }
 
-    public UINativeplaceTreeNodeBean(String id, String name) {
+    public UIDefaultTreeNodeBean(String id, String name) {
         this.id = id;
         this.name = name;
     }

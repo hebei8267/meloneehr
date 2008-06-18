@@ -34,7 +34,7 @@
 					<div id="nativeplaceInfoTreeDiv" style="border:1px solid #99bbe8;margin-top:-1px;">
 						<rich:tree id="nativeplaceInfoTree" switchType="client"
 							value="#{DDCom003_View.npTreeData}" var="item">
-							<rich:treeNode>
+							<rich:treeNode icon="/images/nativeplace.gif" iconLeaf="/images/nativeplace.gif">
 								<h:outputLabel id="node" value="#{item.name}" 
 									onclick="setFromData('#{item.id}')" 
 									styleClass="treeNode"/>

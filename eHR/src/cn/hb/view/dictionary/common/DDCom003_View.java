@@ -17,7 +17,7 @@ import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.dictionary.common.IDDCommonService;
 import cn.hb.view.convert.ConvertUtil;
-import cn.hb.view.domain.UINativeplaceTreeNodeBean;
+import cn.hb.view.domain.UIDefaultTreeNodeBean;
 import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
 
 /**
@@ -28,7 +28,7 @@ import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
 @Component("DDCom003_View")
 @Scope("request")
 public class DDCom003_View extends AbstractViewBean {
-    private TreeNode<UINativeplaceTreeNodeBean> npTreeData;
+    private TreeNode<UIDefaultTreeNodeBean> npTreeData;
     private String pid;
     private String pname;
     private String id;
@@ -109,7 +109,7 @@ public class DDCom003_View extends AbstractViewBean {
     public void init() {
         Object[] dataObj = ddCommonService.getNativeplaceInfoTree_Service();
         if (dataObj != null) {
-            npTreeData = (TreeNode<UINativeplaceTreeNodeBean>) dataObj[0];
+            npTreeData = (TreeNode<UIDefaultTreeNodeBean>) dataObj[0];
 
             ConvertUtil<UINativeplaceTreeNodeJsonBean> util = new ConvertUtil<UINativeplaceTreeNodeJsonBean>();
 
@@ -123,7 +123,7 @@ public class DDCom003_View extends AbstractViewBean {
     // Get Set Method
     // ---------------------------------------------------------------------------
 
-    public TreeNode<UINativeplaceTreeNodeBean> getNpTreeData() {
+    public TreeNode<UIDefaultTreeNodeBean> getNpTreeData() {
         return npTreeData;
     }
 
@@ -155,7 +155,7 @@ public class DDCom003_View extends AbstractViewBean {
         return ddCommonService;
     }
 
-    public void setNpTreeData(TreeNode<UINativeplaceTreeNodeBean> npTreeData) {
+    public void setNpTreeData(TreeNode<UIDefaultTreeNodeBean> npTreeData) {
         this.npTreeData = npTreeData;
     }
 

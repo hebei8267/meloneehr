@@ -27,4 +27,9 @@ public class OrganizationDao extends HibernateDaoImpl<Organization> {
         }
         return null;
     }
+
+    public String getMaxOrganizationID() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
