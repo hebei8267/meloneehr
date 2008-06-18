@@ -4,6 +4,10 @@ import static cn.hb.view.MsgID.ERROR_ADD_ORGANIZATION_TYPE;
 import static cn.hb.view.MsgID.ERROR_DEL_ORGANIZATION_TYPE;
 import static cn.hb.view.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE1;
 import static cn.hb.view.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE2;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.hr.organization.OrganizationType;
 import cn.hb.services.dictionary.hr.organization.IDDOrganizationService;
@@ -13,10 +17,11 @@ import cn.hb.services.dictionary.hr.organization.IDDOrganizationService;
  * 
  * 组织类型信息列表
  */
+@Component("DDOrgType001_View")
+@Scope("request")
 public class DDOrgType001_View extends AbstractViewBean {
     private String id;
     private String name;
-    private String shortName;
     private String description;
     private IDDOrganizationService ddOrganizationService;
 
@@ -83,10 +88,6 @@ public class DDOrgType001_View extends AbstractViewBean {
         return name;
     }
 
-    public String getShortName() {
-        return shortName;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -97,10 +98,6 @@ public class DDOrgType001_View extends AbstractViewBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     public void setDescription(String description) {
@@ -116,6 +113,9 @@ public class DDOrgType001_View extends AbstractViewBean {
 
     @Override
     public void destroy() {
+        id = "";
+        name = "";
+        description = "";
     }
 
     @Override

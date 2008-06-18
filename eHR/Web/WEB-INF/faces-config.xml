@@ -83,5 +83,10 @@
 			<from-outcome>nativeplaceCfg</from-outcome>
 			<to-view-id>/page/dictionary/common/com003.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<!-- 组织类型信息 -->
+			<from-outcome>orgTypeCfg</from-outcome>
+			<to-view-id>/page/dictionary/hr/organization/org001.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>
