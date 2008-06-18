@@ -77,6 +77,8 @@ public class OrganizationServiceImpl implements IOrganizationService {
             getSubOrganizationTreeNodeData(nodeDataList, jsonBean, organization.getSubOrganizationList());
             // 树所有节点对象数据列表
             resultObj[1] = nodeDataList;
+
+            return resultObj;
         }
         return null;
     }
