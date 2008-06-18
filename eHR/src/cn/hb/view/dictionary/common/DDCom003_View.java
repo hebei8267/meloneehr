@@ -5,6 +5,10 @@ import static cn.hb.view.MsgID.ERROR_DEL_NATIVE_PLACE;
 import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE1;
 import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE2;
 
+import java.util.List;
+
+import net.sf.json.JSONObject;
+
 import org.richfaces.model.TreeNode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,7 +16,9 @@ import org.springframework.stereotype.Component;
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.dictionary.common.IDDCommonService;
+import cn.hb.view.convert.ConvertUtil;
 import cn.hb.view.domain.UINativeplaceTreeNodeBean;
+import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
 
 /**
  * @author kaka
@@ -28,6 +34,7 @@ public class DDCom003_View extends AbstractViewBean {
     private String id;
     private String name;
     private String description;
+    private String jsonNodeData;
     private IDDCommonService ddCommonService;
 
     public void updateNativeplaceInfo_Action() {
@@ -97,14 +104,25 @@ public class DDCom003_View extends AbstractViewBean {
         description = "";
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void init() {
-        npTreeData = ddCommonService.getNativeplaceInfoTree_Service();
+        Object[] dataObj = ddCommonService.getNativeplaceInfoTree_Service();
+        if (dataObj != null) {
+            npTreeData = (TreeNode<UINativeplaceTreeNodeBean>) dataObj[0];
+
+            ConvertUtil<UINativeplaceTreeNodeJsonBean> util = new ConvertUtil<UINativeplaceTreeNodeJsonBean>();
+
+            JSONObject jsonObj = util.javaListToJSONObject((List<UINativeplaceTreeNodeJsonBean>) dataObj[1]);
+
+            jsonNodeData = jsonObj.toString();
+        }
     }
 
     // ---------------------------------------------------------------------------
     // Get Set Method
     // ---------------------------------------------------------------------------
+
     public TreeNode<UINativeplaceTreeNodeBean> getNpTreeData() {
         return npTreeData;
     }
@@ -127,6 +145,14 @@ public class DDCom003_View extends AbstractViewBean {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getJsonNodeData() {
+        return jsonNodeData;
+    }
+
+    public IDDCommonService getDdCommonService() {
+        return ddCommonService;
     }
 
     public void setNpTreeData(TreeNode<UINativeplaceTreeNodeBean> npTreeData) {
@@ -153,8 +179,8 @@ public class DDCom003_View extends AbstractViewBean {
         this.description = description;
     }
 
-    public IDDCommonService getDdCommonService() {
-        return ddCommonService;
+    public void setJsonNodeData(String jsonNodeData) {
+        this.jsonNodeData = jsonNodeData;
     }
 
     public void setDdCommonService(IDDCommonService ddCommonService) {

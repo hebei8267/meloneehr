@@ -2,13 +2,10 @@ package cn.hb.services.dictionary.common;
 
 import java.util.List;
 
-import org.richfaces.model.TreeNode;
-
 import cn.hb.core.services.IService;
 import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
 import cn.hb.entity.common.Nativeplace;
-import cn.hb.view.domain.UINativeplaceTreeNodeBean;
 
 /**
  * @author kaka
@@ -79,11 +76,11 @@ public interface IDDCommonService extends IService {
     public Integer addNationInfo_Service(Nation objInfo);
 
     /**
-     * 取得籍贯树信息
+     * 取得籍贯树信息 一个长度为2的对象数组，第一个对象是该树的根节点对象，第二个对象是该树所有节点对象数据列表
      * 
      * @return
      */
-    public TreeNode<UINativeplaceTreeNodeBean> getNativeplaceInfoTree_Service();
+    public Object[] getNativeplaceInfoTree_Service();
 
     /**
      * 更新籍贯信息

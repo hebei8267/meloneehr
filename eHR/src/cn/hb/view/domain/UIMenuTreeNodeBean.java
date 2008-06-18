@@ -10,12 +10,16 @@ package cn.hb.view.domain;
 public class UIMenuTreeNodeBean extends AbstractUITreeNodeBean<UIMenuTreeNodeBean> {
     /***/
     private static final long serialVersionUID = 2755754613221738481L;
+    
     /** 节点 ID */
     private String nodeID;
+
     /** 节点内容 */
     private String nodeTxt;
+
     /** Menu Node Action Content */
     private String actionContent;
+
     /** 节点类型 */
     private String type;
 
