@@ -11,7 +11,6 @@ public class UINativeplaceTreeNodeJsonBean extends BaseBean {
     }
 
     public UINativeplaceTreeNodeJsonBean(String pid, String pname, String id, String name, String description) {
-        super();
         this.pid = pid;
         this.pname = pname;
         this.id = id;
