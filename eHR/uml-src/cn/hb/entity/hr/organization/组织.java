@@ -21,8 +21,6 @@ public class 组织 {
 	 
 	private String 详细描述;
 	 
-	private String 网址;
-	 
 	private String 撤销时间;
 	 
 	private String 撤销原因;
