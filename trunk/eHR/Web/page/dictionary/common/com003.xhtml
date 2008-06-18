@@ -11,6 +11,7 @@
 	<ui:param name="pageNum" value="COMMON 003"/>
 	
 	<ui:define name="body">
+		<script src="${request.contextPath}/js/json2.js" type="text/javascript"/>
 		<script src="${request.contextPath}/page/dictionary/common/com003.js" type="text/javascript"/>
 		
 		<h:messages styleClass="message"/>
@@ -35,7 +36,7 @@
 							value="#{DDCom003_View.npTreeData}" var="item">
 							<rich:treeNode>
 								<h:outputLabel id="node" value="#{item.name}" 
-									onclick="setFromData('#{item.pid}','#{item.pname}','#{item.id}','#{item.name}','#{item.description}')" 
+									onclick="setFromData('#{item.id}')" 
 									styleClass="treeNode"/>
 							</rich:treeNode>
 						</rich:tree>
@@ -111,6 +112,7 @@
 							<h:inputHidden id="h_id" value=""/>
 							<h:inputHidden id="h_name" value=""/>
 							<h:inputHidden id="h_description" value=""/>
+							<h:inputHidden id="jsonNodeData" value="#{DDCom003_View.jsonNodeData}"/>
 							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{DDCom003_View.delNativeplaceInfo_Action}" />
 						</div>
 					</h:form>

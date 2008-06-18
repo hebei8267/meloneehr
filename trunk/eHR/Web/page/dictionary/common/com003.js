@@ -1,7 +1,36 @@
-var validCfgForm;;
+var validCfgForm;
+var dataStore;
 
 Ext.onReady(function() {
 	initNativeplaceInfoTreeStyle();
+
+	var treeNodeData = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:jsonNodeData'].value;
+
+	dataStore = new Ext.data.Store({
+		id : 'ds',
+		proxy : new Ext.data.MemoryProxy(JSON.parse(treeNodeData)),
+		reader : new Ext.data.JsonReader({
+			totalProperty : "totalProperty",
+			root : "dataList",
+			id : "id"
+		}, new Ext.data.Record.create([{
+			name : 'pid',
+			mapping : 'pid'
+		}, {
+			name : 'pname',
+			mapping : 'pname'
+		}, {
+			name : 'id',
+			mapping : 'id'
+		}, {
+			name : 'name',
+			mapping : 'name'
+		}, {
+			name : 'description',
+			mapping : 'description'
+		}]))
+	});
+	dataStore.load();
 });
 
 function needSelectedCheck() {
@@ -43,24 +72,26 @@ function initNativeplaceInfoTreeStyle() {
 	treeDiv.setStyle("overflow", "auto");
 }
 
-function setFromData(pid, pname, id, name, description) {
+function setFromData(id) {
 	nodeSelected();
 
 	addValidation();
 
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = pid;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = pname;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = pname;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = id;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = id;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = name;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = description;
+	var record = dataStore.getById(id);
 
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value = pid;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value = pname;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value = id;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value = name;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value = description;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = record.data.pid;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = record.data.pname;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = record.data.pname;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = record.data.id;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = record.data.id;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = record.data.name;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = record.data.description;
+
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value = record.data.pid;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value = record.data.pname;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value = record.data.id;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value = record.data.name;
+	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value = record.data.description;
 }
 
 function addValidation() {

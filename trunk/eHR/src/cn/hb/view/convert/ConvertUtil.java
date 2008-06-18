@@ -18,7 +18,7 @@ public class ConvertUtil<T> {
      * @param lastName 名字
      * @return 全名字
      */
-    public static String formatName(String firstName, String lastName) {
+    public String formatName(String firstName, String lastName) {
         return firstName + BLANK + lastName;
     }
 
@@ -68,7 +68,7 @@ public class ConvertUtil<T> {
      * @return List对象
      */
     @SuppressWarnings("unchecked")
-    public static List<Object> jsonStringToPojoList(String jsonString, Class pojoClass) {
+    public List<Object> jsonStringToPojoList(String jsonString, Class pojoClass) {
         String _jsonString = formatJsonString(jsonString);
         List<Object> list = new ArrayList<Object>();
 
@@ -87,7 +87,7 @@ public class ConvertUtil<T> {
         return list;
     }
 
-    private static String formatJsonString(String jsonString) {
+    private String formatJsonString(String jsonString) {
         if (!StringUtil.isEmpty(jsonString)) {
             if (jsonString.startsWith("")) {
                 String reString = jsonString.substring(1, jsonString.length() - 1);
