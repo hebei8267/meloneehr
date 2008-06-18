@@ -29,7 +29,7 @@ import org.hibernate.annotations.NaturalId;
  * 组织
  */
 @Entity
-@Table(name = "M_ORGANIZATION")
+@Table(name = "W_ORGANIZATION")
 @NamedQueries( {
         @NamedQuery(name = "Organization.getOrganizationByID", query = "select obj from Organization obj where obj.id = ? "),
         @NamedQuery(name = "Organization.getMaxOrganizationID", query = "select max(obj.id) from Organization obj "),
@@ -111,7 +111,7 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 设立时间
      */
-    @NaturalId
+    @Basic
     @Column(name = "START_DATE", nullable = false, length = 8)
     public String getStartDate() {
         return startDate;

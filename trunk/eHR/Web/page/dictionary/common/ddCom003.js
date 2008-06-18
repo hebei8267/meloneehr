@@ -116,7 +116,14 @@ function resetFromData() {
 }
 
 function delInfoCheck() {
-	if (!needSelectedCheck()) {
+	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
+		Ext.Msg.show({
+			title : '籍贯信息',
+			msg : '请选择要删除的籍贯信息!',
+			buttons : Ext.Msg.OK,
+			minWidth : 200,
+			icon : Ext.MessageBox.INFO
+		});
 		return false;
 	}
 
