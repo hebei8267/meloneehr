@@ -88,5 +88,10 @@
 			<from-outcome>orgTypeCfg</from-outcome>
 			<to-view-id>/page/dictionary/hr/organization/ddOrg001.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<!-- 组织类型信息 -->
+			<from-outcome>orgHierarchyCfg</from-outcome>
+			<to-view-id>/page/hr/organization/org001.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>
