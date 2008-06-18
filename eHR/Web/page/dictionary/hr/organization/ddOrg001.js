@@ -171,7 +171,7 @@ function delInfoCheck() {
 function openAddOrgTypeInfoWindow() {
 	document.forms['addOrgTypeInfoWindow:orgTypeAddForm'].elements['addOrgTypeInfoWindow:orgTypeAddForm:name'].value = '';
 	document.forms['addOrgTypeInfoWindow:orgTypeAddForm'].elements['addOrgTypeInfoWindow:orgTypeAddForm:description'].value = '';
-
+	validCfgForm.validate();
 	Richfaces.showModalPanel('addOrgTypeInfoView');
 	return false;
 }

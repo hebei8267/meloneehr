@@ -2,9 +2,9 @@ var validCfgForm;
 var dataStore;
 
 Ext.onReady(function() {
-	initNativeplaceInfoTreeStyle();
+	initOrganizationInfoTreeStyle();
 
-	var treeNodeData = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:jsonNodeData'].value;
+	var treeNodeData = document.forms['organizationCfgForm'].elements['organizationCfgForm:jsonNodeData'].value;
 
 	dataStore = new Ext.data.Store({
 		id : 'ds',
@@ -32,3 +32,14 @@ Ext.onReady(function() {
 	});
 	dataStore.load();
 });
+
+function initOrganizationInfoTreeStyle() {
+	// title
+	var titleDiv = Ext.get("treeTitleDiv");
+	titleDiv.setWidth(340);
+	// tree
+	var treeDiv = Ext.get("organizationInfoTreeDiv");
+	treeDiv.setWidth(340);
+	treeDiv.setHeight(330);
+	treeDiv.setStyle("overflow", "auto");
+}

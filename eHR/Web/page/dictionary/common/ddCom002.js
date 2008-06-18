@@ -172,7 +172,7 @@ function delInfoCheck() {
 function openAddNationInfoWindow() {
 	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:name'].value = '';
 	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:description'].value = '';
-
+	validAddForm.validate();
 	Richfaces.showModalPanel('addNationInfoView');
 	return false;
 }

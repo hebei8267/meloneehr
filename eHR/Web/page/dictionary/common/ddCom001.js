@@ -143,7 +143,7 @@ function resetFromData() {
 		document.forms['countryCfgForm'].elements['countryCfgForm:shortName'].value = record.data.shortName;
 		document.forms['countryCfgForm'].elements['countryCfgForm:description'].value = record.data.description;
 	}
-	
+
 	validCfgForm.validate();
 }
 
@@ -183,7 +183,9 @@ function openAddCountryInfoWindow() {
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:name'].value = '';
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:shortName'].value = '';
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:description'].value = '';
-	
+	if (validAddForm != null) {
+		validAddForm.validate();
+	}
 	Richfaces.showModalPanel('addCountryInfoView');
 	return false;
 }

@@ -185,7 +185,7 @@ function openAddNativeplaceWindow() {
 
 	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:name'].value = '';
 	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:description'].value = '';
-
+	validAddForm.validate();
 	Richfaces.showModalPanel('addNativeplaceInfoView');
 	return false;
 }
