@@ -16,21 +16,19 @@
 		
 		<h:messages styleClass="message"/>
 		
-		<table width="650">
+		<table>
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<input type="button" class="submitBtn" value="添 加" onclick="openAddOrgWindow()"/>
 					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
 				</td>
 			</tr>
 			<tr/>
 			<tr>
-				<td width="400">
-					
+				<td valign="top">
 					<div id="treeTitleDiv" class="x-panel-header">
 						<span class="x-panel-header-text">组织结构信息树</span>
 					</div>
-					
 					<div id="organizationInfoTreeDiv" style="border:1px solid #99bbe8;margin-top:-1px;">
 						<rich:tree id="organizationInfoTree" switchType="client"
 							value="#{Org001_View.orgTreeData}" var="item">
@@ -42,6 +40,7 @@
 						</rich:tree>
 					</div>
 				</td>
+				<td width="30px"></td>
 				<td valign="top">
 					<h:form id="organizationCfgForm">
 						<table>
@@ -60,8 +59,8 @@
 								<td>
 									<table>
 										<tr>	
-											<td colspan="2">
-												<h:outputLabel value="[名称]不能和现有数据重复" styleClass="tipText"/>
+											<td colspan="5">
+												<h:outputLabel value="相同级别组织的[名称]不能和现有数据重复" styleClass="tipText"/>
 											</td>
 										</tr>
 										<tr/>
@@ -73,9 +72,8 @@
 												<h:inputText id="pname" styleClass="readonly" readonly="true"/>
 												<h:inputHidden id="pid" value="#{Org001_View.pid}"/>
 											</td>
-										</tr>
-										<tr>
-											<td>编号</td>
+											<td width="5"/>
+											<td width="60">编号</td>
 											<td align="right">
 												<h:inputText id="rid" styleClass="readonly" readonly="true"/>
 												<h:inputHidden id="id" value="#{Org001_View.id}"/>
@@ -83,19 +81,66 @@
 										</tr>
 										<tr>
 											<td>名称</td>
-											<td align="right">
+											<td>
 												<h:inputText id="name" value="#{Org001_View.name}" styleClass="inputText required max-length-20" />
+											</td>
+											<td/>
+											<td>简称</td>
+											<td>
+												<h:inputText id="shortName" value="#{Org001_View.shortName}" styleClass="inputText required max-length-20" />
 											</td>
 										</tr>
 										<tr>
-											<td valign="top">详细描述</td>
-											<td align="right">
+											<td>设立时间</td>
+											<td>
+												<h:inputText id="startDate" value="#{Org001_View.startDate}" styleClass="inputText required max-length-20" />
+											</td>
+											<td/>
+											<td>组织类型</td>
+											<td>
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">组织描述</td>
+											<td valign="top">
 												<h:inputTextarea id="description" value="#{Org001_View.description}" styleClass="inputTextarea max-length-255"/>
+											</td>
+										</tr>									
+										<tr>
+											<td>所在地</td>
+											<td>
+											</td>
+											<td/>
+											<td>地址</td>
+											<td>
+												<h:inputText id="address" value="#{Org001_View.address}" styleClass="inputText required max-length-20" />
+											</td>
+										</tr>
+										<tr>
+											<td>电话号码</td>
+											<td>
+												<h:inputText id="telephone" value="#{Org001_View.telephone}" styleClass="inputText required max-length-20" />
+											</td>
+											<td/>
+											<td>传真号码</td>
+											<td>
+												<h:inputText id="fax" value="#{Org001_View.fax}" styleClass="inputText required max-length-20" />
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">撤销时间</td>
+											<td valign="top">
+												<h:inputText id="endDate" value="#{Org001_View.endDate}" styleClass="inputText required max-length-20" />
+											</td>
+											<td/>
+											<td valign="top">撤销原因</td>
+											<td valign="top">
+												<h:inputTextarea id="endDescription" value="#{Org001_View.endDescription}" styleClass="inputTextarea max-length-255"/>
 											</td>
 										</tr>
 										<tr height="60"></tr>
 										<tr>
-											<td align="right" colspan="2">
+											<td align="right" colspan="5">
 												<h:commandButton value="更 新" action="#{Org001_View.updateOrganizationInfo_Action}" 
 													onclick="return updateInfoCheck()" styleClass="submitBtn"/>
 												<input type="button" class="cleanBtn" value="复 原" onclick="resetFromData()"/>
