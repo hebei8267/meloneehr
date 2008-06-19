@@ -1,9 +1,9 @@
 package cn.hb.view.dictionary.common;
 
-import static cn.hb.view.MsgID.ERROR_ADD_NATIVE_PLACE;
-import static cn.hb.view.MsgID.ERROR_DEL_NATIVE_PLACE;
-import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE1;
-import static cn.hb.view.MsgID.ERROR_UPDATE_NATIVE_PLACE2;
+import static cn.hb.view.constant.MsgID.ERROR_ADD_NATIVE_PLACE;
+import static cn.hb.view.constant.MsgID.ERROR_DEL_NATIVE_PLACE;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_NATIVE_PLACE1;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_NATIVE_PLACE2;
 
 import java.util.List;
 
@@ -28,6 +28,8 @@ import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 @Component("DDCom003_View")
 @Scope("request")
 public class DDCom003_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = 9171516180933339876L;
     private TreeNode<UIDefaultTreeNodeBean> npTreeData;
     private String pid;
     private String id;

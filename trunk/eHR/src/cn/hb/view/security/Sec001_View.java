@@ -8,8 +8,8 @@ import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
 import cn.hb.view.domain.session.UserInfoSessionBean;
 
-import static cn.hb.view.MsgID.ERROR_LOGIN_FAILED;
-import static cn.hb.view.MsgID.TIP_FIRST_LOGIN_FLAG;
+import static cn.hb.view.constant.MsgID.ERROR_LOGIN_FAILED;
+import static cn.hb.view.constant.MsgID.TIP_FIRST_LOGIN_FLAG;
 
 /**
  * @author kaka
@@ -19,6 +19,8 @@ import static cn.hb.view.MsgID.TIP_FIRST_LOGIN_FLAG;
 @Component("Sec001_View")
 @Scope("request")
 public class Sec001_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -6086200542612241830L;
     private String userId;
     private String password;
     private String loginFlag = Boolean.TRUE.toString();

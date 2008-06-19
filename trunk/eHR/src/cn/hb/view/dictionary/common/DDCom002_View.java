@@ -1,9 +1,9 @@
 package cn.hb.view.dictionary.common;
 
-import static cn.hb.view.MsgID.ERROR_ADD_NATION;
-import static cn.hb.view.MsgID.ERROR_DEL_NATION;
-import static cn.hb.view.MsgID.ERROR_UPDATE_NATION1;
-import static cn.hb.view.MsgID.ERROR_UPDATE_NATION2;
+import static cn.hb.view.constant.MsgID.ERROR_ADD_NATION;
+import static cn.hb.view.constant.MsgID.ERROR_DEL_NATION;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_NATION1;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_NATION2;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,8 @@ import cn.hb.services.dictionary.common.IDDCommonService;
 @Component("DDCom002_View")
 @Scope("request")
 public class DDCom002_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = 8768524041172707000L;
     private String id;
     private String name;
     private String description;

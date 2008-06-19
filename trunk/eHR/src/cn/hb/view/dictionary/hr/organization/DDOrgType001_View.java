@@ -1,9 +1,9 @@
 package cn.hb.view.dictionary.hr.organization;
 
-import static cn.hb.view.MsgID.ERROR_ADD_ORGANIZATION_TYPE;
-import static cn.hb.view.MsgID.ERROR_DEL_ORGANIZATION_TYPE;
-import static cn.hb.view.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE1;
-import static cn.hb.view.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE2;
+import static cn.hb.view.constant.MsgID.ERROR_ADD_ORGANIZATION_TYPE;
+import static cn.hb.view.constant.MsgID.ERROR_DEL_ORGANIZATION_TYPE;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE1;
+import static cn.hb.view.constant.MsgID.ERROR_UPDATE_ORGANIZATION_TYPE2;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,8 @@ import cn.hb.services.dictionary.hr.organization.IDDOrganizationService;
 @Component("DDOrgType001_View")
 @Scope("request")
 public class DDOrgType001_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -5389978936621469655L;
     private String id;
     private String name;
     private String description;

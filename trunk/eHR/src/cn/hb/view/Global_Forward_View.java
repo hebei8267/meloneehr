@@ -13,6 +13,9 @@ import cn.hb.core.view.AbstractViewBean;
 @Component("Global_Forward_View")
 @Scope("request")
 public class Global_Forward_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -5195695133703138902L;
+
     // 迁移到【用户登录】页面
     public String toSec001_Action() {
         return "toSec001";

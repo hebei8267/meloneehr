@@ -15,6 +15,8 @@ import cn.hb.view.convert.ConvertUtil;
  * 民族信息列表
  */
 public class DDCom002_DWR_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -4181778643982479189L;
     private IDDCommonService ddCommonService;
 
     /**

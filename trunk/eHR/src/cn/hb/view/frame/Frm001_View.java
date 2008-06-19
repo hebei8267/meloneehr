@@ -17,6 +17,8 @@ import cn.hb.view.domain.ui.UIMenuTreeNodeBean;
 @Scope("request")
 // session
 public class Frm001_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = 1992548216918190517L;
     private TreeNode<UIMenuTreeNodeBean> menuTreeData;
     private String actionContent;
     private IMenuTreeService menuTreeService;

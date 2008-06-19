@@ -1,4 +1,4 @@
-package cn.hb.view;
+package cn.hb.view.constant;
 
 public class MsgID {
     public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
