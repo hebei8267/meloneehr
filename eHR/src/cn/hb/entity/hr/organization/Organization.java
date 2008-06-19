@@ -44,11 +44,11 @@ public class Organization extends AbstractEntityBean {
     /** 编号 */
     private String id;
 
-    /** 设立时间 */
-    private String startDate;
-
     /** 名称 */
     private String name;
+
+    /** 设立时间 */
+    private String startDate;
 
     /** 简称 */
     private String shortName;

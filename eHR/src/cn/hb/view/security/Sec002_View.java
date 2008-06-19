@@ -8,9 +8,9 @@ import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
 import cn.hb.view.domain.session.UserInfoSessionBean;
 
-import static cn.hb.view.MsgID.ERROR_INPUT_NEW_PWD;
-import static cn.hb.view.MsgID.ERROR_INPUT_OLD_PWD;
-import static cn.hb.view.MsgID.TIP_PWD_CHANGE_SUCCEED;
+import static cn.hb.view.constant.MsgID.ERROR_INPUT_NEW_PWD;
+import static cn.hb.view.constant.MsgID.ERROR_INPUT_OLD_PWD;
+import static cn.hb.view.constant.MsgID.TIP_PWD_CHANGE_SUCCEED;
 
 /**
  * @author kaka
@@ -20,6 +20,8 @@ import static cn.hb.view.MsgID.TIP_PWD_CHANGE_SUCCEED;
 @Component("Sec002_View")
 @Scope("request")
 public class Sec002_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -8998060390699153635L;
     private String userId;
     private String userName;
     private String oldPassword;

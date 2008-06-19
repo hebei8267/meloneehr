@@ -22,11 +22,35 @@ import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 @Component("Org001_View")
 @Scope("request")
 public class Org001_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = 3760159933121877831L;
+
     private TreeNode<UIDefaultTreeNodeBean> orgTreeData;
     private String pid;
+    /** 编号 */
     private String id;
+    /** 名称 */
     private String name;
+    /** 设立时间 */
+    private String startDate;
+    /** 简称 */
+    private String shortName;
+    /** 地址 */
+    private String address;
+    /** 电话号码 */
+    private String telephone;
+    /** 传真号码 */
+    private String fax;
+    /** 详细描述 */
     private String description;
+    /** 撤销时间 */
+    private String endDate;
+    /** 撤销原因 */
+    private String endDesc;
+    /** 组织类型ID */
+    private String organizationTypeID;
+    /** 地址所在地-国家ID */
+    private String countryID;
     private String jsonNodeData;
     private IOrganizationService organizationService;
 
@@ -51,7 +75,16 @@ public class Org001_View extends AbstractViewBean {
         pid = "";
         id = "";
         name = "";
+        startDate = "";
+        shortName = "";
+        address = "";
+        telephone = "";
+        fax = "";
         description = "";
+        endDate = "";
+        endDesc = "";
+        organizationTypeID = "";
+        countryID = "";
     }
 
     @SuppressWarnings("unchecked")
@@ -73,6 +106,10 @@ public class Org001_View extends AbstractViewBean {
     // Get Set Method
     // ---------------------------------------------------------------------------
 
+    public TreeNode<UIDefaultTreeNodeBean> getOrgTreeData11111() {
+        return orgTreeData;
+    }
+
     public TreeNode<UIDefaultTreeNodeBean> getOrgTreeData() {
         return orgTreeData;
     }
@@ -89,12 +126,52 @@ public class Org001_View extends AbstractViewBean {
         return name;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getEndDesc() {
+        return endDesc;
+    }
+
+    public String getOrganizationTypeID() {
+        return organizationTypeID;
+    }
+
+    public String getCountryID() {
+        return countryID;
+    }
+
     public String getJsonNodeData() {
         return jsonNodeData;
+    }
+
+    public IOrganizationService getOrganizationService() {
+        return organizationService;
     }
 
     public void setOrgTreeData(TreeNode<UIDefaultTreeNodeBean> orgTreeData) {
@@ -113,16 +190,48 @@ public class Org001_View extends AbstractViewBean {
         this.name = name;
     }
 
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setJsonNodeData(String jsonNodeData) {
-        this.jsonNodeData = jsonNodeData;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public IOrganizationService getOrganizationService() {
-        return organizationService;
+    public void setEndDesc(String endDesc) {
+        this.endDesc = endDesc;
+    }
+
+    public void setOrganizationTypeID(String organizationTypeID) {
+        this.organizationTypeID = organizationTypeID;
+    }
+
+    public void setCountryID(String countryID) {
+        this.countryID = countryID;
+    }
+
+    public void setJsonNodeData(String jsonNodeData) {
+        this.jsonNodeData = jsonNodeData;
     }
 
     public void setOrganizationService(IOrganizationService organizationService) {

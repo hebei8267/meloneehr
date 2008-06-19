@@ -11,6 +11,8 @@ import cn.hb.services.dictionary.hr.organization.IDDOrganizationService;
 import cn.hb.view.convert.ConvertUtil;
 
 public class DDOrgType001_DWR_View extends AbstractViewBean {
+
+    private static final long serialVersionUID = -1550537279512064968L;
     private IDDOrganizationService ddOrganizationService;
 
     /**
