@@ -1,4 +1,6 @@
 var validCfgForm;
+var validAddForm;
+
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 
@@ -183,9 +185,11 @@ function openAddCountryInfoWindow() {
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:name'].value = '';
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:shortName'].value = '';
 	document.forms['addCountryInfoWindow:countryAddForm'].elements['addCountryInfoWindow:countryAddForm:description'].value = '';
+	
 	if (validAddForm != null) {
 		validAddForm.validate();
 	}
+	
 	Richfaces.showModalPanel('addCountryInfoView');
 	return false;
 }

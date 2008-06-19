@@ -1,4 +1,5 @@
 var validCfgForm;
+var validAddForm;
 var dataStore;
 
 Ext.onReady(function() {
@@ -185,7 +186,11 @@ function openAddNativeplaceWindow() {
 
 	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:name'].value = '';
 	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:description'].value = '';
-	validAddForm.validate();
+
+	if (validAddForm != null) {
+		validAddForm.validate();
+	}
+
 	Richfaces.showModalPanel('addNativeplaceInfoView');
 	return false;
 }

@@ -1,12 +1,13 @@
 var validCfgForm;
+var validAddForm;
 
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 
 	var store = new Ext.data.Store({
 		id : 'store',
-		proxy : new Ext.data.DWRProxy(DDCom002_DWR_View.getNationInfoList_Action,
-				false),
+		proxy : new Ext.data.DWRProxy(
+				DDCom002_DWR_View.getNationInfoList_Action, false),
 		reader : new Ext.data.DWRJsonReader({
 			totalProperty : "totalProperty",
 			root : "dataList"
@@ -172,7 +173,11 @@ function delInfoCheck() {
 function openAddNationInfoWindow() {
 	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:name'].value = '';
 	document.forms['addNationInfoWindow:nationAddForm'].elements['addNationInfoWindow:nationAddForm:description'].value = '';
-	validAddForm.validate();
+
+	if (validAddForm != null) {
+		validAddForm.validate();
+	}
+
 	Richfaces.showModalPanel('addNationInfoView');
 	return false;
 }
