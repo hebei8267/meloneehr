@@ -1,4 +1,5 @@
 var validCfgForm;
+var validAddForm;
 
 Ext.onReady(function() {
 	Ext.QuickTips.init();
@@ -171,7 +172,11 @@ function delInfoCheck() {
 function openAddOrgTypeInfoWindow() {
 	document.forms['addOrgTypeInfoWindow:orgTypeAddForm'].elements['addOrgTypeInfoWindow:orgTypeAddForm:name'].value = '';
 	document.forms['addOrgTypeInfoWindow:orgTypeAddForm'].elements['addOrgTypeInfoWindow:orgTypeAddForm:description'].value = '';
-	validCfgForm.validate();
+
+	if (validAddForm != null) {
+		validAddForm.validate();
+	}
+
 	Richfaces.showModalPanel('addOrgTypeInfoView');
 	return false;
 }
