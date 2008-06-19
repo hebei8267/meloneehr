@@ -70,7 +70,7 @@
 										<tr>
 											<td width="60">隶属于</td>
 											<td align="right">
-												<h:inputText id="rpname" styleClass="readonly" readonly="true"/>
+												<h:inputText id="pname" styleClass="readonly" readonly="true"/>
 												<h:inputHidden id="pid" value="#{Org001_View.pid}"/>
 											</td>
 										</tr>
@@ -106,10 +106,6 @@
 							</tr>
 						</table>
 						<div class="hidden">
-							<h:inputHidden id="h_pid" value=""/>
-							<h:inputHidden id="h_id" value=""/>
-							<h:inputHidden id="h_name" value=""/>
-							<h:inputHidden id="h_description" value=""/>
 							<h:inputHidden id="jsonNodeData" value="#{Org001_View.jsonNodeData}"/>
 							<h:commandButton id="delOrganizationInfoBtn" value="删 除" action="#{DDCom003_View.delOrganizationInfo_Action}" />
 						</div>

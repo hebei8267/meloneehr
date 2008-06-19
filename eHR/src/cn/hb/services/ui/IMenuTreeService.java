@@ -1,7 +1,7 @@
 package cn.hb.services.ui;
 
 import cn.hb.core.services.IService;
-import cn.hb.view.domain.UIMenuTreeNodeBean;
+import cn.hb.view.domain.ui.UIMenuTreeNodeBean;
 
 /**
  * @author kaka

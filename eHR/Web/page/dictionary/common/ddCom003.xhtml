@@ -70,9 +70,8 @@
 										<tr>
 											<td width="60">隶属于</td>
 											<td align="right">
-												<h:inputText id="rpname" styleClass="readonly" readonly="true"/>
+												<h:inputText id="pname" styleClass="readonly" readonly="true"/>
 												<h:inputHidden id="pid" value="#{DDCom003_View.pid}"/>
-												<h:inputHidden id="pname" value="#{DDCom003_View.pname}"/>
 											</td>
 										</tr>
 										<tr>
@@ -107,11 +106,6 @@
 							</tr>
 						</table>
 						<div class="hidden">
-							<h:inputHidden id="h_pid" value=""/>
-							<h:inputHidden id="h_pname" value=""/>
-							<h:inputHidden id="h_id" value=""/>
-							<h:inputHidden id="h_name" value=""/>
-							<h:inputHidden id="h_description" value=""/>
 							<h:inputHidden id="jsonNodeData" value="#{DDCom003_View.jsonNodeData}"/>
 							<h:commandButton id="delNativeplaceInfoBtn" value="删 除" action="#{DDCom003_View.delNativeplaceInfo_Action}" />
 						</div>

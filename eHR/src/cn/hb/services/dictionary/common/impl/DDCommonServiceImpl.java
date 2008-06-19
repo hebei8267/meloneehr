@@ -13,8 +13,8 @@ import cn.hb.entity.common.Country;
 import cn.hb.entity.common.Nation;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.dictionary.common.IDDCommonService;
-import cn.hb.view.domain.UIDefaultTreeNodeBean;
-import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
+import cn.hb.view.domain.json.NativeplaceJsonTreeNodeBean;
+import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 import static cn.hb.constant.Constant.DEFAULT_ID;
 
 /**
@@ -151,9 +151,8 @@ public class DDCommonServiceImpl implements IDDCommonService {
             // 树根节点对象
             resultObj[0] = rootNode;
 
-            List<UINativeplaceTreeNodeJsonBean> nodeDataList = new ArrayList<UINativeplaceTreeNodeJsonBean>();
-            UINativeplaceTreeNodeJsonBean jsonBean = new UINativeplaceTreeNodeJsonBean(null, null, nativeplace.getId(),
-                    nativeplace.getName(), nativeplace.getDescription());
+            List<NativeplaceJsonTreeNodeBean> nodeDataList = new ArrayList<NativeplaceJsonTreeNodeBean>();
+            NativeplaceJsonTreeNodeBean jsonBean = new NativeplaceJsonTreeNodeBean(null, null, nativeplace);
             nodeDataList.add(jsonBean);
 
             getSubNativeplaceTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
@@ -165,12 +164,12 @@ public class DDCommonServiceImpl implements IDDCommonService {
         return null;
     }
 
-    private void getSubNativeplaceTreeNodeData(List<UINativeplaceTreeNodeJsonBean> nodeDataList,
-            UINativeplaceTreeNodeJsonBean parentNode, List<Nativeplace> subNativeplaceList) {
+    private void getSubNativeplaceTreeNodeData(List<NativeplaceJsonTreeNodeBean> nodeDataList,
+            NativeplaceJsonTreeNodeBean parentNode, List<Nativeplace> subNativeplaceList) {
         if (subNativeplaceList != null && !subNativeplaceList.isEmpty()) {
             for (Nativeplace nativeplace : subNativeplaceList) {
-                UINativeplaceTreeNodeJsonBean jsonBean = new UINativeplaceTreeNodeJsonBean(parentNode.getId(),
-                        parentNode.getName(), nativeplace.getId(), nativeplace.getName(), nativeplace.getDescription());
+                NativeplaceJsonTreeNodeBean jsonBean = new NativeplaceJsonTreeNodeBean(parentNode.getId(), parentNode
+                        .getName(), nativeplace);
                 nodeDataList.add(jsonBean);
                 getSubNativeplaceTreeNodeData(nodeDataList, jsonBean, nativeplace.getSubNativeplaceList());
             }

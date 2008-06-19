@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.services.ui.IMenuTreeService;
-import cn.hb.view.domain.UIMenuTreeNodeBean;
+import cn.hb.view.domain.ui.UIMenuTreeNodeBean;
 
 /**
  * @author kaka

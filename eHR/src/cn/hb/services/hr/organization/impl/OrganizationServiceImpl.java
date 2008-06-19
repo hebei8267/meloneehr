@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import cn.hb.dao.hr.organization.OrganizationDao;
 import cn.hb.entity.hr.organization.Organization;
 import cn.hb.services.hr.organization.IOrganizationService;
-import cn.hb.view.domain.UIDefaultTreeNodeBean;
-import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
+import cn.hb.view.domain.json.OrganizationJsonTreeNodeBean;
+import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 
 /**
  * @author kaka
@@ -69,9 +69,8 @@ public class OrganizationServiceImpl implements IOrganizationService {
             // 树根节点对象
             resultObj[0] = rootNode;
 
-            List<UINativeplaceTreeNodeJsonBean> nodeDataList = new ArrayList<UINativeplaceTreeNodeJsonBean>();
-            UINativeplaceTreeNodeJsonBean jsonBean = new UINativeplaceTreeNodeJsonBean(null, null,
-                    organization.getId(), organization.getName(), organization.getDescription());
+            List<OrganizationJsonTreeNodeBean> nodeDataList = new ArrayList<OrganizationJsonTreeNodeBean>();
+            OrganizationJsonTreeNodeBean jsonBean = new OrganizationJsonTreeNodeBean(null, null, organization);
             nodeDataList.add(jsonBean);
 
             getSubOrganizationTreeNodeData(nodeDataList, jsonBean, organization.getSubOrganizationList());
@@ -83,14 +82,13 @@ public class OrganizationServiceImpl implements IOrganizationService {
         return null;
     }
 
-    private void getSubOrganizationTreeNodeData(List<UINativeplaceTreeNodeJsonBean> nodeDataList,
-            UINativeplaceTreeNodeJsonBean parentNode, List<Organization> subOrganizationList) {
+    private void getSubOrganizationTreeNodeData(List<OrganizationJsonTreeNodeBean> nodeDataList,
+            OrganizationJsonTreeNodeBean parentNode, List<Organization> subOrganizationList) {
         if (subOrganizationList != null && !subOrganizationList.isEmpty()) {
 
             for (Organization organization : subOrganizationList) {
-                UINativeplaceTreeNodeJsonBean jsonBean = new UINativeplaceTreeNodeJsonBean(parentNode.getId(),
-                        parentNode.getName(), organization.getId(), organization.getName(), organization
-                                .getDescription());
+                OrganizationJsonTreeNodeBean jsonBean = new OrganizationJsonTreeNodeBean(parentNode.getId(), parentNode
+                        .getName(), organization);
                 nodeDataList.add(jsonBean);
                 getSubOrganizationTreeNodeData(nodeDataList, jsonBean, organization.getSubOrganizationList());
             }

@@ -81,18 +81,11 @@ function setFromData(id) {
 	var record = dataStore.getById(id);
 
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = record.data.pid;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = record.data.pname;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = record.data.pname;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = record.data.id;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = record.data.id;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = record.data.name;
 	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = record.data.description;
-
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value = record.data.pid;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value = record.data.pname;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value = record.data.id;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value = record.data.name;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value = record.data.description;
 }
 
 function addValidation() {
@@ -105,15 +98,17 @@ function resetFromData() {
 	if (!needSelectedCheck()) {
 		return false;
 	}
+	var selectedNodeId = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value;
+	var record = dataStore.getById(selectedNodeId);
 
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pid'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rpname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_pname'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value;
-	document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_description'].value;
-
+	if (record != null) {
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pid'].value = record.data.pid;
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:pname'].value = record.data.pname;
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:rid'].value = record.data.id;
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value = record.data.id;
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:name'].value = record.data.name;
+		document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:description'].value = record.data.description;
+	}
 }
 
 function delInfoCheck() {
@@ -178,10 +173,15 @@ function getEvent() { // 同时兼容IE和FF的写法
 function openAddNativeplaceWindow() {
 	if (document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value == "") {
 		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pid'].value = '00000001';
-		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:rpname'].value = '籍贯信息';
+		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pname'].value = '籍贯信息';
 	} else {
-		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pid'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_id'].value;
-		document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:rpname'].value = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:h_name'].value;
+		var selectedNodeId = document.forms['nativeplaceCfgForm'].elements['nativeplaceCfgForm:id'].value;
+		var record = dataStore.getById(selectedNodeId);
+
+		if (record != null) {
+			document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pid'].value = record.data.id;
+			document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:pname'].value = record.data.name;
+		}
 	}
 
 	document.forms['addNativeplaceInfoWindow:nativeplaceAddForm'].elements['addNativeplaceInfoWindow:nativeplaceAddForm:name'].value = '';

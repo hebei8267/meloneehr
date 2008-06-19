@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.hb.dao.ui.MenuNodeDao;
 import cn.hb.entity.ui.MenuNode;
 import cn.hb.services.ui.IMenuTreeService;
-import cn.hb.view.domain.UIMenuTreeNodeBean;
+import cn.hb.view.domain.ui.UIMenuTreeNodeBean;
 import static cn.hb.constant.Constant.DEFAULT_ID;
 
 @Component("menuTreeService")

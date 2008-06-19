@@ -1,4 +1,4 @@
-package cn.hb.view.domain;
+package cn.hb.view.domain.session;
 
 import cn.hb.core.bean.BaseBean;
 

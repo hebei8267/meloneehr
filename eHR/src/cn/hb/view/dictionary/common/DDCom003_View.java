@@ -17,8 +17,8 @@ import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.common.Nativeplace;
 import cn.hb.services.dictionary.common.IDDCommonService;
 import cn.hb.view.convert.ConvertUtil;
-import cn.hb.view.domain.UIDefaultTreeNodeBean;
-import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
+import cn.hb.view.domain.json.NativeplaceJsonTreeNodeBean;
+import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 
 /**
  * @author kaka
@@ -30,7 +30,6 @@ import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
 public class DDCom003_View extends AbstractViewBean {
     private TreeNode<UIDefaultTreeNodeBean> npTreeData;
     private String pid;
-    private String pname;
     private String id;
     private String name;
     private String description;
@@ -98,7 +97,6 @@ public class DDCom003_View extends AbstractViewBean {
     @Override
     public void destroy() {
         pid = "";
-        pname = "";
         id = "";
         name = "";
         description = "";
@@ -111,9 +109,9 @@ public class DDCom003_View extends AbstractViewBean {
         if (dataObj != null) {
             npTreeData = (TreeNode<UIDefaultTreeNodeBean>) dataObj[0];
 
-            ConvertUtil<UINativeplaceTreeNodeJsonBean> util = new ConvertUtil<UINativeplaceTreeNodeJsonBean>();
+            ConvertUtil<NativeplaceJsonTreeNodeBean> util = new ConvertUtil<NativeplaceJsonTreeNodeBean>();
 
-            JSONObject jsonObj = util.javaListToJSONObject((List<UINativeplaceTreeNodeJsonBean>) dataObj[1]);
+            JSONObject jsonObj = util.javaListToJSONObject((List<NativeplaceJsonTreeNodeBean>) dataObj[1]);
 
             jsonNodeData = jsonObj.toString();
         }
@@ -129,10 +127,6 @@ public class DDCom003_View extends AbstractViewBean {
 
     public String getPid() {
         return pid;
-    }
-
-    public String getPname() {
-        return pname;
     }
 
     public String getId() {
@@ -161,10 +155,6 @@ public class DDCom003_View extends AbstractViewBean {
 
     public void setPid(String pid) {
         this.pid = pid;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
     }
 
     public void setId(String id) {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import cn.hb.core.util.FacesContextUtil;
 import cn.hb.core.util.SpringContextUtils;
-import cn.hb.view.domain.UserInfoSessionBean;
+import cn.hb.view.domain.session.UserInfoSessionBean;
 
 public abstract class AbstractViewBean {
     private final String USER_INFO = "userInfo";

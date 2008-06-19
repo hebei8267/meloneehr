@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.services.hr.organization.IOrganizationService;
 import cn.hb.view.convert.ConvertUtil;
-import cn.hb.view.domain.UIDefaultTreeNodeBean;
-import cn.hb.view.domain.UINativeplaceTreeNodeJsonBean;
+import cn.hb.view.domain.json.OrganizationJsonTreeNodeBean;
+import cn.hb.view.domain.ui.UIDefaultTreeNodeBean;
 
 /**
  * @author kaka
@@ -61,9 +61,9 @@ public class Org001_View extends AbstractViewBean {
         if (dataObj != null) {
             orgTreeData = (TreeNode<UIDefaultTreeNodeBean>) dataObj[0];
 
-            ConvertUtil<UINativeplaceTreeNodeJsonBean> util = new ConvertUtil<UINativeplaceTreeNodeJsonBean>();
+            ConvertUtil<OrganizationJsonTreeNodeBean> util = new ConvertUtil<OrganizationJsonTreeNodeBean>();
 
-            JSONObject jsonObj = util.javaListToJSONObject((List<UINativeplaceTreeNodeJsonBean>) dataObj[1]);
+            JSONObject jsonObj = util.javaListToJSONObject((List<OrganizationJsonTreeNodeBean>) dataObj[1]);
 
             jsonNodeData = jsonObj.toString();
         }
