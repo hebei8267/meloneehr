@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import cn.hb.core.view.AbstractViewBean;
 import cn.hb.entity.security.User;
 import cn.hb.services.security.ISecurityService;
-import cn.hb.view.domain.UserInfoSessionBean;
+import cn.hb.view.domain.session.UserInfoSessionBean;
 
 import static cn.hb.view.MsgID.ERROR_INPUT_NEW_PWD;
 import static cn.hb.view.MsgID.ERROR_INPUT_OLD_PWD;

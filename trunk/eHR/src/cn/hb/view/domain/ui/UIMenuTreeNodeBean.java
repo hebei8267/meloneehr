@@ -1,4 +1,5 @@
-package cn.hb.view.domain;
+package cn.hb.view.domain.ui;
+
 
 /**
  * 2008/01/24

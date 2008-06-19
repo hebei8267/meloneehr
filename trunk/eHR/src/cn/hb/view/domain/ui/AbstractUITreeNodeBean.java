@@ -1,4 +1,4 @@
-package cn.hb.view.domain;
+package cn.hb.view.domain.ui;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
