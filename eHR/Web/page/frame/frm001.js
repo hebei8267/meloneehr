@@ -16,7 +16,7 @@ Ext.onReady(function() {
 			contentEl : 'menuTreeContent',
 			title : '菜单树',
 			split : true,
-			width : 250,
+			width : 220,
 			minSize : 175,
 			maxSize : 400,
 			collapsible : true,

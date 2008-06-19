@@ -26,7 +26,7 @@ public class OrganizationJsonTreeNodeBean extends AbstractJsonTreeNodeBean {
         this.fax = organization.getFax();
         this.description = organization.getDescription();
         this.endDate = organization.getEndDate();
-        this.endDesc = organization.getEndDesc();
+        this.endDescription = organization.getEndDescription();
         this.organizationTypeID = organization.getOrganizationTypeID();
         this.countryID = organization.getCountryID();
     }
@@ -59,7 +59,7 @@ public class OrganizationJsonTreeNodeBean extends AbstractJsonTreeNodeBean {
     private String endDate;
 
     /** 撤销原因 */
-    private String endDesc;
+    private String endDescription;
 
     /** 组织类型ID */
     private String organizationTypeID;
@@ -103,8 +103,8 @@ public class OrganizationJsonTreeNodeBean extends AbstractJsonTreeNodeBean {
         return endDate;
     }
 
-    public String getEndDesc() {
-        return endDesc;
+    public String getEndDescription() {
+        return endDescription;
     }
 
     public String getOrganizationTypeID() {
@@ -151,8 +151,8 @@ public class OrganizationJsonTreeNodeBean extends AbstractJsonTreeNodeBean {
         this.endDate = endDate;
     }
 
-    public void setEndDesc(String endDesc) {
-        this.endDesc = endDesc;
+    public void setEndDescription(String endDescription) {
+        this.endDescription = endDescription;
     }
 
     public void setOrganizationTypeID(String organizationTypeID) {
