@@ -62,14 +62,14 @@ public class Organization extends AbstractEntityBean {
     /** 传真号码 */
     private String fax;
 
-    /** 详细描述 */
+    /** 组织描述 */
     private String description;
 
     /** 撤销时间 */
     private String endDate;
 
     /** 撤销原因 */
-    private String endDesc;
+    private String endDescription;
 
     /** 组织类型 */
     private OrganizationType OrganizationType;
@@ -173,9 +173,9 @@ public class Organization extends AbstractEntityBean {
     }
 
     /**
-     * 取得详细描述
+     * 取得组织描述
      * 
-     * @return 详细描述
+     * @return 组织描述
      */
     @Basic
     @Column(name = "DESCRIPTION")
@@ -201,8 +201,8 @@ public class Organization extends AbstractEntityBean {
      */
     @Basic
     @Column(name = "END_DESCRIPTION")
-    public String getEndDesc() {
-        return endDesc;
+    public String getEndDescription() {
+        return endDescription;
     }
 
     /**
@@ -352,9 +352,9 @@ public class Organization extends AbstractEntityBean {
     }
 
     /**
-     * 设置详细描述
+     * 设置组织描述
      * 
-     * @param description 详细描述
+     * @param description 组织描述
      */
     public void setDescription(String description) {
         this.description = description;
@@ -374,8 +374,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @param endDesc 撤销原因
      */
-    public void setEndDesc(String endDesc) {
-        this.endDesc = endDesc;
+    public void setEndDescription(String endDescription) {
+        this.endDescription = endDescription;
     }
 
     public void setOrganizationType(OrganizationType organizationType) {

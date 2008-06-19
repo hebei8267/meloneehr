@@ -16,16 +16,16 @@
 		
 		<h:messages styleClass="message"/>
 		
-		<table width="650">
+		<table>
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<input type="button" class="submitBtn" value="添 加" onclick="openAddNativeplaceWindow()"/>
 					<input type="button" class="deleteBtn" value="删 除" onclick="delInfoCheck()"/>
 				</td>
 			</tr>
 			<tr/>
 			<tr>
-				<td width="400">
+				<td valign="top">
 					
 					<div id="treeTitleDiv" class="x-panel-header">
 						<span class="x-panel-header-text">籍贯信息树</span>
@@ -42,6 +42,7 @@
 						</rich:tree>
 					</div>
 				</td>
+				<td width="30px"></td>
 				<td valign="top">
 					<h:form id="nativeplaceCfgForm">
 						<table>

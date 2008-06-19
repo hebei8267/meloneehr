@@ -26,6 +26,7 @@ public class Org001_View extends AbstractViewBean {
     private static final long serialVersionUID = 3760159933121877831L;
 
     private TreeNode<UIDefaultTreeNodeBean> orgTreeData;
+    /** 父编号 */
     private String pid;
     /** 编号 */
     private String id;
@@ -41,12 +42,12 @@ public class Org001_View extends AbstractViewBean {
     private String telephone;
     /** 传真号码 */
     private String fax;
-    /** 详细描述 */
+    /** 组织描述 */
     private String description;
     /** 撤销时间 */
     private String endDate;
     /** 撤销原因 */
-    private String endDesc;
+    private String endDescription;
     /** 组织类型ID */
     private String organizationTypeID;
     /** 地址所在地-国家ID */
@@ -82,7 +83,7 @@ public class Org001_View extends AbstractViewBean {
         fax = "";
         description = "";
         endDate = "";
-        endDesc = "";
+        endDescription = "";
         organizationTypeID = "";
         countryID = "";
     }
@@ -154,8 +155,8 @@ public class Org001_View extends AbstractViewBean {
         return endDate;
     }
 
-    public String getEndDesc() {
-        return endDesc;
+    public String getEndDescription() {
+        return endDescription;
     }
 
     public String getOrganizationTypeID() {
@@ -218,8 +219,8 @@ public class Org001_View extends AbstractViewBean {
         this.endDate = endDate;
     }
 
-    public void setEndDesc(String endDesc) {
-        this.endDesc = endDesc;
+    public void setEndDescription(String endDescription) {
+        this.endDescription = endDescription;
     }
 
     public void setOrganizationTypeID(String organizationTypeID) {
