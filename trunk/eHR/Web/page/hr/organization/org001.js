@@ -47,8 +47,8 @@ Ext.onReady(function() {
 			name : 'endDate',
 			mapping : 'endDate'
 		}, {
-			name : 'endDesc',
-			mapping : 'endDesc'
+			name : 'endDescription',
+			mapping : 'endDescription'
 		}, {
 			name : 'organizationTypeID',
 			mapping : 'organizationTypeID'
