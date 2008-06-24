@@ -32,7 +32,7 @@ import cn.hb.core.bean.AbstractEntityBean;
 @NamedQueries( {
         @NamedQuery(name = "Nativeplace.getNativeplaceByID", query = "select obj from Nativeplace obj where obj.id = ? "),
         @NamedQuery(name = "Nativeplace.getMaxNativeplaceID", query = "select max(obj.id) from Nativeplace obj "),
-        @NamedQuery(name = "Nativeplace.existLikenessNativeplace", query = "select obj from Nativeplace obj where obj.name = ? ") })
+        @NamedQuery(name = "Nativeplace.existLikenessNativeplace", query = "select obj from Nativeplace obj where obj.name = ? and parentNativeplaceID = ? ") })
 public class Nativeplace extends AbstractEntityBean {
 
     private static final long serialVersionUID = 5513801424090133479L;
@@ -78,7 +78,7 @@ public class Nativeplace extends AbstractEntityBean {
      * @return 名称
      */
     @Basic
-    @Column(name = "NAME", nullable = false, length = 20, unique = true)
+    @Column(name = "NAME", nullable = false, length = 20)
     public String getName() {
         return name;
     }
