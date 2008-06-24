@@ -1,18 +1,18 @@
-package cn.hb.services.dictionary;
+package cn.hb.service.dictionary;
 
 import java.util.List;
 import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
-import cn.hb.services.domain.dictionary.Nativeplace_Tree_VO;
-import cn.hb.services.domain.dictionary.Nativeplace_VO;
+import cn.hb.service.domain.dictionary.Nativeplace_Tree_VO;
+import cn.hb.service.domain.dictionary.Nativeplace_VO;
 
 /**
  * @author kaka
  * 
  * 数据字典-公共服务
  */
-public interface IDD_Communal_Service {
+public interface IDDCommunalService {
 
     /**
      * 取得国家信息列表

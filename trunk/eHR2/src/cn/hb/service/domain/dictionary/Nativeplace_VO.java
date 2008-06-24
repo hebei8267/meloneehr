@@ -1,4 +1,4 @@
-package cn.hb.services.domain.dictionary;
+package cn.hb.service.domain.dictionary;
 
 import cn.hb.core.bean.BaseBean;
 

@@ -1,6 +1,9 @@
-package cn.hb.services.dictionary.impl;
+package cn.hb.service.dictionary.impl;
 
 import java.util.List;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import cn.hb.dao.dictionary.communal.CountryDao;
 import cn.hb.dao.dictionary.communal.NationDao;
@@ -8,16 +11,18 @@ import cn.hb.dao.dictionary.communal.NativeplaceDao;
 import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
-import cn.hb.services.dictionary.IDD_Communal_Service;
-import cn.hb.services.domain.dictionary.Nativeplace_Tree_VO;
-import cn.hb.services.domain.dictionary.Nativeplace_VO;
+import cn.hb.service.dictionary.IDDCommunalService;
+import cn.hb.service.domain.dictionary.Nativeplace_Tree_VO;
+import cn.hb.service.domain.dictionary.Nativeplace_VO;
 
 /**
  * @author kaka
  * 
  * 数据字典-公共服务
  */
-public class DD_Communal_Service implements IDD_Communal_Service {
+@Component("ddCommunalService")
+@Scope("prototype")
+public class DDCommunalService implements IDDCommunalService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
