@@ -1,4 +1,4 @@
-package cn.hb.services.domain.dictionary;
+package cn.hb.service.domain.dictionary;
 
 public class Nativeplace_Tree_VO {
     // TODO
