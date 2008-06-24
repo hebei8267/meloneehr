@@ -149,6 +149,33 @@ public class IDD_CommunalServiceTest extends ServiceTestCase {
         assertEquals(1, result);
     }
 
+    /**
+     * 正常系
+     */
+    public void test_GetCountryInfoList_Service() {
+        int result = DD_CommunalService.getCountryInfoList_Service().size();
+
+        assertEquals(3, result);
+    }
+
+    /**
+     * 正常系
+     */
+    public void test_GetNationInfoList_Service() {
+        int result = DD_CommunalService.getNationInfoList_Service().size();
+
+        assertEquals(3, result);
+    }
+
+    /**
+     * 正常系
+     */
+    public void test_GetNativeplaceInfoList_Service() {
+        int result = DD_CommunalService.getNativeplaceInfoList_Service().size();
+
+        assertEquals(12, result);
+    }
+
     private IDD_CommunalService DD_CommunalService;
 
     public IDD_CommunalService getDD_CommunalService() {
