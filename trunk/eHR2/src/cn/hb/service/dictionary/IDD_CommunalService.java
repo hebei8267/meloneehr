@@ -12,7 +12,7 @@ import cn.hb.service.domain.dictionary.Nativeplace_VO;
  * 
  * 数据字典-公共服务
  */
-public interface IDDCommunalService {
+public interface IDD_CommunalService {
 
     /**
      * 取得国家信息列表

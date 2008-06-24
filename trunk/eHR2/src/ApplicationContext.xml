@@ -18,8 +18,8 @@
 	<context:component-scan base-package="cn.hb.dao"/>
 	<!-- 扫描cn.hb.view包下面的@Component组建 -->
 	<context:component-scan base-package="cn.hb.view"/>
-	<!-- 扫描cn.hb.services包下面的@Component组建 -->
-	<context:component-scan base-package="cn.hb.services"/>
+	<!-- 扫描cn.hb.service包下面的@Component组建 -->
+	<context:component-scan base-package="cn.hb.service"/>
 	
 	<!-- Dwr Spring配置
 	<import resource="Dwr_Spring_Config.xml" /> -->
