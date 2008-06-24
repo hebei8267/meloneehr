@@ -4,10 +4,8 @@ import cn.hb.core.test.dao.HibernateDaoTestCase;
 import cn.hb.dao.dictionary.communal.CountryDaoTest;
 import cn.hb.dao.dictionary.communal.NationDaoTest;
 import cn.hb.dao.dictionary.communal.NativeplaceDaoTest;
-import cn.hb.dao.hr.organization.OrganizationDaoTest;
-import cn.hb.dao.hr.organization.OrganizationTypeDaoTest;
-import cn.hb.dao.hr.personnel.CardKindDaoTest;
-import cn.hb.dao.hr.personnel.MarriageStateDaoTest;
+import cn.hb.dao.dictionary.organization.JobPositionTypeDaoTest;
+import cn.hb.dao.dictionary.organization.OrganizationTypeDaoTest;
 import cn.hb.dao.security.UserDaoTest;
 import cn.hb.dao.ui.MenuNodeDaoTest;
 import junit.framework.Test;
@@ -27,20 +25,10 @@ public class AllDaoTest extends HibernateDaoTestCase {
         suite.addTestSuite(NationDaoTest.class);
         suite.addTestSuite(NativeplaceDaoTest.class);
 
+        suite.addTestSuite(JobPositionTypeDaoTest.class);
         suite.addTestSuite(OrganizationTypeDaoTest.class);
-        suite.addTestSuite(OrganizationDaoTest.class);
-
-        suite.addTestSuite(MarriageStateDaoTest.class);
-        suite.addTestSuite(CardKindDaoTest.class);
 
         suite.addTestSuite(UserDaoTest.class);
-        // suite.addTestSuite(NativePlaceDaoTest.class);
-        //
-        // suite.addTestSuite(OrganizationDaoTest.class);
-        // suite.addTestSuite(JobLevelDaoTest.class);
-        // suite.addTestSuite(OrganizationJobLevelDaoTest.class);
-        //
-        // suite.addTestSuite(CultureClassDaoTest.class);
 
         suite.addTestSuite(MenuNodeDaoTest.class);
         return suite;

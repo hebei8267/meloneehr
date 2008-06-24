@@ -1,12 +1,27 @@
 package cn.hb.entity.hr.organization;
 
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import cn.hb.core.bean.AbstractEntityBean;
 import cn.hb.entity.dictionary.organization.Organization类型;
 import cn.hb.entity.dictionary.organization.OrganizationType;
 import cn.hb.entity.assets.car.Organization-车辆;
 import cn.hb.entity.dictionary.communal.Country;
 
-/** 组织 */
+/**
+ * @author kaka
+ * 
+ * 组织
+ */
+@Entity
+@Table(name = "W_ORGANIZATION")
+@NamedQueries( {
+        @NamedQuery(name = "Organization.getOrganizationByID", query = "select obj from Organization obj where obj.id = ? "),
+        @NamedQuery(name = "Organization.getMaxOrganizationID", query = "select max(obj.id) from Organization obj "),
+        @NamedQuery(name = "Organization.existLikenessOrganization", query = "select obj from Organization obj where obj.name = ? ") })
 public class Organization extends AbstractEntityBean  {
 	public Organization() {
 	}

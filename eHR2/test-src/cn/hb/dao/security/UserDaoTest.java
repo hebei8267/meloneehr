@@ -43,7 +43,7 @@ public class UserDaoTest extends HibernateDaoTestCase {
                 } else if (i == 3) {
                     user.setFirstLoginFlag(Boolean.valueOf(value));
                 } else if (i == 4) {
-                    user.setDescription(value);
+                    user.setNote(value);
                 }
             }
             userDao.save(user);

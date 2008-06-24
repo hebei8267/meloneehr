@@ -37,7 +37,7 @@ public class Nation extends AbstractEntityBean {
     private String name;
 
     /** 详细描述 */
-    private String description;
+    private String note;
 
     /**
      * 取得编号
@@ -67,9 +67,9 @@ public class Nation extends AbstractEntityBean {
      * @return 详细描述
      */
     @Basic
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
+    @Column(name = "NOTE")
+    public String getNote() {
+        return note;
     }
 
     /**
@@ -93,10 +93,10 @@ public class Nation extends AbstractEntityBean {
     /**
      * 设置详细描述
      * 
-     * @param description 详细描述
+     * @param note 详细描述
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     /**

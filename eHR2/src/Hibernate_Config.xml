@@ -40,10 +40,17 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<!-- -->	
+				<!-- -->
 				<value>cn.hb.entity.dictionary.communal.Country</value>
 				<value>cn.hb.entity.dictionary.communal.Nation</value>
 				<value>cn.hb.entity.dictionary.communal.Nativeplace</value>
+				<!-- -->
+				<value>cn.hb.entity.dictionary.organization.OrganizationType</value>
+				<value>cn.hb.entity.dictionary.organization.JobPositionType</value>
+				<!-- -->
+				<value>cn.hb.entity.ui.MenuNode</value>
+				<!-- -->
+				<value>cn.hb.entity.security.User</value>
 			</list>
 		</property>
 	</bean>

@@ -8,6 +8,8 @@ import cn.hb.services.domain.dictionary.Nativeplace_Tree_VO;
 import cn.hb.services.domain.dictionary.Nativeplace_VO;
 
 /**
+ * @author kaka
+ * 
  * 数据字典-公共服务
  */
 public interface IDD_Communal_Service {
