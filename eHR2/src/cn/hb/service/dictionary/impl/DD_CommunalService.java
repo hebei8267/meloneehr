@@ -11,7 +11,7 @@ import cn.hb.dao.dictionary.communal.NativeplaceDao;
 import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
-import cn.hb.service.dictionary.IDDCommunalService;
+import cn.hb.service.dictionary.IDD_CommunalService;
 import cn.hb.service.domain.dictionary.Nativeplace_Tree_VO;
 import cn.hb.service.domain.dictionary.Nativeplace_VO;
 
@@ -20,9 +20,9 @@ import cn.hb.service.domain.dictionary.Nativeplace_VO;
  * 
  * 数据字典-公共服务
  */
-@Component("ddCommunalService")
+@Component("DD_CommunalService")
 @Scope("prototype")
-public class DDCommunalService implements IDDCommunalService {
+public class DD_CommunalService implements IDD_CommunalService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
