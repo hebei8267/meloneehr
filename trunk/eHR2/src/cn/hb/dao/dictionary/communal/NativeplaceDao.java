@@ -15,7 +15,7 @@ public class NativeplaceDao extends HibernateDaoImpl<Nativeplace> {
      * 根据籍贯ID取得籍贯信息
      * 
      * @param nativeplaceID 籍贯信息ID
-     * @return Nativeplace 籍贯信息
+     * @return 籍贯信息
      */
     @SuppressWarnings("unchecked")
     public Nativeplace getNativeplaceByID(String nativeplaceID) {

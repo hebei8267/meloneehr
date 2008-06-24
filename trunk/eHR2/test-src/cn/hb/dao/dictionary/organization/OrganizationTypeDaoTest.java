@@ -1,4 +1,4 @@
-package cn.hb.dao.hr.organization;
+package cn.hb.dao.dictionary.organization;
 
 import static constant.TestConstant.ROOT_PATH;
 
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.List;
 
 import cn.hb.core.test.dao.HibernateDaoTestCase;
-import cn.hb.entity.hr.organization.OrganizationType;
-import cn.hb.dao.hr.organization.OrganizationTypeDao;
+import cn.hb.dao.dictionary.organization.OrganizationTypeDao;
+import cn.hb.entity.dictionary.organization.OrganizationType;
 import file.CSVUtils;
 
 /**
@@ -37,7 +37,7 @@ public class OrganizationTypeDaoTest extends HibernateDaoTestCase {
                 } else if (i == 1) {
                     organizationType.setName(value);
                 } else if (i == 2) {
-                    organizationType.setDescription(value);
+                    organizationType.setNote(value);
                 }
             }
 

@@ -35,7 +35,7 @@ public class CountryDaoTest extends HibernateDaoTestCase {
                 if (i == 0) {
                     country.setId(value);
                 } else if (i == 1) {
-                    country.setDescription(value);
+                    country.setNote(value);
                 } else if (i == 2) {
                     country.setName(value);
                 } else if (i == 3) {

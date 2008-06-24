@@ -47,7 +47,7 @@ public class Nativeplace extends AbstractEntityBean {
     private String name;
 
     /** 详细描述 */
-    private String description;
+    private String note;
 
     /** Index */
     private Integer index;
@@ -89,9 +89,9 @@ public class Nativeplace extends AbstractEntityBean {
      * @return 详细描述
      */
     @Basic
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
+    @Column(name = "NOTE")
+    public String getNote() {
+        return note;
     }
 
     @Basic
@@ -141,11 +141,10 @@ public class Nativeplace extends AbstractEntityBean {
     /**
      * 设置详细描述
      * 
-     * @param description 详细描述
+     * @param note 详细描述
      */
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     protected void setIndex(Integer index) {
