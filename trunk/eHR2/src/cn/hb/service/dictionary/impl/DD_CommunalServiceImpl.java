@@ -167,18 +167,74 @@ public class DD_CommunalServiceImpl implements IDD_CommunalService {
     }
 
     public Integer updateCountryInfo_Service(Country obj) {
-        // TODO Auto-generated method stub
-        return null;
+        Country dbObjInfo = countryDao.getCountryByID(obj.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<Country> likenessList = countryDao.existLikenessCountry(obj.getName(), obj.getShortName());
+        if (likenessList != null) {
+            for (Country country : likenessList) {
+                if (!country.getId().equals(obj.getId())) {
+                    // 存在类似的国家
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(obj.getName());
+        dbObjInfo.setShortName(obj.getShortName());
+        dbObjInfo.setNote(obj.getNote());
+
+        countryDao.save(dbObjInfo);
+        return 0;
     }
 
     public Integer updateNationInfo_Service(Nation obj) {
-        // TODO Auto-generated method stub
-        return null;
+        Nation dbObjInfo = nationDao.getNationByID(obj.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<Nation> likenessList = nationDao.existLikenessNation(obj.getName());
+        if (likenessList != null) {
+            for (Nation nation : likenessList) {
+                if (!nation.getId().equals(obj.getId())) {
+                    // 存在类似的民族
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(obj.getName());
+        dbObjInfo.setNote(obj.getNote());
+
+        nationDao.save(dbObjInfo);
+        return 0;
+
     }
 
-    public Integer updateNativeplaceInfo_Service(Nativeplace obj) {
-        // TODO Auto-generated method stub
-        return null;
+    public Integer updateNativeplaceInfo_Service(Nativeplace obj, String pNativeplaceID) {
+        Nativeplace dbObjInfo = nativeplaceDao.getNativeplaceByID(obj.getId());
+
+        if (dbObjInfo == null) {
+            return 1;
+        }
+        List<Nativeplace> likenessList = nativeplaceDao.existLikenessNativeplace(obj.getName(), pNativeplaceID);
+        if (likenessList != null) {
+            for (Nativeplace nativeplace : likenessList) {
+                if (!nativeplace.getId().equals(obj.getId())) {
+                    // 存在类似的籍贯
+                    return 2;
+                }
+            }
+        }
+
+        dbObjInfo.setName(obj.getName());
+        dbObjInfo.setNote(obj.getNote());
+
+        nativeplaceDao.save(dbObjInfo);
+        return 0;
     }
 
     private CountryDao countryDao = null;
