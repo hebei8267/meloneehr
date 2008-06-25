@@ -110,7 +110,8 @@ public interface IDD_CommunalService {
      * 更新籍贯信息
      * 
      * @param obj 籍贯信息
+     * @param pNativeplaceID 父民族ID
      * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的籍贯)成功
      */
-    public abstract Integer updateNativeplaceInfo_Service(Nativeplace obj);
+    public abstract Integer updateNativeplaceInfo_Service(Nativeplace obj, String pNativeplaceID);
 }
