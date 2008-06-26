@@ -1,4 +1,4 @@
-package cn.hb.dao.hr.personnel;
+package cn.hb.dao.dictionary.personnel;
 
 import static constant.TestConstant.ROOT_PATH;
 
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.List;
 
 import cn.hb.core.test.dao.HibernateDaoTestCase;
-import cn.hb.entity.hr.personnel.MarriageState;
-import cn.hb.dao.hr.personnel.MarriageStateDao;
+import cn.hb.dao.dictionary.personnel.MarriageStateDao;
+import cn.hb.entity.dictionary.personnel.MarriageState;
 import file.CSVUtils;
 
 /**
@@ -38,6 +38,8 @@ public class MarriageStateDaoTest extends HibernateDaoTestCase {
                     marriageState.setSlaveID(value);
                 } else if (i == 2) {
                     marriageState.setName(value);
+                } else if (i == 3) {
+                    marriageState.setNote(value);
                 }
             }
             marriageStateDao.save(marriageState);
