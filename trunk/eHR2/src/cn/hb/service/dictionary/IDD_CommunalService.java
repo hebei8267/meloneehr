@@ -60,8 +60,6 @@ public interface IDD_CommunalService extends IService {
     /**
      * 删除籍贯信息
      * 
-     * 0-删除成功 1-删除失败
-     * 
      * @param nativeplaceID 籍贯信息ID
      * @param pNativeplaceID 父籍贯信息ID
      * @return 0-删除成功 1-删除失败
