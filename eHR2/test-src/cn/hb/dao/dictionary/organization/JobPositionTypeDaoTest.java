@@ -44,6 +44,7 @@ public class JobPositionTypeDaoTest extends HibernateDaoTestCase {
 
                     jobPositionType.setParentJobPositionType(parentJobPositionType);
 
+                } else if (i == 3) {
                     jobPositionType.setNote(value);
                 }
             }

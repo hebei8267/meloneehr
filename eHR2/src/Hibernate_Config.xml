@@ -52,6 +52,7 @@
 				<value>cn.hb.entity.dictionary.personnel.MarriageState</value>
 				<value>cn.hb.entity.dictionary.personnel.IdentifieationType</value>
 				<value>cn.hb.entity.dictionary.personnel.Currculum</value>
+				<value>cn.hb.entity.dictionary.personnel.EducateSpecialty</value>
 				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
