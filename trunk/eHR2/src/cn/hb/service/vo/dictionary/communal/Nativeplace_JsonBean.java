@@ -1,6 +1,7 @@
-package cn.hb.service.vo.dictionary;
+package cn.hb.service.vo.dictionary.communal;
 
 import cn.hb.entity.dictionary.communal.Nativeplace;
+import cn.hb.service.vo.dictionary.JsonDataBean;
 
 /**
  * @author 何 贝

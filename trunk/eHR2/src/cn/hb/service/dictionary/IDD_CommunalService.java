@@ -1,18 +1,20 @@
 package cn.hb.service.dictionary;
 
 import java.util.List;
+
+import cn.hb.core.service.IService;
 import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
-import cn.hb.service.vo.dictionary.Nativeplace_JsonBean;
-import cn.hb.service.vo.dictionary.Nativeplace_TreeNode;
+import cn.hb.service.vo.dictionary.communal.Nativeplace_JsonBean;
+import cn.hb.service.vo.dictionary.communal.Nativeplace_TreeNode;
 
 /**
  * @author kaka
  * 
  * 数据字典-公共服务
  */
-public interface IDD_CommunalService {
+public interface IDD_CommunalService extends IService {
 
     /**
      * 添加国家信息
