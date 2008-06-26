@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.FileInfo;
+import entity.FileInfo;
 
 import static constant.UtilConstant.JAVA_FILE;
 import static constant.UtilConstant.SEPARATOR;

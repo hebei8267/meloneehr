@@ -174,6 +174,33 @@ public class IDD_CommunalServiceTest extends ServiceTestCase {
         int result = DD_CommunalService.getNativeplaceInfoList_Service().size();
 
         assertEquals(12, result);
+
+    }
+
+    public void test_UpdateCountryInfo_Service() {
+        Country obj = new Country();
+        obj.setId("00000004");
+        obj.setName("阿富汗_Update");
+        obj.setShortName("AF_Update");
+        obj.setNote("Afghanistan_Update");
+        DD_CommunalService.updateCountryInfo_Service(obj);
+
+    }
+
+    public void test_UpdateNationInfo_Service() {
+        Nation obj = new Nation();
+        obj.setId("00000004");
+        obj.setName("楚汉族_Update");
+        obj.setNote("楚国的汉族_Update");
+        DD_CommunalService.updateNationInfo_Service(obj);
+    }
+
+    public void test_UpdateNativeplaceInfo_Service() {
+        Nativeplace obj = new Nativeplace();
+        obj.setId("00000013");
+        obj.setName("武汉市_Update");
+        DD_CommunalService.updateNativeplaceInfo_Service(obj, "00000003");
+
     }
 
     private IDD_CommunalService DD_CommunalService;

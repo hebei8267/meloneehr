@@ -95,6 +95,30 @@ public class JobPositionType extends AbstractEntityBean {
         return name;
     }
 
+    @Basic
+    @Column(name = "_INDEX")
+    public Integer getIndex() {
+        return index;
+    }
+
+    @OneToMany(mappedBy = "parentJobPositionType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
+    public List<JobPositionType> getSubJobPositionTypeList() {
+        return subJobPositionTypeList;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "PARENT_JOB_POSITION_TYPE_H_ID")
+    public JobPositionType getParentJobPositionType() {
+        return parentJobPositionType;
+    }
+
+    @Basic
+    @Column(name = "PARENT_JOB_POSITION_TYPE_ID", length = 20)
+    public String getParentJobPositionTypeID() {
+        return parentJobPositionTypeID;
+    }
+
     /**
      * 设置编号
      * 
@@ -122,24 +146,24 @@ public class JobPositionType extends AbstractEntityBean {
         this.name = name;
     }
 
-    /**
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(-666804719, -1693772375).append(this.id).toHashCode();
+    protected void setIndex(Integer index) {
+        this.index = index;
     }
 
-    /**
-     * @see java.lang.Object#equals(Object)
-     */
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof JobPositionType)) {
-            return false;
+    public void setSubJobPositionTypeList(List<JobPositionType> subJobPositionTypeList) {
+        this.subJobPositionTypeList = subJobPositionTypeList;
+    }
+
+    public void setParentJobPositionType(JobPositionType parentJobPositionType) {
+        if (parentJobPositionType != null) {
+            this.parentJobPositionTypeID = parentJobPositionType.getId();
         }
-        JobPositionType rhs = (JobPositionType) object;
-        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
+
+        this.parentJobPositionType = parentJobPositionType;
+    }
+
+    protected void setParentJobPositionTypeID(String parentJobPositionTypeID) {
+        this.parentJobPositionTypeID = parentJobPositionTypeID;
     }
 
     public void addSubJobPositionType(JobPositionType jobPositionType) {
@@ -170,48 +194,23 @@ public class JobPositionType extends AbstractEntityBean {
         }
     }
 
-    @Basic
-    @Column(name = "_INDEX")
-    public Integer getIndex() {
-        return index;
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(-666804719, -1693772375).append(this.id).toHashCode();
     }
 
-    @OneToMany(mappedBy = "parentJobPositionType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @IndexColumn(name = "_INDEX", base = 1)
-    public List<JobPositionType> getSubJobPositionTypeList() {
-        return subJobPositionTypeList;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "PARENT_JOB_POSITION_TYPE_H_ID")
-    public JobPositionType getParentJobPositionType() {
-        return parentJobPositionType;
-    }
-
-    @Basic
-    @Column(name = "PARENT_JOB_POSITION_TYPE_ID", length = 20)
-    public String getParentJobPositionTypeID() {
-        return parentJobPositionTypeID;
-    }
-
-    protected void setIndex(Integer index) {
-        this.index = index;
-    }
-
-    public void setSubJobPositionTypeList(List<JobPositionType> subJobPositionTypeList) {
-        this.subJobPositionTypeList = subJobPositionTypeList;
-    }
-
-    public void setParentJobPositionType(JobPositionType parentJobPositionType) {
-        if (parentJobPositionType != null) {
-            this.parentJobPositionTypeID = parentJobPositionType.getId();
+    /**
+     * @see java.lang.Object#equals(Object)
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof JobPositionType)) {
+            return false;
         }
-
-        this.parentJobPositionType = parentJobPositionType;
+        JobPositionType rhs = (JobPositionType) object;
+        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
     }
-
-    protected void setParentJobPositionTypeID(String parentJobPositionTypeID) {
-        this.parentJobPositionTypeID = parentJobPositionTypeID;
-    }
-
 }

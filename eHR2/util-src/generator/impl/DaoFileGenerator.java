@@ -5,7 +5,7 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
-import domain.FileInfo;
+import entity.FileInfo;
 
 import static constant.UtilConstant.ROOT_PATH;
 import static constant.UtilConstant.DAO_FILE_PATH;

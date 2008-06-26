@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import domain.FileInfo;
+import entity.FileInfo;
 
 /**
  * @author kaka

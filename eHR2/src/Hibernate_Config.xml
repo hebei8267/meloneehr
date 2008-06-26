@@ -47,6 +47,7 @@
 				<!-- -->
 				<value>cn.hb.entity.dictionary.organization.OrganizationType</value>
 				<value>cn.hb.entity.dictionary.organization.JobPositionType</value>
+				<value>cn.hb.entity.dictionary.organization.Organization_JobPosition_RelateType</value>
 				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
