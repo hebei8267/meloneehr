@@ -8,6 +8,7 @@ import cn.hb.dao.dictionary.organization.JobPositionTypeDaoTest;
 import cn.hb.dao.dictionary.organization.OrganizationTypeDaoTest;
 import cn.hb.dao.dictionary.organization.Organization_JobPosition_RelateTypeDaoTest;
 import cn.hb.dao.dictionary.personnel.CurrculumDaoTest;
+import cn.hb.dao.dictionary.personnel.EducateSpecialtyDaoTest;
 import cn.hb.dao.dictionary.personnel.IdentifieationTypeDaoTest;
 import cn.hb.dao.dictionary.personnel.MarriageStateDaoTest;
 import cn.hb.dao.security.UserDaoTest;
@@ -36,6 +37,7 @@ public class AllDaoTest extends HibernateDaoTestCase {
         suite.addTestSuite(MarriageStateDaoTest.class);
         suite.addTestSuite(IdentifieationTypeDaoTest.class);
         suite.addTestSuite(CurrculumDaoTest.class);
+        suite.addTestSuite(EducateSpecialtyDaoTest.class);
 
         suite.addTestSuite(UserDaoTest.class);
 
