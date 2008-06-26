@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import domain.FileInfo;
+import entity.FileInfo;
 
 import static constant.UtilConstant.ROOT_PATH;
 import static constant.UtilConstant.ENTITY_FILE_PATH;
@@ -44,7 +44,7 @@ public class EntityFileGenerator extends AbstractFileGenerator {
                     for (Entry<String, String> entry : dataMap.entrySet()) {
                         if (line.indexOf(entry.getKey()) != -1) {
                             String tempLine = "";
-                            if (line.startsWith(CLASS_JAVA_KEY)) {
+                            if (line.equals(CLASS_JAVA_KEY)) {
                                 tempLine = line.replaceAll(entry.getKey(), entry.getValue() + getSuperClass());
 
                             } else {
