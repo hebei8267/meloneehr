@@ -16,4 +16,7 @@ public class Organization_JobPosition_RelateType extends MasterEntityBean {
 
     private static final long serialVersionUID = -4245036351235403763L;
 
+    public Organization_JobPosition_RelateType() {
+
+    }
 }

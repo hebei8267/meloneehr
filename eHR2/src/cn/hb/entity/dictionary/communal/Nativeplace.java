@@ -123,7 +123,6 @@ public class Nativeplace extends AbstractEntityBean {
      * 
      * @param id 编号
      */
-
     public void setId(String id) {
         this.id = id;
     }
@@ -133,7 +132,6 @@ public class Nativeplace extends AbstractEntityBean {
      * 
      * @param name 名称
      */
-
     public void setName(String name) {
         this.name = name;
     }
