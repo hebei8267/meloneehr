@@ -15,8 +15,8 @@ import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
 import cn.hb.service.dictionary.IDD_CommunalService;
-import cn.hb.service.vo.dictionary.Nativeplace_JsonBean;
-import cn.hb.service.vo.dictionary.Nativeplace_TreeNode;
+import cn.hb.service.vo.dictionary.communal.Nativeplace_JsonBean;
+import cn.hb.service.vo.dictionary.communal.Nativeplace_TreeNode;
 
 /**
  * @author kaka
