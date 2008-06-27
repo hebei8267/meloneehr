@@ -59,6 +59,8 @@
 				<value>cn.hb.entity.dictionary.employment.ContractType</value>
 				<value>cn.hb.entity.dictionary.employment.EmployeeWorkState</value>
 				<!-- -->
+				<value>cn.hb.entity.dictionary.financial.SalaryType</value>
+				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>
