@@ -25,12 +25,54 @@ public interface IDD_CommunalService extends IService {
     public abstract Integer addCountryInfo_Service(Country obj);
 
     /**
+     * 删除国家信息
+     * 
+     * @param countryID 国家ID
+     * @return 0-删除成功 1-删除失败
+     */
+    public abstract Integer delCountryInfo_Service(String countryID);
+
+    /**
+     * 取得国家信息列表
+     */
+    public abstract List<Country> getCountryInfoList_Service();
+
+    /**
+     * 更新国家信息
+     * 
+     * @param obj 国家
+     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的国家)
+     */
+    public abstract Integer updateCountryInfo_Service(Country obj);
+
+    /**
      * 添加民族信息
      * 
      * @param obj 民族
      * @return 0-添加成功 1-添加失败
      */
     public abstract Integer addNationInfo_Service(Nation obj);
+
+    /**
+     * 删除民族信息
+     * 
+     * @param nationID 民族ID
+     * @return 0-删除成功 1-删除失败
+     */
+    public abstract Integer delNationInfo_Service(String nationID);
+
+    /**
+     * 取得民族信息列表
+     */
+    public abstract List<Nation> getNationInfoList_Service();
+
+    /**
+     * 更新民族信息
+     * 
+     * @param obj 民族
+     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的民族)
+     */
+    public abstract Integer updateNationInfo_Service(Nation obj);
 
     /**
      * 添加籍贯信息
@@ -42,22 +84,6 @@ public interface IDD_CommunalService extends IService {
     public abstract Integer addNativeplaceInfo_Service(Nativeplace obj, String pNativeplaceID);
 
     /**
-     * 删除国家信息
-     * 
-     * @param countryID 国家ID
-     * @return 0-删除成功 1-删除失败
-     */
-    public abstract Integer delCountryInfo_Service(String countryID);
-
-    /**
-     * 删除民族信息
-     * 
-     * @param nationID 民族ID
-     * @return 0-删除成功 1-删除失败
-     */
-    public abstract Integer delNationInfo_Service(String nationID);
-
-    /**
      * 删除籍贯信息
      * 
      * @param nativeplaceID 籍贯信息ID
@@ -65,16 +91,6 @@ public interface IDD_CommunalService extends IService {
      * @return 0-删除成功 1-删除失败
      */
     public abstract Integer delNativeplaceInfo_Service(String nativeplaceID, String pNativeplaceID);
-
-    /**
-     * 取得国家信息列表
-     */
-    public abstract List<Country> getCountryInfoList_Service();
-
-    /**
-     * 取得民族信息列表
-     */
-    public abstract List<Nation> getNationInfoList_Service();
 
     /**
      * 取得籍贯树信息
@@ -91,22 +107,6 @@ public interface IDD_CommunalService extends IService {
     public abstract Nativeplace_TreeNode getNativeplaceInfoTree_Service();
 
     /**
-     * 更新国家信息
-     * 
-     * @param obj 国家
-     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的国家)
-     */
-    public abstract Integer updateCountryInfo_Service(Country obj);
-
-    /**
-     * 更新民族信息
-     * 
-     * @param obj 民族
-     * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的民族)
-     */
-    public abstract Integer updateNationInfo_Service(Nation obj);
-
-    /**
      * 更新籍贯信息
      * 
      * @param obj 籍贯信息
@@ -114,4 +114,5 @@ public interface IDD_CommunalService extends IService {
      * @return 0-更新成功 1-更新失败(数据不存在) 2-更新失败(存在类似的籍贯)成功
      */
     public abstract Integer updateNativeplaceInfo_Service(Nativeplace obj, String pNativeplaceID);
+
 }
