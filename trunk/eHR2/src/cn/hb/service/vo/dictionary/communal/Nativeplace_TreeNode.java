@@ -1,6 +1,6 @@
 package cn.hb.service.vo.dictionary.communal;
 
-import cn.hb.service.vo.dictionary.TreeNodeAdaptor;
+import cn.hb.service.vo.TreeNodeAdaptor;
 
 public class Nativeplace_TreeNode extends TreeNodeAdaptor<Nativeplace_TreeNode> {
 

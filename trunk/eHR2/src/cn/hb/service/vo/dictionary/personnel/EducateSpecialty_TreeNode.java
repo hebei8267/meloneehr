@@ -1,6 +1,6 @@
 package cn.hb.service.vo.dictionary.personnel;
 
-import cn.hb.service.vo.dictionary.TreeNodeAdaptor;
+import cn.hb.service.vo.TreeNodeAdaptor;
 
 public class EducateSpecialty_TreeNode extends TreeNodeAdaptor<EducateSpecialty_TreeNode> {
 

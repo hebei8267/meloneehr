@@ -1,6 +1,6 @@
 package cn.hb.service.vo.dictionary.organization;
 
-import cn.hb.service.vo.dictionary.TreeNodeAdaptor;
+import cn.hb.service.vo.TreeNodeAdaptor;
 
 public class JobPositionType_TreeNode extends TreeNodeAdaptor<JobPositionType_TreeNode> {
 

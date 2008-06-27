@@ -1,4 +1,4 @@
-package cn.hb.service.vo.dictionary;
+package cn.hb.service.vo;
 
 import cn.hb.core.bean.BaseBean;
 
