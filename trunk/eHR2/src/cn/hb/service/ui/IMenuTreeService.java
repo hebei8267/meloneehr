@@ -1,4 +1,4 @@
-package cn.hb.service;
+package cn.hb.service.ui;
 
 import cn.hb.core.service.IService;
 import cn.hb.service.vo.ui.UIMenu_TreeNode;
@@ -6,6 +6,7 @@ import cn.hb.service.vo.ui.UIMenu_TreeNode;
 /**
  * @author kaka
  * 
+ * 菜单树服务
  */
 public interface IMenuTreeService extends IService {
     /**

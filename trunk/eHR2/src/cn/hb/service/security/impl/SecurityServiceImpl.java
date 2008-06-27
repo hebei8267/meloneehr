@@ -7,6 +7,11 @@ import cn.hb.dao.security.UserDao;
 import cn.hb.entity.security.User;
 import cn.hb.service.security.ISecurityService;
 
+/**
+ * @author kaka
+ * 
+ * 安全服务
+ */
 @Component("securityService")
 @Scope("prototype")
 public class SecurityServiceImpl implements ISecurityService {
