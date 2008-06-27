@@ -8,6 +8,7 @@ import cn.hb.dao.dictionary.employment.ContractTypeDaoTest;
 import cn.hb.dao.dictionary.employment.EmployTypeDaoTest;
 import cn.hb.dao.dictionary.employment.EmployeeWorkStateDaoTest;
 import cn.hb.dao.dictionary.employment.HoldingJobTypeDaoTest;
+import cn.hb.dao.dictionary.financial.SalaryTypeDaoTest;
 import cn.hb.dao.dictionary.organization.JobPositionTypeDaoTest;
 import cn.hb.dao.dictionary.organization.OrganizationTypeDaoTest;
 import cn.hb.dao.dictionary.organization.Organization_JobPosition_RelateTypeDaoTest;
@@ -47,6 +48,8 @@ public class AllDaoTest extends HibernateDaoTestCase {
         suite.addTestSuite(EmployTypeDaoTest.class);
         suite.addTestSuite(ContractTypeDaoTest.class);
         suite.addTestSuite(EmployeeWorkStateDaoTest.class);
+
+        suite.addTestSuite(SalaryTypeDaoTest.class);
 
         suite.addTestSuite(UserDaoTest.class);
 
