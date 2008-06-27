@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="core-src"/>
 	<classpathentry kind="src" path="test-src"/>
 	<classpathentry kind="src" path="util-src"/>
-	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
@@ -38,5 +37,6 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
