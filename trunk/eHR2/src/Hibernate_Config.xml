@@ -54,6 +54,11 @@
 				<value>cn.hb.entity.dictionary.personnel.Currculum</value>
 				<value>cn.hb.entity.dictionary.personnel.EducateSpecialty</value>
 				<!-- -->
+				<value>cn.hb.entity.dictionary.employment.HoldingJobType</value>
+				<value>cn.hb.entity.dictionary.employment.EmployType</value>
+				<value>cn.hb.entity.dictionary.employment.ContractType</value>
+				<value>cn.hb.entity.dictionary.employment.EmployeeWorkState</value>
+				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>
