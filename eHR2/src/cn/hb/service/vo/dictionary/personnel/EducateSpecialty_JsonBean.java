@@ -1,6 +1,6 @@
 package cn.hb.service.vo.dictionary.personnel;
 
-import cn.hb.service.vo.dictionary.JsonDataBean;
+import cn.hb.service.vo.JsonDataBean;
 
 public class EducateSpecialty_JsonBean extends JsonDataBean {
 

@@ -1,6 +1,6 @@
 package cn.hb.service.vo.dictionary.organization;
 
-import cn.hb.service.vo.dictionary.JsonDataBean;
+import cn.hb.service.vo.JsonDataBean;
 
 public class JobPositionType_JsonBean extends JsonDataBean {
 
