@@ -6,6 +6,7 @@ import cn.hb.entity.security.User;
 /**
  * @author kaka
  * 
+ * 安全服务
  */
 public interface ISecurityService extends IService {
     /**
