@@ -1,9 +1,5 @@
 package cn.hb.entity.hr.personnel;
 
-/** 地址 */
-public class 联系address {
-	public address() {
-	}
 
 /** 联系地址 */
 public class ContactAddress {
@@ -35,140 +31,140 @@ public class ContactAddress {
 	private Person Person;
 	 
 	/**
-	 * 取得编号
-	 * 
-	 * @return 编号
-	 */
+     * 取得编号
+     * 
+     * @return 编号
+     */
 
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * 取得地址
-	 * 
-	 * @return 地址
-	 */
+     * 取得地址
+     * 
+     * @return 地址
+     */
 
 	public String getAddress() {
 		return address;
 	}
 
 	/**
-	 * 取得联系地址
-	 * 
-	 * @return 联系地址
-	 */
+     * 取得联系地址
+     * 
+     * @return 联系地址
+     */
 
 	public String getContactAddress() {
 		return ContactAddress;
 	}
 
 	/**
-	 * 取得编号
-	 * 
-	 * @return 编号
-	 */
+     * 取得编号
+     * 
+     * @return 编号
+     */
 
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * 取得电话号码
-	 * 
-	 * @return 电话号码
-	 */
+     * 取得电话号码
+     * 
+     * @return 电话号码
+     */
 
 	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
-	 * 取得电话号码
-	 * 
-	 * @return 电话号码
-	 */
+     * 取得电话号码
+     * 
+     * @return 电话号码
+     */
 
 	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
-	 * 取得个人基本信息
-	 * 
-	 * @return 个人基本信息
-	 */
+     * 取得个人基本信息
+     * 
+     * @return 个人基本信息
+     */
 
 	public String getPerson() {
 		return Person;
 	}
 
 	/**
-	 * 设置编号
-	 * 
-	 * @param id 编号
-	 */
+     * 设置编号
+     * 
+     * @param id 编号
+     */
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * 设置地址
-	 * 
-	 * @param address 地址
-	 */
+     * 设置地址
+     * 
+     * @param address 地址
+     */
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	/**
-	 * 设置联系地址
-	 * 
-	 * @param ContactAddress 联系地址
-	 */
+     * 设置联系地址
+     * 
+     * @param ContactAddress 联系地址
+     */
 
 	public void setContactAddress(String ContactAddress) {
 		this.ContactAddress = ContactAddress;
 	}
 
 	/**
-	 * 设置编号
-	 * 
-	 * @param id 编号
-	 */
+     * 设置编号
+     * 
+     * @param id 编号
+     */
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * 设置电话号码
-	 * 
-	 * @param telephone 电话号码
-	 */
+     * 设置电话号码
+     * 
+     * @param telephone 电话号码
+     */
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
 	/**
-	 * 设置电话号码
-	 * 
-	 * @param telephone 电话号码
-	 */
+     * 设置电话号码
+     * 
+     * @param telephone 电话号码
+     */
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
 	/**
-	 * 设置个人基本信息
-	 * 
-	 * @param Person 个人基本信息
-	 */
+     * 设置个人基本信息
+     * 
+     * @param Person 个人基本信息
+     */
 
 	public void setPerson(String Person) {
 		this.Person = Person;
