@@ -42,7 +42,7 @@ public class Job_Salary_RelateTypeDaoTest extends HibernateDaoTestCase {
                     job_Salary_RelateType.setNote(value);
                 }
             }
-System.out.println(job_Salary_RelateType);
+
             job_Salary_RelateTypeDao.save(job_Salary_RelateType);
         }
     }
