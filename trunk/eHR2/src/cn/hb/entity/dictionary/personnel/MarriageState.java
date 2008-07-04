@@ -16,6 +16,8 @@ public class MarriageState extends MasterEntityBean {
 
     private static final long serialVersionUID = -7319647672902301256L;
 
+    public final static String MASTER_ID = "0002";
+
     public MarriageState() {
     }
 

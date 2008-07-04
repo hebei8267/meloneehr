@@ -60,6 +60,7 @@
 				<value>cn.hb.entity.dictionary.employment.EmployeeWorkState</value>
 				<!-- -->
 				<value>cn.hb.entity.dictionary.financial.SalaryType</value>
+				<value>cn.hb.entity.dictionary.financial.Job_Salary_RelateType</value>
 				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->

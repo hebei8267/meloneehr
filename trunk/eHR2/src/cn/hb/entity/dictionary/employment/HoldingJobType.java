@@ -15,6 +15,8 @@ public class HoldingJobType extends MasterEntityBean {
 
     private static final long serialVersionUID = -3759296790067178600L;
 
+    public final static String MASTER_ID = "0004";
+
     public HoldingJobType() {
     }
 }

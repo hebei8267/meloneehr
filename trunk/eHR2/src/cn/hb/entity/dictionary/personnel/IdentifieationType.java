@@ -16,6 +16,8 @@ public class IdentifieationType extends MasterEntityBean {
 
     private static final long serialVersionUID = 7818888308553206962L;
 
+    public final static String MASTER_ID = "0003";
+
     public IdentifieationType() {
     }
 
