@@ -1,12 +1,12 @@
 package cn.hb.entity.hr.personnel;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
@@ -22,6 +22,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_P_IDENTIFIEATION")
+@NamedQueries( { @NamedQuery(name = "Identifieation.getIdentifieationByID", query = "select obj from Identifieation obj where obj.no = ? "), })
 public class Identifieation extends AbstractEntityBean {
 
     private static final long serialVersionUID = 3140428651764533089L;
@@ -37,12 +38,6 @@ public class Identifieation extends AbstractEntityBean {
 
     /** 失效时间 */
     private String endDate;
-
-    /** 个人基本信息ID */
-    private String personID;
-
-    /** 个人基本信息 */
-    private Person person;
 
     /** 身份标识类型ID */
     private String identifieationTypeID;
@@ -81,23 +76,6 @@ public class Identifieation extends AbstractEntityBean {
     @Column(name = "END_DATE", nullable = false, length = 8)
     public String getEndDate() {
         return endDate;
-    }
-
-    /**
-     * 取得个人基本信息
-     * 
-     * @return 个人基本信息
-     */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PERSON_H_ID")
-    public Person getPerson() {
-        return person;
-    }
-
-    @Basic
-    @Column(name = "PERSON_ID", length = 20)
-    public String getPersonID() {
-        return personID;
     }
 
     /**
@@ -142,22 +120,6 @@ public class Identifieation extends AbstractEntityBean {
      */
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    /**
-     * 设置个人基本信息
-     * 
-     * @param Person 个人基本信息
-     */
-    public void setPerson(Person person) {
-        if (person != null) {
-            this.personID = person.getId();
-        }
-        this.person = person;
-    }
-
-    protected void setPersonID(String personID) {
-        this.personID = personID;
     }
 
     /**
