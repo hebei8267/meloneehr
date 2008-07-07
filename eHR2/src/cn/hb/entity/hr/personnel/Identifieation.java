@@ -90,7 +90,7 @@ public class Identifieation extends AbstractEntityBean {
     }
 
     @Basic
-    @Column(name = "IDENTIFIEATION_TYPE_ID", length = 20)
+    @Column(name = "IDENTIFIEATION_TYPE_ID", nullable = false, length = 20)
     public String getIdentifieationTypeID() {
         return identifieationTypeID;
     }

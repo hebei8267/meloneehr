@@ -143,7 +143,7 @@ public class Training extends AbstractEntityBean {
     }
 
     @Basic
-    @Column(name = "PERSON_ID", length = 20)
+    @Column(name = "PERSON_ID", nullable = false, length = 20)
     public String getPersonID() {
         return personID;
     }

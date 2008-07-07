@@ -123,7 +123,7 @@ public class Education extends AbstractEntityBean {
     }
 
     @Basic
-    @Column(name = "EDUCATE_SPECIALTY_ID", length = 20)
+    @Column(name = "EDUCATE_SPECIALTY_ID", nullable = false, length = 20)
     public String getEducateSpecialtyID() {
         return educateSpecialtyID;
     }
@@ -140,7 +140,7 @@ public class Education extends AbstractEntityBean {
     }
 
     @Basic
-    @Column(name = "PERSON_ID", length = 20)
+    @Column(name = "PERSON_ID", nullable = false, length = 20)
     public String getPersonID() {
         return personID;
     }
