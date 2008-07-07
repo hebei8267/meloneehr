@@ -52,8 +52,9 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
     }
 
     /**
-     * Set方法注释生成
+     * Get方法注释生成
      * 
+     * @param filedName
      * @param comment
      * @return
      */
@@ -68,9 +69,8 @@ public abstract class AbstractFileGenerator implements IFileGenerator {
     }
 
     /**
-     * Get方法注释生成
+     * Set方法注释生成
      * 
-     * @param filedName
      * @param comment
      * @return
      */

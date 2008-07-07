@@ -1,7 +1,29 @@
 package cn.hb.entity.hr.personnel;
 
-/** 培训信息 */
-public class Training {
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import cn.hb.core.bean.AbstractEntityBean;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.NaturalId;
+
+/**
+ * @author kaka
+ * 
+ * 培训信息
+ */
+@Entity
+@Table(name = "W_P_TRAINING")
+public class Training extends AbstractEntityBean {
+
+    private static final long serialVersionUID = -3136939615537738139L;
+
     public Training() {
     }
 
@@ -10,16 +32,15 @@ public class Training {
 
     /** 课程名称 */
     private String trainingName;
-    /** 名称 */
-    private String name;
 
     /** 开始日期 */
     private String startDate;
 
     /** 结束时间 */
     private String endDate;
-    /** 培训机构 */
-    private String trainingOrganization;
+
+    /** 培训机构名称 */
+    private String trainingOrgName;
 
     /** 培训地点 */
     private String trainingSite;
@@ -27,15 +48,19 @@ public class Training {
     /** 详细描述 */
     private String note;
 
+    /** 个人基本信息ID */
+    private String personID;
+
     /** 个人基本信息 */
-    private Person Person;
+    private Person person;
 
     /**
      * 取得编号
      * 
      * @return 编号
      */
-
+    @NaturalId
+    @Column(name = "TRAINING_ID", nullable = false, length = 20)
     public String getId() {
         return id;
     }
@@ -45,19 +70,10 @@ public class Training {
      * 
      * @return 课程名称
      */
-
+    @Basic
+    @Column(name = "TRAINING_NAME", nullable = false, length = 40)
     public String getTrainingName() {
         return trainingName;
-    }
-
-    /**
-     * 取得名称
-     * 
-     * @return 名称
-     */
-
-    public String getName() {
-        return name;
     }
 
     /**
@@ -65,7 +81,8 @@ public class Training {
      * 
      * @return 开始日期
      */
-
+    @Basic
+    @Column(name = "START_DATE", nullable = false, length = 8)
     public String getStartDate() {
         return startDate;
     }
@@ -75,7 +92,8 @@ public class Training {
      * 
      * @return 结束时间
      */
-
+    @Basic
+    @Column(name = "END_DATE", nullable = false, length = 8)
     public String getEndDate() {
         return endDate;
     }
@@ -85,9 +103,21 @@ public class Training {
      * 
      * @return 培训地点
      */
-
+    @Basic
+    @Column(name = "TRAINING_SITE", nullable = false, length = 40)
     public String getTrainingSite() {
         return trainingSite;
+    }
+
+    /**
+     * 取得培训机构名称
+     * 
+     * @return 培训机构名称
+     */
+    @Basic
+    @Column(name = "TRAINING_ORG_NAME", nullable = false, length = 40)
+    public String getTrainingOrgName() {
+        return trainingOrgName;
     }
 
     /**
@@ -95,7 +125,8 @@ public class Training {
      * 
      * @return 详细描述
      */
-
+    @Basic
+    @Column(name = "NOTE")
     public String getNote() {
         return note;
     }
@@ -105,9 +136,16 @@ public class Training {
      * 
      * @return 个人基本信息
      */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_H_ID")
+    public Person getPerson() {
+        return person;
+    }
 
-    public String getPerson() {
-        return Person;
+    @Basic
+    @Column(name = "PERSON_ID", length = 20)
+    public String getPersonID() {
+        return personID;
     }
 
     /**
@@ -115,7 +153,6 @@ public class Training {
      * 
      * @param id 编号
      */
-
     public void setId(String id) {
         this.id = id;
     }
@@ -125,19 +162,8 @@ public class Training {
      * 
      * @param trainingName 课程名称
      */
-
     public void setTrainingName(String trainingName) {
         this.trainingName = trainingName;
-    }
-
-    /**
-     * 设置名称
-     * 
-     * @param name 名称
-     */
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -145,7 +171,6 @@ public class Training {
      * 
      * @param startDate 开始日期
      */
-
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
@@ -155,7 +180,6 @@ public class Training {
      * 
      * @param endDate 结束时间
      */
-
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
@@ -165,9 +189,17 @@ public class Training {
      * 
      * @param trainingSite 培训地点
      */
-
     public void setTrainingSite(String trainingSite) {
         this.trainingSite = trainingSite;
+    }
+
+    /**
+     * 设置培训机构名称
+     * 
+     * @param trainingSite 培训机构名称
+     */
+    public void setTrainingOrgName(String trainingOrgName) {
+        this.trainingOrgName = trainingOrgName;
     }
 
     /**
@@ -175,7 +207,6 @@ public class Training {
      * 
      * @param note 详细描述
      */
-
     public void setNote(String note) {
         this.note = note;
     }
@@ -185,9 +216,35 @@ public class Training {
      * 
      * @param Person 个人基本信息
      */
+    public void setPerson(Person person) {
+        if (person != null) {
+            this.personID = person.getId();
+        }
+        this.person = person;
+    }
 
-    public void setPerson(String Person) {
-        this.Person = Person;
+    protected void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    /**
+     * @see java.lang.Object#equals(Object)
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Training)) {
+            return false;
+        }
+        Training rhs = (Training) object;
+        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(-2032745193, 933879965).append(this.id).toHashCode();
     }
 
 }

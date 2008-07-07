@@ -63,6 +63,12 @@
 				<value>cn.hb.entity.dictionary.financial.SalaryType</value>
 				<value>cn.hb.entity.dictionary.financial.Job_Salary_RelateType</value>
 				<!-- -->
+				<value>cn.hb.entity.hr.personnel.Identifieation</value>
+				<value>cn.hb.entity.hr.personnel.Education</value>
+				<value>cn.hb.entity.hr.personnel.Training</value>
+				<value>cn.hb.entity.hr.personnel.ContactAddress</value>
+				<value>cn.hb.entity.hr.personnel.Person</value>
+				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>
