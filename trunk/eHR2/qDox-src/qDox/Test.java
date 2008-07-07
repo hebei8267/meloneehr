@@ -22,10 +22,10 @@ public class Test {
 
         JavaDocBuilder builder = new JavaDocBuilder();
         File javaFile = new File(
-                "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\eHR2\\src\\cn\\hb\\entity\\hr\\personnel\\Person.java");
+                "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\eHR2\\src\\cn\\hb\\entity\\hr\\organization\\Organization.java");
 
         builder.addSource(new InputStreamReader(new FileInputStream(javaFile), CHARSET_NAME));
-        JavaClass cls = builder.getClassByName("cn.hb.entity.hr.personnel.Person");
+        JavaClass cls = builder.getClassByName("cn.hb.entity.hr.organization.Organization");
 
         JavaField[] fields = cls.getFields();
 
@@ -34,12 +34,16 @@ public class Test {
         List<String> setList = new ArrayList<String>();
         for (int i = 0; i < fields.length; i++) {
             System.out.println(fields[i].getName());
-            System.out.println(fields[i].getType());
+            System.out.println(fields[i].getType().getValue());
+            int _inde = fields[i].getType().getValue().lastIndexOf(".") == -1 ? 0 : fields[i].getType().getValue()
+                    .lastIndexOf(".") + 1;
+            String _type = fields[i].getType().getValue().substring(_inde);
+            System.out.println(_type);
             getList.add(getGetMethodComment(fields[i].getComment()));
-            getList.add(getGetMethodString(fields[i].getName(), fields[i].getType().getValue()));
+            getList.add(getGetMethodString(fields[i].getName(), _type));
 
             setList.add(getSetMethodComment(fields[i].getName(), fields[i].getComment()));
-            setList.add(getSetMethodString(fields[i].getName(), fields[i].getType().getValue()));
+            setList.add(getSetMethodString(fields[i].getName(), _type));
         }
 
         for (String str : getList) {
