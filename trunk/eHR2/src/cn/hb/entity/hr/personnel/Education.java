@@ -50,6 +50,9 @@ public class Education extends AbstractEntityBean {
     /** 教育专业 */
     private EducateSpecialty educateSpecialty;
 
+    /** Index */
+    private Integer index;
+
     /** 个人基本信息ID */
     private String personID;
 
@@ -145,6 +148,12 @@ public class Education extends AbstractEntityBean {
         return personID;
     }
 
+    @Basic
+    @Column(name = "_INDEX")
+    public Integer getIndex() {
+        return index;
+    }
+
     /**
      * 设置编号
      * 
@@ -220,6 +229,10 @@ public class Education extends AbstractEntityBean {
 
     protected void setPersonID(String personID) {
         this.personID = personID;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     /**

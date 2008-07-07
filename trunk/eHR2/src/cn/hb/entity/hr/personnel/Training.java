@@ -48,6 +48,9 @@ public class Training extends AbstractEntityBean {
     /** 详细描述 */
     private String note;
 
+    /** Index */
+    private Integer index;
+
     /** 个人基本信息ID */
     private String personID;
 
@@ -148,6 +151,12 @@ public class Training extends AbstractEntityBean {
         return personID;
     }
 
+    @Basic
+    @Column(name = "_INDEX")
+    public Integer getIndex() {
+        return index;
+    }
+
     /**
      * 设置编号
      * 
@@ -225,6 +234,10 @@ public class Training extends AbstractEntityBean {
 
     protected void setPersonID(String personID) {
         this.personID = personID;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     /**

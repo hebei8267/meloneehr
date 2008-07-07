@@ -48,6 +48,9 @@ public class ContactAddress extends AbstractEntityBean {
     /** EMail */
     private String email;
 
+    /** Index */
+    private Integer index;
+
     /** 个人基本信息ID */
     private String personID;
 
@@ -153,6 +156,12 @@ public class ContactAddress extends AbstractEntityBean {
         return person;
     }
 
+    @Basic
+    @Column(name = "_INDEX")
+    public Integer getIndex() {
+        return index;
+    }
+
     /**
      * 设置编号
      * 
@@ -235,6 +244,10 @@ public class ContactAddress extends AbstractEntityBean {
             this.personID = person.getId();
         }
         this.person = person;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     /**
