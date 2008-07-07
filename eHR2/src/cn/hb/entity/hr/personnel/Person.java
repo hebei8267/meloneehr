@@ -526,6 +526,34 @@ public class Person extends AbstractEntityBean {
         this.contactAddressList = contactAddressList;
     }
 
+    public void addContactAddress(ContactAddress contactAddress) {
+        int index = 1;
+        for (ContactAddress _contactAddress : contactAddressList) {
+            if (_contactAddress.getIndex() != null) {
+                _contactAddress.setIndex(index);
+                index++;
+            }
+        }
+
+        contactAddress.setIndex(index);
+        this.contactAddressList.add(contactAddress);
+    }
+
+    public void removeContactAddress(ContactAddress contactAddress) {
+        if (!contactAddressList.contains(contactAddress)) {
+            return;
+        }
+        contactAddressList.remove(contactAddress);
+
+        int index = 1;
+        for (ContactAddress _contactAddress : contactAddressList) {
+            if (_contactAddress.getIndex() != null) {
+                _contactAddress.setIndex(index);
+                index++;
+            }
+        }
+    }
+
     /**
      * 设置教育信息
      * 
@@ -535,6 +563,34 @@ public class Person extends AbstractEntityBean {
         this.educationList = educationList;
     }
 
+    public void addEducation(Education education) {
+        int index = 1;
+        for (Education _education : educationList) {
+            if (_education.getIndex() != null) {
+                _education.setIndex(index);
+                index++;
+            }
+        }
+
+        education.setIndex(index);
+        this.educationList.add(education);
+    }
+
+    public void removeSubNativeplace(Education education) {
+        if (!educationList.contains(education)) {
+            return;
+        }
+        educationList.remove(education);
+
+        int index = 1;
+        for (Education _education : educationList) {
+            if (_education.getIndex() != null) {
+                _education.setIndex(index);
+                index++;
+            }
+        }
+    }
+
     /**
      * 设置培训信息
      * 
@@ -542,6 +598,34 @@ public class Person extends AbstractEntityBean {
      */
     public void setTrainingList(List<Training> trainingList) {
         this.trainingList = trainingList;
+    }
+
+    public void addTraining(Training training) {
+        int index = 1;
+        for (Training _training : trainingList) {
+            if (_training.getIndex() != null) {
+                _training.setIndex(index);
+                index++;
+            }
+        }
+
+        training.setIndex(index);
+        this.trainingList.add(training);
+    }
+
+    public void removeTraining(Training training) {
+        if (!trainingList.contains(training)) {
+            return;
+        }
+        trainingList.remove(training);
+
+        int index = 1;
+        for (Training _training : trainingList) {
+            if (_training.getIndex() != null) {
+                _training.setIndex(index);
+                index++;
+            }
+        }
     }
 
     /**
