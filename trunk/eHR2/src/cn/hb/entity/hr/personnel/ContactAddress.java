@@ -137,7 +137,7 @@ public class ContactAddress extends AbstractEntityBean {
      * @return 个人基本信息ID
      */
     @Basic
-    @Column(name = "PERSON_ID", length = 20)
+    @Column(name = "PERSON_ID", nullable = false, length = 20)
     public String getPersonID() {
         return personID;
     }
