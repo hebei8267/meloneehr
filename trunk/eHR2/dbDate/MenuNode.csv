@@ -1,9 +1,9 @@
-00000001	系统菜单树根节点	folder	true	null	
-00000002	系统管理	folder	true	null	00000001
-00000003	数据字典	folder	true	null	00000002
-00000004	国家信息	node	true	countryCfg	00000003
-00000005	民族信息	node	true	nationCfg	00000003
-00000006	籍贯信息	node	true	nativeplaceCfg	00000003
-00000007	组织类型信息	node	true	orgTypeCfg	00000003
-00000008	组织相关	folder	true	null	00000002
-00000009	组织结构信息	node	true	orgHierarchyCfg	00000008
+00000001,系统菜单树根节点,folder,true,null,
+00000002,系统管理,folder,true,null,00000001
+00000003,数据字典,folder,true,null,00000002
+00000004,国家信息,node,true,countryCfg,00000003
+00000005,民族信息,node,true,nationCfg,00000003
+00000006,籍贯信息,node,true,nativeplaceCfg,00000003
+00000007,组织类型信息,node,true,orgTypeCfg,00000003
+00000008,组织相关,folder,true,null,00000002
+00000009,组织结构信息,node,true,orgHierarchyCfg,00000008

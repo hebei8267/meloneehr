@@ -13,7 +13,7 @@ public class UtilConstant {
     /** 文件编码规则 */
     public final static String CHARSET_NAME = "UTF-8";
     /** csv文件分隔符 */
-    public final static String DELIM = "\t";
+    public final static String DELIM = ",";
     /** 文件系统java文件 */
     public final static String JAVA_FILE = ".java";
     /** 文件系统隐藏文件（Windows） */

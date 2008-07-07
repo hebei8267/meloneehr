@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
@@ -152,7 +153,7 @@ public class Person extends AbstractEntityBean {
      * @return 性别ID
      */
     @Basic
-    @Column(name = "SEX_TYPE_ID", length = 20)
+    @Column(name = "SEX_TYPE_ID", nullable = false, length = 20)
     public String getSexID() {
         return sexID;
     }
@@ -163,7 +164,7 @@ public class Person extends AbstractEntityBean {
      * @return 出生日期
      */
     @Basic
-    @Column(name = "BIRTH_DATE", length = 8)
+    @Column(name = "BIRTH_DATE", nullable = false, length = 8)
     public String getBirthdate() {
         return birthdate;
     }
@@ -218,7 +219,7 @@ public class Person extends AbstractEntityBean {
      * @return 国家ID
      */
     @Basic
-    @Column(name = "COUNTRY_ID", length = 20)
+    @Column(name = "COUNTRY_ID", nullable = false, length = 20)
     public String getCountryID() {
         return countryID;
     }
@@ -284,7 +285,7 @@ public class Person extends AbstractEntityBean {
      * @return 身份标识ID
      */
     @Basic
-    @Column(name = "IDENTIFIEATION_ID", length = 20)
+    @Column(name = "IDENTIFIEATION_ID", nullable = false, length = 20)
     public String getIdentifieationID() {
         return identifieationID;
     }
@@ -294,7 +295,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @return 身份标识
      */
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "IDENTIFIEATION_H_ID")
     public Identifieation getIdentifieation() {
         return identifieation;
@@ -366,6 +367,9 @@ public class Person extends AbstractEntityBean {
      * @param sex 性别
      */
     public void setSex(SexType sex) {
+        if (sex != null) {
+            this.sexID = sex.getMasterID() + sex.getSlaveID();
+        }
         this.sex = sex;
     }
 
@@ -374,7 +378,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param sexID 性别ID
      */
-    public void setSexID(String sexID) {
+    protected void setSexID(String sexID) {
         this.sexID = sexID;
     }
 
@@ -392,7 +396,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param marriageStateID 婚姻状况ID
      */
-    public void setMarriageStateID(String marriageStateID) {
+    protected void setMarriageStateID(String marriageStateID) {
         this.marriageStateID = marriageStateID;
     }
 
@@ -402,6 +406,9 @@ public class Person extends AbstractEntityBean {
      * @param marriageState 婚姻状况
      */
     public void setMarriageState(MarriageState marriageState) {
+        if (marriageState != null) {
+            this.marriageStateID = marriageState.getMasterID() + marriageState.getSlaveID();
+        }
         this.marriageState = marriageState;
     }
 
@@ -410,7 +417,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param lastCurrculumID 最终学历信息ID
      */
-    public void setLastCurrculumID(String lastCurrculumID) {
+    protected void setLastCurrculumID(String lastCurrculumID) {
         this.lastCurrculumID = lastCurrculumID;
     }
 
@@ -420,6 +427,9 @@ public class Person extends AbstractEntityBean {
      * @param lastCurrculum 最终学历信息
      */
     public void setLastCurrculum(Currculum lastCurrculum) {
+        if (lastCurrculum != null) {
+            this.lastCurrculumID = lastCurrculum.getId();
+        }
         this.lastCurrculum = lastCurrculum;
     }
 
@@ -428,7 +438,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param countryID 国家ID
      */
-    public void setCountryID(String countryID) {
+    protected void setCountryID(String countryID) {
         this.countryID = countryID;
     }
 
@@ -438,6 +448,9 @@ public class Person extends AbstractEntityBean {
      * @param country 国家
      */
     public void setCountry(Country country) {
+        if (country != null) {
+            this.countryID = country.getId();
+        }
         this.country = country;
     }
 
@@ -446,7 +459,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param nationID 民族ID
      */
-    public void setNationID(String nationID) {
+    protected void setNationID(String nationID) {
         this.nationID = nationID;
     }
 
@@ -456,6 +469,9 @@ public class Person extends AbstractEntityBean {
      * @param nation 民族
      */
     public void setNation(Nation nation) {
+        if (nation != null) {
+            this.nationID = nation.getId();
+        }
         this.nation = nation;
     }
 
@@ -464,7 +480,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param nativeplaceID 籍贯ID
      */
-    public void setNativeplaceID(String nativeplaceID) {
+    protected void setNativeplaceID(String nativeplaceID) {
         this.nativeplaceID = nativeplaceID;
     }
 
@@ -474,6 +490,9 @@ public class Person extends AbstractEntityBean {
      * @param nativeplace 籍贯
      */
     public void setNativeplace(Nativeplace nativeplace) {
+        if (nativeplace != null) {
+            this.nativeplaceID = nativeplace.getId();
+        }
         this.nativeplace = nativeplace;
     }
 
@@ -482,7 +501,7 @@ public class Person extends AbstractEntityBean {
      * 
      * @param identifieationID 身份标识ID
      */
-    public void setIdentifieationID(String identifieationID) {
+    protected void setIdentifieationID(String identifieationID) {
         this.identifieationID = identifieationID;
     }
 
@@ -492,6 +511,9 @@ public class Person extends AbstractEntityBean {
      * @param identifieation 身份标识
      */
     public void setIdentifieation(Identifieation identifieation) {
+        if (identifieation != null) {
+            this.identifieationID = identifieation.getNo();
+        }
         this.identifieation = identifieation;
     }
 

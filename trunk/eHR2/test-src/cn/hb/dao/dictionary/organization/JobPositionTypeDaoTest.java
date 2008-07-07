@@ -33,6 +33,7 @@ public class JobPositionTypeDaoTest extends HibernateDaoTestCase {
 
             for (int i = 0; i < fileLine.size(); i++) {
                 String value = fileLine.get(i);
+
                 if (i == 0) {
                     jobPositionType.setId(value);
                 } else if (i == 1) {

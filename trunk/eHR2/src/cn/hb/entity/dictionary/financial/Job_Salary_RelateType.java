@@ -2,6 +2,8 @@ package cn.hb.entity.dictionary.financial;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import cn.hb.entity.dictionary.MasterEntityBean;
 
@@ -12,6 +14,7 @@ import cn.hb.entity.dictionary.MasterEntityBean;
  */
 @Entity
 @DiscriminatorValue(value = "Job_Salary_RelateType")
+@NamedQueries( { @NamedQuery(name = "Job_Salary_RelateType.getJob_Salary_RelateTypeByID", query = "select obj from Job_Salary_RelateType obj where obj.masterID = ? And obj.slaveID = ? ") })
 public class Job_Salary_RelateType extends MasterEntityBean {
 
     private static final long serialVersionUID = -4245036351235403763L;
