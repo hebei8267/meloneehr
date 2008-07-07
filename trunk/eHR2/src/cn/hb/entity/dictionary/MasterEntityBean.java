@@ -45,7 +45,7 @@ public class MasterEntityBean extends AbstractEntityBean {
      * @return 编号
      */
     @NaturalId
-    @Column(name = "DICTIONARY_MASTER_ID", nullable = false, length = 20)
+    @Column(name = "DICTIONARY_MASTER_ID", nullable = false, length = 10)
     public String getMasterID() {
         return masterID;
     }
@@ -56,7 +56,7 @@ public class MasterEntityBean extends AbstractEntityBean {
      * @return 编号
      */
     @NaturalId
-    @Column(name = "DICTIONARY_SLAVE_ID", nullable = false, length = 20)
+    @Column(name = "DICTIONARY_SLAVE_ID", nullable = false, length = 10)
     public String getSlaveID() {
         return slaveID;
     }

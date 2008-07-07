@@ -4,6 +4,11 @@
 	<classpathentry kind="src" path="core-src"/>
 	<classpathentry kind="src" path="test-src"/>
 	<classpathentry kind="src" path="util-src"/>
+	<classpathentry kind="src" path="qDox-src"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
@@ -29,14 +34,11 @@
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/p6spy.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/postgresql-8.2-506.jdbc3.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/qdox-1.6.3.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-api-3.2.1.GA.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-impl-3.2.1.GA.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/richfaces-ui-3.2.1.GA.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring-mock.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
-	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

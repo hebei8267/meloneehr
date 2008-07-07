@@ -1,14 +1,41 @@
 package cn.hb.entity.hr.personnel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import cn.hb.core.bean.AbstractEntityBean;
 import cn.hb.entity.dictionary.personnel.MarriageState;
 import cn.hb.entity.dictionary.personnel.Currculum;
+import cn.hb.entity.dictionary.personnel.SexType;
 import cn.hb.entity.dictionary.communal.Country;
 import cn.hb.entity.dictionary.communal.Nation;
 import cn.hb.entity.dictionary.communal.Nativeplace;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.NaturalId;
 
-/** 个人基本信息 */
-public class Person {
+/**
+ * @author kaka
+ * 
+ * 个人基本信息
+ */
+@Entity
+@Table(name = "W_PERSON")
+public class Person extends AbstractEntityBean {
+
+    private static final long serialVersionUID = -1469408001002812874L;
+
     public Person() {
     }
 
@@ -21,44 +48,67 @@ public class Person {
     /** 英文名 */
     private String name2;
 
-    private Integer 性别;
+    /** 性别 */
+    private SexType sex;
+
+    /** 性别ID */
+    private String sexID;
 
     /** 出生日期 */
     private String birthdate;
 
-    /** 婚姻状况 */
-    private MarriageState MarriageState;
+    /** 婚姻状况ID */
+    private String marriageStateID;
 
-    /** 学历信息 */
-    private Currculum 最高学历;
+    /** 婚姻状况 */
+    private MarriageState marriageState;
+
+    /** 最终学历信息ID */
+    private String lastCurrculumID;
+
+    /** 最终学历信息 */
+    private Currculum lastCurrculum;
+
+    /** 国家ID */
+    private String countryID;
 
     /** 国家 */
-    private Country 国籍;
+    private Country country;
+
+    /** 民族ID */
+    private String nationID;
 
     /** 民族 */
-    private Nation Nation;
+    private Nation nation;
+
+    /** 籍贯ID */
+    private String nativeplaceID;
 
     /** 籍贯 */
-    private Nativeplace Nativeplace;
+    private Nativeplace nativeplace;
+
+    /** 身份标识ID */
+    private String identifieationID;
 
     /** 身份标识 */
-    private Identifieation Identifieation;
+    private Identifieation identifieation;
 
     /** 联系地址 */
-    private ContactAddress[] ContactAddress;
+    private List<ContactAddress> contactAddressList = new ArrayList<ContactAddress>();
 
     /** 教育信息 */
-    private Education[] Education;
+    private List<Education> educationList = new ArrayList<Education>();
 
     /** 培训信息 */
-    private Training[] Training;
+    private List<Training> trainingList = new ArrayList<Training>();
 
     /**
      * 取得编号
      * 
      * @return 编号
      */
-
+    @NaturalId
+    @Column(name = "PERSON_ID", nullable = false, length = 20)
     public String getId() {
         return id;
     }
@@ -68,7 +118,8 @@ public class Person {
      * 
      * @return 姓名
      */
-
+    @Basic
+    @Column(name = "NAME_1", nullable = false, length = 20)
     public String getName1() {
         return name1;
     }
@@ -78,9 +129,32 @@ public class Person {
      * 
      * @return 英文名
      */
-
+    @Basic
+    @Column(name = "NAME_2", length = 20)
     public String getName2() {
         return name2;
+    }
+
+    /**
+     * 取得性别
+     * 
+     * @return 性别
+     */
+    @ManyToOne
+    @JoinColumn(name = "SEX_TYPE_H_ID")
+    public SexType getSex() {
+        return sex;
+    }
+
+    /**
+     * 取得性别ID
+     * 
+     * @return 性别ID
+     */
+    @Basic
+    @Column(name = "SEX_TYPE_ID", length = 20)
+    public String getSexID() {
+        return sexID;
     }
 
     /**
@@ -88,9 +162,21 @@ public class Person {
      * 
      * @return 出生日期
      */
-
+    @Basic
+    @Column(name = "BIRTH_DATE", length = 8)
     public String getBirthdate() {
         return birthdate;
+    }
+
+    /**
+     * 取得婚姻状况ID
+     * 
+     * @return 婚姻状况ID
+     */
+    @Basic
+    @Column(name = "MARRIAGE_STATE_ID", length = 20)
+    public String getMarriageStateID() {
+        return marriageStateID;
     }
 
     /**
@@ -98,19 +184,43 @@ public class Person {
      * 
      * @return 婚姻状况
      */
-
-    public String getMarriageState() {
-        return MarriageState;
+    @ManyToOne
+    @JoinColumn(name = "MARRIAGE_STATE_H_ID")
+    public MarriageState getMarriageState() {
+        return marriageState;
     }
 
     /**
-     * 取得学历信息
+     * 取得最终学历信息ID
      * 
-     * @return 学历信息
+     * @return 最终学历信息ID
      */
+    @Basic
+    @Column(name = "LAST_CURRCULUM_ID", length = 20)
+    public String getLastCurrculumID() {
+        return lastCurrculumID;
+    }
 
-    public String getCurrculum() {
-        return Currculum;
+    /**
+     * 取得最终学历信息
+     * 
+     * @return 最终学历信息
+     */
+    @ManyToOne
+    @JoinColumn(name = "LAST_CURRCULUM_H_ID")
+    public Currculum getLastCurrculum() {
+        return lastCurrculum;
+    }
+
+    /**
+     * 取得国家ID
+     * 
+     * @return 国家ID
+     */
+    @Basic
+    @Column(name = "COUNTRY_ID", length = 20)
+    public String getCountryID() {
+        return countryID;
     }
 
     /**
@@ -118,9 +228,21 @@ public class Person {
      * 
      * @return 国家
      */
+    @ManyToOne
+    @JoinColumn(name = "COUNTRY_H_ID")
+    public Country getCountry() {
+        return country;
+    }
 
-    public String getCountry() {
-        return Country;
+    /**
+     * 取得民族ID
+     * 
+     * @return 民族ID
+     */
+    @Basic
+    @Column(name = "NATION_ID", length = 20)
+    public String getNationID() {
+        return nationID;
     }
 
     /**
@@ -128,9 +250,21 @@ public class Person {
      * 
      * @return 民族
      */
+    @ManyToOne
+    @JoinColumn(name = "NATION_H_ID")
+    public Nation getNation() {
+        return nation;
+    }
 
-    public String getNation() {
-        return Nation;
+    /**
+     * 取得籍贯ID
+     * 
+     * @return 籍贯ID
+     */
+    @Basic
+    @Column(name = "NATIVEPLACE_ID", length = 20)
+    public String getNativeplaceID() {
+        return nativeplaceID;
     }
 
     /**
@@ -138,9 +272,21 @@ public class Person {
      * 
      * @return 籍贯
      */
+    @ManyToOne
+    @JoinColumn(name = "NATIVEPLACE_H_ID")
+    public Nativeplace getNativeplace() {
+        return nativeplace;
+    }
 
-    public String getNativeplace() {
-        return Nativeplace;
+    /**
+     * 取得身份标识ID
+     * 
+     * @return 身份标识ID
+     */
+    @Basic
+    @Column(name = "IDENTIFIEATION_ID", length = 20)
+    public String getIdentifieationID() {
+        return identifieationID;
     }
 
     /**
@@ -148,19 +294,10 @@ public class Person {
      * 
      * @return 身份标识
      */
-
-    public String getIdentifieation() {
-        return Identifieation;
-    }
-
-    /**
-     * 取得地址
-     * 
-     * @return 地址
-     */
-
-    public String getAddress() {
-        return address;
+    @ManyToOne
+    @JoinColumn(name = "IDENTIFIEATION_H_ID")
+    public Identifieation getIdentifieation() {
+        return identifieation;
     }
 
     /**
@@ -168,9 +305,10 @@ public class Person {
      * 
      * @return 联系地址
      */
-
-    public String getContactAddress() {
-        return ContactAddress;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
+    public List<ContactAddress> getContactAddressList() {
+        return contactAddressList;
     }
 
     /**
@@ -178,9 +316,10 @@ public class Person {
      * 
      * @return 教育信息
      */
-
-    public String getEducation() {
-        return Education;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
+    public List<Education> getEducationList() {
+        return educationList;
     }
 
     /**
@@ -188,9 +327,10 @@ public class Person {
      * 
      * @return 培训信息
      */
-
-    public String getTraining() {
-        return Training;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
+    public List<Training> getTrainingList() {
+        return trainingList;
     }
 
     /**
@@ -198,7 +338,6 @@ public class Person {
      * 
      * @param id 编号
      */
-
     public void setId(String id) {
         this.id = id;
     }
@@ -208,7 +347,6 @@ public class Person {
      * 
      * @param name1 姓名
      */
-
     public void setName1(String name1) {
         this.name1 = name1;
     }
@@ -218,9 +356,26 @@ public class Person {
      * 
      * @param name2 英文名
      */
-
     public void setName2(String name2) {
         this.name2 = name2;
+    }
+
+    /**
+     * 设置性别
+     * 
+     * @param sex 性别
+     */
+    public void setSex(SexType sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * 设置性别ID
+     * 
+     * @param sexID 性别ID
+     */
+    public void setSexID(String sexID) {
+        this.sexID = sexID;
     }
 
     /**
@@ -228,109 +383,163 @@ public class Person {
      * 
      * @param birthdate 出生日期
      */
-
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
     /**
-     * 设置婚姻状况
+     * 设置婚姻状况ID
      * 
-     * @param MarriageState 婚姻状况
+     * @param marriageStateID 婚姻状况ID
      */
-
-    public void setMarriageState(String MarriageState) {
-        this.MarriageState = MarriageState;
+    public void setMarriageStateID(String marriageStateID) {
+        this.marriageStateID = marriageStateID;
     }
 
     /**
-     * 设置学历信息
+     * 设置婚姻状况
      * 
-     * @param Currculum 学历信息
+     * @param marriageState 婚姻状况
      */
+    public void setMarriageState(MarriageState marriageState) {
+        this.marriageState = marriageState;
+    }
 
-    public void setCurrculum(String Currculum) {
-        this.Currculum = Currculum;
+    /**
+     * 设置最终学历信息ID
+     * 
+     * @param lastCurrculumID 最终学历信息ID
+     */
+    public void setLastCurrculumID(String lastCurrculumID) {
+        this.lastCurrculumID = lastCurrculumID;
+    }
+
+    /**
+     * 设置最终学历信息
+     * 
+     * @param lastCurrculum 最终学历信息
+     */
+    public void setLastCurrculum(Currculum lastCurrculum) {
+        this.lastCurrculum = lastCurrculum;
+    }
+
+    /**
+     * 设置国家ID
+     * 
+     * @param countryID 国家ID
+     */
+    public void setCountryID(String countryID) {
+        this.countryID = countryID;
     }
 
     /**
      * 设置国家
      * 
-     * @param Country 国家
+     * @param country 国家
      */
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
-    public void setCountry(String Country) {
-        this.Country = Country;
+    /**
+     * 设置民族ID
+     * 
+     * @param nationID 民族ID
+     */
+    public void setNationID(String nationID) {
+        this.nationID = nationID;
     }
 
     /**
      * 设置民族
      * 
-     * @param Nation 民族
+     * @param nation 民族
      */
+    public void setNation(Nation nation) {
+        this.nation = nation;
+    }
 
-    public void setNation(String Nation) {
-        this.Nation = Nation;
+    /**
+     * 设置籍贯ID
+     * 
+     * @param nativeplaceID 籍贯ID
+     */
+    public void setNativeplaceID(String nativeplaceID) {
+        this.nativeplaceID = nativeplaceID;
     }
 
     /**
      * 设置籍贯
      * 
-     * @param Nativeplace 籍贯
+     * @param nativeplace 籍贯
      */
+    public void setNativeplace(Nativeplace nativeplace) {
+        this.nativeplace = nativeplace;
+    }
 
-    public void setNativeplace(String Nativeplace) {
-        this.Nativeplace = Nativeplace;
+    /**
+     * 设置身份标识ID
+     * 
+     * @param identifieationID 身份标识ID
+     */
+    public void setIdentifieationID(String identifieationID) {
+        this.identifieationID = identifieationID;
     }
 
     /**
      * 设置身份标识
      * 
-     * @param Identifieation 身份标识
+     * @param identifieation 身份标识
      */
-
-    public void setIdentifieation(String Identifieation) {
-        this.Identifieation = Identifieation;
-    }
-
-    /**
-     * 设置地址
-     * 
-     * @param address 地址
-     */
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setIdentifieation(Identifieation identifieation) {
+        this.identifieation = identifieation;
     }
 
     /**
      * 设置联系地址
      * 
-     * @param ContactAddress 联系地址
+     * @param contactAddressList 联系地址
      */
-
-    public void setContactAddress(String ContactAddress) {
-        this.ContactAddress = ContactAddress;
+    public void setContactAddressList(List<ContactAddress> contactAddressList) {
+        this.contactAddressList = contactAddressList;
     }
 
     /**
      * 设置教育信息
      * 
-     * @param Education 教育信息
+     * @param educationList 教育信息
      */
-
-    public void setEducation(String Education) {
-        this.Education = Education;
+    public void setEducationList(List<Education> educationList) {
+        this.educationList = educationList;
     }
 
     /**
      * 设置培训信息
      * 
-     * @param Training 培训信息
+     * @param trainingList 培训信息
      */
+    public void setTrainingList(List<Training> trainingList) {
+        this.trainingList = trainingList;
+    }
 
-    public void setTraining(String Training) {
-        this.Training = Training;
+    /**
+     * @see java.lang.Object#equals(Object)
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Person)) {
+            return false;
+        }
+        Person rhs = (Person) object;
+        return new EqualsBuilder().append(this.id, rhs.id).isEquals();
+    }
+
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(1358819275, -1185650891).append(this.id).toHashCode();
     }
 
 }
