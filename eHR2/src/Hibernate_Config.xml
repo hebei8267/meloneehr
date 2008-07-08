@@ -69,6 +69,10 @@
 				<value>cn.hb.entity.hr.personnel.ContactAddress</value>
 				<value>cn.hb.entity.hr.personnel.Person</value>
 				<!-- -->
+				<value>cn.hb.entity.hr.organization.Organization</value>
+				<value>cn.hb.entity.hr.organization.JobPosition</value>
+				<value>cn.hb.entity.hr.organization.Organization_JobPosition_Relate</value>
+				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>

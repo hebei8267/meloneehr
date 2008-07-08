@@ -3,17 +3,32 @@ package cn.hb.entity.hr.organization;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import cn.hb.core.bean.AbstractEntityBean;
 import cn.hb.entity.dictionary.organization.OrganizationType;
 import cn.hb.entity.dictionary.communal.Country;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.NaturalId;
 
 /**
  * @author kaka
  * 
  * 组织
  */
+@Entity
+@Table(name = "W_ORGANIZATION")
 public class Organization extends AbstractEntityBean {
 
     private static final long serialVersionUID = -2591815652312982010L;
@@ -29,9 +44,6 @@ public class Organization extends AbstractEntityBean {
 
     /** 名称 */
     private String name;
-
-    /** 简称 */
-    private String shortName;
 
     /** 地址 */
     private String address;
@@ -49,7 +61,7 @@ public class Organization extends AbstractEntityBean {
     private String endDate;
 
     /** 撤销原因 */
-    private String endDescription;
+    private String endNote;
 
     /** 组织类型ID */
     private String organizationTypeID;
@@ -80,6 +92,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 编号
      */
+    @NaturalId
+    @Column(name = "ORGANIZATION_ID", nullable = false, length = 20)
     public String getId() {
         return id;
     }
@@ -89,6 +103,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 设立时间
      */
+    @NaturalId
+    @Column(name = "START_DATE", nullable = false, length = 8)
     public String getStartDate() {
         return startDate;
     }
@@ -98,17 +114,10 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 名称
      */
+    @Basic
+    @Column(name = "NAME", nullable = false, length = 20)
     public String getName() {
         return name;
-    }
-
-    /**
-     * 取得简称
-     * 
-     * @return 简称
-     */
-    public String getShortName() {
-        return shortName;
     }
 
     /**
@@ -116,6 +125,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 地址
      */
+    @Basic
+    @Column(name = "ADDRESS", nullable = false, length = 40)
     public String getAddress() {
         return address;
     }
@@ -125,6 +136,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 电话号码
      */
+    @Basic
+    @Column(name = "TELEPHONE_NUM", nullable = false, length = 20)
     public String getTelephone() {
         return telephone;
     }
@@ -134,6 +147,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 传真号码
      */
+    @Basic
+    @Column(name = "FAX_NUM", length = 20)
     public String getFax() {
         return fax;
     }
@@ -143,6 +158,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 组织详细描述
      */
+    @Basic
+    @Column(name = "NOTE")
     public String getOrgNote() {
         return orgNote;
     }
@@ -152,6 +169,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 撤销时间
      */
+    @Basic
+    @Column(name = "END_DATE", nullable = false, length = 8)
     public String getEndDate() {
         return endDate;
     }
@@ -161,8 +180,10 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 撤销原因
      */
-    public String getEndDescription() {
-        return endDescription;
+    @Basic
+    @Column(name = "END_NOTE")
+    public String getEndNote() {
+        return endNote;
     }
 
     /**
@@ -170,6 +191,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 组织类型ID
      */
+    @Basic
+    @Column(name = "ORGANIZATION_TYPE_ID", nullable = false, length = 20)
     public String getOrganizationTypeID() {
         return organizationTypeID;
     }
@@ -179,6 +202,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 组织类型
      */
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_TYPE_H_ID")
     public OrganizationType getOrganizationType() {
         return organizationType;
     }
@@ -188,6 +213,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 子组织
      */
+    @OneToMany(mappedBy = "parentOrganization", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
     public List<Organization> getSubOrganizationList() {
         return subOrganizationList;
     }
@@ -197,6 +224,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return Index
      */
+    @Basic
+    @Column(name = "_INDEX")
     public Integer getIndex() {
         return index;
     }
@@ -206,6 +235,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 父组织
      */
+    @Basic
+    @Column(name = "PARENT_ORGANIZATION_ID", length = 20)
     public String getParentOrganizationID() {
         return parentOrganizationID;
     }
@@ -215,6 +246,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 父组织
      */
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ORGANIZATION_H_ID")
     public Organization getParentOrganization() {
         return parentOrganization;
     }
@@ -224,6 +257,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 国家ID
      */
+    @Basic
+    @Column(name = "LOCAL_COUNTRY_ID", nullable = false, length = 20)
     public String getLocalCountryID() {
         return localCountryID;
     }
@@ -233,6 +268,8 @@ public class Organization extends AbstractEntityBean {
      * 
      * @return 国家
      */
+    @ManyToOne
+    @JoinColumn(name = "LOCAL_COUNTRY_H_ID")
     public Country getLocalCountry() {
         return localCountry;
     }
@@ -262,15 +299,6 @@ public class Organization extends AbstractEntityBean {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * 设置简称
-     * 
-     * @param shortName 简称
-     */
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     /**
@@ -321,10 +349,10 @@ public class Organization extends AbstractEntityBean {
     /**
      * 设置撤销原因
      * 
-     * @param endDescription 撤销原因
+     * @param endNote 撤销原因
      */
-    public void setEndDescription(String endDescription) {
-        this.endDescription = endDescription;
+    public void setEndNote(String endNote) {
+        this.endNote = endNote;
     }
 
     /**
@@ -332,7 +360,7 @@ public class Organization extends AbstractEntityBean {
      * 
      * @param organizationTypeID 组织类型ID
      */
-    public void setOrganizationTypeID(String organizationTypeID) {
+    protected void setOrganizationTypeID(String organizationTypeID) {
         this.organizationTypeID = organizationTypeID;
     }
 
@@ -342,6 +370,9 @@ public class Organization extends AbstractEntityBean {
      * @param organizationType 组织类型
      */
     public void setOrganizationType(OrganizationType organizationType) {
+        if (organizationType != null) {
+            this.organizationTypeID = organizationType.getId();
+        }
         this.organizationType = organizationType;
     }
 
@@ -354,12 +385,40 @@ public class Organization extends AbstractEntityBean {
         this.subOrganizationList = subOrganizationList;
     }
 
+    public void addSubOrganization(Organization organization) {
+        int index = 1;
+        for (Organization _organization : subOrganizationList) {
+            if (_organization.getIndex() != null) {
+                _organization.setIndex(index);
+                index++;
+            }
+        }
+
+        organization.setIndex(index);
+        this.subOrganizationList.add(organization);
+    }
+
+    public void removeSubNativeplace(Organization organization) {
+        if (!subOrganizationList.contains(organization)) {
+            return;
+        }
+        subOrganizationList.remove(organization);
+
+        int index = 1;
+        for (Organization _organization : subOrganizationList) {
+            if (_organization.getIndex() != null) {
+                _organization.setIndex(index);
+                index++;
+            }
+        }
+    }
+
     /**
      * 设置Index
      * 
      * @param index Index
      */
-    public void setIndex(Integer index) {
+    protected void setIndex(Integer index) {
         this.index = index;
     }
 
@@ -368,7 +427,7 @@ public class Organization extends AbstractEntityBean {
      * 
      * @param parentOrganizationID 父组织
      */
-    public void setParentOrganizationID(String parentOrganizationID) {
+    protected void setParentOrganizationID(String parentOrganizationID) {
         this.parentOrganizationID = parentOrganizationID;
     }
 
@@ -378,6 +437,9 @@ public class Organization extends AbstractEntityBean {
      * @param parentOrganization 父组织
      */
     public void setParentOrganization(Organization parentOrganization) {
+        if (parentOrganization != null) {
+            this.parentOrganizationID = parentOrganization.getId();
+        }
         this.parentOrganization = parentOrganization;
     }
 
@@ -386,7 +448,7 @@ public class Organization extends AbstractEntityBean {
      * 
      * @param localCountryID 国家ID
      */
-    public void setLocalCountryID(String localCountryID) {
+    protected void setLocalCountryID(String localCountryID) {
         this.localCountryID = localCountryID;
     }
 
@@ -396,6 +458,9 @@ public class Organization extends AbstractEntityBean {
      * @param localCountry 国家
      */
     public void setLocalCountry(Country localCountry) {
+        if (localCountry != null) {
+            this.localCountryID = localCountry.getId();
+        }
         this.localCountry = localCountry;
     }
 

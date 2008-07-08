@@ -1,4 +1,4 @@
-package cn.hb.entity.hr.organization;
+package cn.hb.entity.hr.employment;
 
 import cn.hb.core.bean.AbstractEntityBean;
 
