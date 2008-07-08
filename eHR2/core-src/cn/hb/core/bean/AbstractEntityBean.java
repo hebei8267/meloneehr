@@ -13,7 +13,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public abstract class AbstractEntityBean extends BaseBean {
     /** Hibernate_ID */
-    private Integer hid;
+    private Integer hID;
     /** CreateDate_Timestamp */
     private Timestamp createDate;
     /** Create_User_ID */
@@ -28,12 +28,12 @@ public abstract class AbstractEntityBean extends BaseBean {
     @Id
     @Column(name = "H_ID", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getHid() {
-        return hid;
+    public Integer getHID() {
+        return hID;
     }
 
-    public void setHid(Integer hid) {
-        this.hid = hid;
+    public void setHID(Integer hid) {
+        this.hID = hid;
     }
 
     @Basic

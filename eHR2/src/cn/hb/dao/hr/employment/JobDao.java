@@ -1,0 +1,12 @@
+package cn.hb.dao.hr.employment;
+
+import org.springframework.stereotype.Component;
+import cn.hb.core.dao.impl.HibernateDaoImpl;
+import cn.hb.entity.hr.employment.Job;
+
+/**
+ * 职位Dao
+ */
+@Component("jobDao")
+public class JobDao extends HibernateDaoImpl<Job> {
+}
