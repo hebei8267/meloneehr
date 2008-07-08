@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
@@ -136,7 +135,7 @@ public class Education extends AbstractEntityBean {
      * 
      * @return 个人基本信息
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PERSON_H_ID")
     public Person getPerson() {
         return person;
