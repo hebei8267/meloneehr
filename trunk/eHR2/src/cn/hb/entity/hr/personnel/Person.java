@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,6 +35,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_PERSON")
+@NamedQueries( { @NamedQuery(name = "Person.getPersonByID", query = "select obj from Person obj where obj.id = ? "), })
 public class Person extends AbstractEntityBean {
 
     private static final long serialVersionUID = -1469408001002812874L;
