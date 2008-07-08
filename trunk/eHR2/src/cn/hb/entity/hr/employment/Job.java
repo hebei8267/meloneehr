@@ -8,19 +8,16 @@ public class Job {
     }
 
     /** 组织编号 */
-    private String OrganizationID;
+    private String organizationID;
 
     /** 职务编号 */
-    private String JobPositionID;
+    private String jobPositionID;
 
     /** 设立时间 */
     private String startDate;
 
     /** 名称 */
     private String name;
-
-    /** 简称 */
-    private String shortName;
 
     /** 编制人数 */
     private Integer assignmentSize;
@@ -35,9 +32,12 @@ public class Job {
     private String endDate;
 
     /** 撤销原因 */
-    private String endDescription;
+    private String endNote;
 
     /** 是否为该组织的负责人 */
     private Boolean isManager;
+
+    /** 员工-职位 */
+    private Staff_Job_Relate[] Staff_Job_Relate;
 
 }
