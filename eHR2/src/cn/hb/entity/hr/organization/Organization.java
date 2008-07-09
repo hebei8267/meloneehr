@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,6 +31,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_ORGANIZATION")
+@NamedQueries( { @NamedQuery(name = "Organization.getOrganizationByID", query = "select obj from Organization obj where obj.id = ? "), })
 public class Organization extends AbstractEntityBean {
 
     private static final long serialVersionUID = -2591815652312982010L;
@@ -126,7 +129,7 @@ public class Organization extends AbstractEntityBean {
      * @return 地址
      */
     @Basic
-    @Column(name = "ADDRESS", nullable = false, length = 40)
+    @Column(name = "ADDRESS", length = 40)
     public String getAddress() {
         return address;
     }
@@ -137,7 +140,7 @@ public class Organization extends AbstractEntityBean {
      * @return 电话号码
      */
     @Basic
-    @Column(name = "TELEPHONE_NUM", nullable = false, length = 20)
+    @Column(name = "TELEPHONE_NUM", length = 20)
     public String getTelephone() {
         return telephone;
     }
@@ -192,7 +195,7 @@ public class Organization extends AbstractEntityBean {
      * @return 组织类型ID
      */
     @Basic
-    @Column(name = "ORGANIZATION_TYPE_ID", nullable = false, length = 20)
+    @Column(name = "ORGANIZATION_TYPE_ID", length = 20)
     public String getOrganizationTypeID() {
         return organizationTypeID;
     }
@@ -258,7 +261,7 @@ public class Organization extends AbstractEntityBean {
      * @return 国家ID
      */
     @Basic
-    @Column(name = "LOCAL_COUNTRY_ID", nullable = false, length = 20)
+    @Column(name = "LOCAL_COUNTRY_ID", length = 20)
     public String getLocalCountryID() {
         return localCountryID;
     }
