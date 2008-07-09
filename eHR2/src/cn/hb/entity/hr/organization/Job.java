@@ -1,6 +1,7 @@
-package cn.hb.entity.hr.employment;
+package cn.hb.entity.hr.organization;
 
 import cn.hb.core.bean.AbstractEntityBean;
+import cn.hb.entity.hr.employment.Staff_Job_Relate;
 
 /** 职位 */
 public class Job {

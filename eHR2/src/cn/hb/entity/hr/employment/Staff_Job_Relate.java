@@ -2,6 +2,7 @@ package cn.hb.entity.hr.employment;
 
 import cn.hb.core.bean.AbstractEntityBean;
 import cn.hb.entity.dictionary.employment.HoldingJobType;
+import cn.hb.entity.hr.organization.Job;
 
 /** 员工-职位 */
 public class Staff_Job_Relate {

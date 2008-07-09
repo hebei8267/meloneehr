@@ -1,7 +1,7 @@
 package cn.hb.dao.hr.employment;
 
 import cn.hb.core.test.dao.HibernateDaoTestCase;
-import cn.hb.entity.hr.employment.Job;
+import cn.hb.entity.hr.organization.Job;
 import cn.hb.dao.hr.employment.JobDao;
 
 /**
