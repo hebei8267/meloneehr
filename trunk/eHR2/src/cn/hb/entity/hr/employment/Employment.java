@@ -34,7 +34,7 @@ public class Employment {
     private Person person;
 
     /** 合同 */
-    private Contract[] contract;
+    private AbstractContract[] contract;
 
     /** 员工 */
     private Staff staff;

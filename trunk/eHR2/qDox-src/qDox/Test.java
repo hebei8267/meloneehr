@@ -22,10 +22,10 @@ public class Test {
 
         JavaDocBuilder builder = new JavaDocBuilder();
         File javaFile = new File(
-                "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\eHR2\\src\\cn\\hb\\entity\\hr\\organization\\Organization_JobPosition_Relate.java");
+                "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\eHR2\\src\\cn\\hb\\entity\\hr\\employment\\Contract.java");
 
         builder.addSource(new InputStreamReader(new FileInputStream(javaFile), CHARSET_NAME));
-        JavaClass cls = builder.getClassByName("cn.hb.entity.hr.organization.Organization_JobPosition_Relate");
+        JavaClass cls = builder.getClassByName("cn.hb.entity.hr.employment.Contract");
 
         JavaField[] fields = cls.getFields();
 
