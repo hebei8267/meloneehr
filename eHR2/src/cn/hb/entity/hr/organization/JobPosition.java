@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import cn.hb.core.bean.AbstractEntityBean;
 import cn.hb.entity.dictionary.organization.JobPositionType;
+import cn.hb.entity.dictionary.organization.Organization_JobPosition_RelateType;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.NaturalId;
@@ -42,6 +44,12 @@ public class JobPosition extends AbstractEntityBean {
     /** 职种(职务类型) */
     private JobPositionType jobPositionType;
 
+    /** 组织-职务关联类型(排斥_非排斥-关联)ID */
+    private String organization_JobPosition_RelateTypeID;
+
+    /** 组织-职务关联类型(排斥_非排斥-关联) */
+    private Organization_JobPosition_RelateType organization_JobPosition_RelateType;
+
     /**
      * 取得编号
      * 
@@ -59,7 +67,7 @@ public class JobPosition extends AbstractEntityBean {
      * @return 名称
      */
     @Basic
-    @Column(name = "NAME", nullable = false, length = 20)
+    @Column(name = "NAME", nullable = false, unique = true, length = 20)
     public String getName() {
         return name;
     }
@@ -95,6 +103,28 @@ public class JobPosition extends AbstractEntityBean {
     @JoinColumn(name = "JOB_POSITION_TYPE_H_ID")
     public JobPositionType getJobPositionType() {
         return jobPositionType;
+    }
+
+    /**
+     * 取得组织-职务关联类型(排斥_非排斥-关联)ID
+     * 
+     * @return 组织-职务关联类型(排斥_非排斥-关联)ID
+     */
+    @Basic
+    @Column(name = "ORGANIZATION_JOB_POSITION_RELATE_TYPE_ID", nullable = false, length = 20)
+    public String getOrganization_JobPosition_RelateTypeID() {
+        return organization_JobPosition_RelateTypeID;
+    }
+
+    /**
+     * 取得组织-职务关联类型(排斥_非排斥-关联)
+     * 
+     * @return 组织-职务关联类型(排斥_非排斥-关联)
+     */
+    @ManyToOne
+    @JoinColumn(name = "ORGANIZATION_JOB_POSITION_RELATE_TYPE_H_ID")
+    public Organization_JobPosition_RelateType getOrganization_JobPosition_RelateType() {
+        return organization_JobPosition_RelateType;
     }
 
     /**
@@ -143,6 +173,29 @@ public class JobPosition extends AbstractEntityBean {
             this.jobPositionTypeID = jobPositionType.getId();
         }
         this.jobPositionType = jobPositionType;
+    }
+
+    /**
+     * 设置组织-职务关联类型(排斥_非排斥-关联)ID
+     * 
+     * @param organization_JobPosition_RelateTypeID 组织-职务关联类型(排斥_非排斥-关联)ID
+     */
+    protected void setOrganization_JobPosition_RelateTypeID(String organization_JobPosition_RelateTypeID) {
+        this.organization_JobPosition_RelateTypeID = organization_JobPosition_RelateTypeID;
+    }
+
+    /**
+     * 设置组织-职务关联类型(排斥_非排斥-关联)
+     * 
+     * @param organization_JobPosition_RelateType 组织-职务关联类型(排斥_非排斥-关联)
+     */
+    public void setOrganization_JobPosition_RelateType(
+            Organization_JobPosition_RelateType organization_JobPosition_RelateType) {
+        if (organization_JobPosition_RelateType != null) {
+            this.organization_JobPosition_RelateTypeID = organization_JobPosition_RelateType.getMasterID()
+                    + organization_JobPosition_RelateType.getSlaveID();
+        }
+        this.organization_JobPosition_RelateType = organization_JobPosition_RelateType;
     }
 
     /**
