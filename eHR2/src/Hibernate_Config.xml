@@ -72,6 +72,7 @@
 				<value>cn.hb.entity.hr.organization.Organization</value>
 				<value>cn.hb.entity.hr.organization.JobPosition</value>
 				<value>cn.hb.entity.hr.organization.Organization_JobPosition_Relate</value>
+				<value>cn.hb.entity.hr.organization.Job</value>
 				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
