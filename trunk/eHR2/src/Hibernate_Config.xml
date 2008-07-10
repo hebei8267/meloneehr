@@ -74,6 +74,11 @@
 				<value>cn.hb.entity.hr.organization.Organization_JobPosition_Relate</value>
 				<value>cn.hb.entity.hr.organization.Job</value>
 				<!-- -->
+				<value>cn.hb.entity.hr.employment.Contract</value>
+				<value>cn.hb.entity.hr.employment.Employee</value>
+				<value>cn.hb.entity.hr.employment.Employment</value>
+				<value>cn.hb.entity.hr.employment.Employee_Job_Relate</value>
+				<!-- -->
 				<value>cn.hb.entity.ui.MenuNode</value>
 				<!-- -->
 				<value>cn.hb.entity.security.User</value>
