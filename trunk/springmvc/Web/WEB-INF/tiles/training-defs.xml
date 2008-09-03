@@ -1,8 +1,0 @@
-<tiles-definitions>
-	<definition name="template" page="/tiles/mainTemplate.jsp">
-		<put name="title" value="Default title"/>
-		<put name="header" value="/tiles/header.jsp"/>
-		<put name="content" value="/tiles/defaultContentPage.jsp"/>
-		<put name="footer" value="/tiles/footer.jsp"/>
-	</definition>
-</tiles-definitions>
