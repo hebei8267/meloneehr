@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring-webmvc.jar" sourcepath="C:/eHR/eclipse-java-europa-winter-win32/eclipse/workspace/springmvc/Web/WEB-INF/lib/spring-webmvc-sources.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/json-lib-2.2.2-jdk15.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/ezmorph-1.0.5.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="output" path="Web/WEB-INF/classes"/>
+</classpath>
