@@ -40,7 +40,7 @@ public class NativeSQLQueryDaoImpl extends AbstractQueryDaoImpl {
 			}
 
 			// 创建动态查询对象
-			SQLQuery query = getSession().createSQLQuery(queryCommand.getQuerySql());
+			SQLQuery query = getSession(false).createSQLQuery(queryCommand.getQuerySql());
 			// 查询参数注入
 			for (int i = 0; i < values.length; i++) {
 				query.setParameter(paramNames[i], values[i]);
