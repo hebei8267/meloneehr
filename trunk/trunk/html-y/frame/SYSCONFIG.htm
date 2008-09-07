@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Melone-eHR 人力资源系统</title>
+        <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/reset-fonts-grids/reset-fonts-grids.css" />
+        <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/resize/assets/skins/sam/resize.css" />
+        <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/layout/assets/skins/sam/layout.css" />
+        <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/button/assets/skins/sam/button.css" />
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <script type="text/javascript" src="../yui2.5.2/build/yahoo/yahoo-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/event/event-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/dom/dom-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/element/element-beta-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/dragdrop/dragdrop-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/resize/resize-beta-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/animation/animation-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/layout/layout-beta-min.js">
+        </script>
+    </head>
+    <body class="yui-skin-sam">
+        <div id="top">
+            <br>
+            <!-- 标题栏 START -->
+            <center>
+                <table class="titleTable">
+                    <tr>
+                        <td colspan="2" class="loginUser">
+                            登录用户名称
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="loginDate">
+                            2008/09/06 10:43:49
+                        </td>
+                    </tr>
+                </table>
+            </center>
+            <!-- 标题栏 END --><!-- Link菜单 START -->
+            <table class="menuTable">
+                <tbody>
+                    <tr>
+                        <td>
+                            <center>
+                                <a href=""><span class="menuItem">HOME</span></a>
+                                &nbsp;&nbsp;<a href=""><span class="menuItem">系统设置</span></a>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Link菜单 END -->
+        </div>
+        <div id="left">
+            <p>
+                Left
+            </p>
+        </div>
+        <div id="center">
+            center center center
+        </div>
+        <script>
+            
+            (function(){
+                var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
+                
+                Event.onDOMReady(function(){
+                    var layout = new YAHOO.widget.Layout({
+                        units: [{
+                            position: 'top',
+                            height: 130,
+                            body: 'top'
+                        }, {
+                            position: 'left',
+                            width: 200,
+                            resize: true,
+                            body: 'left',
+                            gutter: '5px',
+                            collapseSize: 50,
+                            scroll: true,
+                            animate: true
+                        }, {
+                            position: 'center',
+                            gutter: '5px',
+                            body: 'center'
+                        }]
+                    });
+                    layout.render();
+                    
+                    
+                    
+                });
+            })();
+        </script>
+    </body>
+</html>

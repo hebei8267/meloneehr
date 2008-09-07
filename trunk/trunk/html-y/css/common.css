@@ -1,0 +1,102 @@
+body {
+}
+/* tile begin */
+.titleTable {
+    width: 100%;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-image: url(../images/EHR_Title.jpg);
+}
+
+.loginUser {
+    padding-right: 35px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.loginDate {
+    padding-right: 35px;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+/* tile end */
+.spiltLine {
+    width: 100%;
+    height: 5px;
+    background-image: url(../images/EHR_Line.jpg);
+    background-repeat: repeat-x;
+}
+/* app tile begin */
+.appTitleTable {
+    width: 100%;
+}
+
+.appTitle {
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.appScreenID {
+    text-align: right;
+    padding-right: 30px;
+}
+/* app tile end */
+.appFooterTable {
+    width: 100%;
+    height: 50px;
+    background-image: url(../images/EHR_TopLine.jpg);
+    background-repeat: repeat-x;
+}
+
+.tip {
+    padding-left: 10px;
+}
+/* app input item begin */
+.itemTitle {
+    background-color: #f0f0f0;
+    text-align: left;
+    padding-top: 3px;
+    padding-left: 30px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    border: 1px solid #000000;
+}
+
+.inputItemName {
+    background-color: #FFFFCC;
+    text-align: right;
+    padding-right: 5px;
+    border: 1px solid #000000;
+}
+
+.inputItemCell {
+    background-color: #FFFFCC;
+    padding-left: 10px;
+    padding-right: 5px;
+    border: 1px solid #000000;
+}
+/* app input item end */
+.buttonSubmitLong {
+    background-image: url(../images/EHR_Submit_Btn.jpg);
+    background-repeat: repeat-x;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonResetLong {
+    background-image: url(../images/EHR_Reset_Btn.jpg);
+    background-repeat: repeat-x;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+
