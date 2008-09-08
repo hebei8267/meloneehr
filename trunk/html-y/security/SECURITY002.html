@@ -3,16 +3,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/reset-fonts-grids/reset-fonts-grids.css">
-        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/default.css">
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript">
+            function modPwd(){
+                window.location = '../frame/SYS_MAIN_FRAME.html';
+            }
         </script>
     </head>
     <body>
         <div id="doc3" class="yui-t7">
             <!-- 标题栏 START -->
             <div id="hd">
-                <br>
                 <center>
                     <table class="titleTable">
                         <tr>
@@ -22,29 +24,23 @@
                         </tr>
                         <tr>
                             <td class="loginDate">
-                                2008/09/06 10:43:49
+                                2008/09/06 星期六
                             </td>
                         </tr>
                     </table>
                 </center>
             </div>
-            <!-- 标题栏 END --><!-- Link菜单 START -->
-            <table class="menuTable">
-                <tbody>
-                    <tr>
-                        <td>
-                            <center>
-                                <a href=""><span class="menuItem">HOME</span></a>
-                                &nbsp;&nbsp;<a href=""><span class="menuItem">系统设置</span></a>
-                            </center>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- Link菜单 END -->
+            <!-- 标题栏 END -->
             <div id="bd">
-                <!-- 操作说明 START -->
                 <div class="yui-g">
+                    <table class="spiltLine">
+                        <tr>
+                            <td>
+                                <!-- 分割线 -->
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
                     <table class="appTitleTable">
                         <tr>
                             <td class="appTitle">
@@ -55,14 +51,18 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="2" class="tip">
-                                <img src="../images/EHR_Tip.png">请输入您的原密码和新密码
+                                <!-- 操作说明 --><img src="../images/EHR_Tip.png">请输入您的原密码和新密码
                                 <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果不想变更，请选择上方的应用菜单
                             </td>
                         </tr>
                     </table>
-                    <!-- 操作说明 END -->
                     <br>
                     <br>
                     <table>
@@ -90,7 +90,7 @@
                                             原密码
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <input type="beforPassword" size="20" maxlength="20" name="password">
+                                            <input type="beforPassword" size="20" maxlength="20" name="password" class="inputText">
                                         </td>
                                     </tr>
                                     <tr>
@@ -98,7 +98,7 @@
                                             新密码
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <input type="password" size="20" maxlength="20" name="password">
+                                            <input type="password" size="20" maxlength="20" name="password" class="inputText">
                                         </td>
                                     </tr>
                                     <tr>
@@ -106,7 +106,7 @@
                                             新密码(确认用)
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <input type="password" size="20" maxlength="20" name="password">
+                                            <input type="password" size="20" maxlength="20" name="password" class="inputText">
                                         </td>
                                     </tr>
                                 </table><!-- 操作区域 END -->
@@ -117,7 +117,7 @@
                                         <td height="30" width="120" class="">
                                         </td>
                                         <td align="right">
-                                            <input value="变  更" class="buttonSubmitLong" type="button">
+                                            <input value="变  更" class="buttonSubmitLong" type="button" onclick="modPwd()">
                                         </td>
                                         <td width="20">
                                         </td>
