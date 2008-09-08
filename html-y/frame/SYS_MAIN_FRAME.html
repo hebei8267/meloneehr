@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/reset-fonts-grids/reset-fonts-grids.css" />
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/resize/assets/skins/sam/resize.css" />
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/layout/assets/skins/sam/layout.css" />
+        <link rel="stylesheet" type="text/css" href="../css/treeview.css" />
         <link rel="stylesheet" type="text/css" href="../css/default.css">
         <script type="text/javascript" src="../yui2.5.2/build/yahoo/yahoo-min.js">
         </script>
@@ -22,6 +23,8 @@
         <script type="text/javascript" src="../yui2.5.2/build/animation/animation-min.js">
         </script>
         <script type="text/javascript" src="../yui2.5.2/build/layout/layout-beta-min.js">
+        </script>
+        <script type="text/javascript" src="../yui2.5.2/build/treeview/treeview-min.js">
         </script>
     </head>
     <body class="yui-skin-sam">
@@ -44,9 +47,9 @@
             <!-- 标题栏 END -->
         </div>
         <div id="left">
-            <p>
-                LeftLeftLeftLeftLeftLeftLeftLeftLeftLeft
-            </p>
+        	<!--<div id="menuTreeDiv" style="white-space: nowrap;">-->
+            <div id="menuTreeDiv" style="white-space: nowrap;">
+            </div>
         </div>
         <div id="center">
             <p>
@@ -85,6 +88,62 @@
                     });
                     layout.render();
                 });
+                
+				// *******************************************
+                // Builder Tree
+				// *******************************************
+                function treeInit(){
+                    buildRandomTextNodeTree();
+                }
+                
+                //Function  creates the tree and 
+                //builds between 3 and 7 children of the root node:
+                function buildRandomTextNodeTree(){
+                
+                    //instantiate the tree:
+                    tree = new YAHOO.widget.TreeView("menuTreeDiv");
+                    
+                    for (var i = 0; i < Math.floor((Math.random() * 4) + 3); i++) {
+                        var tmpNode = new YAHOO.widget.TextNode("show label-" + i, tree.getRoot(), false);
+                        // tmpNode.collapse();
+                        // tmpNode.expand();
+                        // buildRandomTextBranch(tmpNode);
+                        buildLargeBranch(tmpNode);
+                    }
+                    
+                    // Expand and collapse happen prior to the actual expand/collapse,
+                    // and can be used to cancel the operation
+                    tree.subscribe("expand", function(node){
+                        YAHOO.log(node.index + " was expanded", "info", "example");
+                        // return false; // return false to cancel the expand
+                    });
+                    
+                    tree.subscribe("collapse", function(node){
+                        YAHOO.log(node.index + " was collapsed", "info", "example");
+                    });
+                    
+                    // Trees with TextNodes will fire an event for when the label is clicked:
+                    tree.subscribe("labelClick", function(node){
+                        YAHOO.log(node.index + " label was clicked", "info", "example");
+                    });
+                    
+                    //The tree is not created in the DOM until this method is called:
+                    tree.draw();
+                }
+                
+                //function builds 10 children for the node you pass in:
+                function buildLargeBranch(node){
+                    if (node.depth < 10) {
+                        YAHOO.log("buildRandomTextBranch: " + node.index, "info", "example");
+                        for (var i = 0; i < 10; i++) {
+                            new YAHOO.widget.TextNode(node.label + "-" + i, node, false);
+                        }
+                    }
+                }
+                
+                //Add an onDOMReady handler to build the tree when the document is ready
+                YAHOO.util.Event.onDOMReady(treeInit);
+                
             })();
         </script>
     </body>

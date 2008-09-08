@@ -1,0 +1,123 @@
+/*
+ Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+ Code licensed under the BSD License:
+ http://developer.yahoo.net/yui/license.txt
+ version: 2.5.2
+ */
+.ygtvitem {
+}
+
+.ygtvitem table {
+    margin-bottom: 0;
+    border: none;
+}
+
+.ygtvitem td {
+    border: none;
+    padding: 0;
+}
+
+.ygtvtn {
+    width: 17px;
+    height: 18px;
+    background: url(treeview-sprite.gif) 0 -5600px no-repeat;
+}
+
+.ygtvtm {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 -4000px no-repeat;
+}
+
+.ygtvtmh {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 -4800px no-repeat;
+}
+
+.ygtvtp {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(../images/folder.gif) !important;
+}
+
+.ygtvtph {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(../images/folder.gif) !important;
+}
+
+.ygtvln {
+    width: 17px;
+    height: 18px;
+    background: url(treeview-sprite.gif) 0 -1600px no-repeat;
+}
+
+.ygtvlm {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 0px no-repeat;
+}
+
+.ygtvlmh {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 -800px no-repeat;
+}
+
+.ygtvlp {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 -2400px no-repeat;
+}
+
+.ygtvlph {
+    width: 17px;
+    height: 18px;
+    cursor: pointer;
+    background: url(treeview-sprite.gif) 0 -3200px no-repeat;
+}
+
+.ygtvloading {
+    width: 17px;
+    height: 18px;
+    background: url(../images/loading.gif);
+    !important;
+}
+
+.ygtvdepthcell {
+    width: 17px;
+    height: 18px;
+    background: url(../images/elbow.gif);
+    !important;
+}
+
+.ygtvblankdepthcell {
+    width: 17px;
+    height: 18px;
+}
+
+.ygtvchildren {
+}
+
+* html .ygtvchildren {
+    height: 2%;
+}
+
+.ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover {
+    margin-left: 2px;
+    text-decoration: none;
+    background-color: white;
+}
+
+.ygtvspacer {
+    height: 18px;
+    width: 12px;
+}
