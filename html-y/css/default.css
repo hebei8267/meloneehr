@@ -47,8 +47,6 @@ body {
 .appFooterTable {
     width: 100%;
     height: 50px;
-    background-image: url(../images/EHR_TopLine.jpg);
-    background-repeat: repeat-x;
 }
 
 .tip {
@@ -77,6 +75,10 @@ body {
     padding-left: 10px;
     padding-right: 5px;
     border: 1px solid #000000;
+}
+
+.inputText:hover, .inputText:focus, .inputTextarea:hover, .inputTextarea:focus {
+    background: #FFFF00;
 }
 /* app input item end */
 .buttonSubmitLong {

@@ -3,16 +3,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="yui2.5.2/build/reset-fonts-grids/reset-fonts-grids.css">
-        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/default.css">
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript">
             function login(){
                 var chgpass = document.loginForm.change_password[1].checked;
                 if (chgpass == true) {
                     window.location = './security/SECURITY002.html';
-                }
-                else {
-                    window.location = './common/top.html';
+                } else {
+					window.location = './frame/SYS_MAIN_FRAME.html';
                 }
             }
         </script>
@@ -80,7 +79,7 @@
                                     <!-- 操作区域 START -->
                                     <table>
                                         <tr>
-                                            <td colspan="2" class="itemTitle" >
+                                            <td colspan="2" class="itemTitle">
                                                 用户登录信息
                                             </td>
                                         </tr>
@@ -89,7 +88,7 @@
                                                 用户名
                                             </td>
                                             <td class="inputItemCell" height="30" width="200">
-                                                <input type="text" size="20" maxlength="20" name="userid">
+                                                <input type="text" size="20" maxlength="20" name="userid" class="inputText">
                                             </td>
                                         </tr>
                                         <tr>
@@ -97,7 +96,7 @@
                                                 用户密码
                                             </td>
                                             <td class="inputItemCell" height="30" width="200">
-                                                <input type="password" size="20" maxlength="20" name="password">
+                                                <input type="password" size="20" maxlength="20" name="password" class="inputText">
                                             </td>
                                         </tr>
                                         <tr>

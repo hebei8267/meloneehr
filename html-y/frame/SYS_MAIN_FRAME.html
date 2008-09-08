@@ -6,8 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/reset-fonts-grids/reset-fonts-grids.css" />
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/resize/assets/skins/sam/resize.css" />
         <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/layout/assets/skins/sam/layout.css" />
-        <link rel="stylesheet" type="text/css" href="../yui2.5.2/build/button/assets/skins/sam/button.css" />
-        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/default.css">
         <script type="text/javascript" src="../yui2.5.2/build/yahoo/yahoo-min.js">
         </script>
         <script type="text/javascript" src="../yui2.5.2/build/event/event-min.js">
@@ -27,7 +26,6 @@
     </head>
     <body class="yui-skin-sam">
         <div id="top">
-            <br>
             <!-- 标题栏 START -->
             <center>
                 <table class="titleTable">
@@ -38,64 +36,54 @@
                     </tr>
                     <tr>
                         <td class="loginDate">
-                            2008/09/06 10:43:49
+                            2008/09/06 星期六
                         </td>
                     </tr>
                 </table>
             </center>
-            <!-- 标题栏 END --><!-- Link菜单 START -->
-            <table class="menuTable">
-                <tbody>
-                    <tr>
-                        <td>
-                            <center>
-                                <a href=""><span class="menuItem">HOME</span></a>
-                                &nbsp;&nbsp;<a href=""><span class="menuItem">系统设置</span></a>
-                            </center>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- Link菜单 END -->
+            <!-- 标题栏 END -->
         </div>
         <div id="left">
             <p>
-                Left
+                LeftLeftLeftLeftLeftLeftLeftLeftLeftLeft
             </p>
         </div>
         <div id="center">
-            center center center
+            <p>
+                center center center
+            </p>
         </div>
-        <script>
-            
+        <script type="text/javascript">
             (function(){
-                var Dom = YAHOO.util.Dom, Event = YAHOO.util.Event;
-                
-                Event.onDOMReady(function(){
+                YAHOO.util.Event.onDOMReady(function(){
                     var layout = new YAHOO.widget.Layout({
+                        minWidth: 1000,
                         units: [{
                             position: 'top',
-                            height: 130,
+                            height: 80,
+                            minHeight: 80,
+                            gutter: '0 5 0 5',
                             body: 'top'
                         }, {
                             position: 'left',
                             width: 200,
-                            resize: true,
+                            minWidth: 100,
+                            maxWidth: 300,
                             body: 'left',
-                            gutter: '5px',
-                            collapseSize: 50,
+                            gutter: '5 8 5 5',
+                            resize: true,
                             scroll: true,
                             animate: true
                         }, {
                             position: 'center',
-                            gutter: '5px',
-                            body: 'center'
+                            gutter: '5 5 5 0',
+                            body: 'center',
+                            resize: true,
+                            scroll: true,
+                            animate: true
                         }]
                     });
                     layout.render();
-                    
-                    
-                    
                 });
             })();
         </script>
