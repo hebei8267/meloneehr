@@ -86,6 +86,14 @@ function initConfigTree(){
                 leaf: true,
                 text: '国家信息',
                 hrefSrc: '../dictionary/common/country.html'
+            }, {
+                leaf: true,
+                text: '民族信息',
+                hrefSrc: '../dictionary/common/nation.html'
+            }, {
+                leaf: true,
+                text: '籍贯信息',
+                hrefSrc: '../dictionary/common/nativeplace.html'
             }]
         }, {
             leaf: true,
