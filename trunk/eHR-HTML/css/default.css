@@ -13,7 +13,7 @@ table {
 /* tile begin */
 .titleTable {
     width: 100%;
-    height: 80px;
+    height: 45px;
     background-repeat: no-repeat;
     background-image: url(../images/EHR_Title.jpg);
 }
