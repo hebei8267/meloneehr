@@ -35,7 +35,7 @@ Ext.onReady(function(){
             }, {
                 title: '菜单树',
                 border: false,
-				autoScroll: true
+                autoScroll: true
             }]
         }, new Ext.Panel({
             id: 'work',
@@ -82,63 +82,75 @@ function initConfigTree(){
         id: 'root',
         children: [{
             leaf: false,
+            text: '组织结构相关',
+            children: [{
+                leaf: true,
+                text: '组织',
+                hrefSrc: '../setting/organization/organization.html'
+            }]
+        }, {
+            leaf: false,
             text: '数据字典',
             children: [{
-                leaf: true,
-                text: '国家信息',
-                hrefSrc: '../dictionary/common/country.html'
+                leaf: false,
+                text: '公共相关',
+                children: [{
+                    leaf: true,
+                    text: '国家信息',
+                    hrefSrc: '../setting/common/country.html'
+                }]
             }, {
-                leaf: true,
-                text: '民族信息',
-                hrefSrc: '../dictionary/common/nation.html'
+                leaf: false,
+                text: '雇佣相关',
+                children: [{
+                    leaf: true,
+                    text: '雇佣类型',
+                    hrefSrc: '../setting/employment/employType.html'
+                }, {
+                    leaf: true,
+                    text: '合同类型',
+                    hrefSrc: '../setting/employment/contractType.html'
+                }, {
+                    leaf: true,
+                    text: '员工当前工作状态',
+                    hrefSrc: '../setting/employment/employeeWorkState.html'
+                }]
             }, {
-                leaf: true,
-                text: '籍贯信息',
-                hrefSrc: '../dictionary/common/nativeplace.html'
-            }]
-        }, {
-            leaf: false,
-            text: '雇佣相关',
-            children: [{
-                leaf: true,
-                text: '雇佣类型',
-                hrefSrc: '../dictionary/employment/employType.html'
+                leaf: false,
+                text: '组织相关',
+                children: [{
+                    leaf: true,
+                    text: '组织类型',
+                    hrefSrc: '../setting/organization/organizationType.html'
+                }, {
+                    leaf: true,
+                    text: '职种(职务类型)',
+                    hrefSrc: '../setting/organization/jobPositionType.html'
+                }]
             }, {
-                leaf: true,
-                text: '合同类型',
-                hrefSrc: '../dictionary/employment/contractType.html'
-            }, {
-                leaf: true,
-                text: '员工当前工作状态',
-                hrefSrc: '../dictionary/employment/employeeWorkState.html'
-            }]
-        }, {
-            leaf: false,
-            text: '组织相关',
-            children: [{
-                leaf: true,
-                text: '组织类型',
-                hrefSrc: '../dictionary/organization/organizationType.html'
-            }, {
-                leaf: true,
-                text: '职种(职务类型)',
-                hrefSrc: '../dictionary/organization/jobPositionType.html'
-            }]
-        }, {
-            leaf: false,
-            text: '人员相关',
-            children: [{
-                leaf: true,
-                text: '学历类型',
-                hrefSrc: '../dictionary/personnel/education.html'
-            }, {
-                leaf: true,
-                text: '教育专业',
-                hrefSrc: '../dictionary/personnel/educateSpecialty.html'
-            }, {
-                leaf: true,
-                text: '身份标识类型',
-                hrefSrc: '../dictionary/personnel/identifieationType.html'
+                leaf: false,
+                text: '人员相关',
+                children: [{
+                    leaf: true,
+                    text: '学历类型',
+                    hrefSrc: '../setting/personnel/educationType.html'
+                }, {
+                    leaf: true,
+                    text: '教育专业',
+                    hrefSrc: '../setting/personnel/educateSpecialty.html'
+                }, {
+                    leaf: true,
+                    text: '身份标识类型',
+                    hrefSrc: '../setting/personnel/identifieationType.html'
+                }, {
+                    leaf: true,
+                    text: '民族信息',
+                    hrefSrc: '../setting/personnel/nation.html'
+                }, {
+                    leaf: true,
+                    text: '籍贯信息',
+                    hrefSrc: '../setting/personnel/nativeplace.html'
+                }]
             }]
         }]
     });
