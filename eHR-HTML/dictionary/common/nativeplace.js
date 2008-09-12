@@ -3,62 +3,59 @@
  */
 Ext.onReady(function(){
 
-    var myData = [['N001', '汉族', '汉族是中国的主体民族'],
-	 ['N002', '蒙古族', '蒙古族现主要分布在中国内蒙古区'],
-	  ['N003', '回族', '回族是目前中国分布最广的少数民族'],
-	  ['N004', '藏族', '藏族是主要居住在中国境内的操藏语的民族']];
-    
-    // create the data store
-    var store = new Ext.data.SimpleStore({
-        fields: [{
-            name: 'countryID'
-        }, {
-            name: 'countryName'
-        }, {
-            name: 'description'
-        }]
-    });
-    store.loadData(myData);
-    
-    var sm = new Ext.grid.CheckboxSelectionModel({
-        header: '',
-        singleSelect: true,
-        listeners: {
-            rowselect: function(sm, row, rec){
-                //	setFromData(rec);
-            },
-            rowdeselect: function(sm, row, rec){
-                //		cleanFromData();
-            }
-        }
-    });
-    
-    // create the Grid
-    var grid = new Ext.grid.GridPanel({
-        store: store,
-        id: 'nativeplaceInfoGrid',
-        el: 'nativeplaceInfoGridDiv',
-        columns: [sm, new Ext.grid.RowNumberer({
-            header: '序号',// 自动行号
-            width: 35
-        }), {
-            id: 'countryID',
-            header: "籍贯编号",
-            width: 80,
-            sortable: true,
-            dataIndex: 'countryID'
-        }, {
-            id: 'countryName',
-            header: "籍贯名称",
-            width: 150,
-            sortable: true,
-            dataIndex: 'countryName'
-        }],
-        stripeRows: true,
+    var tree = new Ext.tree.TreePanel({
+        el: 'nativeplaceInfoTreeDiv',
+        useArrows: true,
+        animate: true,
+        enableDD: false,
+        containerScroll: true,
+        bodyBorder: false,
+        autoScroll: true,
+        rootVisible: false,
         height: 300,
         width: 300,
-        title: '籍贯信息列表'
+        // loader : new Ext.tree.TreeLoader({
+        // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
+        // })
+        loader: new Ext.tree.TreeLoader()
     });
     
-    grid.render();
+    var root = new Ext.tree.AsyncTreeNode({
+        draggable: false,
+        id: 'root',
+        children: [{
+            leaf: false,
+            text: '中国',
+            children: [{
+                leaf: true,
+                text: '北京'
+            }, {
+                leaf: true,
+                text: '上海'
+            }, {
+                leaf: false,
+                text: '湖北省',
+                children: [{
+                    leaf: true,
+                    text: '武汉市'
+                }, {
+                    leaf: true,
+                    text: '宜昌市'
+                }]
+            }, {
+                leaf: true,
+                text: '湖南省'
+            }]
+        }, {
+            leaf: true,
+            text: '日本'
+        }, {
+            leaf: true,
+            text: '美国'
+        }]
+    });
+    tree.setRootNode(root);
+    
+    tree.render();
+    root.expand();
 });

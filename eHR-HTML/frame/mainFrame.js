@@ -11,7 +11,7 @@ Ext.onReady(function(){
             id: 'toolBar',
             el: 'toolBarDiv',
             margins: '0 5 0 5',
-            height: 85
+            height: 45
         }), {
             region: 'west',
             id: 'menuTree',
@@ -34,7 +34,8 @@ Ext.onReady(function(){
                 html: '<div id="configTreeDiv"></div>'
             }, {
                 title: '菜单树',
-                border: false
+                border: false,
+				autoScroll: true
             }]
         }, new Ext.Panel({
             id: 'work',
@@ -96,9 +97,49 @@ function initConfigTree(){
                 hrefSrc: '../dictionary/common/nativeplace.html'
             }]
         }, {
-            leaf: true,
-            text: '111',
-            hrefSrc: '22222222222'
+            leaf: false,
+            text: '雇佣相关',
+            children: [{
+                leaf: true,
+                text: '雇佣类型',
+                hrefSrc: '../dictionary/employment/employType.html'
+            }, {
+                leaf: true,
+                text: '合同类型',
+                hrefSrc: '../dictionary/employment/contractType.html'
+            }, {
+                leaf: true,
+                text: '员工当前工作状态',
+                hrefSrc: '../dictionary/employment/employeeWorkState.html'
+            }]
+        }, {
+            leaf: false,
+            text: '组织相关',
+            children: [{
+                leaf: true,
+                text: '组织类型',
+                hrefSrc: '../dictionary/organization/organizationType.html'
+            }, {
+                leaf: true,
+                text: '职种(职务类型)',
+                hrefSrc: '../dictionary/organization/jobPositionType.html'
+            }]
+        }, {
+            leaf: false,
+            text: '人员相关',
+            children: [{
+                leaf: true,
+                text: '学历类型',
+                hrefSrc: '../dictionary/personnel/education.html'
+            }, {
+                leaf: true,
+                text: '教育专业',
+                hrefSrc: '../dictionary/personnel/educateSpecialty.html'
+            }, {
+                leaf: true,
+                text: '身份标识类型',
+                hrefSrc: '../dictionary/personnel/identifieationType.html'
+            }]
         }]
     });
     tree.setRootNode(root);
