@@ -5,14 +5,15 @@ Ext.onReady(function(){
 
     var tree = new Ext.tree.TreePanel({
         el: 'organizationInfoTreeDiv',
+        title: '组织',
         useArrows: true,
         animate: true,
         enableDD: false,
         containerScroll: true,
         bodyBorder: false,
         autoScroll: true,
-        rootVisible: false,
-        height: 300,
+        rootVisible: true,
+        height: 600,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
         // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
@@ -23,39 +24,36 @@ Ext.onReady(function(){
     var root = new Ext.tree.AsyncTreeNode({
         draggable: false,
         id: 'root',
+        text: '组织结构根节点',
         children: [{
             leaf: false,
-            text: '中国',
+            text: '＊＊软件公司',
             children: [{
                 leaf: true,
-                text: '北京'
+                text: '综合业务部'
             }, {
                 leaf: true,
-                text: '上海'
-            }, {
-                leaf: false,
-                text: '湖北省',
-                children: [{
-                    leaf: true,
-                    text: '武汉市'
-                }, {
-                    leaf: true,
-                    text: '宜昌市'
-                }]
+                text: '质量管理部'
             }, {
                 leaf: true,
-                text: '湖南省'
+                text: '开发一部'
+            }, {
+                leaf: true,
+                text: '开发二部'
             }]
-        }, {
-            leaf: true,
-            text: '日本'
-        }, {
-            leaf: true,
-            text: '美国'
         }]
     });
     tree.setRootNode(root);
     
     tree.render();
     root.expand();
+    
+    // 设立时间
+    var md = new Ext.form.DateField({
+        name: 'register_date',
+        width: 155,
+        altFormats: 'Y-m-d',
+        format: 'Y-m-d'
+    });
+    md.render('startDate'); // div-di
 });

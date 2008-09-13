@@ -5,6 +5,7 @@ Ext.onReady(function(){
 
     var tree = new Ext.tree.TreePanel({
         el: 'educateSpecialtyInfoTreeDiv',
+		title: '教育专业信息',
         useArrows: true,
         animate: true,
         enableDD: false,

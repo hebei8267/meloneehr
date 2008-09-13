@@ -5,6 +5,7 @@ Ext.onReady(function(){
 
     var tree = new Ext.tree.TreePanel({
         el: 'nativeplaceInfoTreeDiv',
+        title: '籍贯信息',
         useArrows: true,
         animate: true,
         enableDD: false,

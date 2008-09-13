@@ -57,7 +57,7 @@ Ext.onReady(function(){
         stripeRows: true,
         height: 300,
         width: 300,
-        title: '组织类型信息列表'
+        title: '组织类型信息'
     });
     
     grid.render();

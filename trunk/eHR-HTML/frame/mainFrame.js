@@ -33,7 +33,7 @@ Ext.onReady(function(){
                 autoScroll: true,
                 html: '<div id="configTreeDiv"></div>'
             }, {
-                title: '菜单树',
+                title: '菜单',
                 border: false,
                 autoScroll: true
             }]
@@ -57,7 +57,7 @@ Ext.onReady(function(){
     initConfigTree();
 });
 
-// 系统设置菜单树
+// 系统设置菜单
 function initConfigTree(){
     var tree = new Ext.tree.TreePanel({
         el: 'configTreeDiv',
@@ -77,7 +77,7 @@ function initConfigTree(){
     });
     
     var root = new Ext.tree.AsyncTreeNode({
-        text: '系统设置菜单树',
+        text: '系统设置菜单',
         draggable: false,
         id: 'root',
         children: [{
@@ -96,7 +96,7 @@ function initConfigTree(){
                 text: '公共相关',
                 children: [{
                     leaf: true,
-                    text: '国家信息',
+                    text: '国家',
                     hrefSrc: '../setting/common/country.html'
                 }]
             }, {
@@ -144,11 +144,11 @@ function initConfigTree(){
                     hrefSrc: '../setting/personnel/identifieationType.html'
                 }, {
                     leaf: true,
-                    text: '民族信息',
+                    text: '民族',
                     hrefSrc: '../setting/personnel/nation.html'
                 }, {
                     leaf: true,
-                    text: '籍贯信息',
+                    text: '籍贯',
                     hrefSrc: '../setting/personnel/nativeplace.html'
                 }]
             }]
