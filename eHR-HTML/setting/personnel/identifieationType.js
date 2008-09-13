@@ -55,7 +55,7 @@ Ext.onReady(function(){
         stripeRows: true,
         height: 300,
         width: 300,
-        title: '身份标识类型信息列表'
+        title: '身份标识类型信息'
     });
     
     grid.render();

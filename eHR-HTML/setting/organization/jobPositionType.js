@@ -5,6 +5,7 @@ Ext.onReady(function(){
 
     var tree = new Ext.tree.TreePanel({
         el: 'jobPositionTypeInfoTreeDiv',
+		title: '职种(职务类型)信息',
         useArrows: true,
         animate: true,
         enableDD: false,

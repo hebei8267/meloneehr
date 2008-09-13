@@ -60,7 +60,7 @@ Ext.onReady(function(){
         stripeRows: true,
         height: 300,
         width: 300,
-        title: '员工当前工作状态信息列表'
+        title: '员工当前工作状态信息'
     });
     
     grid.render();

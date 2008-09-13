@@ -57,7 +57,7 @@ Ext.onReady(function(){
         stripeRows: true,
         height: 300,
         width: 300,
-        title: '民族信息列表'
+        title: '民族信息'
     });
     
     grid.render();
