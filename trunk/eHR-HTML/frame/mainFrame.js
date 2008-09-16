@@ -33,9 +33,10 @@ Ext.onReady(function(){
                 autoScroll: true,
                 html: '<div id="configTreeDiv"></div>'
             }, {
-                title: '菜单',
+                title: '人力资源',
                 border: false,
-                autoScroll: true
+                autoScroll: true,
+                html: '<div id="humanResTreeDiv"></div>'
             }]
         }, new Ext.Panel({
             id: 'work',
@@ -55,12 +56,13 @@ Ext.onReady(function(){
     }, this);
     
     initConfigTree();
+	initHumanResTree();
 });
 
-// 系统设置菜单
-function initConfigTree(){
-    var tree = new Ext.tree.TreePanel({
-        el: 'configTreeDiv',
+// 人力资源菜单
+function initHumanResTree(){
+	var tree = new Ext.tree.TreePanel({
+        el: 'humanResTreeDiv',
         useArrows: true,
         animate: true,
         enableDD: false,
@@ -96,7 +98,44 @@ function initConfigTree(){
                 text: '职位',
                 hrefSrc: '../setting/organization/job.html'
             }]
-        }, {
+        }]
+    });
+    tree.setRootNode(root);
+    
+    tree.render();
+    root.expand();
+    
+    tree.on("click", function(node, event){
+        if (node.isLeaf()) {
+            document.getElementById("workFrame").src = node.attributes.hrefSrc;
+        }
+    })
+}
+
+// 系统设置菜单
+function initConfigTree(){
+    var tree = new Ext.tree.TreePanel({
+        el: 'configTreeDiv',
+        useArrows: true,
+        animate: true,
+        enableDD: false,
+        containerScroll: true,
+        bodyBorder: false,
+        autoScroll: true,
+        autoWidth: true,
+        autoHeight: true,
+        rootVisible: false,
+        // loader : new Ext.tree.TreeLoader({
+        // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
+        // })
+        loader: new Ext.tree.TreeLoader()
+    });
+    
+    var root = new Ext.tree.AsyncTreeNode({
+        text: '系统设置菜单',
+        draggable: false,
+        id: 'root',
+        children: [{
             leaf: false,
             text: '数据字典',
             children: [{
