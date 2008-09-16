@@ -148,6 +148,14 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
+.buttonSubmit {
+    background-image: url(../images/submit_btn.jpg);
+    background-repeat: repeat-x;
+    width: 50px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 .buttonResetLong {
     background-image: url(../images/reset_btn.jpg);
@@ -157,11 +165,27 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
+.buttonReset {
+    background-image: url(../images/reset_btn.jpg);
+    background-repeat: repeat-x;
+    width: 50px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 .buttonDeleteLong {
     background-image: url(../images/delete_btn.jpg);
     background-repeat: repeat-x;
     width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+.buttonDelete {
+    background-image: url(../images/delete_btn.jpg);
+    background-repeat: repeat-x;
+    width: 50px;
     border: 1px solid #000000;
     text-decoration: none;
     font-weight: bold;
