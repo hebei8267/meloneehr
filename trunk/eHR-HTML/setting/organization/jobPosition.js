@@ -14,7 +14,7 @@ Ext.onReady(function(){
         bodyBorder: false,
         autoScroll: true,
         rootVisible: true,
-        height: 680,
+        height: 250,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
         // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
@@ -99,18 +99,18 @@ Ext.onReady(function(){
         }, {
             id: 'jobPositionName',
             header: "职务名称",
-            width: 100,
+            width: 90,
             sortable: true,
             dataIndex: 'jobPositionName'
         }, {
             id: 'jobPositionType',
             header: "职务类型",
-            width: 100,
+            width: 90,
             sortable: true,
             dataIndex: 'jobPositionType'
         }],
         stripeRows: true,
-        height: 200,
+        height: 250,
         width: 320,
         title: '职务信息'
     });

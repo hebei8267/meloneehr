@@ -13,7 +13,7 @@ Ext.onReady(function(){
         bodyBorder: false,
         autoScroll: true,
         rootVisible: true,
-        height: 630,
+        height: 620,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
         // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
