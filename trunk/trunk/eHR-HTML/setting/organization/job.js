@@ -14,7 +14,7 @@ Ext.onReady(function(){
         bodyBorder: false,
         autoScroll: true,
         rootVisible: true,
-        height: 780,
+        height: 250,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
         // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
@@ -49,29 +49,14 @@ Ext.onReady(function(){
     tree.render();
     root.expand();
     
-    // 设立时间
-    var startDate = new Ext.form.DateField({
-        name: 'register_date',
-        width: 155,
-        altFormats: 'Y-m-d',
-        format: 'Y-m-d'
-    });
-    startDate.render('startDate'); // div-di
-    // 撤销时间
-    var endDate = new Ext.form.DateField({
-        name: 'register_date',
-        width: 155,
-        altFormats: 'Y-m-d',
-        format: 'Y-m-d'
-    });
-    endDate.render('endDate'); // div-di
+    
     // ------------------------------------------------------------------------
-    // job grid
+    // jobPosition grid
     // ------------------------------------------------------------------------
     var myData = [['A001', '董事长', '2008-09-15', '1', '否', '是', '2028-09-15'],
-	 ['A002', '经理', '2008-09-15', '2', '否', '是', '2028-09-15'], 
-	 ['A003', '秘书', '2008-09-15', '3', '否', '否', '2028-09-15'],
-	  ['A004', '程序员', '2008-09-15', '10', '是', '否', '2028-09-15']];
+	 ['A002', '经理', '2008-09-15', '2', '否', '是', '2028-09-15'],
+	  ['A003', '秘书', '2008-09-15', '3', '否', '否', '2028-09-15'],
+	   ['A004', '程序员', '2008-09-15', '10', '是', '否', '2028-09-15']];
     
     // create the data store
     var store = new Ext.data.SimpleStore({
@@ -109,8 +94,8 @@ Ext.onReady(function(){
     // create the Grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        id: 'jobInfoGrid',
-        el: 'jobInfoGridDiv',
+        id: 'jobPositionInfoGrid',
+        el: 'jobPositionInfoGridDiv',
         columns: [sm, new Ext.grid.RowNumberer({
             header: '序号',// 自动行号
             width: 35
@@ -158,10 +143,28 @@ Ext.onReady(function(){
             dataIndex: 'endDate'
         }],
         stripeRows: true,
-        height: 200,
+        height: 250,
         width: 320,
         title: '职位信息'
     });
     
     grid.render();
+	
+	// 设立时间
+    var startDate = new Ext.form.DateField({
+        name: 'register_date',
+        width: 155,
+        altFormats: 'Y-m-d',
+        format: 'Y-m-d'
+    });
+    startDate.render('startDate'); // div-di
+    
+	// 撤销时间
+	var endDate = new Ext.form.DateField({
+        name: 'register_date',
+        width: 155,
+        altFormats: 'Y-m-d',
+        format: 'Y-m-d'
+    });
+    endDate.render('endDate'); // div-di
 });

@@ -47,21 +47,16 @@
                     <td colspan="2" class="tip">
                         <!-- 操作说明 --><img src="../../images/tip.png">职务信息维护&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="need">注意:[＊]为必填项</span>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[职务]&nbsp;(可多选&nbsp;--&nbsp;
-						<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[职务]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
                     </td>
                 </tr>
             </table>
             <br>
             <table>
                 <tr>
-                    <td>
+                    <td colspan="3">
                     </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
+                    <td align="right">
                         <!-- 按钮 START -->
                         <table>
                             <tr>
@@ -89,30 +84,31 @@
                     </td>
                     <td width="30">
                     </td>
-                    <td valign="top">
+                    <td>
+                        <div id="jobPositionInfoGridDiv">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td colspan="3">
                         <table>
                             <tr>
-                                <td colspan="2">
-                                    <div id="jobPositionInfoGridDiv">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <br>
-                                    <br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="itemTitle">
+                                <td colspan="4" class="itemTitle">
                                     职务详细信息
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    编号
+                                    编号<span class="need">　</span>
                                 </td>
-                                <td class="inputItemCell" height="30" width="200">
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
                                     <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="A001">
                                 </td>
                             </tr>
@@ -123,8 +119,6 @@
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText"/>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td class="inputItemName" height="30" width="100">
                                     职务类型<span class="need">＊</span>
                                 </td>
@@ -152,18 +146,18 @@
                                 <td class="inputItemName" height="30" width="100">
                                     适用组织范围<span class="need">＊</span>
                                 </td>
-                                <td class="inputItemCell" height="130" width="200">
+                                <td class="inputItemCell" height="140" width="200">
                                     <table>
                                         <tr>
-                                            <td>
+                                            <td style="padding-top: 5px;">
                                                 <input type="radio" name="aa" value="1" checked="true">适用组织
                                             </td>
-                                            <td>
+                                            <td style="padding-top: 5px;">
                                                 <input type="radio" name="aa" value="2">非适用组织
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">
+                                            <td style="padding-top: 5px;" colspan="2">
                                                 <select class="inputSelect" size="6" multiple="true">
                                                     <option>＊＊软件公司</option>
                                                     <option>综合业务部</option>
@@ -175,7 +169,7 @@
                                             <td width="2">
                                                 &nbsp;
                                             </td>
-                                            <td valign="top">
+                                            <td style="padding-top: 5px;" valign="top">
                                                 <input value="添加" class="buttonSubmit" type="button">
                                                 <br>
                                                 <br>
@@ -184,35 +178,32 @@
                                         </tr>
                                     </table>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
-                                    详细描述
+                                    详细描述<span class="need">　</span>
                                 </td>
-                                <td class="inputItemCell" height="115" width="200">
-                                    <textarea rows="5" cols="20" class="inputTextarea">
-                                    </textarea>
+                                <td class="inputItemCell" width="200">
+                                    <textarea rows="6" cols="20" class="inputTextarea"></textarea>
                                 </td>
-                            </tr>
-                            <tr height="50">
-                                <!-- 按钮 START -->
-                                <table>
-                                    <tr>
-                                        <td width="120">
-                                        </td>
-                                        <td align="right">
-                                            <input value="更  新" class="buttonSubmitLong" type="button">
-                                        </td>
-                                        <td width="20">
-                                        </td>
-                                        <td align="left">
-                                            <input value="重  置" class="buttonResetLong" type="reset">
-                                        </td>
-                                    </tr>
-                                </table><!-- 按钮 END -->
                             </tr>
                         </table>
                     </td>
+                </tr>
+                <tr height="15">
+                    <!-- 按钮 START -->
+                    <table>
+                        <tr>
+                            <td width="475">
+                            </td>
+                            <td align="right">
+                                <input value="更  新" class="buttonSubmitLong" type="button">
+                            </td>
+                            <td width="20">
+                            </td>
+                            <td align="left">
+                                <input value="重  置" class="buttonResetLong" type="reset">
+                            </td>
+                        </tr>
+                    </table><!-- 按钮 END -->
                 </tr>
             </table>
             <br>

@@ -37,6 +37,11 @@ Ext.onReady(function(){
                 border: false,
                 autoScroll: true,
                 html: '<div id="humanResTreeDiv"></div>'
+            }, {
+                title: '财务管理',
+                border: false,
+                autoScroll: true,
+                html: '<div id="financialTreeDiv"></div>'
             }]
         }, new Ext.Panel({
             id: 'work',
@@ -56,12 +61,12 @@ Ext.onReady(function(){
     }, this);
     
     initConfigTree();
-	initHumanResTree();
+    initHumanResTree();
 });
 
 // 人力资源菜单
 function initHumanResTree(){
-	var tree = new Ext.tree.TreePanel({
+    var tree = new Ext.tree.TreePanel({
         el: 'humanResTreeDiv',
         useArrows: true,
         animate: true,
@@ -81,24 +86,7 @@ function initHumanResTree(){
     var root = new Ext.tree.AsyncTreeNode({
         text: '系统设置菜单',
         draggable: false,
-        id: 'root',
-        children: [{
-            leaf: false,
-            text: '组织结构相关',
-            children: [{
-                leaf: true,
-                text: '组织',
-                hrefSrc: '../setting/organization/organization.html'
-            }, {
-                leaf: true,
-                text: '职务',
-                hrefSrc: '../setting/organization/jobPosition.html'
-            }, {
-                leaf: true,
-                text: '职位',
-                hrefSrc: '../setting/organization/job.html'
-            }]
-        }]
+        id: 'root'
     });
     tree.setRootNode(root);
     
@@ -136,6 +124,22 @@ function initConfigTree(){
         draggable: false,
         id: 'root',
         children: [{
+            leaf: false,
+            text: '组织结构相关',
+            children: [{
+                leaf: true,
+                text: '组织',
+                hrefSrc: '../setting/organization/organization.html'
+            }, {
+                leaf: true,
+                text: '职务',
+                hrefSrc: '../setting/organization/jobPosition.html'
+            }, {
+                leaf: true,
+                text: '职位',
+                hrefSrc: '../setting/organization/job.html'
+            }]
+        }, {
             leaf: false,
             text: '数据字典',
             children: [{
@@ -197,6 +201,14 @@ function initConfigTree(){
                     leaf: true,
                     text: '籍贯',
                     hrefSrc: '../setting/dictionary/personnel/nativeplace.html'
+                }]
+            }, {
+                leaf: false,
+                text: '财务相关',
+                children: [{
+                    leaf: true,
+                    text: '薪酬福利类型',
+                    hrefSrc: '../setting/dictionary/financial/salaryType.html'
                 }]
             }]
         }]
