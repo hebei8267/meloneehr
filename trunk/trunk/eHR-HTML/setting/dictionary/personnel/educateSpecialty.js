@@ -12,7 +12,7 @@ Ext.onReady(function(){
         containerScroll: true,
         bodyBorder: false,
         autoScroll: true,
-        rootVisible: false,
+        rootVisible: true,
         height: 300,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
@@ -24,6 +24,7 @@ Ext.onReady(function(){
     var root = new Ext.tree.AsyncTreeNode({
         draggable: false,
         id: 'root',
+		text: '教育专业结构根节点',
         children: [{
             leaf: true,
             text: '哲学'
