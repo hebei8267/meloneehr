@@ -14,7 +14,7 @@ Ext.onReady(function(){
         bodyBorder: false,
         autoScroll: true,
         rootVisible: true,
-        height: 680,
+        height: 780,
         width: 300,
         // loader : new Ext.tree.TreeLoader({
         // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
@@ -49,22 +49,46 @@ Ext.onReady(function(){
     tree.render();
     root.expand();
     
-    
+    // 设立时间
+    var startDate = new Ext.form.DateField({
+        name: 'register_date',
+        width: 155,
+        altFormats: 'Y-m-d',
+        format: 'Y-m-d'
+    });
+    startDate.render('startDate'); // div-di
+    // 撤销时间
+    var endDate = new Ext.form.DateField({
+        name: 'register_date',
+        width: 155,
+        altFormats: 'Y-m-d',
+        format: 'Y-m-d'
+    });
+    endDate.render('endDate'); // div-di
     // ------------------------------------------------------------------------
-    // jobPosition grid
+    // job grid
     // ------------------------------------------------------------------------
-    var myData = [['A001', '董事长', '企业管理类'], 
-	['A002', '经理', '企业管理类'], ['A003', '秘书', '行政类'], 
-	['A004', '程序员', '研发类']];
+    var myData = [['A001', '董事长', '2008-09-15', '1', '否', '是', '2028-09-15'],
+	 ['A002', '经理', '2008-09-15', '2', '否', '是', '2028-09-15'], 
+	 ['A003', '秘书', '2008-09-15', '3', '否', '否', '2028-09-15'],
+	  ['A004', '程序员', '2008-09-15', '10', '是', '否', '2028-09-15']];
     
     // create the data store
     var store = new Ext.data.SimpleStore({
         fields: [{
-            name: 'jobPositionID'
+            name: 'jobID'
         }, {
-            name: 'jobPositionName'
+            name: 'jobName'
         }, {
-            name: 'jobPositionType'
+            name: 'startDate'
+        }, {
+            name: 'assignmentSize'
+        }, {
+            name: 'allowExceed'
+        }, {
+            name: 'isManager'
+        }, {
+            name: 'endDate'
         }]
     });
     store.loadData(myData);
@@ -85,34 +109,58 @@ Ext.onReady(function(){
     // create the Grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        id: 'jobPositionInfoGrid',
-        el: 'jobPositionInfoGridDiv',
+        id: 'jobInfoGrid',
+        el: 'jobInfoGridDiv',
         columns: [sm, new Ext.grid.RowNumberer({
             header: '序号',// 自动行号
             width: 35
         }), {
-            id: 'jobPositionID',
-            header: "职务编号",
+            id: 'jobID',
+            header: "职位编号",
+            width: 70,
+            sortable: true,
+            dataIndex: 'jobID'
+        }, {
+            id: 'jobName',
+            header: "职位名称",
+            width: 70,
+            sortable: true,
+            dataIndex: 'jobName'
+        }, {
+            id: 'startDate',
+            header: "设立时间",
             width: 80,
-            sortable: true,
-            dataIndex: 'jobPositionID'
+            sortable: false,
+            dataIndex: 'startDate'
         }, {
-            id: 'jobPositionName',
-            header: "职务名称",
-            width: 100,
-            sortable: true,
-            dataIndex: 'jobPositionName'
+            id: 'assignmentSize',
+            header: "编制人数(人)",
+            width: 80,
+            sortable: false,
+            dataIndex: 'assignmentSize'
         }, {
-            id: 'jobPositionType',
-            header: "职务类型",
-            width: 100,
+            id: 'allowExceed',
+            header: "允许超编",
+            width: 70,
             sortable: true,
-            dataIndex: 'jobPositionType'
+            dataIndex: 'allowExceed'
+        }, {
+            id: 'isManager',
+            header: "组织负责人",
+            width: 70,
+            sortable: true,
+            dataIndex: 'isManager'
+        }, {
+            id: 'endDate',
+            header: "撤销时间",
+            width: 80,
+            sortable: false,
+            dataIndex: 'endDate'
         }],
         stripeRows: true,
         height: 200,
         width: 320,
-        title: '职务信息'
+        title: '职位信息'
     });
     
     grid.render();

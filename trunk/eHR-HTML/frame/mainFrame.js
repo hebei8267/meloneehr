@@ -91,6 +91,10 @@ function initConfigTree(){
                 leaf: true,
                 text: '职务',
                 hrefSrc: '../setting/organization/jobPosition.html'
+            }, {
+                leaf: true,
+                text: '职位',
+                hrefSrc: '../setting/organization/job.html'
             }]
         }, {
             leaf: false,

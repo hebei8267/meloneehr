@@ -14,7 +14,7 @@
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript" src="../../js/common.js">
         </script>
-        <script type="text/javascript" src="jobPosition.js">
+        <script type="text/javascript" src="job.js">
         </script>
     </head>
     <body>
@@ -23,7 +23,7 @@
             <table class="appTitleTable">
                 <tr>
                     <td class="appTitle">
-                        职务信息
+                        职位信息
                     </td>
                     <td class="appScreenID">
                         - ORGANIZATION-O 002 -
@@ -45,13 +45,13 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="tip">
-                        <!-- 操作说明 --><img src="../../images/tip.png">职务信息维护&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="need">注意:[＊]为必填项</span>
+                        <!-- 操作说明 --><img src="../../images/tip.png">职位信息维护&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="need">注意:[＊]为必填项</span>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加新的[职务],点击<span style="font-weight: bold;">添加</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加新的[职位],点击<span style="font-weight: bold;">添加</span>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[职务],选择要删除的[职务],点击<span style="font-weight: bold;">删除</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[职位],选择要删除的[职位],点击<span style="font-weight: bold;">删除</span>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改已有[职务],选择要修改的[职务],编辑后点击<span style="font-weight: bold;">更新</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改已有[职位],选择要修改的[职位],编辑后点击<span style="font-weight: bold;">更新</span>
                     </td>
                 </tr>
             </table>
@@ -96,7 +96,7 @@
                         <table>
                             <tr>
                                 <td colspan="2">
-                                    <div id="jobPositionInfoGridDiv">
+                                    <div id="jobInfoGridDiv">
                                     </div>
                                 </td>
                             </tr>
@@ -108,7 +108,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="itemTitle">
-                                    职务详细信息
+                                    职位详细信息
                                 </td>
                             </tr>
                             <tr>
@@ -129,63 +129,40 @@
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    职务类型<span class="need">＊</span>
+                                    设立时间<span class="need">＊</span>
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <select class="inputSelect">
-                                        <option></option>
-                                        <option>管理类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 企业管理类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 经营类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 财务类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 人力资源类</option>
-                                        <option>技术类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 研发类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 工艺类</option>
-                                        <option>营销类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售支持类</option>
-                                        <option>作业类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 操作类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 维修类</option>
-                                    </select>
+                                    <div id="startDate"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    适用组织范围<span class="need">＊</span>
+                                    编制人数<span class="need">＊</span>
                                 </td>
-                                <td class="inputItemCell" height="130" width="200">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type="radio" name="aa" value="1" checked="true">适用组织
-                                            </td>
-                                            <td>
-                                                <input type="radio" name="aa" value="2">非适用组织
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <select class="inputSelect" size="6" multiple="true">
-                                                    <option>＊＊软件公司</option>
-                                                    <option>综合业务部</option>
-                                                    <option>质量管理部</option>
-                                                    <option>开发一部</option>
-                                                    <option>开发二部</option>
-                                                </select>
-                                            </td>
-                                            <td width="2">
-                                                &nbsp;
-                                            </td>
-                                            <td valign="top">
-                                                <input value="添加" class="buttonSubmit" type="button">
-                                                <br>
-                                                <br>
-                                                <input value="删除" class="buttonDelete" type="button">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText"/>&nbsp;人
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    允许超编<span class="need">＊</span>
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                	&nbsp;&nbsp;
+                                    <input type="radio" name="aa" value="1" checked="true">否
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="aa" value="2">是
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    组织负责人<span class="need">＊</span>
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                	&nbsp;&nbsp;
+                                    <input type="radio" name="bb" value="1" checked="true">否
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="bb" value="2">是
                                 </td>
                             </tr>
                             <tr>
@@ -195,6 +172,22 @@
                                 <td class="inputItemCell" height="115" width="200">
                                     <textarea rows="5" cols="20" class="inputTextarea">
                                     </textarea>
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    撤销时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                	<div id="endDate"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    撤销原因
+                                </td>
+                                <td class="inputItemCell" height="115" width="200">
+                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
                                 </td>
                             </tr>
                             <tr height="50">
