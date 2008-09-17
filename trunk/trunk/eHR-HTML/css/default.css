@@ -100,10 +100,11 @@ table {
 
 .readonly {
     font: 13px / 1.231 arial, helvetica, clean, sans-serif;
-    padding: 1px;
+    padding:1px 3px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
-    width: 150px;
+    width: 147px;
+    height: 19px;
     color: gray;
     cursor: default;
     opacity: .6;
@@ -112,10 +113,11 @@ table {
 
 .inputText {
     font: 13px / 1.231 arial, helvetica, clean, sans-serif;
-    padding: 1px;
+    padding:1px 3px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
-    width: 150px;
+    width: 147px;
+    height: 19px;
 }
 
 .inputSelect {
