@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext/ext-all.js">
+        </script>
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css">
+        <title>Melone-eHR 人力资源系统</title>
+        <script type="text/javascript" src="../../js/common.js">
+        </script>
+        <script type="text/javascript" src="addOrganization.js">
+        </script>
+    </head>
+    <body>
+        <div class="defaultPopWindowBody">
+        	<br>
+            <table class="appTitleTable">
+                <tr>
+                    <td>
+                     <span class="appTitle">添加组织信息</span>
+                     <br>
+                     <span class="appScreenIDPopWindow">- ORGANIZATION 0011 -</span>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="spiltLine">
+                        <tr>
+                            <td>
+                                <!-- 分割线 -->
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tip">
+                        <!-- 操作说明 --><img src="../../images/tip.png"><span class="need">注意:[＊]为必填项</span>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table>
+                <tr>
+                    <td style="padding-left: 20px">
+                        &nbsp;
+                    </td>
+                    <td valign="top">
+                        <table>
+                            <tr>
+                                <td colspan="2" class="itemTitle">
+                                    组织详细信息
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    父组织名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="A001">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>组织类型
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                	<select class="inputSelect" id="orgType">
+                                		<option>&nbsp;</option>
+                                		<option>总部</option>
+										<option>分公司</option>
+										<option>子公司</option>
+										<option>部门</option>
+                                	</select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>设立时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="startDate"></div>
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>地址
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>所在地国家
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+									<select class="inputSelect" id="country">
+                                		<option>&nbsp;</option>
+                                		<option>中国</option>
+										<option>美国</option>
+										<option>日本</option>
+                                	</select>
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>电话号码
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    传真号码
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    详细描述
+                                </td>
+                                <td class="inputItemCell" height="115" width="200">
+                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    撤销时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                	<div id="endDate"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    撤销原因
+                                </td>
+                                <td class="inputItemCell" height="115" width="200">
+                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+                                </td>
+                            </tr>
+                            <tr height="10">
+                                <!-- 按钮 START -->
+                                <table>
+                                    <tr>
+                                        <td width="120">
+                                        </td>
+                                        <td align="right">
+                                            <input value="添  加" class="buttonSubmitLong" type="button">
+                                        </td>
+                                        <td width="20">
+                                        </td>
+                                        <td align="left">
+                                            <input value="关  闭" class="buttonResetLong" type="button" onclick="javascript:parent.close();">
+                                        </td>
+                                    </tr>
+                                </table><!-- 按钮 END -->
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </body>
+</html>
