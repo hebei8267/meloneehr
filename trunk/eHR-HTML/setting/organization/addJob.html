@@ -5,10 +5,16 @@
         <!-- ExtJS -->
         <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="../../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext/ext-all.js">
+        </script>
         <!-- ExtJS -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css">
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript" src="../../js/common.js">
+        </script>
+        <script type="text/javascript" src="addJob.js">
         </script>
     </head>
     <body>
@@ -60,8 +66,66 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
-                                    详细描述
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>所属职务
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="jobPosition">
+                                        <option>&nbsp;</option>
+                                        <option>董事长</option>
+                                        <option>经理</option>
+                                        <option>秘书</option>
+                                        <option>程序员</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>设立时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="startDate">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>编制人数
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText"/>&nbsp;人
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>允许超编
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    &nbsp;&nbsp;<input type="radio" name="aa" value="1" checked="true">否
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aa" value="2">是
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>组织负责人
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    &nbsp;&nbsp;<input type="radio" name="bb" value="1" checked="true">否
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="bb" value="2">是
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    撤销时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="endDate">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    撤销原因
                                 </td>
                                 <td class="inputItemCell" height="115" width="200">
                                     <textarea rows="5" cols="20" class="inputTextarea"></textarea>
@@ -89,5 +153,6 @@
                 </tr>
             </table>
         </div>
+        <br>
     </body>
 </html>

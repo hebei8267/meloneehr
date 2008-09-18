@@ -134,6 +134,14 @@ table {
     border: 1px solid #B5B8C8;
 }
 
+.inputMultSelect {
+    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    padding: 1px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 155px;
+}
+
 .inputTextarea {
     font: 13px / 1.231 arial, helvetica, clean, sans-serif;
     padding: 1px;
