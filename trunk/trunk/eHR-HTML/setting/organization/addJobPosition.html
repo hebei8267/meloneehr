@@ -5,10 +5,16 @@
         <!-- ExtJS -->
         <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="../../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext/ext-all.js">
+        </script>
         <!-- ExtJS -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css">
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript" src="../../js/common.js">
+        </script>
+        <script type="text/javascript" src="addJobPosition.js">
         </script>
     </head>
     <body>
@@ -60,6 +66,66 @@
                                 </td>
                             </tr>
                             <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>职务类型
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="jobPositionType">
+                                        <option>&nbsp;</option>
+                                        <option>管理类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 企业管理类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 经营类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 财务类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 人力资源类</option>
+                                        <option>技术类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 研发类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 工艺类</option>
+                                        <option>营销类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售支持类</option>
+                                        <option>作业类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 操作类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 维修类</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>适用组织范围
+                                </td>
+                                <td class="inputItemCell" height="170" width="200">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-top: 5px;">
+                                                <input type="radio" name="aa" value="1" checked="true">适用组织
+                                            </td>
+                                            <td style="padding-top: 5px;">
+                                                <input type="radio" name="aa" value="2">非适用组织
+                                            </td>
+                                        </tr>
+										<tr>
+                                            <td style="padding-top: 5px;" colspan="2">
+                                                <select class="inputMultSelect" size="6" multiple="true">
+                                                    <option>＊＊软件公司</option>
+                                                    <option>综合业务部</option>
+                                                    <option>质量管理部</option>
+                                                    <option>开发一部</option>
+                                                    <option>开发二部</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+										<tr>
+											<td style="padding-top: 5px;">
+                                                <input value="添加" class="buttonSubmit" type="button">
+                                            </td>
+											<td style="padding-top: 5px;">
+												<input value="删除" class="buttonDelete" type="button">
+											</td>
+										</tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
                                     详细描述
                                 </td>
@@ -89,5 +155,6 @@
                 </tr>
             </table>
         </div>
+        <br>
     </body>
 </html>

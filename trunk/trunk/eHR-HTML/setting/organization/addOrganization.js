@@ -2,7 +2,6 @@
  * @author kaka
  */
 Ext.onReady(function() {
-	alert(123);
 	var orgTypeCombo = new Ext.form.ComboBox({
 		triggerAction : 'all',
 		width : 155,
