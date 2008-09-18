@@ -1,10 +1,11 @@
 body {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
 }
 
 .defaultBody {
     min-width: 700px;
 }
+
 .defaultPopWindowBody {
     min-width: 300px;
 }
@@ -22,14 +23,14 @@ table {
 }
 
 .loginUser {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     padding-right: 35px;
     font-weight: bold;
     text-align: right;
 }
 
 .loginDate {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     padding-right: 35px;
     font-weight: bold;
     text-align: right;
@@ -58,6 +59,7 @@ table {
     text-align: right;
     padding-right: 30px;
 }
+
 .appScreenIDPopWindow {
     text-align: right;
     padding-left: 220px;
@@ -77,19 +79,17 @@ table {
 }
 /* app input item begin */
 .itemTitle {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
-    font-weight: bold;
-    text-align: left;
-    padding-top: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 3px;
+    overflow: hidden;
+    zoom: 1;
+    font: bold 13px arial, tahoma, verdana, sans-serif;
+    padding: 5px 3px 4px 5px;
     border: 1px solid #dcdcdc;
+    line-height: 15px;
     background: transparent url(../images/white-top-bottom.gif) repeat-x 0 -1px;
 }
 
 .inputItemName {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     background-color: #FFFFCC;
     text-align: right;
     padding-right: 5px;
@@ -106,8 +106,8 @@ table {
 }
 
 .readonly {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
-    padding:1px 3px;
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
     width: 147px;
@@ -119,8 +119,8 @@ table {
 }
 
 .inputText {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
-    padding:1px 3px;
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
     width: 147px;
@@ -128,14 +128,14 @@ table {
 }
 
 .inputSelect {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     padding: 1px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
 }
 
 .inputMultSelect {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     padding: 1px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
@@ -143,7 +143,7 @@ table {
 }
 
 .inputTextarea {
-    font: 13px / 1.231 arial, helvetica, clean, sans-serif;
+    font: 13px arial, helvetica, clean, sans-serif;
     padding: 1px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
@@ -164,6 +164,7 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
+
 .buttonSubmit {
     background-image: url(../images/submit_btn.jpg);
     background-repeat: repeat-x;
@@ -181,6 +182,7 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
+
 .buttonReset {
     background-image: url(../images/reset_btn.jpg);
     background-repeat: repeat-x;
@@ -198,6 +200,7 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
+
 .buttonDelete {
     background-image: url(../images/delete_btn.jpg);
     background-repeat: repeat-x;
