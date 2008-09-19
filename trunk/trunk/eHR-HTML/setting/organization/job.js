@@ -51,7 +51,7 @@ Ext.onReady(function(){
     
     
     // ------------------------------------------------------------------------
-    // jobPosition grid
+    // job grid
     // ------------------------------------------------------------------------
     var myData = [['A001', '董事长', '2008-09-15', '1', '否', '是', '2028-09-15'],
 	 ['A002', '经理', '2008-09-15', '2', '否', '是', '2028-09-15'],
@@ -94,8 +94,8 @@ Ext.onReady(function(){
     // create the Grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        id: 'jobPositionInfoGrid',
-        el: 'jobPositionInfoGridDiv',
+        id: 'jobInfoGrid',
+        el: 'jobInfoGridDiv',
         columns: [sm, new Ext.grid.RowNumberer({
             header: '序号',// 自动行号
             width: 35
