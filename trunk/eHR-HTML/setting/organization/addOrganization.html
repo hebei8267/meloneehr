@@ -21,11 +21,14 @@
         <div class="defaultPopWindowBody">
         	<br>
             <table class="appTitleTable">
+            	<tr>
+                	<td class="appTitle">
+                    	添加组织信息
+                    </td>
+                </tr>
                 <tr>
-                    <td>
-                     <span class="appTitle">添加组织信息</span>
-                     <br>
-                     <span class="appScreenIDPopWindow">- ORGANIZATION 0011 -</span>
+                    <td class="appScreenIDPopWindow">
+                   		- ORGANIZATION 0011 -
                     </td>
                 </tr>
                 <tr>
@@ -53,7 +56,7 @@
                     <td valign="top">
                         <table>
                             <tr>
-                                <td colspan="2" class="itemTitle">
+                                <td colspan="4" class="itemTitle">
                                     组织详细信息
                                 </td>
                             </tr>
@@ -61,7 +64,7 @@
                                 <td class="inputItemName" height="30" width="100">
                                     父组织名称
                                 </td>
-                                <td class="inputItemCell" height="30" width="200">
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
                                     <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="A001">
                                 </td>
                             </tr>
@@ -72,8 +75,6 @@
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
-                            </tr>
-                            <tr>
                                 <td class="inputItemName" height="30" width="100">
                                     <span class="need">＊</span>组织类型
                                 </td>
@@ -94,8 +95,6 @@
                                 <td class="inputItemCell" height="30" width="200">
                                     <div id="startDate"></div>
                                 </td>
-                            </tr>
-							<tr>
                                 <td class="inputItemName" height="30" width="100">
                                     <span class="need">＊</span>地址
                                 </td>
@@ -115,8 +114,6 @@
 										<option>日本</option>
                                 	</select>
                                 </td>
-                            </tr>
-							<tr>
                                 <td class="inputItemName" height="30" width="100">
                                     <span class="need">＊</span>电话号码
                                 </td>
@@ -131,16 +128,6 @@
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
-                                    详细描述
-                                </td>
-                                <td class="inputItemCell" height="115" width="200">
-                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
-                                </td>
-                            </tr>
-							<tr>
                                 <td class="inputItemName" height="30" width="100">
                                     撤销时间
                                 </td>
@@ -149,6 +136,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    详细描述
+                                </td>
+                                <td class="inputItemCell" height="115" width="200">
+                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+                                </td>
                                 <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
                                     撤销原因
                                 </td>
@@ -160,7 +153,7 @@
                                 <!-- 按钮 START -->
                                 <table>
                                     <tr>
-                                        <td width="120">
+                                        <td width="440">
                                         </td>
                                         <td align="right">
                                             <input value="添  加" class="buttonSubmitLong" type="button">
