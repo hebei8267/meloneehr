@@ -80,7 +80,9 @@ Ext.onReady(function() {
 		}, {
 			id : 'salaryTypeName',
 			header : "薪酬福利类型",
-			hidden : true,
+			hidden: true,
+            hideable: false,
+            menuDisabled: true,
 			dataIndex : 'salaryTypeName'
 		}, {
 			id : 'startDate',
