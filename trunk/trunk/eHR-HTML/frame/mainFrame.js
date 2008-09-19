@@ -89,13 +89,17 @@ function initFinancialTree(){
         draggable: false,
         id: 'root',
         children: [{
-        	leaf: false,
-           	text: '薪酬福利设定',
-          	children: [{
-          		leaf: true,
+            leaf: false,
+            text: '薪酬福利设定',
+            children: [{
+                leaf: true,
                 text: '薪酬福利',
                 hrefSrc: '../financial/setting/salary.html'
-          	}]
+            }, {
+                leaf: true,
+                text: '职位薪酬福利',
+                hrefSrc: '../financial/setting/jobSalary.html'
+            }]
         }]
     });
     tree.setRootNode(root);
