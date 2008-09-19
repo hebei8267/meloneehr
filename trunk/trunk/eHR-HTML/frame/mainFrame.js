@@ -62,7 +62,53 @@ Ext.onReady(function(){
     
     initConfigTree();
     initHumanResTree();
+    initFinancialTree();
 });
+
+// 财务管理菜单
+function initFinancialTree(){
+    var tree = new Ext.tree.TreePanel({
+        el: 'financialTreeDiv',
+        useArrows: true,
+        animate: true,
+        enableDD: false,
+        containerScroll: true,
+        bodyBorder: false,
+        autoScroll: true,
+        autoWidth: true,
+        autoHeight: true,
+        rootVisible: false,
+        // loader : new Ext.tree.TreeLoader({
+        // dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
+        // })
+        loader: new Ext.tree.TreeLoader()
+    });
+    
+    var root = new Ext.tree.AsyncTreeNode({
+        text: '财务管理菜单',
+        draggable: false,
+        id: 'root',
+        children: [{
+        	leaf: false,
+           	text: '薪酬福利设定',
+          	children: [{
+          		leaf: true,
+                text: '薪酬福利',
+                hrefSrc: '../financial/setting/salary.html'
+          	}]
+        }]
+    });
+    tree.setRootNode(root);
+    
+    tree.render();
+    root.expand();
+    
+    tree.on("click", function(node, event){
+        if (node.isLeaf()) {
+            document.getElementById("workFrame").src = node.attributes.hrefSrc;
+        }
+    })
+}
 
 // 人力资源菜单
 function initHumanResTree(){
@@ -84,7 +130,7 @@ function initHumanResTree(){
     });
     
     var root = new Ext.tree.AsyncTreeNode({
-        text: '系统设置菜单',
+        text: '人力资源菜单',
         draggable: false,
         id: 'root'
     });
