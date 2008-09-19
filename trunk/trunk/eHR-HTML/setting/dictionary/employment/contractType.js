@@ -42,13 +42,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'contractTypeID',
-            header: "合同类型编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'contractTypeID'
         }, {
             id: 'contractTypeName',
-            header: "合同类型名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'contractTypeName'

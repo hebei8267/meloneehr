@@ -101,13 +101,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'jobID',
-            header: "职位编号",
+            header: "编号",
             width: 70,
             sortable: true,
             dataIndex: 'jobID'
         }, {
             id: 'jobName',
-            header: "职位名称",
+            header: "名称",
             width: 70,
             sortable: true,
             dataIndex: 'jobName'

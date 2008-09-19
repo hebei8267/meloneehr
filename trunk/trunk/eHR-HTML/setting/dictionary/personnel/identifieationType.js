@@ -41,13 +41,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'identifieationTypeID',
-            header: "身份标识类型编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'identifieationTypeID'
         }, {
             id: 'identifieationTypeName',
-            header: "身份标识类型名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'identifieationTypeName'

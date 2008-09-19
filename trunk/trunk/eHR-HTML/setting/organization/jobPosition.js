@@ -99,13 +99,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'jobPositionID',
-            header: "职务编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'jobPositionID'
         }, {
             id: 'jobPositionName',
-            header: "职务名称",
+            header: "名称",
             width: 90,
             sortable: true,
             dataIndex: 'jobPositionName'

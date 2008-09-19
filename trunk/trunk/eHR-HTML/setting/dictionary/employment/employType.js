@@ -42,13 +42,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'employTypeID',
-            header: "雇佣类型编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'employTypeID'
         }, {
             id: 'employTypeName',
-            header: "雇佣类型名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'employTypeName'

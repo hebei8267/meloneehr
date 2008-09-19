@@ -40,13 +40,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'countryID',
-            header: "国家编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'countryID'
         }, {
             id: 'countryName',
-            header: "国家名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'countryName'
@@ -54,7 +54,7 @@ Ext.onReady(function(){
         stripeRows: true,
         height: 300,
         width: 300,
-        title: '国家信息'
+        title: '信息'
     });
     
     grid.render();

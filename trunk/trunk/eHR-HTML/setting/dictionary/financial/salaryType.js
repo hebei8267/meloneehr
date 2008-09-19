@@ -47,13 +47,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'countryID',
-            header: "薪酬福利类型编号",
+            header: "编号",
             width: 110,
             sortable: true,
             dataIndex: 'countryID'
         }, {
             id: 'countryName',
-            header: "薪酬福利类型名称",
+            header: "名称",
             width: 130,
             sortable: true,
             dataIndex: 'countryName'

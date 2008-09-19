@@ -48,13 +48,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'educationTypeID',
-            header: "学历类型编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'educationTypeID'
         }, {
             id: 'educationTypeName',
-            header: "学历类型名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'educationTypeName'

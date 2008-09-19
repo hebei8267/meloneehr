@@ -46,13 +46,13 @@ Ext.onReady(function(){
             width: 35
         }), {
             id: 'employeeWorkStateID',
-            header: "员工当前工作状态编号",
+            header: "编号",
             width: 80,
             sortable: true,
             dataIndex: 'employeeWorkStateID'
         }, {
             id: 'employeeWorkStateName',
-            header: "员工当前工作状态名称",
+            header: "名称",
             width: 150,
             sortable: true,
             dataIndex: 'employeeWorkStateName'
