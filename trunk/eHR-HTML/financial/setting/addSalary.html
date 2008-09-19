@@ -16,24 +16,21 @@
         <title>Melone-eHR 人力资源系统</title>
         <script type="text/javascript" src="../../js/common.js">
         </script>
-        <script type="text/javascript" src="salary.js">
+        <script type="text/javascript" src="addSalary.js">
         </script>
     </head>
     <body>
-        <div class="defaultBody">
-            <br>
+        <div class="defaultPopWindowBody">
+        	<br>
             <table class="appTitleTable">
-                <tr>
-                    <td class="appTitle">
-                        薪酬福利信息
-                    </td>
-                    <td class="appScreenID">
-                        - DICTIONARY-F 001 -
+            	<tr>
+                	<td class="appTitle">
+                    	添加薪酬福利信息
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <br>
+                    <td class="appScreenIDPopWindow">
+                   		- ORGANIZATION 0011 -
                     </td>
                 </tr>
                 <tr>
@@ -48,8 +45,6 @@
                 <tr>
                     <td colspan="2" class="tip">
                         <!-- 操作说明 --><img src="../../images/tip.png"><span class="need">注意:[＊]为必填项</span>
-                        <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[薪酬福利]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
                     </td>
                 </tr>
             </table>
@@ -60,46 +55,7 @@
                     <td style="padding-left: 20px">
                         &nbsp;
                     </td>
-                    <td>
-                        <div id="salaryInfoGridDiv">
-                        </div>
-                    </td>
-                </tr>
-				<tr>
-                    <td>
-                    	&nbsp;
-                    </td>
-				</tr>
-				<tr>
-                    <td style="padding-left: 20px">
-                        &nbsp;
-                    </td>
-                    <td>
-                        <!-- 按钮 START -->
-                        <table>
-                            <tr>
-                                <td align="right">
-                                    <input value="添  加" class="buttonSubmitLong" type="button" onclick="openSubWindow('addSalary.html','690','390')">
-                                </td>
-                                <td width="20">
-                                </td>
-                                <td align="left">
-                                    <input value="删  除" class="buttonDeleteLong" type="button">
-                                </td>
-                            </tr>
-                        </table><!-- 按钮 END -->
-                    </td>
-                </tr>
-				<tr>
-                    <td>
-                    	&nbsp;
-                    </td>
-				</tr>
-                <tr>
-                    <td style="padding-left: 20px">
-                        &nbsp;
-                    </td>
-                    <td>
+                    <td valign="top">
                         <table>
                             <tr>
                                 <td colspan="4" class="itemTitle">
@@ -108,31 +64,34 @@
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    编号
+                                   <span class="need">＊</span>名称
                                 </td>
-                                <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="A001">
-                                </td>
-                                <td class="inputItemName" height="30" width="100">
-                                    薪酬福利类型
-                                </td>
-                                <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="基本工资">
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>名称
+                                    <span class="need">＊</span>薪酬福利类型
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                	<select class="inputSelect" id="salaryType">
+                                		<option>&nbsp;</option>
+                                		<option>基本工资</option>
+										<option>岗位工资</option>
+										<option>工龄工资</option>
+										<option>职岗津贴</option>
+										<option>住房补贴</option>
+										<option>全勤奖</option>
+										<option>目标奖</option>
+										<option>通讯费</option>
+                                	</select>
                                 </td>
-                                <td class="inputItemName" height="30" width="100">
+								<td class="inputItemName" height="30" width="100">
                                     <span class="need">＊</span>设立时间
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <div id="startDate">
-                                    </div>
+                                    <div id="startDate"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -150,7 +109,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+							<tr>
                                 <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
                                     详细描述
                                 </td>
@@ -164,19 +123,19 @@
                                     <textarea rows="5" cols="20" class="inputTextarea"></textarea>
                                 </td>
                             </tr>
-                            <tr height="20">
+                            <tr height="10">
                                 <!-- 按钮 START -->
                                 <table>
                                     <tr>
                                         <td width="440">
                                         </td>
                                         <td align="right">
-                                            <input value="更  新" class="buttonSubmitLong" type="button">
+                                            <input value="添  加" class="buttonSubmitLong" type="button">
                                         </td>
                                         <td width="20">
                                         </td>
                                         <td align="left">
-                                            <input value="重  置" class="buttonResetLong" type="reset">
+                                            <input value="关  闭" class="buttonResetLong" type="button" onclick="javascript:parent.close();">
                                         </td>
                                     </tr>
                                 </table><!-- 按钮 END -->
@@ -185,20 +144,7 @@
                     </td>
                 </tr>
             </table>
-            <br>
-            <br>
-            <div>
-                <table class="appFooterTable">
-                    <tr>
-                        <td>
-                            <center>
-                                <a href="">Melone-eHR 人力资源系统</a>&nbsp;｜&nbsp;<a href="mailto:hebei198267@gmail.com">电子邮件</a>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <br>
         </div>
+        <br>
     </body>
 </html>
