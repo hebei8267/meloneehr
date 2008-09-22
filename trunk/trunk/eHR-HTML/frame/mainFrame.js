@@ -140,7 +140,7 @@ function initHumanResTree() {
 		children : [{
 			leaf : true,
 			text : '新增员工',
-			hrefSrc : ''
+			hrefSrc : '../personnel/personInfoTabs.html'
 		}, {
 			leaf : true,
 			text : '员工信息维护',
