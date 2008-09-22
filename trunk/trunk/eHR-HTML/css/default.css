@@ -144,12 +144,24 @@ table {
 
 .inputTextarea {
     font: 13px arial, helvetica, clean, sans-serif;
-    padding: 1px;
+    padding: 1px 3px;
     background: #fff url(../images/text-bg.gif) repeat-x 0 0;
     border: 1px solid #B5B8C8;
     width: 150px;
     word-wrap: break-word;
     overflow: auto;
+}
+
+.textareaReadonly {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 150px;
+    color: gray;
+    cursor: default;
+    opacity: .6;
+    -moz-opacity: .6;
 }
 
 .inputText:focus, .inputTextarea:focus, .inputSelect:focus {
