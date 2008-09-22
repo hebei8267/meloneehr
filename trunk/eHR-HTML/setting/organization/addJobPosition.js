@@ -1,7 +1,7 @@
 /**
  * @author kaka
  */
-Ext.onReady(function(){
+Ext.onReady(function() {
 	var jobPositionTypeCombo = new Ext.form.ComboBox({
 		triggerAction : 'all',
 		width : 155,

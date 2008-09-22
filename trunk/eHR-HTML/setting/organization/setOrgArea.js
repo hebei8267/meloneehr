@@ -2,7 +2,7 @@
  * @author kaka
  */
 Ext.onReady(function() {
-	
+
 	var tree = new Ext.tree.TreePanel({
 		el : 'organizationInfoTreeDiv',
 		title : '组织信息',
