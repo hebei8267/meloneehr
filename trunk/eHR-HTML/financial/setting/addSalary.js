@@ -20,7 +20,7 @@ Ext.onReady(function() {
 		format : 'Y-m-d'
 	});
 	endDate.render('endDate'); // div-di
-	
+
 	var salaryTypeCombo = new Ext.form.ComboBox({
 		triggerAction : 'all',
 		width : 155,
