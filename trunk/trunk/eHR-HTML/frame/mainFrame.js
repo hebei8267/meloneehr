@@ -28,20 +28,20 @@ Ext.onReady(function() {
 				animate : true
 			},
 			items : [{
-				title : '系统设置',
+				title : '人事管理',
 				border : false,
 				autoScroll : true,
-				html : '<div id="configTreeDiv"></div>'
-			}, {
-				title : '人力资源',
-				border : false,
-				autoScroll : true,
-				html : '<div id="humanResTreeDiv"></div>'
+				html : '<div id="personnelTreeDiv"></div>'
 			}, {
 				title : '财务管理',
 				border : false,
 				autoScroll : true,
 				html : '<div id="financialTreeDiv"></div>'
+			}, {
+				title : '系统设置',
+				border : false,
+				autoScroll : true,
+				html : '<div id="configTreeDiv"></div>'
 			}]
 		}, new Ext.Panel({
 			id : 'work',
@@ -117,7 +117,7 @@ function initFinancialTree() {
 // 人力资源菜单
 function initHumanResTree() {
 	var tree = new Ext.tree.TreePanel({
-		el : 'humanResTreeDiv',
+		el : 'personnelTreeDiv',
 		useArrows : true,
 		animate : true,
 		enableDD : false,
@@ -136,7 +136,20 @@ function initHumanResTree() {
 	var root = new Ext.tree.AsyncTreeNode({
 		text : '人力资源菜单',
 		draggable : false,
-		id : 'root'
+		id : 'root',
+		children : [{
+			leaf : true,
+			text : '新增员工',
+			hrefSrc : ''
+		}, {
+			leaf : true,
+			text : '员工信息维护',
+			hrefSrc : ''
+		}, {
+			leaf : true,
+			text : '合同管理',
+			hrefSrc : ''
+		}]
 	});
 	tree.setRootNode(root);
 
