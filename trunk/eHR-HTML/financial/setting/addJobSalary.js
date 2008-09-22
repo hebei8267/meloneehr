@@ -81,13 +81,13 @@ Ext.onReady(function() {
 		}), {
 			id : 'salaryID',
 			header : "编号",
-			width : 100,
+			width : 70,
 			sortable : true,
 			dataIndex : 'salaryID'
 		}, {
 			id : 'salaryName',
 			header : "名称",
-			width : 120,
+			width : 100,
 			sortable : true,
 			dataIndex : 'salaryName'
 		}, {
@@ -100,19 +100,19 @@ Ext.onReady(function() {
 		}, {
 			id : 'startDate',
 			header : "设立时间",
-			width : 120,
+			width : 100,
 			sortable : true,
 			dataIndex : 'startDate'
 		}, {
 			id : 'moneySum',
 			header : "数额(元)",
-			width : 120,
+			width : 100,
 			sortable : true,
 			dataIndex : 'moneySum'
 		}, {
 			id : 'endDate',
 			header : "撤销时间",
-			width : 120,
+			width : 100,
 			sortable : true,
 			dataIndex : 'endDate'
 		}],
