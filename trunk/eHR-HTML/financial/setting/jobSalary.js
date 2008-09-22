@@ -268,7 +268,7 @@ Ext.onReady(function() {
 			enableGroupingMenu : false
 		}),
 		height : 250,
-		width : 645,
+		width : 650,
 		title : '薪酬福利信息'
 	});
 
