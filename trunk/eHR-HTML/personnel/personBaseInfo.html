@@ -16,10 +16,31 @@
         <title>Melone-eHR 人力资源管理</title>
         <script type="text/javascript" src="../js/common.js">
         </script>
+        <script type="text/javascript" src="personBaseInfo.js">
+        </script>
     </head>
     <body>
         <div class="defaultBody">
             <table>
+                <tr>
+                    <td height="50" style="padding-left: 9px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="更  新" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="left">
+                                    <input value="重  置" class="buttonResetLong" type="reset">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 <tr>
                     <td style="padding-left: 9px">
                         &nbsp;
@@ -33,10 +54,23 @@
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
-                                <td class="inputItemName" rowspan="6" height="30" width="100">
+                                <td class="inputItemName" rowspan="6" height="30" width="100" valign="top" style="padding-top: 5px;">
                                     相片
                                 </td>
                                 <td class="inputItemCell" rowspan="6" height="30" width="200">
+                                    <img src="../photo/Sunset.jpg" width="195" height="140">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-top: 3px;">
+                                                <input value="添加" class="buttonSubmit" type="button">
+                                            </td>
+                                            <td width="20">
+                                            </td>
+                                            <td style="padding-top: 3px;">
+                                                <input value="删除" class="buttonDelete" type="button">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             <tr>
@@ -52,28 +86,41 @@
                                     <span class="need">＊</span>性别
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <select class="inputSelect" id="sex">
+                                        <option>&nbsp;</option>
+                                        <option>男</option>
+                                        <option>女</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>民族
+                                    <span class="need">＊</span>国籍
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <select class="inputSelect" id="country">
+                                        <option>&nbsp;</option>
+                                        <option>中国</option>
+                                        <option>美国</option>
+                                        <option>日本</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>婚姻状况
+                                    <span class="need">＊</span>有效证件类型
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <select class="inputSelect" id="identifieationType">
+                                        <option>&nbsp;</option>
+                                        <option>居民身份证</option>
+                                        <option>外国人签证</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>身份证
+                                    <span class="need">＊</span>证件编号
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
@@ -84,12 +131,25 @@
                                     <span class="need">＊</span>出生日期
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <div id="birthday">
+                                    </div>
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    年龄
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true">&nbsp;岁
                                 </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>年龄
+                                    民族
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    籍贯
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
@@ -97,42 +157,31 @@
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>最高学历
+                                    最高学历
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <select class="inputSelect" id="educationType">
+                                        <option>&nbsp;</option>
+                                        <option>小学</option>
+                                        <option>初中</option>
+                                        <option>高中</option>
+                                        <option>大学专科</option>
+                                        <option>大学本科</option>
+                                        <option>研究生</option>
+                                        <option>博士</option>
+                                        <option>博士后</option>
+                                        <option>其他</option>
+                                    </select>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>籍贯
+                                    婚姻状况
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>国家
-                                </td>
-                                <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>部门
-                                </td>
-                                <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>职位
-                                </td>
-                                <td class="inputItemCell" height="30" width="200">
-                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                    <select class="inputSelect" id="marriageState">
+                                        <option>&nbsp;</option>
+                                        <option>未婚</option>
+                                        <option>已婚</option>
+                                    </select>
                                 </td>
                             </tr>
                         </table>

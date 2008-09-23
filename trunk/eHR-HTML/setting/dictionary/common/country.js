@@ -55,7 +55,7 @@ Ext.onReady(function() {
 		stripeRows : true,
 		height : 300,
 		width : 300,
-		title : '信息'
+		title : '国家信息'
 	});
 
 	grid.render();

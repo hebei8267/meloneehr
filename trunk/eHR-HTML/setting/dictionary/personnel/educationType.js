@@ -58,7 +58,7 @@ Ext.onReady(function() {
 		stripeRows : true,
 		height : 300,
 		width : 300,
-		title : '学历类型信息'
+		title : '教育类型信息'
 	});
 
 	grid.render();
