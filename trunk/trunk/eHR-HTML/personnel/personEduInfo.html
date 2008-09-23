@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../ext/build/locale/ext-lang-zh_CN.js">
+        </script>
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../css/default.css">
+        <title>Melone-eHR 人力资源管理</title>
+        <script type="text/javascript" src="../js/common.js">
+        </script>
+        <script type="text/javascript" src="personEduInfo.js">
+        </script>
+    </head>
+    <body>
+        <div class="defaultBody">
+            <table>
+                <tr>
+                    <td height="50" style="padding-left: 9px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="添  加" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="left">
+                                    <input value="删  除" class="buttonDeleteLong" type="button">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 9px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <div id="eduInfoGridDiv">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="20" style="padding-left: 9px">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 9px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    编号
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true">
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>学校名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>教育类型
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="educationType">
+                                        <option>&nbsp;</option>
+                                        <option>小学</option>
+                                        <option>初中</option>
+                                        <option>高中</option>
+                                        <option>大学专科</option>
+                                        <option>大学本科</option>
+                                        <option>研究生</option>
+                                        <option>博士</option>
+                                        <option>博士后</option>
+                                        <option>其他</option>
+                                    </select>
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    教育专业
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="educateSpecialty">
+                                        <option>&nbsp;</option>
+                                        <option>哲学</option>
+                                        <option>经济学</option>
+                                        <option>法学</option>
+                                        <option>理学</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 数学类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 物理学类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 化学类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;|-- 电子信息科学类</option>
+                                        <option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- 电子信息科学与技术</option>
+										<option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- 光信息科学与技术</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>入学时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="eduStartDate">
+                                    </div>
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>毕业时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="eduEndDate">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    详细描述
+                                </td>
+                                <td class="inputItemCell" height="115" colspan="3">
+                                    <textarea rows="5" cols="20" class="inputTextarea" style="width: 470px;"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr height="50">
+                    <td colspan="2" align="right">
+                        <!-- 按钮 START -->
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="更  新" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="right">
+                                    <input value="重  置" class="buttonResetLong" type="reset">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

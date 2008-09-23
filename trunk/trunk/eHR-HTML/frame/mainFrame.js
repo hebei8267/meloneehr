@@ -18,8 +18,8 @@ Ext.onReady(function() {
 			el : 'menuTreeDiv',
 			title : '导航',
 			split : true,
-			width : 280,
-			minSize : 280,
+			width : 250,
+			minSize : 250,
 			maxSize : 400,
 			collapsible : true,
 			margins : '0 0 5 5',
@@ -246,7 +246,7 @@ function initConfigTree() {
 				text : '人员相关',
 				children : [{
 					leaf : true,
-					text : '学历类型',
+					text : '教育类型',
 					hrefSrc : '../setting/dictionary/personnel/educationType.html'
 				}, {
 					leaf : true,
