@@ -59,8 +59,8 @@ Ext.onReady(function(){
     // create the Grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        id: 'eduInfoGrid',
-        el: 'eduInfoGridDiv',
+        id: 'trainingInfoGrid',
+        el: 'trainingInfoGridDiv',
         columns: [sm, new Ext.grid.RowNumberer({
             header: '序号',// 自动行号
             width: 35
