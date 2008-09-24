@@ -22,13 +22,12 @@ Ext.onReady(function() {
 			}
 		}, {
 			title : '薪金福利信息'
-				// ,contentEl: 'personBaseInfo'
-				}, {
-					title : '教育经历信息',
-					contentEl : 'personEduInfo'
-				}, {
-					title : '培训经历信息'
-				// ,contentEl: 'personBaseInfo'
-				}]
+		}, {
+			title : '教育经历信息',
+			contentEl : 'personEduInfo'
+		}, {
+			title : '培训经历信息',
+			contentEl : 'personTrainingInfo'
+		}]
 	});
 });
