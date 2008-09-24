@@ -6,9 +6,8 @@ Ext.onReady(function(){
         id: 'personInfoTabs',
         renderTo: 'personInfoTabsDiv',
         activeTab: 0,
-        width: 690,
-        height: 410,
         plain: true,
+        width: 725,
         defaults: {
             autoScroll: true
         },
