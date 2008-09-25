@@ -36,8 +36,10 @@
                                 <td height="35">
                                     <!-- 操作说明 --><img src="../images/tip.png"><span class="need">注意:[＊]为必填项</span>
                                     <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[培训经历]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
-                                </td>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[合同,任职情况]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+                                	<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个时间段内,不能同时添加多份<span class="need">劳动</span>[合同]
+								</td>
                             </tr>
                             <tr>
                                 <td height="8">
@@ -89,6 +91,12 @@
                                     <span class="need">＊</span>雇佣类型
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="employType">
+                                        <option>&nbsp;</option>
+                                        <option>正式员工</option>
+                                        <option>契约员工</option>
+                                        <option>暂时实行生</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -100,6 +108,39 @@
                                 </td>
                             </tr>
                         </table>
+                    </td>
+                </tr>
+				<tr>
+                    <td height="10">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <!-- 按钮 START -->
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="更  新" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="right">
+                                    <input value="重  置" class="buttonResetLong" type="reset">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+                <tr>
+                    <td height="30">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <div id="contractInfoGridDiv">
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -128,79 +169,164 @@
                     <td>
                         <table>
                             <tr>
-                                <td>
-                                    <div id="contractInfoGridDiv">
-                                    </div>
+                                <td colspan="4" class="itemTitle">
+                                    合同详细信息
                                 </td>
-                                <td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    编号
                                 </td>
-                                <td>
-                                    <table>
-                                        <tr>
-                                            <td colspan="2" class="itemTitle">
-                                                合同详细信息
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100">
-                                                编号
-                                            </td>
-                                            <td class="inputItemCell" height="30" width="200">
-                                                <input type="text" size="20" maxlength="20" class="readonly" readonly="true">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100">
-                                                <span class="need">＊</span>合同名称
-                                            </td>
-                                            <td class="inputItemCell" height="30" width="200">
-                                                <input type="text" size="20" maxlength="20" class="inputText">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100">
-                                                <span class="need">＊</span>合同类型
-                                            </td>
-                                            <td class="inputItemCell" height="30" width="200">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100">
-                                                雇佣开始时间
-                                            </td>
-                                            <td class="inputItemCell" height="30" width="200">
-                                                <input type="text" size="20" maxlength="20" class="inputText">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100">
-                                                雇佣结束时间
-                                            </td>
-                                            <td class="inputItemCell" height="30" width="200">
-                                                <input type="text" size="20" maxlength="20" class="inputText">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>合同名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>合同类型
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <select class="inputSelect" id="contractType">
+                                        <option>&nbsp;</option>
+                                        <option>劳动合同</option>
+                                        <option>工作保密合同</option>
+                                        <option>培训合同</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>合同生效时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>合同失效时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <tr>
-                    <td height="20">
+				<tr>
+                    <td height="10">
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2" align="right">
+                        <!-- 按钮 START -->
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="更  新" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="right">
+                                    <input value="重  置" class="buttonResetLong" type="reset">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+				<tr>
+                    <td height="30">
+                    </td>
+                </tr>
+				<tr>
                     <td>
                     </td>
                     <td>
+                        <div id="jobInfoGridDiv">
+                        </div>
+                    </td>
+                </tr>
+				<tr>
+                    <td>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td height="40">
+                                </td>
+                                <td align="left" width="90">
+                                    <input value="添  加" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="left">
+                                    <input value="删  除" class="buttonDeleteLong" type="button">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+				<tr>
+                    <td>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="4" class="itemTitle">
+                                    任职情况详细信息
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>组织名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>职位名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>任职开始时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="jobStartDate"></div>
+                                </td>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>任职结束时间
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <div id="jobEndDate"></div>
+                                </td>
+                            </tr>
+							<tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <span class="need">＊</span>主／副
+                                </td>
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
+                                    <select class="inputSelect" id="isMainJob">
+                                        <option>副</option>
+                                        <option>主</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+				<tr>
+                    <td height="10">
                     </td>
                 </tr>
                 <tr>
-                    <td height="20">
-                    </td>
-                </tr>
-                <tr height="50">
                     <td colspan="2" align="right">
                         <!-- 按钮 START -->
                         <table>
