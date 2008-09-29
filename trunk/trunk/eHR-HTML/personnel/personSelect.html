@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../ext/build/locale/ext-lang-zh_CN.js">
+        </script>
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../css/default.css">
+        <title>Melone-eHR 人力资源管理</title>
+        <script type="text/javascript" src="../js/common.js">
+        </script>
+        <script type="text/javascript" src="personSelect.js">
+        </script>
+        <script type="text/javascript">
+            function showSearchTable(TagName){
+                var obj = document.getElementById(TagName);
+                if (obj.style.display == "") {
+                    obj.style.display = "none";
+                } else {
+                    obj.style.display = "";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="defaultBody">
+            <br>
+            <table class="appTitleTable">
+                <tr>
+                    <td class="appTitle">
+                        现有员工信息
+                    </td>
+                    <td class="appScreenID">
+                        - DICTIONARY-C 001 -
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="spiltLine">
+                        <tr>
+                            <td>
+                                <!-- 分割线 -->
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="2" class="tip">
+                        <!-- 操作说明 --><img src="../images/tip.png"><span class="need">注意:[☆]为可模糊检索项目</span>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td height="20">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 20px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <A onclick="showSearchTable('searchTable')" style="cursor:pointer;">
+                                    <FONT style="text-decoration:underline;">
+                                        检索条件　表示／非表示
+                                    </FONT>
+                                </A>
+                            </tr>
+                            <tr>
+                                <table id="searchTable">
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <table>
+                                            	<tr>
+                                            		<td height="30">
+                    								</td>
+                                            	</tr>
+												<tr>
+                                                    <td colspan="2" class="itemTitle">
+                                                        组织详细信息
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inputItemName" height="30" width="100">
+                                                        编号
+                                                    </td>
+                                                    <td class="inputItemCell" height="30" width="200">
+                                                        <input type="text" size="20" maxlength="20" class="readonly" readonly="true" value="A001">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
