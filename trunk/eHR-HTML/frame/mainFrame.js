@@ -144,7 +144,7 @@ function initHumanResTree() {
 		}, {
 			leaf : true,
 			text : '员工信息维护',
-			hrefSrc : ''
+			hrefSrc : '../personnel/personSelect.html'
 		}, {
 			leaf : true,
 			text : '合同管理',
