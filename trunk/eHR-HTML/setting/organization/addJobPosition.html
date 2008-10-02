@@ -44,7 +44,10 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="tip">
-                        <!-- 操作说明 --><img src="../../images/tip.png"><span class="need">注意:[＊]为必填项</span>
+                        <!-- 操作说明 --><img src="../../images/tip.png"><span class="need">注意:[<img src="../../images/cube-red.png">]为必填项</span>
+						<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[适用组织范围]&nbsp;(可多选&nbsp;--&nbsp;
+						<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
                     </td>
                 </tr>
             </table>
@@ -64,37 +67,23 @@
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>名称
+                                    <img src="../../images/cube-red.png">名称
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
                                     <input type="text" size="20" maxlength="20" class="inputText">
                                 </td>
                             	<td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>职务类型
+                                    <img src="../../images/cube-red.png">职务类型
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <select class="inputSelect" id="jobPositionType">
-                                        <option>&nbsp;</option>
-                                        <option>管理类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 企业管理类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 经营类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 财务类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 人力资源类</option>
-                                        <option>技术类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 研发类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 工艺类</option>
-                                        <option>营销类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 销售支持类</option>
-                                        <option>作业类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 操作类</option>
-                                        <option>&nbsp;&nbsp;&nbsp;|-- 维修类</option>
-                                    </select>
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true">
+									<img src="../../images/zoom.png" title="选择" class="iconButton">
+									<img src="../../images/em-cross.png" title="清除" class="iconButton">
                                 </td>
                             </tr>
                             <tr>
                             	<td class="inputItemName" height="30" width="100">
-                                    <span class="need">＊</span>适用组织范围
+                                    <img src="../../images/cube-red.png">适用组织范围
                                 </td>
                                 <td class="inputItemCell" height="170" width="200">
                                     <table>
@@ -109,7 +98,7 @@
 										<tr>
                                             <td style="padding-top: 5px;" colspan="2">
                                                 <select class="inputMultSelect" size="6" multiple="true">
-                                                    <option>＊＊软件公司</option>
+                                                    <option><img src="../../images/cube-red.png"><img src="images/cube-red.png">软件公司</option>
                                                     <option>综合业务部</option>
                                                     <option>质量管理部</option>
                                                     <option>开发一部</option>

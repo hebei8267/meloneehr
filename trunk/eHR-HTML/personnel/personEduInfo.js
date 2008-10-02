@@ -24,12 +24,6 @@ Ext.onReady(function(){
         transform: 'educationType' // 转变表单元素ID
     });
     
-    var educateSpecialtyCombo = new Ext.form.ComboBox({
-        triggerAction: 'all',
-        width: 155,
-        editable: false,
-        transform: 'educateSpecialty' // 转变表单元素ID
-    });
     
     
     var myData = [['A001', '北京大学', '大学', '计算机科学与技术', '2004-9-1', '2008-7-1'], 
