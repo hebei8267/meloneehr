@@ -48,6 +48,10 @@ table {
     width: 100%;
 }
 
+.searchTable {
+    border: 3px solid #dcdcdc;
+}
+
 .appTitle {
     font-size: 20pt;
     font-weight: bold;
@@ -221,7 +225,9 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
-
+.iconButton{
+	cursor:pointer;
+}
 
 
 
