@@ -148,7 +148,7 @@ function initHumanResTree() {
 		}, {
 			leaf : true,
 			text : '合同管理',
-			hrefSrc : ''
+			hrefSrc : '../personnel/contractSearch.html'
 		}]
 	});
 	tree.setRootNode(root);
