@@ -17,9 +17,9 @@ Ext.onReady(function(){
     });
     
     
-    var myData = [['E01010', '420107198201012020', '张三', '软件公司', '总经理', 'zhangsan', '男', '中华人民共和国'],
-	 ['E01011', '420107198201012021', '王武', '开发部', '程序员', 'wangwu', '男', '日本'],
-	 ['E01012', '420107198201012022', '李小二', '销售部', '客户代表', 'lixiaoer', '女', '美利坚合众国']];
+    var myData = [['E01010', '420107198201012020', '张三', '软件公司', '总经理', 'zhangsan', '男', '中华人民共和国'], 
+	['E01011', '420107198201012021', '王武', '开发部', '程序员', 'wangwu', '男', '日本'], 
+	['E01012', '420107198201012022', '李小二', '销售部', '客户代表', 'lixiaoer', '女', '美利坚合众国']];
     
     // create the data store
     var store = new Ext.data.SimpleStore({
@@ -58,6 +58,15 @@ Ext.onReady(function(){
             header: '序号',// 自动行号
             width: 35
         }), {
+            id: 'detailBtn',
+            header: "详细",
+            dataIndex: 'employeeID',
+            width: 80,
+			sortable: false,
+            renderer: function(employeeID){
+                return '<span><center><input type="button" class="buttonReset" value="详  细" onclick="toEmployeeNameDesc()"></center></span>';      
+            }
+        }, {
             id: 'employeeID',
             header: "员工编号",
             width: 80,
@@ -115,3 +124,8 @@ Ext.onReady(function(){
     
     grid.render();
 });
+
+
+function toEmployeeNameDesc(){
+	window.location = "personInfoTabs2.html";
+}

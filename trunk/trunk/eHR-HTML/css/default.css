@@ -49,6 +49,7 @@ table {
 }
 
 .searchTable {
+    border-collapse: collapse;
     border: 3px solid #dcdcdc;
 }
 
@@ -225,8 +226,9 @@ table {
     text-decoration: none;
     font-weight: bold;
 }
-.iconButton{
-	cursor:pointer;
+
+.iconButton {
+    cursor: pointer;
 }
 
 
