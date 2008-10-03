@@ -16,7 +16,7 @@
         <title>Melone-eHR 人力资源管理</title>
         <script type="text/javascript" src="../js/common.js">
         </script>
-        <script type="text/javascript" src="personSearch.js">
+        <script type="text/javascript" src="contractSearch.js">
         </script>
         <script type="text/javascript">
             function showSearchTable(TagName){
@@ -35,7 +35,7 @@
             <table class="appTitleTable">
                 <tr>
                     <td class="appTitle">
-                        员工信息检索
+                        合同信息检索
                     </td>
                     <td class="appScreenID">
                         - DICTIONARY-C 001 -
@@ -94,62 +94,92 @@
                                     </tr>
                                     <tr>
                                         <td width="20">
-                                        	&nbsp;
+                                            &nbsp;
                                         </td>
                                         <td>
                                             <table>
                                                 <tr>
                                                     <td class="inputItemName" height="30" width="100">
-                                                        员工编号
+                                                        合同编号
                                                     </td>
                                                     <td class="inputItemCell" height="30" width="200">
                                                         <input type="text" size="20" maxlength="20" class="inputText">
                                                     </td>
                                                     <td class="inputItemName" height="30" width="100">
-                                                        证件编号
+                                                        合同类型
                                                     </td>
                                                     <td class="inputItemCell" height="30" width="200">
-                                                        <input type="text" size="20" maxlength="20" class="inputText">
+                                                        <select class="inputSelect" id="contractType">
+                                                            <option>&nbsp;</option>
+                                                            <option>劳动合同</option>
+                                                            <option>工作保密合同</option>
+                                                            <option>培训合同</option>
+                                                        </select>
                                                     </td>
                                                 </tr>
-												<tr>
+                                                <tr>
                                                     <td class="inputItemName" height="30" width="100">
-                                                        <img src="../images/blur-search.png">员工姓名
+                                                        合同生效时间
                                                     </td>
-                                                    <td class="inputItemCell" height="30" width="200">
-                                                        <input type="text" size="20" maxlength="20" class="inputText">
-                                                    </td>
-                                                    <td class="inputItemName" height="30" width="100">
-                                                        <img src="../images/blur-search.png">拼音(姓名)
-                                                    </td>
-                                                    <td class="inputItemCell" height="30" width="200">
-                                                        <input type="text" size="20" maxlength="20" class="inputText">
+                                                    <td class="inputItemCell" height="30" width="200" colspan="3">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="contractStart">
+                                                                    </div>
+                                                                </td>
+                                                                <td width="30">
+                                                                </td>
+                                                                <td>
+                                                                    <input name="contractStartChk" id="contractStartChk" type="radio">
+                                                                    <label>
+                                                                        指定时间之前
+                                                                    </label>
+                                                                </td>
+                                                                <td width="30">
+                                                                </td>
+                                                                <td>
+                                                                    <input checked="checked" name="contractStartChk" id="contractStartChk" type="radio">
+                                                                    <label>
+                                                                        指定时间之后 
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </td>
                                                 </tr>
-												<tr>
+                                                <tr>
                                                     <td class="inputItemName" height="30" width="100">
-                                                        性别
+                                                        合同失效时间
                                                     </td>
-                                                    <td class="inputItemCell" height="30" width="200">
-                                                        <select class="inputSelect" id="sex">
-					                                        <option>&nbsp;</option>
-					                                        <option>男</option>
-					                                        <option>女</option>
-					                                    </select>
-                                                    </td>
-                                                    <td class="inputItemName" height="30" width="100">
-                                                        国籍
-                                                    </td>
-                                                    <td class="inputItemCell" height="30" width="200">
-                                                        <select class="inputSelect" id="country">
-					                                        <option>&nbsp;</option>
-					                                        <option>中国</option>
-					                                        <option>美国</option>
-					                                        <option>日本</option>
-					                                    </select>
+                                                    <td class="inputItemCell" height="30" width="200" colspan="3">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="contractEnd">
+                                                                    </div>
+                                                                </td>
+                                                                <td width="30">
+                                                                </td>
+                                                                <td>
+                                                                    <input checked="checked" name="front1" id="front1" type="radio">
+                                                                    <label for="front1">
+                                                                        指定时间之前
+                                                                    </label>
+                                                                </td>
+                                                                <td width="30">
+                                                                </td>
+                                                                <td>
+                                                                    <input name="after2" id="after2" type="radio">
+                                                                    <label for="after2">
+                                                                        指定时间之后
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </td>
                                                 </tr>
-												<tr>
+                                                <tr>
                                                     <td class="inputItemName" height="30" width="100">
                                                         组织名称
                                                     </td>
@@ -172,15 +202,15 @@
                                                         &nbsp;
                                                     </td>
                                                 </tr>
-												<tr>
-													<td colspan="4" align="center">
-														<input value="检  索" class="buttonSubmitLong" type="button">
-													</td>
-												</tr>
+                                                <tr>
+                                                    <td colspan="4" align="center">
+                                                        <input value="检  索" class="buttonSubmitLong" type="button">
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
-										<td width="20">
-											&nbsp;
+                                        <td width="20">
+                                            &nbsp;
                                         </td>
                                     </tr>
                                     <tr>
@@ -194,18 +224,22 @@
                     </td>
                 </tr>
             </table>
-			<table>
-				<tr>
+            <table>
+                <tr>
                     <td style="padding-left: 20px" height="15">
                         &nbsp;
                     </td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><div id="employeeInfoGridDiv"></div></td>
-				</tr>
-			</table>
-			<br>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <div id="employeeInfoGridDiv">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br>
             <br>
             <div>
                 <table class="appFooterTable">
