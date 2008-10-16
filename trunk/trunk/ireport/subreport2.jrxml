@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="main_report_1_subreport0"
+		 name="subreport2"
 		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Portrait"
@@ -45,13 +45,13 @@
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="43"  isSplitAllowed="true" >
+			<band height="23"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="20"
-						y="11"
-						width="270"
-						height="20"
+						x="0"
+						y="0"
+						width="535"
+						height="23"
 						key="textField"/>
 					<box></box>
 					<textElement>
