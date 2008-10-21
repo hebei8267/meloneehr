@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+	  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<!-- 数据库连接配置 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<!-- 数据库连接驱动 -->
+			<value>com.p6spy.engine.spy.P6SpyDriver</value>
+		</property>
+		<property name="jdbcUrl">
+			<!-- 数据库连接字段 -->
+			<value>jdbc:postgresql://localhost/fdWorkFrame</value>
+		</property>
+		<property name="user">
+			<!-- 用户名称 -->
+			<value>postgres</value>
+		</property>
+		<property name="password">
+			<!--密码  -->
+			<value>1234</value>
+		</property>
+	</bean>
+</beans>
