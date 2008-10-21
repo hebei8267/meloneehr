@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.view;
+package org.freedom.view.constant;
 
 /**
  * 常量消息Security

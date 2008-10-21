@@ -10,8 +10,8 @@ import org.freedom.services.security.ISecurityService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import static org.freedom.view.MesssageIDSecurity.ERROR_LOGIN_FAILED;
-import static org.freedom.view.MesssageIDSecurity.TIP_FIRST_LOGIN_FLAG;
+import static org.freedom.view.constant.MesssageIDSecurity.ERROR_LOGIN_FAILED;
+import static org.freedom.view.constant.MesssageIDSecurity.TIP_FIRST_LOGIN_FLAG;
 
 /**
  * 用户登录FacesView
@@ -25,7 +25,7 @@ public class Security001FView extends AbstractViewBean {
 
 	private static final long serialVersionUID = 3101578630313125390L;
 	/** 用户名 */
-	private String userId="1231111111111111111111";
+	private String userId;
 	/** 用户密码 */
 	private String password;
 	/** 变更密码 */
