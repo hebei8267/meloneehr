@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="faces_src"/>
-	<classpathentry kind="src" path="base_src"/>
-	<classpathentry kind="src" path="permission_src"/>
-	<classpathentry kind="src" path="config_src"/>
+	<classpathentry kind="src" path="src_permission"/>
+	<classpathentry kind="src" path="src_faces"/>
+	<classpathentry kind="src" path="src_config"/>
+	<classpathentry kind="src" path="src_base"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
