@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="src_faces"/>
 	<classpathentry kind="src" path="src_config"/>
 	<classpathentry kind="src" path="src_base"/>
+	<classpathentry kind="src" path="util_generator"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
@@ -22,6 +23,7 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jta.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/p6spy.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
