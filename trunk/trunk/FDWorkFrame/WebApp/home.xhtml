@@ -1,103 +1,117 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	template="/WEB-INF/jsp/base/template/default2.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" template="/WEB-INF/jsp/base/template/default2.xhtml">
 	<ui:define name="body">
-		<div>
-			<form>
-				<table class="appTitleTable">
-					<ui:include src="/WEB-INF/jsp/base/common/pageNum.xhtml">
-						<ui:param name="pageName" value="用户登录" />
-						<ui:param name="pageID" value="SECURITY 001" />
-					</ui:include>
-					<!-- 操作说明 -->
-					<tr>
-						<td colspan="2" class="tip">
-							<table>
-								<tr>
-									<td>
-										<h:graphicImage value="/images/tip.png"/>
-									</td>
-									<td>
-										请输入用户名称和密码,登录系统
-										<span class="need">
-											注意:[<h:graphicImage value="/images/cube-red.png"/>]为必填项
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>登录系统的同时,如果想修改密码,请选择[变更]选项</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-				<br/>
-				<br/>
-				<table>
-					<tr>
-						<td width="60">
-						</td>
-						<td>
-							<!-- 操作区域 START -->
-							<table>
-								<tr>
-									<td colspan="2" class="itemTitle">
-                                    用户登录信息
-									</td>
-								</tr>
-								<tr>
-									<td class="inputItemName" height="30" width="100">
-										<h:graphicImage value="/images/cube-red.png"/>用户名
-									</td>
-									<td class="inputItemCell" height="30" width="200">
-										<h:inputText id="userId"/>
-									</td>
-								</tr>
-								<tr>
-									<td class="inputItemName" height="30" width="100">
-										<h:graphicImage value="images/cube-red.png"/>用户密码
-									</td>
-									<td class="inputItemCell" height="30" width="200">
-										<h:inputSecret id="password"></h:inputSecret>
-									</td>
-								</tr>
-								<tr>
-									<td class="inputItemName" height="30" width="100">
-                                    变更密码
-									</td>
-									<td class="inputItemCell" height="30" width="200">
-										<h:selectOneRadio id="changePassword" value="0">
-											<f:selectItem itemValue="0" itemLabel="不变更"/>
-											<f:selectItem itemValue="1" itemLabel="变更"/>
-										</h:selectOneRadio>
-									</td>
-								</tr>
-							</table>
-							<!-- 操作区域 END -->
-							<br/>
-							<!-- 按钮 START -->
-							<table>
-								<tr>
-									<td height="30" width="120" class="">
-									</td>
-									<td align="right">
-										<input value="登  录" class="buttonSubmitLong" type="button" onclick="login();"/>
-									</td>
-									<td width="20">
-									</td>
-									<td align="left">
-										<input value="重  置" class="buttonResetLong" type="reset"/>
-									</td>
-								</tr>
-							</table><!-- 按钮 END -->
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</ui:define>
+        <style type="text/css">
+        <!--
+        table.chgPwd {
+        }
+        
+        table.chgPwd td {
+            padding: 4px 6px;
+        }
+        -->
+        </style>
+        <div>
+            <form>
+                <table class="appTitleTable">
+                    <ui:include src="/WEB-INF/jsp/base/common/pageNum.xhtml">
+                        <ui:param name="pageName" value="用户登录" />
+                        <ui:param name="pageID" value="Security 001" />
+                    </ui:include><!-- 操作说明 -->
+                    <tr>
+                        <td colspan="2" class="tip">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:graphicImage value="/images/tip.png"/>
+                                    </td>
+                                    <td>
+                                    	<span class="need">注意:[<h:graphicImage value="/images/cube-red.png"/>]为必填项</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        请输入用户名称和密码,登录系统
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        登录系统的同时,如果想修改密码,请选择[变更]选项
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <table>
+                    <tr>
+                        <td width="60">
+                        </td>
+                        <td>
+                            <!-- 操作区域 START -->
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="itemTitle">
+                                        用户登录信息
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="inputItemName" height="30" width="100">
+                                        <h:graphicImage value="/images/cube-red.png"/>用户名
+                                    </td>
+                                    <td class="inputItemCell" height="30" width="200">
+                                        <h:inputText id="userId"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="inputItemName" height="30" width="100">
+                                        <h:graphicImage value="images/cube-red.png"/>用户密码
+                                    </td>
+                                    <td class="inputItemCell" height="30" width="200">
+                                        <h:inputSecret id="password">
+                                        </h:inputSecret>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="inputItemName" height="30" width="100">
+                                        变更密码
+                                    </td>
+                                    <td class="inputItemCell" height="30" width="200">
+                                        <h:selectOneRadio id="changePassword" value="0" styleClass="chgPwd">
+                                            <f:selectItem itemValue="0" itemLabel="不变更"/>
+                                            <f:selectItem itemValue="1" itemLabel="变更"/>
+                                        </h:selectOneRadio>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- 操作区域 END -->
+                            <br/>
+                            <!-- 按钮 START -->
+                            <table>
+                                <tr>
+                                    <td height="30" width="120">
+                                    </td>
+                                    <td align="right">
+                                        <input value="登  录" class="buttonSubmitLong" type="button" onclick="login();"/>
+                                    </td>
+                                    <td width="20">
+                                    </td>
+                                    <td align="left">
+                                        <input value="重  置" class="buttonResetLong" type="reset"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- 按钮 END -->
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </ui:define>
 </ui:composition>
