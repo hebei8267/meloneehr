@@ -12,7 +12,7 @@
         -->
         </style>
         <div>
-            <form>
+            <h:form id="loginForm">
                 <table class="appTitleTable">
                     <ui:include src="/WEB-INF/jsp/base/common/pageNum.xhtml">
                         <ui:param name="pageName" value="用户登录" />
@@ -66,7 +66,7 @@
                                         <h:graphicImage value="/images/cube-red.png"/>用户名
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:inputText id="userId"/>
+                                        <h:inputText id="userId" value="#{Security001FView.userId}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -74,8 +74,7 @@
                                         <h:graphicImage value="images/cube-red.png"/>用户密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:inputSecret id="password">
-                                        </h:inputSecret>
+                                        <h:inputSecret id="password" value="#{Security001FView.password}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,9 +82,9 @@
                                         变更密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:selectOneRadio id="changePassword" value="0" styleClass="chgPwd">
-                                            <f:selectItem itemValue="0" itemLabel="不变更"/>
-                                            <f:selectItem itemValue="1" itemLabel="变更"/>
+                                        <h:selectOneRadio id="loginFlag" value="#{Security001FView.loginFlag}" styleClass="chgPwd">
+                                            <f:selectItem itemValue="true" itemLabel="不变更"/>
+                                            <f:selectItem itemValue="false" itemLabel="变更"/>
                                         </h:selectOneRadio>
                                     </td>
                                 </tr>
@@ -98,7 +97,7 @@
                                     <td height="30" width="120">
                                     </td>
                                     <td align="right">
-                                        <input value="登  录" class="buttonSubmitLong" type="button" onclick="login();"/>
+                                    	<h:commandButton value="登  录" action="#{Security001FView.loginAction}" styleClass="buttonSubmitLong" onclick=""></h:commandButton>
                                     </td>
                                     <td width="20">
                                     </td>
@@ -111,7 +110,7 @@
                         </td>
                     </tr>
                 </table>
-            </form>
+            </h:form>
         </div>
     </ui:define>
 </ui:composition>

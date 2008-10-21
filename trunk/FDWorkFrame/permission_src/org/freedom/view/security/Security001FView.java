@@ -25,11 +25,11 @@ public class Security001FView extends AbstractViewBean {
 
 	private static final long serialVersionUID = 3101578630313125390L;
 	/** 用户名 */
-	private String userId;
+	private String userId="1231111111111111111111";
 	/** 用户密码 */
 	private String password;
 	/** 变更密码 */
-	private String loginFlag = Boolean.FALSE.toString();
+	private String loginFlag = Boolean.TRUE.toString();
 
 	private ISecurityService securityService;
 
@@ -49,7 +49,7 @@ public class Security001FView extends AbstractViewBean {
 	}
 
 	public String loginAction() {
-
+System.out.println("11111111111111");
 		// 用户登录
 		User user = securityService.userLogin_Service(userId, password);
 		if (user == null) {// 输入用户名或密码错误

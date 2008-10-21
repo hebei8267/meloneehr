@@ -12,9 +12,9 @@
 				<supported-locale>es</supported-locale>-->
 		</locale-config>
 		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
-		<!--	<variable-resolver>
+		<variable-resolver>
 				org.springframework.web.jsf.DelegatingVariableResolver
-			</variable-resolver>-->
+		</variable-resolver>
 	</application>
 	<managed-bean>
 		<managed-bean-name>AppCommonInfo</managed-bean-name>

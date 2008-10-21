@@ -8,6 +8,13 @@
 	<description></description>
 
 	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/classes/ApplicationContext.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
@@ -22,6 +29,19 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
 	</context-param>
+
+	<!-- Spring Frame -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
 	
 	<!-- Faces Servlet -->
 	<servlet>
