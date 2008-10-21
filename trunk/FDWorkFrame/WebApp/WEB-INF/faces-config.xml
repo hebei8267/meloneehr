@@ -18,7 +18,7 @@
 	</application>
 	<managed-bean>
 		<managed-bean-name>AppCommonInfo</managed-bean-name>
-		<managed-bean-class>MyDate</managed-bean-class>
+		<managed-bean-class>org.freedom.view.system.SystemDate</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
   
