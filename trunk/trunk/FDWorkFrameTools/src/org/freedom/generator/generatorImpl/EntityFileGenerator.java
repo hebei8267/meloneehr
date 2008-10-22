@@ -31,8 +31,8 @@ public class EntityFileGenerator extends AbstractGenerator implements IFileGener
 
     public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
         for (FileInfo fileInfo : fileInfoList) {
-            String classNameStr = dataMap.get(fileInfo.getFileName());
-            String packageNameStr = fileInfo.getFilePath();
+            String classNameStr = dataMap.get(fileInfo.getShortFileName());
+            String packageNameStr = fileInfo.getPackageName();
 
             List<String> fileContent = new ArrayList<String>();
 

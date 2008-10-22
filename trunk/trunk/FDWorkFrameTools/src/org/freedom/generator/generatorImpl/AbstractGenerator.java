@@ -152,6 +152,11 @@ public abstract class AbstractGenerator {
         return cellValue.replace(POINT, SEPARATOR) + SEPARATOR;
     }
 
+    /**
+     * 创建文件夹
+     * 
+     * @param dir
+     */
     protected static void createFolder(String dir) {
         new File(dir).mkdirs();
     }

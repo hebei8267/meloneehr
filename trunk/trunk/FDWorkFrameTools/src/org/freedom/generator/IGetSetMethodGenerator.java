@@ -18,6 +18,10 @@ public interface IGetSetMethodGenerator {
      * Get Set 方法生成
      * 
      * @param fileInfoList 文件信息类容列表
+     * @param inputSrcFilePath 输入文件夹路径
+     * @param outputSrcFilePath 输出文件夹路径
+     * @throws Exception
      */
-    public void createMethodFile(List<FileInfo> fileInfoList) throws Exception;
+    public void createMethodFile(List<FileInfo> fileInfoList, String inputSrcFilePath, String outputSrcFilePath)
+            throws Exception;
 }

@@ -43,8 +43,10 @@ public class FindFilesUtils {
 
                     FileInfo fileInfo = new FileInfo();
 
-                    fileInfo.setFileName(file.getName().replace(JAVA_FILE, ""));
-                    fileInfo.setFilePath(file.getParent().replace(rootPath, "").replace(SEPARATOR, POINT));
+                    fileInfo.setShortFileName(file.getName().replace(JAVA_FILE, ""));
+                    fileInfo.setPackageName(file.getParent().replace(rootPath, "").replace(SEPARATOR, POINT));
+                    fileInfo.setFileAllPath(path);
+                    fileInfo.setFilePath(path.replace(file.getName(), ""));
                     fileInfo.setFileContent(getFileContent(file));
 
                     fileInfoList.add(fileInfo);

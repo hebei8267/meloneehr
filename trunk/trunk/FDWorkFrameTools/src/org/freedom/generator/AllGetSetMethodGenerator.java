@@ -16,15 +16,17 @@ import org.freedom.generator.generatorImpl.GetSetMethodGenerator;
  * @author 何 贝
  */
 public class AllGetSetMethodGenerator {
-    public final static String INPUT_SRC_FILE_PATH = "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\eHR2\\file\\Data.xls";
+    public final static String INPUT_SRC_FILE_PATH = "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\FDWorkFrameTools\\src\\org\\freedom\\domain\\";
 
- //   public final static String OUTPUT_SRC_FILE_PATH = "C:\\eHR\\uml-src\\";
+    public final static String OUTPUT_SRC_FILE_PATH = "C:\\456\\";
 
     public static void main(String[] args) throws IOException {
         GetSetMethodGenerator gen = new GetSetMethodGenerator();
         FindFilesUtils utils = new FindFilesUtils();
 
         List<FileInfo> fileInfoList = utils.getFileInfoList(INPUT_SRC_FILE_PATH);
-        gen.createMethodFile(fileInfoList);
+        gen.createMethodFile(fileInfoList, INPUT_SRC_FILE_PATH, OUTPUT_SRC_FILE_PATH);
+
     }
+
 }
