@@ -71,7 +71,7 @@
                                         <h:graphicImage value="/images/cube-red.png"/>用户名
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:inputText id="userId" value="#{Security001FView.userId}"/>
+                                        <h:inputText id="userId" value="#{Security001FacesView.userId}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -79,7 +79,7 @@
                                         <h:graphicImage value="images/cube-red.png"/>用户密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:inputSecret id="password" value="#{Security001FView.password}"/>
+                                        <h:inputSecret id="password" value="#{Security001FacesView.password}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -87,7 +87,7 @@
                                         变更密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <h:selectOneRadio id="loginFlag" value="#{Security001FView.loginFlag}" styleClass="chgPwd">
+                                        <h:selectOneRadio id="loginFlag" value="#{Security001FacesView.loginFlag}" styleClass="chgPwd">
                                             <f:selectItem itemValue="true" itemLabel="不变更"/>
                                             <f:selectItem itemValue="false" itemLabel="变更"/>
                                         </h:selectOneRadio>
@@ -102,7 +102,7 @@
                                     <td height="30" width="120">
                                     </td>
                                     <td align="right">
-                                    	<h:commandButton value="登  录" action="#{Security001FView.loginAction}" styleClass="buttonSubmitLong" onclick=""></h:commandButton>
+                                    	<input value="登  录" class="buttonSubmitLong" type="button" onclick="login()"/>
                                     </td>
                                     <td width="20">
                                     </td>
@@ -112,6 +112,23 @@
                                 </tr>
                             </table>
                             <!-- 按钮 END -->
+                            <script type="text/javascript">
+                            	function login(){
+                            	alert("run")
+                            	Ext.Ajax.request({
+								   url: 'loginAction.ajax',
+								   success: function(){
+								   		alert("OK");
+								   },
+								   failure: function(){
+								   		alert("failure");
+								   },
+								   params: { userId: '123',
+								   	password:'123456'
+								   }
+								});
+								}
+                            </script>
                         </td>
                     </tr>
                 </table>

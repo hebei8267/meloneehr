@@ -9,9 +9,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/classes/ApplicationContext.xml
-		</param-value>
+		<param-value>classpath:/ApplicationContext.xml</param-value>
 	</context-param>
 	
 	<context-param>
@@ -29,7 +27,25 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
 	</context-param>
-
+	
+	<!-- Character Encoding -->
+	<filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<listener>  
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>  
+	</listener>
+	
 	<!-- Spring Frame -->
 	<listener>
 		<listener-class>
@@ -42,6 +58,19 @@
 			org.springframework.web.context.request.RequestContextListener
 		</listener-class>
 	</listener>
+	
+	<!-- Spring MVC -->
+	<servlet>
+		<servlet-name>ajax</servlet-name>
+		<servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ajax</servlet-name>
+		<url-pattern>*.ajax</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Faces Servlet -->
 	<servlet>
