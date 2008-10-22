@@ -23,139 +23,139 @@ import static org.freedom.view.constant.MesssageIDSecurity.TIP_FIRST_LOGIN_FLAG;
 @Scope("request")
 public class Security001FView extends AbstractViewBean {
 
-	private static final long serialVersionUID = 3101578630313125390L;
-	/** 用户名 */
-	private String userId;
-	/** 用户密码 */
-	private String password;
-	/** 变更密码 */
-	private String loginFlag = Boolean.TRUE.toString();
+    private static final long serialVersionUID = 3101578630313125390L;
+    /** 用户名 */
+    private String userId;
+    /** 用户密码 */
+    private String password;
+    /** 变更密码 */
+    private String loginFlag = Boolean.TRUE.toString();
 
-	private ISecurityService securityService;
+    private ISecurityService securityService;
 
-	@Override
-	public void create() {
+    @Override
+    public void create() {
 
-	}
+    }
 
-	@Override
-	public void destroy() {
+    @Override
+    public void destroy() {
 
-	}
+    }
 
-	@Override
-	public void init() {
+    @Override
+    public void init() {
 
-	}
+    }
 
-	public String loginAction() {
-System.out.println("11111111111111");
-		// 用户登录
-		User user = securityService.userLogin_Service(userId, password);
-		if (user == null) {// 输入用户名或密码错误
+    public String loginAction() {
 
-			addErrorMessage(ERROR_LOGIN_FAILED);
+        // 用户登录
+        User user = securityService.userLogin_Service(userId, password);
+        if (user == null) {// 输入用户名或密码错误
 
-			return null;
-		}
+            addErrorMessage(ERROR_LOGIN_FAILED);
 
-		if (user.getFirstLoginFlag().equals(Boolean.TRUE)) {// 登录成功--（第一次登录系统）
+            return null;
+        }
 
-			addErrorMessage(TIP_FIRST_LOGIN_FLAG);
+        if (user.getFirstLoginFlag().equals(Boolean.TRUE)) {// 登录成功--（第一次登录系统）
 
-			// 保存Session登录用户信息
-			saveUserInfoToSession(user);
+            addErrorMessage(TIP_FIRST_LOGIN_FLAG);
 
-			return "modPassword";
-		} else {// 登录成功--画面迁移到指定页面
-			if (loginFlag.equals(Boolean.TRUE.toString())) {
+            // 保存Session登录用户信息
+            saveUserInfoToSession(user);
 
-				// 保存Session登录用户信息
-				saveUserInfoToSession(user);
+            return "modPassword";
+        } else {// 登录成功--画面迁移到指定页面
+            if (loginFlag.equals(Boolean.TRUE.toString())) {
 
-				return "loginSucceed";
-			} else {
+                // 保存Session登录用户信息
+                saveUserInfoToSession(user);
 
-				// 保存Session登录用户信息
-				saveUserInfoToSession(user);
+                return "loginSucceed";
+            } else {
 
-				return "modPassword";
-			}
-		}
+                // 保存Session登录用户信息
+                saveUserInfoToSession(user);
 
-	}
+                return "modPassword";
+            }
+        }
 
-	/**
-	 * 保存Session登录用户信息
-	 */
-	private void saveUserInfoToSession(User user) {
+    }
 
-		UserInfoSessionBean userInfo = new UserInfoSessionBean();
-		userInfo.setUserId(user.getId());
-		userInfo.setUserName(user.getName());
+    /**
+     * 保存Session登录用户信息
+     */
+    private void saveUserInfoToSession(User user) {
 
-		saveUserInfo(userInfo);
-	}
+        UserInfoSessionBean userInfo = new UserInfoSessionBean();
+        userInfo.setUserId(user.getId());
+        userInfo.setUserName(user.getName());
 
-	/**
-	 * 取得用户名
-	 * 
-	 * @return 用户名
-	 */
-	public String getUserId() {
-		return userId;
-	}
+        saveUserInfo(userInfo);
+    }
 
-	/**
-	 * 设置用户名
-	 * 
-	 * @param userId 用户名
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    /**
+     * 取得用户名
+     * 
+     * @return 用户名
+     */
+    public String getUserId() {
+        return userId;
+    }
 
-	/**
-	 * 取得用户密码
-	 * 
-	 * @return 用户密码
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * 设置用户名
+     * 
+     * @param userId 用户名
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	/**
-	 * 设置用户密码
-	 * 
-	 * @param password 用户密码
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * 取得用户密码
+     * 
+     * @return 用户密码
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * 取得变更密码
-	 * 
-	 * @return 变更密码
-	 */
-	public String getLoginFlag() {
-		return loginFlag;
-	}
+    /**
+     * 设置用户密码
+     * 
+     * @param password 用户密码
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * 设置变更密码
-	 * 
-	 * @param loginFlag 变更密码
-	 */
-	public void setLoginFlag(String loginFlag) {
-		this.loginFlag = loginFlag;
-	}
+    /**
+     * 取得变更密码
+     * 
+     * @return 变更密码
+     */
+    public String getLoginFlag() {
+        return loginFlag;
+    }
 
-	public ISecurityService getSecurityService() {
-		return securityService;
-	}
+    /**
+     * 设置变更密码
+     * 
+     * @param loginFlag 变更密码
+     */
+    public void setLoginFlag(String loginFlag) {
+        this.loginFlag = loginFlag;
+    }
 
-	public void setSecurityService(ISecurityService securityService) {
-		this.securityService = securityService;
-	}
+    public ISecurityService getSecurityService() {
+        return securityService;
+    }
+
+    public void setSecurityService(ISecurityService securityService) {
+        this.securityService = securityService;
+    }
 }
