@@ -16,7 +16,7 @@ import org.freedom.generator.generatorImpl.GetSetMethodGenerator;
  * @author 何 贝
  */
 public class AllGetSetMethodGenerator {
-    public final static String INPUT_SRC_FILE_PATH = "C:\\eeeee";
+    public final static String INPUT_SRC_FILE_PATH = "C:\\eHR\\eclipse-java-europa-winter-win32\\eclipse\\workspace\\FDWorkFrame\\src_permission\\org\\freedom";
 
     public final static String OUTPUT_SRC_FILE_PATH = "C:\\456";
 
