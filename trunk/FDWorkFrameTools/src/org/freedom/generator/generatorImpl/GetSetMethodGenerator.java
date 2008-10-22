@@ -37,8 +37,16 @@ public class GetSetMethodGenerator extends AbstractGenerator implements IGetSetM
             JavaDocBuilder builder = new JavaDocBuilder();
             File _file = new File(fileInfo.getFileAllPath());
 
-            // 添加java文件,并自定文件读取是的编码方式
-            builder.addSource(new InputStreamReader(new FileInputStream(_file), CHARSET_NAME));
+            try {
+                // 添加java文件,并自定文件读取是的编码方式
+                builder.addSource(new InputStreamReader(new FileInputStream(_file), CHARSET_NAME));
+            } catch (Exception e) {
+                System.out.println("method source generator failure! file path: " + fileInfo.getFileAllPath());
+                // System.out.println("Exception Message: " + e.getMessage());
+                // 跳过错误,继续处理
+                continue;
+            }
+
             // 取得java类型定义名词
             JavaClass cls = builder.getClassByName(getJavaClassName(fileInfo));
 
