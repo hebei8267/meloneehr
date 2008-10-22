@@ -16,7 +16,6 @@ import org.freedom.domain.FileInfo;
 import static org.freedom.constant.GeneratorUtilConstant.CHARSET_NAME;
 import static org.freedom.constant.GeneratorUtilConstant.HIDDEN_FILE;
 import static org.freedom.constant.GeneratorUtilConstant.JAVA_FILE;
-import static org.freedom.constant.GeneratorUtilConstant.POINT;
 import static org.freedom.constant.GeneratorUtilConstant.SEPARATOR;
 
 /**
@@ -44,10 +43,9 @@ public class FindFilesUtils {
                     FileInfo fileInfo = new FileInfo();
 
                     fileInfo.setShortFileName(file.getName().replace(JAVA_FILE, ""));
-                    fileInfo.setPackageName(file.getParent().replace(rootPath, "").replace(SEPARATOR, POINT));
                     fileInfo.setFileAllPath(path);
                     fileInfo.setFilePath(path.replace(file.getName(), ""));
-                    fileInfo.setFileContent(getFileContent(file));
+                    fileInfo.setFileContent(getFileContent(file, fileInfo));
 
                     fileInfoList.add(fileInfo);
                 }
@@ -71,13 +69,17 @@ public class FindFilesUtils {
      * @return
      * @throws IOException
      */
-    private List<String> getFileContent(File file) throws IOException {
+    private List<String> getFileContent(File file, FileInfo fileInfo) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET_NAME));
 
         List<String> fileContent = new ArrayList<String>();
 
         String line = "";
         while ((line = reader.readLine()) != null) {
+            // 设置文件package名称
+            if (line.startsWith("package")) {
+                fileInfo.setPackageName(line.substring(8, line.length() - 1));
+            }
             fileContent.add(line);
         }
         return fileContent;

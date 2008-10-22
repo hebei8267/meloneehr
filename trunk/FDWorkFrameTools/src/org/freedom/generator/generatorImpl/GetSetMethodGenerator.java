@@ -74,18 +74,7 @@ public class GetSetMethodGenerator extends AbstractGenerator implements IGetSetM
      * @return
      */
     private String getJavaClassName(FileInfo fileInfo) {
-        String className = "";
-        for (int i = 0; i < fileInfo.getFileContent().size(); i++) {
-            String strLine = fileInfo.getFileContent().get(i).trim();
-            if (strLine.startsWith("package")) {
-
-                className = strLine.substring(8, strLine.length() - 1) + POINT + fileInfo.getShortFileName();
-                break;
-            } else {
-                System.out.println("package not found");
-            }
-        }
-        return className;
+        return fileInfo.getPackageName() + POINT + fileInfo.getShortFileName();
     }
 
     /**
