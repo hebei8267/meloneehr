@@ -19,9 +19,9 @@ import static org.freedom.view.constant.MesssageIDSecurity.TIP_FIRST_LOGIN_FLAG;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("Security001FView")
+@Component("Security001FacesView")
 @Scope("request")
-public class Security001FView extends AbstractViewBean {
+public class Security001FacesView extends AbstractViewBean {
 
     private static final long serialVersionUID = 3101578630313125390L;
     /** 用户名 */
@@ -32,21 +32,6 @@ public class Security001FView extends AbstractViewBean {
     private String loginFlag = Boolean.TRUE.toString();
 
     private ISecurityService securityService;
-
-    @Override
-    public void create() {
-
-    }
-
-    @Override
-    public void destroy() {
-
-    }
-
-    @Override
-    public void init() {
-
-    }
 
     public String loginAction() {
 
