@@ -26,9 +26,9 @@ public class DaoTestFileGenerator extends AbstractGenerator implements IFileGene
 
     public void createCodeFile(List<FileInfo> fileInfoList, Map<String, String> dataMap) throws IOException {
         for (FileInfo fileInfo : fileInfoList) {
-            String classNameStr = dataMap.get(fileInfo.getFileName());
-            String packageNameStr = fileInfo.getFilePath();
-            String annotationStr = fileInfo.getFileName();
+            String classNameStr = dataMap.get(fileInfo.getShortFileName());
+            String packageNameStr = fileInfo.getPackageName();
+            String annotationStr = fileInfo.getShortFileName();
 
             createCodeFile(classNameStr, packageNameStr, annotationStr);
         }
