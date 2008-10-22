@@ -114,17 +114,22 @@
                             <!-- 按钮 END -->
                             <script type="text/javascript">
                             	function login(){
-                            	alert("run")
+                            
                             	Ext.Ajax.request({
 								   url: 'loginAction.ajax',
-								   success: function(){
-								   		alert("OK");
+								   success: function(result, request){
+								   		Ext.MessageBox.alert('Success', 'Data return from the server: '+ result.responseText); 
+
 								   },
-								   failure: function(){
+								   failure: function(result, request){
+								   var o1=result.responseText;
+								   alert(o1)
+								   var o2=request;
 								   		alert("failure");
 								   },
-								   params: { userId: '123',
-								   	password:'123456'
+								   params: { 
+								   	userId: $F('loginForm:userId'),
+								   	password:$F('loginForm:password')
 								   }
 								});
 								}
