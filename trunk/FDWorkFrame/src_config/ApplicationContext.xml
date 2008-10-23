@@ -17,7 +17,7 @@
 	<!-- 扫描org.freedom.dao包下面的@Component组建 -->
 	<context:component-scan base-package="org.freedom.dao"/>
 	<!-- 扫描org.freedom.view包下面的@Component组建 -->
-	<context:component-scan base-package="org.freedom.view"/>
+	<context:component-scan base-package="org.freedom.view.faces"/>
 	<!-- 扫描org.freedom.service包下面的@Component组建 -->
 	<context:component-scan base-package="org.freedom.service"/>
 </beans>
