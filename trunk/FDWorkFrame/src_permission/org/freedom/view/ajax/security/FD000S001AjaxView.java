@@ -35,8 +35,7 @@ public class FD000S001AjaxView extends AbstractViewBean {
 
         System.out.println(userId);
         System.out.println(password);
-        throw new IOException("12123");
-        // writer.write("123");
+        writer.write("123");
     }
 
 }
