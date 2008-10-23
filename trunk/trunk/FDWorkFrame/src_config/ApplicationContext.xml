@@ -14,9 +14,11 @@
 	<!-- Hibernate连接配置 -->
 	<import resource="Hibernate_Config.xml" />
 	
+	<import resource="View_Config.xml" />
+	
 	<!-- 扫描org.freedom.dao包下面的@Component组建 -->
 	<context:component-scan base-package="org.freedom.dao"/>
-	<!-- 扫描org.freedom.view包下面的@Component组建 -->
+	<!-- 扫描org.freedom.view.faces包下面的@Component组建 -->
 	<context:component-scan base-package="org.freedom.view.faces"/>
 	<!-- 扫描org.freedom.service包下面的@Component组建 -->
 	<context:component-scan base-package="org.freedom.service"/>
