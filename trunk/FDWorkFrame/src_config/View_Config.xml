@@ -9,5 +9,16 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	
-	
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>*FacesView</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+		<!--		<value>transactionInterceptor</value>
+				 在这里可以添加其他拦截 -->
+			</list>
+		</property>
+	</bean>
 </beans>
