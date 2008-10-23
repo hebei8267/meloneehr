@@ -5,18 +5,19 @@
 	<classpathentry kind="src" path="src_permission"/>
 	<classpathentry kind="src" path="src_config"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jta.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/common-annotations.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/common-annotations.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-collections.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-lang.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="output" path="WebApp/WEB-INF/classes"/>
 </classpath>

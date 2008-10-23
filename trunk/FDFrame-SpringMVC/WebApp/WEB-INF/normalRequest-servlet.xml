@@ -26,7 +26,7 @@
 	
 	<bean id="officeHoursInterceptor"
 		class="org.freedom.view.TimeBasedAccessInterceptor">
-		<property name="openingTime" value="9"/>
-		<property name="closingTime" value="20"/>
+		<property name="openingTime" value="0"/>
+		<property name="closingTime" value="25"/>
 	</bean>
 </beans>  
