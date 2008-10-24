@@ -4,7 +4,7 @@
 package org.freedom.view.jsp.security;
 
 import org.freedom.core.view.AbstractViewBean;
-import org.freedom.view.vo.FD000S001ViewObject;
+import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
