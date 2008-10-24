@@ -45,7 +45,8 @@ public class TagWriter {
 	/**
 	 * Stores {@link TagStateEntry tag state}. Stack model naturally supports tag nesting.
 	 */
-	private final Stack tagState = new Stack();
+	@SuppressWarnings("unchecked")
+    private final Stack tagState = new Stack();
 
 
 	/**
@@ -175,7 +176,8 @@ public class TagWriter {
 	/**
 	 * Adds the supplied tag name to the {@link #tagState tag state}.
 	 */
-	private void push(String tagName) {
+	@SuppressWarnings("unchecked")
+    private void push(String tagName) {
 		this.tagState.push(new TagStateEntry(tagName));
 	}
 

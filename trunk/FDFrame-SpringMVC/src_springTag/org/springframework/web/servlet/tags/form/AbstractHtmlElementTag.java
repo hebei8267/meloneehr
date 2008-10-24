@@ -29,6 +29,7 @@ import org.springframework.util.StringUtils;
  * @author Rob Harrop
  * @since 2.0
  */
+@SuppressWarnings("serial")
 public abstract class AbstractHtmlElementTag extends AbstractDataBoundFormElementTag {
 
 	public static final String CLASS_ATTRIBUTE = "class";

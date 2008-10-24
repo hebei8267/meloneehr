@@ -153,7 +153,8 @@ class OptionWriter {
 	 * {@link Map} as the source.
 	 * @see #renderOption(TagWriter, Object, Object, Object)
 	 */
-	private void renderFromMap(final TagWriter tagWriter) throws JspException {
+    @SuppressWarnings("unchecked")
+    private void renderFromMap(final TagWriter tagWriter) throws JspException {
 		Map optionMap = (Map) this.optionSource;
 		for (Iterator iterator = optionMap.entrySet().iterator(); iterator.hasNext();) {
 			Map.Entry entry = (Map.Entry) iterator.next();
@@ -173,7 +174,8 @@ class OptionWriter {
 	 * Renders the inner '<code>option</code>' tags using the {@link #optionSource}.
 	 * @see #doRenderFromCollection(java.util.Collection, TagWriter)
 	 */
-	private void renderFromCollection(TagWriter tagWriter) throws JspException {
+	@SuppressWarnings("unchecked")
+    private void renderFromCollection(TagWriter tagWriter) throws JspException {
 		doRenderFromCollection((Collection) this.optionSource, tagWriter);
 	}
 
@@ -183,7 +185,8 @@ class OptionWriter {
 	 * when rendering the '<code>value</code>' of the '<code>option</code>' and the value of the
 	 * {@link #labelProperty} property is used when rendering the label.
 	 */
-	private void doRenderFromCollection(Collection optionCollection, TagWriter tagWriter) throws JspException {
+	@SuppressWarnings("unchecked")
+    private void doRenderFromCollection(Collection optionCollection, TagWriter tagWriter) throws JspException {
 		for (Iterator it = optionCollection.iterator(); it.hasNext();) {
 			Object item = it.next();
 			BeanWrapper wrapper = PropertyAccessorFactory.forBeanPropertyAccess(item);

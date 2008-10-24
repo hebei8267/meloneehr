@@ -29,6 +29,7 @@ import javax.servlet.jsp.JspException;
  * @author Juergen Hoeller
  * @since 2.5
  */
+@SuppressWarnings("serial")
 public abstract class AbstractCheckedElementTag extends AbstractHtmlInputElementTag {
 
 	/**

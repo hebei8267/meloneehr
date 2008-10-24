@@ -59,6 +59,7 @@ import org.springframework.web.servlet.support.BindStatus;
  * @author Juergen Hoeller
  * @since 2.0
  */
+@SuppressWarnings("unchecked")
 abstract class SelectedValueComparator {
 
 	/**

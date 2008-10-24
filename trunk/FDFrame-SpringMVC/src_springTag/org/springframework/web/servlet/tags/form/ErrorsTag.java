@@ -43,6 +43,7 @@ import org.springframework.util.ObjectUtils;
  * @author Rick Evans
  * @since 2.0
  */
+@SuppressWarnings("serial")
 public class ErrorsTag extends AbstractHtmlElementBodyTag implements BodyTag {
 
 	/**
@@ -163,7 +164,8 @@ public class ErrorsTag extends AbstractHtmlElementBodyTag implements BodyTag {
 	 * <p>Only called if {@link #shouldRender()} returns <code>true</code>.
 	 * @see #removeAttributes()
 	 */
-	protected void exposeAttributes() throws JspException {
+	@SuppressWarnings("unchecked")
+    protected void exposeAttributes() throws JspException {
 		List errorMessages = new ArrayList();
 		errorMessages.addAll(Arrays.asList(getBindStatus().getErrorMessages()));
 		this.oldMessages = this.pageContext.getAttribute(MESSAGES_ATTRIBUTE, PageContext.PAGE_SCOPE);
