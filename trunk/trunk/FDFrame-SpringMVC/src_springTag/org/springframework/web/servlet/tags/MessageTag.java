@@ -51,6 +51,7 @@ import org.springframework.web.util.TagUtils;
  * @see HtmlEscapeTag#setDefaultHtmlEscape
  * @see org.springframework.web.util.WebUtils#HTML_ESCAPE_CONTEXT_PARAM
  */
+@SuppressWarnings("serial")
 public class MessageTag extends HtmlEscapingAwareTag {
 
 	/**
@@ -239,7 +240,8 @@ public class MessageTag extends HtmlEscapingAwareTag {
 	 * @throws JspException if argument conversion failed
 	 * @see #setArguments
 	 */
-	protected Object[] resolveArguments(Object arguments) throws JspException {
+	@SuppressWarnings("unchecked")
+    protected Object[] resolveArguments(Object arguments) throws JspException {
 		if (arguments instanceof String) {
 			String[] stringArray =
 					StringUtils.delimitedListToStringArray((String) arguments, this.argumentSeparator);

@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.view.vo;
+package org.freedom.view.vo.security;
 
 /**
  * 用户登录页面ViewObject
