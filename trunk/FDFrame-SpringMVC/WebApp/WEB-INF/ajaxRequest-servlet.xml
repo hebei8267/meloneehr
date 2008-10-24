@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">  
 
-	<context:component-scan base-package="org.freedom.view.ajax"/>
+	<context:component-scan base-package="org.freedom.view.action.ajax"/>
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  >
@@ -25,8 +25,8 @@
 	
 	<bean id="officeHoursInterceptor"
 		class="org.freedom.view.TimeBasedAccessInterceptor">
-		<property name="openingTime" value="9"/>
-		<property name="closingTime" value="20"/>
+		<property name="openingTime" value="0"/>
+		<property name="closingTime" value="25"/>
 	</bean>
 
 </beans>  

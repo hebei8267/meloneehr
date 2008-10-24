@@ -49,8 +49,8 @@ Date.dayNames = [
 
 if(Ext.MessageBox){
    Ext.MessageBox.buttonText = {
-      ok     : "确定",
-      cancel : "取消",
+      ok     : "确 定",
+      cancel : "取 消",
       yes    : "是",
       no     : "否"
    };
@@ -78,8 +78,8 @@ if(Ext.DatePicker){
       monthYearText     : '选择一个月 (Control+Up/Down 来改变年)',
       todayTip          : "{0} (空格键选择)",
       format            : "y年m月d日",
-      okText            : "确定",
-      cancelText        : "取消"
+      okText            : "确 定",
+      cancelText        : "取 消"
    });
 }
 
