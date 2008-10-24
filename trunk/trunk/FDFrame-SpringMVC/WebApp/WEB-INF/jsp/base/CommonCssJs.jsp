@@ -6,3 +6,5 @@
 <script src="extjs/adapter/prototype/ext-prototype-adapter.js" type="text/javascript"></script>
 <script src="extjs/ext-all.js" type="text/javascript"></script>
 <script src="extjs/build/locale/ext-lang-zh_CN.js" type="text/javascript"></script>
+<script src="js/commonCheck.js" type="text/javascript"></script>
+<script src="js/commonMessages.js" type="text/javascript"></script>

@@ -2,10 +2,52 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <HTML>
     <HEAD>
         <%@ include file="/WEB-INF/jsp/base/PageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/CommonCssJs.jsp" %>
+        <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
+        <script type="text/javascript">
+        <!--
+        <%// 用户登录校验 %>
+        function loginCheck(){
+        	var msg = "";
+        	if(isEmpty($F('userId'))){
+        		msg = getNeedInputMsg("用户名");
+        	}
+        	if(isEmpty($F('password'))){
+        		msg += getNeedInputMsg("用户密码");
+        	}
+        	if(!isEmpty(msg)){
+        		showMessageBox(msg);
+        		return false;
+        	}
+        	return true;
+        }
+        <%// 用户登录 %>
+        function login(){
+        	if(!loginCheck()){
+        		return;
+        	}
+        	
+        	Ext.Ajax.request({
+				url : 'loginAction.ajax',
+				success : function(result, request) {
+					Ext.MessageBox.alert('Success', 'Data return from the server: '
+							+ result.responseText);
+				},
+				failure : function(result, request) {
+					showMessageBox("和服务通信发生错误,请稍候再试!")
+				},
+				params : {
+					userId : $F('userId'),
+					password : $F('password')
+				}
+			});
+        }
+        -->
+        </script>
     </HEAD>
     <BODY>
         <%// 标题栏 START %>
@@ -19,7 +61,8 @@
                     </tr>
                     <tr>
                         <td class="loginDate">
-                            2008/09/06 星期六
+                        	<%=systemDate.getNowDate()%>
+                            <%=systemDate.getNowWeek()%>
                         </td>
                     </tr>
                 </table>
