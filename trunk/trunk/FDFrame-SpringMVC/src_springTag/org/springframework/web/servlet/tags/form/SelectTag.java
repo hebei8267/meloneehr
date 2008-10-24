@@ -40,6 +40,7 @@ import org.springframework.web.servlet.support.BindStatus;
  * @since 2.0
  * @see OptionTag
  */
+@SuppressWarnings("serial")
 public class SelectTag extends AbstractHtmlInputElementTag {
 
 	/**
@@ -260,7 +261,8 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 	 * Returns '<code>true</code>' if the bound value requires the
 	 * resultant '<code>select</code>' tag to be multi-select.
 	 */
-	private boolean forceMultiple() throws JspException {
+	@SuppressWarnings("unchecked")
+    private boolean forceMultiple() throws JspException {
 		BindStatus bindStatus = getBindStatus();
 		Class valueType = bindStatus.getValueType();
 		if (valueType != null && typeRequiresMultiple(valueType)) {
@@ -279,7 +281,8 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 	 * Returns '<code>true</code>' for arrays, {@link Collection Collections}
 	 * and {@link Map Maps}.
 	 */
-	private static boolean typeRequiresMultiple(Class type) {
+	@SuppressWarnings("unchecked")
+    private static boolean typeRequiresMultiple(Class type) {
 		return (type.isArray() || Collection.class.isAssignableFrom(type) || Map.class.isAssignableFrom(type));
 	}
 

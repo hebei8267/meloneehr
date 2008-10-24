@@ -37,6 +37,7 @@ import org.springframework.util.StringUtils;
  * @author Juergen Hoeller
  * @since 2.5.2
  */
+@SuppressWarnings("serial")
 public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElementTag {
 
 	/**
@@ -178,7 +179,8 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 	 * {@link #setItems(Object)} values. Marks the element as checked if the
 	 * value matches the bound value.
 	 */
-	protected int writeTagContent(TagWriter tagWriter) throws JspException {
+	@SuppressWarnings("unchecked")
+    protected int writeTagContent(TagWriter tagWriter) throws JspException {
 		Object items = getItems();
 		Object itemsObject = (items instanceof String ? evaluate("items", (String) items) : items);
 
@@ -232,7 +234,8 @@ public abstract class AbstractMultiCheckedElementTag extends AbstractCheckedElem
 		writeElementTag(tagWriter, item, renderValue, renderLabel, itemIndex);
 	}
 
-	private void writeMapEntry(TagWriter tagWriter, String valueProperty,
+	@SuppressWarnings("unchecked")
+    private void writeMapEntry(TagWriter tagWriter, String valueProperty,
 			String labelProperty, Map.Entry entry, int itemIndex) throws JspException {
 
 		Object mapKey = entry.getKey();

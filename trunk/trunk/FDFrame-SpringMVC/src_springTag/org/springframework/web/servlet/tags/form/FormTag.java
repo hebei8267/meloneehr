@@ -46,6 +46,7 @@ import org.springframework.web.util.HtmlUtils;
  * @since 2.0
  * @see org.springframework.web.servlet.mvc.SimpleFormController
  */
+@SuppressWarnings("serial")
 public class FormTag extends AbstractHtmlElementTag {
 
 	/** The default HTTP method using which form values are sent to the server: "post" */
@@ -285,7 +286,8 @@ public class FormTag extends AbstractHtmlElementTag {
 	 * @param tagWriter the {@link TagWriter} to which the form content is to be written
 	 * @return {@link javax.servlet.jsp.tagext.Tag#EVAL_BODY_INCLUDE}
 	 */
-	protected int writeTagContent(TagWriter tagWriter) throws JspException {
+	@SuppressWarnings("deprecation")
+    protected int writeTagContent(TagWriter tagWriter) throws JspException {
 		this.tagWriter = tagWriter;
 
 		tagWriter.startTag("form");
@@ -373,7 +375,8 @@ public class FormTag extends AbstractHtmlElementTag {
 	 * Closes the '<code>form</code>' block tag and removes the form object name
 	 * from the {@link javax.servlet.jsp.PageContext}.
 	 */
-	public int doEndTag() throws JspException {
+	@SuppressWarnings("deprecation")
+    public int doEndTag() throws JspException {
 		this.tagWriter.endTag();
 		this.pageContext.removeAttribute(MODEL_ATTRIBUTE_VARIABLE_NAME, PageContext.REQUEST_SCOPE);
 		this.pageContext.removeAttribute(COMMAND_NAME_VARIABLE_NAME, PageContext.REQUEST_SCOPE);

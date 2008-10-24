@@ -26,6 +26,7 @@ import javax.servlet.jsp.JspException;
  * @author Rick Evans
  * @since 2.0
  */
+@SuppressWarnings("serial")
 public class PasswordInputTag extends InputTag {
 
 	private boolean showPassword = false;
