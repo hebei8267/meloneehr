@@ -116,13 +116,13 @@
                                     	变更密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                        <input checked="checked" name="change_password" value="no" id="change_password" type="radio">
-                                        <label>
+                                    	<form:radiobutton path="changePassword" value="false"/>
+										<label>
                                         	不变更
                                         </label>
-                                        <input name="change_password" value="yes" id="change_password" type="radio">
-                                        <label>
-                                        	变更
+                                        <form:radiobutton path="changePassword" value="true" />
+										<label>
+                                        	不变更
                                         </label>
                                     </td>
                                 </tr>
