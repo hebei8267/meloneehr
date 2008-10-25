@@ -16,9 +16,10 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.5-with-dependencies/spring-framework-2.5.5/dist/spring-sources.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar" sourcepath="E:/java-tools/opensource/spring-framework-2.5-with-dependencies/spring-framework-2.5/dist/module-sources/spring-webmvc-sources.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-beanutils.jar"/>
 	<classpathentry kind="output" path="WebApp/WEB-INF/classes"/>
 </classpath>

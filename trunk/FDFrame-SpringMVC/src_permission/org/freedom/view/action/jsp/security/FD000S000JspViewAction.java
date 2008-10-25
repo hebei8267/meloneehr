@@ -3,7 +3,7 @@
  */
 package org.freedom.view.action.jsp.security;
 
-import org.freedom.core.view.AbstractViewBean;
+import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 默认画面迁移到用户登录页面JspView
+ * 默认画面迁移到用户登录页面JspViewAction
  * 
  * @author 何贝
  * @since JDK1.5
  */
 @Controller
-public class FD000S000JspView extends AbstractViewBean {
+public class FD000S000JspViewAction extends AbstractViewAction {
 
     private static final long serialVersionUID = 6066674675465360677L;
 
