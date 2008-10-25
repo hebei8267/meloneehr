@@ -7,7 +7,6 @@ import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -27,7 +26,6 @@ public class FD000S000JspViewAction extends AbstractViewAction {
      * @return
      */
     @RequestMapping("/index.faces")
-    @ModelAttribute
     public String defaultTransplantAction(Model model) {
         // 用户登录页面初始化
         FD000S001ViewObject vObj = new FD000S001ViewObject();

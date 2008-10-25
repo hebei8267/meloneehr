@@ -7,3 +7,7 @@ function showMessageBox(msg){
 function getNeedInputMsg(itemName){
 	return _newLine + _space + "请输入[<b><font color='red'>" + itemName + "</font></b>]!" + _space;
 }
+
+function getNeedSameInputMsg(itemName1, itemName2){
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName1 + "</font></b>]和[<b><font color='red'>" + itemName2 + "</font></b>]不一样!" + _space;
+}

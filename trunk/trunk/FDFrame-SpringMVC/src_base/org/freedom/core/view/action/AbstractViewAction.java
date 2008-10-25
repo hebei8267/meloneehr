@@ -3,8 +3,6 @@
  */
 package org.freedom.core.view.action;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
@@ -24,8 +22,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @since JDK1.5
  */
 public abstract class AbstractViewAction extends BaseBean {
+    /** Ajax处理结果 默认页面编码UTF-8 */
+    public static String RESPONSE_CONTENT_TYPE = "text/html;charset=UTF-8;";
     private final String USER_INFO = "userInfo";
-    private List<String> msgList = new ArrayList<String>();
 
     public AbstractViewAction() {
 
@@ -61,42 +60,6 @@ public abstract class AbstractViewAction extends BaseBean {
     }
 
     /**
-     * 添加错误消息
-     * 
-     * @param request HttpServletRequest
-     * @param msgKey 消息内容Key
-     */
-    protected void addErrorMessage(HttpServletRequest request, String msgKey) {
-        String msgStr = getMessage(request, msgKey);
-        msgList.add(msgStr);
-    }
-
-    /**
-     * 添加错误消息
-     * 
-     * @param request HttpServletRequest
-     * @param msgKey 消息内容Key
-     * @param args 消息Param
-     */
-    protected void addErrorMessage(HttpServletRequest request, String msgKey, Object[] args) {
-        String msgStr = getMessage(request, msgKey, args);
-        msgList.add(msgStr);
-    }
-
-    /**
-     * 添加错误消息
-     * 
-     * @param request HttpServletRequest
-     * @param msgKey 消息内容Key
-     * @param args 消息Param
-     * @param locale Locale
-     */
-    protected void addErrorMessage(HttpServletRequest request, String msgKey, Object[] args, Locale locale) {
-        String msgStr = getMessage(request, msgKey, args, locale);
-        msgList.add(msgStr);
-    }
-
-    /**
      * 取得消息资源
      * 
      * @param request HttpServletRequest
@@ -119,6 +82,10 @@ public abstract class AbstractViewAction extends BaseBean {
         return getMessage(request, msgKey, args, Locale.CHINA);
     }
 
+    private static String ERROR_INFO = "ERROR_";
+    private static String SPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    private static String NEW_LINE = "<br>";
+
     /**
      * 取得消息资源
      * 
@@ -131,7 +98,9 @@ public abstract class AbstractViewAction extends BaseBean {
     protected String getMessage(HttpServletRequest request, String msgKey, Object[] args, Locale locale) {
         ResourceBundleMessageSource msgObj = (ResourceBundleMessageSource) WebApplicationContextUtil
                 .getApplicationBean(request, "messageSource");
-
+        if (msgKey.startsWith(ERROR_INFO)) {// 消息级别--错误级别
+            return NEW_LINE + SPACE + msgObj.getMessage(msgKey, args, locale) + SPACE;
+        }
         return msgObj.getMessage(msgKey, args, locale);
     }
 

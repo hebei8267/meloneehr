@@ -17,9 +17,11 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-lang.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/ezmorph-1.0.4.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/json-lib-2.2.1-jdk15.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>

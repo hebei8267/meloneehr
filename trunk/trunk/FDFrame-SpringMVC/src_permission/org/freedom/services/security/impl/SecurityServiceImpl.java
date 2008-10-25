@@ -30,12 +30,12 @@ public class SecurityServiceImpl implements ISecurityService {
         return null;
     }
 
-    public boolean modUserPassword_Service(String userID, String password) {
+    public Boolean modUserPassword_Service(String userID, String oldPassword, String newPassword) {
         User user = userDao.getUserByID(userID);
-        if (user == null) {
+        if (user == null || !user.getPassword().equals(oldPassword)) {
             return false;
         }
-        user.setPassword(password);
+        user.setPassword(newPassword);
         user.setFirstLoginFlag(Boolean.FALSE);
         userDao.save(user);
 
