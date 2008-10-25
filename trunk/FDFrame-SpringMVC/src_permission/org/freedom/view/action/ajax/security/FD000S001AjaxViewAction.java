@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.view.action.AbstractViewAction;
+import org.freedom.entity.security.User;
+import org.freedom.services.security.ISecurityService;
 import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
 
     private static final long serialVersionUID = -6277601235716651095L;
 
+    private ISecurityService securityService;
+
     @RequestMapping("/loginAction.ajax")
     public void loginAction(HttpServletRequest request, Model model, Writer writer)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
@@ -36,7 +40,17 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
         BeanUtils.populate(vObj, request.getParameterMap());
 
         System.out.println(vObj);
+        User user = securityService.userLogin_Service(vObj.getUserId(), vObj.getPassword());
+        System.out.println(user);
         writer.write("123");
+    }
+
+    public ISecurityService getSecurityService() {
+        return securityService;
+    }
+
+    public void setSecurityService(ISecurityService securityService) {
+        this.securityService = securityService;
     }
 
 }
