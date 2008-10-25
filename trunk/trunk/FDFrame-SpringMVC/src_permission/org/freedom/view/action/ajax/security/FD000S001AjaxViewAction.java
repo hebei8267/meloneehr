@@ -3,6 +3,8 @@
  */
 package org.freedom.view.action.ajax.security;
 
+import static org.freedom.view.constant.MesssageIDSecurity.ERROR_LOGIN_FAILED;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
@@ -32,15 +34,20 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
 
     private ISecurityService securityService;
 
-    @RequestMapping("/loginAction.ajax")
+    @RequestMapping("/FD000S001AjaxViewAction_LoginAction.ajax")
     public void loginAction(HttpServletRequest request, Model model, Writer writer)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
         FD000S001ViewObject vObj = new FD000S001ViewObject();
         // 取得request里面的参数
         BeanUtils.populate(vObj, request.getParameterMap());
 
-        System.out.println(vObj);
         User user = securityService.userLogin_Service(vObj.getUserId(), vObj.getPassword());
+        if (user == null) {// 输入用户名或密码错误
+
+            addErrorMessage(request, ERROR_LOGIN_FAILED);
+
+            return null;
+        }
         System.out.println(user);
         writer.write("123");
     }
