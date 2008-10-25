@@ -3,7 +3,7 @@
  */
 package org.freedom.view.action.ajax.security;
 
-import static org.freedom.view.constant.MesssageIDSecurity.ERROR_LOGIN_FAILED;
+import static org.freedom.view.constant.MesssageIDSecurity.ERROR_INPUT_OLD_PWD;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -14,31 +14,28 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.JosnViewObject;
-import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
-import org.freedom.view.vo.security.FD000S001ViewObject;
+import org.freedom.view.vo.security.FD000S002ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户登录AjaxView
+ * 用户密码变更AjaxView
  * 
  * @author 何贝
  * @since JDK1.5
  */
 @Controller
-public class FD000S001AjaxViewAction extends AbstractViewAction {
+public class FD000S002AjaxViewAction extends AbstractViewAction {
 
-    private static final long serialVersionUID = -6277601235716651095L;
-
+    private static final long serialVersionUID = -4693702061279466832L;
     private ISecurityService securityService;
 
     /**
-     * 用户登录
+     * 用户密码变更
      * 
      * @param request
      * @param response
@@ -47,45 +44,29 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    @RequestMapping("/FD000S001AjaxViewAction_LoginAction.ajax")
-    public void loginAction(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S002AjaxViewAction_ModPwdAction.ajax")
+    public void modPwdAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
-        FD000S001ViewObject vObj = new FD000S001ViewObject();
+        FD000S002ViewObject vObj = new FD000S002ViewObject();
         // 取得request里面的参数
         BeanUtils.populate(vObj, request.getParameterMap());
 
-        User user = securityService.userLogin_Service(vObj.getUserId(), vObj.getPassword());
-        if (user == null) {// 输入用户名或密码错误
-
+        if (!securityService.modUserPassword_Service(vObj.getUserId(), vObj.getOldPassword(), vObj.getNewPassword())) {// 修改失败
             JosnViewObject jViewObj = new JosnViewObject(false);
 
-            jViewObj.setResultMsg(getMessage(request, ERROR_LOGIN_FAILED));
+            jViewObj.setResultMsg(getMessage(request, ERROR_INPUT_OLD_PWD));
             JSONObject jSONObject = JSONObject.fromObject(jViewObj);
 
             response.setContentType(RESPONSE_CONTENT_TYPE);
             response.getWriter().write(jSONObject.toString());
-        } else {// 用户登录成功
-
+        } else {
             JosnViewObject jViewObj = new JosnViewObject();
+
             JSONObject jSONObject = JSONObject.fromObject(jViewObj);
 
             response.setContentType(RESPONSE_CONTENT_TYPE);
             response.getWriter().write(jSONObject.toString());
-
-            saveUserInfoToSession(request, user);
         }
-    }
-
-    /**
-     * 初始化 登录用户信息
-     */
-    private void saveUserInfoToSession(HttpServletRequest request, User user) {
-
-        UserInfoSessionBean userInfo = new UserInfoSessionBean();
-        userInfo.setUserId(user.getId());
-        userInfo.setUserName(user.getName());
-
-        saveUserInfo(request, userInfo);
     }
 
     public ISecurityService getSecurityService() {
@@ -95,5 +76,4 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
     public void setSecurityService(ISecurityService securityService) {
         this.securityService = securityService;
     }
-
 }

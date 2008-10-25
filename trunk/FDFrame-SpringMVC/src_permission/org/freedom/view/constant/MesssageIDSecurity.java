@@ -11,8 +11,7 @@ package org.freedom.view.constant;
  */
 public class MesssageIDSecurity {
 	public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
-	public final static String ERROR_INPUT_NEW_PWD = "ERROR_INPUT_NEW_PWD";
-	public final static String ERROR_INPUT_OLD_PWD = "ERROR_Input_Old_PWD";
+	public final static String ERROR_INPUT_OLD_PWD = "ERROR_INPUT_OLD_PWD";
 
 	public final static String ERROR_UPDATE_COUNTRY1 = "ERROR_UPDATE_COUNTRY1";
 	public final static String ERROR_UPDATE_COUNTRY2 = "ERROR_UPDATE_COUNTRY2";

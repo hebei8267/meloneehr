@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<HTML>
-    <HEAD>
+<html>
+    <head>
         <%@ include file="/WEB-INF/jsp/base/PageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/CommonCssJs.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
@@ -14,7 +14,7 @@
         function loginCheck(){
         	var msg = "";
         	if(isEmpty($F('userId'))){
-        		msg = getNeedInputMsg("用户名");
+        		msg += getNeedInputMsg("用户名");
         	}
         	if(isEmpty($F('password'))){
         		msg += getNeedInputMsg("用户密码");
@@ -32,10 +32,15 @@
         	}
         	
         	Ext.Ajax.request({
-				url : 'loginAction.ajax',
+				url : 'FD000S001AjaxViewAction_LoginAction.ajax',
 				success : function(result, request) {
-					Ext.MessageBox.alert('Success', 'Data return from the server: '
-							+ result.responseText);
+					var oResult = eval("(" + result.responseText + ")");
+					
+					if(oResult.processResult) {// 成功
+						loginSuccess();
+					} else {//失败
+						showMessageBox(oResult.resultMsg);
+					}
 				},
 				failure : function(result, request) {
 					showMessageBox("和服务通信发生错误,请稍候再试!")
@@ -46,10 +51,14 @@
 				}
 			});
         }
+        <%// 用户登录成功 %>
+        function loginSuccess(){
+        	$("loginForm").submit();
+        }
         -->
         </script>
-    </HEAD>
-    <BODY>
+    </head>
+    <body>
         <%// 标题栏 START %>
         <div>
             <center>
@@ -124,8 +133,9 @@
                 </tr>
             </table>
             <br>
+            <%@ include file="/WEB-INF/jsp/base/PageMessageInfo.jsp" %>
             <br>
-            <form:form id="loginForm" method="post" modelAttribute="FD000S001ViewObject">
+            <form:form id="loginForm" method="post" modelAttribute="FD000S001ViewObject" action="FD000S001JspViewAction_LoginSuccessAction.faces">
                 <table>
                     <tr>
                         <td width="60">
@@ -151,7 +161,7 @@
                                         <img src="images/cube-red.png">用户密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                    	<form:input path="password" size="20" maxlength="20"/>
+                                    	<form:password path="password" size="20" maxlength="20"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -194,5 +204,5 @@
             </form:form>
         </div>
 		<%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
-    </BODY>
-</HTML>
+    </body>
+</html>

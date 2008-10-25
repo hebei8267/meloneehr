@@ -2,7 +2,7 @@
 <%@ page language="java" import="org.springframework.web.context.WebApplicationContext" %>
 <%@ page language="java" import="org.springframework.web.context.support.WebApplicationContextUtils" %>
 <%@ page language="java" import="org.freedom.view.system.domain.SystemDate" %>
-<%@ page language="java" import="org.freedom.view.system.utils.JspApplicationContext" %>
+<%@ page language="java" import="org.freedom.core.util.WebApplicationContextUtil" %>
 <%
-SystemDate systemDate = (SystemDate) JspApplicationContext.getApplicationBean(request, "SystemDate");
+SystemDate systemDate = (SystemDate) WebApplicationContextUtil.getApplicationBean(request, "SystemDate");
 %>

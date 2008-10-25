@@ -3,6 +3,9 @@
  */
 package org.freedom.core.view.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.freedom.core.bean.BaseBean;
 
 /**
@@ -12,5 +15,36 @@ import org.freedom.core.bean.BaseBean;
  * @since JDK1.5
  */
 public abstract class AbstractViewObject extends BaseBean {
+    /**
+     * 错误消息List
+     */
+    private List<String> msgList = new ArrayList<String>();
+
+    /**
+     * 添加错误消息
+     * 
+     * @param msg 消息内容
+     */
+    public void addErrorMessage(String msg) {
+        msgList.add(msg);
+    }
+
+    /**
+     * 取得错误消息List
+     * 
+     * @return 错误消息List
+     */
+    public List<String> getMsgList() {
+        return msgList;
+    }
+
+    /**
+     * 设置错误消息List
+     * 
+     * @param msgList 错误消息List
+     */
+    public void setMsgList(List<String> msgList) {
+        this.msgList = msgList;
+    }
 
 }
