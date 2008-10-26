@@ -6,6 +6,7 @@ package org.freedom.services.ui.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.freedom.core.view.vo.UIMenuTreeNode;
 import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.services.ui.IMenuNodeService;
@@ -24,7 +25,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
-    public List<MenuNode> getAllShipAreaMenuNode_Service() {
+    public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service() {
         MenuNode root = menuNodeDao.getMenuNodeByID(MenuNodeDao.ROOT_ID);
 
         return getAllShipAreaMenuNode(root);
@@ -36,12 +37,54 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param parentNode
      * @return
      */
-    private List<MenuNode> getAllShipAreaMenuNode(MenuNode parentNode) {
-        List<MenuNode> _reList = new ArrayList<MenuNode>();
+    private List<UIMenuTreeNode> getAllShipAreaMenuNode(MenuNode parentNode) {
+        List<UIMenuTreeNode> _reList = new ArrayList<UIMenuTreeNode>();
         for (MenuNode menuNode : parentNode.getSubNodeList()) {
-            _reList.add(menuNode);
+
+            UIMenuTreeNode uiNode = new UIMenuTreeNode(menuNode.getId(), menuNode.getNodeTxt());
+
+            _reList.add(uiNode);
         }
         return _reList;
+    }
+
+    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId) {
+        MenuNode root = menuNodeDao.getMenuNodeByID(rootNodeId);
+
+        if (root != null) {
+            menuNodeDao.initialize(root);
+
+            UIMenuTreeNode uiMenuNode = new UIMenuTreeNode(root.getId(), root.getNodeTxt());
+
+            buildSubMenuTree(uiMenuNode, root);
+
+            return uiMenuNode;
+        }
+        return null;
+    }
+
+    /**
+     * 创建树结构
+     * 
+     * @param parentNode
+     * @param subNodeList
+     */
+    private void buildSubMenuTree(UIMenuTreeNode parentNode, MenuNode root) {
+        boolean firstFlg = true;
+        for (MenuNode node : root.getSubNodeList()) {
+            if (firstFlg) {
+                parentNode.setLeaf(false);
+                firstFlg = false;
+            }
+            if (node != null) {
+                UIMenuTreeNode uiMenuNode = new UIMenuTreeNode(node.getId(), node.getNodeTxt());
+
+                parentNode.addChildren(uiMenuNode);
+
+                buildSubMenuTree(uiMenuNode, node);
+            }
+        }
+
     }
 
     // ---------------------------------------------------------------------------
@@ -56,4 +99,5 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     public void setMenuNodeDao(MenuNodeDao menuNodeDao) {
         this.menuNodeDao = menuNodeDao;
     }
+
 }
