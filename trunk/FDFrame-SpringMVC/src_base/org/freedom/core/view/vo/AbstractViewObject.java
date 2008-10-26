@@ -15,6 +15,7 @@ import org.freedom.core.bean.BaseBean;
  * @since JDK1.5
  */
 public abstract class AbstractViewObject extends BaseBean {
+
     /**
      * 错误消息List
      */
