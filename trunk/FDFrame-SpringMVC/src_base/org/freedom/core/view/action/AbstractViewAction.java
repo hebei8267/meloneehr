@@ -24,7 +24,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 public abstract class AbstractViewAction extends BaseBean {
     /** Ajax处理结果 默认页面编码UTF-8 */
     public static String RESPONSE_CONTENT_TYPE = "text/html;charset=UTF-8;";
-    private final String USER_INFO = "userInfo";
+    public static final String USER_INFO = "userInfo";
 
     public AbstractViewAction() {
 

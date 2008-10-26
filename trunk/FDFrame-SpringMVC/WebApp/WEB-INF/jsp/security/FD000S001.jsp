@@ -39,6 +39,12 @@
 					if(oResult.processResult) {// 成功
 						loginSuccess();
 					} else {//失败
+						//Ajax系统定式
+						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("sessionTimeOutForm").submit();
+							return;
+						}
+						
 						showMessageBox(oResult.resultMsg);
 					}
 				},
@@ -53,12 +59,18 @@
         }
         <%// 用户登录成功 %>
         function loginSuccess(){
+        	if($F("changePassword2") == "true"){//修改用户密码
+        		$("loginForm").action = "FD000S001JspViewAction_GoModPwdAction.faces";
+        	}else{//工作区主界面
+        		$("loginForm").action = "FD000S002JspViewAction_GoHomeAction.faces";
+        	}
         	$("loginForm").submit();
         }
         -->
         </script>
     </head>
     <body>
+    	<%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
         <%// 标题栏 START %>
         <div>
             <center>
@@ -135,7 +147,7 @@
             <br>
             <%@ include file="/WEB-INF/jsp/base/PageMessageInfo.jsp" %>
             <br>
-            <form:form id="loginForm" method="post" modelAttribute="FD000S001ViewObject" action="FD000S001JspViewAction_LoginSuccessAction.faces">
+            <form:form id="loginForm" method="post" modelAttribute="FD000S001ViewObject">
                 <table>
                     <tr>
                         <td width="60">

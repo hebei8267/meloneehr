@@ -51,6 +51,11 @@
 					if(oResult.processResult) {// 成功
 						modPwdSuccess();
 					} else {//失败
+						//Ajax系统定式
+						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("sessionTimeOutForm").submit();
+							return;
+						}
 						showMessageBox(oResult.resultMsg);
 					}
 				},
@@ -74,6 +79,7 @@
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/jsp/base/PageHeaderDate.jsp" %>
+		<%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
     	<br>
    	 	<div>
 		    <table class="spiltLine">
