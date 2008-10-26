@@ -57,6 +57,7 @@
 							return;
 						}
 						showMessageBox(oResult.resultMsg);
+						cleanInfo();
 					}
 				},
 				failure : function(result, request) {
@@ -75,6 +76,12 @@
         	$("modPwdForm").submit();
         }
         -->
+        <%// 信息清空 %>
+        function cleanInfo(){
+        	$("oldPassword").value = "";
+        	$("newPassword").value = "";
+        	$("newPassword2").value = "";
+        }
         </script>
 	</head>
 	<body>
@@ -185,15 +192,15 @@
 							<table>
 						  		<tr>
 						     		<td height="30" width="140" class="">
-						       			<input value="HOME" class="buttonResetLong" type="button" onclick="goHome()">
+						       			<input value="HOME" class="buttonResetLong" type="button" onclick="goHome();">
 						     		</td>
 						       		<td align="right">
-						          		<input value="变  更" class="buttonSubmitLong" type="button" onclick="modPwd()">
+						          		<input value="变  更" class="buttonSubmitLong" type="button" onclick="modPwd();">
 						         	</td>
 						           	<td width="20">
 						        	</td>
 						           	<td align="left">
-						       			<input value="重  置" class="buttonResetLong" type="reset">
+						       			<input value="重  置" class="buttonResetLong" type="button" onclick="cleanInfo();">
 									</td>
 						     	</tr>
 							</table>

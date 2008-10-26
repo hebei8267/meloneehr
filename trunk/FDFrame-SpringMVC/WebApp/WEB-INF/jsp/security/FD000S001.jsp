@@ -46,6 +46,7 @@
 						}
 						
 						showMessageBox(oResult.resultMsg);
+						cleanInfo();
 					}
 				},
 				failure : function(result, request) {
@@ -65,6 +66,11 @@
         		$("loginForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
         	}
         	$("loginForm").submit();
+        }
+        <%// 信息清空 %>
+        function cleanInfo(){
+        	$("userId").value = "";
+        	$("password").value = "";
         }
         -->
         </script>
@@ -205,7 +211,7 @@
                                     <td width="20">
                                     </td>
                                     <td align="left">
-                                        <input value="重  置" class="buttonResetLong" type="reset">
+                                        <input value="重  置" class="buttonResetLong" type="button" onclick="cleanInfo();">
                                     </td>
                                 </tr>
                             </table>
