@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.services.ui.IMenuNodeService;
 import org.freedom.view.vo.security.FD000S003ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since JDK1.5
  */
 @Controller
-public class FD000S003JspViewAction {
+public class FD000S003JspViewAction extends AbstractViewAction {
+
+    private static final long serialVersionUID = -642239425475299301L;
+
     @Autowired
     private IMenuNodeService menuNodeService;
 

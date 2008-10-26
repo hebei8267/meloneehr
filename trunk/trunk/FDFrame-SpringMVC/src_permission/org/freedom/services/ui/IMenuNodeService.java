@@ -5,7 +5,7 @@ package org.freedom.services.ui;
 
 import java.util.List;
 
-import org.freedom.entity.ui.MenuNode;
+import org.freedom.core.view.vo.UIMenuTreeNode;
 
 /**
  * 系统菜单树相关服务
@@ -19,5 +19,13 @@ public interface IMenuNodeService {
      * 
      * @return
      */
-    public List<MenuNode> getAllShipAreaMenuNode_Service();
+    public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service();
+
+    /**
+     * 取得菜单树节点和其所有子节点信息
+     * 
+     * @param rootNodeId 菜单树节点
+     * @return
+     */
+    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId);
 }
