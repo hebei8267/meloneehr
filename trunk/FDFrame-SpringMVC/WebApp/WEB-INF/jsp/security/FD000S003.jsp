@@ -37,22 +37,16 @@
 						animate : true
 					},
 					items : [
+						<c:forEach items="${FD000S003ViewObject.shipAreaList}" var="item" varStatus="status">
+						<c:if test="${status.index != '0'}">
+						,
+						</c:if>
 						{
-							title : '人事管理',
+							title : '${item.nodeTxt}',
 							border : false,
-							//autoScroll : true,
-							html : '<div id="personnelTreeDiv"></div>'
-						}, {
-							title : '财务管理',
-							border : false,
-							autoScroll : true,
-							html : '<div id="financialTreeDiv"></div>'
-						}, {
-							title : '系统设置',
-							border : false,
-							autoScroll : true,
-							html : '<div id="configTreeDiv"></div>'
+							html : '<div id="subTreeAreaDiv_${item.id}"></div>'
 						}
+						</c:forEach>
 					]
 				}, new Ext.Panel({
 					id : 'work',
@@ -84,7 +78,7 @@
         // 菜单树
 		function initMenuTree() {
 			var tree = new Ext.tree.TreePanel({
-				el : 'personnelTreeDiv',
+				el : 'subTreeAreaDiv_00000003',
 				useArrows : true,
 				animate : true,
 				enableDD : false,
@@ -133,9 +127,6 @@
         </script>
     </head>
     <body>
-    	<c:forEach items="${FD000S001ViewObject.msgList}" var="item" >
-${item}<br>
-</c:forEach>
     	<%// 画面公共菜单部分 %>
         <div id="toolBarDiv">
             <%@ include file="/WEB-INF/jsp/base/PageHeaderDate.jsp" %>

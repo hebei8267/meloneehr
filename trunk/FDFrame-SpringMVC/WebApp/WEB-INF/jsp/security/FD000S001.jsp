@@ -187,7 +187,7 @@
                                         </label>
                                         <form:radiobutton path="changePassword" value="true" />
 										<label>
-                                        	不变更
+                                        	变更
                                         </label>
                                     </td>
                                 </tr>
