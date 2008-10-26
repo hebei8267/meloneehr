@@ -13,36 +13,41 @@ import java.util.List;
  * @since JDK1.5
  */
 public interface IGenericDao<T> {
-	/**
-	 * 根据ID获取对象
-	 * 
-	 * @see HibernateGenericDao#getId(Class,Object)
-	 */
-	public T get(Serializable id);
+    /**
+     * 根据ID获取对象
+     * 
+     * @see HibernateGenericDao#getId(Class,Object)
+     */
+    public T get(Serializable id);
 
-	/**
-	 * 获取全部对象
-	 */
-	public List<T> getAll();
+    /**
+     * 获取全部对象
+     */
+    public List<T> getAll();
 
-	/**
-	 * 保存对象
-	 */
-	public void save(T instance);
+    /**
+     * 保存对象
+     */
+    public void save(T instance);
 
-	/**
-	 * 删除对象
-	 */
-	public void remove(Object o);
+    /**
+     * 加载延时对象
+     */
+    public void initialize(Object entityObj);
 
-	/**
-	 * 根据ID删除对象
-	 */
-	public void removeById(Serializable id);
+    /**
+     * 删除对象
+     */
+    public void remove(Object o);
 
-	/**
-	 * 取得对象的主键名,辅助函数
-	 */
-	@SuppressWarnings("unchecked")
-	public String getIdName(Class clazz);
+    /**
+     * 根据ID删除对象
+     */
+    public void removeById(Serializable id);
+
+    /**
+     * 取得对象的主键名,辅助函数
+     */
+    @SuppressWarnings("unchecked")
+    public String getIdName(Class clazz);
 }
