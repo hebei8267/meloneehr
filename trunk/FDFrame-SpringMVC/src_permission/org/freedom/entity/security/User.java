@@ -60,7 +60,7 @@ public class User extends AbstractEntityBean {
      * @return 名称
      */
     @Basic
-    @Column(name = "NAME", nullable = false, length = 20)
+    @Column(name = "USER_NAME", nullable = false, length = 20)
     public String getName() {
         return name;
     }
