@@ -19,15 +19,8 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
 			<list>
-				<ref bean="officeHoursInterceptor"/>
+				<ref bean="loginUserAccessInterceptor"/>
 			</list>
 		</property> 
 	</bean>
-	
-	<bean id="officeHoursInterceptor"
-		class="org.freedom.view.TimeBasedAccessInterceptor">
-		<property name="openingTime" value="0"/>
-		<property name="closingTime" value="25"/>
-	</bean>
-
 </beans>  

@@ -14,6 +14,8 @@ import org.freedom.core.bean.BaseBean;
 public class JosnViewObject extends BaseBean {
 
     private static final long serialVersionUID = 1490292841454499665L;
+    /** Session超时 */
+    private Boolean sessionTimeOut = Boolean.FALSE;
     /** 处理结果 */
     private Boolean processResult = Boolean.TRUE;
     /** 处理结果消息 */
@@ -25,6 +27,29 @@ public class JosnViewObject extends BaseBean {
 
     public JosnViewObject(Boolean processResult) {
         this.processResult = processResult;
+    }
+
+    public JosnViewObject(Boolean processResult, Boolean sessionTimeOut) {
+        this.processResult = processResult;
+        this.sessionTimeOut = sessionTimeOut;
+    }
+
+    /**
+     * 取得Session超时
+     * 
+     * @return Session超时
+     */
+    public Boolean getSessionTimeOut() {
+        return sessionTimeOut;
+    }
+
+    /**
+     * 设置Session超时
+     * 
+     * @param sessionTimeOut Session超时
+     */
+    public void setSessionTimeOut(Boolean sessionTimeOut) {
+        this.sessionTimeOut = sessionTimeOut;
     }
 
     /**
