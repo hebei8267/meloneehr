@@ -18,6 +18,7 @@ import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.JosnViewObject;
 import org.freedom.services.security.ISecurityService;
 import org.freedom.view.vo.security.FD000S002ViewObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FD000S002AjaxViewAction extends AbstractViewAction {
 
     private static final long serialVersionUID = -4693702061279466832L;
+    @Autowired
     private ISecurityService securityService;
 
     /**

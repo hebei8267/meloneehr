@@ -3,18 +3,14 @@
  */
 package org.freedom.view.action.jsp.security;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.view.vo.security.FD000S002ViewObject;
+import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户登录成功--修改密码JspViewAction
+ * 默认画面迁移到用户登录页面JspViewAction
  * 
  * @author 何贝
  * @since JDK1.5
@@ -22,26 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FD000S001JspViewAction extends AbstractViewAction {
 
-    private static final long serialVersionUID = 968684109252172382L;
+    private static final long serialVersionUID = 6066674675465360677L;
 
     /**
-     * 用户登录成功--修改密码
+     * 默认画面迁移到用户登录页面
      * 
-     * @param model
      * @return
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
      */
-    @RequestMapping("/FD000S001JspViewAction_GoModPwdAction.faces")
-    public String goModPwdAction(HttpServletRequest request, Model model) throws IllegalAccessException,
-            InvocationTargetException {
+    @RequestMapping("/index.faces")
+    public String showPageAction(Model model) {
+        // 用户登录页面初始化
+        FD000S001ViewObject vObj = new FD000S001ViewObject();
 
-        // 修改密码
-        FD000S002ViewObject nextVObj = new FD000S002ViewObject();
+        model.addAttribute("FD000S001ViewObject", vObj);
 
-        model.addAttribute("FD000S002ViewObject", nextVObj);
-
-        return "WEB-INF/jsp/security/FD000S002";
-
+        return "WEB-INF/jsp/security/FD000S001";
     }
+
 }
