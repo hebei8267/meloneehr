@@ -60,9 +60,9 @@
         <%// 用户登录成功 %>
         function loginSuccess(){
         	if($F("changePassword2") == "true"){//修改用户密码
-        		$("loginForm").action = "FD000S001JspViewAction_GoModPwdAction.faces";
+        		$("loginForm").action = "FD000S002JspViewAction_ShowPageAction.faces";
         	}else{//工作区主界面
-        		$("loginForm").action = "FD000S002JspViewAction_GoHomeAction.faces";
+        		$("loginForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
         	}
         	$("loginForm").submit();
         }

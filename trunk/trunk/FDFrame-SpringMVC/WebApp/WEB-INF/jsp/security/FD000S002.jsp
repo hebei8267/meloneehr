@@ -49,7 +49,7 @@
 					var oResult = eval("(" + result.responseText + ")");
 					
 					if(oResult.processResult) {// 成功
-						modPwdSuccess();
+						goHome();
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
@@ -70,9 +70,9 @@
 			});
         }
         <%// 用户密码变更成功 %>
-        function modPwdSuccess(){
-        alert("ok")
-        	//$("modPwdForm").submit();
+        function goHome(){
+        	$("modPwdForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
+        	$("modPwdForm").submit();
         }
         -->
         </script>
@@ -185,7 +185,7 @@
 							<table>
 						  		<tr>
 						     		<td height="30" width="140" class="">
-						       			<input value="HOME" class="buttonResetLong" type="button" onclick="">
+						       			<input value="HOME" class="buttonResetLong" type="button" onclick="goHome()">
 						     		</td>
 						       		<td align="right">
 						          		<input value="变  更" class="buttonSubmitLong" type="button" onclick="modPwd()">
