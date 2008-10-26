@@ -42,7 +42,7 @@
 						,
 						</c:if>
 						{
-							title : '${item.nodeTxt}',
+							title : '${item.text}',
 							border : false,
 							html : '<div id="subTreeAreaDiv_${item.id}"></div>'
 						}
@@ -65,7 +65,9 @@
 				doWorkFrameLayout();
 			}, this);
 			
-			initMenuTree();
+			<c:forEach items="${FD000S003ViewObject.shipAreaList}" var="item" varStatus="status">
+			initMenuTree_${item.id}();
+			</c:forEach>
         });
         
         /** 工作区区域尺寸调整 */
@@ -74,11 +76,11 @@
 			Ext.get("workFrame").setHeight(Ext.getCmp("work").getInnerHeight());
 		}
         
-        
+        <c:forEach items="${FD000S003ViewObject.shipAreaList}" var="item" varStatus="status">
         // 菜单树
-		function initMenuTree() {
+		function initMenuTree_${item.id}() {
 			var tree = new Ext.tree.TreePanel({
-				el : 'subTreeAreaDiv_00000003',
+				el : 'subTreeAreaDiv_${item.id}',
 				useArrows : true,
 				animate : true,
 				enableDD : false,
@@ -87,42 +89,27 @@
 				autoScroll : true,
 				autoWidth : true,
 				autoHeight : true,
-				rootVisible : false,
-				// loader : new Ext.tree.TreeLoader({
-				// dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
-				// })
-				loader : new Ext.tree.TreeLoader()
+				rootVisible : false
 			});
-		
-			var root = new Ext.tree.AsyncTreeNode({
-				text : '人力资源菜单',
-				draggable : false,
-				id : 'root',
-				children : [{
-					leaf : true,
-					text : '新增员工',
-					hrefSrc : '../personnel/personInfoTabs.html'
-				}, {
-					leaf : true,
-					text : '员工信息维护',
-					hrefSrc : '../personnel/personSearch.html'
-				}, {
-					leaf : true,
-					text : '合同管理',
-					hrefSrc : '../personnel/contractSearch.html'
-				}]
-			});
+
+            // add a tree sorter in folder mode
+            //new Ext.tree.TreeSorter(tree, {folderSort:true});
+            
+            // set the root node
+            var root = new Ext.tree.AsyncTreeNode({
+                text : 'ROOT_${item.id}', 
+                draggable : false,
+                id : '${item.id}',
+                loader: new Ext.tree.TreeLoader(
+					{dataUrl:'FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax',
+					 baseParams :{id:'${item.id}'}})
+            });
 			tree.setRootNode(root);
 		
 			tree.render();
 			root.expand();
-		
-			tree.on("click", function(node, event) {
-				if (node.isLeaf()) {
-					document.getElementById("workFrame").src = node.attributes.hrefSrc;
-				}
-			})
 		}
+		</c:forEach>
         -->
         </script>
     </head>
