@@ -64,7 +64,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             }
 
             if (_addFlg) {
-                UIMenuTreeNode uiNode = new UIMenuTreeNode(menuNode.getId(), menuNode.getNodeTxt());
+                UIMenuTreeNode uiNode = new UIMenuTreeNode(menuNode.getId(), menuNode.getNodeTxt(), null);
 
                 _reList.add(uiNode);
             }
@@ -87,7 +87,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             menuNodeDao.initialize(dbNodeRoot);
 
             UIMenuTreeNode uiNodeRoot = new UIMenuTreeNode(dbNodeRoot.getId(), dbNodeRoot.getNodeTxt(),
-                    MenuNode.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+                    MenuNode.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()), dbNodeRoot.getActionContent());
 
             buildSubMenuTree(uiNodeRoot, dbNodeRoot, roleMenuNodePermitList);
 
@@ -122,7 +122,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
                 if (_addFlg) {
                     UIMenuTreeNode uiNode = new UIMenuTreeNode(dbNode.getId(), dbNode.getNodeTxt(),
-                            MenuNode.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                            MenuNode.LEAF_NODE_TYPE.equals(dbNode.getNodeType()), dbNode.getActionContent());
 
                     parentNode.addChildren(uiNode);
 
