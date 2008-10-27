@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.dao.security.RoleDao;
 import org.freedom.dao.security.UserDao;
+import org.freedom.entity.security.Role;
 import org.freedom.entity.security.User;
 import org.freedom.file.CSVFileUtils;
 
@@ -21,6 +23,7 @@ import org.freedom.file.CSVFileUtils;
  */
 public class UserDaoTest extends HibernateDaoTestCase {
     private UserDao userDao;
+    private RoleDao roleDao;
 
     public UserDao getUserDao() {
         return userDao;
@@ -28,6 +31,14 @@ public class UserDaoTest extends HibernateDaoTestCase {
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    public RoleDao getRoleDao() {
+        return roleDao;
+    }
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     public void testCase() throws IOException {
@@ -48,6 +59,9 @@ public class UserDaoTest extends HibernateDaoTestCase {
                     user.setPassword(value);
                 } else if (i == 3) {
                     user.setFirstLoginFlag(Boolean.valueOf(value));
+                } else if (i == 4) {
+                    Role role = roleDao.getRoleByID(value);
+                    user.setRole(role);
                 }
             }
             userDao.save(user);
