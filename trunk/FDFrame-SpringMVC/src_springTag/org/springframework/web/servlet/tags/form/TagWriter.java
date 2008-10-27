@@ -260,4 +260,16 @@ public class TagWriter {
 		}
 	}
 
+	/**
+     * TODO hebei ignore
+     * 
+     * 添加javascript脚本
+     * 
+     * @param javascript javascript脚本
+     * @throws JspException
+     */
+    public void writerJavascript(String javascript) throws JspException {
+        this.writer.append("<script type='text/javascript'> Ext.onReady(function(){ " + javascript + " });</script>");
+
+    }
 }

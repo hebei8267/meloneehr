@@ -186,6 +186,26 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 		return this.multiple;
 	}
 
+	/**
+     * TODO hebei ignore
+     * 
+     * 生成ExtjsComboBoxjavascript脚本
+     * 
+     * @return
+     * @throws JspException
+     */
+    private String createExtjsComboBoxJavascript() throws JspException {
+        StringBuffer _sbuf = new StringBuffer();
+
+        _sbuf.append(" var " + resolveId() + "Combo = new Ext.form.ComboBox({ ");
+        _sbuf.append(" id: '" + resolveId() + "ExtCombo', ");
+        _sbuf.append(" triggerAction: 'all', ");
+        _sbuf.append(" width: 155, ");
+        _sbuf.append(" editable: false, ");
+        _sbuf.append(" transform: '" + resolveId() + "' ");
+        _sbuf.append(" }); ");
+        return _sbuf.toString();
+    }
 
 	/**
 	 * Renders the HTML '<code>select</code>' tag to the supplied
@@ -219,6 +239,8 @@ public class SelectTag extends AbstractHtmlInputElementTag {
 			}
 			tagWriter.endTag(true);
 			writeHiddenTagIfNecessary(tagWriter);
+			// TODO hebei ignore
+			tagWriter.writerJavascript(createExtjsComboBoxJavascript());
 			return SKIP_BODY;
 		}
 		else {
