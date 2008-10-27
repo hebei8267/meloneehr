@@ -17,5 +17,14 @@
             </tr>
         </table>
     </center>
+    <script type="text/javascript">
+	<!--
+	function userLoginOutSystem(){
+		$("sessionTimeOutForm").action = "UserLoginOutSystem.faces";
+		$("sessionTimeOutForm").submit();
+		return;
+	}
+	-->
+	</script>
 </div>
 <%// 标题栏 END %>
