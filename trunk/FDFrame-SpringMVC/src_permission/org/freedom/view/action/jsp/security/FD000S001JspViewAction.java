@@ -28,9 +28,9 @@ public class FD000S001JspViewAction extends AbstractViewAction {
     @RequestMapping("/index.faces")
     public String showPageAction(Model model) {
         // 用户登录页面初始化
-        FD000S001ViewObject vObj = new FD000S001ViewObject();
+        FD000S001ViewObject outPutObj = new FD000S001ViewObject();
 
-        model.addAttribute("FD000S001ViewObject", vObj);
+        model.addAttribute("FD000S001ViewObject", outPutObj);
 
         return "WEB-INF/jsp/security/FD000S001";
     }

@@ -46,6 +46,7 @@
 			<list>
 				<value>org.freedom.entity.security.User</value>
 				<value>org.freedom.entity.security.Role</value>
+				<value>org.freedom.entity.security.RoleMenuNodePermit</value>
 				<value>org.freedom.entity.ui.MenuNode</value>
 			</list>
 		</property>

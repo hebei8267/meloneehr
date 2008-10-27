@@ -6,6 +6,7 @@ package org.freedom.services.ui;
 import java.util.List;
 
 import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.entity.security.RoleMenuNodePermit;
 
 /**
  * 系统菜单树相关服务
@@ -15,11 +16,12 @@ import org.freedom.core.view.vo.UIMenuTreeNode;
  */
 public interface IMenuNodeService {
     /**
-     * 取得所有导航区列表菜单节点
+     * 取得所有导航区列表菜单节点列表
      * 
-     * @return
+     * @param roleMenuNodePermitList 拥有访问权限列表
+     * @return 导航区列表菜单节点列表
      */
-    public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service();
+    public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service(List<RoleMenuNodePermit> roleMenuNodePermitList);
 
     /**
      * 取得菜单树节点和其所有子节点信息
