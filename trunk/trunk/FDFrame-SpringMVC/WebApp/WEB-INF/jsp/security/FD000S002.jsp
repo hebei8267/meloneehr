@@ -76,13 +76,13 @@
         	$("modPwdForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
         	$("modPwdForm").submit();
         }
-        -->
         <%// 信息清空 %>
         function cleanInfo(){
         	$("oldPassword").value = "";
         	$("newPassword").value = "";
         	$("newPassword2").value = "";
         }
+        -->
         </script>
 	</head>
 	<body>
