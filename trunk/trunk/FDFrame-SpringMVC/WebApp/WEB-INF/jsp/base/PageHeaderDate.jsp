@@ -10,7 +10,8 @@
             </tr>
             <tr>
                 <td class="loginDate">
-                    <%=systemDate.getNowDate()%>
+                	<input type="button" value="退出系统" onclick="userLoginOutSystem();" class="buttonLoginOutLong">
+                	<%=systemDate.getNowDate()%>
                     <%=systemDate.getNowWeek()%>
                 </td>
             </tr>

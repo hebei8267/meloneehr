@@ -35,7 +35,9 @@
 					layout : 'accordion',
 					layoutConfig : {
 						animate : true
-					},
+					}
+					<c:if test="${!empty FD000S003ViewObject.shipAreaList}">
+					,
 					items : [
 						<c:forEach items="${FD000S003ViewObject.shipAreaList}" var="item" varStatus="status">
 						<c:if test="${status.index != '0'}">
@@ -48,6 +50,7 @@
 						}
 						</c:forEach>
 					]
+					</c:if>
 				}, new Ext.Panel({
 					id : 'work',
 					el : 'workDiv',
