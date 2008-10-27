@@ -33,20 +33,24 @@ public class UIMenuTreeNode extends BaseBean {
      * 子节点
      */
     private List<UIMenuTreeNode> children = new ArrayList<UIMenuTreeNode>();
+    /** 页面迁移内容 */
+    private String actionContent;
 
     public UIMenuTreeNode() {
 
     }
 
-    public UIMenuTreeNode(String id, String text) {
+    public UIMenuTreeNode(String id, String text, String actionContent) {
         this.id = id;
         this.text = text;
+        this.actionContent = actionContent;
     }
 
-    public UIMenuTreeNode(String id, String text, boolean leaf) {
+    public UIMenuTreeNode(String id, String text, boolean leaf, String actionContent) {
         this.id = id;
         this.text = text;
         this.leaf = leaf;
+        this.actionContent = actionContent;
     }
 
     /**
@@ -123,5 +127,23 @@ public class UIMenuTreeNode extends BaseBean {
 
     public void addChildren(UIMenuTreeNode children) {
         this.children.add(children);
+    }
+
+    /**
+     * 页面迁移内容
+     * 
+     * @return 页面迁移内容
+     */
+    public String getActionContent() {
+        return actionContent;
+    }
+
+    /**
+     * 页面迁移内容
+     * 
+     * @return 页面迁移内容
+     */
+    public void setActionContent(String actionContent) {
+        this.actionContent = actionContent;
     }
 }
