@@ -79,6 +79,15 @@ public class MenuNode extends AbstractEntityBean {
     }
 
     /**
+     * 设置节点编号
+     * 
+     * @param id 节点编号
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
      * 取得节点描述
      * 
      * @return 节点描述
@@ -87,6 +96,15 @@ public class MenuNode extends AbstractEntityBean {
     @Column(name = "NODE_TEXT", nullable = false)
     public String getNodeTxt() {
         return nodeTxt;
+    }
+
+    /**
+     * 设置节点描述
+     * 
+     * @param nodeTxt 节点描述
+     */
+    public void setNodeTxt(String nodeTxt) {
+        this.nodeTxt = nodeTxt;
     }
 
     /**
@@ -101,14 +119,32 @@ public class MenuNode extends AbstractEntityBean {
     }
 
     /**
-     * 取得默认权限
+     * 设置节点类型
      * 
-     * @return 默认权限
+     * @param nodeType 节点类型
+     */
+    public void setNodeType(String nodeType) {
+        this.nodeType = nodeType;
+    }
+
+    /**
+     * 取得默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @return 默认权限 "true"无访问限制 "false"有访问限制
      */
     @Basic
     @Column(name = "DEFAULT_PERMIT", nullable = false)
     public Boolean getDefaultPermit() {
         return defaultPermit;
+    }
+
+    /**
+     * 设置默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
+     */
+    public void setDefaultPermit(Boolean defaultPermit) {
+        this.defaultPermit = defaultPermit;
     }
 
     /**
@@ -122,66 +158,6 @@ public class MenuNode extends AbstractEntityBean {
         return actionContent;
     }
 
-    @Basic
-    @Column(name = "_INDEX")
-    public Integer getIndex() {
-        return index;
-    }
-
-    @OneToMany(mappedBy = "parentNode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @IndexColumn(name = "_INDEX", base = 1)
-    public List<MenuNode> getSubNodeList() {
-        return subNodeList;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "PARENT_NODE_H_ID")
-    public MenuNode getParentNode() {
-        return parentNode;
-    }
-
-    @Basic
-    @Column(name = "PARENT_NODE_ID", length = 20)
-    public String getParentNodeID() {
-        return parentNodeID;
-    }
-
-    /**
-     * 设置节点编号
-     * 
-     * @param id 节点编号
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * 设置节点描述
-     * 
-     * @param nodeTxt 节点描述
-     */
-    public void setNodeTxt(String nodeTxt) {
-        this.nodeTxt = nodeTxt;
-    }
-
-    /**
-     * 设置节点类型
-     * 
-     * @param nodeType 节点类型
-     */
-    public void setNodeType(String nodeType) {
-        this.nodeType = nodeType;
-    }
-
-    /**
-     * 设置默认权限
-     * 
-     * @param defaultPermit 默认权限
-     */
-    public void setDefaultPermit(Boolean defaultPermit) {
-        this.defaultPermit = defaultPermit;
-    }
-
     /**
      * 页面迁移内容
      * 
@@ -191,10 +167,51 @@ public class MenuNode extends AbstractEntityBean {
         this.actionContent = actionContent;
     }
 
+    /**
+     * 取得Index
+     * 
+     * @return Index
+     */
+    @Basic
+    @Column(name = "_INDEX")
+    public Integer getIndex() {
+        return index;
+    }
+
+    /**
+     * 设置Index
+     * 
+     * @param index Index
+     */
     protected void setIndex(Integer index) {
         this.index = index;
     }
 
+    /**
+     * 取得子节点
+     * 
+     * @return 子节点
+     */
+    @OneToMany(mappedBy = "parentNode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @IndexColumn(name = "_INDEX", base = 1)
+    public List<MenuNode> getSubNodeList() {
+        return subNodeList;
+    }
+
+    /**
+     * 设置子节点
+     * 
+     * @param subNodeList 子节点
+     */
+    public void setSubNodeList(List<MenuNode> subNodeList) {
+        this.subNodeList = subNodeList;
+    }
+
+    /**
+     * 添加子节点
+     * 
+     * @param menuNode 子节点
+     */
     public void addSubNode(MenuNode menuNode) {
         int index = 1;
         for (MenuNode _menuNode : subNodeList) {
@@ -208,10 +225,22 @@ public class MenuNode extends AbstractEntityBean {
         this.subNodeList.add(menuNode);
     }
 
-    public void setSubNodeList(List<MenuNode> subNodeList) {
-        this.subNodeList = subNodeList;
+    /**
+     * 取得父节点
+     * 
+     * @return 父节点
+     */
+    @ManyToOne
+    @JoinColumn(name = "PARENT_NODE_H_ID")
+    public MenuNode getParentNode() {
+        return parentNode;
     }
 
+    /**
+     * 设置父节点
+     * 
+     * @param parentNode 父节点
+     */
     public void setParentNode(MenuNode parentNode) {
         if (parentNode != null) {
             this.parentNodeID = parentNode.getId();
@@ -219,6 +248,22 @@ public class MenuNode extends AbstractEntityBean {
         this.parentNode = parentNode;
     }
 
+    /**
+     * 取得父节点ID
+     * 
+     * @return 父节点ID
+     */
+    @Basic
+    @Column(name = "PARENT_NODE_ID", length = 20)
+    public String getParentNodeID() {
+        return parentNodeID;
+    }
+
+    /**
+     * 设置父节点ID
+     * 
+     * @param parentNodeID 父节点ID
+     */
     protected void setParentNodeID(String parentNodeID) {
         this.parentNodeID = parentNodeID;
     }
