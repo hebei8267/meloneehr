@@ -5,6 +5,7 @@ package org.freedom.view.action.ajax.security;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.entity.security.RoleMenuNodePermit;
+import org.freedom.services.security.ISecurityService;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +37,8 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
 
     @Autowired
     private IMenuNodeService menuNodeService;
+    @Autowired
+    private ISecurityService securityService;
 
     /**
      * 取得树节点数据
@@ -46,13 +52,18 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
      */
     @RequestMapping("/FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax")
     public void getTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
+            throws ServletRequestBindingException, IOException, IllegalAccessException,
+            InvocationTargetException {
         UIMenuTreeNode inputObj = new UIMenuTreeNode();
 
         // 取得request里面的参数
         BeanUtils.populate(inputObj, request.getParameterMap());
-
-        UIMenuTreeNode outObj = menuNodeService.getMenuTreeNode_Service(inputObj.getId());
+        // 取得登录用户信息
+        UserInfoSessionBean user = getUserInfoInSession(request);
+        // 取得用户可访问的菜单树结点权限列表
+        List<RoleMenuNodePermit> permitList = securityService.getMenuNodePermitList_Service(user.getUserId());
+        // 菜单树节点和其所有子节点信息
+        UIMenuTreeNode outObj = menuNodeService.getMenuTreeNode_Service(inputObj.getId(), permitList);
 
         JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
@@ -65,5 +76,13 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
 
     public void setMenuNodeService(IMenuNodeService menuNodeService) {
         this.menuNodeService = menuNodeService;
+    }
+
+    public ISecurityService getSecurityService() {
+        return securityService;
+    }
+
+    public void setSecurityService(ISecurityService securityService) {
+        this.securityService = securityService;
     }
 }

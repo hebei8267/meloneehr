@@ -27,7 +27,9 @@ public interface IMenuNodeService {
      * 取得菜单树节点和其所有子节点信息
      * 
      * @param rootNodeId 菜单树节点
-     * @return
+     * @param roleMenuNodePermitList 拥有访问权限列表
+     * @return 菜单树节点和其所有子节点信息
      */
-    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId);
+    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId,
+            List<RoleMenuNodePermit> roleMenuNodePermitList);
 }

@@ -76,19 +76,22 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * 取得菜单树节点和其所有子节点信息
      * 
      * @param rootNodeId 菜单树节点
-     * @return
+     * @param roleMenuNodePermitList 拥有访问权限列表
+     * @return 菜单树节点和其所有子节点信息
      */
-    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId) {
-        MenuNode root = menuNodeDao.getMenuNodeByID(rootNodeId);
+    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId,
+            List<RoleMenuNodePermit> roleMenuNodePermitList) {
+        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
 
-        if (root != null) {
-            menuNodeDao.initialize(root);
+        if (dbNodeRoot != null) {
+            menuNodeDao.initialize(dbNodeRoot);
 
-            UIMenuTreeNode uiMenuNode = new UIMenuTreeNode(root.getId(), root.getNodeTxt());
+            UIMenuTreeNode uiNodeRoot = new UIMenuTreeNode(dbNodeRoot.getId(), dbNodeRoot.getNodeTxt(),
+                    MenuNode.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
 
-            buildSubMenuTree(uiMenuNode, root);
+            buildSubMenuTree(uiNodeRoot, dbNodeRoot, roleMenuNodePermitList);
 
-            return uiMenuNode;
+            return uiNodeRoot;
         }
         return null;
     }
@@ -97,21 +100,34 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * 创建树结构
      * 
      * @param parentNode
-     * @param subNodeList
+     * @param dbNodeRoot
+     * @param roleMenuNodePermitList 拥有访问权限列表
      */
-    private void buildSubMenuTree(UIMenuTreeNode parentNode, MenuNode root) {
-        boolean firstFlg = true;
-        for (MenuNode node : root.getSubNodeList()) {
-            if (firstFlg) {
-                parentNode.setLeaf(false);
-                firstFlg = false;
-            }
-            if (node != null) {
-                UIMenuTreeNode uiMenuNode = new UIMenuTreeNode(node.getId(), node.getNodeTxt());
+    private void buildSubMenuTree(UIMenuTreeNode parentNode, MenuNode dbNodeRoot,
+            List<RoleMenuNodePermit> roleMenuNodePermitList) {
 
-                parentNode.addChildren(uiMenuNode);
+        for (MenuNode dbNode : dbNodeRoot.getSubNodeList()) {
+            boolean _addFlg = false;
+            if (dbNode != null) {
+                if (dbNode.getDefaultPermit()) {// 默认权限 "true"无访问限制 "false"有访问限制
+                    _addFlg = true;
+                } else {
+                    for (RoleMenuNodePermit roleMenuNodePermit : roleMenuNodePermitList) {// 拥有访问权限
+                        if (dbNode.getId().equals(roleMenuNodePermit.getMenuNodeID())) {
+                            _addFlg = true;
+                            break;
+                        }
+                    }
+                }
 
-                buildSubMenuTree(uiMenuNode, node);
+                if (_addFlg) {
+                    UIMenuTreeNode uiNode = new UIMenuTreeNode(dbNode.getId(), dbNode.getNodeTxt(),
+                            MenuNode.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+
+                    parentNode.addChildren(uiNode);
+
+                    buildSubMenuTree(uiNode, dbNode, roleMenuNodePermitList);
+                }
             }
         }
 
