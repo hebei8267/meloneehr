@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%// 程序主框架 %>
 <html>
     <head>
         <%@ include file="/WEB-INF/jsp/base/PageHeader.jsp" %>
@@ -94,10 +94,7 @@
 				autoHeight : true,
 				rootVisible : false
 			});
-
-            // add a tree sorter in folder mode
-            //new Ext.tree.TreeSorter(tree, {folderSort:true});
-            
+          
             // set the root node
             var root = new Ext.tree.AsyncTreeNode({
                 text : 'ROOT_${item.id}', 
@@ -111,6 +108,14 @@
 		
 			tree.render();
 			root.expand();
+
+			tree.on("click", function(node, event) {
+				if (node.isLeaf() && node.attributes.actionContent != "") {
+					$("sessionTimeOutForm").target = "workFrame";
+					$("sessionTimeOutForm").action = node.attributes.actionContent;
+					$("sessionTimeOutForm").submit();
+				}
+			})
 		}
 		</c:forEach>
         -->
