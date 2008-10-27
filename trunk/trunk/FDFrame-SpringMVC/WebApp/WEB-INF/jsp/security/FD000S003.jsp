@@ -10,7 +10,6 @@
         <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
-        
         Ext.onReady(function() {
         	var viewport = new Ext.Viewport({
 				layout : 'border',
@@ -55,7 +54,7 @@
 					id : 'work',
 					el : 'workDiv',
 					region : 'center',
-					html : '<iframe id="workFrame" name="workFrame" src=""></iframe>',
+					html : '<iframe id="workFrame" name="workFrame" src="javascript:false;"></iframe>',
 					margins : '0 5 5 0'
 				})]
 			});
