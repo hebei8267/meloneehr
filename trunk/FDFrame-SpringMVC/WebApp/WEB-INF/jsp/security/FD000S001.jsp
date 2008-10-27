@@ -41,6 +41,7 @@
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("sessionTimeOutForm").target = "_self";
 							$("sessionTimeOutForm").submit();
 							return;
 						}
@@ -76,6 +77,7 @@
         </script>
     </head>
     <body>
+    <div class="defaultBody">
     	<%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
         <%// 标题栏 START %>
         <div>
@@ -222,5 +224,6 @@
             </form:form>
         </div>
 		<%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
+	</div>
     </body>
 </html>
