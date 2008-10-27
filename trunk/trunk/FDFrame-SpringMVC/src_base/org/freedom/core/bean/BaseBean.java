@@ -16,15 +16,17 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 public abstract class BaseBean implements Serializable {
 
-	public BaseBean() {
+    private static final long serialVersionUID = 6905530882052168915L;
 
-	}
+    public BaseBean() {
 
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-	}
+    }
 
-	public String toString(ToStringStyle style) {
-		return ToStringBuilder.reflectionToString(this, style);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    public String toString(ToStringStyle style) {
+        return ToStringBuilder.reflectionToString(this, style);
+    }
 }

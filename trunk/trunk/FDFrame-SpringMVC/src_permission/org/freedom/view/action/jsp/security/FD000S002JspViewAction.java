@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.freedom.core.view.action.AbstractViewAction;
+import org.freedom.view.vo.security.FD000S001ViewObject;
 import org.freedom.view.vo.security.FD000S002ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +38,28 @@ public class FD000S002JspViewAction extends AbstractViewAction {
             InvocationTargetException {
 
         // 修改密码
-        FD000S002ViewObject nextVObj = new FD000S002ViewObject();
+        FD000S002ViewObject outPutObj = new FD000S002ViewObject();
 
-        model.addAttribute("FD000S002ViewObject", nextVObj);
+        model.addAttribute("FD000S002ViewObject", outPutObj);
 
         return "WEB-INF/jsp/security/FD000S002";
 
+    }
+
+    /**
+     * 用户退出,画面迁移到用户登录页面
+     * 
+     * @return
+     */
+    @RequestMapping("/UserLoginOutSystem.faces")
+    public String userLoginOutSystem(HttpServletRequest request, Model model) {
+        // 用户登录页面初始化
+        FD000S001ViewObject outPutObj = new FD000S001ViewObject();
+        // 删除Session登录用户信息
+        removeUserInfo(request);
+
+        model.addAttribute("FD000S001ViewObject", outPutObj);
+
+        return "WEB-INF/jsp/security/FD000S001";
     }
 }

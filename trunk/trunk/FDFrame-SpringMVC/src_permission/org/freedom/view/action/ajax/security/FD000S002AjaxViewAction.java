@@ -49,11 +49,11 @@ public class FD000S002AjaxViewAction extends AbstractViewAction {
     @RequestMapping("/FD000S002AjaxViewAction_ModPwdAction.ajax")
     public void modPwdAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
-        FD000S002ViewObject vObj = new FD000S002ViewObject();
+        FD000S002ViewObject inputObj = new FD000S002ViewObject();
         // 取得request里面的参数
-        BeanUtils.populate(vObj, request.getParameterMap());
+        BeanUtils.populate(inputObj, request.getParameterMap());
 
-        if (!securityService.modUserPassword_Service(vObj.getUserId(), vObj.getOldPassword(), vObj.getNewPassword())) {// 修改失败
+        if (!securityService.modUserPassword_Service(inputObj.getUserId(), inputObj.getOldPassword(), inputObj.getNewPassword())) {// 修改失败
             JosnViewObject jViewObj = new JosnViewObject(false);
 
             jViewObj.setResultMsg(getMessage(request, ERROR_INPUT_OLD_PWD));

@@ -51,11 +51,11 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
     @RequestMapping("/FD000S001AjaxViewAction_LoginAction.ajax")
     public void loginAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
-        FD000S001ViewObject vObj = new FD000S001ViewObject();
+        FD000S001ViewObject inputObj = new FD000S001ViewObject();
         // 取得request里面的参数
-        BeanUtils.populate(vObj, request.getParameterMap());
+        BeanUtils.populate(inputObj, request.getParameterMap());
 
-        User user = securityService.userLogin_Service(vObj.getUserId(), vObj.getPassword());
+        User user = securityService.userLogin_Service(inputObj.getUserId(), inputObj.getPassword());
         if (user == null) {// 输入用户名或密码错误
 
             JosnViewObject jViewObj = new JosnViewObject(false);

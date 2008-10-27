@@ -16,6 +16,7 @@ import org.freedom.core.bean.BaseBean;
  */
 public abstract class AbstractViewObject extends BaseBean {
 
+    private static final long serialVersionUID = -5895556101518158703L;
     /**
      * 错误消息List
      */

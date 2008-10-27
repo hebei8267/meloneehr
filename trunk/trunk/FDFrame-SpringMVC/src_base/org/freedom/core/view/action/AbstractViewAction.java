@@ -22,6 +22,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
  * @since JDK1.5
  */
 public abstract class AbstractViewAction extends BaseBean {
+
+    private static final long serialVersionUID = -7494181740833493859L;
     /** Ajax处理结果 默认页面编码UTF-8 */
     public static String RESPONSE_CONTENT_TYPE = "text/html;charset=UTF-8;";
     public static final String USER_INFO = "userInfo";
@@ -105,7 +107,7 @@ public abstract class AbstractViewAction extends BaseBean {
     }
 
     /**
-     * 保存登录用户信息
+     * 保存Session登录用户信息
      * 
      * @param request HttpServletRequest
      * @param userInfo 登录用户信息
@@ -121,7 +123,7 @@ public abstract class AbstractViewAction extends BaseBean {
     }
 
     /**
-     * 取得登录用户信息
+     * 取得Session登录用户信息
      * 
      * @param request HttpServletRequest
      * @return 登录用户信息
@@ -135,7 +137,7 @@ public abstract class AbstractViewAction extends BaseBean {
     }
 
     /**
-     * 删除登录用户信息
+     * 删除Session登录用户信息
      * 
      * @param request HttpServletRequest
      * @return 执行结果

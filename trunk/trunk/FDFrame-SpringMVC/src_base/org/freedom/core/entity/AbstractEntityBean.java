@@ -23,85 +23,87 @@ import org.freedom.core.bean.BaseBean;
  */
 @MappedSuperclass
 public abstract class AbstractEntityBean extends BaseBean {
-	/** Hibernate_ID */
-	private Integer hid;
-	/** CreateDate_Timestamp */
-	private Timestamp createDate;
-	/** Create_User_ID */
-	private String createUserId;
-	/** Update_Timestamp */
-	private Timestamp updateDate;
-	/** Update_User_ID */
-	private String updateUserId;
-	/** Hibernate_Version */
-	private Integer version;
 
-	@Id
-	@Column(name = "H_ID", nullable = true)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getHid() {
-		return hid;
-	}
+    private static final long serialVersionUID = 648082607776880707L;
+    /** Hibernate_ID */
+    private Integer hid;
+    /** CreateDate_Timestamp */
+    private Timestamp createDate;
+    /** Create_User_ID */
+    private String createUserId;
+    /** Update_Timestamp */
+    private Timestamp updateDate;
+    /** Update_User_ID */
+    private String updateUserId;
+    /** Hibernate_Version */
+    private Integer version;
 
-	public void setHid(Integer hid) {
-		this.hid = hid;
-	}
+    @Id
+    @Column(name = "H_ID", nullable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getHid() {
+        return hid;
+    }
 
-	@Basic
-	@Column(name = "CREATE_DATE", nullable = false, updatable = false)
-	public Timestamp getCreateDate() {
-		return createDate;
-	}
+    public void setHid(Integer hid) {
+        this.hid = hid;
+    }
 
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
+    @Basic
+    @Column(name = "CREATE_DATE", nullable = false, updatable = false)
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
 
-	@Basic
-	@Column(name = "CREATE_USER_ID", nullable = false, length = 20, updatable = false)
-	public String getCreateUserId() {
-		return createUserId;
-	}
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setCreateUserId(String createUserId) {
-		this.createUserId = createUserId;
-	}
+    @Basic
+    @Column(name = "CREATE_USER_ID", nullable = false, length = 20, updatable = false)
+    public String getCreateUserId() {
+        return createUserId;
+    }
 
-	@Basic
-	@Column(name = "UPDATE_USER_ID", nullable = false, length = 20)
-	public String getUpdateUserId() {
-		return updateUserId;
-	}
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
 
-	public void setUpdateUserId(String updateUserId) {
-		this.updateUserId = updateUserId;
-	}
+    @Basic
+    @Column(name = "UPDATE_USER_ID", nullable = false, length = 20)
+    public String getUpdateUserId() {
+        return updateUserId;
+    }
 
-	@Basic
-	@Column(name = "UPDATE_DATE", nullable = false)
-	public Timestamp getUpdateDate() {
-		return updateDate;
-	}
+    public void setUpdateUserId(String updateUserId) {
+        this.updateUserId = updateUserId;
+    }
 
-	public void setUpdateDate(Timestamp updateDate) {
-		this.updateDate = updateDate;
-	}
+    @Basic
+    @Column(name = "UPDATE_DATE", nullable = false)
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
 
-	@Version
-	@Column(name = "VERSION", nullable = false)
-	public Integer getVersion() {
-		return version;
-	}
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    @Version
+    @Column(name = "VERSION", nullable = false)
+    public Integer getVersion() {
+        return version;
+    }
 
-	public abstract int hashCode();
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
-	public abstract boolean equals(Object obj);
+    public abstract int hashCode();
 
-	public AbstractEntityBean() {
+    public abstract boolean equals(Object obj);
 
-	}
+    public AbstractEntityBean() {
+
+    }
 }
