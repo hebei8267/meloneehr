@@ -5,6 +5,7 @@ package test.org.freedom.dao;
 
 import org.freedom.core.test.dao.HibernateDaoTestCase;
 
+import test.org.freedom.dao.security.RoleDaoTest;
 import test.org.freedom.dao.security.UserDaoTest;
 import test.org.freedom.dao.ui.MenuNodeDaoTest;
 
@@ -22,7 +23,9 @@ public class AllDaoTest extends HibernateDaoTestCase {
         TestSuite suite = new TestSuite();
         suite.addTestSuite(CreateTableTest.class);
 
+        suite.addTestSuite(RoleDaoTest.class);
         suite.addTestSuite(UserDaoTest.class);
+
         suite.addTestSuite(MenuNodeDaoTest.class);
         return suite;
     }
