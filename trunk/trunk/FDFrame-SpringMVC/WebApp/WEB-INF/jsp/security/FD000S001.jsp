@@ -41,7 +41,6 @@
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
-							$("sessionTimeOutForm").target = "_self";
 							$("sessionTimeOutForm").submit();
 							return;
 						}
