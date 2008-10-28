@@ -4,13 +4,11 @@
 package org.freedom.view.action.jsp.security;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.entity.security.RoleMenuNodePermit;
 import org.freedom.services.security.ISecurityService;
 import org.freedom.services.ui.IMenuNodeService;
 import org.freedom.view.vo.security.FD000S003ViewObject;
@@ -51,10 +49,8 @@ public class FD000S003JspViewAction extends AbstractViewAction {
         FD000S003ViewObject outPutObj = new FD000S003ViewObject();
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
-        // 取得用户可访问的菜单树结点权限列表
-        List<RoleMenuNodePermit> permitList = securityService.getMenuNodePermitList_Service(user.getUserId());
         // 导航区列表
-        outPutObj.getShipAreaList().addAll(menuNodeService.getAllShipAreaMenuNode_Service(permitList));
+        outPutObj.getShipAreaList().addAll(menuNodeService.getAllShipAreaMenuNode_Service(user.getUserId()));
 
         model.addAttribute("FD000S003ViewObject", outPutObj);
 

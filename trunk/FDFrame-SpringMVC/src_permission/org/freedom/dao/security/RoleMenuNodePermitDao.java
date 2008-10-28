@@ -24,8 +24,8 @@ public class RoleMenuNodePermitDao extends HibernateDaoImpl<RoleMenuNodePermit> 
      * @return 用户可访问的菜单树结点权限列表
      */
     @SuppressWarnings("unchecked")
-    public List<RoleMenuNodePermit> getRoleMenuNodePermitListByUserID(String userID) {
-        List<RoleMenuNodePermit> resultList = getHibernateTemplate().findByNamedQuery(
+    public List<String> getRoleMenuNodePermitListByUserID(String userID) {
+        List<String> resultList = getHibernateTemplate().findByNamedQuery(
                 "RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", userID);
 
         return resultList;
