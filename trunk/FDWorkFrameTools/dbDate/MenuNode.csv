@@ -6,5 +6,5 @@
 00000006,籍贯信息,node,false,null,00000003
 00000007,组织类型信息,node,false,null,00000003
 00000008,组织相关,folder,false,null,00000002
-00000009,组织结构信息,node,false,bbbbbbbbb.faces,00000008
+00000009,组织结构信息,node,true,bbbbbbbbb.faces,00000008
 00000010,菜单树管理,node,false,FD000S004JspViewAction_ShowPageAction.faces,00000002
