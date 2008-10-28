@@ -43,7 +43,6 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private String parentNodeID;
 
     public FD000S004ViewObject() {
-        nodeTypeList.add(new LabelValueBean("&nbsp;", ""));
         nodeTypeList.add(new LabelValueBean("1", "1"));
         nodeTypeList.add(new LabelValueBean("2", "2"));
         nodeTypeList.add(new LabelValueBean("3", "3"));

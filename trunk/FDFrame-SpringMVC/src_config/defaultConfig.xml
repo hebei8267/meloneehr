@@ -84,7 +84,7 @@
 	</bean>
 	
 	<bean id="loginUserAccessInterceptor" class="org.freedom.view.interceptor.LoginUserAccessInterceptor">
-		<property name="unLoginAllowAccessClassNameList">
+		<property name="notLoginAllowAccessClassNameList">
 			<list>
 				<value>org.freedom.view.action.jsp.security.FD000S001JspViewAction</value>
 				<value>org.freedom.view.action.ajax.security.FD000S001AjaxViewAction</value>

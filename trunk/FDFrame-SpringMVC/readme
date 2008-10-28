@@ -1,0 +1,22 @@
+
+
+session失效时错误处理
+
+spring Ext.form.Date 标签
+
+
+
+loader : new Ext.tree.TreeLoader({
+      baseParams : {
+       myName : "Dangzhao"
+      },
+      clearOnLoad : false ,
+      dataUrl : "http://127.0.0.1:8080/CommonWeb/jsonData.jsp" ,
+      listeners : {
+       beforeload : function(){alert("beforeLoad")},
+       load : function(){alert("load")},
+       loadexception : function(){alert("loadexception")}
+      },
+      preloadChildren : false,
+      requestMethod : "POST"
+     }),
