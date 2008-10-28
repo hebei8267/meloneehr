@@ -17,24 +17,27 @@ import org.freedom.core.bean.BaseBean;
 public class UIMenuTreeNode extends BaseBean {
 
     private static final long serialVersionUID = 6909488869312107426L;
-    /**
-     * 节点编号
-     */
+    /** 节点编号 */
     private String id;
-    /**
-     * 节点内容
-     */
+    /** 节点内容 */
     private String text;
-    /**
-     * 子节点标记
-     */
+    /** 子节点标记 */
     private boolean leaf = true;
-    /**
-     * 子节点
-     */
-    private List<UIMenuTreeNode> children = new ArrayList<UIMenuTreeNode>();
     /** 页面迁移内容 */
     private String actionContent;
+    /** 子节点 */
+    private List<UIMenuTreeNode> children = new ArrayList<UIMenuTreeNode>();
+    /** 节点类型 */
+    private String treeNodeType;
+
+    /** 默认权限 "true"无访问限制 "false"有访问限制 */
+    private Boolean defaultPermit = Boolean.TRUE;
+
+    /** 父节点ID */
+    private String parentNodeID;
+
+    /** 节点显示位置 */
+    private String treeNodeIndex;
 
     public UIMenuTreeNode() {
 
@@ -125,12 +128,12 @@ public class UIMenuTreeNode extends BaseBean {
         this.children = children;
     }
 
-    public void addChildren(UIMenuTreeNode children) {
-        this.children.add(children);
+    public void addChildren(UIMenuTreeNode uiNode) {
+        this.children.add(uiNode);
     }
 
     /**
-     * 页面迁移内容
+     * 取得页面迁移内容
      * 
      * @return 页面迁移内容
      */
@@ -139,11 +142,83 @@ public class UIMenuTreeNode extends BaseBean {
     }
 
     /**
-     * 页面迁移内容
+     * 设置页面迁移内容
      * 
-     * @return 页面迁移内容
+     * @param actionContent 页面迁移内容
      */
     public void setActionContent(String actionContent) {
         this.actionContent = actionContent;
+    }
+
+    /**
+     * 取得节点类型
+     * 
+     * @return 节点类型
+     */
+    public String getTreeNodeType() {
+        return treeNodeType;
+    }
+
+    /**
+     * 设置节点类型
+     * 
+     * @param treeNodeType 节点类型
+     */
+    public void setTreeNodeType(String treeNodeType) {
+        this.treeNodeType = treeNodeType;
+    }
+
+    /**
+     * 取得默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @return 默认权限 "true"无访问限制 "false"有访问限制
+     */
+    public Boolean getDefaultPermit() {
+        return defaultPermit;
+    }
+
+    /**
+     * 设置默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
+     */
+    public void setDefaultPermit(Boolean defaultPermit) {
+        this.defaultPermit = defaultPermit;
+    }
+
+    /**
+     * 取得父节点ID
+     * 
+     * @return 父节点ID
+     */
+    public String getParentNodeID() {
+        return parentNodeID;
+    }
+
+    /**
+     * 设置父节点ID
+     * 
+     * @param parentNodeID 父节点ID
+     */
+    public void setParentNodeID(String parentNodeID) {
+        this.parentNodeID = parentNodeID;
+    }
+
+    /**
+     * 取得节点显示位置
+     * 
+     * @return 节点显示位置
+     */
+    public String getTreeNodeIndex() {
+        return treeNodeIndex;
+    }
+
+    /**
+     * 设置节点显示位置
+     * 
+     * @param treeNodeIndex 节点显示位置
+     */
+    public void setTreeNodeIndex(String treeNodeIndex) {
+        this.treeNodeIndex = treeNodeIndex;
     }
 }

@@ -36,6 +36,10 @@ import org.hibernate.annotations.NaturalId;
 public class MenuNode extends AbstractEntityBean {
 
     private static final long serialVersionUID = -7186864941977613879L;
+    /**
+     * 系统菜单树根节点
+     */
+    public final static String ROOT_ID = "00000001";
 
     public MenuNode() {
     }

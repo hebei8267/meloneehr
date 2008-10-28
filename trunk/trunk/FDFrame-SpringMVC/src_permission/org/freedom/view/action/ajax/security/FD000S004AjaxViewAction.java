@@ -11,32 +11,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.UIMenuTreeNode;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 工作区主界面AjaxView
+ * 菜单树管理界面JspViewAction
  * 
  * @author 何贝
  * @since JDK1.5
  */
 @Controller
-public class FD000S003AjaxViewAction extends AbstractViewAction {
+public class FD000S004AjaxViewAction extends AbstractViewAction {
 
-    private static final long serialVersionUID = 7180328524977023850L;
-
+    private static final long serialVersionUID = -1019032505634538776L;
     @Autowired
     private IMenuNodeService menuNodeService;
 
     /**
-     * 取得树节点数据
+     * 取得所有树节点数据
      * 
      * @param request
      * @param response
@@ -45,20 +43,18 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    @RequestMapping("/FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax")
-    public void getTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax")
+    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
-        UIMenuTreeNode inputObj = new UIMenuTreeNode();
 
         // 取得request里面的参数
-        BeanUtils.populate(inputObj, request.getParameterMap());
-        // 取得登录用户信息
-        UserInfoSessionBean user = getUserInfoInSession(request);
-        // 菜单树节点和其所有子节点信息
-        UIMenuTreeNode outObj = menuNodeService.getMenuTreeNode_Service(inputObj.getId(), user.getUserId());
+        String nodeId = ServletRequestUtils.getStringParameter(request, "id");
 
-        JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
+        // 所有菜单树节点和其所有子节点信息
+        UIMenuTreeNode uiMenuNode = menuNodeService.getAllMenuTreeNode_Service(nodeId);
+
+        JSONArray jSONArray = JSONArray.fromObject(uiMenuNode.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONArray.toString());
     }
@@ -70,5 +66,4 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
     public void setMenuNodeService(IMenuNodeService menuNodeService) {
         this.menuNodeService = menuNodeService;
     }
-
 }
