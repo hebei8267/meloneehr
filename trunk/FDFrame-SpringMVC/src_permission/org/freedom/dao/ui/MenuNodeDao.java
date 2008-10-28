@@ -17,10 +17,6 @@ import org.springframework.stereotype.Component;
  */
 @Component("menuNodeDao")
 public class MenuNodeDao extends HibernateDaoImpl<MenuNode> {
-    /**
-     * 系统菜单树根节点
-     */
-    public final static String ROOT_ID = "00000001";
 
     /**
      * 根据菜单树结点ID取得菜单树结点信息
@@ -30,7 +26,8 @@ public class MenuNodeDao extends HibernateDaoImpl<MenuNode> {
      */
     @SuppressWarnings("unchecked")
     public MenuNode getMenuNodeByID(String nodeID) {
-        List<MenuNode> resultList = getHibernateTemplate().findByNamedQuery("MenuNode.getMenuNodeByID", nodeID);
+        List<MenuNode> resultList = getHibernateTemplate().findByNamedQuery("MenuNode.getMenuNodeByID",
+                nodeID);
         if (resultList.size() > 0) {
             return resultList.get(0);
         }

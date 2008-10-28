@@ -13,6 +13,7 @@ import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.ui.IMenuNodeService;
+import org.freedom.view.vo.security.FD000S004ViewObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +36,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @return 导航区列表菜单节点列表
      */
     public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service(String userID) {
-        MenuNode root = menuNodeDao.getMenuNodeByID(MenuNodeDao.ROOT_ID);
+        MenuNode root = menuNodeDao.getMenuNodeByID(MenuNode.ROOT_ID);
         // 取得用户可访问的菜单树结点权限列表
         List<String> roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
         return getAllShipAreaMenuNode(root, roleMenuNodePermitList);
@@ -128,6 +129,59 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      */
     public List<MenuNodeType> getMenuNodeTypeList_Service() {
         return menuNodeTypeDao.getMenuNodeTypeList();
+    }
+
+    /**
+     * 取得所有菜单树节点和其所有子节点信息
+     * 
+     * @param rootNodeId 菜单树节点
+     * @return 所有菜单树节点和其所有子节点信息
+     */
+    public UIMenuTreeNode getAllMenuTreeNode_Service(String rootNodeId) {
+        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
+        if (dbNodeRoot != null) {
+            UIMenuTreeNode uiTreeNode = new UIMenuTreeNode();
+
+            uiTreeNode.setId(dbNodeRoot.getId());
+            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
+            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            uiTreeNode.setTreeNodeType(dbNodeRoot.getNodeType());
+            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+            uiTreeNode.setTreeNodeIndex("");
+
+            buildSubVOList(uiTreeNode, dbNodeRoot);
+
+            return uiTreeNode;
+        }
+        return null;
+    }
+
+    /**
+     * 构建整个树结构
+     * 
+     * @param parentNode
+     * @param dbMenuNode
+     */
+    private void buildSubVOList(UIMenuTreeNode parentNode, MenuNode dbParentNode) {
+        for (MenuNode dbChildNode : dbParentNode.getSubNodeList()) {
+
+            FD000S004ViewObject childNode = new FD000S004ViewObject();
+
+            childNode.setId(dbChildNode.getId());
+            childNode.setText(dbChildNode.getNodeTxt());
+            childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
+            childNode.setActionContent(dbChildNode.getActionContent());
+            childNode.setTreeNodeType(dbChildNode.getNodeType());
+            childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
+            childNode.setParentNodeID(dbChildNode.getParentNodeID());
+            childNode.setTreeNodeIndex(String.valueOf(dbChildNode.getIndex()));
+
+            parentNode.addChildren(childNode);
+
+            buildSubVOList(childNode, dbChildNode);
+        }
     }
 
     // ---------------------------------------------------------------------------

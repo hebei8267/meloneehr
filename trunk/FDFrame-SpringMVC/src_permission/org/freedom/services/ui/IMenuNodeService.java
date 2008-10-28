@@ -33,6 +33,14 @@ public interface IMenuNodeService {
     public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId, String userID);
 
     /**
+     * 取得所有菜单树节点和其所有子节点信息
+     * 
+     * @param rootNodeId 菜单树节点
+     * @return 所有菜单树节点和其所有子节点信息
+     */
+    public UIMenuTreeNode getAllMenuTreeNode_Service(String rootNodeId);
+
+    /**
      * 取得菜单树结点类型列表
      * 
      * @return 菜单树结点类型列表

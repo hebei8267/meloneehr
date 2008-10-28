@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.services.security.ISecurityService;
 import org.freedom.services.ui.IMenuNodeService;
 import org.freedom.view.vo.security.FD000S003ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class FD000S003JspViewAction extends AbstractViewAction {
 
     @Autowired
     private IMenuNodeService menuNodeService;
-    @Autowired
-    private ISecurityService securityService;
 
     /**
      * 用户登录成功--工作区主界面
@@ -65,11 +62,4 @@ public class FD000S003JspViewAction extends AbstractViewAction {
         this.menuNodeService = menuNodeService;
     }
 
-    public ISecurityService getSecurityService() {
-        return securityService;
-    }
-
-    public void setSecurityService(ISecurityService securityService) {
-        this.securityService = securityService;
-    }
 }
