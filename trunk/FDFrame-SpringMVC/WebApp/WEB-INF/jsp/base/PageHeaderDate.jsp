@@ -20,7 +20,7 @@
     <script type="text/javascript">
 	<!--
 	function userLoginOutSystem(){
-		$("sessionTimeOutForm").target = "_self";
+		$("sessionTimeOutForm").target = "_top";
 		$("sessionTimeOutForm").action = "UserLoginOutSystem.faces";
 		$("sessionTimeOutForm").submit();
 		return;
