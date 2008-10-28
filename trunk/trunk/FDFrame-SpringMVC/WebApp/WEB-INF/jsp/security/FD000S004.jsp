@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" import="org.freedom.entity.ui.MenuNode" %>
 <%// 菜单树管理 %>
 <html> 
     <head> 
@@ -14,62 +15,55 @@
 
         	var tree = new Ext.tree.TreePanel({
         		el : 'menuTreeDiv',
-        		title : '籍贯信息',
+        		title : '菜单树信息',
         		useArrows : true,
-        		animate : true,
-        		enableDD : false,
-        		containerScroll : true,
-        		bodyBorder : false,
-        		autoScroll : true,
-        		rootVisible : true,
-        		height : 300,
+				animate : true,
+				enableDD : false,
+				containerScroll : true,
+				bodyBorder : false,
+				autoScroll : true,
+				height : 400,
         		width : 300,
-        		// loader : new Ext.tree.TreeLoader({
-        		// dataUrl : 'http://extjs.com/deploy/dev/examples/tree/get-nodes.php'
-        		// })
-        		loader : new Ext.tree.TreeLoader()
+				rootVisible : false
         	});
 
         	var root = new Ext.tree.AsyncTreeNode({
-        		draggable : false,
-        		id : 'root',
-        		text : '籍贯结构根节点',
-        		children : [{
-        			leaf : false,
-        			text : '中国',
-        			children : [{
-        				leaf : true,
-        				text : '北京'
-        			}, {
-        				leaf : true,
-        				text : '上海'
-        			}, {
-        				leaf : false,
-        				text : '湖北省',
-        				children : [{
-        					leaf : true,
-        					text : '武汉市'
-        				}, {
-        					leaf : true,
-        					text : '宜昌市'
-        				}]
-        			}, {
-        				leaf : true,
-        				text : '湖南省'
-        			}]
-        		}, {
-        			leaf : true,
-        			text : '日本'
-        		}, {
-        			leaf : true,
-        			text : '美国'
-        		}]
-        	});
-        	tree.setRootNode(root);
+                text : '系统菜单树根节点', 
+                draggable : false,
+                id : '<%=MenuNode.ROOT_ID%>',
+                loader: new Ext.tree.TreeLoader(
+					{dataUrl:'FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax',
+					 baseParams :{id:'<%=MenuNode.ROOT_ID%>'}})
+            });
+			tree.setRootNode(root);
+		
+			tree.render();
+			root.expand();
 
-        	tree.render();
-        	root.expand();
+			tree.on("click", function(node, event) {
+				//设置选中节点信息
+				$("id").value = node.id;
+	            $("text").value = node.attributes.text;
+	            Ext.getCmp('treeNodeTypeExtCombo').setValue(node.attributes.treeNodeType);
+	            $("actionContent").value = node.attributes.actionContent;
+	            setNodeType(node.attributes.defaultPermit);
+	            $("treeNodeIndex").value = node.attributes.treeNodeIndex;
+			})
         });
+
+        function setNodeType(defaultPermit){  
+        	var objs = document.getElementsByName("defaultPermit");
+
+            for(var i = 0; i < objs.length; i++){
+            	var _v1 = String(objs[i].value);
+            	var _v2 = String(defaultPermit);
+
+            	if(_v1 == _v2){
+                	objs[i].checked = true;
+                  	break;  
+               	}  
+          	}  
+        }
         -->
         </script>
     </head> 
@@ -176,7 +170,7 @@
                                     <img src="images/cube-red.png">名称
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="nodeTxt" size="20" maxlength="20"/>
+                                    <form:input path="text" size="20" maxlength="20"/>
                                 </td> 
                             </tr> 
                             <tr> 
@@ -184,7 +178,7 @@
                                     <img src="images/cube-red.png">类型
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200">
-							        <form:select path="nodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
+							        <form:select path="treeNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
                                 </td> 
                             </tr>
                             <tr> 
@@ -192,7 +186,7 @@
                                     <img src="images/cube-red.png">Action
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="actionContent" size="20" maxlength="20"/>
+                                    <form:input path="actionContent" size="20" maxlength="255"/>
                                 </td> 
                             </tr>
                             <tr> 
@@ -215,7 +209,7 @@
                                 	显示位置
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="index" size="20" maxlength="20"/> 
+                                    <form:input path="treeNodeIndex" size="20" maxlength="20"/> 
                                 </td> 
                             </tr> 
                             <tr> 
