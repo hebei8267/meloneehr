@@ -197,13 +197,14 @@ public class SelectTag extends AbstractHtmlInputElementTag {
     private String createExtjsComboBoxJavascript() throws JspException {
         StringBuffer _sbuf = new StringBuffer();
 
-        _sbuf.append(" var " + resolveId() + "Combo = new Ext.form.ComboBox({ ");
-        _sbuf.append(" id: '" + resolveId() + "ExtCombo', ");
-        _sbuf.append(" triggerAction: 'all', ");
-        _sbuf.append(" width: 155, ");
-        _sbuf.append(" editable: false, ");
-        _sbuf.append(" transform: '" + resolveId() + "' ");
+        _sbuf.append(" var " + resolveId() + "ExtCombo = new Ext.form.ComboBox({ ");
+        _sbuf.append("      id: '" + resolveId() + "ExtCombo', ");
+        _sbuf.append("      triggerAction: 'all', ");
+        _sbuf.append("      width: 155, ");
+        _sbuf.append("      editable: false, ");
+        _sbuf.append("      transform: '" + resolveId() + "' ");
         _sbuf.append(" }); ");
+
         return _sbuf.toString();
     }
 
