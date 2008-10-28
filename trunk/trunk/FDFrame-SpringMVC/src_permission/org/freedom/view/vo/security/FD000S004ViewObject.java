@@ -22,6 +22,8 @@ public class FD000S004ViewObject extends UIMenuTreeNode {
 
     /** 节点类型列表 */
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
+    /** 节点图标 */
+    private String icon;
 
     public FD000S004ViewObject() {
 
@@ -31,6 +33,24 @@ public class FD000S004ViewObject extends UIMenuTreeNode {
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
         }
+    }
+
+    /**
+     * 取得节点图标
+     * 
+     * @return 节点图标
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * 设置节点图标
+     * 
+     * @param icon 节点图标
+     */
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     /**
@@ -51,4 +71,18 @@ public class FD000S004ViewObject extends UIMenuTreeNode {
         this.nodeTypeList = nodeTypeList;
     }
 
+    /**
+     * 设置节点类型
+     * 
+     * @param treeNodeType 节点类型
+     */
+    @Override
+    public void setTreeNodeType(String treeNodeType) {
+        if (MenuNodeType.AREA_NODE_TYPE.equals(treeNodeType)) {
+            icon = "images/cube-red.png";
+        } else if (MenuNodeType.FOLDER_NODE_TYPE.equals(treeNodeType)) {
+            icon = "images/cube-red.png";
+        }
+        super.setTreeNodeType(treeNodeType);
+    }
 }
