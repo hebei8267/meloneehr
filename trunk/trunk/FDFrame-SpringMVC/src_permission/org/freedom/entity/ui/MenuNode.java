@@ -40,18 +40,6 @@ public class MenuNode extends AbstractEntityBean {
     public MenuNode() {
     }
 
-    /**
-     * 节点类型--导航条
-     */
-    public final static String AREA_NODE_TYPE = "area";
-    /**
-     * 节点类型--文件夹
-     */
-    public final static String FOLDER_NODE_TYPE = "folder";
-    /**
-     * 节点类型--叶节点
-     */
-    public final static String LEAF_NODE_TYPE = "node";
     /** 节点编号 */
     private String id;
 

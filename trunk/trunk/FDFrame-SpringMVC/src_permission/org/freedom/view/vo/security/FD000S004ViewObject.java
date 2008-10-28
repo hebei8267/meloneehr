@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.freedom.core.view.vo.AbstractViewObject;
 import org.freedom.core.view.vo.LabelValueBean;
+import org.freedom.entity.ui.MenuNodeType;
 
 /**
  * 菜单树管理界面ViewObject
@@ -19,36 +20,37 @@ public class FD000S004ViewObject extends AbstractViewObject {
 
     private static final long serialVersionUID = -3699212498804881787L;
     /** 节点编号 */
-    private String id = "id";
+    private String id;
 
     /** 节点类型 */
-    private String nodeType = "nodeType";
+    private String nodeType;
 
     /** 节点类型列表 */
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
 
     /** 节点名称 */
-    private String nodeTxt = "nodeTxt";
+    private String nodeTxt;
 
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private boolean defaultPermit = false;
 
     /** 页面迁移内容 */
-    private String actionContent = "actionContent";
+    private String actionContent;
 
     /** 显示位置 */
-    private Integer index = 0;
+    private String index;
 
     /** 父节点ID */
     private String parentNodeID;
 
     public FD000S004ViewObject() {
-        nodeTypeList.add(new LabelValueBean("1", "1"));
-        nodeTypeList.add(new LabelValueBean("2", "2"));
-        nodeTypeList.add(new LabelValueBean("3", "3"));
-        nodeTypeList.add(new LabelValueBean("4", "4"));
-        nodeTypeList.add(new LabelValueBean("nodeType", "nodeType"));
 
+    }
+
+    public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
+        for (MenuNodeType menuNodeType : _menuNodeTypeList) {
+            nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
+        }
     }
 
     /**
@@ -164,7 +166,7 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @return 显示位置
      */
-    public Integer getIndex() {
+    public String getIndex() {
         return index;
     }
 
@@ -173,7 +175,7 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @param index 显示位置
      */
-    public void setIndex(Integer index) {
+    public void setIndex(String index) {
         this.index = index;
     }
 
