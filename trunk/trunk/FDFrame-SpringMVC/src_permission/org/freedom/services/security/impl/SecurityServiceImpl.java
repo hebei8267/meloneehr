@@ -3,11 +3,8 @@
  */
 package org.freedom.services.security.impl;
 
-import java.util.List;
-
 import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.security.UserDao;
-import org.freedom.entity.security.RoleMenuNodePermit;
 import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
 import org.springframework.context.annotation.Scope;
@@ -59,16 +56,6 @@ public class SecurityServiceImpl implements ISecurityService {
         userDao.save(user);
 
         return true;
-    }
-
-    /**
-     * 取得用户可访问的菜单树结点权限列表
-     * 
-     * @param userID 用户ID
-     * @return 用户可访问的菜单树结点权限列表
-     */
-    public List<RoleMenuNodePermit> getMenuNodePermitList_Service(String userID) {
-        return roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
     }
 
     // ---------------------------------------------------------------------------

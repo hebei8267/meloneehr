@@ -3,9 +3,6 @@
  */
 package org.freedom.services.security;
 
-import java.util.List;
-
-import org.freedom.entity.security.RoleMenuNodePermit;
 import org.freedom.entity.security.User;
 
 /**
@@ -33,12 +30,4 @@ public interface ISecurityService {
      * @return true-修改成功 false-修改失败(用户ID或原用户密码不匹配)
      */
     public Boolean modUserPassword_Service(String userID, String oldPassword, String newPassword);
-
-    /**
-     * 取得用户可访问的菜单树结点权限列表
-     * 
-     * @param userID 用户ID
-     * @return 用户可访问的菜单树结点权限列表
-     */
-    public List<RoleMenuNodePermit> getMenuNodePermitList_Service(String userID);
 }
