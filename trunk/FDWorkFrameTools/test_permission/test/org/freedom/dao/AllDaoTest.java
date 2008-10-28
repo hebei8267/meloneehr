@@ -9,6 +9,7 @@ import test.org.freedom.dao.security.RoleDaoTest;
 import test.org.freedom.dao.security.RoleMenuNodePermitDaoTest;
 import test.org.freedom.dao.security.UserDaoTest;
 import test.org.freedom.dao.ui.MenuNodeDaoTest;
+import test.org.freedom.dao.ui.MenuNodeTypeDaoTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -27,7 +28,7 @@ public class AllDaoTest extends HibernateDaoTestCase {
         suite.addTestSuite(RoleDaoTest.class);
         suite.addTestSuite(UserDaoTest.class);
         suite.addTestSuite(MenuNodeDaoTest.class);
-
+        suite.addTestSuite(MenuNodeTypeDaoTest.class);
         suite.addTestSuite(RoleMenuNodePermitDaoTest.class);
         return suite;
     }
