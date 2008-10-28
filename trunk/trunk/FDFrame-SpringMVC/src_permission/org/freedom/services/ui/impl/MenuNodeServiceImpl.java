@@ -78,7 +78,6 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             // 取得用户可访问的菜单树结点权限列表
             List<String> roleMenuNodePermitList = roleMenuNodePermitDao
                     .getRoleMenuNodePermitListByUserID(userID);
-            // menuNodeDao.initialize(dbNodeRoot);
 
             UIMenuTreeNode uiNodeRoot = new UIMenuTreeNode(dbNodeRoot.getId(), dbNodeRoot.getNodeTxt(),
                     MenuNode.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()), dbNodeRoot.getActionContent());

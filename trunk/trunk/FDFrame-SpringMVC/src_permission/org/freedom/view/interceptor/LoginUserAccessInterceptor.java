@@ -3,6 +3,7 @@
  */
 package org.freedom.view.interceptor;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,14 +27,14 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
     /**
      * 未登录用户允许访问的Action地址列表
      */
-    private List<String> unLoginAllowAccessClassNameList;
+    private List<String> notLoginAllowAccessClassNameList;
     /**
      * SessionTimeOut Action地址列表
      */
     private String sessionTimeOut;
 
-    public void setUnLoginAllowAccessClassNameList(List<String> unLoginAllowAccessClassNameList) {
-        this.unLoginAllowAccessClassNameList = unLoginAllowAccessClassNameList;
+    public void setNotLoginAllowAccessClassNameList(List<String> notLoginAllowAccessClassNameList) {
+        this.notLoginAllowAccessClassNameList = notLoginAllowAccessClassNameList;
     }
 
     public void setSessionTimeOut(String sessionTimeOut) {
@@ -42,9 +43,30 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
 
     private final static String AJAX_VIEW_ACTION = "AjaxViewAction";
 
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(handler.getClass());
-        if (unLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @seeorg.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.
+     * HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+     */
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        return notLoginCheck(request, response, handler);
+    }
+
+    /**
+     * 未登录用户检查
+     * 
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @param handler 响应操作对象
+     * @return
+     * @throws IOException
+     */
+    private boolean notLoginCheck(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws IOException {
+        System.out.println(handler.getClass().getName());
+        if (notLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
             // 用户登录Action
             return true;
         } else if (existSessionInfo(request)) {
