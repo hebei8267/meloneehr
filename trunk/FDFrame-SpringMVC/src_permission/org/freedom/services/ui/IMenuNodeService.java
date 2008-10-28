@@ -6,6 +6,7 @@ package org.freedom.services.ui;
 import java.util.List;
 
 import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.entity.ui.MenuNodeType;
 
 /**
  * 系统菜单树相关服务
@@ -30,4 +31,11 @@ public interface IMenuNodeService {
      * @return 菜单树节点和其所有子节点信息
      */
     public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId, String userID);
+
+    /**
+     * 取得菜单树结点类型列表
+     * 
+     * @return 菜单树结点类型列表
+     */
+    public List<MenuNodeType> getMenuNodeTypeList_Service();
 }

@@ -9,7 +9,9 @@ import java.util.List;
 import org.freedom.core.view.vo.UIMenuTreeNode;
 import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeDao;
+import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -80,7 +82,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                     .getRoleMenuNodePermitListByUserID(userID);
 
             UIMenuTreeNode uiNodeRoot = new UIMenuTreeNode(dbNodeRoot.getId(), dbNodeRoot.getNodeTxt(),
-                    MenuNode.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()), dbNodeRoot.getActionContent());
+                    MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()), dbNodeRoot
+                            .getActionContent());
 
             buildSubMenuTree(uiNodeRoot, dbNodeRoot, roleMenuNodePermitList);
 
@@ -106,7 +109,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 拥有访问权限
                 if (dbNode.getDefaultPermit() || roleMenuNodePermitList.contains(dbNode.getId())) {
                     UIMenuTreeNode uiNode = new UIMenuTreeNode(dbNode.getId(), dbNode.getNodeTxt(),
-                            MenuNode.LEAF_NODE_TYPE.equals(dbNode.getNodeType()), dbNode.getActionContent());
+                            MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()), dbNode
+                                    .getActionContent());
 
                     parentNode.addChildren(uiNode);
 
@@ -117,10 +121,20 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
     }
 
+    /**
+     * 取得菜单树结点类型列表
+     * 
+     * @return 菜单树结点类型列表
+     */
+    public List<MenuNodeType> getMenuNodeTypeList_Service() {
+        return menuNodeTypeDao.getMenuNodeTypeList();
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     private MenuNodeDao menuNodeDao = null;
+    private MenuNodeTypeDao menuNodeTypeDao = null;
     private RoleMenuNodePermitDao roleMenuNodePermitDao = null;
 
     public MenuNodeDao getMenuNodeDao() {
@@ -137,6 +151,14 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
     public void setRoleMenuNodePermitDao(RoleMenuNodePermitDao roleMenuNodePermitDao) {
         this.roleMenuNodePermitDao = roleMenuNodePermitDao;
+    }
+
+    public MenuNodeTypeDao getMenuNodeTypeDao() {
+        return menuNodeTypeDao;
+    }
+
+    public void setMenuNodeTypeDao(MenuNodeTypeDao menuNodeTypeDao) {
+        this.menuNodeTypeDao = menuNodeTypeDao;
     }
 
 }
