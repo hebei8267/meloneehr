@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.core.view.vo.UITreeNode;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +52,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
 
         // 所有菜单树节点和其所有子节点信息
-        UIMenuTreeNode uiMenuNode = menuNodeService.getAllMenuTreeNode_Service(nodeId);
+        UITreeNode uiMenuNode = menuNodeService.getAllMenuTreeNode_Service(nodeId);
 
         JSONArray jSONArray = JSONArray.fromObject(uiMenuNode.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);

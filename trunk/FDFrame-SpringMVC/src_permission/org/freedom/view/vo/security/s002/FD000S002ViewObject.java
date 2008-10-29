@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.view.vo.security;
+package org.freedom.view.vo.security.s002;
 
 import org.freedom.core.view.vo.AbstractViewObject;
 

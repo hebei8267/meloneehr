@@ -1,7 +1,7 @@
 package org.freedom.view.action.jsp.security;
 
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.view.vo.security.FD000S001ViewObject;
+import org.freedom.view.vo.security.s001.FD000S001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.services.ui.IMenuNodeService;
-import org.freedom.view.vo.security.FD000S003ViewObject;
+import org.freedom.view.vo.security.s003.FD000S003ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
