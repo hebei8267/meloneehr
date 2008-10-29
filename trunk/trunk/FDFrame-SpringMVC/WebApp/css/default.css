@@ -177,7 +177,7 @@ table {
 .buttonSubmitLong {
     background-image: url(../images/submit_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 90px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -187,7 +187,7 @@ table {
 .buttonSubmit {
     background-image: url(../images/submit_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 50px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -197,7 +197,7 @@ table {
 .buttonResetLong {
     background-image: url(../images/reset_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 90px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -206,7 +206,7 @@ table {
 
 .buttonLoginOutLong {
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 90px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -216,7 +216,7 @@ table {
 .buttonReset {
     background-image: url(../images/reset_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 50px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -226,7 +226,7 @@ table {
 .buttonDeleteLong {
     background-image: url(../images/delete_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 90px;
     border: 1px solid #000000;
     text-decoration: none;
@@ -236,7 +236,7 @@ table {
 .buttonDelete {
     background-image: url(../images/delete_btn.jpg);
     background-repeat: repeat-x;
-    height: 18px;
+    height: 20px;
     width: 50px;
     border: 1px solid #000000;
     text-decoration: none;

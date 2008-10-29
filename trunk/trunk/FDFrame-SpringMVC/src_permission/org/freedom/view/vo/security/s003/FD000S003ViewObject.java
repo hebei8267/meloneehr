@@ -1,13 +1,13 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.view.vo.security;
+package org.freedom.view.vo.security.s003;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.core.view.vo.AbstractViewObject;
-import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.core.view.vo.UITreeNode;
 
 /**
  * 工作区主界面ViewObject
@@ -22,14 +22,14 @@ public class FD000S003ViewObject extends AbstractViewObject {
     /**
      * 导航区列表
      */
-    private List<UIMenuTreeNode> shipAreaList = new ArrayList<UIMenuTreeNode>();
+    private List<UITreeNode> shipAreaList = new ArrayList<UITreeNode>();
 
     /**
      * 取得导航区列表
      * 
      * @return 导航区列表
      */
-    public List<UIMenuTreeNode> getShipAreaList() {
+    public List<UITreeNode> getShipAreaList() {
         return shipAreaList;
     }
 
@@ -38,7 +38,7 @@ public class FD000S003ViewObject extends AbstractViewObject {
      * 
      * @param shipAreaList 导航区列表
      */
-    public void setShipAreaList(List<UIMenuTreeNode> shipAreaList) {
+    public void setShipAreaList(List<UITreeNode> shipAreaList) {
         this.shipAreaList = shipAreaList;
     }
 }

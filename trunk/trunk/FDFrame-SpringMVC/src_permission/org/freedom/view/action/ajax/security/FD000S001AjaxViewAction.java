@@ -19,7 +19,7 @@ import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.JosnViewObject;
 import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
-import org.freedom.view.vo.security.FD000S001ViewObject;
+import org.freedom.view.vo.security.s001.FD000S001ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;

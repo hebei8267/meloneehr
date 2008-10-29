@@ -14,42 +14,41 @@ import org.freedom.core.bean.BaseBean;
  * @author 何贝
  * @since JDK1.5
  */
-public class UIMenuTreeNode extends BaseBean {
+public class UITreeNode extends BaseBean {
 
     private static final long serialVersionUID = 6909488869312107426L;
     /** 节点编号 */
     private String id;
     /** 节点内容 */
     private String text;
-    /** 子节点标记 */
-    private boolean leaf = true;
     /** 页面迁移内容 */
     private String actionContent;
-    /** 子节点 */
-    private List<UIMenuTreeNode> children = new ArrayList<UIMenuTreeNode>();
     /** 节点类型 */
-    private String treeNodeType;
-
-    /** 默认权限 "true"无访问限制 "false"有访问限制 */
-    private Boolean defaultPermit = Boolean.TRUE;
-
+    private String uiNodeType;
+    /** 子节点标记 */
+    private boolean leaf = true;
     /** 父节点ID */
     private String parentNodeID;
-
+    /** 子节点 */
+    private List<UITreeNode> children = new ArrayList<UITreeNode>();
+    /** 默认权限 "true"无访问限制 "false"有访问限制 */
+    private Boolean defaultPermit = Boolean.TRUE;
     /** 节点显示位置 */
-    private String treeNodeIndex;
+    private String uiNodeIndex;
+    /** 节点图标 */
+    private String icon;
 
-    public UIMenuTreeNode() {
+    public UITreeNode() {
 
     }
 
-    public UIMenuTreeNode(String id, String text, String actionContent) {
+    public UITreeNode(String id, String text, String actionContent) {
         this.id = id;
         this.text = text;
         this.actionContent = actionContent;
     }
 
-    public UIMenuTreeNode(String id, String text, boolean leaf, String actionContent) {
+    public UITreeNode(String id, String text, String actionContent, boolean leaf) {
         this.id = id;
         this.text = text;
         this.leaf = leaf;
@@ -93,46 +92,6 @@ public class UIMenuTreeNode extends BaseBean {
     }
 
     /**
-     * 取得子节点标记
-     * 
-     * @return 子节点标记
-     */
-    public boolean getLeaf() {
-        return leaf;
-    }
-
-    /**
-     * 设置子节点标记
-     * 
-     * @param leaf 子节点标记
-     */
-    public void setLeaf(boolean leaf) {
-        this.leaf = leaf;
-    }
-
-    /**
-     * 取得子节点
-     * 
-     * @return 子节点
-     */
-    public List<UIMenuTreeNode> getChildren() {
-        return children;
-    }
-
-    /**
-     * 设置子节点
-     * 
-     * @param children 子节点
-     */
-    public void setChildren(List<UIMenuTreeNode> children) {
-        this.children = children;
-    }
-
-    public void addChildren(UIMenuTreeNode uiNode) {
-        this.children.add(uiNode);
-    }
-
-    /**
      * 取得页面迁移内容
      * 
      * @return 页面迁移内容
@@ -155,35 +114,35 @@ public class UIMenuTreeNode extends BaseBean {
      * 
      * @return 节点类型
      */
-    public String getTreeNodeType() {
-        return treeNodeType;
+    public String getUiNodeType() {
+        return uiNodeType;
     }
 
     /**
      * 设置节点类型
      * 
-     * @param treeNodeType 节点类型
+     * @param nodeType 节点类型
      */
-    public void setTreeNodeType(String treeNodeType) {
-        this.treeNodeType = treeNodeType;
+    public void setUiNodeType(String nodeType) {
+        this.uiNodeType = nodeType;
     }
 
     /**
-     * 取得默认权限 "true"无访问限制 "false"有访问限制
+     * 取得子节点标记
      * 
-     * @return 默认权限 "true"无访问限制 "false"有访问限制
+     * @return 子节点标记
      */
-    public Boolean getDefaultPermit() {
-        return defaultPermit;
+    public boolean getLeaf() {
+        return leaf;
     }
 
     /**
-     * 设置默认权限 "true"无访问限制 "false"有访问限制
+     * 设置子节点标记
      * 
-     * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
+     * @param leaf 子节点标记
      */
-    public void setDefaultPermit(Boolean defaultPermit) {
-        this.defaultPermit = defaultPermit;
+    public void setLeaf(boolean leaf) {
+        this.leaf = leaf;
     }
 
     /**
@@ -205,20 +164,83 @@ public class UIMenuTreeNode extends BaseBean {
     }
 
     /**
+     * 取得子节点
+     * 
+     * @return 子节点
+     */
+    public List<UITreeNode> getChildren() {
+        return children;
+    }
+
+    /**
+     * 设置子节点
+     * 
+     * @param children 子节点
+     */
+    public void setChildren(List<UITreeNode> children) {
+        this.children = children;
+    }
+
+    /**
+     * 添加子节点
+     * 
+     * @param node 子节点
+     */
+    public void addChildren(UITreeNode node) {
+        this.children.add(node);
+    }
+
+    /**
+     * 取得默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @return 默认权限 "true"无访问限制 "false"有访问限制
+     */
+    public Boolean getDefaultPermit() {
+        return defaultPermit;
+    }
+
+    /**
+     * 设置默认权限 "true"无访问限制 "false"有访问限制
+     * 
+     * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
+     */
+    public void setDefaultPermit(Boolean defaultPermit) {
+        this.defaultPermit = defaultPermit;
+    }
+
+    /**
      * 取得节点显示位置
      * 
      * @return 节点显示位置
      */
-    public String getTreeNodeIndex() {
-        return treeNodeIndex;
+    public String getUiNodeIndex() {
+        return uiNodeIndex;
     }
 
     /**
      * 设置节点显示位置
      * 
-     * @param treeNodeIndex 节点显示位置
+     * @param nodeIndex 节点显示位置
      */
-    public void setTreeNodeIndex(String treeNodeIndex) {
-        this.treeNodeIndex = treeNodeIndex;
+    public void setUiNodeIndex(String nodeIndex) {
+        this.uiNodeIndex = nodeIndex;
+    }
+
+    /**
+     * 取得节点图标
+     * 
+     * @return 节点图标
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * 设置节点图标
+     * 
+     * @param icon 节点图标
+     */
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

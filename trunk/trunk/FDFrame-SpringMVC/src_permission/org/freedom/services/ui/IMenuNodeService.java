@@ -5,7 +5,7 @@ package org.freedom.services.ui;
 
 import java.util.List;
 
-import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.core.view.vo.UITreeNode;
 import org.freedom.entity.ui.MenuNodeType;
 
 /**
@@ -21,7 +21,7 @@ public interface IMenuNodeService {
      * @param userID 用户ID
      * @return 导航区列表菜单节点列表
      */
-    public List<UIMenuTreeNode> getAllShipAreaMenuNode_Service(String userID);
+    public List<UITreeNode> getAllShipAreaMenuNode_Service(String userID);
 
     /**
      * 取得菜单树节点和其所有子节点信息
@@ -30,7 +30,7 @@ public interface IMenuNodeService {
      * @param userID 用户ID
      * @return 菜单树节点和其所有子节点信息
      */
-    public UIMenuTreeNode getMenuTreeNode_Service(String rootNodeId, String userID);
+    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID);
 
     /**
      * 取得所有菜单树节点和其所有子节点信息
@@ -38,7 +38,7 @@ public interface IMenuNodeService {
      * @param rootNodeId 菜单树节点
      * @return 所有菜单树节点和其所有子节点信息
      */
-    public UIMenuTreeNode getAllMenuTreeNode_Service(String rootNodeId);
+    public UITreeNode getAllMenuTreeNode_Service(String rootNodeId);
 
     /**
      * 取得菜单树结点类型列表

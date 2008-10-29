@@ -14,7 +14,7 @@ import net.sf.json.JSONArray;
 import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.UIMenuTreeNode;
+import org.freedom.core.view.vo.UITreeNode;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,14 +49,14 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
     public void getTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
-        UIMenuTreeNode inputObj = new UIMenuTreeNode();
+        UITreeNode inputObj = new UITreeNode();
 
         // 取得request里面的参数
         BeanUtils.populate(inputObj, request.getParameterMap());
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
         // 菜单树节点和其所有子节点信息
-        UIMenuTreeNode outObj = menuNodeService.getMenuTreeNode_Service(inputObj.getId(), user.getUserId());
+        UITreeNode outObj = menuNodeService.getMenuTreeNode_Service(inputObj.getId(), user.getUserId());
 
         JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
