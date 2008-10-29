@@ -44,10 +44,10 @@
 				//设置选中节点信息
 				$("id").value = node.id;
 	            $("text").value = node.attributes.text;
-	            Ext.getCmp('treeNodeTypeExtCombo').setValue(node.attributes.treeNodeType);
+	            Ext.getCmp('uiNodeTypeExtCombo').setValue(node.attributes.uiNodeType);
 	            $("actionContent").value = node.attributes.actionContent;
 	            setNodeType(node.attributes.defaultPermit);
-	            $("treeNodeIndex").value = node.attributes.treeNodeIndex;
+	            $("uiNodeIndex").value = node.attributes.uiNodeIndex;
 			})
         });
 
@@ -124,7 +124,7 @@
                     <td style="padding-left: 20px"> 
                         &nbsp;
                     </td> 
-                    <td align="right"> 
+                    <td align="right">
                         <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
                     </td> 
                     <td width="20"> 
@@ -178,7 +178,7 @@
                                     <img src="images/cube-red.png">类型
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200">
-							        <form:select path="treeNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
+							        <form:select path="uiNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
                                 </td> 
                             </tr>
                             <tr> 
@@ -209,7 +209,7 @@
                                 	显示位置
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="treeNodeIndex" size="20" maxlength="20"/> 
+                                    <form:input path="uiNodeIndex" size="20" maxlength="20"/> 
                                 </td> 
                             </tr> 
                             <tr> 
