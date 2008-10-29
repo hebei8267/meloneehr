@@ -12,7 +12,9 @@
         <script type="text/javascript">
         <!--
         Ext.onReady(function() {
-
+			//-----------------------------------------------------------------------------
+			//菜单树
+			//-----------------------------------------------------------------------------
         	var tree = new Ext.tree.TreePanel({
         		el : 'menuTreeDiv',
         		title : '菜单树信息',
@@ -23,7 +25,7 @@
 				bodyBorder : false,
 				autoScroll : true,
 				height : 250,
-        		width : 300,
+        		width : 307,
 				rootVisible : false
         	});
 
@@ -49,8 +51,70 @@
 	            setNodeType(node.attributes.defaultPermit);
 	            $("uiNodeIndex").value = node.attributes.uiNodeIndex;
 			})
-        });
 
+
+			//-----------------------------------------------------------------------------
+			//角色列表
+			//-----------------------------------------------------------------------------
+			var myData = [['CN', '中国', '中华人民共和国'], ['JP', '日本', '日本'],
+			  			['US', '美国', '美利坚合众国']];
+
+			// create the data store
+			var store = new Ext.data.SimpleStore({
+				fields : [{
+			  		name : 'countryID'
+			  	}, {
+			  		name : 'countryName'
+			 	}, {
+			  		name : 'description'
+			  	}]
+			});
+			store.loadData(myData);
+
+			var sm = new Ext.grid.CheckboxSelectionModel({
+				header : '',
+			  	listeners : {
+			  		rowselect : function(sm, row, rec) {
+			  			// setFromData(rec);
+			  		},
+			  		rowdeselect : function(sm, row, rec) {
+			  			// cleanFromData();
+			  		}
+			  	}
+			});
+
+			// create the Grid
+			var grid = new Ext.grid.GridPanel({
+				store : store,
+			  	id : 'roleGrid',
+			  	el : 'roleGridDiv',
+			  	columns : [
+					sm, 
+					new Ext.grid.RowNumberer({
+			  			header : '序号',// 自动行号
+			  			width : 35
+			  		}), {
+			  			id : 'countryID',
+			  			header : "编号",
+			  			width : 80,
+			  			sortable : true,
+			  			dataIndex : 'countryID'
+			  		}, {
+			  			id : 'countryName',
+			  			header : "名称",
+			  			width : 150,
+			  			sortable : true,
+			  			dataIndex : 'countryName'
+			  	}],
+			  	stripeRows : true,
+			  	height : 250,
+			  	width : 307,
+			  	title : '国家信息'
+			});
+
+			grid.render();
+        });
+		//设置菜单节点的默认权限
         function setNodeType(defaultPermit){  
         	var objs = document.getElementsByName("defaultPermit");
 
@@ -115,132 +179,147 @@
                     </td> 
                 </tr> 
             </table>
-            <table> 
-                <tr> 
-                    <td height="20"> 
-                    </td> 
-                </tr> 
-                <tr> 
-                    <td style="padding-left: 20px"> 
-                        &nbsp;
-                    </td> 
-                    <td align="right">
-                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
-                    </td> 
-                    <td width="20"> 
-                    </td> 
-                    <td align="left"> 
-                        <input value="删  除" class="buttonDeleteLong" type="button"> 
-                    </td> 
-                </tr> 
-                <tr> 
-                    <td height="10"> 
-                    </td> 
-                </tr> 
-            </table>
             <form:form id="menuTreeForm" method="post" modelAttribute="FD000S004ViewObject">
-            <table> 
+            <table>
+            	<tr height="10">
+            	</tr>
                 <tr> 
                     <td style="padding-left: 20px"> 
-                        &nbsp;
-                    </td> 
-                    <td> 
-                        <div id="menuTreeDiv"> 
-                        </div> 
-                    </td> 
-                    <td width="30"> 
-                    </td> 
-                </tr>
-                <tr>
-                	<td height="20"> 
-                    </td> 
-                <tr>
-                <tr>
-                	<td style="padding-left: 20px"> 
                         &nbsp;
                     </td>
-                    <td valign="top"> 
-                        <table> 
-                            <tr> 
-                                <td colspan="4" class="itemTitle">
-                                	节点详细信息
-                                </td> 
-                            </tr> 
-                            <tr> 
-                                <td class="inputItemName" height="30" width="100">
-                                	编号
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200" colspan="3">
-                                	<form:input path="id" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
-                                </td> 
-                            </tr> 
-                            <tr> 
-                                <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/need-input.gif">名称
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="text" size="20" maxlength="20"/>
-                                </td>
-                                <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/need-input.gif">类型
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200">
-							        <form:select path="uiNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
-                                </td> 
-                            </tr>
-                            <tr> 
-                                <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/need-input.gif">Action
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200" colspan="3"> 
-                                    <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>
-                                </td> 
-                            </tr>
-                            <tr> 
-                                <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/need-input.gif">访问限制
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200"> 
-                                    <form:radiobutton path="defaultPermit" value="true"/>
-									<label>
-										无限制
-                                    </label>
-                                    <form:radiobutton path="defaultPermit" value="false" />
-									<label>
-										有限制
-                                    </label>
-                                </td>
-                                <td class="inputItemName" height="30" width="100">
-                                	显示位置
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="uiNodeIndex" size="20" maxlength="20"/> 
-                                </td> 
-                            </tr> 
-                            <tr> 
-			                    <td height="10"> 
+                    <td>
+                    	<table>
+                    		<tr>
+                    			<td>
+                    				<table>
+                    					<tr>
+	                    					<td align="left">
+						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
+						                    </td> 
+						                    <td width="20"> 
+						                    </td> 
+						                    <td align="left"> 
+						                        <input value="删  除" class="buttonDeleteLong" type="button"> 
+						                    </td>
+                    					</tr>
+                    				</table>
+                    			</td>
+                    			<td width="30"></td>
+                    			<td>
+                    				<table>
+                    					<tr>
+                    						<td align="left">
+						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
+						                    </td> 
+						                    <td width="20"> 
+						                    </td> 
+						                    <td align="left"> 
+						                        <input value="删  除" class="buttonDeleteLong" type="button"> 
+						                    </td>
+                    					</tr>
+                    				</table>
+                    			</td>
+                    		</tr>
+                    		<tr height="10">
+            				</tr>
+                    		<tr>
+                    			<td> 
+			                        <div id="menuTreeDiv"> 
+			                        </div> 
 			                    </td> 
-			                </tr> 
-                            <tr> 
-                                <td colspan="4" align="right"> 
-                                    <!-- 按钮 START --> 
-                                    <table> 
-                                        <tr> 
-                                            <td align="right"> 
-                                                <input value="更  新" class="buttonSubmitLong" type="button"> 
-                                            </td> 
-                                            <td width="20"> 
-                                            </td> 
-                                            <td align="right"> 
-                                                <input value="重  置" class="buttonResetLong" type="button"> 
-                                            </td> 
-                                        </tr> 
-                                    </table><!-- 按钮 END --> 
-                                </td> 
-                            </tr> 
-                        </table> 
-                    </td> 
-                </tr> 
+			                    <td width="30">
+			                    </td> 
+			                    <td>
+			                    	<div id="roleGridDiv"></div>
+			                    </td>
+                    		</tr>
+                    		<tr height="10">
+            				</tr>
+			                <tr>
+			                	<td valign="top" colspan="3"> 
+			                        <table> 
+			                            <tr> 
+			                                <td colspan="4" class="itemTitle">
+			                                	节点详细信息
+			                                </td> 
+			                            </tr> 
+			                            <tr> 
+			                                <td class="inputItemName" height="30" width="100">
+			                                	编号
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200" colspan="3">
+			                                	<form:input path="id" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
+			                                </td> 
+			                            </tr> 
+			                            <tr> 
+			                                <td class="inputItemName" height="30" width="100"> 
+			                                    <img src="images/need-input.gif">名称
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200"> 
+			                                    <form:input path="text" size="20" maxlength="20"/>
+			                                </td>
+			                                <td class="inputItemName" height="30" width="100"> 
+			                                    <img src="images/need-input.gif">类型
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200">
+										        <form:select path="uiNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
+			                                </td> 
+			                            </tr>
+			                            <tr> 
+			                                <td class="inputItemName" height="30" width="100"> 
+			                                    <img src="images/need-input.gif">Action
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200" colspan="3"> 
+			                                    <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>
+			                                </td> 
+			                            </tr>
+			                            <tr> 
+			                                <td class="inputItemName" height="30" width="100"> 
+			                                    <img src="images/need-input.gif">访问限制
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200"> 
+			                                    <form:radiobutton path="defaultPermit" value="true"/>
+												<label>
+													无限制
+			                                    </label>
+			                                    <form:radiobutton path="defaultPermit" value="false" />
+												<label>
+													有限制
+			                                    </label>
+			                                </td>
+			                                <td class="inputItemName" height="30" width="100">
+			                                	显示位置
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200"> 
+			                                    <form:input path="uiNodeIndex" size="20" maxlength="20"/> 
+			                                </td> 
+			                            </tr> 
+			                            <tr height="10">
+            							</tr> 
+			                            <tr> 
+			                                <td colspan="4" align="right"> 
+			                                    <!-- 按钮 START --> 
+			                                    <table> 
+			                                        <tr> 
+			                                            <td align="right"> 
+			                                                <input value="更  新" class="buttonSubmitLong" type="button"> 
+			                                            </td> 
+			                                            <td width="20"> 
+			                                            </td> 
+			                                            <td align="right"> 
+			                                                <input value="重  置" class="buttonResetLong" type="button"> 
+			                                            </td> 
+			                                        </tr> 
+			                                    </table>
+			                                    <!-- 按钮 END --> 
+			                                </td> 
+			                            </tr> 
+			                        </table> 
+                    			</td> 
+			                </tr>
+                    	</table>
+                    </td>
+                </tr>
             </table>
             </form:form>
             <%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
