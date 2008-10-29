@@ -24,7 +24,7 @@ import org.hibernate.annotations.NaturalId;
  * @since JDK1.5
  */
 @Entity
-@Table(name = "M_COMMON_DICTIONARY")
+@Table(name = "M_DICTIONARY")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "ENTITY_TYPE", discriminatorType = DiscriminatorType.STRING, length = 50)
 public class MasterEntityBean extends AbstractEntityBean {
@@ -49,7 +49,7 @@ public class MasterEntityBean extends AbstractEntityBean {
      * @return 编号
      */
     @NaturalId
-    @Column(name = "DICTIONARY_MASTER_ID", nullable = false, length = 10)
+    @Column(name = "MASTER_ID", nullable = false, length = 10)
     public String getMasterID() {
         return masterID;
     }
@@ -60,7 +60,7 @@ public class MasterEntityBean extends AbstractEntityBean {
      * @return 编号
      */
     @NaturalId
-    @Column(name = "DICTIONARY_SLAVE_ID", nullable = false, length = 10)
+    @Column(name = "SLAVE_ID", nullable = false, length = 10)
     public String getSlaveID() {
         return slaveID;
     }

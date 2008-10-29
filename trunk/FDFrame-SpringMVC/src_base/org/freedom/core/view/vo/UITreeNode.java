@@ -48,13 +48,6 @@ public class UITreeNode extends BaseBean {
         this.actionContent = actionContent;
     }
 
-    public UITreeNode(String id, String text, String actionContent, boolean leaf) {
-        this.id = id;
-        this.text = text;
-        this.leaf = leaf;
-        this.actionContent = actionContent;
-    }
-
     /**
      * 取得节点编号
      * 
