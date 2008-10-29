@@ -81,12 +81,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             List<String> roleMenuNodePermitList = roleMenuNodePermitDao
                     .getRoleMenuNodePermitListByUserID(userID);
 
-            UITreeNode uiNodeRoot = new UITreeNode(dbNodeRoot.getId(), dbNodeRoot.getNodeTxt(), dbNodeRoot
-                    .getActionContent(), MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            UITreeNode uiTreeNode = new UITreeNode();
 
-            buildSubMenuTree(uiNodeRoot, dbNodeRoot, roleMenuNodePermitList);
+            uiTreeNode.setId(dbNodeRoot.getId());
+            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
+            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
 
-            return uiNodeRoot;
+            buildSubMenuTree(uiTreeNode, dbNodeRoot, roleMenuNodePermitList);
+
+            return uiTreeNode;
         }
         return null;
     }
@@ -107,12 +114,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 默认权限 "true"无访问限制 "false"有访问限制
                 // 拥有访问权限
                 if (dbNode.getDefaultPermit() || roleMenuNodePermitList.contains(dbNode.getId())) {
-                    UITreeNode uiNode = new UITreeNode(dbNode.getId(), dbNode.getNodeTxt(), dbNode
-                            .getActionContent(), MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                    UITreeNode uiTreeNode = new UITreeNode();
 
-                    parentNode.addChildren(uiNode);
+                    uiTreeNode.setId(dbNode.getId());
+                    uiTreeNode.setText(dbNode.getNodeTxt());
+                    uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                    uiTreeNode.setActionContent(dbNode.getActionContent());
+                    uiTreeNode.setUiNodeType(dbNode.getNodeType());
+                    uiTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
+                    uiTreeNode.setParentNodeID(dbNode.getParentNodeID());
 
-                    buildSubMenuTree(uiNode, dbNode, roleMenuNodePermitList);
+                    parentNode.addChildren(uiTreeNode);
+
+                    buildSubMenuTree(uiTreeNode, dbNode, roleMenuNodePermitList);
                 }
             }
         }
@@ -137,6 +151,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     public UITreeNode getAllMenuTreeNode_Service(String rootNodeId) {
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
         if (dbNodeRoot != null) {
+
             UITreeNode uiTreeNode = new UITreeNode();
 
             uiTreeNode.setId(dbNodeRoot.getId());

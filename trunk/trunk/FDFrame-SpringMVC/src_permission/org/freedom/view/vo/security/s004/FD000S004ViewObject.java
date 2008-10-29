@@ -24,10 +24,12 @@ public class FD000S004ViewObject extends UITreeNode {
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
 
     public FD000S004ViewObject() {
-
+        setUiNodeType(MenuNodeType.NONE_NODE_TYPE);
     }
 
     public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
+        setUiNodeType(MenuNodeType.NONE_NODE_TYPE);
+        
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
         }

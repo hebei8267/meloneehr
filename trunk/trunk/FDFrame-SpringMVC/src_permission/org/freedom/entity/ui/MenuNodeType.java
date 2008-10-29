@@ -20,12 +20,16 @@ import org.freedom.entity.MasterEntityBean;
 @DiscriminatorValue(value = "MenuNodeType")
 @NamedQueries( {
         @NamedQuery(name = "MenuNodeType.getMenuNodeTypeByID", query = "select obj from MenuNodeType obj where obj.masterID = ? and obj.slaveID = ? "),
-        @NamedQuery(name = "MenuNodeType.getMenuNodeTypeList", query = "select obj from MenuNodeType obj where obj.masterID = ?  ") })
+        @NamedQuery(name = "MenuNodeType.getMenuNodeTypeList", query = "select obj from MenuNodeType obj where obj.masterID = ?  order by obj.slaveID ") })
 public class MenuNodeType extends MasterEntityBean {
 
     private static final long serialVersionUID = 3504185821760440924L;
 
     public final static String MASTER_ID = "0001";
+    /**
+     * 节点类型--未定义
+     */
+    public final static String NONE_NODE_TYPE = "none";
     /**
      * 节点类型--导航条
      */
