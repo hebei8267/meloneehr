@@ -1,4 +1,4 @@
-00000001,系统菜单树根节点,true,false,null,
+00000001,系统菜单树根节点,root,true,null,
 00000002,系统设置,area,false,null,00000001
 00000003,人事管理,area,false,null,00000001
 00000004,国家信息,node,false,null,00000003
