@@ -130,7 +130,7 @@
                                     <img src="images/tip.png">
                                 </td>
                                 <td>
-                                    <span class="need">注意:[<img src="images/cube-red.png">]为必填项</span>
+                                    <span class="need">注意:[<img src="images/need-input.gif">]为必填项</span>
                                 </td>
                             </tr>
                             <tr>
@@ -169,7 +169,7 @@
                                 </tr>
                                 <tr>
                                     <td class="inputItemName" height="30" width="100">
-                                        <img src="images/cube-red.png">用户名
+                                        <img src="images/need-input.gif">用户名
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
                                     	<form:input path="userId" size="20" maxlength="20"/>
@@ -177,7 +177,7 @@
                                 </tr>
                                 <tr>
                                     <td class="inputItemName" height="30" width="100">
-                                        <img src="images/cube-red.png">用户密码
+                                        <img src="images/need-input.gif">用户密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
                                     	<form:password path="password" size="20" maxlength="20"/>
