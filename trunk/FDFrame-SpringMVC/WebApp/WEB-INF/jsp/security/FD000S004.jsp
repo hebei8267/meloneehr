@@ -22,7 +22,7 @@
 				containerScroll : true,
 				bodyBorder : false,
 				autoScroll : true,
-				height : 400,
+				height : 250,
         		width : 300,
 				rootVisible : false
         	});
@@ -101,7 +101,7 @@
 			                        <img src="images/tip.png">
 			                    </td>
 			                    <td>
-			                        <span class="need">注意:[<img src="images/cube-red.png">]为必填项</span>
+			                        <span class="need">注意:[<img src="images/need-input.gif">]为必填项</span>
 			                    </td>
 			                </tr>
 			                <tr>
@@ -150,10 +150,19 @@
                     </td> 
                     <td width="30"> 
                     </td> 
+                </tr>
+                <tr>
+                	<td height="20"> 
+                    </td> 
+                <tr>
+                <tr>
+                	<td style="padding-left: 20px"> 
+                        &nbsp;
+                    </td>
                     <td valign="top"> 
                         <table> 
                             <tr> 
-                                <td colspan="2" class="itemTitle">
+                                <td colspan="4" class="itemTitle">
                                 	节点详细信息
                                 </td> 
                             </tr> 
@@ -161,21 +170,19 @@
                                 <td class="inputItemName" height="30" width="100">
                                 	编号
                                 </td> 
-                                <td class="inputItemCell" height="30" width="200">
+                                <td class="inputItemCell" height="30" width="200" colspan="3">
                                 	<form:input path="id" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
                                 </td> 
                             </tr> 
                             <tr> 
                                 <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/cube-red.png">名称
+                                    <img src="images/need-input.gif">名称
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
                                     <form:input path="text" size="20" maxlength="20"/>
-                                </td> 
-                            </tr> 
-                            <tr> 
+                                </td>
                                 <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/cube-red.png">类型
+                                    <img src="images/need-input.gif">类型
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200">
 							        <form:select path="uiNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
@@ -183,15 +190,15 @@
                             </tr>
                             <tr> 
                                 <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/cube-red.png">Action
+                                    <img src="images/need-input.gif">Action
                                 </td> 
-                                <td class="inputItemCell" height="30" width="200"> 
-                                    <form:input path="actionContent" size="20" maxlength="255"/>
+                                <td class="inputItemCell" height="30" width="200" colspan="3"> 
+                                    <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>
                                 </td> 
                             </tr>
                             <tr> 
                                 <td class="inputItemName" height="30" width="100"> 
-                                    <img src="images/cube-red.png">访问限制
+                                    <img src="images/need-input.gif">访问限制
                                 </td> 
                                 <td class="inputItemCell" height="30" width="200"> 
                                     <form:radiobutton path="defaultPermit" value="true"/>
@@ -202,9 +209,7 @@
 									<label>
 										有限制
                                     </label>
-                                </td> 
-                            </tr>
-                            <tr> 
+                                </td>
                                 <td class="inputItemName" height="30" width="100">
                                 	显示位置
                                 </td> 
@@ -217,7 +222,7 @@
 			                    </td> 
 			                </tr> 
                             <tr> 
-                                <td colspan="2" align="right"> 
+                                <td colspan="4" align="right"> 
                                     <!-- 按钮 START --> 
                                     <table> 
                                         <tr> 
