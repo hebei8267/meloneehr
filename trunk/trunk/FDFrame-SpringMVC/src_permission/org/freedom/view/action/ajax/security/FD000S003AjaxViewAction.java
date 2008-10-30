@@ -14,7 +14,7 @@ import net.sf.json.JSONArray;
 import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.UITreeNode;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

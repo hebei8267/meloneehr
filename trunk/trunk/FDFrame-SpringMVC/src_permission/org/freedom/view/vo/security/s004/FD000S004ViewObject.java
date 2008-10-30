@@ -6,8 +6,8 @@ package org.freedom.view.vo.security.s004;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.freedom.core.view.vo.LabelValueBean;
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.core.view.vo.jsp.LabelValueBean;
 import org.freedom.entity.ui.MenuNodeType;
 
 /**

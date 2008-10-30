@@ -5,7 +5,8 @@ package org.freedom.services.ui;
 
 import java.util.List;
 
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.entity.security.Role;
 import org.freedom.entity.ui.MenuNodeType;
 
 /**
@@ -46,4 +47,12 @@ public interface IMenuNodeService {
      * @return 菜单树结点类型列表
      */
     public List<MenuNodeType> getMenuNodeTypeList_Service();
+
+    /**
+     * 取得可访问菜单节点的角色列表
+     * 
+     * @param menuNodeID 菜单节点
+     * @return
+     */
+    public List<Role> getRoleList_Service(String menuNodeID);
 }

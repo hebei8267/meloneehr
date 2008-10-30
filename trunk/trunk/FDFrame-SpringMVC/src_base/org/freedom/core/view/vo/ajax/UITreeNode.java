@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.core.view.vo;
+package org.freedom.core.view.vo.ajax;
 
 import java.util.ArrayList;
 import java.util.List;

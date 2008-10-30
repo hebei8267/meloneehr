@@ -31,4 +31,15 @@ public class RoleDao extends HibernateDaoImpl<Role> {
         }
         return null;
     }
+
+    /**
+     * 取得可访问菜单节点的角色列表
+     * 
+     * @param menuNodeID 菜单节点ID
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public List<Role> getRoleListByMenuNodeID(String menuNodeID) {
+        return getHibernateTemplate().findByNamedQuery("Role.getRoleListByMenuNodeID", menuNodeID);
+    }
 }

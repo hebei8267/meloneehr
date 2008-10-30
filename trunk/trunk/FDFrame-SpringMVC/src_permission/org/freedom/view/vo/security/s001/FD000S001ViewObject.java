@@ -3,7 +3,7 @@
  */
 package org.freedom.view.vo.security.s001;
 
-import org.freedom.core.view.vo.AbstractViewObject;
+import org.freedom.core.view.vo.jsp.AbstractViewObject;
 
 /**
  * 用户登录页面ViewObject

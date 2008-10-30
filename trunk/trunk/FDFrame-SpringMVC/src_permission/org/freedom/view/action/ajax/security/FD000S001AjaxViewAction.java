@@ -16,7 +16,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.JosnViewObject;
+import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
 import org.freedom.view.vo.security.s001.FD000S001ViewObject;
