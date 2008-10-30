@@ -110,13 +110,13 @@
 			  		}), {
 			  			id : 'myid',
 			  			header : "编号",
-			  			width : 80,
+			  			width : 85,
 			  			sortable : true,
 			  			dataIndex : 'id'
 			  		}, {
 			  			id : 'myname',
 			  			header : "名称",
-			  			width : 150,
+			  			width : 161,
 			  			sortable : true,
 			  			dataIndex : 'name'
 			  	}],

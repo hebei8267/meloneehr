@@ -20,7 +20,7 @@ import org.freedom.entity.MasterEntityBean;
 @DiscriminatorValue(value = "MenuNodeType")
 @NamedQueries( {
         @NamedQuery(name = "MenuNodeType.getMenuNodeTypeByID", query = "select obj from MenuNodeType obj where obj.masterID = ? and obj.slaveID = ? "),
-        @NamedQuery(name = "MenuNodeType.getMenuNodeTypeList", query = "select obj from MenuNodeType obj where obj.masterID = ?  order by obj.slaveID ") })
+        @NamedQuery(name = "MenuNodeType.getMenuNodeTypeList", query = "select obj from MenuNodeType obj where obj.masterID = ?  order by obj.slaveID desc ") })
 public class MenuNodeType extends MasterEntityBean {
 
     private static final long serialVersionUID = 3504185821760440924L;
