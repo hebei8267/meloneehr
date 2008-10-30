@@ -13,16 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
-import org.freedom.view.vo.security.s001.FD000S001ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -50,12 +49,14 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
      */
     @RequestMapping("/FD000S001AjaxViewAction_LoginAction.ajax")
     public void loginAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
-        FD000S001ViewObject inputObj = new FD000S001ViewObject();
-        // 取得request里面的参数
-        BeanUtils.populate(inputObj, request.getParameterMap());
+            throws ServletRequestBindingException, IOException, IllegalAccessException,
+            InvocationTargetException {
 
-        User user = securityService.userLogin_Service(inputObj.getUserId(), inputObj.getPassword());
+        // 取得request里面的参数
+        String userId = ServletRequestUtils.getStringParameter(request, "userId");
+        String password = ServletRequestUtils.getStringParameter(request, "password");
+
+        User user = securityService.userLogin_Service(userId, password);
         if (user == null) {// 输入用户名或密码错误
 
             JosnViewObject jViewObj = new JosnViewObject(false);
