@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.JosnViewObject;
+import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**

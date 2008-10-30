@@ -6,10 +6,12 @@ package org.freedom.services.ui.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.dao.security.RoleDao;
 import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
+import org.freedom.entity.security.Role;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.ui.IMenuNodeService;
@@ -196,12 +198,38 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         }
     }
 
+    /**
+     * 取得可访问菜单节点的角色列表
+     * 
+     * @param menuNodeID 菜单节点
+     * @return
+     */
+    public List<Role> getRoleList_Service(String menuNodeID) {
+        List<Role> roleList = roleDao.getRoleListByMenuNodeID(menuNodeID);
+        if (roleList != null && roleList.size() != 0) {
+            List<Role> resultList = new ArrayList<Role>();
+            for (Role role : roleList) {
+                Role _role = new Role();
+
+                _role.setId(role.getId());
+                _role.setName(role.getName());
+                _role.setVersion(role.getVersion());
+
+                resultList.add(_role);
+            }
+            return resultList;
+        }
+
+        return null;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     private MenuNodeDao menuNodeDao = null;
     private MenuNodeTypeDao menuNodeTypeDao = null;
     private RoleMenuNodePermitDao roleMenuNodePermitDao = null;
+    private RoleDao roleDao = null;
 
     public MenuNodeDao getMenuNodeDao() {
         return menuNodeDao;
@@ -225,6 +253,14 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
     public void setMenuNodeTypeDao(MenuNodeTypeDao menuNodeTypeDao) {
         this.menuNodeTypeDao = menuNodeTypeDao;
+    }
+
+    public RoleDao getRoleDao() {
+        return roleDao;
+    }
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
 }

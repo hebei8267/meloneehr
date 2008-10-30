@@ -5,14 +5,18 @@ package org.freedom.view.action.ajax.security;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.DataListBean;
+import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.entity.security.Role;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,9 +58,26 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
         // 所有菜单树节点和其所有子节点信息
         UITreeNode uiMenuNode = menuNodeService.getAllMenuTreeNode_Service(nodeId);
 
+        // Json对象格式化
         JSONArray jSONArray = JSONArray.fromObject(uiMenuNode.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONArray.toString());
+    }
+
+    @RequestMapping("/FD000S004AjaxViewAction_GetRoleInfoListAction.ajax")
+    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
+        // 取得request里面的参数
+        String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
+        // 取得可访问菜单节点的角色列表
+        List<Role> roleList = menuNodeService.getRoleList_Service(menuNodeID);
+
+        // Json对象格式化
+        DataListBean<Role> dataList = new DataListBean<Role>();
+        dataList.setDataList(roleList);
+        JSONObject jSONObject = JSONObject.fromObject(dataList);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
     }
 
     public IMenuNodeService getMenuNodeService() {

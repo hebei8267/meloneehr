@@ -30,4 +30,5 @@ public interface ISecurityService {
      * @return true-修改成功 false-修改失败(用户ID或原用户密码不匹配)
      */
     public Boolean modUserPassword_Service(String userID, String oldPassword, String newPassword);
+
 }

@@ -6,8 +6,8 @@ package org.freedom.view.vo.security.s003;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.freedom.core.view.vo.AbstractViewObject;
-import org.freedom.core.view.vo.UITreeNode;
+import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.core.view.vo.jsp.AbstractViewObject;
 
 /**
  * 工作区主界面ViewObject
