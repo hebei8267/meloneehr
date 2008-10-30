@@ -45,6 +45,7 @@
         	
         	Ext.Ajax.request({
 				url : 'FD000S002AjaxViewAction_ModPwdAction.ajax',
+				method: 'post',
 				success : function(result, request) {
 					var oResult = eval("(" + result.responseText + ")");
 					

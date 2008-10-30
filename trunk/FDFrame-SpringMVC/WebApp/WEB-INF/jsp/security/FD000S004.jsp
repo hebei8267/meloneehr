@@ -50,26 +50,30 @@
 	            $("actionContent").value = node.attributes.actionContent;
 	            setNodeType(node.attributes.defaultPermit);
 	            $("uiNodeIndex").value = node.attributes.uiNodeIndex;
+	            //加载列表
+	            store.load({params : {menuNodeID : $F("id")}});
 			})
 
 
 			//-----------------------------------------------------------------------------
 			//角色列表
 			//-----------------------------------------------------------------------------
-			var myData = [['CN', '中国', '中华人民共和国'], ['JP', '日本', '日本'],
-			  			['US', '美国', '美利坚合众国']];
-
+			var role = Ext.data.Record.create([
+			    {name: 'id'},
+			    {name: 'name'}
+			]);
 			// create the data store
-			var store = new Ext.data.SimpleStore({
-				fields : [{
-			  		name : 'countryID'
-			  	}, {
-			  		name : 'countryName'
-			 	}, {
-			  		name : 'description'
-			  	}]
+			var store = new Ext.data.Store({
+				id : 'roleStore',
+				proxy : new Ext.data.HttpProxy({
+					url : 'FD000S004AjaxViewAction_GetRoleInfoListAction.ajax',
+					method: 'POST'
+				}),
+				reader : new Ext.data.JsonReader({
+					totalProperty: "totalProperty",
+					root: "dataList"
+				}, role)
 			});
-			store.loadData(myData);
 
 			var sm = new Ext.grid.CheckboxSelectionModel({
 				header : '',
@@ -94,17 +98,17 @@
 			  			header : '序号',// 自动行号
 			  			width : 35
 			  		}), {
-			  			id : 'countryID',
+			  			id : 'myid',
 			  			header : "编号",
 			  			width : 80,
 			  			sortable : true,
-			  			dataIndex : 'countryID'
+			  			dataIndex : 'id'
 			  		}, {
-			  			id : 'countryName',
+			  			id : 'myname',
 			  			header : "名称",
 			  			width : 150,
 			  			sortable : true,
-			  			dataIndex : 'countryName'
+			  			dataIndex : 'name'
 			  	}],
 			  	stripeRows : true,
 			  	height : 250,
@@ -114,6 +118,7 @@
 
 			grid.render();
         });
+        
 		//设置菜单节点的默认权限
         function setNodeType(defaultPermit){  
         	var objs = document.getElementsByName("defaultPermit");
@@ -127,6 +132,9 @@
                   	break;  
                	}  
           	}  
+        }
+        //delSelectedRole
+        function delSelectedRole(){
         }
         -->
         </script>
@@ -193,12 +201,12 @@
                     			<td>
                     				<table>
                     					<tr>
-	                    					<td align="left">
+	                    					<td align="left"><%// 添加菜单树节点 %>
 						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
 						                    </td> 
 						                    <td width="20"> 
 						                    </td> 
-						                    <td align="left"> 
+						                    <td align="left"><%// 删除菜单树节点 %>
 						                        <input value="删  除" class="buttonDeleteLong" type="button"> 
 						                    </td>
                     					</tr>
@@ -208,13 +216,13 @@
                     			<td>
                     				<table>
                     					<tr>
-                    						<td align="left">
+                    						<td align="left"><%// 添加角色 %>
 						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
 						                    </td> 
 						                    <td width="20"> 
 						                    </td> 
-						                    <td align="left"> 
-						                        <input value="删  除" class="buttonDeleteLong" type="button"> 
+						                    <td align="left"><%// 删除角色 %> 
+						                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delSelectedRole()"> 
 						                    </td>
                     					</tr>
                     				</table>
