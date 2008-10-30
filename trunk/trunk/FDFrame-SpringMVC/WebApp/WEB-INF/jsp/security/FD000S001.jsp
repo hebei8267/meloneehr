@@ -33,6 +33,7 @@
         	
         	Ext.Ajax.request({
 				url : 'FD000S001AjaxViewAction_LoginAction.ajax',
+				method: 'post',
 				success : function(result, request) {
 					var oResult = eval("(" + result.responseText + ")");
 					
