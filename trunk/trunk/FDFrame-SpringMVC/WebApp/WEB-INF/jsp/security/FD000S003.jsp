@@ -102,7 +102,12 @@
                 loader: new Ext.tree.TreeLoader({
                 	dataUrl:'FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax',
 					baseParams :{id:'${item.id}'},
-					requestMethod : 'post'
+					requestMethod : 'post',
+					listeners : {
+						loadexception : function(){
+							showMessageBox("和服务通信发生错误,请稍候再试!");
+						}
+					}
 				})
             });
 			tree.setRootNode(root);

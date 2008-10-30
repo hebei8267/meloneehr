@@ -6,15 +6,13 @@ package org.freedom.core.view.vo.ajax;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.freedom.core.bean.BaseBean;
-
 /**
  * UI树节点
  * 
  * @author 何贝
  * @since JDK1.5
  */
-public class UITreeNode extends BaseBean {
+public class UITreeNode extends JosnViewObject {
 
     private static final long serialVersionUID = 6909488869312107426L;
     /** 节点编号 */

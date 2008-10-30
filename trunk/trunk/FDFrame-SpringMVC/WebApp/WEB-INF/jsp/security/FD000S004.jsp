@@ -50,8 +50,12 @@
 	            $("actionContent").value = node.attributes.actionContent;
 	            setNodeType(node.attributes.defaultPermit);
 	            $("uiNodeIndex").value = node.attributes.uiNodeIndex;
-	            //加载列表
-	            store.load({params : {menuNodeID : $F("id")}});
+
+	            if($F("selectedMenuNode") != node.id){
+	            	$("selectedMenuNode").value = node.id;
+	            	//加载列表
+		            store.load({params : {menuNodeID : $F("id")}});
+	            }
 			})
 
 
@@ -71,8 +75,14 @@
 				}),
 				reader : new Ext.data.JsonReader({
 					totalProperty: "totalProperty",
-					root: "dataList"
-				}, role)
+					root: "dataList",
+					successProperty :'sessionTimeOut'
+				}, role),
+				listeners : {
+					loadexception : function(){
+						showMessageBox("和服务通信发生错误,请稍候再试!");
+					}
+				}
 			});
 
 			var sm = new Ext.grid.CheckboxSelectionModel({
@@ -188,6 +198,8 @@
                 </tr> 
             </table>
             <form:form id="menuTreeForm" method="post" modelAttribute="FD000S004ViewObject">
+            <%// 选中菜单节点 %>
+            <input type="hidden" id="selectedMenuNode" name="selectedMenuNode" value="">
             <table>
             	<tr height="10">
             	</tr>
