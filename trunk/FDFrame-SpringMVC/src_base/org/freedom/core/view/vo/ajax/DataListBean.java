@@ -11,7 +11,9 @@ import java.util.List;
  * @author 何贝
  * @since JDK1.5
  */
-public class DataListBean<T> {
+public class DataListBean<T> extends JosnViewObject {
+
+    private static final long serialVersionUID = 5282109040660552471L;
     /** 列表大小 */
     private int totalProperty;
     /** 数据列表 */

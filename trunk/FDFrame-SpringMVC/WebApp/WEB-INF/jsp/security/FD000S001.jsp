@@ -51,7 +51,7 @@
 					}
 				},
 				failure : function(result, request) {
-					showMessageBox("和服务通信发生错误,请稍候再试!")
+					showMessageBox("和服务通信发生错误,请稍候再试!");
 				},
 				params : {
 					userId : $F('userId'),
