@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.services.security.ISecurityService;
-import org.freedom.view.vo.security.s002.FD000S002ViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -48,12 +47,15 @@ public class FD000S002AjaxViewAction extends AbstractViewAction {
      */
     @RequestMapping("/FD000S002AjaxViewAction_ModPwdAction.ajax")
     public void modPwdAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
-        FD000S002ViewObject inputObj = new FD000S002ViewObject();
-        // 取得request里面的参数
-        BeanUtils.populate(inputObj, request.getParameterMap());
+            throws ServletRequestBindingException, IOException, IllegalAccessException,
+            InvocationTargetException {
 
-        if (!securityService.modUserPassword_Service(inputObj.getUserId(), inputObj.getOldPassword(), inputObj.getNewPassword())) {// 修改失败
+        // 取得request里面的参数
+        String userId = ServletRequestUtils.getStringParameter(request, "userId");
+        String oldPassword = ServletRequestUtils.getStringParameter(request, "oldPassword");
+        String newPassword = ServletRequestUtils.getStringParameter(request, "newPassword");
+
+        if (!securityService.modUserPassword_Service(userId, oldPassword, newPassword)) {// 修改失败
             JosnViewObject jViewObj = new JosnViewObject(false);
 
             jViewObj.setResultMsg(getMessage(request, ERROR_INPUT_OLD_PWD));
