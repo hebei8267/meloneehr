@@ -11,6 +11,7 @@
         <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
+        var subWin = null;
         Ext.onReady(function() {
 			//-----------------------------------------------------------------------------
 			//菜单树
@@ -123,7 +124,7 @@
 			  	stripeRows : true,
 			  	height : 250,
 			  	width : 307,
-			  	title : '国家信息'
+			  	title : '适用角色信息'
 			});
 
 			grid.render();
@@ -171,6 +172,7 @@
 						//Ajax系统定式      start
 						//-------------------------------------------------
 						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").target = "_top";
 							$("systemErrorForm").submit();
 							return;
 						}
@@ -198,7 +200,7 @@
         //删除选中角色
         function delSelectedRole(){
             var selectObjs = Ext.getCmp('roleGrid').getSelections();
-			if(selectObjs.length == 0){
+			if(selectObjs == null || selectObjs.length == 0){
 				showMessageBox(getNeedSelectedMsg('角色'));
 				return;
 			}else{
@@ -206,13 +208,33 @@
 				return;
 			}
         }
+      	//添加可访问选中菜单节点的角色信息
+        function addMenuNodeAccessRole(){
+        	if(subWin != null){
+        		subWin.close();
+    		}
+
+       	 	var windowOption = "width=360,height=400,left=300,top=200,status=no,resizable=no";
+            var windowName = "ROLE_LIST";
+            subWin =  window.open("", windowName, windowOption);
+        	$("menuTreeForm").target = windowName;
+    		$("menuTreeForm").action = "FD000S005JspViewAction_ShowPageAction.faces";
+    		$("menuTreeForm").submit();
+    		return;
+        }
       	//删除选中菜单节点
         function delSelectedMenuNode(){
+        }
+        function closeSubWin(){
+        	if(subWin != null){
+        		subWin.close();
+    		}
         }
         -->
         </script>
     </head> 
-    <body> 
+    <body onunload="closeSubWin();"> 
+    	<%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
         <div class="defaultBody">
     		<br>
             <table class="appTitleTable"> 
@@ -239,7 +261,7 @@
                     </table> 
                 </tr> 
                 <tr> 
-                    <td colspan="2" class="tip">
+                    <td colspan="2" class="opTip">
                     	<table>
 			                <tr>
 			                    <td>
@@ -253,7 +275,7 @@
 			                    <td>
 			                    </td>
 			                    <td>
-			                    	删除菜单节点的[适用角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+			                    	删除菜单树节点的[适用角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
 			                    </td>
 			                </tr>
 			            </table>
@@ -292,7 +314,7 @@
                     				<table>
                     					<tr>
                     						<td align="left"><%// 添加角色 %>
-						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
+						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNodeAccessRole();"> 
 						                    </td> 
 						                    <td width="20"> 
 						                    </td> 
