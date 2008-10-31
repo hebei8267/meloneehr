@@ -68,6 +68,7 @@
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").target = "_top";
 							$("systemErrorForm").submit();
 							return;
 						}
@@ -126,7 +127,7 @@
 		     		<td><br></td>
 		       	</tr>
 		        <tr>
-		        	<td colspan="2" class="tip">
+		        	<td colspan="2" class="opTip">
 			            <table>
 			                <tr>
 			                    <td>

@@ -53,6 +53,7 @@
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").target = "_top";
 							$("systemErrorForm").submit();
 							return;
 						}
