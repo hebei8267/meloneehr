@@ -20,9 +20,9 @@
     <script type="text/javascript">
 	<!--
 	function userLoginOutSystem(){
-		$("sessionTimeOutForm").target = "_top";
-		$("sessionTimeOutForm").action = "UserLoginOutSystem.faces";
-		$("sessionTimeOutForm").submit();
+		$("systemErrorForm").target = "_top";
+		$("systemErrorForm").action = "UserLoginOutSystem.faces";
+		$("systemErrorForm").submit();
 		return;
 	}
 	-->

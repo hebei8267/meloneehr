@@ -105,7 +105,7 @@
 					requestMethod : 'post',
 					listeners : {
 						loadexception : function(){
-							showMessageBox("和服务通信发生错误,请稍候再试!");
+							showMessageBox(getSystemCommunicationMsg());
 						}
 					}
 				})
@@ -117,9 +117,9 @@
 
 			tree.on("click", function(node, event) {
 				if (node.isLeaf() && node.attributes.actionContent != "") {
-					$("sessionTimeOutForm").target = "workFrame";
-					$("sessionTimeOutForm").action = node.attributes.actionContent;
-					$("sessionTimeOutForm").submit();
+					$("systemErrorForm").target = "workFrame";
+					$("systemErrorForm").action = node.attributes.actionContent;
+					$("systemErrorForm").submit();
 				}
 			})
 		}

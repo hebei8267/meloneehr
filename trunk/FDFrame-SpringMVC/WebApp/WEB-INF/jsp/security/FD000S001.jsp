@@ -42,7 +42,7 @@
 					} else {//失败
 						//Ajax系统定式
 						if(!oResult.processResult && oResult.sessionTimeOut){
-							$("sessionTimeOutForm").submit();
+							$("systemErrorForm").submit();
 							return;
 						}
 						
@@ -51,7 +51,7 @@
 					}
 				},
 				failure : function(result, request) {
-					showMessageBox("和服务通信发生错误,请稍候再试!");
+					showMessageBox(getSystemCommunicationMsg());
 				},
 				params : {
 					userId : $F('userId'),

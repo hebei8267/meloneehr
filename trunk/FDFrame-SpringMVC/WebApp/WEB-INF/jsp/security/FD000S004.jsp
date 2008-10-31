@@ -80,7 +80,7 @@
 				}, role),
 				listeners : {
 					loadexception : function(){
-						showMessageBox("和服务通信发生错误,请稍候再试!");
+						showMessageBox(getSystemCommunicationMsg());
 					}
 				}
 			});
