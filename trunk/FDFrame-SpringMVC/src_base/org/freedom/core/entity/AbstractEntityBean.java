@@ -26,17 +26,17 @@ public abstract class AbstractEntityBean extends BaseBean {
 
     private static final long serialVersionUID = 648082607776880707L;
     /** Hibernate_ID */
-    private Integer hid;
+    protected Integer hid;
     /** CreateDate_Timestamp */
-    private Timestamp createDate;
+    protected Timestamp createDate;
     /** Create_User_ID */
-    private String createUserId;
+    protected String createUserId;
     /** Update_Timestamp */
-    private Timestamp updateDate;
+    protected Timestamp updateDate;
     /** Update_User_ID */
-    private String updateUserId;
+    protected String updateUserId;
     /** Hibernate_Version */
-    private Integer version;
+    protected Integer version;
 
     @Id
     @Column(name = "H_ID", nullable = true)

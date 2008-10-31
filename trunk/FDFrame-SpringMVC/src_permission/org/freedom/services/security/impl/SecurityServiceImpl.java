@@ -3,8 +3,11 @@
  */
 package org.freedom.services.security.impl;
 
+import java.util.List;
+
 import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.security.UserDao;
+import org.freedom.entity.security.Role;
 import org.freedom.entity.security.User;
 import org.freedom.services.security.ISecurityService;
 import org.springframework.context.annotation.Scope;
@@ -46,7 +49,7 @@ public class SecurityServiceImpl implements ISecurityService {
      * @param newPassword 新用户密码
      * @return true-修改成功 false-修改失败(用户ID或原用户密码不匹配)
      */
-    public Boolean modUserPassword_Service(String userID, String oldPassword, String newPassword) {
+    public boolean modUserPassword_Service(String userID, String oldPassword, String newPassword) {
         User user = userDao.getUserByID(userID);
         if (user == null || !user.getPassword().equals(oldPassword)) {
             return false;
@@ -56,6 +59,22 @@ public class SecurityServiceImpl implements ISecurityService {
         userDao.save(user);
 
         return true;
+    }
+
+    /**
+     * 删除指定菜单节点的角色关联关系
+     * 
+     * @param menuNodeID 菜单节点
+     * @param roleList 要删除角色列表
+     * @return 删除的记录行数
+     */
+    public int delRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList) {
+        String[] roleIDs = new String[roleList.size()];
+        for (int i = 0; i < roleList.size(); i++) {
+            roleIDs[i] = roleList.get(i).getId();
+        }
+        return roleMenuNodePermitDao.delRoleMenuNodePermitByMenuNodeID(menuNodeID, roleIDs);
+
     }
 
     // ---------------------------------------------------------------------------

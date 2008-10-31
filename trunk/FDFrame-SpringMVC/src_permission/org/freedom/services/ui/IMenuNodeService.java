@@ -63,5 +63,5 @@ public interface IMenuNodeService {
      * @param menuNodeID
      * @return true-有访问权限 false-无访问权限
      */
-    public Boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID);
+    public boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID);
 }
