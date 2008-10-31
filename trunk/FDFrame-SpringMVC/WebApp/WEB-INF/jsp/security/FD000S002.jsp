@@ -26,6 +26,20 @@
         		showMessageBox(msg);
         		return false;
         	}
+
+        	if(maxLength($('oldPassword'),20)){
+        		msg += getMaxLengthMsg("原密码",20);
+        	}
+        	if(maxLength($('newPassword'),20)){
+        		msg += getMaxLengthMsg("新密码",20);
+        	}
+        	if(maxLength($('newPassword2'),20)){
+        		msg += getMaxLengthMsg("新密码(确认用)",20);
+        	}
+        	if(!isEmpty(msg)){
+        		showMessageBox(msg);
+        		return false;
+        	}
         	
         	if($F('newPassword') != $F('newPassword2')){
         		msg += getNeedSameInputMsg("新密码", "新密码(确认用)");
