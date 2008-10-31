@@ -55,4 +55,13 @@ public interface IMenuNodeService {
      * @return
      */
     public List<Role> getRoleList_Service(String menuNodeID);
+
+    /**
+     * 检查用户访问菜单节点的权限
+     * 
+     * @param userID 用户ID
+     * @param menuNodeID
+     * @return true-有访问权限 false-无访问权限
+     */
+    public Boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID);
 }

@@ -223,6 +223,21 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return null;
     }
 
+    /**
+     * 检查用户访问菜单节点的权限
+     * 
+     * @param userID 用户ID
+     * @param menuNodeID
+     * @return true-有访问权限 false-无访问权限
+     */
+    public Boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID) {
+        List<String> nodeList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+        if (nodeList.contains(menuNodeID)) {
+            return true;
+        }
+        return false;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
