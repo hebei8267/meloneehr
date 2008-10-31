@@ -68,8 +68,6 @@ public class RoleMenuNodePermitDaoTest extends HibernateDaoTestCase {
                 } else if (i == 1) {
                     Role role = roleDao.getRoleByID(value);
                     rolePermit.setRole(role);
-                } else if (i == 2) {
-                    rolePermit.setHoldRoleID(value);
                 }
             }
             roleMenuNodePermitDao.save(rolePermit);
