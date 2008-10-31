@@ -13,30 +13,40 @@ import org.freedom.core.bean.BaseBean;
  */
 public class UserInfoSessionBean extends BaseBean {
 
-	private static final long serialVersionUID = 6644616830389518518L;
+    private static final long serialVersionUID = 6644616830389518518L;
 
-	public UserInfoSessionBean() {
+    public UserInfoSessionBean() {
 
-	}
+    }
 
-	/** 登录用户ID */
-	private String userId;
-	/** 用户名称 */
-	private String userName;
+    /** 登录用户ID */
+    private String userId;
+    /** 用户名称 */
+    private String userName;
+    /** 登录用户角色ID */
+    private String roleId;
 
-	public String getUserId() {
-		return userId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
 }

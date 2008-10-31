@@ -47,7 +47,8 @@ public class FD000S003JspViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
         // 导航区列表
-        outPutObj.getShipAreaList().addAll(menuNodeService.getAllShipAreaMenuNode_Service(user.getUserId()));
+        outPutObj.getShipAreaList().addAll(
+                menuNodeService.getNavigationAreaMenuNode_Service(user.getUserId(), user.getRoleId()));
 
         model.addAttribute("FD000S003ViewObject", outPutObj);
 

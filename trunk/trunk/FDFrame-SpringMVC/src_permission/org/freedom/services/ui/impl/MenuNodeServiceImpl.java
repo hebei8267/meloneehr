@@ -34,14 +34,20 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     /**
      * 取得所有导航区列表菜单节点列表
      * 
-     * @param roleMenuNodePermitList 拥有访问权限列表
+     * @param userID 用户ID
+     * @param roleID 用户角色ID
      * @return 导航区列表菜单节点列表
      */
-    public List<UITreeNode> getAllShipAreaMenuNode_Service(String userID) {
+    public List<UITreeNode> getNavigationAreaMenuNode_Service(String userID, String roleID) {
         MenuNode root = menuNodeDao.getMenuNodeByID(MenuNode.ROOT_ID);
-        // 取得用户可访问的菜单树结点权限列表
-        List<String> roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
-        return getAllShipAreaMenuNode(root, roleMenuNodePermitList);
+
+        List<String> roleMenuNodePermitList = null;
+        if (!Role.ADMIN_ROLE_ID.equals(roleID)) {// 不是系统管理员ID
+            // 取得用户可访问的菜单树结点权限列表
+            roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+        }
+
+        return getNavigationAreaMenuNode(root, roleID, roleMenuNodePermitList);
     }
 
     /**
@@ -50,16 +56,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * hibernate lazy load原因
      * 
      * @param parentNode 父节点
+     * @param roleID 用户角色ID
      * @param roleMenuNodePermitList 拥有访问权限列表
-     * @return 下一层子节点列表
+     * @return
      */
-    private List<UITreeNode> getAllShipAreaMenuNode(MenuNode parentNode, List<String> roleMenuNodePermitList) {
+    private List<UITreeNode> getNavigationAreaMenuNode(MenuNode parentNode, String roleID,
+            List<String> roleMenuNodePermitList) {
         List<UITreeNode> _reList = new ArrayList<UITreeNode>();
         for (MenuNode menuNode : parentNode.getSubNodeList()) {
-
+            // 系统管理员ID
             // 默认权限 "true"无访问限制 "false"有访问限制
             // 拥有访问权限
-            if (menuNode.getDefaultPermit() || roleMenuNodePermitList.contains(menuNode.getId())) {
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit()
+                    || roleMenuNodePermitList.contains(menuNode.getId())) {
                 UITreeNode uiNode = new UITreeNode(menuNode.getId(), menuNode.getNodeTxt(), null);
 
                 _reList.add(uiNode);
@@ -72,30 +81,40 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * 取得菜单树节点和其所有子节点信息
      * 
      * @param rootNodeId 菜单树节点
-     * @param roleMenuNodePermitList 拥有访问权限列表
+     * @param userID 用户ID
+     * @param roleID 用户角色ID
      * @return 菜单树节点和其所有子节点信息
      */
-    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID) {
+    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID, String roleID) {
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
 
         if (dbNodeRoot != null) {
-            // 取得用户可访问的菜单树结点权限列表
-            List<String> roleMenuNodePermitList = roleMenuNodePermitDao
-                    .getRoleMenuNodePermitListByUserID(userID);
+            List<String> roleMenuNodePermitList = null;
+            if (!Role.ADMIN_ROLE_ID.equals(roleID)) {// 不是系统管理员ID
+                // 取得用户可访问的菜单树结点权限列表
+                roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+            }
 
-            UITreeNode uiTreeNode = new UITreeNode();
+            // 系统管理员ID
+            // 默认权限 "true"无访问限制 "false"有访问限制
+            // 拥有访问权限
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit()
+                    || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
+                UITreeNode uiTreeNode = new UITreeNode();
 
-            uiTreeNode.setId(dbNodeRoot.getId());
-            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
-            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
-            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
-            uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
-            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
-            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+                uiTreeNode.setId(dbNodeRoot.getId());
+                uiTreeNode.setText(dbNodeRoot.getNodeTxt());
+                uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+                uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
+                uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+                uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+                uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
 
-            buildSubMenuTree(uiTreeNode, dbNodeRoot, roleMenuNodePermitList);
+                buildSubMenuTree(uiTreeNode, dbNodeRoot, roleMenuNodePermitList, roleID);
 
-            return uiTreeNode;
+                return uiTreeNode;
+            }
+
         }
         return null;
     }
@@ -103,19 +122,22 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     /**
      * 创建树结构
      * 
-     * @param parentNode
+     * @param parentNode 父节点
      * @param dbNodeRoot
      * @param roleMenuNodePermitList 拥有访问权限列表
+     * @param roleID 用户角色ID
      */
     private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot,
-            List<String> roleMenuNodePermitList) {
+            List<String> roleMenuNodePermitList, String roleID) {
 
         for (MenuNode dbNode : dbNodeRoot.getSubNodeList()) {
 
             if (dbNode != null) {
+                // 系统管理员ID
                 // 默认权限 "true"无访问限制 "false"有访问限制
                 // 拥有访问权限
-                if (dbNode.getDefaultPermit() || roleMenuNodePermitList.contains(dbNode.getId())) {
+                if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit()
+                        || roleMenuNodePermitList.contains(dbNode.getId())) {
                     UITreeNode uiTreeNode = new UITreeNode();
 
                     uiTreeNode.setId(dbNode.getId());
@@ -128,7 +150,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
                     parentNode.addChildren(uiTreeNode);
 
-                    buildSubMenuTree(uiTreeNode, dbNode, roleMenuNodePermitList);
+                    buildSubMenuTree(uiTreeNode, dbNode, roleMenuNodePermitList, roleID);
                 }
             }
         }
@@ -230,7 +252,10 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param menuNodeID
      * @return true-有访问权限 false-无访问权限
      */
-    public boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID) {
+    public boolean checkUserAccessMenuNodePermit_Service(String userID, String roleID, String menuNodeID) {
+        if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员ID
+            return true;
+        }
         List<String> nodeList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
         if (nodeList.contains(menuNodeID)) {
             return true;

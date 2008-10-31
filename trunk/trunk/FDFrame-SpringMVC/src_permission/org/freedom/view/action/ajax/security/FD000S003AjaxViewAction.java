@@ -60,7 +60,8 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
         // 菜单树节点和其所有子节点信息
-        UITreeNode outObj = menuNodeService.getMenuTreeNode_Service(nodeId, user.getUserId());
+        UITreeNode outObj = menuNodeService.getMenuTreeNode_Service(nodeId, user.getUserId(), user
+                .getRoleId());
 
         JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
@@ -83,7 +84,8 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
 
-        boolean _result = menuNodeService.checkUserAccessMenuNodePermit_Service(user.getUserId(), nodeId);
+        boolean _result = menuNodeService.checkUserAccessMenuNodePermit_Service(user.getUserId(), user
+                .getRoleId(), nodeId);
 
         JosnViewObject outObj = new JosnViewObject();
         if (!_result) {

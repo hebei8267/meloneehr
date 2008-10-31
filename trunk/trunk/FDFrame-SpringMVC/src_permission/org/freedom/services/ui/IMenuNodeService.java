@@ -20,18 +20,20 @@ public interface IMenuNodeService {
      * 取得所有导航区列表菜单节点列表
      * 
      * @param userID 用户ID
+     * @param roleID 用户角色ID
      * @return 导航区列表菜单节点列表
      */
-    public List<UITreeNode> getAllShipAreaMenuNode_Service(String userID);
+    public List<UITreeNode> getNavigationAreaMenuNode_Service(String userID, String roleID);
 
     /**
      * 取得菜单树节点和其所有子节点信息
      * 
      * @param rootNodeId 菜单树节点
      * @param userID 用户ID
+     * @param roleID 用户角色ID
      * @return 菜单树节点和其所有子节点信息
      */
-    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID);
+    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID, String roleID);
 
     /**
      * 取得所有菜单树节点和其所有子节点信息
@@ -60,8 +62,9 @@ public interface IMenuNodeService {
      * 检查用户访问菜单节点的权限
      * 
      * @param userID 用户ID
+     * @param roleID 用户角色ID
      * @param menuNodeID
      * @return true-有访问权限 false-无访问权限
      */
-    public boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID);
+    public boolean checkUserAccessMenuNodePermit_Service(String userID, String roleID, String menuNodeID);
 }
