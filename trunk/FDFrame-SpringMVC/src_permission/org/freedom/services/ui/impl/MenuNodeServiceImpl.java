@@ -172,7 +172,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param rootNodeId 菜单树节点
      * @return 所有菜单树节点和其所有子节点信息
      */
-    public UITreeNode getAllMenuTreeNode_Service(String rootNodeId) {
+    public UITreeNode getNavigationAreaSubMenuTreeNode_Service(String rootNodeId) {
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
         if (dbNodeRoot != null) {
 
@@ -226,7 +226,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param menuNodeID 菜单节点
      * @return
      */
-    public List<Role> getRoleList_Service(String menuNodeID) {
+    public List<Role> getMenuNodeAccessRoleList_Service(String menuNodeID) {
         List<Role> roleList = roleDao.getRoleListByMenuNodeID(menuNodeID);
         if (roleList != null && roleList.size() != 0) {
             List<Role> resultList = new ArrayList<Role>();
