@@ -4,8 +4,16 @@ function showMessageBox(msg){
 	Ext.MessageBox.alert("Melone-eHR 人力资源管理", msg);
 }
 
+function showConfirm(msg, fnProc){
+	Ext.MessageBox.confirm("Melone-eHR 人力资源管理", msg, fnProc);
+}
+
 function getNeedInputMsg(itemName){
 	return _newLine + _space + "请输入[<b><font color='red'>" + itemName + "</font></b>]!" + _space;
+}
+
+function getNeedSelectedMsg(){
+	return _newLine + _space + "最少要选择一条[<b><font color='red'>" + itemName + "</font></b>]记录!" + _space;
 }
 
 function getNeedSameInputMsg(itemName1, itemName2){
