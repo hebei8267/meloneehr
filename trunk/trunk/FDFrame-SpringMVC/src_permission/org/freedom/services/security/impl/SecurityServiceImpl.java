@@ -3,8 +3,10 @@
  */
 package org.freedom.services.security.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.freedom.dao.security.RoleDao;
 import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.security.UserDao;
 import org.freedom.entity.security.Role;
@@ -77,11 +79,34 @@ public class SecurityServiceImpl implements ISecurityService {
 
     }
 
+    /**
+     * 取得所有角色列表信息
+     * 
+     * @return 角色列表信息
+     */
+    public List<Role> getAllRoleList_Service() {
+        List<Role> dbRoleList = roleDao.getAll();
+
+        List<Role> _resultRoleList = new ArrayList<Role>();
+
+        for (Role dbRole : dbRoleList) {
+            Role _role = new Role();
+
+            _role.setId(dbRole.getId());
+            _role.setName(dbRole.getName());
+
+            _resultRoleList.add(_role);
+        }
+
+        return _resultRoleList;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     private UserDao userDao = null;
     private RoleMenuNodePermitDao roleMenuNodePermitDao = null;
+    private RoleDao roleDao = null;
 
     public UserDao getUserDao() {
         return userDao;
@@ -97,6 +122,14 @@ public class SecurityServiceImpl implements ISecurityService {
 
     public void setRoleMenuNodePermitDao(RoleMenuNodePermitDao roleMenuNodePermitDao) {
         this.roleMenuNodePermitDao = roleMenuNodePermitDao;
+    }
+
+    public RoleDao getRoleDao() {
+        return roleDao;
+    }
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
 }

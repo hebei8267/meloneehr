@@ -12,7 +12,7 @@ function getNeedInputMsg(itemName){
 	return _newLine + _space + "请输入[<b><font color='red'>" + itemName + "</font></b>]!" + _space;
 }
 
-function getNeedSelectedMsg(){
+function getNeedSelectedMsg(itemName){
 	return _newLine + _space + "最少要选择一条[<b><font color='red'>" + itemName + "</font></b>]记录!" + _space;
 }
 

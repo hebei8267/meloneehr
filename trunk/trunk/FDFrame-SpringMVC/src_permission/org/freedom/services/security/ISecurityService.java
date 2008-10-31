@@ -42,4 +42,11 @@ public interface ISecurityService {
      * @return 删除的记录行数
      */
     public int delRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList);
+
+    /**
+     * 取得所有角色列表信息
+     * 
+     * @return 角色列表信息
+     */
+    public List<Role> getAllRoleList_Service();
 }

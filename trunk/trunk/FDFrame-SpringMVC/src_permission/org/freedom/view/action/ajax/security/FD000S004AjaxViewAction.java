@@ -29,7 +29,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 菜单树管理界面JspViewAction
+ * 菜单树管理界面AjaxViewAction
  * 
  * @author 何贝
  * @since JDK1.5
@@ -62,7 +62,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
 
         // 所有菜单树节点和其所有子节点信息
-        UITreeNode uiMenuNode = menuNodeService.getAllMenuTreeNode_Service(nodeId);
+        UITreeNode uiMenuNode = menuNodeService.getNavigationAreaSubMenuTreeNode_Service(nodeId);
 
         // Json对象格式化
         JSONArray jSONArray = JSONArray.fromObject(uiMenuNode.getChildren());
@@ -71,7 +71,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
     }
 
     /**
-     * 取得菜单接的的角色信息
+     * 取得菜单节点的角色信息
      * 
      * @param request
      * @param response
@@ -84,7 +84,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         // 取得可访问菜单节点的角色列表
-        List<Role> roleList = menuNodeService.getRoleList_Service(menuNodeID);
+        List<Role> roleList = menuNodeService.getMenuNodeAccessRoleList_Service(menuNodeID);
 
         // Json对象格式化
         DataListBean<Role> dataList = new DataListBean<Role>();
