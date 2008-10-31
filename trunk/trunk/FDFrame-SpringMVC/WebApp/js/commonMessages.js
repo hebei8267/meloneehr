@@ -12,6 +12,14 @@ function getNeedSameInputMsg(itemName1, itemName2){
 	return _newLine + _space + "输入的[<b><font color='red'>" + itemName1 + "</font></b>]和[<b><font color='red'>" + itemName2 + "</font></b>]不一样!" + _space;
 }
 
+function getMaxLengthMsg(itemName, length){
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能大于" + length + _space;
+}
+
+function getMinLengthMsg(itemName, length){
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能小于" + length + _space;
+}
+
 function getSystemCommunicationMsg(){
 	return "和服务通信发生错误,请稍候再试!";
 }

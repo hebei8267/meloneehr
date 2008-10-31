@@ -23,6 +23,17 @@
         		showMessageBox(msg);
         		return false;
         	}
+
+        	if(maxLength($('userId'),20)){
+        		msg += getMaxLengthMsg("用户名",20);
+        	}
+        	if(maxLength($('password'),20)){
+        		msg += getMaxLengthMsg("用户密码",20);
+        	}
+        	if(!isEmpty(msg)){
+        		showMessageBox(msg);
+        		return false;
+        	}
         	return true;
         }
         <%// 用户登录 %>
