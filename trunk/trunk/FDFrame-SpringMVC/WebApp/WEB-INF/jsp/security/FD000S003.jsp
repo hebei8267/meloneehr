@@ -117,13 +117,48 @@
 
 			tree.on("click", function(node, event) {
 				if (node.isLeaf() && node.attributes.actionContent != "") {
-					$("systemErrorForm").target = "workFrame";
-					$("systemErrorForm").action = node.attributes.actionContent;
-					$("systemErrorForm").submit();
+					// 检查用户访问菜单节点的权限
+					checkMenuNodePermit(node.id, node.attributes.actionContent);
 				}
 			})
 		}
 		</c:forEach>
+		//更新工作区
+		function updateWorkFrame(actionContent){
+			$("systemErrorForm").target = "workFrame";
+			$("systemErrorForm").action = actionContent;
+			$("systemErrorForm").submit();
+		}
+
+		// 检查用户访问菜单节点的权限
+		function checkMenuNodePermit(menuNodeId, actionContent){
+			Ext.Ajax.request({
+				url : 'FD000S003AjaxViewAction_CheckMenuNodePermit.ajax',
+				method: 'post',
+				success : function(result, request) {
+					var oResult = eval("(" + result.responseText + ")");
+					
+					if(oResult.processResult) {// 成功
+						updateWorkFrame(actionContent);
+					} else {//失败
+						//Ajax系统定式
+						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").submit();
+							return;
+						}
+						
+						showMessageBox(oResult.resultMsg);
+						return;//无访问权限
+					}
+				},
+				failure : function(result, request) {
+					showMessageBox(getSystemCommunicationMsg());
+				},
+				params : {
+					nodeId : menuNodeId
+				}
+			});
+		}
         -->
         </script>
     </head>
