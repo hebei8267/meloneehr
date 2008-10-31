@@ -13,7 +13,11 @@ public class MesssageIDSecurity {
     public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
     public final static String ERROR_INPUT_OLD_PWD = "ERROR_INPUT_OLD_PWD";
     public final static String ERROR_NO_ACCESS_PERMIT = "ERROR_NO_ACCESS_PERMIT";
-
+    public final static String ERROR_NO_DATA_DELETE="ERROR_NO_DATA_DELETE";
+        
+        
+        
+        
     public final static String ERROR_UPDATE_COUNTRY1 = "ERROR_UPDATE_COUNTRY1";
     public final static String ERROR_UPDATE_COUNTRY2 = "ERROR_UPDATE_COUNTRY2";
     public final static String ERROR_DEL_COUNTRY = "ERROR_DEL_COUNTRY";

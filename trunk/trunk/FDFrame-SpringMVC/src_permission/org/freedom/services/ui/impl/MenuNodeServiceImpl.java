@@ -230,7 +230,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param menuNodeID
      * @return true-有访问权限 false-无访问权限
      */
-    public Boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID) {
+    public boolean checkUserAccessMenuNodePermit_Service(String userID, String menuNodeID) {
         List<String> nodeList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
         if (nodeList.contains(menuNodeID)) {
             return true;

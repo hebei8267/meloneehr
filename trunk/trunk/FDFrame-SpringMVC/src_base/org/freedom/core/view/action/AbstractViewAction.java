@@ -3,6 +3,8 @@
  */
 package org.freedom.core.view.action;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +12,10 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.apache.commons.lang.StringUtils;
 import org.freedom.core.bean.BaseBean;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.util.WebApplicationContextUtil;
@@ -151,4 +157,30 @@ public abstract class AbstractViewAction extends BaseBean {
         return false;
     }
 
+    /**
+     * 将json对象列表转换成pojo对象列表
+     * 
+     * @param jsonString
+     * @param pojoClass
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    protected List jsonStr2PojoList(String jsonString, Class pojoClass) {
+
+        List list = new ArrayList();
+
+        if (!StringUtils.isEmpty(jsonString)) {
+            JSONArray jsonArray = JSONArray.fromObject(jsonString);
+
+            JSONObject jsonObject = null;
+            Object pojoValue = null;
+
+            for (int i = 0; i < jsonArray.size(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
+                pojoValue = JSONObject.toBean(jsonObject, pojoClass);
+                list.add(pojoValue);
+            }
+        }
+        return list;
+    }
 }

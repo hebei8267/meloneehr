@@ -3,7 +3,6 @@
  */
 package org.freedom.entity.security;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -42,9 +41,6 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
 
     /** 菜单树结点ID */
     private String menuNodeID;
-
-    /** 该节点权限的拥有角色ID */
-    private String holdRoleID;
 
     /**
      * 取得登录用户角色
@@ -130,26 +126,6 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
      */
     protected void setMenuNodeID(String menuNodeID) {
         this.menuNodeID = menuNodeID;
-    }
-
-    /**
-     * 取得该节点权限的拥有角色ID
-     * 
-     * @return 该节点权限的拥有角色ID
-     */
-    @Basic
-    @Column(name = "HOLD_ROLE_ID", nullable = false, length = 20)
-    public String getHoldRoleID() {
-        return holdRoleID;
-    }
-
-    /**
-     * 设置该节点权限的拥有角色ID
-     * 
-     * @param holdRoleID 该节点权限的拥有角色ID
-     */
-    public void setHoldRoleID(String holdRoleID) {
-        this.holdRoleID = holdRoleID;
     }
 
     /**
