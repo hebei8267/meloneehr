@@ -86,6 +86,7 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
         UserInfoSessionBean userInfo = new UserInfoSessionBean();
         userInfo.setUserId(user.getId());
         userInfo.setUserName(user.getName());
+        userInfo.setRoleId(user.getRoleID());
 
         saveUserInfo(request, userInfo);
     }
