@@ -200,8 +200,8 @@
         //删除选中角色
         function delSelectedRole(){
             var selectObjs = Ext.getCmp('roleGrid').getSelections();
-			if(selectObjs == null || selectObjs.length == 0){
-				showMessageBox(getNeedSelectedMsg('角色'));
+			if(selectObjs == null || selectObjs.length == 0){//未选择删除角色
+				showMessageBox(getNeedMinSelectedMsg('角色'));
 				return;
 			}else{
 				showConfirm("确认要删除所选记录?", doDelSelectedRole);
@@ -214,7 +214,11 @@
         		subWin.close();
     		}
 
-       	 	var windowOption = "width=360,height=400,left=300,top=200,status=no,resizable=no";
+			if($("id").value==''){//未选择菜单树节点
+				showMessageBox(getNeedSelectedMsg('菜单树节点'));
+				return;
+			}
+       	 	var windowOption = "width=355,height=420,left=300,top=150,status=no,resizable=no";
             var windowName = "ROLE_LIST";
             subWin =  window.open("", windowName, windowOption);
         	$("menuTreeForm").target = windowName;
@@ -222,8 +226,52 @@
     		$("menuTreeForm").submit();
     		return;
         }
+        //添加角色
+        function addRoleListCall(roleList){
+        	Ext.Ajax.request({
+				url : 'FD000S004AjaxViewAction_AddSelectedRole.ajax',
+				method: 'post',
+				success : function(result, request) {
+					var oResult = eval("(" + result.responseText + ")");
+					
+					if(oResult.processResult) {
+						//成功时的业务处理
+						//加载列表
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+						
+					} else {//失败
+						//-------------------------------------------------
+						//Ajax系统定式      start
+						//-------------------------------------------------
+						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").target = "_top";
+							$("systemErrorForm").submit();
+							return;
+						}
+						
+						showMessageBox(oResult.resultMsg);
+						//-------------------------------------------------
+						//Ajax系统定式      end
+						//-------------------------------------------------
+
+					
+						//错误发生时的业务处理 
+						//加载列表
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+					}
+				},
+				failure : function(result, request) {
+					showMessageBox(getSystemCommunicationMsg());
+				},
+				params : {
+					menuNodeID : $F("id"),
+					roleList : Ext.util.JSON.encode(roleList)
+				}
+			});
+        }
       	//删除选中菜单节点
         function delSelectedMenuNode(){
+      
         }
         function closeSubWin(){
         	if(subWin != null){
@@ -275,7 +323,7 @@
 			                    <td>
 			                    </td>
 			                    <td>
-			                    	删除菜单树节点的[适用角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+			                    	删除菜单树节点的[角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
 			                    </td>
 			                </tr>
 			            </table>

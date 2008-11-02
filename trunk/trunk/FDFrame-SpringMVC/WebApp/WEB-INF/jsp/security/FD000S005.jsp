@@ -81,6 +81,27 @@
 			grid.render();
 			store.load();
         });
+        //添加角色
+        function addRoleList(){
+        	var selectObjs = Ext.getCmp('roleGrid').getSelections();
+			if(selectObjs == null || selectObjs.length == 0){//未选择添加角色
+				showMessageBox(getNeedMinSelectedMsg('角色'));
+				return;
+			}
+			
+			var roleList = new Array();
+            for(var i=0;i<selectObjs.length;i++){
+            	roleList[i] = selectObjs[i].json;
+            }
+            
+            //调用父窗口的回调函数
+			window.opener.addRoleListCall(roleList);
+			closeWin();
+        }
+        //关闭当前窗口
+        function closeWin(){
+        	parent.close();
+        }
         -->
         </script>
     </head> 
@@ -93,7 +114,7 @@
                     	角色信息
                     </td> 
                     <td class="appScreenID"> 
-                        - FD000S004 -
+                        - FD000S005 -
                     </td> 
                 </tr> 
                 <tr> 
@@ -118,8 +139,14 @@
 			                    	<img src="images/tip.png">
 			                    </td>
 			                    <td>
-			                    	选中要添加的[角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+			                    	重复添加已存在的[角色]时,将忽视该[角色]
 			                    </td>
+			                </tr>
+			                <tr>
+			                	<td></td>
+			                	<td>
+			                		选中要添加的[角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+			                	</td>
 			                </tr>
 			            </table>
                     </td> 
@@ -144,12 +171,12 @@
 			       		<table> 
 	                        <tr> 
 	                            <td align="right"> 
-	                                <input value="添  加" class="buttonSubmitLong" type="button"> 
+	                                <input value="添  加" class="buttonSubmitLong" type="button" onclick="addRoleList();"> 
 	                            </td> 
 	                            <td width="20"> 
 	                            </td> 
 	                            <td align="right"> 
-	                                <input value="关  闭" class="buttonResetLong" type="button"> 
+	                                <input value="关  闭" class="buttonResetLong" type="button" onclick="closeWin();"> 
 	                            </td> 
 	                        </tr> 
 	                    </table>

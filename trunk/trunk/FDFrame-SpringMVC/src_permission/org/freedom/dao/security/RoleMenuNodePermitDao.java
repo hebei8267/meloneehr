@@ -38,6 +38,25 @@ public class RoleMenuNodePermitDao extends HibernateDaoImpl<RoleMenuNodePermit> 
     }
 
     /**
+     * 根据用户ID和菜单节点ID取得访问权限对象
+     * 
+     * @param roleID 登录用户角色ID
+     * @param menuNodeID 菜单节点ID
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public RoleMenuNodePermit getRoleMenuNodePermitByRoleIDAndMenuNodeID(String roleID, String menuNodeID) {
+        List<RoleMenuNodePermit> resultList = getHibernateTemplate().findByNamedQuery(
+                "RoleMenuNodePermit.getRoleMenuNodePermitByRoleIDAndMenuNodeID", new String[] { roleID, menuNodeID });
+
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
+
+    }
+
+    /**
      * 根据菜单树结点ID取得可访问菜单树结点权限列表
      * 
      * @param menuNodeID 菜单树结点ID
@@ -48,8 +67,7 @@ public class RoleMenuNodePermitDao extends HibernateDaoImpl<RoleMenuNodePermit> 
         return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
-                StringBuffer sql = new StringBuffer(
-                        " delete RoleMenuNodePermit pObj where pObj.menuNodeID = ? and ( ");
+                StringBuffer sql = new StringBuffer(" delete RoleMenuNodePermit pObj where pObj.menuNodeID = ? and ( ");
                 for (int i = 0; i < roleIDs.length; i++) {
                     if (i != 0) {
                         sql.append(" or ");
