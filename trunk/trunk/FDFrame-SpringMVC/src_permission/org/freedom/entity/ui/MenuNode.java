@@ -234,7 +234,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @return 父节点
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_NODE_H_ID")
     public MenuNode getParentNode() {
         return parentNode;

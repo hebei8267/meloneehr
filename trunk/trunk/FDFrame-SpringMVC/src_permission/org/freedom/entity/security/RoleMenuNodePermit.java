@@ -5,6 +5,7 @@ package org.freedom.entity.security;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -49,7 +50,7 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
      * 
      * @return 登录用户角色
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_H_ID")
     public Role getRole() {
         return role;
@@ -92,7 +93,7 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
      * 
      * @return 菜单树结点
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "NODE_H_ID")
     public MenuNode getMenuNode() {
         return menuNode;
