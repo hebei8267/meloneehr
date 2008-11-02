@@ -25,7 +25,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 @Entity
 @Table(name = "W_ROLE_MENU_NODE_PERMIT")
-@NamedQueries( { @NamedQuery(name = "RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", query = "select pObj.menuNodeID from RoleMenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID ") })
+@NamedQueries( {
+        @NamedQuery(name = "RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", query = "select pObj.menuNodeID from RoleMenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
+        @NamedQuery(name = "RoleMenuNodePermit.getRoleMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from RoleMenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? ") })
 public class RoleMenuNodePermit extends AbstractEntityBean {
 
     private static final long serialVersionUID = -350595423265400452L;
@@ -136,15 +138,13 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
             return false;
         }
         RoleMenuNodePermit rhs = (RoleMenuNodePermit) object;
-        return new EqualsBuilder().append(this.menuNodeID, rhs.menuNodeID).append(this.roleID, rhs.roleID)
-                .isEquals();
+        return new EqualsBuilder().append(this.menuNodeID, rhs.menuNodeID).append(this.roleID, rhs.roleID).isEquals();
     }
 
     /**
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return new HashCodeBuilder(2041415427, 1675002413).append(this.menuNodeID).append(this.roleID)
-                .toHashCode();
+        return new HashCodeBuilder(2041415427, 1675002413).append(this.menuNodeID).append(this.roleID).toHashCode();
     }
 }

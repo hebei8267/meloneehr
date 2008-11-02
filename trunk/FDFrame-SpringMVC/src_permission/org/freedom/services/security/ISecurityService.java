@@ -44,6 +44,14 @@ public interface ISecurityService {
     public int delRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList);
 
     /**
+     * 添加指定菜单节点的角色关联关系(已经存在的关联关系将忽略)
+     * 
+     * @param menuNodeID 菜单节点
+     * @param roleList 要添加角色列表
+     */
+    public void addRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList);
+
+    /**
      * 取得所有角色列表信息
      * 
      * @return 角色列表信息

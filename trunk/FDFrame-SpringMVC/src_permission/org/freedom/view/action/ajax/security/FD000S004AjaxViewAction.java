@@ -55,8 +55,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      */
     @RequestMapping("/FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax")
     public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException,
-            InvocationTargetException {
+            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
 
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
@@ -95,7 +94,7 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
     }
 
     /**
-     * 删除菜单接的的角色信息
+     * 删除菜单节点的角色信息
      * 
      * @param request
      * @param response
@@ -118,6 +117,32 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
             outObj.setProcessResult(false);
             outObj.setResultMsg(getMessage(request, ERROR_NO_DATA_DELETE));
         }
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
+    }
+
+    /**
+     * 添加菜单节点的角色信息
+     * 
+     * @param request
+     * @param response
+     * @throws ServletRequestBindingException
+     * @throws IOException
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/FD000S004AjaxViewAction_AddSelectedRole.ajax")
+    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
+        // 取得request里面的参数
+        String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
+        String roleListStr = ServletRequestUtils.getStringParameter(request, "roleList");
+        
+        List<Role> roleList = jsonStr2PojoList(roleListStr, Role.class);
+        
+        securityService.addRoleMenuNodePermit_Service(menuNodeID, roleList);
+        
+        JosnViewObject outObj = new JosnViewObject();
         JSONObject jSONObject = JSONObject.fromObject(outObj);
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONObject.toString());
