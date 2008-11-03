@@ -30,8 +30,7 @@ public class RoleMenuNodePermitDao extends HibernateDaoImpl<RoleMenuNodePermit> 
      */
     @SuppressWarnings("unchecked")
     public List<String> getRoleMenuNodePermitListByUserID(String userID) {
-        List<String> resultList = getHibernateTemplate().findByNamedQuery(
-                "RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", userID);
+        List<String> resultList = getHibernateTemplate().findByNamedQuery("RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", userID);
 
         return resultList;
 
@@ -57,9 +56,29 @@ public class RoleMenuNodePermitDao extends HibernateDaoImpl<RoleMenuNodePermit> 
     }
 
     /**
-     * 根据菜单树结点ID取得可访问菜单树结点权限列表
+     * 删除可访问菜单树结点权限列表
      * 
      * @param menuNodeID 菜单树结点ID
+     * @return 删除的记录行数
+     */
+    public Integer delRoleMenuNodePermitByMenuNodeID(final String menuNodeID) {
+        return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+                StringBuffer sql = new StringBuffer(" delete RoleMenuNodePermit pObj where pObj.menuNodeID = ? ");
+                Query query = session.createQuery(sql.toString());
+                query.setString(0, menuNodeID);
+                return query.executeUpdate();
+            }
+
+        });
+    }
+
+    /**
+     * 删除可访问菜单树结点权限列表
+     * 
+     * @param menuNodeID 菜单树结点ID
+     * @param roleIDs 角色ID数组
      * @return 删除的记录行数
      */
     public Integer delRoleMenuNodePermitByMenuNodeID(final String menuNodeID, final String[] roleIDs) {

@@ -59,6 +59,14 @@ public interface IMenuNodeService {
     public List<Role> getMenuNodeAccessRoleList_Service(String menuNodeID);
 
     /**
+     * 删除指定的菜单树节点
+     * 
+     * @param menuNodeID
+     * @return
+     */
+    public boolean delMenuTreeNode_Service(String menuNodeID);
+
+    /**
      * 检查用户访问菜单节点的权限
      * 
      * @param userID 用户ID

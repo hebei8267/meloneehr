@@ -4,6 +4,7 @@
 package org.freedom.entity.ui;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -227,6 +228,25 @@ public class MenuNode extends AbstractEntityBean {
 
         menuNode.setIndex(index);
         this.subNodeList.add(menuNode);
+    }
+
+    /**
+     * 删除子节点
+     * 
+     * @param menuNode 子节点
+     */
+    public void removeSubNode(MenuNode menuNode) {
+        int index = 1;
+        for (Iterator<MenuNode> iterator = subNodeList.iterator(); iterator.hasNext();) {
+            MenuNode _menuNode = iterator.next();
+            _menuNode.setIndex(index);
+            index++;
+            
+            if (_menuNode.equals(menuNode)) {
+                iterator.remove();
+            }
+        }
+
     }
 
     /**

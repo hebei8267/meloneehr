@@ -54,8 +54,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws InvocationTargetException
      */
     @RequestMapping("/FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax")
-    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
+    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException, IllegalAccessException, InvocationTargetException {
 
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
@@ -78,8 +78,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IOException
      */
     @RequestMapping("/FD000S004AjaxViewAction_GetRoleInfoListAction.ajax")
-    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException {
+    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         // 取得可访问菜单节点的角色列表
@@ -103,8 +103,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("/FD000S004AjaxViewAction_DelSelectedRole.ajax")
-    public void delSelectedRole(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException {
+    public void delSelectedRole(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         String roleListStr = ServletRequestUtils.getStringParameter(request, "roleList");
@@ -132,17 +132,43 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("/FD000S004AjaxViewAction_AddSelectedRole.ajax")
-    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException {
+    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         String roleListStr = ServletRequestUtils.getStringParameter(request, "roleList");
-        
+
         List<Role> roleList = jsonStr2PojoList(roleListStr, Role.class);
-        
+
         securityService.addRoleMenuNodePermit_Service(menuNodeID, roleList);
-        
+
         JosnViewObject outObj = new JosnViewObject();
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
+    }
+
+    /**
+     * 删除菜单节点
+     * 
+     * @param request
+     * @param response
+     * @throws ServletRequestBindingException
+     * @throws IOException
+     */
+    @RequestMapping("/FD000S004AjaxViewAction_DelSelectedMenuNode.ajax")
+    public void delSelectedMenuNode(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
+        // 取得request里面的参数
+        String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
+
+        boolean _result = menuNodeService.delMenuTreeNode_Service(menuNodeID);
+
+        JosnViewObject outObj = new JosnViewObject();
+        if (!_result) {
+            outObj.setProcessResult(false);
+            outObj.setResultMsg(getMessage(request, ERROR_NO_DATA_DELETE));
+        }
         JSONObject jSONObject = JSONObject.fromObject(outObj);
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONObject.toString());

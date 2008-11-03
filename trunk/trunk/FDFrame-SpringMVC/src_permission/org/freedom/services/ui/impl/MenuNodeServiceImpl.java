@@ -60,15 +60,13 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @return
      */
-    private List<UITreeNode> getNavigationAreaMenuNode(MenuNode parentNode, String roleID,
-            List<String> roleMenuNodePermitList) {
+    private List<UITreeNode> getNavigationAreaMenuNode(MenuNode parentNode, String roleID, List<String> roleMenuNodePermitList) {
         List<UITreeNode> _reList = new ArrayList<UITreeNode>();
         for (MenuNode menuNode : parentNode.getSubNodeList()) {
             // 系统管理员ID
             // 默认权限 "true"无访问限制 "false"有访问限制
             // 拥有访问权限
-            if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit()
-                    || roleMenuNodePermitList.contains(menuNode.getId())) {
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit() || roleMenuNodePermitList.contains(menuNode.getId())) {
                 UITreeNode uiNode = new UITreeNode(menuNode.getId(), menuNode.getNodeTxt(), null);
 
                 _reList.add(uiNode);
@@ -98,8 +96,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             // 系统管理员ID
             // 默认权限 "true"无访问限制 "false"有访问限制
             // 拥有访问权限
-            if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit()
-                    || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit() || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
                 UITreeNode uiTreeNode = new UITreeNode();
 
                 uiTreeNode.setId(dbNodeRoot.getId());
@@ -127,8 +124,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @param roleID 用户角色ID
      */
-    private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot,
-            List<String> roleMenuNodePermitList, String roleID) {
+    private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot, List<String> roleMenuNodePermitList, String roleID) {
 
         for (MenuNode dbNode : dbNodeRoot.getSubNodeList()) {
 
@@ -136,8 +132,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 系统管理员ID
                 // 默认权限 "true"无访问限制 "false"有访问限制
                 // 拥有访问权限
-                if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit()
-                        || roleMenuNodePermitList.contains(dbNode.getId())) {
+                if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit() || roleMenuNodePermitList.contains(dbNode.getId())) {
                     UITreeNode uiTreeNode = new UITreeNode();
 
                     uiTreeNode.setId(dbNode.getId());
@@ -261,6 +256,54 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 删除指定的菜单树节点
+     * 
+     * @param menuNodeID
+     * @return
+     */
+    public boolean delMenuTreeNode_Service(String menuNodeID) {
+        // 菜单节点对象
+        MenuNode menuNode = menuNodeDao.getMenuNodeByID(menuNodeID);
+        if (menuNode == null) {// 要删除的对象不存在
+            return false;
+        }
+        // 删除子菜单节点对象
+        delSubMenuTreeNode(menuNode.getSubNodeList());
+        // 删除该菜单节点关联的角色对象
+        delMenuNodeAccessRole(menuNodeID);
+        // 删除该菜单节点对象
+        menuNodeDao.remove(menuNode);
+        return true;
+    }
+
+    /**
+     * 删除该菜单节点关联的角色对象
+     * 
+     * @param menuNodeID 菜单节点ID
+     */
+    private void delMenuNodeAccessRole(String menuNodeID) {
+        roleMenuNodePermitDao.delRoleMenuNodePermitByMenuNodeID(menuNodeID);
+    }
+
+    /**
+     * 删除子菜单节点对象
+     * 
+     * @param subMenuNodeList
+     */
+    private void delSubMenuTreeNode(List<MenuNode> subMenuNodeList) {
+        if (subMenuNodeList != null) {
+            for (MenuNode menuNode : subMenuNodeList) {
+                if (menuNode != null) {
+                    // 删除子菜单节点对象
+                    delSubMenuTreeNode(menuNode.getSubNodeList());
+                    // 删除该菜单节点关联的角色对象
+                    delMenuNodeAccessRole(menuNode.getId());
+                }
+            }
+        }
     }
 
     // ---------------------------------------------------------------------------

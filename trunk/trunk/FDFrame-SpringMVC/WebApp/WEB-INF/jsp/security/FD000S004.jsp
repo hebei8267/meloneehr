@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="org.freedom.entity.ui.MenuNode" %>
+<%@ page language="java" import="org.freedom.entity.ui.MenuNodeType" %>
 <%// 菜单树管理 %>
 <html> 
     <head> 
@@ -18,6 +19,7 @@
 			//-----------------------------------------------------------------------------
         	var tree = new Ext.tree.TreePanel({
         		el : 'menuTreeDiv',
+        		id : 'menuTree',
         		title : '菜单树信息',
         		useArrows : true,
 				animate : true,
@@ -144,6 +146,7 @@
                	}  
           	}  
         }
+        //删除选中角色
         function doDelSelectedRole(btn){
         	if (btn != 'yes') {
             	return;
@@ -269,9 +272,64 @@
 				}
 			});
         }
+        //清空菜单节点详细信息区域
+        function resetInputMenuNodeArea(){
+        	$("id").value = "";
+	        $("text").value = "";
+	        Ext.getCmp('uiNodeTypeExtCombo').setValue("<%=MenuNodeType.NONE_NODE_TYPE%>");
+	        $("actionContent").value = "";
+	        setNodeType(true);
+	        $("uiNodeIndex").value = "";
+        }
       	//删除选中菜单节点
         function delSelectedMenuNode(){
-      
+        	if($("id").value==''){//未选择菜单树节点
+				showMessageBox(getNeedSelectedMsg('菜单树节点'));
+				return;
+			}
+			
+			Ext.Ajax.request({
+				url : 'FD000S004AjaxViewAction_DelSelectedMenuNode.ajax',
+				method: 'post',
+				success : function(result, request) {
+					var oResult = eval("(" + result.responseText + ")");
+					
+					if(oResult.processResult) {
+						//成功时的业务处理
+						//清空菜单节点详细信息区域
+			            resetInputMenuNodeArea();
+			            //重新加载菜单节点树
+						Ext.getCmp("menuTree").getRootNode().reload();
+					} else {//失败
+						//-------------------------------------------------
+						//Ajax系统定式      start
+						//-------------------------------------------------
+						if(!oResult.processResult && oResult.sessionTimeOut){
+							$("systemErrorForm").target = "_top";
+							$("systemErrorForm").submit();
+							return;
+						}
+						
+						showMessageBox(oResult.resultMsg);
+						//-------------------------------------------------
+						//Ajax系统定式      end
+						//-------------------------------------------------
+
+					
+						//错误发生时的业务处理 
+						//清空菜单节点详细信息区域
+			            resetInputMenuNodeArea();
+			            //重新加载菜单节点树
+			            Ext.getCmp("menuTree").getRootNode().reload();
+					}
+				},
+				failure : function(result, request) {
+					showMessageBox(getSystemCommunicationMsg());
+				},
+				params : {
+					menuNodeID : $F("id")
+				}
+			});
         }
         function closeSubWin(){
         	if(subWin != null){
