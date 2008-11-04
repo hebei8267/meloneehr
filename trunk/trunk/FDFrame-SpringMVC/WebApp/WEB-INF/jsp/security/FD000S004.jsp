@@ -47,17 +47,17 @@
 
 			tree.on("click", function(node, event) {
 				//设置选中节点信息
-				$("id").value = node.id;
-	            $("text").value = node.attributes.text;
-	            Ext.getCmp('uiNodeTypeExtCombo').setValue(node.attributes.uiNodeType);
+				$("nodeId").value = node.id;
+	            $("nodeText").value = node.attributes.text;
+	            Ext.getCmp('nodeTypeExtCombo').setValue(node.attributes.uiNodeType);
 	            $("actionContent").value = node.attributes.actionContent;
 	            setNodeType(node.attributes.defaultPermit);
-	            $("uiNodeIndex").value = node.attributes.uiNodeIndex;
+	            $("nodeIndex").value = node.attributes.uiNodeIndex;
 
 	            if($F("selectedMenuNode") != node.id){
 	            	$("selectedMenuNode").value = node.id;
 	            	//加载列表
-		            store.load({params : {menuNodeID : $F("id")}});
+		            store.load({params : {menuNodeID : $F("nodeId")}});
 	            }
 			})
 
@@ -168,7 +168,7 @@
 					if(oResult.processResult) {
 						//成功时的业务处理
 						//加载列表
-			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("nodeId")}});
 						
 					} else {//失败
 						//-------------------------------------------------
@@ -188,14 +188,14 @@
 					
 						//错误发生时的业务处理 
 						//加载列表
-			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("nodeId")}});
 					}
 				},
 				failure : function(result, request) {
 					showMessageBox(getSystemCommunicationMsg());
 				},
 				params : {
-					menuNodeID : $F("id"),
+					menuNodeID : $F("nodeId"),
 					roleList : Ext.util.JSON.encode(roleList)
 				}
 			});
@@ -217,7 +217,7 @@
         		subWin.close();
     		}
 
-			if($("id").value==''){//未选择菜单树节点
+			if($("nodeId").value==''){//未选择菜单树节点
 				showMessageBox(getNeedSelectedMsg('菜单树节点'));
 				return;
 			}
@@ -240,7 +240,7 @@
 					if(oResult.processResult) {
 						//成功时的业务处理
 						//加载列表
-			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("nodeId")}});
 						
 					} else {//失败
 						//-------------------------------------------------
@@ -260,26 +260,26 @@
 					
 						//错误发生时的业务处理 
 						//加载列表
-			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("id")}});
+			            Ext.getCmp('roleGrid').getStore().load({params : {menuNodeID : $F("nodeId")}});
 					}
 				},
 				failure : function(result, request) {
 					showMessageBox(getSystemCommunicationMsg());
 				},
 				params : {
-					menuNodeID : $F("id"),
+					menuNodeID : $F("nodeId"),
 					roleList : Ext.util.JSON.encode(roleList)
 				}
 			});
         }
         //清空菜单节点详细信息区域
         function resetInputMenuNodeArea(){
-        	$("id").value = "";
-	        $("text").value = "";
-	        Ext.getCmp('uiNodeTypeExtCombo').setValue("<%=MenuNodeType.NONE_NODE_TYPE%>");
+        	$("nodeId").value = "";
+	        $("nodeText").value = "";
+	        Ext.getCmp('nodeTypeExtCombo').setValue("<%=MenuNodeType.NONE_NODE_TYPE%>");
 	        $("actionContent").value = "";
 	        setNodeType(true);
-	        $("uiNodeIndex").value = "";
+	        $("nodeIndex").value = "";
         }
       	//删除选中菜单节点
         function doDelSelectedMenuNode(btn){
@@ -329,13 +329,13 @@
 					showMessageBox(getSystemCommunicationMsg());
 				},
 				params : {
-					menuNodeID : $F("id")
+					menuNodeID : $F("nodeId")
 				}
 			});
         }
       	//删除选中菜单节点
         function delSelectedMenuNode(){
-        	if($("id").value==''){//未选择菜单树节点
+        	if($("nodeId").value==''){//未选择菜单树节点
 				showMessageBox(getNeedSelectedMsg('菜单树节点'));
 				return;
 			}
@@ -470,7 +470,7 @@
 			                                	编号
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200" colspan="3">
-			                                	<form:input path="id" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
+			                                	<form:input path="nodeId" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
 			                                </td> 
 			                            </tr> 
 			                            <tr> 
@@ -478,13 +478,13 @@
 			                                    <img src="images/need-input.gif">名称
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200"> 
-			                                    <form:input path="text" size="20" maxlength="20"/>
+			                                    <form:input path="nodeText" size="20" maxlength="20"/>
 			                                </td>
 			                                <td class="inputItemName" height="30" width="100"> 
 			                                    <img src="images/need-input.gif">类型
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200">
-										        <form:select path="uiNodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
+										        <form:select path="nodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
 			                                </td> 
 			                            </tr>
 			                            <tr> 
@@ -513,7 +513,7 @@
 			                                	显示位置
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200"> 
-			                                    <form:input path="uiNodeIndex" size="20" maxlength="20"/> 
+			                                    <form:input path="nodeIndex" size="20" maxlength="20"/> 
 			                                </td> 
 			                            </tr> 
 			                            <tr height="10">

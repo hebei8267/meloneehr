@@ -20,19 +20,19 @@ public class FD000S004ViewObject extends AbstractViewObject {
 
     private static final long serialVersionUID = -3699212498804881787L;
     /** 节点编号 */
-    private String id;
+    private String nodeId;
 
     /** 节点内容 */
-    private String text;
+    private String nodeText;
 
     /** 节点类型 */
-    private String uiNodeType;
+    private String nodeType;
 
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private Boolean defaultPermit = Boolean.TRUE;
 
     /** 节点显示位置 */
-    private String uiNodeIndex;
+    private String nodeIndex;
 
     /** 页面迁移内容 */
     private String actionContent;
@@ -41,11 +41,11 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
 
     public FD000S004ViewObject() {
-        setUiNodeType(MenuNodeType.NONE_NODE_TYPE);
+        setNodeIndex(MenuNodeType.NONE_NODE_TYPE);
     }
 
     public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
-        setUiNodeType(MenuNodeType.NONE_NODE_TYPE);
+        setNodeIndex(MenuNodeType.NONE_NODE_TYPE);
 
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
@@ -57,17 +57,17 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @return 节点编号
      */
-    public String getId() {
-        return id;
+    public String getNodeId() {
+        return nodeId;
     }
 
     /**
      * 设置节点编号
      * 
-     * @param id 节点编号
+     * @param nodeId 节点编号
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 
     /**
@@ -75,17 +75,35 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @return 节点内容
      */
-    public String getText() {
-        return text;
+    public String getNodeText() {
+        return nodeText;
     }
 
     /**
      * 设置节点内容
      * 
-     * @param text 节点内容
+     * @param nodeText 节点内容
      */
-    public void setText(String text) {
-        this.text = text;
+    public void setNodeText(String nodeText) {
+        this.nodeText = nodeText;
+    }
+
+    /**
+     * 取得节点类型
+     * 
+     * @return 节点类型
+     */
+    public String getNodeType() {
+        return nodeType;
+    }
+
+    /**
+     * 设置节点类型
+     * 
+     * @param nodeType 节点类型
+     */
+    public void setNodeType(String nodeType) {
+        this.nodeType = nodeType;
     }
 
     /**
@@ -111,8 +129,8 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @return 节点显示位置
      */
-    public String getUiNodeIndex() {
-        return uiNodeIndex;
+    public String getNodeIndex() {
+        return nodeIndex;
     }
 
     /**
@@ -120,8 +138,26 @@ public class FD000S004ViewObject extends AbstractViewObject {
      * 
      * @param nodeIndex 节点显示位置
      */
-    public void setUiNodeIndex(String nodeIndex) {
-        this.uiNodeIndex = nodeIndex;
+    public void setNodeIndex(String nodeIndex) {
+        this.nodeIndex = nodeIndex;
+    }
+
+    /**
+     * 取得页面迁移内容
+     * 
+     * @return 页面迁移内容
+     */
+    public String getActionContent() {
+        return actionContent;
+    }
+
+    /**
+     * 设置页面迁移内容
+     * 
+     * @param actionContent 页面迁移内容
+     */
+    public void setActionContent(String actionContent) {
+        this.actionContent = actionContent;
     }
 
     /**
@@ -142,39 +178,4 @@ public class FD000S004ViewObject extends AbstractViewObject {
         this.nodeTypeList = nodeTypeList;
     }
 
-    /**
-     * 取得节点类型
-     * 
-     * @return 节点类型
-     */
-    public String getUiNodeType() {
-        return uiNodeType;
-    }
-
-    /**
-     * 设置节点类型
-     * 
-     * @param uiNodeType 节点类型
-     */
-    public void setUiNodeType(String uiNodeType) {
-        this.uiNodeType = uiNodeType;
-    }
-
-    /**
-     * 取得页面迁移内容
-     * 
-     * @return 页面迁移内容
-     */
-    public String getActionContent() {
-        return actionContent;
-    }
-
-    /**
-     * 设置页面迁移内容
-     * 
-     * @param actionContent 页面迁移内容
-     */
-    public void setActionContent(String actionContent) {
-        this.actionContent = actionContent;
-    }
 }
