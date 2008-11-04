@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.entity.security;
+package org.freedom.entity.ui;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.freedom.core.entity.AbstractEntityBean;
-import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.security.Role;
 import org.hibernate.annotations.NaturalId;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -27,9 +27,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Entity
 @Table(name = "W_ROLE_MENU_NODE_PERMIT")
 @NamedQueries( {
-        @NamedQuery(name = "RoleMenuNodePermit.getRoleMenuNodePermitListByUserID", query = "select pObj.menuNodeID from RoleMenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
-        @NamedQuery(name = "RoleMenuNodePermit.getRoleMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from RoleMenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? ") })
-public class RoleMenuNodePermit extends AbstractEntityBean {
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByUserID", query = "select pObj.menuNodeID from MenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),
+        @NamedQuery(name = "MenuNodePermit.delMenuNodePermitByMenuNodeID", query = "delete MenuNodePermit pObj where pObj.menuNodeID = ? ") })
+public class MenuNodePermit extends AbstractEntityBean {
 
     private static final long serialVersionUID = -350595423265400452L;
 
@@ -135,17 +136,19 @@ public class RoleMenuNodePermit extends AbstractEntityBean {
      * @see java.lang.Object#equals(Object)
      */
     public boolean equals(Object object) {
-        if (!(object instanceof RoleMenuNodePermit)) {
+        if (!(object instanceof MenuNodePermit)) {
             return false;
         }
-        RoleMenuNodePermit rhs = (RoleMenuNodePermit) object;
-        return new EqualsBuilder().append(this.menuNodeID, rhs.menuNodeID).append(this.roleID, rhs.roleID).isEquals();
+        MenuNodePermit rhs = (MenuNodePermit) object;
+        return new EqualsBuilder().append(this.menuNodeID, rhs.menuNodeID).append(this.roleID, rhs.roleID)
+                .isEquals();
     }
 
     /**
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return new HashCodeBuilder(2041415427, 1675002413).append(this.menuNodeID).append(this.roleID).toHashCode();
+        return new HashCodeBuilder(2041415427, 1675002413).append(this.menuNodeID).append(this.roleID)
+                .toHashCode();
     }
 }

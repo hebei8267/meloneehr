@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.freedom.core.view.vo.ajax.UITreeNode;
 import org.freedom.dao.security.RoleDao;
-import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeDao;
+import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.security.Role;
 import org.freedom.entity.ui.MenuNode;
@@ -44,7 +44,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         List<String> roleMenuNodePermitList = null;
         if (!Role.ADMIN_ROLE_ID.equals(roleID)) {// 不是系统管理员ID
             // 取得用户可访问的菜单树结点权限列表
-            roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+            roleMenuNodePermitList = menuNodePermitDao.getMenuNodePermitListByUserID(userID);
         }
 
         return getNavigationAreaMenuNode(root, roleID, roleMenuNodePermitList);
@@ -92,7 +92,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             List<String> roleMenuNodePermitList = null;
             if (!Role.ADMIN_ROLE_ID.equals(roleID)) {// 不是系统管理员ID
                 // 取得用户可访问的菜单树结点权限列表
-                roleMenuNodePermitList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+                roleMenuNodePermitList = menuNodePermitDao.getMenuNodePermitListByUserID(userID);
             }
 
             // 系统管理员ID
@@ -258,7 +258,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员ID
             return true;
         }
-        List<String> nodeList = roleMenuNodePermitDao.getRoleMenuNodePermitListByUserID(userID);
+        List<String> nodeList = menuNodePermitDao.getMenuNodePermitListByUserID(userID);
         if (nodeList.contains(menuNodeID)) {
             return true;
         }
@@ -292,7 +292,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param menuNodeID 菜单节点ID
      */
     private void delMenuNodeAccessRole(String menuNodeID) {
-        roleMenuNodePermitDao.delRoleMenuNodePermitByMenuNodeID(menuNodeID);
+        menuNodePermitDao.delMenuNodePermitByMenuNodeID(menuNodeID);
     }
 
     /**
@@ -318,7 +318,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     // ---------------------------------------------------------------------------
     private MenuNodeDao menuNodeDao = null;
     private MenuNodeTypeDao menuNodeTypeDao = null;
-    private RoleMenuNodePermitDao roleMenuNodePermitDao = null;
+    private MenuNodePermitDao menuNodePermitDao = null;
     private RoleDao roleDao = null;
 
     public MenuNodeDao getMenuNodeDao() {
@@ -329,12 +329,12 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         this.menuNodeDao = menuNodeDao;
     }
 
-    public RoleMenuNodePermitDao getRoleMenuNodePermitDao() {
-        return roleMenuNodePermitDao;
+    public MenuNodePermitDao getMenuNodePermitDao() {
+        return menuNodePermitDao;
     }
 
-    public void setRoleMenuNodePermitDao(RoleMenuNodePermitDao roleMenuNodePermitDao) {
-        this.roleMenuNodePermitDao = roleMenuNodePermitDao;
+    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
+        this.menuNodePermitDao = menuNodePermitDao;
     }
 
     public MenuNodeTypeDao getMenuNodeTypeDao() {
