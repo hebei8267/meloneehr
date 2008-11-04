@@ -342,6 +342,20 @@
         	showConfirm("确认要删除所选记录?", doDelSelectedMenuNode);
 			return;
         }
+        //添加菜单树节点
+        function addMenuNode(){
+        	if(subWin != null){
+        		subWin.close();
+    		}
+    		
+        	var windowOption = "width=400,height=420,left=300,top=150,status=no,resizable=no";
+            var windowName = "ADD_MENU_NODE";
+            subWin =  window.open("", windowName, windowOption);
+        	$("menuTreeForm").target = windowName;
+    		$("menuTreeForm").action = "FD000S006JspViewAction_ShowPageAction.faces";
+    		$("menuTreeForm").submit();
+    		return;
+        }
         function closeSubWin(){
         	if(subWin != null){
         		subWin.close();
@@ -416,7 +430,7 @@
                     				<table>
                     					<tr>
 	                    					<td align="left"><%// 添加菜单树节点 %>
-						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick=""> 
+						                        <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNode();"> 
 						                    </td> 
 						                    <td width="20"> 
 						                    </td> 
