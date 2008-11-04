@@ -31,6 +31,9 @@ public class FD000S004ViewObject extends AbstractViewObject {
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private Boolean defaultPermit = Boolean.TRUE;
 
+    /** 角色适用范围 "true"仅该节点 "false"所有子节点 */
+    private Boolean selfFlag = Boolean.TRUE;
+
     /** 节点显示位置 */
     private String nodeIndex;
 
@@ -41,11 +44,11 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
 
     public FD000S004ViewObject() {
-        setNodeIndex(MenuNodeType.NONE_NODE_TYPE);
+        setNodeType(MenuNodeType.NONE_NODE_TYPE);
     }
 
     public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
-        setNodeIndex(MenuNodeType.NONE_NODE_TYPE);
+        setNodeType(MenuNodeType.NONE_NODE_TYPE);
 
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
@@ -122,6 +125,24 @@ public class FD000S004ViewObject extends AbstractViewObject {
      */
     public void setDefaultPermit(Boolean defaultPermit) {
         this.defaultPermit = defaultPermit;
+    }
+
+    /**
+     * 取得角色适用范围 "true"仅该节点 "false"所有子节点
+     * 
+     * @return 角色适用范围 "true"仅该节点 "false"所有子节点
+     */
+    public Boolean getSelfFlag() {
+        return selfFlag;
+    }
+
+    /**
+     * 设置角色适用范围 "true"仅该节点 "false"所有子节点
+     * 
+     * @param selfFlag 角色适用范围 "true"仅该节点 "false"所有子节点
+     */
+    public void setSelfFlag(Boolean selfFlag) {
+        this.selfFlag = selfFlag;
     }
 
     /**
