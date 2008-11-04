@@ -75,6 +75,10 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         delMenuNodePermit(menuNodeID);
         // 删除该菜单节点对象
         menuNodeDao.remove(menuNode);
+        // 更新兄弟节点index
+        MenuNode pMenuNode = menuNode.getParentNode();
+        pMenuNode.removeSubNode(menuNode);
+        menuNodeDao.save(pMenuNode);
         return true;
     }
 

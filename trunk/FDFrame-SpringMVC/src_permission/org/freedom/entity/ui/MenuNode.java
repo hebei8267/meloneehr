@@ -239,12 +239,15 @@ public class MenuNode extends AbstractEntityBean {
         int index = 1;
         for (Iterator<MenuNode> iterator = subNodeList.iterator(); iterator.hasNext();) {
             MenuNode _menuNode = iterator.next();
-            _menuNode.setIndex(index);
-            index++;
-            
             if (_menuNode.equals(menuNode)) {
                 iterator.remove();
+                continue;
             }
+            if (_menuNode != null) {
+                _menuNode.setIndex(index);
+                index++;
+            }
+
         }
 
     }

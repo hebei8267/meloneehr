@@ -469,33 +469,23 @@
 			                                <td class="inputItemName" height="30" width="100">
 			                                	编号
 			                                </td> 
-			                                <td class="inputItemCell" height="30" width="200" colspan="3">
+			                                <td class="inputItemCell" height="30" width="200">
 			                                	<form:input path="nodeId" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
-			                                </td> 
-			                            </tr> 
-			                            <tr> 
+			                                </td>
 			                                <td class="inputItemName" height="30" width="100"> 
 			                                    <img src="images/need-input.gif">名称
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200"> 
 			                                    <form:input path="nodeText" size="20" maxlength="20"/>
 			                                </td>
+			                            </tr> 
+			                            <tr>
 			                                <td class="inputItemName" height="30" width="100"> 
 			                                    <img src="images/need-input.gif">类型
 			                                </td> 
 			                                <td class="inputItemCell" height="30" width="200">
 										        <form:select path="nodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
-			                                </td> 
-			                            </tr>
-			                            <tr> 
-			                                <td class="inputItemName" height="30" width="100"> 
-			                                    <img src="images/need-input.gif">Action
-			                                </td> 
-			                                <td class="inputItemCell" height="30" width="200" colspan="3"> 
-			                                    <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>
-			                                </td> 
-			                            </tr>
-			                            <tr> 
+			                                </td>
 			                                <td class="inputItemName" height="30" width="100"> 
 			                                    <img src="images/need-input.gif">访问限制
 			                                </td> 
@@ -507,6 +497,29 @@
 			                                    <form:radiobutton path="defaultPermit" value="false" />
 												<label>
 													有限制
+			                                    </label>
+			                                </td>
+			                            </tr>
+			                            <tr> 
+			                                <td class="inputItemName" height="30" width="100"> 
+			                                    <img src="images/need-input.gif">Action
+			                                </td> 
+			                                <td class="inputItemCell" height="30" width="200" colspan="3"> 
+			                                    <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>
+			                                </td> 
+			                            </tr>
+			                            <tr> 
+			                            	<td class="inputItemName" height="30" width="100">
+			                            		角色适用范围
+			                                </td>
+			                                <td class="inputItemCell" height="30" width="200"> 
+			                                    <form:radiobutton path="selfFlag" value="true"/>
+												<label>
+													仅该节点
+			                                    </label>
+			                                    <form:radiobutton path="selfFlag" value="false" />
+												<label>
+													包含所有子节点
 			                                    </label>
 			                                </td>
 			                                <td class="inputItemName" height="30" width="100">
