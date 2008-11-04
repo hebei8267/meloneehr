@@ -282,13 +282,11 @@
 	        $("uiNodeIndex").value = "";
         }
       	//删除选中菜单节点
-        function delSelectedMenuNode(){
-        	if($("id").value==''){//未选择菜单树节点
-				showMessageBox(getNeedSelectedMsg('菜单树节点'));
-				return;
-			}
-			
-			Ext.Ajax.request({
+        function doDelSelectedMenuNode(btn){
+        	if (btn != 'yes') {
+            	return;
+        	}
+        	Ext.Ajax.request({
 				url : 'FD000S004AjaxViewAction_DelSelectedMenuNode.ajax',
 				method: 'post',
 				success : function(result, request) {
@@ -300,6 +298,8 @@
 			            resetInputMenuNodeArea();
 			            //重新加载菜单节点树
 						Ext.getCmp("menuTree").getRootNode().reload();
+						//清空角色列表内容
+						Ext.getCmp('roleGrid').getStore().removeAll();
 					} else {//失败
 						//-------------------------------------------------
 						//Ajax系统定式      start
@@ -321,6 +321,8 @@
 			            resetInputMenuNodeArea();
 			            //重新加载菜单节点树
 			            Ext.getCmp("menuTree").getRootNode().reload();
+			          	//清空角色列表内容
+						Ext.getCmp('roleGrid').getStore().removeAll();
 					}
 				},
 				failure : function(result, request) {
@@ -330,6 +332,15 @@
 					menuNodeID : $F("id")
 				}
 			});
+        }
+      	//删除选中菜单节点
+        function delSelectedMenuNode(){
+        	if($("id").value==''){//未选择菜单树节点
+				showMessageBox(getNeedSelectedMsg('菜单树节点'));
+				return;
+			}
+        	showConfirm("确认要删除所选记录?", doDelSelectedMenuNode);
+			return;
         }
         function closeSubWin(){
         	if(subWin != null){
