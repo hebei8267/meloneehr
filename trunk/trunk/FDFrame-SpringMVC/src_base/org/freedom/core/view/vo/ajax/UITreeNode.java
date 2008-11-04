@@ -15,24 +15,22 @@ import java.util.List;
 public class UITreeNode extends JosnViewObject {
 
     private static final long serialVersionUID = 6909488869312107426L;
+
     /** 节点编号 */
     private String id;
+
     /** 节点内容 */
     private String text;
-    /** 页面迁移内容 */
-    private String actionContent;
-    /** 节点类型 */
-    private String uiNodeType;
+
     /** 子节点标记 */
     private boolean leaf = true;
+
     /** 父节点ID */
     private String parentNodeID;
+
     /** 子节点 */
     private List<UITreeNode> children = new ArrayList<UITreeNode>();
-    /** 默认权限 "true"无访问限制 "false"有访问限制 */
-    private Boolean defaultPermit = Boolean.TRUE;
-    /** 节点显示位置 */
-    private String uiNodeIndex;
+
     /** 节点图标 */
     private String icon;
 
@@ -40,10 +38,9 @@ public class UITreeNode extends JosnViewObject {
 
     }
 
-    public UITreeNode(String id, String text, String actionContent) {
+    public UITreeNode(String id, String text) {
         this.id = id;
         this.text = text;
-        this.actionContent = actionContent;
     }
 
     /**
@@ -80,42 +77,6 @@ public class UITreeNode extends JosnViewObject {
      */
     public void setText(String text) {
         this.text = text;
-    }
-
-    /**
-     * 取得页面迁移内容
-     * 
-     * @return 页面迁移内容
-     */
-    public String getActionContent() {
-        return actionContent;
-    }
-
-    /**
-     * 设置页面迁移内容
-     * 
-     * @param actionContent 页面迁移内容
-     */
-    public void setActionContent(String actionContent) {
-        this.actionContent = actionContent;
-    }
-
-    /**
-     * 取得节点类型
-     * 
-     * @return 节点类型
-     */
-    public String getUiNodeType() {
-        return uiNodeType;
-    }
-
-    /**
-     * 设置节点类型
-     * 
-     * @param nodeType 节点类型
-     */
-    public void setUiNodeType(String nodeType) {
-        this.uiNodeType = nodeType;
     }
 
     /**
@@ -179,42 +140,6 @@ public class UITreeNode extends JosnViewObject {
      */
     public void addChildren(UITreeNode node) {
         this.children.add(node);
-    }
-
-    /**
-     * 取得默认权限 "true"无访问限制 "false"有访问限制
-     * 
-     * @return 默认权限 "true"无访问限制 "false"有访问限制
-     */
-    public Boolean getDefaultPermit() {
-        return defaultPermit;
-    }
-
-    /**
-     * 设置默认权限 "true"无访问限制 "false"有访问限制
-     * 
-     * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
-     */
-    public void setDefaultPermit(Boolean defaultPermit) {
-        this.defaultPermit = defaultPermit;
-    }
-
-    /**
-     * 取得节点显示位置
-     * 
-     * @return 节点显示位置
-     */
-    public String getUiNodeIndex() {
-        return uiNodeIndex;
-    }
-
-    /**
-     * 设置节点显示位置
-     * 
-     * @param nodeIndex 节点显示位置
-     */
-    public void setUiNodeIndex(String nodeIndex) {
-        this.uiNodeIndex = nodeIndex;
     }
 
     /**
