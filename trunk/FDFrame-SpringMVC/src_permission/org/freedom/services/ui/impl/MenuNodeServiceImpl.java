@@ -14,7 +14,7 @@ import org.freedom.entity.security.Role;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.ui.IMenuNodeService;
-import org.freedom.view.vo.security.s004.FD000S004ViewObject;
+import org.freedom.view.vo.security.s003.UIMenuTreeNode;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -109,20 +109,20 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
         if (dbNodeRoot != null) {
 
-            UITreeNode uiTreeNode = new UITreeNode();
+            UIMenuTreeNode menuTreeNode = new UIMenuTreeNode();
 
-            uiTreeNode.setId(dbNodeRoot.getId());
-            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
-            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
-            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
-            uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
-            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
-            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
-            uiTreeNode.setUiNodeIndex("");
+            menuTreeNode.setId(dbNodeRoot.getId());
+            menuTreeNode.setText(dbNodeRoot.getNodeTxt());
+            menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            menuTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            menuTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+            menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+            menuTreeNode.setUiNodeIndex("");
             // 构建整个菜单树结构
-            buildSubMenuTreeInfo(uiTreeNode, dbNodeRoot);
+            buildSubMenuTreeInfo(menuTreeNode, dbNodeRoot);
 
-            return uiTreeNode;
+            return menuTreeNode;
         }
         return null;
     }
@@ -137,20 +137,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         for (MenuNode dbChildNode : dbParentNode.getSubNodeList()) {
             if (dbChildNode != null) {
 
-                FD000S004ViewObject childNode = new FD000S004ViewObject();
+                UIMenuTreeNode childMenuTreeNode = new UIMenuTreeNode();
+                childMenuTreeNode.setId(dbChildNode.getId());
+                childMenuTreeNode.setText(dbChildNode.getNodeTxt());
+                childMenuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
+                childMenuTreeNode.setActionContent(dbChildNode.getActionContent());
+                childMenuTreeNode.setUiNodeType(dbChildNode.getNodeType());
+                childMenuTreeNode.setDefaultPermit(dbChildNode.getDefaultPermit());
+                childMenuTreeNode.setParentNodeID(dbChildNode.getParentNodeID());
+                childMenuTreeNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
 
-                childNode.setId(dbChildNode.getId());
-                childNode.setText(dbChildNode.getNodeTxt());
-                childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
-                childNode.setActionContent(dbChildNode.getActionContent());
-                childNode.setUiNodeType(dbChildNode.getNodeType());
-                childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
-                childNode.setParentNodeID(dbChildNode.getParentNodeID());
-                childNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
+                parentNode.addChildren(childMenuTreeNode);
 
-                parentNode.addChildren(childNode);
-
-                buildSubMenuTreeInfo(childNode, dbChildNode);
+                buildSubMenuTreeInfo(childMenuTreeNode, dbChildNode);
             }
         }
     }
@@ -190,7 +189,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             // 拥有访问权限
             if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit()
                     || roleMenuNodePermitList.contains(menuNode.getId())) {
-                UITreeNode uiNode = new UITreeNode(menuNode.getId(), menuNode.getNodeTxt(), null);
+                UITreeNode uiNode = new UITreeNode(menuNode.getId(), menuNode.getNodeTxt());
 
                 _reList.add(uiNode);
             }
@@ -213,19 +212,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             // 拥有访问权限
             if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit()
                     || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
-                UITreeNode uiTreeNode = new UITreeNode();
+                UIMenuTreeNode menuTreeNode = new UIMenuTreeNode();
 
-                uiTreeNode.setId(dbNodeRoot.getId());
-                uiTreeNode.setText(dbNodeRoot.getNodeTxt());
-                uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
-                uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
-                uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
-                uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
-                uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+                menuTreeNode.setId(dbNodeRoot.getId());
+                menuTreeNode.setText(dbNodeRoot.getNodeTxt());
+                menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+                menuTreeNode.setActionContent(dbNodeRoot.getActionContent());
+                menuTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+                menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+                menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
                 // 创建导航区菜单树结构
-                buildSubNavigationAreaMenuTreeInfo(uiTreeNode, dbNodeRoot, roleMenuNodePermitList, roleID);
+                buildSubNavigationAreaMenuTreeInfo(menuTreeNode, dbNodeRoot, roleMenuNodePermitList, roleID);
 
-                return uiTreeNode;
+                return menuTreeNode;
             }
 
         }
@@ -251,19 +250,19 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 拥有访问权限
                 if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit()
                         || roleMenuNodePermitList.contains(dbNode.getId())) {
-                    UITreeNode uiTreeNode = new UITreeNode();
+                    UIMenuTreeNode menuTreeNode = new UIMenuTreeNode();
 
-                    uiTreeNode.setId(dbNode.getId());
-                    uiTreeNode.setText(dbNode.getNodeTxt());
-                    uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
-                    uiTreeNode.setActionContent(dbNode.getActionContent());
-                    uiTreeNode.setUiNodeType(dbNode.getNodeType());
-                    uiTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
-                    uiTreeNode.setParentNodeID(dbNode.getParentNodeID());
+                    menuTreeNode.setId(dbNode.getId());
+                    menuTreeNode.setText(dbNode.getNodeTxt());
+                    menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                    menuTreeNode.setActionContent(dbNode.getActionContent());
+                    menuTreeNode.setUiNodeType(dbNode.getNodeType());
+                    menuTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
+                    menuTreeNode.setParentNodeID(dbNode.getParentNodeID());
 
-                    parentNode.addChildren(uiTreeNode);
+                    parentNode.addChildren(menuTreeNode);
 
-                    buildSubNavigationAreaMenuTreeInfo(uiTreeNode, dbNode, roleMenuNodePermitList, roleID);
+                    buildSubNavigationAreaMenuTreeInfo(menuTreeNode, dbNode, roleMenuNodePermitList, roleID);
                 }
             }
         }
