@@ -35,26 +35,9 @@ public interface ISecurityService {
     public boolean modUserPassword_Service(String userID, String oldPassword, String newPassword);
 
     /**
-     * 删除指定菜单节点的角色关联关系
-     * 
-     * @param menuNodeID 菜单节点
-     * @param roleList 要删除角色列表
-     * @return 删除的记录行数
-     */
-    public int delRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList);
-
-    /**
-     * 添加指定菜单节点的角色关联关系(已经存在的关联关系将忽略)
-     * 
-     * @param menuNodeID 菜单节点
-     * @param roleList 要添加角色列表
-     */
-    public void addRoleMenuNodePermit_Service(String menuNodeID, List<Role> roleList);
-
-    /**
      * 取得所有角色列表信息
      * 
      * @return 角色列表信息
      */
-    public List<Role> getAllRoleList_Service();
+    public List<Role> getAllRoleInfoList_Service();
 }

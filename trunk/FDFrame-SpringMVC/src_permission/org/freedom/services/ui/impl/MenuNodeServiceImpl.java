@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.core.view.vo.ajax.UITreeNode;
-import org.freedom.dao.security.RoleDao;
 import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
@@ -28,16 +27,138 @@ import org.springframework.stereotype.Component;
 @Component("menuNodeService")
 @Scope("prototype")
 public class MenuNodeServiceImpl implements IMenuNodeService {
+
+    // ---------------------------------------------------------------------------
+    // DAO
+    // ---------------------------------------------------------------------------
+    private MenuNodeDao menuNodeDao = null;
+    private MenuNodeTypeDao menuNodeTypeDao = null;
+    private MenuNodePermitDao menuNodePermitDao = null;
+
+    public MenuNodeDao getMenuNodeDao() {
+        return menuNodeDao;
+    }
+
+    public void setMenuNodeDao(MenuNodeDao menuNodeDao) {
+        this.menuNodeDao = menuNodeDao;
+    }
+
+    public MenuNodePermitDao getMenuNodePermitDao() {
+        return menuNodePermitDao;
+    }
+
+    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
+        this.menuNodePermitDao = menuNodePermitDao;
+    }
+
+    public MenuNodeTypeDao getMenuNodeTypeDao() {
+        return menuNodeTypeDao;
+    }
+
+    public void setMenuNodeTypeDao(MenuNodeTypeDao menuNodeTypeDao) {
+        this.menuNodeTypeDao = menuNodeTypeDao;
+    }
+
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
+
+    public boolean delMenuTreeNode_Service(String menuNodeID) {
+        // 菜单节点对象
+        MenuNode menuNode = menuNodeDao.getMenuNodeByID(menuNodeID);
+        if (menuNode == null) {// 要删除的对象不存在
+            return false;
+        }
+        // 删除子菜单节点对象
+        delSubMenuTreeNode(menuNode.getSubNodeList());
+        // 删除该菜单节点关联的角色对象
+        delMenuNodePermit(menuNodeID);
+        // 删除该菜单节点对象
+        menuNodeDao.remove(menuNode);
+        return true;
+    }
+
     /**
-     * 取得所有导航区列表菜单节点列表
+     * 删除子菜单节点对象
      * 
-     * @param userID 用户ID
-     * @param roleID 用户角色ID
-     * @return 导航区列表菜单节点列表
+     * @param subMenuNodeList
      */
+    private void delSubMenuTreeNode(List<MenuNode> subMenuNodeList) {
+        if (subMenuNodeList != null) {
+            for (MenuNode menuNode : subMenuNodeList) {
+                if (menuNode != null) {
+                    // 删除子菜单节点对象
+                    delSubMenuTreeNode(menuNode.getSubNodeList());
+                    // 删除该菜单节点关联的角色对象
+                    delMenuNodePermit(menuNode.getId());
+                }
+            }
+        }
+    }
+
+    /**
+     * 删除该菜单节点关联的角色对象
+     * 
+     * @param menuNodeID 菜单节点ID
+     */
+    private void delMenuNodePermit(String menuNodeID) {
+        menuNodePermitDao.delMenuNodePermitByMenuNodeID(menuNodeID);
+    }
+
+    public UITreeNode getAllMenuTreeInfo_Service(String rootNodeId) {
+        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
+        if (dbNodeRoot != null) {
+
+            UITreeNode uiTreeNode = new UITreeNode();
+
+            uiTreeNode.setId(dbNodeRoot.getId());
+            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
+            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+            uiTreeNode.setUiNodeIndex("");
+            // 构建整个菜单树结构
+            buildSubMenuTreeInfo(uiTreeNode, dbNodeRoot);
+
+            return uiTreeNode;
+        }
+        return null;
+    }
+
+    /**
+     * 构建整个菜单树结构
+     * 
+     * @param parentNode 父节点
+     * @param dbMenuNode 数据库中取得的菜单节点
+     */
+    private void buildSubMenuTreeInfo(UITreeNode parentNode, MenuNode dbParentNode) {
+        for (MenuNode dbChildNode : dbParentNode.getSubNodeList()) {
+            if (dbChildNode != null) {
+
+                FD000S004ViewObject childNode = new FD000S004ViewObject();
+
+                childNode.setId(dbChildNode.getId());
+                childNode.setText(dbChildNode.getNodeTxt());
+                childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
+                childNode.setActionContent(dbChildNode.getActionContent());
+                childNode.setUiNodeType(dbChildNode.getNodeType());
+                childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
+                childNode.setParentNodeID(dbChildNode.getParentNodeID());
+                childNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
+
+                parentNode.addChildren(childNode);
+
+                buildSubMenuTreeInfo(childNode, dbChildNode);
+            }
+        }
+    }
+
+    public List<MenuNodeType> getMenuNodeTypeList_Service() {
+        return menuNodeTypeDao.getMenuNodeTypeList();
+    }
+
     public List<UITreeNode> getNavigationAreaMenuNode_Service(String userID, String roleID) {
         MenuNode root = menuNodeDao.getMenuNodeByID(MenuNode.ROOT_ID);
 
@@ -77,15 +198,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return _reList;
     }
 
-    /**
-     * 取得菜单树节点和其所有子节点信息
-     * 
-     * @param rootNodeId 菜单树节点
-     * @param userID 用户ID
-     * @param roleID 用户角色ID
-     * @return 菜单树节点和其所有子节点信息
-     */
-    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID, String roleID) {
+    public UITreeNode getNavigationAreaMenuTreeInfo_Service(String rootNodeId, String userID, String roleID) {
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
 
         if (dbNodeRoot != null) {
@@ -109,8 +222,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
                 uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
                 uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
-
-                buildSubMenuTree(uiTreeNode, dbNodeRoot, roleMenuNodePermitList, roleID);
+                // 创建导航区菜单树结构
+                buildSubNavigationAreaMenuTreeInfo(uiTreeNode, dbNodeRoot, roleMenuNodePermitList, roleID);
 
                 return uiTreeNode;
             }
@@ -120,14 +233,14 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     }
 
     /**
-     * 创建树结构
+     * 创建导航区菜单树结构
      * 
      * @param parentNode 父节点
      * @param dbNodeRoot
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @param roleID 用户角色ID
      */
-    private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot,
+    private void buildSubNavigationAreaMenuTreeInfo(UITreeNode parentNode, MenuNode dbNodeRoot,
             List<String> roleMenuNodePermitList, String roleID) {
 
         for (MenuNode dbNode : dbNodeRoot.getSubNodeList()) {
@@ -150,207 +263,10 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
                     parentNode.addChildren(uiTreeNode);
 
-                    buildSubMenuTree(uiTreeNode, dbNode, roleMenuNodePermitList, roleID);
+                    buildSubNavigationAreaMenuTreeInfo(uiTreeNode, dbNode, roleMenuNodePermitList, roleID);
                 }
             }
         }
 
     }
-
-    /**
-     * 取得菜单树结点类型列表
-     * 
-     * @return 菜单树结点类型列表
-     */
-    public List<MenuNodeType> getMenuNodeTypeList_Service() {
-        return menuNodeTypeDao.getMenuNodeTypeList();
-    }
-
-    /**
-     * 取得所有菜单树节点和其所有子节点信息
-     * 
-     * @param rootNodeId 菜单树节点
-     * @return 所有菜单树节点和其所有子节点信息
-     */
-    public UITreeNode getNavigationAreaSubMenuTreeNode_Service(String rootNodeId) {
-        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootNodeId);
-        if (dbNodeRoot != null) {
-
-            UITreeNode uiTreeNode = new UITreeNode();
-
-            uiTreeNode.setId(dbNodeRoot.getId());
-            uiTreeNode.setText(dbNodeRoot.getNodeTxt());
-            uiTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
-            uiTreeNode.setActionContent(dbNodeRoot.getActionContent());
-            uiTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
-            uiTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
-            uiTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
-            uiTreeNode.setUiNodeIndex("");
-
-            buildSubVOList(uiTreeNode, dbNodeRoot);
-
-            return uiTreeNode;
-        }
-        return null;
-    }
-
-    /**
-     * 构建整个树结构
-     * 
-     * @param parentNode
-     * @param dbMenuNode
-     */
-    private void buildSubVOList(UITreeNode parentNode, MenuNode dbParentNode) {
-        for (MenuNode dbChildNode : dbParentNode.getSubNodeList()) {
-            if (dbChildNode != null) {
-
-                FD000S004ViewObject childNode = new FD000S004ViewObject();
-
-                childNode.setId(dbChildNode.getId());
-                childNode.setText(dbChildNode.getNodeTxt());
-                childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
-                childNode.setActionContent(dbChildNode.getActionContent());
-                childNode.setUiNodeType(dbChildNode.getNodeType());
-                childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
-                childNode.setParentNodeID(dbChildNode.getParentNodeID());
-                childNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
-
-                parentNode.addChildren(childNode);
-
-                buildSubVOList(childNode, dbChildNode);
-            }
-        }
-    }
-
-    /**
-     * 取得可访问菜单节点的角色列表
-     * 
-     * @param menuNodeID 菜单节点
-     * @return
-     */
-    public List<Role> getMenuNodeAccessRoleList_Service(String menuNodeID) {
-        List<Role> roleList = roleDao.getRoleListByMenuNodeID(menuNodeID);
-        if (roleList != null && roleList.size() != 0) {
-            List<Role> resultList = new ArrayList<Role>();
-            for (Role role : roleList) {
-                Role _role = new Role();
-
-                _role.setId(role.getId());
-                _role.setName(role.getName());
-                _role.setVersion(role.getVersion());
-
-                resultList.add(_role);
-            }
-            return resultList;
-        }
-
-        return null;
-    }
-
-    /**
-     * 检查用户访问菜单节点的权限
-     * 
-     * @param userID 用户ID
-     * @param menuNodeID
-     * @return true-有访问权限 false-无访问权限
-     */
-    public boolean checkUserAccessMenuNodePermit_Service(String userID, String roleID, String menuNodeID) {
-        if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员ID
-            return true;
-        }
-        List<String> nodeList = menuNodePermitDao.getMenuNodePermitListByUserID(userID);
-        if (nodeList.contains(menuNodeID)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 删除指定的菜单树节点
-     * 
-     * @param menuNodeID
-     * @return
-     */
-    public boolean delMenuTreeNode_Service(String menuNodeID) {
-        // 菜单节点对象
-        MenuNode menuNode = menuNodeDao.getMenuNodeByID(menuNodeID);
-        if (menuNode == null) {// 要删除的对象不存在
-            return false;
-        }
-        // 删除子菜单节点对象
-        delSubMenuTreeNode(menuNode.getSubNodeList());
-        // 删除该菜单节点关联的角色对象
-        delMenuNodeAccessRole(menuNodeID);
-        // 删除该菜单节点对象
-        menuNodeDao.remove(menuNode);
-        return true;
-    }
-
-    /**
-     * 删除该菜单节点关联的角色对象
-     * 
-     * @param menuNodeID 菜单节点ID
-     */
-    private void delMenuNodeAccessRole(String menuNodeID) {
-        menuNodePermitDao.delMenuNodePermitByMenuNodeID(menuNodeID);
-    }
-
-    /**
-     * 删除子菜单节点对象
-     * 
-     * @param subMenuNodeList
-     */
-    private void delSubMenuTreeNode(List<MenuNode> subMenuNodeList) {
-        if (subMenuNodeList != null) {
-            for (MenuNode menuNode : subMenuNodeList) {
-                if (menuNode != null) {
-                    // 删除子菜单节点对象
-                    delSubMenuTreeNode(menuNode.getSubNodeList());
-                    // 删除该菜单节点关联的角色对象
-                    delMenuNodeAccessRole(menuNode.getId());
-                }
-            }
-        }
-    }
-
-    // ---------------------------------------------------------------------------
-    // DAO
-    // ---------------------------------------------------------------------------
-    private MenuNodeDao menuNodeDao = null;
-    private MenuNodeTypeDao menuNodeTypeDao = null;
-    private MenuNodePermitDao menuNodePermitDao = null;
-    private RoleDao roleDao = null;
-
-    public MenuNodeDao getMenuNodeDao() {
-        return menuNodeDao;
-    }
-
-    public void setMenuNodeDao(MenuNodeDao menuNodeDao) {
-        this.menuNodeDao = menuNodeDao;
-    }
-
-    public MenuNodePermitDao getMenuNodePermitDao() {
-        return menuNodePermitDao;
-    }
-
-    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
-        this.menuNodePermitDao = menuNodePermitDao;
-    }
-
-    public MenuNodeTypeDao getMenuNodeTypeDao() {
-        return menuNodeTypeDao;
-    }
-
-    public void setMenuNodeTypeDao(MenuNodeTypeDao menuNodeTypeDao) {
-        this.menuNodeTypeDao = menuNodeTypeDao;
-    }
-
-    public RoleDao getRoleDao() {
-        return roleDao;
-    }
-
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
-
 }
