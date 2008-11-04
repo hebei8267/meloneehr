@@ -111,7 +111,7 @@
     		<table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
-                    	角色信息
+                    	添加角色信息
                     </td> 
                     <td class="appScreenID"> 
                         - FD000S005 -

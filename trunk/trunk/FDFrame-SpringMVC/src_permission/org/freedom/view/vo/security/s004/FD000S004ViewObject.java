@@ -26,7 +26,7 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private String nodeText;
 
     /** 节点类型 */
-    private String nodeType;
+    private String nodeType = MenuNodeType.NONE_NODE_TYPE;
 
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private Boolean defaultPermit = Boolean.TRUE;
@@ -44,12 +44,10 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
 
     public FD000S004ViewObject() {
-        setNodeType(MenuNodeType.NONE_NODE_TYPE);
+
     }
 
     public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
-        setNodeType(MenuNodeType.NONE_NODE_TYPE);
-
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
         }
