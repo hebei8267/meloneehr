@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.dao.security.RoleDao;
-import org.freedom.dao.security.RoleMenuNodePermitDao;
 import org.freedom.dao.security.UserDao;
 import org.freedom.dao.ui.MenuNodeDao;
+import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.entity.security.Role;
-import org.freedom.entity.security.RoleMenuNodePermit;
 import org.freedom.entity.security.User;
 import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.services.security.ISecurityService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -78,7 +78,7 @@ public class SecurityServiceImpl implements ISecurityService {
         for (int i = 0; i < roleList.size(); i++) {
             roleIDs[i] = roleList.get(i).getId();
         }
-        return roleMenuNodePermitDao.delRoleMenuNodePermitByMenuNodeID(menuNodeID, roleIDs);
+        return menuNodePermitDao.delRoleMenuNodePermitByMenuNodeID(menuNodeID, roleIDs);
 
     }
 
@@ -117,19 +117,20 @@ public class SecurityServiceImpl implements ISecurityService {
 
         for (Role _role : roleList) {
 
-            RoleMenuNodePermit existObj = roleMenuNodePermitDao.getRoleMenuNodePermitByRoleIDAndMenuNodeID(_role.getId(), menuNodeID);
+            MenuNodePermit existObj = menuNodePermitDao.getMenuNodePermitByRoleIDAndMenuNodeID(_role
+                    .getId(), menuNodeID);
             if (existObj != null) {// 要添加的对象已经存在
                 continue;
             }
 
             // 登录用户角色可访问菜单树结点权限
-            RoleMenuNodePermit rolePermit = new RoleMenuNodePermit();
+            MenuNodePermit rolePermit = new MenuNodePermit();
             rolePermit.setMenuNode(menuNode);
             // 角色对象
             Role role = roleDao.getRoleByID(_role.getId());
             rolePermit.setRole(role);
 
-            roleMenuNodePermitDao.save(rolePermit);
+            menuNodePermitDao.save(rolePermit);
         }
 
     }
@@ -138,7 +139,7 @@ public class SecurityServiceImpl implements ISecurityService {
     // DAO
     // ---------------------------------------------------------------------------
     private UserDao userDao = null;
-    private RoleMenuNodePermitDao roleMenuNodePermitDao = null;
+    private MenuNodePermitDao menuNodePermitDao = null;
     private RoleDao roleDao = null;
     private MenuNodeDao menuNodeDao = null;
 
@@ -150,12 +151,12 @@ public class SecurityServiceImpl implements ISecurityService {
         this.userDao = userDao;
     }
 
-    public RoleMenuNodePermitDao getRoleMenuNodePermitDao() {
-        return roleMenuNodePermitDao;
+    public MenuNodePermitDao getMenuNodePermitDao() {
+        return menuNodePermitDao;
     }
 
-    public void setRoleMenuNodePermitDao(RoleMenuNodePermitDao roleMenuNodePermitDao) {
-        this.roleMenuNodePermitDao = roleMenuNodePermitDao;
+    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
+        this.menuNodePermitDao = menuNodePermitDao;
     }
 
     public RoleDao getRoleDao() {

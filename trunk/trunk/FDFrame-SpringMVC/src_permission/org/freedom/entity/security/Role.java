@@ -31,7 +31,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Table(name = "W_LOGIN_USER_ROLE")
 @NamedQueries( {
         @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
-        @NamedQuery(name = "Role.getRoleListByMenuNodeID", query = "select robj from Role robj, RoleMenuNodePermit pObj where robj.id = pObj.roleID and pObj.menuNodeID = ? ") })
+        @NamedQuery(name = "Role.getRoleListByMenuNodeID", query = "select robj from Role robj, MenuNodePermit pObj where robj.id = pObj.roleID and pObj.menuNodeID = ? ") })
 public class Role extends AbstractEntityBean {
 
     private static final long serialVersionUID = 2814135309469292776L;
