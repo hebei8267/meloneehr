@@ -16,6 +16,7 @@ import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.core.view.vo.ajax.UITreeNode;
+import org.freedom.services.ui.IMenuNodePermitService;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
 
     @Autowired
     private IMenuNodeService menuNodeService;
+    @Autowired
+    private IMenuNodePermitService menuNodePermitService;
 
     /**
      * 取得树节点数据
@@ -60,8 +63,8 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
         // 菜单树节点和其所有子节点信息
-        UITreeNode outObj = menuNodeService.getMenuTreeNode_Service(nodeId, user.getUserId(), user
-                .getRoleId());
+        UITreeNode outObj = menuNodeService.getNavigationAreaMenuTreeInfo_Service(nodeId, user.getUserId(),
+                user.getRoleId());
 
         JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
@@ -84,7 +87,7 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
 
-        boolean _result = menuNodeService.checkUserAccessMenuNodePermit_Service(user.getUserId(), user
+        boolean _result = menuNodePermitService.checkUserAccessMenuNodePermit_Service(user.getUserId(), user
                 .getRoleId(), nodeId);
 
         JosnViewObject outObj = new JosnViewObject();
@@ -103,6 +106,14 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
 
     public void setMenuNodeService(IMenuNodeService menuNodeService) {
         this.menuNodeService = menuNodeService;
+    }
+
+    public IMenuNodePermitService getMenuNodePermitService() {
+        return menuNodePermitService;
+    }
+
+    public void setMenuNodePermitService(IMenuNodePermitService menuNodePermitService) {
+        this.menuNodePermitService = menuNodePermitService;
     }
 
 }

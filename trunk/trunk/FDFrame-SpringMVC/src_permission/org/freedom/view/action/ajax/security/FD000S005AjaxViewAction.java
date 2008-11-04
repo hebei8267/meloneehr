@@ -43,7 +43,7 @@ public class FD000S005AjaxViewAction extends AbstractViewAction {
     public void getAllRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
-        List<Role> roleList = securityService.getAllRoleList_Service();
+        List<Role> roleList = securityService.getAllRoleInfoList_Service();
 
         // Json对象格式化
         DataListBean<Role> dataList = new DataListBean<Role>();

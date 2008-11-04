@@ -6,7 +6,6 @@ package org.freedom.services.ui;
 import java.util.List;
 
 import org.freedom.core.view.vo.ajax.UITreeNode;
-import org.freedom.entity.security.Role;
 import org.freedom.entity.ui.MenuNodeType;
 
 /**
@@ -26,22 +25,22 @@ public interface IMenuNodeService {
     public List<UITreeNode> getNavigationAreaMenuNode_Service(String userID, String roleID);
 
     /**
-     * 取得菜单树节点和其所有子节点信息
+     * 取得所有导航区菜单树信息
      * 
      * @param rootNodeId 菜单树节点
      * @param userID 用户ID
      * @param roleID 用户角色ID
-     * @return 菜单树节点和其所有子节点信息
+     * @return 所有导航区菜单树信息
      */
-    public UITreeNode getMenuTreeNode_Service(String rootNodeId, String userID, String roleID);
+    public UITreeNode getNavigationAreaMenuTreeInfo_Service(String rootNodeId, String userID, String roleID);
 
     /**
-     * 取得所有菜单树节点和其所有子节点信息
+     * 取得菜单树信息
      * 
      * @param rootNodeId 菜单树节点
-     * @return 所有菜单树节点和其所有子节点信息
+     * @return 菜单树信息
      */
-    public UITreeNode getNavigationAreaSubMenuTreeNode_Service(String rootNodeId);
+    public UITreeNode getAllMenuTreeInfo_Service(String rootNodeId);
 
     /**
      * 取得菜单树结点类型列表
@@ -51,14 +50,6 @@ public interface IMenuNodeService {
     public List<MenuNodeType> getMenuNodeTypeList_Service();
 
     /**
-     * 取得可访问菜单节点的角色列表
-     * 
-     * @param menuNodeID 菜单节点
-     * @return
-     */
-    public List<Role> getMenuNodeAccessRoleList_Service(String menuNodeID);
-
-    /**
      * 删除指定的菜单树节点
      * 
      * @param menuNodeID
@@ -66,13 +57,4 @@ public interface IMenuNodeService {
      */
     public boolean delMenuTreeNode_Service(String menuNodeID);
 
-    /**
-     * 检查用户访问菜单节点的权限
-     * 
-     * @param userID 用户ID
-     * @param roleID 用户角色ID
-     * @param menuNodeID
-     * @return true-有访问权限 false-无访问权限
-     */
-    public boolean checkUserAccessMenuNodePermit_Service(String userID, String roleID, String menuNodeID);
 }

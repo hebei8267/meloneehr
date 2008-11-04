@@ -21,6 +21,7 @@ import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.core.view.vo.ajax.UITreeNode;
 import org.freedom.entity.security.Role;
 import org.freedom.services.security.ISecurityService;
+import org.freedom.services.ui.IMenuNodePermitService;
 import org.freedom.services.ui.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
     private IMenuNodeService menuNodeService;
     @Autowired
     private ISecurityService securityService;
+    @Autowired
+    private IMenuNodePermitService menuNodePermitService;
 
     /**
      * 取得所有树节点数据
@@ -54,14 +57,15 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws InvocationTargetException
      */
     @RequestMapping("/FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax")
-    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
-            IOException, IllegalAccessException, InvocationTargetException {
+    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException, IllegalAccessException,
+            InvocationTargetException {
 
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
 
         // 所有菜单树节点和其所有子节点信息
-        UITreeNode uiMenuNode = menuNodeService.getNavigationAreaSubMenuTreeNode_Service(nodeId);
+        UITreeNode uiMenuNode = menuNodeService.getAllMenuTreeInfo_Service(nodeId);
 
         // Json对象格式化
         JSONArray jSONArray = JSONArray.fromObject(uiMenuNode.getChildren());
@@ -78,12 +82,12 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IOException
      */
     @RequestMapping("/FD000S004AjaxViewAction_GetRoleInfoListAction.ajax")
-    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
-            IOException {
+    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         // 取得可访问菜单节点的角色列表
-        List<Role> roleList = menuNodeService.getMenuNodeAccessRoleList_Service(menuNodeID);
+        List<Role> roleList = menuNodePermitService.getAccessMenuNodePermitRoleInfoList_Service(menuNodeID);
 
         // Json对象格式化
         DataListBean<Role> dataList = new DataListBean<Role>();
@@ -103,14 +107,14 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("/FD000S004AjaxViewAction_DelSelectedRole.ajax")
-    public void delSelectedRole(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
-            IOException {
+    public void delSelectedRole(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         String roleListStr = ServletRequestUtils.getStringParameter(request, "roleList");
 
         List<Role> roleList = jsonStr2PojoList(roleListStr, Role.class);
-        int _result = securityService.delRoleMenuNodePermit_Service(menuNodeID, roleList);
+        int _result = menuNodePermitService.delMenuNodePermit_Service(menuNodeID, roleList);
 
         JosnViewObject outObj = new JosnViewObject();
         if (_result == 0) {
@@ -132,15 +136,15 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("/FD000S004AjaxViewAction_AddSelectedRole.ajax")
-    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
-            IOException {
+    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
         String roleListStr = ServletRequestUtils.getStringParameter(request, "roleList");
 
         List<Role> roleList = jsonStr2PojoList(roleListStr, Role.class);
 
-        securityService.addRoleMenuNodePermit_Service(menuNodeID, roleList);
+        menuNodePermitService.addMenuNodePermit_Service(menuNodeID, roleList);
 
         JosnViewObject outObj = new JosnViewObject();
         JSONObject jSONObject = JSONObject.fromObject(outObj);
@@ -157,8 +161,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IOException
      */
     @RequestMapping("/FD000S004AjaxViewAction_DelSelectedMenuNode.ajax")
-    public void delSelectedMenuNode(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
-            IOException {
+    public void delSelectedMenuNode(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
 
@@ -188,5 +192,13 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
 
     public void setSecurityService(ISecurityService securityService) {
         this.securityService = securityService;
+    }
+
+    public IMenuNodePermitService getMenuNodePermitService() {
+        return menuNodePermitService;
+    }
+
+    public void setMenuNodePermitService(IMenuNodePermitService menuNodePermitService) {
+        this.menuNodePermitService = menuNodePermitService;
     }
 }
