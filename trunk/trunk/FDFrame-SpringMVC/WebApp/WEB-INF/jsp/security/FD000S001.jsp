@@ -12,85 +12,85 @@
         <!--
         <%// 用户登录校验 %>
         function loginCheck(){
-        	var msg = "";
-        	if(isEmpty($F('userId'))){
-        		msg += getNeedInputMsg("用户名");
-        	}
-        	if(isEmpty($F('password'))){
-        		msg += getNeedInputMsg("用户密码");
-        	}
-        	if(!isEmpty(msg)){
-        		showMessageBox(msg);
-        		return false;
-        	}
+            var msg = "";
+            if(isEmpty($F('userId'))){
+                msg += getNeedInputMsg("用户名");
+            }
+            if(isEmpty($F('password'))){
+                msg += getNeedInputMsg("用户密码");
+            }
+            if(!isEmpty(msg)){
+                showMessageBox(msg);
+                return false;
+            }
 
-        	if(maxLength($('userId'),20)){
-        		msg += getMaxLengthMsg("用户名",20);
-        	}
-        	if(maxLength($('password'),20)){
-        		msg += getMaxLengthMsg("用户密码",20);
-        	}
-        	if(!isEmpty(msg)){
-        		showMessageBox(msg);
-        		return false;
-        	}
-        	return true;
+            if(maxLength($('userId'),20)){
+                msg += getMaxLengthMsg("用户名",20);
+            }
+            if(maxLength($('password'),20)){
+                msg += getMaxLengthMsg("用户密码",20);
+            }
+            if(!isEmpty(msg)){
+                showMessageBox(msg);
+                return false;
+            }
+            return true;
         }
         <%// 用户登录 %>
         function login(){
-        	if(!loginCheck()){
-        		return;
-        	}
-        	
-        	Ext.Ajax.request({
-				url : 'FD000S001AjaxViewAction_LoginAction.ajax',
-				method: 'post',
-				success : function(result, request) {
-					var oResult = eval("(" + result.responseText + ")");
-					
-					if(oResult.processResult) {// 成功
-						loginSuccess();
-					} else {//失败
-						//Ajax系统定式
-						if(!oResult.processResult && oResult.sessionTimeOut){
-							$("systemErrorForm").target = "_top";
-							$("systemErrorForm").submit();
-							return;
-						}
-						
-						showMessageBox(oResult.resultMsg);
-						cleanInfo();
-					}
-				},
-				failure : function(result, request) {
-					showMessageBox(getSystemCommunicationMsg());
-				},
-				params : {
-					userId : $F('userId'),
-					password : $F('password')
-				}
-			});
+            if(!loginCheck()){
+                return;
+            }
+            
+            Ext.Ajax.request({
+                url : 'FD000S001AjaxViewAction_LoginAction.ajax',
+                method: 'post',
+                success : function(result, request) {
+                    var oResult = eval("(" + result.responseText + ")");
+                    
+                    if(oResult.processResult) {// 成功
+                        loginSuccess();
+                    } else {//失败
+                        //Ajax系统定式
+                        if(!oResult.processResult && oResult.sessionTimeOut){
+                            $("systemErrorForm").target = "_top";
+                            $("systemErrorForm").submit();
+                            return;
+                        }
+                        
+                        showMessageBox(oResult.resultMsg);
+                        cleanInfo();
+                    }
+                },
+                failure : function(result, request) {
+                    showMessageBox(getSystemCommunicationMsg());
+                },
+                params : {
+                    userId : $F('userId'),
+                    password : $F('password')
+                }
+            });
         }
         <%// 用户登录成功 %>
         function loginSuccess(){
-        	if($F("changePassword2") == "true"){//修改用户密码
-        		$("loginForm").action = "FD000S002JspViewAction_ShowPageAction.faces";
-        	}else{//工作区主界面
-        		$("loginForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
-        	}
-        	$("loginForm").submit();
+            if($F("changePassword2") == "true"){//修改用户密码
+                $("loginForm").action = "FD000S002JspViewAction_ShowPageAction.faces";
+            }else{//工作区主界面
+                $("loginForm").action = "FD000S003JspViewAction_ShowPageAction.faces";
+            }
+            $("loginForm").submit();
         }
         <%// 信息清空 %>
         function cleanInfo(){
-        	$("userId").value = "";
-        	$("password").value = "";
+            $("userId").value = "";
+            $("password").value = "";
         }
         -->
         </script>
     </head>
     <body>
     <div class="defaultBody">
-    	<%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
+        <%@ include file="/WEB-INF/jsp/base/SysErrorFrom.jsp" %>
         <%// 标题栏 START %>
         <div>
             <center>
@@ -102,7 +102,7 @@
                     </tr>
                     <tr>
                         <td class="loginDate">
-                        	<%=systemDate.getNowDate()%>
+                            <%=systemDate.getNowDate()%>
                             <%=systemDate.getNowWeek()%>
                         </td>
                     </tr>
@@ -123,7 +123,7 @@
             <table class="appTitleTable">
                 <tr>
                     <td class="appTitle">
-                    	用户登录
+                        用户登录
                     </td>
                     <td class="appScreenID">
                         - FD000S001 -
@@ -150,14 +150,14 @@
                                 <td>
                                 </td>
                                 <td>
-                                	请输入用户名称和密码,登录系统
+                                    请输入用户名称和密码,登录系统
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                 </td>
                                 <td>
-                                	登录系统的同时,如果想修改密码,请选择[变更]选项
+                                    登录系统的同时,如果想修改密码,请选择[变更]选项
                                 </td>
                             </tr>
                         </table>
@@ -177,7 +177,7 @@
                             <table>
                                 <tr>
                                     <td colspan="2" class="itemTitle">
-                                    	用户登录信息
+                                        用户登录信息
                                     </td>
                                 </tr>
                                 <tr>
@@ -185,7 +185,7 @@
                                         <img src="images/need-input.gif">用户名
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                    	<form:input path="userId" size="20" maxlength="20"/>
+                                        <form:input path="userId" size="20" maxlength="20"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -193,21 +193,21 @@
                                         <img src="images/need-input.gif">用户密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                    	<form:password path="password" size="20" maxlength="20"/>
+                                        <form:password path="password" size="20" maxlength="20"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="inputItemName" height="30" width="100">
-                                    	变更密码
+                                        变更密码
                                     </td>
                                     <td class="inputItemCell" height="30" width="200">
-                                    	<form:radiobutton path="changePassword" value="false"/>
-										<label>
-                                        	不变更
+                                        <form:radiobutton path="changePassword" value="false"/>
+                                        <label>
+                                            不变更
                                         </label>
                                         <form:radiobutton path="changePassword" value="true" />
-										<label>
-                                        	变更
+                                        <label>
+                                            变更
                                         </label>
                                     </td>
                                 </tr>
@@ -235,7 +235,7 @@
                 </table>
             </form:form>
         </div>
-		<%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
-	</div>
+        <%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
+    </div>
     </body>
 </html>
