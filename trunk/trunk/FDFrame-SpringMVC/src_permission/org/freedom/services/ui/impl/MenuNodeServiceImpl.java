@@ -60,13 +60,15 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @return
      */
-    private List<UITreeNode> getNavigationAreaMenuNode(MenuNode parentNode, String roleID, List<String> roleMenuNodePermitList) {
+    private List<UITreeNode> getNavigationAreaMenuNode(MenuNode parentNode, String roleID,
+            List<String> roleMenuNodePermitList) {
         List<UITreeNode> _reList = new ArrayList<UITreeNode>();
         for (MenuNode menuNode : parentNode.getSubNodeList()) {
             // 系统管理员ID
             // 默认权限 "true"无访问限制 "false"有访问限制
             // 拥有访问权限
-            if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit() || roleMenuNodePermitList.contains(menuNode.getId())) {
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || menuNode.getDefaultPermit()
+                    || roleMenuNodePermitList.contains(menuNode.getId())) {
                 UITreeNode uiNode = new UITreeNode(menuNode.getId(), menuNode.getNodeTxt(), null);
 
                 _reList.add(uiNode);
@@ -96,7 +98,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             // 系统管理员ID
             // 默认权限 "true"无访问限制 "false"有访问限制
             // 拥有访问权限
-            if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit() || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
+            if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNodeRoot.getDefaultPermit()
+                    || roleMenuNodePermitList.contains(dbNodeRoot.getId())) {
                 UITreeNode uiTreeNode = new UITreeNode();
 
                 uiTreeNode.setId(dbNodeRoot.getId());
@@ -124,7 +127,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @param roleID 用户角色ID
      */
-    private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot, List<String> roleMenuNodePermitList, String roleID) {
+    private void buildSubMenuTree(UITreeNode parentNode, MenuNode dbNodeRoot,
+            List<String> roleMenuNodePermitList, String roleID) {
 
         for (MenuNode dbNode : dbNodeRoot.getSubNodeList()) {
 
@@ -132,7 +136,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 系统管理员ID
                 // 默认权限 "true"无访问限制 "false"有访问限制
                 // 拥有访问权限
-                if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit() || roleMenuNodePermitList.contains(dbNode.getId())) {
+                if (Role.ADMIN_ROLE_ID.equals(roleID) || dbNode.getDefaultPermit()
+                        || roleMenuNodePermitList.contains(dbNode.getId())) {
                     UITreeNode uiTreeNode = new UITreeNode();
 
                     uiTreeNode.setId(dbNode.getId());
@@ -197,21 +202,23 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      */
     private void buildSubVOList(UITreeNode parentNode, MenuNode dbParentNode) {
         for (MenuNode dbChildNode : dbParentNode.getSubNodeList()) {
+            if (dbChildNode != null) {
 
-            FD000S004ViewObject childNode = new FD000S004ViewObject();
+                FD000S004ViewObject childNode = new FD000S004ViewObject();
 
-            childNode.setId(dbChildNode.getId());
-            childNode.setText(dbChildNode.getNodeTxt());
-            childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
-            childNode.setActionContent(dbChildNode.getActionContent());
-            childNode.setUiNodeType(dbChildNode.getNodeType());
-            childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
-            childNode.setParentNodeID(dbChildNode.getParentNodeID());
-            childNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
+                childNode.setId(dbChildNode.getId());
+                childNode.setText(dbChildNode.getNodeTxt());
+                childNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbChildNode.getNodeType()));
+                childNode.setActionContent(dbChildNode.getActionContent());
+                childNode.setUiNodeType(dbChildNode.getNodeType());
+                childNode.setDefaultPermit(dbChildNode.getDefaultPermit());
+                childNode.setParentNodeID(dbChildNode.getParentNodeID());
+                childNode.setUiNodeIndex(String.valueOf(dbChildNode.getIndex()));
 
-            parentNode.addChildren(childNode);
+                parentNode.addChildren(childNode);
 
-            buildSubVOList(childNode, dbChildNode);
+                buildSubVOList(childNode, dbChildNode);
+            }
         }
     }
 
