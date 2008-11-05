@@ -11,10 +11,10 @@
         <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
-      	//添加角色
+        //添加角色
         function addMenuNode(){
-        	var msg = "";
-        	if(isEmpty($F('nodeText'))){
+            var msg = "";
+            if(isEmpty($F('nodeText'))){
                 msg += getNeedInputMsg("名称");
             }
             if(Ext.getCmp('nodeTypeExtCombo').getValue()=='<%=MenuNodeType.NONE_NODE_TYPE%>'){
@@ -29,7 +29,7 @@
             }
 
             if(!isNumber($F('nodeIndex'))){
-            	msg += getNotNumberMsg("显示位置");
+                msg += getNotNumberMsg("显示位置");
             }
             if(!isEmpty(msg)){
                 showMessageBox(msg);
@@ -42,20 +42,20 @@
             addObj.defaultPermit = getDefaultPermitValue();
             addObj.actionContent = $F('actionContent');
             addObj.nodeIndex = $F('nodeIndex');
-          	//调用父窗口的回调函数
+            //调用父窗口的回调函数
             window.opener.addMenuNodeCall(addObj);
             closeWin();
         }
         
         function getDefaultPermitValue() {
             var defaultPermit = document.getElementsByName("defaultPermit");
-	        for (var i=0;i<defaultPermit.length;i++){
-	        	if(defaultPermit[i].checked){ 
-		         	return defaultPermit[i].value;
-	         	}
-	        }
+            for (var i=0;i<defaultPermit.length;i++){
+                if(defaultPermit[i].checked){ 
+                    return defaultPermit[i].value;
+                }
+            }
         }
-      	//关闭当前窗口
+        //关闭当前窗口
         function closeWin(){
             parent.close();
         }
@@ -150,41 +150,41 @@
                                 </td>
                             </tr>
                             <tr>
-                            	<td class="inputItemName" height="30" width="100">
-                                	<img src="images/need-input.gif">Action URL
+                                <td class="inputItemName" height="30" width="100">
+                                    <img src="images/need-input.gif">Action URL
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
                                     <form:input path="actionContent" size="20" maxlength="100" />
                                 </td> 
                             </tr>
                             <tr>
-                            	 <td class="inputItemName" height="30" width="100">
-                                                显示位置
+                                 <td class="inputItemName" height="30" width="100">
+                                    显示位置
                                  </td> 
                                  <td class="inputItemCell" height="30" width="200"> 
-                                 	<form:input path="nodeIndex" size="20" maxlength="20"/> 
+                                    <form:input path="nodeIndex" size="20" maxlength="20"/> 
                                  </td>
                             </tr>
                             <tr height="10">
-                      		</tr> 
-                         	<tr> 
-                         		<td colspan="4" align="right"> 
-                            	<!-- 按钮 START --> 
-                             		<table> 
-                                   		<tr> 
-                                     		<td align="right"> 
-                                       			<input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNode();"> 
-                                        	</td> 
-                                        	<td width="20"> 
-                                       		</td> 
-                                          	<td align="right"> 
-                                        		<input value="关  闭" class="buttonResetLong" type="button" onclick="closeWin();"> 
-                                       		</td> 
-                                     	</tr> 
-                          			</table>
-                       			<!-- 按钮 END --> 
-                         		</td> 
-                      		</tr>
+                            </tr> 
+                            <tr> 
+                                <td colspan="4" align="right"> 
+                                <!-- 按钮 START --> 
+                                    <table> 
+                                        <tr> 
+                                            <td align="right"> 
+                                                <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNode();"> 
+                                            </td> 
+                                            <td width="20"> 
+                                            </td> 
+                                            <td align="right"> 
+                                                <input value="关  闭" class="buttonResetLong" type="button" onclick="closeWin();"> 
+                                            </td> 
+                                        </tr> 
+                                    </table>
+                                <!-- 按钮 END --> 
+                                </td> 
+                            </tr>
                         </table>
                     </td>
                 </tr>
