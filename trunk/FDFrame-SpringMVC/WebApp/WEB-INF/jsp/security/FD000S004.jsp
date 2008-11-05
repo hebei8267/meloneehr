@@ -254,7 +254,7 @@
             $("menuTreeForm").submit();
             return;
         }
-        //添加角色
+        //添加角色(回调函数)
         function addRoleListCall(roleList){
             Ext.Ajax.request({
                 url : 'FD000S004AjaxViewAction_AddMenuNodePermitAction.ajax',
@@ -377,13 +377,17 @@
                 subWin.close();
             }
             
-            var windowOption = "width=400,height=420,left=300,top=150,status=no,resizable=no";
+            var windowOption = "width=375,height=420,left=300,top=150,status=no,resizable=no";
             var windowName = "ADD_MENU_NODE";
             subWin =  window.open("", windowName, windowOption);
             $("menuTreeForm").target = windowName;
             $("menuTreeForm").action = "FD000S006JspViewAction_ShowPageAction.faces";
             $("menuTreeForm").submit();
             return;
+        }
+        //添加菜单树节点(回调函数)
+        function addMenuNodeCall(addObj){
+            alert(addObj.defaultPermit)
         }
         function closeSubWin(){
             if(subWin != null){
@@ -516,7 +520,7 @@
                                                 <form:input path="nodeId" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
                                             </td>
                                             <td class="inputItemName" height="30" width="100"> 
-                                                <img src="images/need-input.gif">类型
+                                                类型
                                             </td> 
                                             <td class="inputItemCell" height="30" width="200">
                                                 <form:input path="nodeType" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
@@ -569,7 +573,7 @@
                                                 显示位置
                                             </td> 
                                             <td class="inputItemCell" height="30" width="200"> 
-                                                <form:input path="nodeIndex" size="20" maxlength="20"/> 
+                                                <form:input path="nodeIndex" size="20" maxlength="100"/> 
                                             </td> 
                                         </tr> 
                                         <tr height="10">

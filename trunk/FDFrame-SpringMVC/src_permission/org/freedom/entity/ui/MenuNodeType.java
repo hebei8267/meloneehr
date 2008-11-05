@@ -42,10 +42,6 @@ public class MenuNodeType extends MasterEntityBean {
      * 节点类型--叶节点
      */
     public final static String LEAF_NODE_TYPE = "node";
-    /**
-     * 节点类型--根节点
-     */
-    public final static String ROOT_NODE_TYPE = "root";
 
     public MenuNodeType() {
 

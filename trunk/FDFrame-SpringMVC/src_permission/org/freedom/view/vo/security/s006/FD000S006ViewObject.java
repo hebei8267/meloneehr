@@ -19,10 +19,6 @@ import org.freedom.entity.ui.MenuNodeType;
 public class FD000S006ViewObject extends AbstractViewObject {
 
     private static final long serialVersionUID = -4983774123239417523L;
-    /** 父节点编号 */
-    private String parentNodeId;
-    /** 父节点内容 */
-    private String parentNodeText;
     /** 节点内容 */
     private String nodeText;
     /** 节点类型 */
@@ -46,44 +42,6 @@ public class FD000S006ViewObject extends AbstractViewObject {
         for (MenuNodeType menuNodeType : _menuNodeTypeList) {
             nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
         }
-    }
-
-    /**
-     * 取得父节点编号
-     * 
-     * @return 父节点编号
-     */
-
-    public String getParentNodeId() {
-        return parentNodeId;
-    }
-
-    /**
-     * 设置父节点编号
-     * 
-     * @param parentNodeId 父节点编号
-     */
-    public void setParentNodeId(String parentNodeId) {
-        this.parentNodeId = parentNodeId;
-    }
-
-    /**
-     * 取得父节点内容
-     * 
-     * @return 父节点内容
-     */
-
-    public String getParentNodeText() {
-        return parentNodeText;
-    }
-
-    /**
-     * 设置父节点内容
-     * 
-     * @param parentNodeText 父节点内容
-     */
-    public void setParentNodeText(String parentNodeText) {
-        this.parentNodeText = parentNodeText;
     }
 
     /**

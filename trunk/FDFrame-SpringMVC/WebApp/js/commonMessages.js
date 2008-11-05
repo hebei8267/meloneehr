@@ -1,4 +1,4 @@
-var _space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+var _space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 var _newLine = "<br>"
 function showMessageBox(msg){
 	Ext.MessageBox.alert("Melone-eHR 人力资源管理", msg);
@@ -29,11 +29,15 @@ function getNeedSameInputMsg(itemName1, itemName2){
 }
 
 function getMaxLengthMsg(itemName, length){
-	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能大于" + length + _space;
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能大于" + length + "!" + _space;
 }
 
 function getMinLengthMsg(itemName, length){
-	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能小于" + length + _space;
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]的长度不能小于" + length + "!" + _space;
+}
+
+function getNotNumberMsg(itemName){
+	return _newLine + _space + "输入的[<b><font color='red'>" + itemName + "</font></b>]不是有效数字!"  + _space;
 }
 
 function getSystemCommunicationMsg(){
