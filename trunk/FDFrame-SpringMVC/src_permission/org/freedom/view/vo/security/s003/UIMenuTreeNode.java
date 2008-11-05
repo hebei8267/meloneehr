@@ -22,6 +22,9 @@ public class UIMenuTreeNode extends UITreeNode {
     /** 节点类型 */
     private String uiNodeType;
 
+    /** 节点类型名称 */
+    private String uiNodeTypeName;
+
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private Boolean defaultPermit = Boolean.TRUE;
 
@@ -65,10 +68,41 @@ public class UIMenuTreeNode extends UITreeNode {
      * @param nodeType 节点类型
      */
     public void setUiNodeType(String nodeType) {
+        if (MenuNodeType.NONE_NODE_TYPE.equals(nodeType)) {
+            this.uiNodeTypeName = "未定义";
+        } else if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
+            this.uiNodeTypeName = "导航条";
+        } else if (MenuNodeType.FOLDER_NODE_TYPE.equals(nodeType)) {
+            this.uiNodeTypeName = "文件夹";
+        } else if (MenuNodeType.LEAF_NODE_TYPE.equals(nodeType)) {
+            this.uiNodeTypeName = "叶节点";
+        } else {
+            this.uiNodeTypeName = "根节点";
+        }
         if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
             super.setIcon("images/area.gif");
+        }else if(MenuNodeType.ROOT_NODE_TYPE.equals(nodeType)){
+            super.setIcon("images/root.gif");
         }
         this.uiNodeType = nodeType;
+    }
+
+    /**
+     * 取得节点类型名称
+     * 
+     * @return 节点类型名称
+     */
+    public String getUiNodeTypeName() {
+        return uiNodeTypeName;
+    }
+
+    /**
+     * 设置节点类型名称
+     * 
+     * @param uiNodeTypeName 节点类型名称
+     */
+    public void setUiNodeTypeName(String uiNodeTypeName) {
+        this.uiNodeTypeName = uiNodeTypeName;
     }
 
     /**

@@ -34,7 +34,7 @@ public class FD000S002JspViewAction extends AbstractViewAction {
      * @throws IllegalAccessException
      */
     @RequestMapping("/FD000S002JspViewAction_ShowPageAction.faces")
-    public String showPageAction(HttpServletRequest request, Model model) throws IllegalAccessException,
+    public String showPage_Action(HttpServletRequest request, Model model) throws IllegalAccessException,
             InvocationTargetException {
 
         // 修改密码
@@ -51,8 +51,8 @@ public class FD000S002JspViewAction extends AbstractViewAction {
      * 
      * @return
      */
-    @RequestMapping("/UserLoginOutSystem.faces")
-    public String userLoginOutSystem(HttpServletRequest request, Model model) {
+    @RequestMapping("/UserLoginOutSystemAction.faces")
+    public String userLoginOutSystem_Action(HttpServletRequest request, Model model) {
         // 用户登录页面初始化
         FD000S001ViewObject outPutObj = new FD000S001ViewObject();
         // 删除Session登录用户信息

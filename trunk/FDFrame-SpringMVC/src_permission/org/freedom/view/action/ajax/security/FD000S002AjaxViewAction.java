@@ -46,7 +46,7 @@ public class FD000S002AjaxViewAction extends AbstractViewAction {
      * @throws InvocationTargetException
      */
     @RequestMapping("/FD000S002AjaxViewAction_ModPwdAction.ajax")
-    public void modPwdAction(HttpServletRequest request, HttpServletResponse response)
+    public void modPwd_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
 

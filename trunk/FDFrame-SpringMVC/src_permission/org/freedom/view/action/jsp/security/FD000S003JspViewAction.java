@@ -40,7 +40,7 @@ public class FD000S003JspViewAction extends AbstractViewAction {
      * @throws InvocationTargetException
      */
     @RequestMapping("/FD000S003JspViewAction_ShowPageAction.faces")
-    public String showPageAction(HttpServletRequest request, Model model) throws IllegalAccessException,
+    public String showPage_Action(HttpServletRequest request, Model model) throws IllegalAccessException,
             InvocationTargetException {
 
         FD000S003ViewObject outPutObj = new FD000S003ViewObject();

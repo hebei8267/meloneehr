@@ -56,10 +56,9 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    @RequestMapping("/FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax")
-    public void getAllTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException,
-            InvocationTargetException {
+    @RequestMapping("/FD000S004AjaxViewAction_GetAllMenuTreeInfoAction.ajax")
+    public void getAllMenuTreeInfo_Action(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
 
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
@@ -81,8 +80,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws ServletRequestBindingException
      * @throws IOException
      */
-    @RequestMapping("/FD000S004AjaxViewAction_GetRoleInfoListAction.ajax")
-    public void getRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S004AjaxViewAction_GetAccessMenuNodePermitRoleInfoListAction.ajax")
+    public void getAccessMenuNodePermitRoleInfoList_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
@@ -106,8 +105,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping("/FD000S004AjaxViewAction_DelSelectedRole.ajax")
-    public void delSelectedRole(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S004AjaxViewAction_DelMenuNodePermitAction.ajax")
+    public void delMenuNodePermit_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
@@ -135,8 +134,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping("/FD000S004AjaxViewAction_AddSelectedRole.ajax")
-    public void addSelectedRole(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S004AjaxViewAction_AddMenuNodePermitAction.ajax")
+    public void addMenuNodePermit_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");
@@ -160,8 +159,8 @@ public class FD000S004AjaxViewAction extends AbstractViewAction {
      * @throws ServletRequestBindingException
      * @throws IOException
      */
-    @RequestMapping("/FD000S004AjaxViewAction_DelSelectedMenuNode.ajax")
-    public void delSelectedMenuNode(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S004AjaxViewAction_DelSelectedMenuNodeAction.ajax")
+    public void delSelectedMenuNode_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String menuNodeID = ServletRequestUtils.getStringParameter(request, "menuNodeID");

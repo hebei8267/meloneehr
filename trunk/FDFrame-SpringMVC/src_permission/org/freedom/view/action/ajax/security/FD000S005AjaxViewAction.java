@@ -40,7 +40,7 @@ public class FD000S005AjaxViewAction extends AbstractViewAction {
      * @return
      */
     @RequestMapping("/FD000S005JspViewAction_GetAllRoleInfoListAction.ajax")
-    public void getAllRoleInfoListAction(HttpServletRequest request, HttpServletResponse response)
+    public void getAllRoleInfoList_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
         List<Role> roleList = securityService.getAllRoleInfoList_Service();

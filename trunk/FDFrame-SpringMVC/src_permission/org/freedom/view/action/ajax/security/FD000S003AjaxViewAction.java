@@ -52,10 +52,9 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    @RequestMapping("/FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax")
-    public void getTreeNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException, IllegalAccessException,
-            InvocationTargetException {
+    @RequestMapping("/FD000S003AjaxViewAction_GetNavigationAreaMenuTreeInfoAction.ajax")
+    public void getNavigationAreaMenuTreeInfo_Action(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
 
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "id");
@@ -63,8 +62,7 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
         // 菜单树节点和其所有子节点信息
-        UITreeNode outObj = menuNodeService.getNavigationAreaMenuTreeInfo_Service(nodeId, user.getUserId(),
-                user.getRoleId());
+        UITreeNode outObj = menuNodeService.getNavigationAreaMenuTreeInfo_Service(nodeId, user.getUserId(), user.getRoleId());
 
         JSONArray jSONArray = JSONArray.fromObject(outObj.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
@@ -79,16 +77,15 @@ public class FD000S003AjaxViewAction extends AbstractViewAction {
      * @throws ServletRequestBindingException
      * @throws IOException
      */
-    @RequestMapping("/FD000S003AjaxViewAction_CheckMenuNodePermit.ajax")
-    public void checkMenuNodePermit(HttpServletRequest request, HttpServletResponse response)
+    @RequestMapping("/FD000S003AjaxViewAction_CheckUserAccessMenuNodePermitAction.ajax")
+    public void checkUserAccessMenuNodePermit_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException {
         // 取得request里面的参数
         String nodeId = ServletRequestUtils.getStringParameter(request, "nodeId");
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
 
-        boolean _result = menuNodePermitService.checkUserAccessMenuNodePermit_Service(user.getUserId(), user
-                .getRoleId(), nodeId);
+        boolean _result = menuNodePermitService.checkUserAccessMenuNodePermit_Service(user.getUserId(), user.getRoleId(), nodeId);
 
         JosnViewObject outObj = new JosnViewObject();
         if (!_result) {
