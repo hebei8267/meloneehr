@@ -24,7 +24,7 @@ public class FD000S005JspViewAction extends AbstractViewAction {
      * @return
      */
     @RequestMapping("/FD000S005JspViewAction_ShowPageAction.faces")
-    public String showPageAction() {
+    public String showPage_Action() {
         return "WEB-INF/jsp/security/FD000S005";
     }
 

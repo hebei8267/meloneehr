@@ -3,11 +3,7 @@
  */
 package org.freedom.view.vo.security.s004;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.freedom.core.view.vo.jsp.AbstractViewObject;
-import org.freedom.core.view.vo.jsp.LabelValueBean;
 import org.freedom.entity.ui.MenuNodeType;
 
 /**
@@ -40,17 +36,8 @@ public class FD000S004ViewObject extends AbstractViewObject {
     /** 页面迁移内容 */
     private String actionContent;
 
-    /** 节点类型列表 */
-    private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
-
     public FD000S004ViewObject() {
 
-    }
-
-    public FD000S004ViewObject(List<MenuNodeType> _menuNodeTypeList) {
-        for (MenuNodeType menuNodeType : _menuNodeTypeList) {
-            nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
-        }
     }
 
     /**
@@ -177,24 +164,6 @@ public class FD000S004ViewObject extends AbstractViewObject {
      */
     public void setActionContent(String actionContent) {
         this.actionContent = actionContent;
-    }
-
-    /**
-     * 取得节点类型列表
-     * 
-     * @return 节点类型列表
-     */
-    public List<LabelValueBean> getNodeTypeList() {
-        return nodeTypeList;
-    }
-
-    /**
-     * 设置节点类型列表
-     * 
-     * @param nodeTypeList 节点类型列表
-     */
-    public void setNodeTypeList(List<LabelValueBean> nodeTypeList) {
-        this.nodeTypeList = nodeTypeList;
     }
 
 }

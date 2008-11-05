@@ -48,7 +48,7 @@ public class FD000S001AjaxViewAction extends AbstractViewAction {
      * @throws InvocationTargetException
      */
     @RequestMapping("/FD000S001AjaxViewAction_LoginAction.ajax")
-    public void loginAction(HttpServletRequest request, HttpServletResponse response)
+    public void login_Action(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException,
             InvocationTargetException {
 

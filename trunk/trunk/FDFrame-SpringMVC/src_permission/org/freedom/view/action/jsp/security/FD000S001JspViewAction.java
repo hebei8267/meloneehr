@@ -26,7 +26,7 @@ public class FD000S001JspViewAction extends AbstractViewAction {
      * @return
      */
     @RequestMapping("/index.faces")
-    public String showPageAction(Model model) {
+    public String showPage_Action(Model model) {
         // 用户登录页面初始化
         FD000S001ViewObject outPutObj = new FD000S001ViewObject();
 

@@ -33,7 +33,7 @@ public class FD000S006JspViewAction extends AbstractViewAction {
      * @return
      */
     @RequestMapping("/FD000S006JspViewAction_ShowPageAction.faces")
-    public String showPageAction(Model model) {
+    public String showPage_Action(Model model) {
         // 取得菜单树结点类型列表
         List<MenuNodeType> _menuNodeTypeList = menuNodeService.getMenuNodeTypeList_Service();
 
