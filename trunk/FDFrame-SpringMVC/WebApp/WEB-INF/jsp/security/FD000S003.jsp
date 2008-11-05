@@ -100,7 +100,7 @@
                 draggable : false,
                 id : '${item.id}',
                 loader: new Ext.tree.TreeLoader({
-                    dataUrl:'FD000S003AjaxViewAction_GetTreeNodeInfoAction.ajax',
+                    dataUrl:'FD000S003AjaxViewAction_GetNavigationAreaMenuTreeInfoAction.ajax',
                     baseParams :{id:'${item.id}'},
                     requestMethod : 'post',
                     listeners : {
@@ -133,7 +133,7 @@
         // 检查用户访问菜单节点的权限
         function checkMenuNodePermit(menuNodeId, actionContent){
             Ext.Ajax.request({
-                url : 'FD000S003AjaxViewAction_CheckMenuNodePermit.ajax',
+                url : 'FD000S003AjaxViewAction_CheckUserAccessMenuNodePermitAction.ajax',
                 method: 'post',
                 success : function(result, request) {
                     var oResult = eval("(" + result.responseText + ")");

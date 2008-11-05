@@ -21,7 +21,7 @@
 	<!--
 	function userLoginOutSystem(){
 		$("systemErrorForm").target = "_top";
-		$("systemErrorForm").action = "UserLoginOutSystem.faces";
+		$("systemErrorForm").action = "UserLoginOutSystemAction.faces";
 		$("systemErrorForm").submit();
 		return;
 	}

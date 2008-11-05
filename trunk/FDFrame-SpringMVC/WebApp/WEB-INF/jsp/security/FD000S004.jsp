@@ -29,15 +29,16 @@
                 autoScroll : true,
                 height : 250,
                 width : 307,
-                rootVisible : false
+                rootVisible : true
             });
 
             var root = new Ext.tree.AsyncTreeNode({
                 text : '系统菜单树根节点', 
                 draggable : false,
                 id : '<%=MenuNode.ROOT_ID%>',
+                icon : 'images/root.gif',
                 loader: new Ext.tree.TreeLoader(
-                    {dataUrl:'FD000S004AjaxViewAction_GetAllTreeNodeInfoAction.ajax',
+                    {dataUrl:'FD000S004AjaxViewAction_GetAllMenuTreeInfoAction.ajax',
                      baseParams :{id:'<%=MenuNode.ROOT_ID%>'}})
             });
             tree.setRootNode(root);
@@ -49,15 +50,31 @@
                 //设置选中节点信息
                 $("nodeId").value = node.id;
                 $("nodeText").value = node.attributes.text;
-                Ext.getCmp('nodeTypeExtCombo').setValue(node.attributes.uiNodeType);
-                $("actionContent").value = node.attributes.actionContent;
-                setNodeType(node.attributes.defaultPermit);
-                $("nodeIndex").value = node.attributes.uiNodeIndex;
+                if(node.attributes.uiNodeTypeName == null || node.attributes.uiNodeTypeName == "undefined"){
+                	$("nodeType").value = "";
+                }else{
+                	$("nodeType").value = node.attributes.uiNodeTypeName;
+                }
+                if(node.attributes.actionContent == null || node.attributes.actionContent == "undefined"){
+                	$("actionContent").value = "";
+                }else{
+                	$("actionContent").value = node.attributes.actionContent;
+                }
+                setNodeDefaultPermit(node.attributes.defaultPermit);
+                
+                if(node.attributes.uiNodeIndex == null || node.attributes.uiNodeIndex == "undefined"){
+                	$("nodeIndex").value = "";
+                }else{
+                	$("nodeIndex").value = node.attributes.uiNodeIndex;
+                }
 
-                if($F("selectedMenuNode") != node.id){
+                if((node.id!='<%=MenuNode.ROOT_ID%>') && ($F("selectedMenuNode")!= node.id)){
                     $("selectedMenuNode").value = node.id;
                     //加载列表
                     store.load({params : {menuNodeID : $F("nodeId")}});
+                }else if(node.id=='<%=MenuNode.ROOT_ID%>'){//根节点
+                	//清空角色列表内容
+                    Ext.getCmp('roleGrid').getStore().removeAll();
                 }
             })
 
@@ -73,7 +90,7 @@
             var store = new Ext.data.Store({
                 id : 'roleStore',
                 proxy : new Ext.data.HttpProxy({
-                    url : 'FD000S004AjaxViewAction_GetRoleInfoListAction.ajax',
+                    url : 'FD000S004AjaxViewAction_GetAccessMenuNodePermitRoleInfoListAction.ajax',
                     method: 'POST'
                 }),
                 reader : new Ext.data.JsonReader({
@@ -133,7 +150,7 @@
         });
         
         //设置菜单节点的默认权限
-        function setNodeType(defaultPermit){  
+        function setNodeDefaultPermit(defaultPermit){  
             var objs = document.getElementsByName("defaultPermit");
 
             for(var i = 0; i < objs.length; i++){
@@ -160,7 +177,7 @@
             }
             
             Ext.Ajax.request({
-                url : 'FD000S004AjaxViewAction_DelSelectedRole.ajax',
+                url : 'FD000S004AjaxViewAction_DelMenuNodePermitAction.ajax',
                 method: 'post',
                 success : function(result, request) {
                     var oResult = eval("(" + result.responseText + ")");
@@ -202,6 +219,10 @@
         }
         //删除选中角色
         function delSelectedRole(){
+        	if($("nodeId").value=='<%=MenuNode.ROOT_ID%>'){//根节点
+                showMessageBox(getDisabledSelectedMsg('菜单树根节点'));
+                return;
+            }
             var selectObjs = Ext.getCmp('roleGrid').getSelections();
             if(selectObjs == null || selectObjs.length == 0){//未选择删除角色
                 showMessageBox(getNeedMinSelectedMsg('角色'));
@@ -221,6 +242,10 @@
                 showMessageBox(getNeedSelectedMsg('菜单树节点'));
                 return;
             }
+            if($("nodeId").value=='<%=MenuNode.ROOT_ID%>'){//根节点
+                showMessageBox(getDisabledSelectedMsg('菜单树根节点'));
+                return;
+            }
             var windowOption = "width=355,height=420,left=300,top=150,status=no,resizable=no";
             var windowName = "ROLE_LIST";
             subWin =  window.open("", windowName, windowOption);
@@ -232,7 +257,7 @@
         //添加角色
         function addRoleListCall(roleList){
             Ext.Ajax.request({
-                url : 'FD000S004AjaxViewAction_AddSelectedRole.ajax',
+                url : 'FD000S004AjaxViewAction_AddMenuNodePermitAction.ajax',
                 method: 'post',
                 success : function(result, request) {
                     var oResult = eval("(" + result.responseText + ")");
@@ -276,9 +301,9 @@
         function resetInputMenuNodeArea(){
             $("nodeId").value = "";
             $("nodeText").value = "";
-            Ext.getCmp('nodeTypeExtCombo').setValue("<%=MenuNodeType.NONE_NODE_TYPE%>");
+            $("nodeType").value = "";
             $("actionContent").value = "";
-            setNodeType(true);
+            setNodeDefaultPermit(true);
             $("nodeIndex").value = "";
         }
         //删除选中菜单节点
@@ -287,7 +312,7 @@
                 return;
             }
             Ext.Ajax.request({
-                url : 'FD000S004AjaxViewAction_DelSelectedMenuNode.ajax',
+                url : 'FD000S004AjaxViewAction_DelSelectedMenuNodeAction.ajax',
                 method: 'post',
                 success : function(result, request) {
                     var oResult = eval("(" + result.responseText + ")");
@@ -337,6 +362,10 @@
         function delSelectedMenuNode(){
             if($("nodeId").value==''){//未选择菜单树节点
                 showMessageBox(getNeedSelectedMsg('菜单树节点'));
+                return;
+            }
+            if($("nodeId").value=='<%=MenuNode.ROOT_ID%>'){//根节点
+                showMessageBox(getDisabledSelectedMsg('菜单树根节点'));
                 return;
             }
             showConfirm("确认要删除所选记录?", doDelSelectedMenuNode);
@@ -487,18 +516,18 @@
                                                 <form:input path="nodeId" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
                                             </td>
                                             <td class="inputItemName" height="30" width="100"> 
+                                                <img src="images/need-input.gif">类型
+                                            </td> 
+                                            <td class="inputItemCell" height="30" width="200">
+                                                <form:input path="nodeType" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
+                                            </td>
+                                        </tr> 
+                                        <tr>
+                                        	<td class="inputItemName" height="30" width="100"> 
                                                 <img src="images/need-input.gif">名称
                                             </td> 
                                             <td class="inputItemCell" height="30" width="200"> 
                                                 <form:input path="nodeText" size="20" maxlength="20"/>
-                                            </td>
-                                        </tr> 
-                                        <tr>
-                                            <td class="inputItemName" height="30" width="100"> 
-                                                <img src="images/need-input.gif">类型
-                                            </td> 
-                                            <td class="inputItemCell" height="30" width="200">
-                                                <form:select path="nodeType" items="${FD000S004ViewObject.nodeTypeList}" itemValue="value" itemLabel="label"/>
                                             </td>
                                             <td class="inputItemName" height="30" width="100"> 
                                                 <img src="images/need-input.gif">访问限制
@@ -516,7 +545,7 @@
                                         </tr>
                                         <tr> 
                                             <td class="inputItemName" height="30" width="100"> 
-                                                <img src="images/need-input.gif">Action
+                                                <img src="images/need-input.gif">Action URL
                                             </td> 
                                             <td class="inputItemCell" height="30" width="200" colspan="3"> 
                                                 <form:input path="actionContent" size="20" maxlength="70" cssStyle="width: 469px;"/>

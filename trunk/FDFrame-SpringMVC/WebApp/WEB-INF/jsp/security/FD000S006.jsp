@@ -110,12 +110,20 @@
                                 </td>
                             </tr>
                             <tr>
-                                 <td class="inputItemName" height="30" width="100">
-                                    <img src="images/need-input.gif">Action
-                                 </td>
-                                 <td class="inputItemCell" height="30" width="200">
+                            	<td class="inputItemName" height="30" width="100">
+                                	<img src="images/need-input.gif">Action URL
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
                                     <form:input path="actionContent" size="20" maxlength="70" />
+                                </td> 
+                            </tr>
+                            <tr>
+                            	 <td class="inputItemName" height="30" width="100">
+                                                显示位置
                                  </td> 
+                                 <td class="inputItemCell" height="30" width="200"> 
+                                 	<form:input path="nodeIndex" size="20" maxlength="20"/> 
+                                 </td>
                             </tr>
                         </table>
                     </td>
