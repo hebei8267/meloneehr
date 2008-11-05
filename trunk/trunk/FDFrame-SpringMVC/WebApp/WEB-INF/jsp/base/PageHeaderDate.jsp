@@ -5,27 +5,27 @@
         <table class="titleTable">
             <tr>
                 <td colspan="2" class="loginUser">
-                	您好! <c:out value="${userInfo.userName}"/>
+                    您好! <c:out value="${userInfo.userName}"/>
                 </td>
             </tr>
             <tr>
                 <td class="loginDate">
-                	<input type="button" value="退出系统" onclick="userLoginOutSystem();" class="buttonLoginOutLong">
-                	<%=systemDate.getNowDate()%>
+                    <input type="button" value="退出系统" onclick="userLoginOutSystem();" class="buttonLoginOutLong">
+                    <%=systemDate.getNowDate()%>
                     <%=systemDate.getNowWeek()%>
                 </td>
             </tr>
         </table>
     </center>
     <script type="text/javascript">
-	<!--
-	function userLoginOutSystem(){
-		$("systemErrorForm").target = "_top";
-		$("systemErrorForm").action = "UserLoginOutSystemAction.faces";
-		$("systemErrorForm").submit();
-		return;
-	}
-	-->
-	</script>
+    <!--
+    function userLoginOutSystem(){
+        $("systemErrorForm").target = "_top";
+        $("systemErrorForm").action = "UserLoginOutSystemAction.faces";
+        $("systemErrorForm").submit();
+        return;
+    }
+    -->
+    </script>
 </div>
 <%// 标题栏 END %>

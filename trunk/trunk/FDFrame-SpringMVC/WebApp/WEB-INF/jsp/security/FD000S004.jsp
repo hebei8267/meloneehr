@@ -51,21 +51,21 @@
                 $("nodeId").value = node.id;
                 $("nodeText").value = node.attributes.text;
                 if(node.attributes.uiNodeTypeName == null || node.attributes.uiNodeTypeName == "undefined"){
-                	$("nodeType").value = "";
+                    $("nodeType").value = "";
                 }else{
-                	$("nodeType").value = node.attributes.uiNodeTypeName;
+                    $("nodeType").value = node.attributes.uiNodeTypeName;
                 }
                 if(node.attributes.actionContent == null || node.attributes.actionContent == "undefined"){
-                	$("actionContent").value = "";
+                    $("actionContent").value = "";
                 }else{
-                	$("actionContent").value = node.attributes.actionContent;
+                    $("actionContent").value = node.attributes.actionContent;
                 }
                 setNodeDefaultPermit(node.attributes.defaultPermit);
                 
                 if(node.attributes.uiNodeIndex == null || node.attributes.uiNodeIndex == "undefined"){
-                	$("nodeIndex").value = "";
+                    $("nodeIndex").value = "";
                 }else{
-                	$("nodeIndex").value = node.attributes.uiNodeIndex;
+                    $("nodeIndex").value = node.attributes.uiNodeIndex;
                 }
 
                 if((node.id!='<%=MenuNode.ROOT_ID%>') && ($F("selectedMenuNode")!= node.id)){
@@ -73,7 +73,7 @@
                     //加载列表
                     store.load({params : {menuNodeID : $F("nodeId")}});
                 }else if(node.id=='<%=MenuNode.ROOT_ID%>'){//根节点
-                	//清空角色列表内容
+                    //清空角色列表内容
                     Ext.getCmp('roleGrid').getStore().removeAll();
                 }
             })
@@ -219,7 +219,7 @@
         }
         //删除选中角色
         function delSelectedRole(){
-        	if($("nodeId").value=='<%=MenuNode.ROOT_ID%>'){//根节点
+            if($("nodeId").value=='<%=MenuNode.ROOT_ID%>'){//根节点
                 showMessageBox(getDisabledSelectedMsg('菜单树根节点'));
                 return;
             }
@@ -527,7 +527,7 @@
                                             </td>
                                         </tr> 
                                         <tr>
-                                        	<td class="inputItemName" height="30" width="100"> 
+                                            <td class="inputItemName" height="30" width="100"> 
                                                 <img src="images/need-input.gif">名称
                                             </td> 
                                             <td class="inputItemCell" height="30" width="200"> 
