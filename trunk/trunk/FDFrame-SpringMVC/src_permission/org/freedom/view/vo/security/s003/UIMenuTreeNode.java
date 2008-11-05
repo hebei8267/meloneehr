@@ -76,13 +76,9 @@ public class UIMenuTreeNode extends UITreeNode {
             this.uiNodeTypeName = "文件夹";
         } else if (MenuNodeType.LEAF_NODE_TYPE.equals(nodeType)) {
             this.uiNodeTypeName = "叶节点";
-        } else {
-            this.uiNodeTypeName = "根节点";
         }
         if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
             super.setIcon("images/area.gif");
-        }else if(MenuNodeType.ROOT_NODE_TYPE.equals(nodeType)){
-            super.setIcon("images/root.gif");
         }
         this.uiNodeType = nodeType;
     }

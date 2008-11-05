@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" import="org.freedom.entity.ui.MenuNodeType" %>
 <%// 添加菜单树节点 %>
 <html> 
     <head> 
@@ -10,6 +11,54 @@
         <%@ include file="/WEB-INF/jsp/base/ImportCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
+      	//添加角色
+        function addMenuNode(){
+        	var msg = "";
+        	if(isEmpty($F('nodeText'))){
+                msg += getNeedInputMsg("名称");
+            }
+            if(Ext.getCmp('nodeTypeExtCombo').getValue()=='<%=MenuNodeType.NONE_NODE_TYPE%>'){
+                msg += getNeedInputMsg("类型");
+            }
+            if(isEmpty($F('actionContent'))){
+                msg += getNeedInputMsg("Action URL");
+            }
+            if(!isEmpty(msg)){
+                showMessageBox(msg);
+                return false;
+            }
+
+            if(!isNumber($F('nodeIndex'))){
+            	msg += getNotNumberMsg("显示位置");
+            }
+            if(!isEmpty(msg)){
+                showMessageBox(msg);
+                return false;
+            }
+
+            var addObj = new Object();
+            addObj.nodeText = $F('nodeText');
+            addObj.nodeType = Ext.getCmp('nodeTypeExtCombo').getValue();
+            addObj.defaultPermit = getDefaultPermitValue();
+            addObj.actionContent = $F('actionContent');
+            addObj.nodeIndex = $F('nodeIndex');
+          	//调用父窗口的回调函数
+            window.opener.addMenuNodeCall(addObj);
+            closeWin();
+        }
+        
+        function getDefaultPermitValue() {
+            var defaultPermit = document.getElementsByName("defaultPermit");
+	        for (var i=0;i<defaultPermit.length;i++){
+	        	if(defaultPermit[i].checked){ 
+		         	return defaultPermit[i].value;
+	         	}
+	        }
+        }
+      	//关闭当前窗口
+        function closeWin(){
+            parent.close();
+        }
         -->
         </script>
     </head> 
@@ -19,7 +68,7 @@
             <table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
-                        添加菜单树节点信息
+                        添加节点信息
                     </td> 
                     <td class="appScreenID"> 
                         - FD000S006 -
@@ -68,15 +117,6 @@
                                 <td colspan="2" class="itemTitle">
                                     节点详细信息
                                 </td>
-                            </tr> 
-                            <tr>
-                                <td class="inputItemName" height="30" width="100">
-                                    父节点名称
-                                </td> 
-                                <td class="inputItemCell" height="30" width="200">
-                                    <form:hidden path="parentNodeId"/>
-                                    <form:input path="parentNodeText" size="20" maxlength="20" cssClass="readonly" readonly="true"/>
-                                </td>
                             </tr>
                             <tr>
                                 <td class="inputItemName" height="30" width="100">
@@ -114,7 +154,7 @@
                                 	<img src="images/need-input.gif">Action URL
                                 </td>
                                 <td class="inputItemCell" height="30" width="200">
-                                    <form:input path="actionContent" size="20" maxlength="70" />
+                                    <form:input path="actionContent" size="20" maxlength="100" />
                                 </td> 
                             </tr>
                             <tr>
@@ -125,6 +165,26 @@
                                  	<form:input path="nodeIndex" size="20" maxlength="20"/> 
                                  </td>
                             </tr>
+                            <tr height="10">
+                      		</tr> 
+                         	<tr> 
+                         		<td colspan="4" align="right"> 
+                            	<!-- 按钮 START --> 
+                             		<table> 
+                                   		<tr> 
+                                     		<td align="right"> 
+                                       			<input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNode();"> 
+                                        	</td> 
+                                        	<td width="20"> 
+                                       		</td> 
+                                          	<td align="right"> 
+                                        		<input value="关  闭" class="buttonResetLong" type="button" onclick="closeWin();"> 
+                                       		</td> 
+                                     	</tr> 
+                          			</table>
+                       			<!-- 按钮 END --> 
+                         		</td> 
+                      		</tr>
                         </table>
                     </td>
                 </tr>

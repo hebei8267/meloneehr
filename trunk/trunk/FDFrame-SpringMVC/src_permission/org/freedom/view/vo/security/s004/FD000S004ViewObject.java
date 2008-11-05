@@ -4,7 +4,6 @@
 package org.freedom.view.vo.security.s004;
 
 import org.freedom.core.view.vo.jsp.AbstractViewObject;
-import org.freedom.entity.ui.MenuNodeType;
 
 /**
  * 菜单树管理界面ViewObject
@@ -22,7 +21,7 @@ public class FD000S004ViewObject extends AbstractViewObject {
     private String nodeText;
 
     /** 节点类型 */
-    private String nodeType = MenuNodeType.NONE_NODE_TYPE;
+    private String nodeType = "未定义";
 
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     private Boolean defaultPermit = Boolean.TRUE;
