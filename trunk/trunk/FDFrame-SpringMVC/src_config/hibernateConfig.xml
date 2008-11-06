@@ -52,5 +52,8 @@
 				<value>org.freedom.entity.ui.MenuNodeType</value>
 			</list>
 		</property>
+		<!--
+		 <property name="packagesToScan" value="org.springframework.orm.jpa.domain"/>
+		-->
 	</bean>
 </beans>
