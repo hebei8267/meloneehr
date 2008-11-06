@@ -9,7 +9,6 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/common-annotations.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-beanutils.jar"/>
@@ -30,9 +29,9 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/postgresql-8.2-506.jdbc3.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-api-1.5.0.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-log4j12-1.5.0.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-mock.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.5-with-dependencies/spring-framework-2.5.5/dist/spring-sources.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.5-with-dependencies/spring-framework-2.5.5/dist/module-sources/spring-webmvc-sources.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="output" path="WebApp/WEB-INF/classes"/>
 </classpath>
