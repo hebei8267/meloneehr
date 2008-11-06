@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src_tools"/>
-	<classpathentry kind="src" path="src_config"/>
-	<classpathentry kind="src" path="src_permission"/>
-	<classpathentry kind="src" path="src_base"/>
 	<classpathentry kind="src" path="test_permission"/>
+	<classpathentry kind="src" path="src_config"/>
+	<classpathentry kind="src" path="src_base"/>
+	<classpathentry kind="src" path="src_permission"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="lib/c3p0-0.9.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/cglib-nodep-2.1_3.jar"/>
 	<classpathentry kind="lib" path="lib/common-annotations.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
@@ -36,5 +35,6 @@
 	<classpathentry kind="lib" path="lib/spring-mock.jar"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/standard.jar"/>
+	<classpathentry kind="lib" path="lib/c3p0-0.9.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
