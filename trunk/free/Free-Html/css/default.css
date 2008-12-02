@@ -84,6 +84,19 @@ table {
     height: 18px;
 }
 
+.readonly {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 147px;
+    height: 18px;
+    color: gray;
+    cursor: default;
+    opacity: .6;
+    -moz-opacity: .6;
+}
+
 .buttonSubmitLong {
     background-image: url(../images/submit_btn.jpg);
     background-repeat: repeat-x;
