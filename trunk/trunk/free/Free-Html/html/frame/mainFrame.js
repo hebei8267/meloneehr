@@ -28,7 +28,7 @@ Ext.onReady(function(){
                 animate: true
             },
             items: [{
-                title: '人事管理',
+                title: '系统设置',
                 border: false,
                 autoScroll: true,
                 html: '<div id="configTreeDiv" style="overflow:auto;width:100%;height:100%"></div>'
@@ -38,7 +38,7 @@ Ext.onReady(function(){
                 autoScroll: true,
                 html: '<div id="financialTreeDiv" style="overflow:auto;width:100%;height:100%"></div>'
             }, {
-                title: '系统设置',
+                title: '人事管理',
                 border: false,
                 autoScroll: true,
                 html: '<div id="personnelTreeDiv" style="overflow:auto;width:100%;height:100%"></div>'
@@ -88,7 +88,7 @@ function initConfigTree(){
         children: [{
             leaf: true,
             text: '菜单树管理',
-			hrefSrc: '../setting/organization/organization.html'
+			hrefSrc: '../privilege/menuNode.html'
         }, {
             leaf: false,
             text: '数据字典',
