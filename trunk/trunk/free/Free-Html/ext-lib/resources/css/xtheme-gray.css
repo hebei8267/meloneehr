@@ -431,7 +431,3 @@ body.x-body-masked .x-window-mc, body.x-body-masked .x-window-plain .x-window-mc
     border: 1px solid;
     border-color: #d0d0d0;
 }
-
-.x-form-focus{
-	border-color: #d0d0d0;
-}

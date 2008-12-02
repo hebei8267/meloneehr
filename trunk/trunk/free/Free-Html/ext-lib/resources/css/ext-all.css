@@ -179,7 +179,7 @@ textarea{resize:none;}
 .x-trigger-wrap-focus .x-form-trigger{border-bottom:1px solid #7eadd9;}
 .x-item-disabled .x-form-trigger-over{background-position:0 0!important;border-bottom:1px solid #B5B8C8;}
 .x-item-disabled .x-form-trigger-click{background-position:0 0!important;border-bottom:1px solid #B5B8C8;}
-.x-form-focus,textarea.x-form-focus{background: #FFFFA0;}
+.x-form-focus,textarea.x-form-focus{border:1px solid #7eadd9;background: #FFFFA0;}
 .x-form-invalid,textarea.x-form-invalid{background:#fff url(../images/default/grid/invalid_line.gif) repeat-x bottom;border:1px solid #dd7870;}
 .ext-safari .x-form-invalid{background-color:#fee;border:1px solid #ff7870;}
 .x-editor{visibility:hidden;padding:0;margin:0;}
@@ -939,8 +939,4 @@ body.x-body-masked .x-window-plain .x-window-mc{background:#C7D6E9;}
     padding-right: 5px;
     border: 1px solid;
     border-color: #99bbe8;
-}
-
-.x-form-focus{
-	border-color: #99bbe8;
 }
