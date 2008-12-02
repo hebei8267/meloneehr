@@ -5,12 +5,13 @@
 function focusInput() {
 	var elements = document.getElementsByTagName('input');
 	$A(elements).any(function(input) {
-
-		Event.observe(input, 'blur', function(ev){
-			$(input).removeClassName('x-form-focus');
-		});
-		Event.observe(input, 'focus', function(ev){
-			$(input).addClassName('x-form-focus');
-		});			
+		if(input.type == 'text' || input.type == 'textarea' || input.type == 'password'){
+			Event.observe(input, 'blur', function(ev){
+				$(input).removeClassName('x-form-focus');
+			});
+			Event.observe(input, 'focus', function(ev){
+				$(input).addClassName('x-form-focus');
+			});	
+		}
 	});
 } 
