@@ -69,6 +69,7 @@ Ext.onReady(function(){
 function initConfigTree(){
     var tree = new Ext.tree.TreePanel({
         el: 'configTreeDiv',
+		useArrows: true,
         animate: true,
         enableDD: false,
         containerScroll: true,

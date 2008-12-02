@@ -81,9 +81,11 @@ Ext.onReady(function(){
         draggable: false,
         id: 'root',
         text: '菜单树根节点',
+		icon:'../../images/root.gif',
         children: [{
             leaf: false,
             text: '系统设置',
+			icon:'../../images/area.gif',
             children: [{
                 leaf: true,
                 text: '菜单树管理'
@@ -100,9 +102,11 @@ Ext.onReady(function(){
             }]
         }, {
             leaf: false,
+			icon:'../../images/area.gif',
             text: '人事管理'
         }, {
             leaf: false,
+			icon:'../../images/area.gif',
             text: '财务管理'
         }]
     });
