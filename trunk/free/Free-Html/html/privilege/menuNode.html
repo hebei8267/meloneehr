@@ -20,6 +20,12 @@
 			window.onload = function () {
 				focusInput();
 			}
+			function addMenuNode(){
+				openSubWindow('addMenuNode.html',400,315);
+			}
+			function addMenuNodeRole(){
+				openSubWindow('addMenuNodeRole.html',390,350);
+			}
 		-->
         </script>
 	</head>
@@ -97,7 +103,7 @@
 		                                        <tr>
 		                                        	<!-- 添加角色 -->
 		                                            <td align="left">
-		                                                <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNodeAccessRole();"> 
+		                                                <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNodeRole();"> 
 		                                            </td> 
 		                                            <td width="20"> 
 		                                            </td>
@@ -122,7 +128,7 @@
 		                                    <div id="roleGridDiv"></div>
 		                                </td>
 		                            </tr>
-									<tr height="10">
+									<tr height="20">
 		                            </tr>
 		                            <tr>
 		                            	<td valign="top" colspan="3">
@@ -172,7 +178,7 @@
 		                                                <img src="../../images/need-input.gif">Action URL
 		                                            </td> 
 		                                            <td class="inputItemCell" height="30" width="200" colspan="3"> 
-		                                                <input type="text" size="92" maxlength="70" class="x-form-text" />
+		                                                <input type="text" size="20" maxlength="70" class="x-form-text inputText" style="width:469px;"/>
 		                                            </td>
 		                                        </tr>
 												<tr> 
