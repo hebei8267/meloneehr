@@ -88,21 +88,21 @@ Ext.onReady(function(){
                 text: '菜单树管理'
             }, {
                 leaf: false,
-                text: '湖北省',
+                text: '角色相关',
                 children: [{
                     leaf: true,
-                    text: '武汉市'
+                    text: '角色设定'
                 }, {
                     leaf: true,
-                    text: '宜昌市'
+                    text: '角色&菜单树关联设定'
                 }]
             }]
         }, {
-            leaf: false,
+            leaf: true,
             icon: '../../images/area.gif',
             text: '人事管理'
         }, {
-            leaf: false,
+            leaf: true,
             icon: '../../images/area.gif',
             text: '财务管理'
         }]
