@@ -100,7 +100,7 @@ function initConfigTree(){
             }, {
                 leaf: true,
                 text: '角色&菜单树关联设定',
-				hrefSrc: '../setting/dictionary/employment/employType.html'
+				hrefSrc: '../privilege/role/role&Menu.html'
             }]
         }]
     });
