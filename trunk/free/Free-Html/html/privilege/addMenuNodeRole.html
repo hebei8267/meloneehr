@@ -16,6 +16,10 @@
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript">
 		<!--
+			window.onload = function () {
+				focusInput();
+			}
+			
 			//关闭当前窗口
 	        function closeWin(){
 	            parent.close();
@@ -71,7 +75,7 @@
 			        }],
 			        stripeRows: true,
 			        height: 200,
-			        width: 307,
+			        width: 322,
 			        title: '适用角色信息'
 			    });
 			    
@@ -88,7 +92,7 @@
                         添加角色信息
                     </td> 
                     <td class="appScreenID"> 
-                        - MENU PRIVILEGE 003 -
+                        - MENU SETTINGS 003 -
                     </td> 
                 </tr>
                 <tr> 
@@ -128,7 +132,29 @@
 							&nbsp;
 		                </td>
 						<td>
-	                        <div id="roleGridDiv"></div>
+							<table>
+								<tr>
+									<td class="inputItemName" height="30" width="100">
+										树节点编号
+		                          	</td> 
+		                        	<td class="inputItemCell" height="30" width="200">
+		                         		<input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
+		                         	</td>
+								</tr>
+								<tr>
+									<td class="inputItemName" height="30" width="100">
+										树节点名称
+		                            </td> 
+		                          	<td class="inputItemCell" height="30" width="200"> 
+		                           		<input type="text" size="20" maxlength="20" class="x-form-text inputText readonly"/>
+		                         	</td>
+								</tr>
+								<tr height="10">
+                				</tr>
+								<tr>
+									<td colspan="2"><div id="roleGridDiv"></div></td>
+								</tr>
+							</table>
 	                    </td>
 					</tr>
 					<tr height="10">
