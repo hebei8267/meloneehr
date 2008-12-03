@@ -7,7 +7,7 @@ body {
 }
 
 .defaultPopWindowBody {
-    min-width: 300px;
+    min-width: 370px;
 }
 
 table {
@@ -49,7 +49,7 @@ table {
 }
 
 .appTitle {
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: bold;
     text-align: left;
     padding-left: 30px;
@@ -82,6 +82,16 @@ table {
     font: 13px arial, helvetica, clean, sans-serif;
     width: 147px;
     height: 18px;
+}
+
+.inputTextarea {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 147px;
+    word-wrap: break-word;
+    overflow: auto;
 }
 
 .readonly {

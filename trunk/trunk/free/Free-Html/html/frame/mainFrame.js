@@ -28,7 +28,7 @@ Ext.onReady(function(){
                 animate: true
             },
             items: [{
-                title: '系统设置',
+                title: '系统设定',
                 border: false,
                 autoScroll: true,
                 html: '<div id="configTreeDiv" style="overflow:auto;width:100%;height:100%"></div>'
@@ -83,84 +83,24 @@ function initConfigTree(){
     });
     
     var root = new Ext.tree.AsyncTreeNode({
-        text: '系统设置',
+        text: '系统设定',
         draggable: false,
         id: 'root',
         children: [{
             leaf: true,
-            text: '菜单树管理',
+            text: '菜单树设定',
 			hrefSrc: '../privilege/menuNode.html'
         }, {
             leaf: false,
-            text: '数据字典',
+            text: '角色相关',
             children: [{
-                leaf: false,
-                text: '公共相关',
-                children: [{
-                    leaf: true,
-                    text: '国家',
-                    hrefSrc: '../setting/dictionary/common/country.html'
-                }]
+                leaf: true,
+                text: '角色设定',
+				hrefSrc: '../privilege/role/role.html'
             }, {
-                leaf: false,
-                text: '雇佣相关',
-                children: [{
-                    leaf: true,
-                    text: '雇佣类型',
-                    hrefSrc: '../setting/dictionary/employment/employType.html'
-                }, {
-                    leaf: true,
-                    text: '合同类型',
-                    hrefSrc: '../setting/dictionary/employment/contractType.html'
-                }, {
-                    leaf: true,
-                    text: '员工当前工作状态',
-                    hrefSrc: '../setting/dictionary/employment/employeeWorkState.html'
-                }]
-            }, {
-                leaf: false,
-                text: '组织相关',
-                children: [{
-                    leaf: true,
-                    text: '组织类型',
-                    hrefSrc: '../setting/dictionary/organization/organizationType.html'
-                }, {
-                    leaf: true,
-                    text: '职种(职务类型)',
-                    hrefSrc: '../setting/dictionary/organization/jobPositionType.html'
-                }]
-            }, {
-                leaf: false,
-                text: '人员相关',
-                children: [{
-                    leaf: true,
-                    text: '教育类型',
-                    hrefSrc: '../setting/dictionary/personnel/educationType.html'
-                }, {
-                    leaf: true,
-                    text: '教育专业',
-                    hrefSrc: '../setting/dictionary/personnel/educateSpecialty.html'
-                }, {
-                    leaf: true,
-                    text: '身份标识类型',
-                    hrefSrc: '../setting/dictionary/personnel/identifieationType.html'
-                }, {
-                    leaf: true,
-                    text: '民族',
-                    hrefSrc: '../setting/dictionary/personnel/nation.html'
-                }, {
-                    leaf: true,
-                    text: '籍贯',
-                    hrefSrc: '../setting/dictionary/personnel/nativeplace.html'
-                }]
-            }, {
-                leaf: false,
-                text: '财务相关',
-                children: [{
-                    leaf: true,
-                    text: '薪酬福利类型',
-                    hrefSrc: '../setting/dictionary/financial/salaryType.html'
-                }]
+                leaf: true,
+                text: '角色&菜单树关联设定',
+				hrefSrc: '../setting/dictionary/employment/employType.html'
             }]
         }]
     });
