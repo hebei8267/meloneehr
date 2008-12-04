@@ -12,10 +12,7 @@
 		<script type="text/javascript" src="../../../ext-lib/locale/ext-lang-zh_CN.js"></script>
 		<!-- ExtJS End-->
 		<!-- ExtJS CheckBox Tree Begin -->
-		<link rel="stylesheet" type="text/css" href="../../../ext-lib/resources/css/TreeCheckbox.css" />
-		<link rel="stylesheet" type="text/css" href="../../../ext-lib/resources/css/xTriStateNodeUI.css" />
-		<script type="text/javascript" src="../../../ext-lib/chkTree/TreeCheckbox.js"></script>
-		<script type="text/javascript" src="../../../ext-lib/chkTree/TriStateNodeUI.js"></script>
+		<script type="text/javascript" src="../../../ext-lib/chkTree/TreeCheckNodeUI.js"></script>
 		<!-- ExtJS CheckBox Tree End-->
         <link rel="stylesheet" type="text/css" href="../../../css/default.css">
         <title>Freedom&Melon</title>
@@ -25,6 +22,16 @@
 		<!--
 			window.onload = function () {
 				focusInput();
+			}
+			function showCheckNode(){
+				var array = Ext.getCmp('menuTree').getChecked();
+				var _text = '';
+				if(array != null){
+					for (var i = 0; i < array.length; i++) {
+						_text += array[i].text + '\n';
+					} 
+					alert(_text);
+				}
 			}
 		-->
         </script>
@@ -97,7 +104,7 @@
 					                 		<table> 
 					                     		<tr> 
 					                        		<td align="right"> 
-					                               		<input value="更  新" class="buttonSubmitLong" type="button"> 
+					                               		<input value="更  新" class="buttonSubmitLong" type="button" onclick="showCheckNode();"> 
 					                               	</td> 
 					                          		<td width="20"> 
 					                         		</td> 

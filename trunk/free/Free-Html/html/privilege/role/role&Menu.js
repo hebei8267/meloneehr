@@ -54,8 +54,13 @@ Ext.onReady(function(){
     //************************************************
     var menuTree = new Ext.tree.TreePanel({
         el: 'menuTreeDiv',
+        id: 'menuTree',
         title: '菜单树信息',
-        useArrows: true,
+        // ********************************
+        // checkTree独有属性
+        checkModel: 'cascade', //对树的级联多选
+        onlyLeafCheckable: false,//对树所有结点都可选
+        // ********************************
         animate: true,
         enableDD: false,
         containerScroll: true,
@@ -66,7 +71,7 @@ Ext.onReady(function(){
         width: 307,
         loader: new Ext.tree.TreeLoader({
             baseAttrs: {
-                uiProvider: Ext.tree.TriStateNodeUI
+                uiProvider: Ext.ux.TreeCheckNodeUI
             }
         })
     });
@@ -75,38 +80,32 @@ Ext.onReady(function(){
         draggable: false,
         id: 'root',
         text: '菜单树根节点',
+        icon: '../../../images/root.gif',
         children: [{
             leaf: false,
             text: '系统设置',
             icon: '../../../images/area.gif',
-            checked: true,
             children: [{
                 leaf: true,
-                text: '菜单树管理',
-                checked: true
+                text: '菜单树管理'
             }, {
                 leaf: false,
                 text: '角色相关',
-                checked: true,
                 children: [{
                     leaf: true,
-                    text: '角色设定',
-                    checked: true
+                    text: '角色设定'
                 }, {
                     leaf: true,
-                    text: '角色&菜单树关联设定',
-                    checked: true
+                    text: '角色&菜单树关联设定'
                 }]
             }]
         }, {
             leaf: true,
             icon: '../../../images/area.gif',
-            checked: true,
             text: '人事管理'
         }, {
             leaf: true,
             icon: '../../../images/area.gif',
-            checked: true,
             text: '财务管理'
         }]
     });
