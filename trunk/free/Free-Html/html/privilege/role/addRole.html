@@ -19,6 +19,10 @@
 			window.onload = function () {
 				focusInput();
 			}
+			//关闭当前窗口
+	        function closeWin(){
+	            parent.close();
+	        }
 		-->
         </script>
 	</head>
@@ -113,11 +117,11 @@
 	                                <td class="inputItemCell" height="30" width="200">
 	                                	<input checked="checked" name="defaultPermit" value="no" id="defaultPermit" type="radio">
 	                                    <label>
-	                                        不继承
+	                                        继承
 	                                    </label>
 	                                    <input name="defaultPermit" value="yes" id="defaultPermit" type="radio">
 	                                    <label>
-	                                        继承
+	                                        不继承
 	                                    </label>
 	                                </td>
 	                            </tr>
