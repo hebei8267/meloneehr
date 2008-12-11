@@ -70,12 +70,12 @@ public class HibernateDaoImpl<T> extends HibernateDaoSupport implements IGeneric
         return idName;
     }
 
-    public void remove(Object o) {
+    public void delete(Object o) {
         getHibernateTemplate().delete(o);
     }
 
-    public void removeById(Serializable id) {
-        remove(get(id));
+    public void deleteById(Serializable id) {
+        delete(get(id));
     }
 
     public void save(T instance) {
