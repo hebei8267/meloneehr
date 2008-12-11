@@ -58,7 +58,9 @@ public class GetSetMethodGenerator extends AbstractGenerator implements IGetSetM
 
             JavaField[] fields = cls.getFields();
             for (int i = 0; i < fields.length; i++) {
-
+                if (fields[i].isPublic()||fields[i].isStatic()) {
+                    continue;
+                }
                 int _index = fields[i].getType().getValue().lastIndexOf(POINT) == -1 ? 0 : fields[i].getType()
                         .getValue().lastIndexOf(POINT) + 1;
                 String _type = fields[i].getType().getValue().substring(_index);
