@@ -3,7 +3,7 @@
  */
 package org.freedom.dao;
 
-import org.freedom.core.test.dao.BaseTestCase;
+import org.freedom.core.test.BaseTestCase;
 import org.freedom.core.util.CreateTable;
 import org.junit.Test;
 

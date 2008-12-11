@@ -3,7 +3,7 @@
  */
 package org.freedom.services.privilege;
 
-import org.freedom.core.test.dao.BaseTestCase;
+import org.freedom.core.test.BaseTestCase;
 import org.freedom.entity.privilege.Role;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
+// 不能保证默认配置的事务处理
+// 原因不明
 public class RoleServiceTest extends BaseTestCase {
     @Autowired
     private IRoleService roleService = null;
@@ -60,4 +62,5 @@ public class RoleServiceTest extends BaseTestCase {
         boolean result = roleService.modRoleInfoService(role);
         assertEquals(true, result);
     }
+
 }

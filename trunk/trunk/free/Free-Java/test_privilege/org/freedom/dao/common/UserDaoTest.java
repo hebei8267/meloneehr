@@ -8,7 +8,7 @@ import static org.freedom.dao.DaoConstant.ROOT_PATH;
 import java.io.IOException;
 import java.util.List;
 
-import org.freedom.core.test.dao.BaseTestCase;
+import org.freedom.core.test.BaseTestCase;
 import org.freedom.dao.common.UserDao;
 import org.freedom.dao.privilege.RoleDao;
 import org.freedom.entity.common.User;
