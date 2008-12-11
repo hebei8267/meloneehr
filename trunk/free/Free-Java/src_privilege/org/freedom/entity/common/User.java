@@ -77,8 +77,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置编号
      * 
-     * @param id
-     *            编号
+     * @param id 编号
      */
     public void setId(String id) {
         this.id = id;
@@ -96,8 +95,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置名称
      * 
-     * @param name
-     *            名称
+     * @param name 名称
      */
     public void setName(String name) {
         this.name = name;
@@ -115,8 +113,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置密码
      * 
-     * @param password
-     *            密码
+     * @param password 密码
      */
     public void setPassword(String password) {
         this.password = password;
@@ -134,8 +131,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置第一次登录标记
      * 
-     * @param firstLoginFlag
-     *            第一次登录标记
+     * @param firstLoginFlag 第一次登录标记
      */
     public void setFirstLoginFlag(boolean firstLoginFlag) {
         this.firstLoginFlag = firstLoginFlag;
@@ -153,8 +149,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置登录用户角色
      * 
-     * @param role
-     *            登录用户角色
+     * @param role 登录用户角色
      */
     public void setRole(Role role) {
         if (role != null) {
@@ -175,8 +170,7 @@ public class User extends AbstractEntityBean {
     /**
      * 设置登录用户角色ID
      * 
-     * @param roleID
-     *            登录用户角色ID
+     * @param roleID 登录用户角色ID
      */
     protected void setRoleID(String roleID) {
         this.roleID = roleID;
