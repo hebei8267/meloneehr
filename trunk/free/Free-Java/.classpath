@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src_springTag"/>
-	<classpathentry kind="src" path="test_permission"/>
+	<classpathentry kind="src" path="test_privilege"/>
 	<classpathentry kind="src" path="src_tools"/>
 	<classpathentry kind="src" path="src_config"/>
 	<classpathentry kind="src" path="src_base"/>
