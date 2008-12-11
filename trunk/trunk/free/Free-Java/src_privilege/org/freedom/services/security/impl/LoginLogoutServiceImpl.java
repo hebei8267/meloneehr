@@ -33,7 +33,7 @@ public class LoginLogoutServiceImpl implements ILoginLogoutService {
             return false;
         }
         user.setPassword(newPassword);
-        user.setFirstLoginFlag(Boolean.FALSE);
+        user.setFirstLoginFlag(false);
         userDao.save(user);
 
         return true;
