@@ -49,6 +49,9 @@ public class RoleDaoTest extends BaseTestCase {
                     role.setId(value);
                 } else if (i == 1) {
                     role.setName(value);
+                } else if (i == 2) {
+                    Role parentRole = roleDao.getRoleByID(value);
+                    role.setParentRole(parentRole);
                 }
             }
             roleDao.save(role);
