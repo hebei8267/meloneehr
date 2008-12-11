@@ -38,12 +38,14 @@ public interface IGenericDao<T> {
     /**
      * 删除对象
      */
-    public void remove(Object o);
+    public void delete(Object o);
 
     /**
      * 根据ID删除对象
+     * 
+     * @param id hibernateID
      */
-    public void removeById(Serializable id);
+    public void deleteById(Serializable id);
 
     /**
      * 取得对象的主键名,辅助函数
