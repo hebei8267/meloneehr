@@ -37,6 +37,12 @@ public interface IRoleService {
      */
     public boolean modRoleInfoService(Role role);
 
+    /**
+     * 删除指定的角色(删除之前会检查其所有子角色是否有对应的关联用户对象,如果有将不能删除)
+     * 
+     * @param roleID 要删除的角色ID
+     * @return true-成功 false-失败
+     */
     public boolean delRoleInfoService(String roleID);
 
     public boolean getAllRoleInfoTreeService();
