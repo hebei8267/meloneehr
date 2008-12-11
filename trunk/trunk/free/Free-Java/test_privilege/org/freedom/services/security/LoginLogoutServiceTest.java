@@ -32,21 +32,41 @@ public class LoginLogoutServiceTest extends BaseTestCase {
     public void loginCase1() throws IOException {
         User user = loginLogoutService.userLoginService("00000001", "00000001");
         assertEquals("00000001", user.getId());
-
     }
 
     @Test
     public void loginCase2() throws IOException {
         User user = loginLogoutService.userLoginService("00000001", "00000002");
         assertEquals(null, user);
-
     }
 
     @Test
     public void loginCase3() throws IOException {
         User user = loginLogoutService.userLoginService("00000002", "00000001");
         assertEquals(null, user);
-
     }
 
+    @Test
+    public void getInfoCase4() throws IOException {
+        User user = loginLogoutService.userLoginService("00000001", "00000001");
+        assertEquals(true, user.getFirstLoginFlag());
+    }
+
+    @Test
+    public void modUserPwdCase5() throws IOException {
+        boolean result = loginLogoutService.modUserPwdService("00000001", "00000001", "00000001");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void getInfoCase6() throws IOException {
+        User user = loginLogoutService.userLoginService("00000001", "00000001");
+        assertEquals(false, user.getFirstLoginFlag());
+    }
+
+    @Test
+    public void modUserPwdCase7() throws IOException {
+        boolean result = loginLogoutService.modUserPwdService("00000002", "00000001", "00000002");
+        assertEquals(false, result);
+    }
 }
