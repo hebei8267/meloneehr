@@ -35,7 +35,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @NamedQueries( {
         @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
         @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj "),
-        @NamedQuery(name = "Role.getRole4UserCount", query = "select r from Role r, User u where r.id = u.roleID and r.id in (?) ") })
+        @NamedQuery(name = "Role.getRole4UserCount", query = "select count(r) from Role r, User u where r.id = u.roleID and r.id in (?) ") })
 public class Role extends AbstractEntityBean {
 
     private static final long serialVersionUID = 2814135309469292776L;
