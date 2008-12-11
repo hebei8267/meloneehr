@@ -34,6 +34,22 @@ public class RoleDao extends HibernateDaoImpl<Role> {
     }
 
     /**
+     * 自动计算当前最大ID
+     * 
+     * @return 最大ID
+     */
+    @SuppressWarnings("unchecked")
+    public String getMaxID() {
+        List<String> resultList = getHibernateTemplate().findByNamedQuery("Role.getMaxID");
+        String maxID = "";
+        if (resultList.size() > 0) {
+            maxID = resultList.get(0);
+        }
+
+        return formatMaxID(maxID);
+    }
+
+    /**
      * 取得可访问菜单节点的角色列表
      * 
      * @param menuNodeID 菜单节点ID
