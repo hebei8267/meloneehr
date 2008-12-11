@@ -20,13 +20,6 @@ public class LoginLogoutServiceImpl implements ILoginLogoutService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
-    /**
-     * 用户登录效验
-     * 
-     * @param userID 用户ID
-     * @param password 用户密码
-     * @return 成功-用户信息 失败-null
-     */
     public boolean modUserPwdService(String userID, String oldPassword, String newPassword) {
         User user = userDao.getUserByID(userID);
         if (user == null || !user.getPassword().equals(oldPassword)) {
@@ -39,14 +32,6 @@ public class LoginLogoutServiceImpl implements ILoginLogoutService {
         return true;
     }
 
-    /**
-     * 修改用户密码
-     * 
-     * @param userID 用户ID
-     * @param oldPassword 原用户密码
-     * @param newPassword 新用户密码
-     * @return true-修改成功 false-修改失败(用户ID或原用户密码不匹配)
-     */
     public User userLoginService(String userID, String password) {
         User user = userDao.getUserByID(userID);
 
