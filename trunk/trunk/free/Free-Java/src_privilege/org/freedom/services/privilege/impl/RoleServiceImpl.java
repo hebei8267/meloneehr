@@ -64,10 +64,11 @@ public class RoleServiceImpl implements IRoleService {
         List<String> roleIDList = new ArrayList<String>();
 
         getSubRoleID(role, roleIDList);
-        
-        for (String string : roleIDList) {
-            System.out.println(string);
-        }
+
+        long count = roleDao.getRole4UserCount(roleIDList);
+        // for (String string : roleIDList) {
+        System.out.println(count);
+        // }
     }
 
     /**

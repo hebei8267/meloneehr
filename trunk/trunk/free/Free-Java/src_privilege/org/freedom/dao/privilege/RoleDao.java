@@ -50,6 +50,28 @@ public class RoleDao extends HibernateDaoImpl<Role> {
     }
 
     /**
+     * 取得于角色关联登录用户的个数
+     * 
+     * @return 关联个数
+     */
+    @SuppressWarnings("unchecked")
+    public long getRole4UserCount(List<String> list) {
+        StringBuffer _tmpBuf = new StringBuffer();
+        for (String _str : list) {
+            _tmpBuf.append("'");
+            _tmpBuf.append(_str);
+            _tmpBuf.append("',");
+        }
+        List<Long> resultList = getHibernateTemplate().findByNamedQuery("Role.getRole4UserCount",
+                _tmpBuf.substring(1, _tmpBuf.length() - 2));
+        if (resultList.size() > 0) {
+            System.out.println(resultList.get(0).getClass());
+            return resultList.get(0);
+        }
+        return 0;
+    }
+
+    /**
      * 取得可访问菜单节点的角色列表
      * 
      * @param menuNodeID 菜单节点ID
