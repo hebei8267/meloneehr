@@ -3,7 +3,7 @@
  */
 package org.freedom.services.privilege;
 
-import org.freedom.core.test.BaseTestCase2;
+import org.freedom.core.test.BaseTestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
-public class RoleServiceTest2 extends BaseTestCase2 {
+public class RoleServiceTest2 extends BaseTestCase {
     @Autowired
     private IRoleService roleService = null;
 
@@ -26,7 +26,7 @@ public class RoleServiceTest2 extends BaseTestCase2 {
     }
 
     @Test
-    public void testDelRoleCase5() throws Exception {
+    public void delRoleCase1() throws Exception {
         boolean result = roleService.delRoleInfoService("00000001");
         assertEquals(false, result);
     }
