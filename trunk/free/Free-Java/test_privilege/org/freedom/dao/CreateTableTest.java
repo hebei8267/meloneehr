@@ -3,7 +3,7 @@
  */
 package org.freedom.dao;
 
-import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.core.test.dao.BaseTestCase;
 import org.freedom.core.util.CreateTable;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author 何贝
  * @since JDK1.5
  */
-public class CreateTableTest extends HibernateDaoTestCase {
+public class CreateTableTest extends BaseTestCase {
     @Test
     public void createTable() {
         CreateTable.createTable();

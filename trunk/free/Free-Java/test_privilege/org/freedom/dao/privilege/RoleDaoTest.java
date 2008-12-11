@@ -8,7 +8,7 @@ import static org.freedom.dao.DaoConstant.ROOT_PATH;
 import java.io.IOException;
 import java.util.List;
 
-import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.core.test.dao.BaseTestCase;
 import org.freedom.dao.privilege.RoleDao;
 import org.freedom.entity.privilege.Role;
 
@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
-public class RoleDaoTest extends HibernateDaoTestCase {
+public class RoleDaoTest extends BaseTestCase {
     @Autowired
     private RoleDao roleDao;
 
