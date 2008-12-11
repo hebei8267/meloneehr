@@ -32,8 +32,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 @Entity
 @Table(name = "W_USER_ROLE")
-@NamedQueries( { @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
-        @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj ") })
+@NamedQueries( {
+        @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
+        @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj "),
+        @NamedQuery(name = "Role.getRole4UserCount", query = "select r from Role r, User u where r.id = u.roleID and r.id in (?) ") })
 public class Role extends AbstractEntityBean {
 
     private static final long serialVersionUID = 2814135309469292776L;
@@ -58,7 +60,7 @@ public class Role extends AbstractEntityBean {
     private String detail;
 
     /** 登录用户Set */
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<User> loginUserSet = new HashSet<User>();
 
     /** 子角色Set */
@@ -66,7 +68,7 @@ public class Role extends AbstractEntityBean {
     private Set<Role> subRoleSet = new HashSet<Role>();
 
     /** 父角色 */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_ROLE_H_ID")
     private Role parentRole;
 

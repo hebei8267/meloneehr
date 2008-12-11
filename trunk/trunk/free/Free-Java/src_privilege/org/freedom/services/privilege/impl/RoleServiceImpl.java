@@ -3,6 +3,10 @@
  */
 package org.freedom.services.privilege.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.freedom.dao.privilege.RoleDao;
 import org.freedom.entity.privilege.Role;
@@ -16,6 +20,10 @@ import org.springframework.stereotype.Component;
  * 
  * @author 何贝
  * @since JDK1.5
+ */
+/**
+ * @author kaka
+ * 
  */
 @Component("roleServiceImpl")
 @Scope("prototype")
@@ -42,8 +50,43 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     public boolean delRoleInfoService(String roleID) {
-        // TODO Auto-generated method stub
+        Role dbRole = roleDao.getRoleByID(roleID);
+
+        // if (dbRole != null) {
+        // roleDao.delete(dbRole);
+        // return true;
+        // }
+        checkRole4User(dbRole);
         return false;
+    }
+
+    private void checkRole4User(Role role) {
+        List<String> roleIDList = new ArrayList<String>();
+
+        getSubRoleID(role, roleIDList);
+        
+        for (String string : roleIDList) {
+            System.out.println(string);
+        }
+    }
+
+    /**
+     * 取得所有子角色ID
+     * 
+     * @param role 父角色
+     * @param roleIDList 保存角色ID的容器
+     */
+    private void getSubRoleID(Role role, List<String> roleIDList) {
+        if (role != null) {
+            roleIDList.add(role.getId());
+
+            Set<Role> subRoleSet = role.getSubRoleSet();
+            if (!subRoleSet.isEmpty()) {
+                for (Role _role : subRoleSet) {
+                    getSubRoleID(_role, roleIDList);
+                }
+            }
+        }
     }
 
     public boolean getAllRoleInfoTreeService() {
