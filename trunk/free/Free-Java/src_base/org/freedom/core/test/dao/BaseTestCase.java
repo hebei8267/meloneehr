@@ -21,12 +21,7 @@ public class BaseTestCase extends AbstractAnnotationAwareTransactionalTests {
         setDefaultRollback(false);
     }
 
-    // protected String getMaxID(int id) {
-    // if (id > -1) {
-    // return String.format("%1$08d", Integer.valueOf(id) + 1);
-    // }
-    // return null;
-    // }
+  
     //
     // protected String getCurrentDate() {
     // Date date = new Date();
