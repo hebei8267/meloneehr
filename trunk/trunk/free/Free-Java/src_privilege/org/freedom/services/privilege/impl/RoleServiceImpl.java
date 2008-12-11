@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  * @author kaka
  * 
  */
-@Component("roleServiceImpl")
+@Component("roleService")
 @Scope("prototype")
 public class RoleServiceImpl implements IRoleService {
     // ---------------------------------------------------------------------------
