@@ -3,7 +3,7 @@
  */
 package org.freedom.dao;
 
-import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.core.test.dao.BaseTestCase;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -18,6 +18,6 @@ import org.freedom.dao.privilege.RoleDaoTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { CreateTableTest.class, RoleDaoTest.class, UserDaoTest.class })
-public class AllDaoTest extends HibernateDaoTestCase {
+public class AllDaoTest extends BaseTestCase {
 
 }
