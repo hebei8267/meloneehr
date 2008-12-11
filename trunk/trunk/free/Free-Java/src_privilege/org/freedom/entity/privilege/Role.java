@@ -93,8 +93,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置编号
      * 
-     * @param id
-     *            编号
+     * @param id 编号
      */
     public void setId(String id) {
         this.id = id;
@@ -112,8 +111,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置名称
      * 
-     * @param name
-     *            名称
+     * @param name 名称
      */
     public void setName(String name) {
         this.name = name;
@@ -131,8 +129,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置描述
      * 
-     * @param detail
-     *            描述
+     * @param detail 描述
      */
     public void setDetail(String detail) {
         this.detail = detail;
@@ -150,8 +147,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置登录用户Set
      * 
-     * @param loginUserSet
-     *            登录用户Set
+     * @param loginUserSet 登录用户Set
      */
     public void setLoginUserSet(Set<User> loginUserSet) {
         this.loginUserSet = loginUserSet;
@@ -169,8 +165,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置子角色Set
      * 
-     * @param subRoleSet
-     *            子角色Set
+     * @param subRoleSet 子角色Set
      */
     public void setSubRoleSet(Set<Role> subRoleSet) {
         this.subRoleSet = subRoleSet;
@@ -188,8 +183,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置父角色
      * 
-     * @param parentRole
-     *            父角色
+     * @param parentRole 父角色
      */
     public void setParentRole(Role parentRole) {
         if (parentRole != null) {
@@ -210,8 +204,7 @@ public class Role extends AbstractEntityBean {
     /**
      * 设置父角色ID
      * 
-     * @param parentRoleID
-     *            父角色ID
+     * @param parentRoleID 父角色ID
      */
     protected void setParentRoleID(String parentRoleID) {
         this.parentRoleID = parentRoleID;
