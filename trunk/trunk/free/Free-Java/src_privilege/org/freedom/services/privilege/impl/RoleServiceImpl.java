@@ -51,24 +51,33 @@ public class RoleServiceImpl implements IRoleService {
 
     public boolean delRoleInfoService(String roleID) {
         Role dbRole = roleDao.getRoleByID(roleID);
+        if (dbRole != null && checkRole4User(dbRole)) {
 
-        // if (dbRole != null) {
-        // roleDao.delete(dbRole);
-        // return true;
-        // }
-        checkRole4User(dbRole);
+            roleDao.delete(dbRole);
+            return true;
+
+        }
         return false;
     }
 
-    private void checkRole4User(Role role) {
+    /**
+     * 检验该角色是否可以删除(该角色和和其所有子角色是否关联用户信息)
+     * 
+     * @param role 检验的角色
+     * @return true-未关联用户信息(可以删除) false-关联用户信息(不能删除)
+     */
+    private boolean checkRole4User(Role role) {
         List<String> roleIDList = new ArrayList<String>();
 
         getSubRoleID(role, roleIDList);
 
-        long count = roleDao.getRole4UserCount(roleIDList);
-        // for (String string : roleIDList) {
-        System.out.println(count);
-        // }
+        int count = roleDao.getRole4UserCount(roleIDList);
+
+        if (0 == count) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
