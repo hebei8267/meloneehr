@@ -30,4 +30,11 @@ public class RoleServiceTest2 extends BaseTestCase {
         boolean result = roleService.delRoleInfoService("00000001");
         assertEquals(false, result);
     }
+
+    @Test
+    // 只能成功一次(数据已经删除)
+    public void delRoleCase2() throws Exception {
+        boolean result = roleService.delRoleInfoService("00000003");
+        assertEquals(true, result);
+    }
 }

@@ -28,7 +28,7 @@
 	<classpathentry kind="lib" path="lib/p6spy.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-8.2-506.jdbc3.jar"/>
 	<classpathentry kind="lib" path="lib/qdox-1.7-20070515.134713-1.jar"/>
-	<classpathentry kind="lib" path="lib/spring.jar"/>
+	<classpathentry kind="lib" path="lib/spring.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.6-with-dependencies/spring-framework-2.5.6/dist/module-sources/spring-orm-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-test.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.6-with-dependencies/spring-framework-2.5.6/dist/module-sources/spring-test-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/standard.jar"/>
