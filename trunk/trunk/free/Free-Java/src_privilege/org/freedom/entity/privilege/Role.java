@@ -10,20 +10,20 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityResult;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SqlResultSetMapping;
+
 import javax.persistence.Table;
 
 import org.freedom.core.entity.AbstractEntityBean;
 import org.freedom.entity.common.User;
+
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NamedNativeQuery;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -37,9 +37,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Table(name = "W_USER_ROLE")
 @NamedQueries( {
         @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
-        @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj ") })
-@NamedNativeQuery(name = "Role.getRole4UserCount", query = "select count(r) as cnt from Role r, User u where r.id = u.roleID and r.id in (?) ", resultSetMapping = "rolecount")
-@SqlResultSetMapping(name = "rolecount", entities = { @EntityResult(entityClass = org.freedom.entity.A.class) })
+        @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj "),
+        @NamedQuery(name = "Role.getRole4UserCount", query = "select count(r.id) from Role r,User u where r.id = u.roleID and r.id in (:ids) ") })
+// @NamedNativeQuery(name = "Role.getRole4UserCounta", query = "select
+// count(r.*) as ff from W_USER_ROLE r, W_USER u where r.ROLE_ID = u.ROLE_ID and
+// r.ROLE_ID in (?) ", resultSetMapping = "roleCount")
+// @SqlResultSetMapping(name = "roleCount", columns = @ColumnResult(name =
+// "ff"))
 public class Role extends AbstractEntityBean {
 
     private static final long serialVersionUID = 2814135309469292776L;
@@ -225,8 +229,7 @@ public class Role extends AbstractEntityBean {
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return new HashCodeBuilder(-971876911, -916451299).append(this.id)
-                .toHashCode();
+        return new HashCodeBuilder(-971876911, -916451299).append(this.id).toHashCode();
     }
 
 }
