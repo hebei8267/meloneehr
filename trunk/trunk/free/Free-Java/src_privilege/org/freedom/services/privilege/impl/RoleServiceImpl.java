@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.freedom.core.domain.TreeNode;
 import org.freedom.dao.privilege.RoleDao;
 import org.freedom.entity.privilege.Role;
 import org.freedom.services.privilege.IRoleService;
@@ -20,10 +21,6 @@ import org.springframework.stereotype.Component;
  * 
  * @author 何贝
  * @since JDK1.5
- */
-/**
- * @author kaka
- * 
  */
 @Component("roleService")
 @Scope("prototype")
@@ -55,7 +52,6 @@ public class RoleServiceImpl implements IRoleService {
 
             roleDao.delete(dbRole);
             return true;
-
         }
         return false;
     }
@@ -99,9 +95,20 @@ public class RoleServiceImpl implements IRoleService {
         }
     }
 
-    public boolean getAllRoleInfoTreeService() {
-        // TODO Auto-generated method stub
-        return false;
+    public TreeNode getAllRoleInfoTreeService() {
+        Role dbRole = roleDao.getRoleByID(Role.ROLE_TREE_ROOT_ID);
+        if (dbRole != null) {
+            TreeNode root = new TreeNode();
+            
+            root.setId(dbRole.getId());
+            root.setText();
+            root.setparentNodeID
+            root.seticon
+            // TODO Auto-generated method stub
+            return root;
+        }
+
+        return null;
     }
 
     public boolean modRoleInfoService(Role role) {

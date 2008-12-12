@@ -3,6 +3,7 @@
  */
 package org.freedom.services.privilege;
 
+import org.freedom.core.domain.TreeNode;
 import org.freedom.entity.privilege.Role;
 
 /**
@@ -45,5 +46,10 @@ public interface IRoleService {
      */
     public boolean delRoleInfoService(String roleID);
 
-    public boolean getAllRoleInfoTreeService();
+    /**
+     * 取得角色树信息
+     * 
+     * @return 角色树根节点
+     */
+    public TreeNode getAllRoleInfoTreeService();
 }

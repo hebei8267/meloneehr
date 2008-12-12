@@ -1,18 +1,20 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.core.view.vo.ajax;
+package org.freedom.core.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.freedom.core.bean.BaseBean;
+
 /**
- * UI树节点
+ * 树节点
  * 
  * @author 何贝
  * @since JDK1.5
  */
-public class UITreeNode extends JosnViewObject {
+public class TreeNode extends BaseBean {
 
     private static final long serialVersionUID = 6909488869312107426L;
 
@@ -29,16 +31,16 @@ public class UITreeNode extends JosnViewObject {
     private String parentNodeID;
 
     /** 子节点 */
-    private List<UITreeNode> children = new ArrayList<UITreeNode>();
+    private List<TreeNode> children = new ArrayList<TreeNode>();
 
     /** 节点图标 */
     private String icon;
 
-    public UITreeNode() {
+    public TreeNode() {
 
     }
 
-    public UITreeNode(String id, String text) {
+    public TreeNode(String id, String text) {
         this.id = id;
         this.text = text;
     }
@@ -120,7 +122,7 @@ public class UITreeNode extends JosnViewObject {
      * 
      * @return 子节点
      */
-    public List<UITreeNode> getChildren() {
+    public List<TreeNode> getChildren() {
         return children;
     }
 
@@ -129,7 +131,7 @@ public class UITreeNode extends JosnViewObject {
      * 
      * @param children 子节点
      */
-    public void setChildren(List<UITreeNode> children) {
+    public void setChildren(List<TreeNode> children) {
         this.children = children;
     }
 
@@ -138,7 +140,7 @@ public class UITreeNode extends JosnViewObject {
      * 
      * @param node 子节点
      */
-    public void addChildren(UITreeNode node) {
+    public void addChildren(TreeNode node) {
         this.children.add(node);
     }
 
