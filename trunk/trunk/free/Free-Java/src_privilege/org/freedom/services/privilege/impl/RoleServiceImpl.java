@@ -86,7 +86,7 @@ public class RoleServiceImpl implements IRoleService {
         if (role != null) {
             roleIDList.add(role.getId());
 
-            Set<Role> subRoleSet = role.getSubRoleSet();
+            Set<Role> subRoleSet = role.getChildRoleSet();
             if (!subRoleSet.isEmpty()) {
                 for (Role _role : subRoleSet) {
                     getSubRoleID(_role, roleIDList);
@@ -99,16 +99,42 @@ public class RoleServiceImpl implements IRoleService {
         Role dbRole = roleDao.getRoleByID(Role.ROLE_TREE_ROOT_ID);
         if (dbRole != null) {
             TreeNode root = new TreeNode();
-            
+
             root.setId(dbRole.getId());
-            root.setText();
-            root.setparentNodeID
-            root.seticon
-            // TODO Auto-generated method stub
+            root.setText(dbRole.getName());
+            root.setParentNodeID(dbRole.getParentRoleID());
+
+            // 构建整个角色树结构
+            buildSubMenuTreeInfo(root, dbRole);
+
             return root;
         }
 
         return null;
+    }
+
+    /**
+     * 构建整个角色树结构
+     * 
+     * @param parentNode 父角色节点
+     * @param dbParentRole 数据库中取得的父角色节点
+     */
+    private void buildSubMenuTreeInfo(TreeNode parentNode, Role dbParentRole) {
+        for (Role dbChildRole : dbParentRole.getChildRoleSet()) {
+            if (dbChildRole != null) {
+
+                TreeNode childRole = new TreeNode();
+                childRole.setId(dbChildRole.getId());
+                childRole.setText(dbChildRole.getName());
+                childRole.setParentNodeID(dbChildRole.getParentRoleID());
+
+                parentNode.setLeaf(false);
+
+                parentNode.addChildren(childRole);
+
+                buildSubMenuTreeInfo(childRole, dbChildRole);
+            }
+        }
     }
 
     public boolean modRoleInfoService(Role role) {
