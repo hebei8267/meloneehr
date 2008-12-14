@@ -73,7 +73,7 @@ public class Role extends AbstractEntityBean {
 
     /** 子角色Set */
     @OneToMany(mappedBy = "parentRole", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Role> subRoleSet = new HashSet<Role>();
+    private Set<Role> childRoleSet = new HashSet<Role>();
 
     /** 父角色 */
     @ManyToOne(fetch = FetchType.EAGER)
@@ -162,17 +162,17 @@ public class Role extends AbstractEntityBean {
      * 
      * @return 子角色Set
      */
-    public Set<Role> getSubRoleSet() {
-        return subRoleSet;
+    public Set<Role> getChildRoleSet() {
+        return childRoleSet;
     }
 
     /**
      * 设置子角色Set
      * 
-     * @param subRoleSet 子角色Set
+     * @param childRoleSet 子角色Set
      */
-    public void setSubRoleSet(Set<Role> subRoleSet) {
-        this.subRoleSet = subRoleSet;
+    public void setChildRoleSet(Set<Role> childRoleSet) {
+        this.childRoleSet = childRoleSet;
     }
 
     /**
