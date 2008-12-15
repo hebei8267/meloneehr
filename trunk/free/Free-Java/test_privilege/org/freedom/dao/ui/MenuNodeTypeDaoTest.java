@@ -8,10 +8,12 @@ import static org.freedom.dao.DaoConstant.ROOT_PATH;
 import java.io.IOException;
 import java.util.List;
 
-import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.core.test.BaseTestCase;
 import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.file.CSVFileUtils;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 菜单树结点类型Dao Test
@@ -19,7 +21,8 @@ import org.freedom.file.CSVFileUtils;
  * @author 何贝
  * @since JDK1.5
  */
-public class MenuNodeTypeDaoTest extends HibernateDaoTestCase {
+public class MenuNodeTypeDaoTest extends BaseTestCase {
+    @Autowired
     private MenuNodeTypeDao menuNodeTypeDao;
 
     public MenuNodeTypeDao getMenuNodeTypeDao() {
@@ -30,7 +33,8 @@ public class MenuNodeTypeDaoTest extends HibernateDaoTestCase {
         this.menuNodeTypeDao = menuNodeTypeDao;
     }
 
-    public void testCase() throws IOException {
+    @Test
+    public void case1() throws IOException {
         List<List<String>> csvFileContent = CSVFileUtils.readCSVFile(ROOT_PATH + "MenuNodeType.csv");
 
         for (List<String> fileLine : csvFileContent) {
