@@ -30,4 +30,21 @@ public class MenuNodeTypeDao extends HibernateDaoImpl<MenuNodeType> {
 
         return resultList;
     }
+
+    /**
+     * 根据结点类型ID取得结点类型信息
+     * 
+     * @param userID 结点类型ID
+     * @return MenuNodeType 结点类型
+     */
+    @SuppressWarnings("unchecked")
+    public MenuNodeType getMenuNodeTypeByID(String menuNodeTypeID) {
+
+        List<MenuNodeType> resultList = getHibernateTemplate().findByNamedQuery("MenuNodeType.getMenuNodeTypeByID",
+                new String[] { MenuNodeType.MASTER_ID, menuNodeTypeID });
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
+    }
 }

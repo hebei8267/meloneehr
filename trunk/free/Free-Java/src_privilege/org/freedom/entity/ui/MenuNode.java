@@ -35,14 +35,16 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_UI_MENU_NODE")
-@NamedQueries( { @NamedQuery(name = "MenuNode.getMenuNodeByID", query = "select obj from MenuNode obj where obj.id = ? ") })
+@NamedQueries( {
+        @NamedQuery(name = "MenuNode.getMenuNodeByID", query = "select obj from MenuNode obj where obj.id = ? "),
+        @NamedQuery(name = "MenuNode.getMaxID", query = "select max(obj.id) from MenuNode obj ") })
 public class MenuNode extends AbstractEntityBean {
 
     private static final long serialVersionUID = -7186864941977613879L;
     /**
      * 系统菜单树根节点
      */
-    public final static String ROOT_ID = "00000001";
+    public final static String MENU_NODE_TREE_ROOT_ID = "00000001";
 
     public MenuNode() {
     }
@@ -151,7 +153,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @return 默认权限 "true"无访问限制 "false"有访问限制
      */
-    public Boolean getDefaultPermit() {
+    public boolean getDefaultPermit() {
         return defaultPermit;
     }
 
@@ -160,7 +162,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
      */
-    public void setDefaultPermit(Boolean defaultPermit) {
+    public void setDefaultPermit(boolean defaultPermit) {
         this.defaultPermit = defaultPermit;
     }
 
