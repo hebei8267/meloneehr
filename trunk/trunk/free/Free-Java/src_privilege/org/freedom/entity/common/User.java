@@ -15,8 +15,10 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import org.freedom.core.entity.AbstractEntityBean;
 import org.freedom.entity.privilege.Role;
+
 import org.hibernate.annotations.NaturalId;
 
 /**
@@ -193,8 +195,7 @@ public class User extends AbstractEntityBean {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(-1023797237, 1200053429).append(this.id)
-                .toHashCode();
+        return new HashCodeBuilder(-1023797237, 1200053429).append(this.id).toHashCode();
     }
 
 }
