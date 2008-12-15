@@ -25,14 +25,6 @@ public class MenuNodeDaoTest extends BaseTestCase2 {
     @Autowired
     private MenuNodeDao menuNodeDao;
 
-    public MenuNodeDao getMenuNodeDao() {
-        return menuNodeDao;
-    }
-
-    public void setMenuNodeDao(MenuNodeDao menuNodeDao) {
-        this.menuNodeDao = menuNodeDao;
-    }
-
     // public void testCase() throws IOException {
     // MenuNode menuNode = menuNodeDao.get(8);
     //
@@ -48,6 +40,14 @@ public class MenuNodeDaoTest extends BaseTestCase2 {
     // System.out.println(menuNode.getId());
     // System.out.println(menuNode.getNodeTxt());
     // }
+
+    public MenuNodeDao getMenuNodeDao() {
+        return menuNodeDao;
+    }
+
+    public void setMenuNodeDao(MenuNodeDao menuNodeDao) {
+        this.menuNodeDao = menuNodeDao;
+    }
 
     @Test
     public void testCase1() throws IOException {

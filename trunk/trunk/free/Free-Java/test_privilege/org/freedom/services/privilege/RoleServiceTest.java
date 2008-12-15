@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
-// 不能保证默认配置的事务处理
-// 原因不明
 public class RoleServiceTest extends BaseTestCase {
     @Autowired
     private IRoleService roleService = null;

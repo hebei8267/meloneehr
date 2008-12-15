@@ -33,4 +33,20 @@ public class MenuNodeDao extends HibernateDaoImpl<MenuNode> {
         }
         return null;
     }
+
+    /**
+     * 自动计算当前最大ID
+     * 
+     * @return 最大ID
+     */
+    @SuppressWarnings("unchecked")
+    public String getMaxID() {
+        List<String> resultList = getHibernateTemplate().findByNamedQuery("MenuNode.getMaxID");
+        String maxID = "";
+        if (resultList.size() > 0) {
+            maxID = resultList.get(0);
+        }
+
+        return formatMaxID(maxID);
+    }
 }
