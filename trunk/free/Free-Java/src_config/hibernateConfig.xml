@@ -47,6 +47,9 @@
 				<value>org.freedom.entity.common.User</value>
 				<value>org.freedom.entity.privilege.Role</value>
 
+				<value>org.freedom.entity.ui.MenuNode</value>
+				<value>org.freedom.entity.ui.MenuNodeType</value>
+				<value>org.freedom.entity.ui.MenuNodePrivilege</value>
 			</list>
 		</property>
 		<!--	
