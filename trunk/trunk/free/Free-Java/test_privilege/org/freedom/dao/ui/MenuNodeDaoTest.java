@@ -8,10 +8,12 @@ import static org.freedom.dao.DaoConstant.ROOT_PATH;
 import java.io.IOException;
 import java.util.List;
 
-import org.freedom.core.test.dao.HibernateDaoTestCase;
+import org.freedom.core.test.BaseTestCase;
 import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.file.CSVFileUtils;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 菜单树结点Dao Test
@@ -19,7 +21,8 @@ import org.freedom.file.CSVFileUtils;
  * @author 何贝
  * @since JDK1.5
  */
-public class MenuNodeDaoTest extends HibernateDaoTestCase {
+public class MenuNodeDaoTest extends BaseTestCase {
+    @Autowired
     private MenuNodeDao menuNodeDao;
 
     public MenuNodeDao getMenuNodeDao() {
@@ -46,7 +49,8 @@ public class MenuNodeDaoTest extends HibernateDaoTestCase {
         System.out.println(menuNode.getNodeTxt());
     }
 
-    public void atestCase() throws IOException {
+    @Test
+    public void case1() throws IOException {
         List<List<String>> csvFileContent = CSVFileUtils.readCSVFile(ROOT_PATH + "MenuNode.csv");
 
         for (List<String> fileLine : csvFileContent) {
@@ -67,7 +71,7 @@ public class MenuNodeDaoTest extends HibernateDaoTestCase {
                 } else if (i == 5) {
                     MenuNode parentNode = menuNodeDao.getMenuNodeByID(value);
 
-                    parentNode.addSubNode(menuNode);
+                  //  parentNode.addChildNode(menuNode);
 
                     menuNode.setParentNode(parentNode);
                 }
