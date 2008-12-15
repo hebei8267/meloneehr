@@ -8,7 +8,7 @@ import static org.freedom.dao.DaoConstant.ROOT_PATH;
 import java.io.IOException;
 import java.util.List;
 
-import org.freedom.core.test.BaseTestCase;
+import org.freedom.core.test.BaseTestCase2;
 import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.file.CSVFileUtils;
@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
-public class MenuNodeDaoTest extends BaseTestCase {
+public class MenuNodeDaoTest extends BaseTestCase2 {
     @Autowired
     private MenuNodeDao menuNodeDao;
 
@@ -33,24 +33,24 @@ public class MenuNodeDaoTest extends BaseTestCase {
         this.menuNodeDao = menuNodeDao;
     }
 
-    public void testCase() throws IOException {
-        MenuNode menuNode = menuNodeDao.get(8);
+    // public void testCase() throws IOException {
+    // MenuNode menuNode = menuNodeDao.get(8);
+    //
+    // print(menuNode);
+    //
+    // MenuNode parent = menuNode.getParentNode();
+    // if (parent != null) {
+    // print(parent);
+    // }
+    // }
 
-        print(menuNode);
-
-        MenuNode parent = menuNode.getParentNode();
-        if (parent != null) {
-            print(parent);
-        }
-    }
-
-    private void print(MenuNode menuNode) {
-        System.out.println(menuNode.getId());
-        System.out.println(menuNode.getNodeTxt());
-    }
+    // private void print(MenuNode menuNode) {
+    // System.out.println(menuNode.getId());
+    // System.out.println(menuNode.getNodeTxt());
+    // }
 
     @Test
-    public void case1() throws IOException {
+    public void testCase1() throws IOException {
         List<List<String>> csvFileContent = CSVFileUtils.readCSVFile(ROOT_PATH + "MenuNode.csv");
 
         for (List<String> fileLine : csvFileContent) {
@@ -71,7 +71,7 @@ public class MenuNodeDaoTest extends BaseTestCase {
                 } else if (i == 5) {
                     MenuNode parentNode = menuNodeDao.getMenuNodeByID(value);
 
-                  //  parentNode.addChildNode(menuNode);
+                    parentNode.addChildNode(menuNode);
 
                     menuNode.setParentNode(parentNode);
                 }
