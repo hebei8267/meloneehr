@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
 import org.freedom.dao.common.UserDaoTest;
 import org.freedom.dao.privilege.RoleDaoTest;
 import org.freedom.dao.ui.MenuNodeDaoTest;
+import org.freedom.dao.ui.MenuNodePrivilegeDaoTest;
 import org.freedom.dao.ui.MenuNodeTypeDaoTest;
 
 /**
@@ -23,7 +24,8 @@ import org.freedom.dao.ui.MenuNodeTypeDaoTest;
                        RoleDaoTest.class, 
                        UserDaoTest.class, 
                        MenuNodeTypeDaoTest.class,
-                       MenuNodeDaoTest.class })
+                       MenuNodeDaoTest.class,
+                       MenuNodePrivilegeDaoTest.class})
 public class AllDaoTest extends BaseTestCase {
 
 }

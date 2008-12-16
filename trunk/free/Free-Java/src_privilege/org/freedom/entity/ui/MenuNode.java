@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -82,6 +83,7 @@ public class MenuNode extends AbstractEntityBean {
     /** 子节点 */
     @OneToMany(mappedBy = "parentNode", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @IndexColumn(name = "_INDEX", base = 1)
+    @OrderBy("index")
     private List<MenuNode> childNodeList = new ArrayList<MenuNode>();
 
     /** 父节点 */
@@ -223,12 +225,24 @@ public class MenuNode extends AbstractEntityBean {
 
     /**
      * 更新节点的index
-     * 
-     * @param menuNode 节点
      */
-    public void updateNodeIndex(Integer index) {
-        this.index = index;
-        updateNodeIndex(this);
+    public void updateNodeIndex() {
+
+        List<MenuNode> childNodeList = parentNode.getChildNodeList();
+
+        if (this.getIndex() < childNodeList.size()) {
+            // 移除对象
+            childNodeList.remove(this);
+            // 插入到新位置
+            childNodeList.add(this.getIndex() - 1, this);
+            // 调正顺序
+            int index = 1;
+            for (MenuNode _menuNode : childNodeList) {
+                _menuNode.setIndex(index);
+                index++;
+            }
+        }
+
     }
 
     /**

@@ -35,7 +35,7 @@ public class MenuNodePrivilege extends AbstractEntityBean {
     private static final long serialVersionUID = -350595423265400452L;
 
     /** 登录用户角色 */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_H_ID")
     private Role role;
 
@@ -45,7 +45,7 @@ public class MenuNodePrivilege extends AbstractEntityBean {
     private String roleID;
 
     /** 菜单树结点 */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "NODE_H_ID")
     private MenuNode menuNode;
 

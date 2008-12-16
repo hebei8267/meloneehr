@@ -75,8 +75,8 @@ public class MenuNodeServiceImp implements IMenuNodeService {
         }
         // [导航条]节点下面只能是[文件夹]节点或者[叶节点]节点
         if (MenuNodeType.AREA_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
-            if (!(MenuNodeType.FOLDER_NODE_TYPE.equals(childMenuNode.getNodeType()) 
-                    || MenuNodeType.LEAF_NODE_TYPE.equals(childMenuNode.getNodeType()))) {
+            if (!(MenuNodeType.FOLDER_NODE_TYPE.equals(childMenuNode.getNodeType()) || MenuNodeType.LEAF_NODE_TYPE
+                    .equals(childMenuNode.getNodeType()))) {
                 return false;
             }
         }
@@ -109,7 +109,10 @@ public class MenuNodeServiceImp implements IMenuNodeService {
             _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());
             _dbMenuNode.setDefaultPermit(menuNode.getDefaultPermit());
             _dbMenuNode.setActionContent(menuNode.getActionContent());
-            _dbMenuNode.updateNodeIndex(menuNode.getIndex());
+            if (menuNode.getIndex() != null && !_dbMenuNode.getIndex().equals(menuNode.getIndex())) {// index变更
+                _dbMenuNode.setIndex(menuNode.getIndex());
+                _dbMenuNode.updateNodeIndex();
+            }
 
             menuNodeDao.save(_dbMenuNode);
             return true;
