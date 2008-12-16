@@ -25,7 +25,7 @@ import org.hibernate.annotations.NaturalId;
  * @since JDK1.5
  */
 @Entity
-@Table(name = "W_ROLE_MENU_NODE_PRIVILEGE")
+@Table(name = "W_MENU_NODE_PRIVILEGE")
 @NamedQueries( {
         @NamedQuery(name = "MenuNodePrivilege.getMenuNodePrivilegeListByUserID", query = "select pObj.menuNodeID from MenuNodePrivilege pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
         @NamedQuery(name = "MenuNodePrivilege.getMenuNodePrivilegeByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePrivilege pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),

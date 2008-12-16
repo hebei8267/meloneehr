@@ -34,7 +34,7 @@ import org.hibernate.annotations.NaturalId;
  * @since JDK1.5
  */
 @Entity
-@Table(name = "W_UI_MENU_NODE")
+@Table(name = "W_MENU_NODE")
 @NamedQueries( {
         @NamedQuery(name = "MenuNode.getMenuNodeByID", query = "select obj from MenuNode obj where obj.id = ? "),
         @NamedQuery(name = "MenuNode.getMaxID", query = "select max(obj.id) from MenuNode obj ") })
@@ -67,7 +67,7 @@ public class MenuNode extends AbstractEntityBean {
     /** 默认权限 "true"无访问限制 "false"有访问限制 */
     @Basic
     @Column(name = "DEFAULT_PERMIT", nullable = false)
-    private boolean defaultPermit = true;
+    private Boolean defaultPermit = true;
 
     /** 页面迁移内容 */
     @Basic
@@ -85,7 +85,8 @@ public class MenuNode extends AbstractEntityBean {
     private List<MenuNode> childNodeList = new ArrayList<MenuNode>();
 
     /** 父节点 */
-    @ManyToOne(fetch = FetchType.EAGER)
+    // TODO @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_NODE_H_ID")
     private MenuNode parentNode;
 
@@ -153,7 +154,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @return 默认权限 "true"无访问限制 "false"有访问限制
      */
-    public boolean getDefaultPermit() {
+    public Boolean getDefaultPermit() {
         return defaultPermit;
     }
 
@@ -162,7 +163,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param defaultPermit 默认权限 "true"无访问限制 "false"有访问限制
      */
-    public void setDefaultPermit(boolean defaultPermit) {
+    public void setDefaultPermit(Boolean defaultPermit) {
         this.defaultPermit = defaultPermit;
     }
 
@@ -198,7 +199,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param index Index
      */
-    protected void setIndex(Integer index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
@@ -221,20 +222,55 @@ public class MenuNode extends AbstractEntityBean {
     }
 
     /**
+     * 更新节点的index
+     * 
+     * @param menuNode 节点
+     */
+    public void updateNodeIndex(Integer index) {
+        this.index = index;
+        updateNodeIndex(this);
+    }
+
+    /**
+     * 更新节点的index
+     * 
+     * @param menuNode 节点
+     */
+    private void updateNodeIndex(MenuNode menuNode) {
+        int index = 1;
+        // 向列表尾部添加
+        if (menuNode.getIndex() == null || menuNode.getIndex() > childNodeList.size()) {
+            for (MenuNode _menuNode : childNodeList) {
+                if (_menuNode.getIndex() != null) {
+                    _menuNode.setIndex(index);
+                    index++;
+                }
+            }
+            menuNode.setIndex(index);
+
+        } else {// 像列表中间插于
+            for (int i = 0; i < childNodeList.size(); i++) {
+                if (menuNode.getIndex() == i + 1) {
+                    menuNode.setIndex(index);
+                    index++;
+                }
+
+                MenuNode _menuNode = childNodeList.get(i);
+                _menuNode.setIndex(index);
+                index++;
+            }
+        }
+    }
+
+    /**
      * 添加子节点
      * 
      * @param menuNode 子节点
      */
     public void addChildNode(MenuNode menuNode) {
-        int index = 1;
-        for (MenuNode _menuNode : childNodeList) {
-            if (_menuNode.getIndex() != null) {
-                _menuNode.setIndex(index);
-                index++;
-            }
-        }
 
-        menuNode.setIndex(index);
+        updateNodeIndex(menuNode);
+
         this.childNodeList.add(menuNode);
     }
 

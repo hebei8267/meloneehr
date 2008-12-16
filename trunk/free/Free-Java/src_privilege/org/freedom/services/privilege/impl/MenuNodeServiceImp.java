@@ -101,7 +101,20 @@ public class MenuNodeServiceImp implements IMenuNodeService {
     }
 
     public boolean modMenuNodeInfoService(MenuNode menuNode) {
-        // TODO Auto-generated method stub
+        if (StringUtils.isNotBlank(menuNode.getNodeTxt())
+                && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
+                && StringUtils.isNotBlank(menuNode.getActionContent())) {
+            MenuNode _dbMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getId());
+
+            _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());
+            _dbMenuNode.setDefaultPermit(menuNode.getDefaultPermit());
+            _dbMenuNode.setActionContent(menuNode.getActionContent());
+            _dbMenuNode.updateNodeIndex(menuNode.getIndex());
+
+            menuNodeDao.save(_dbMenuNode);
+            return true;
+
+        }
         return false;
     }
 

@@ -28,7 +28,7 @@ public class MenuNodeServiceTest extends BaseTestCase {
     @Test
     public void addMenuNodeCase1() throws Exception {
         MenuNode node = new MenuNode();
-        node.setNodeTxt("nodeTxt1");
+        node.setNodeTxt("nodeTxt");
         node.setNodeType(MenuNodeType.AREA_NODE_TYPE);
         node.setActionContent("actionContent1");
 
@@ -72,7 +72,7 @@ public class MenuNodeServiceTest extends BaseTestCase {
     @Test
     public void addMenuNodeCase5() throws Exception {
         MenuNode node = new MenuNode();
-        node.setNodeTxt("nodeTxt2");
+        node.setNodeTxt("nodeTxt1");
         node.setNodeType(MenuNodeType.FOLDER_NODE_TYPE);
         node.setActionContent("actionContent2");
         boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
@@ -82,9 +82,53 @@ public class MenuNodeServiceTest extends BaseTestCase {
     @Test
     public void addMenuNodeCase6() throws Exception {
         MenuNode node = new MenuNode();
-        node.setNodeTxt("nodeTxt3");
+        node.setNodeTxt("nodeTxt2");
         node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
         node.setActionContent("actionContent3");
+        boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void addMenuNodeCase9() throws Exception {
+        MenuNode node = new MenuNode();
+        node.setNodeTxt("nodeTxt3");
+        node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
+        node.setActionContent("actionContent4");
+        node.setIndex(1);
+        boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void addMenuNodeCase10() throws Exception {
+        MenuNode node = new MenuNode();
+        node.setNodeTxt("nodeTxt4");
+        node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
+        node.setActionContent("actionContent5");
+        node.setIndex(2);
+        boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void addMenuNodeCase11() throws Exception {
+        MenuNode node = new MenuNode();
+        node.setNodeTxt("nodeTxt5");
+        node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
+        node.setActionContent("actionContent6");
+        node.setIndex(4);
+        boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void addMenuNodeCase12() throws Exception {
+        MenuNode node = new MenuNode();
+        node.setNodeTxt("nodeTxt6");
+        node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
+        node.setActionContent("actionContent7");
+        node.setIndex(50);
         boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
         assertEquals(true, result);
     }
