@@ -55,7 +55,7 @@ public class User extends AbstractEntityBean {
     /** 第一次登录标记 */
     @Basic
     @Column(name = "FIRST_LOGIN_FLAG", nullable = false)
-    private boolean firstLoginFlag = true;
+    private Boolean firstLoginFlag = true;
 
     /** 登录用户角色 */
     @ManyToOne(fetch = FetchType.LAZY)
@@ -126,7 +126,7 @@ public class User extends AbstractEntityBean {
      * 
      * @return 第一次登录标记
      */
-    public boolean getFirstLoginFlag() {
+    public Boolean getFirstLoginFlag() {
         return firstLoginFlag;
     }
 
@@ -135,7 +135,7 @@ public class User extends AbstractEntityBean {
      * 
      * @param firstLoginFlag 第一次登录标记
      */
-    public void setFirstLoginFlag(boolean firstLoginFlag) {
+    public void setFirstLoginFlag(Boolean firstLoginFlag) {
         this.firstLoginFlag = firstLoginFlag;
     }
 

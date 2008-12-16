@@ -47,7 +47,7 @@ public class LoginLogoutServiceTest extends BaseTestCase {
     @Test
     public void getInfoCase4() throws Exception {
         User user = loginLogoutService.userLoginService("00000001", "00000001");
-        assertEquals(true, user.getFirstLoginFlag());
+        assertEquals(Boolean.TRUE, user.getFirstLoginFlag());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LoginLogoutServiceTest extends BaseTestCase {
     @Test
     public void getInfoCase6() throws Exception {
         User user = loginLogoutService.userLoginService("00000001", "00000001");
-        assertEquals(false, user.getFirstLoginFlag());
+        assertEquals(Boolean.FALSE, user.getFirstLoginFlag());
     }
 
     @Test
