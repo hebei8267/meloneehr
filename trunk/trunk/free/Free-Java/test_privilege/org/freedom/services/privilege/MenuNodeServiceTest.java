@@ -152,4 +152,15 @@ public class MenuNodeServiceTest extends BaseTestCase {
         boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
         assertEquals(false, result);
     }
+
+    @Test
+    public void addMenuNodeCase13() throws Exception {
+        MenuNode node = new MenuNode();
+        node.setNodeTxt("xxxxxx");
+        node.setNodeType(MenuNodeType.LEAF_NODE_TYPE);
+        node.setActionContent("xxxxxxx");
+        node.setIndex(3);
+        boolean result = menuNodeService.addMenuNodeInfoService(node, "00000011");
+        assertEquals(true, result);
+    }
 }
