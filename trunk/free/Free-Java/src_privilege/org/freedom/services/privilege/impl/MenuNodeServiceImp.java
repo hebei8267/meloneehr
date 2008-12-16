@@ -109,7 +109,8 @@ public class MenuNodeServiceImp implements IMenuNodeService {
             _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());
             _dbMenuNode.setDefaultPermit(menuNode.getDefaultPermit());
             _dbMenuNode.setActionContent(menuNode.getActionContent());
-            if (menuNode.getIndex() != null && !_dbMenuNode.getIndex().equals(menuNode.getIndex())) {// index变更
+            // index变更
+            if (menuNode.getIndex() != null && !_dbMenuNode.getIndex().equals(menuNode.getIndex())) {
                 _dbMenuNode.setIndex(menuNode.getIndex());
                 _dbMenuNode.updateNodeIndex();
             }
