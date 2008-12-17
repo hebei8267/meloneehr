@@ -7,8 +7,8 @@
 
 <html>
     <head>
-<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
-<%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+    <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
+    <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
     </head>
     <body>
         <div class="defaultBody">
@@ -65,7 +65,7 @@
             </div>
             <br>
             <div>
-            	<form:form id="loginForm" method="post" modelAttribute="Security001ViewObject">
+                <form:form id="loginForm" method="post" modelAttribute="Security001ViewObject">
                     <table>
                         <tr>
                             <td width="35">
@@ -81,7 +81,7 @@
                                             <img src="images/need-input.gif">用户名
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                        	<extjs:input path="userId"/>
+                                            <extjs:input path="userId" minLength="8" maxLength="8" allowBlank="false" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -89,7 +89,7 @@
                                             <img src="images/need-input.gif">用户密码
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <input type="password" size="20" maxlength="20" name="password" class="x-form-text inputText">
+                                            <extjs:password path="password" allowBlank="false" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -97,14 +97,10 @@
                                             变更密码
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <input checked="checked" name="change_password" value="no" id="change_password" type="radio">
-                                            <label>
-                                                不变更
-                                            </label>
-                                            <input name="change_password" value="yes" id="change_password" type="radio">
-                                            <label>
-                                                变更
-                                            </label>
+                                            <form:radiobutton path="changePassword" value="false"/>
+                                            <label>不变更</label>
+                                            <form:radiobutton path="changePassword" value="true" />
+                                            <label>变更</label>
                                         </td>
                                     </tr>
                                     <tr>
