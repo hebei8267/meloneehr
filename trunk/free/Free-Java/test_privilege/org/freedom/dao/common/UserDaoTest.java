@@ -10,9 +10,8 @@ import java.util.List;
 
 import org.freedom.core.test.BaseTestCase;
 import org.freedom.dao.common.UserDao;
-import org.freedom.dao.privilege.RoleDao;
+import org.freedom.entity.common.Role;
 import org.freedom.entity.common.User;
-import org.freedom.entity.privilege.Role;
 
 import org.freedom.file.CSVFileUtils;
 import org.junit.Test;
