@@ -17,7 +17,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import org.freedom.core.entity.AbstractEntityBean;
-import org.freedom.entity.privilege.Role;
 
 import org.hibernate.annotations.NaturalId;
 
