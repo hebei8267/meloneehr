@@ -45,11 +45,11 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>org.freedom.entity.common.User</value>
-				<value>org.freedom.entity.privilege.Role</value>
+				<value>org.freedom.entity.common.Role</value>
 
 				<value>org.freedom.entity.ui.MenuNode</value>
 				<value>org.freedom.entity.ui.MenuNodeType</value>
-				<value>org.freedom.entity.ui.MenuNodePrivilege</value>
+				<value>org.freedom.entity.ui.MenuNodePermit</value>
 			</list>
 		</property>
 		<!--	
