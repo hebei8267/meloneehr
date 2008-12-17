@@ -4,7 +4,7 @@
 package org.freedom.services.privilege;
 
 import org.freedom.core.test.BaseTestCase;
-import org.freedom.entity.privilege.Role;
+import org.freedom.entity.common.Role;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
