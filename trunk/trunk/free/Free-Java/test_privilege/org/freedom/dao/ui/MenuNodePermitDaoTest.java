@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.freedom.core.test.BaseTestCase;
-import org.freedom.dao.privilege.RoleDao;
-import org.freedom.entity.privilege.Role;
+import org.freedom.dao.common.RoleDao;
+import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
-import org.freedom.entity.ui.MenuNodePrivilege;
+import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.file.CSVFileUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +23,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 何贝
  * @since JDK1.5
  */
-public class MenuNodePrivilegeDaoTest extends BaseTestCase {
+public class MenuNodePermitDaoTest extends BaseTestCase {
     @Autowired
-    private MenuNodePrivilegeDao menuNodePrivilegeDao;
+    private MenuNodePermitDao menuNodePermitDao;
     @Autowired
     private RoleDao roleDao;
     @Autowired
     private MenuNodeDao menuNodeDao;
 
-    public MenuNodePrivilegeDao getMenuNodePrivilegeDao() {
-        return menuNodePrivilegeDao;
+    public MenuNodePermitDao getMenuNodePermitDao() {
+        return menuNodePermitDao;
     }
 
-    public void setMenuNodePrivilegeDao(MenuNodePrivilegeDao menuNodePrivilegeDao) {
-        this.menuNodePrivilegeDao = menuNodePrivilegeDao;
+    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
+        this.menuNodePermitDao = menuNodePermitDao;
     }
 
     public RoleDao getRoleDao() {
@@ -61,7 +61,7 @@ public class MenuNodePrivilegeDaoTest extends BaseTestCase {
 
         for (List<String> fileLine : csvFileContent) {
 
-            MenuNodePrivilege rolePrivilege = new MenuNodePrivilege();
+            MenuNodePermit rolePrivilege = new MenuNodePermit();
 
             for (int i = 0; i < fileLine.size(); i++) {
 
@@ -74,7 +74,7 @@ public class MenuNodePrivilegeDaoTest extends BaseTestCase {
                     rolePrivilege.setRole(role);
                 }
             }
-            menuNodePrivilegeDao.save(rolePrivilege);
+            menuNodePermitDao.save(rolePrivilege);
         }
     }
 }
