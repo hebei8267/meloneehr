@@ -15,6 +15,8 @@
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript">
 	<!--
-	    
+	    Ext.onReady(function(){
+    		Ext.QuickTips.init();
+		});
 	-->
 	</script>
