@@ -17,8 +17,7 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-collections.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-lang.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/dom4j.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/ezmorph-1.0.4.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-annotations.jar"/>
@@ -31,10 +30,11 @@
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/p6spy.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/postgresql-8.2-506.jdbc3.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/qdox-1.7-20070515.134713-1.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-api.jar"/>
-	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-log4j12.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-api-1.5.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-log4j12-1.5.0.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-test.jar"/>
 	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar"/>
