@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.freedom.core.entity.AbstractEntityBean;
-import org.freedom.entity.privilege.Role;
+import org.freedom.entity.common.Role;
 import org.hibernate.annotations.NaturalId;
 
 /**
@@ -25,12 +25,12 @@ import org.hibernate.annotations.NaturalId;
  * @since JDK1.5
  */
 @Entity
-@Table(name = "W_MENU_NODE_PRIVILEGE")
+@Table(name = "W_MENU_NODE_PERMIT")
 @NamedQueries( {
-        @NamedQuery(name = "MenuNodePrivilege.getMenuNodePrivilegeListByUserID", query = "select pObj.menuNodeID from MenuNodePrivilege pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
-        @NamedQuery(name = "MenuNodePrivilege.getMenuNodePrivilegeByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePrivilege pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),
-        @NamedQuery(name = "MenuNodePrivilege.delMenuNodePrivilegeByMenuNodeID", query = "delete MenuNodePrivilege pObj where pObj.menuNodeID = ? ") })
-public class MenuNodePrivilege extends AbstractEntityBean {
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByUserID", query = "select pObj.menuNodeID from MenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),
+        @NamedQuery(name = "MenuNodePermit.delMenuNodePermitByMenuNodeID", query = "delete MenuNodePermit pObj where pObj.menuNodeID = ? ") })
+public class MenuNodePermit extends AbstractEntityBean {
 
     private static final long serialVersionUID = -350595423265400452L;
 
@@ -136,10 +136,10 @@ public class MenuNodePrivilege extends AbstractEntityBean {
      * @see java.lang.Object#equals(Object)
      */
     public boolean equals(Object object) {
-        if (!(object instanceof MenuNodePrivilege)) {
+        if (!(object instanceof MenuNodePermit)) {
             return false;
         }
-        MenuNodePrivilege rhs = (MenuNodePrivilege) object;
+        MenuNodePermit rhs = (MenuNodePermit) object;
         return new EqualsBuilder().append(this.menuNodeID, rhs.menuNodeID).append(this.roleID, rhs.roleID).isEquals();
     }
 
