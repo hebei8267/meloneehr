@@ -7,10 +7,10 @@ import org.freedom.core.test.BaseTestCase;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import org.freedom.dao.common.RoleDaoTest;
 import org.freedom.dao.common.UserDaoTest;
-import org.freedom.dao.privilege.RoleDaoTest;
 import org.freedom.dao.ui.MenuNodeDaoTest;
-import org.freedom.dao.ui.MenuNodePrivilegeDaoTest;
+import org.freedom.dao.ui.MenuNodePermitDaoTest;
 import org.freedom.dao.ui.MenuNodeTypeDaoTest;
 
 /**
@@ -25,7 +25,7 @@ import org.freedom.dao.ui.MenuNodeTypeDaoTest;
                        UserDaoTest.class, 
                        MenuNodeTypeDaoTest.class,
                        MenuNodeDaoTest.class,
-                       MenuNodePrivilegeDaoTest.class})
+                       MenuNodePermitDaoTest.class})
 public class AllDaoTest extends BaseTestCase {
 
 }

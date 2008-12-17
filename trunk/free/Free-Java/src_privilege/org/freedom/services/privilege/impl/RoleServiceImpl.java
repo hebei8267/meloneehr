@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.freedom.core.domain.TreeNode;
-import org.freedom.dao.privilege.RoleDao;
-import org.freedom.entity.privilege.Role;
+import org.freedom.dao.common.RoleDao;
+import org.freedom.entity.common.Role;
 import org.freedom.services.privilege.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
