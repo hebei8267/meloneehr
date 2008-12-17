@@ -4,7 +4,7 @@
 package org.freedom.services.privilege;
 
 import org.freedom.core.domain.TreeNode;
-import org.freedom.entity.privilege.Role;
+import org.freedom.entity.common.Role;
 
 /**
  * 角色对象相关服务
