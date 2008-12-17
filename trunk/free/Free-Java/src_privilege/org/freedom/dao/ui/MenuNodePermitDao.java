@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.freedom.core.dao.impl.HibernateDaoImpl;
-import org.freedom.entity.ui.MenuNodePrivilege;
+import org.freedom.entity.ui.MenuNodePermit;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("menuNodePrivilegeDao")
-public class MenuNodePrivilegeDao extends HibernateDaoImpl<MenuNodePrivilege> {
+@Component("menuNodePermitDao")
+public class MenuNodePermitDao extends HibernateDaoImpl<MenuNodePermit> {
     /**
      * 取得用户可访问的菜单树结点权限列表
      * 
@@ -31,9 +31,9 @@ public class MenuNodePrivilegeDao extends HibernateDaoImpl<MenuNodePrivilege> {
      * @return 用户可访问的菜单树结点权限列表
      */
     @SuppressWarnings("unchecked")
-    public List<String> getMenuNodePrivilegeListByUserID(String userID) {
+    public List<String> getMenuNodePermitListByUserID(String userID) {
         List<String> resultList = getHibernateTemplate().findByNamedQuery(
-                "MenuNodePrivilege.getMenuNodePrivilegeListByUserID", userID);
+                "MenuNodePermit.getMenuNodePermitListByUserID", userID);
 
         return resultList;
 
@@ -47,9 +47,9 @@ public class MenuNodePrivilegeDao extends HibernateDaoImpl<MenuNodePrivilege> {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public MenuNodePrivilege getMenuNodePrivilegeByRoleIDAndMenuNodeID(String roleID, String menuNodeID) {
-        List<MenuNodePrivilege> resultList = getHibernateTemplate().findByNamedQuery(
-                "MenuNodePrivilege.getMenuNodePrivilegeByRoleIDAndMenuNodeID", new String[] { roleID, menuNodeID });
+    public MenuNodePermit getMenuNodePermitByRoleIDAndMenuNodeID(String roleID, String menuNodeID) {
+        List<MenuNodePermit> resultList = getHibernateTemplate().findByNamedQuery(
+                "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", new String[] { roleID, menuNodeID });
 
         if (resultList.size() > 0) {
             return resultList.get(0);
@@ -64,12 +64,12 @@ public class MenuNodePrivilegeDao extends HibernateDaoImpl<MenuNodePrivilege> {
      * @param menuNodeID 菜单树结点ID
      * @return 删除的记录行数
      */
-    public Integer delMenuNodePrivilegeByMenuNodeID(final String menuNodeID) {
+    public Integer delMenuNodePermitByMenuNodeID(final String menuNodeID) {
         return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
-                Query query = session.getNamedQuery("MenuNodePrivilege.delMenuNodePrivilegeByMenuNodeID");
+                Query query = session.getNamedQuery("MenuNodePermit.delMenuNodePermitByMenuNodeID");
                 query.setString(0, menuNodeID);
                 return query.executeUpdate();
             }
@@ -84,12 +84,12 @@ public class MenuNodePrivilegeDao extends HibernateDaoImpl<MenuNodePrivilege> {
      * @param roleIDs 角色ID数组
      * @return 删除的记录行数
      */
-    public Integer delRoleMenuNodePrivilegeByMenuNodeID(final String menuNodeID, final String[] roleIDs) {
+    public Integer delRoleMenuNodePermitByMenuNodeID(final String menuNodeID, final String[] roleIDs) {
 
         return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
-                StringBuffer sql = new StringBuffer(" delete MenuNodePrivilege pObj where pObj.menuNodeID = ? and ( ");
+                StringBuffer sql = new StringBuffer(" delete MenuNodePermit pObj where pObj.menuNodeID = ? and ( ");
                 for (int i = 0; i < roleIDs.length; i++) {
                     if (i != 0) {
                         sql.append(" or ");
