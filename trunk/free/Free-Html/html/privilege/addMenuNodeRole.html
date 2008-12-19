@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- ExtJS Begin -->
+        <link rel="stylesheet" type="text/css" href="../../ext-lib/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="../../ext-lib/resources/css/xtheme-gray.css" />
+		<script type="text/javascript" src="../../ext-lib/adapter/prototype/prototype.js"></script>
+        <script type="text/javascript" src="../../ext-lib/adapter/prototype/effects.js"></script>
+		<script type="text/javascript" src="../../ext-lib/adapter/prototype/ext-prototype-adapter.js"></script>
+		<script type="text/javascript" src="../../ext-lib/ext-all.js"></script>
+		<script type="text/javascript" src="../../ext-lib/locale/ext-lang-zh_CN.js"></script>
+		<!-- ExtJS End-->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css">
+        <title>Freedom&Melon</title>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript">
+		<!--
+			window.onload = function () {
+				focusInput();
+			}
+			
+			//关闭当前窗口
+	        function closeWin(){
+	            parent.close();
+	        }
+			
+			Ext.onReady(function(){
+
+			    var myData = [['00000001', '系统管理员'], ['00000002', '一般用户'], ['00000003', '行政人员']];
+			    
+			    // create the data store
+			    var store = new Ext.data.SimpleStore({
+			        fields: [{
+			            name: 'roleID'
+			        }, {
+			            name: 'roleName'
+			        }]
+			    });
+			    store.loadData(myData);
+			    
+			    var sm = new Ext.grid.CheckboxSelectionModel({
+			        header: '',
+			        singleSelect: true,
+			        listeners: {
+			            rowselect: function(sm, row, rec){
+			                // setFromData(rec);
+			            },
+			            rowdeselect: function(sm, row, rec){
+			                // cleanFromData();
+			            }
+			        }
+			    });
+				
+				// create the Grid
+			    var grid = new Ext.grid.GridPanel({
+			        store: store,
+			        id: 'roleGrid',
+			        el: 'roleGridDiv',
+			        columns: [sm, new Ext.grid.RowNumberer({
+			            header: '序号',// 自动行号
+			            width: 35
+			        }), {
+			            id: 'roleID',
+			            header: "编号",
+			            width: 80,
+			            sortable: true,
+			            dataIndex: 'roleID'
+			        }, {
+			            id: 'roleName',
+			            header: "名称",
+			            width: 150,
+			            sortable: true,
+			            dataIndex: 'roleName'
+			        }],
+			        stripeRows: true,
+			        height: 200,
+			        width: 322,
+			        title: '适用角色信息'
+			    });
+			    
+			    grid.render();
+			});
+		-->
+        </script>
+	</head>
+	<body>
+		<div class="defaultPopWindowBody">
+			<table class="appTitleTable"> 
+                <tr> 
+                    <td class="appTitle">
+                        添加角色信息
+                    </td> 
+                    <td class="appScreenID"> 
+                        - MENU SETTINGS 003 -
+                    </td> 
+                </tr>
+                <tr> 
+                    <table class="spiltLine"> 
+                        <tr> 
+                            <td><!-- 分割线 --></td>
+                        </tr> 
+                    </table> 
+                </tr> 
+                <tr> 
+                    <td colspan="2" class="operTip">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="../../images/tip.png">
+                                </td>
+                                <td>
+                                    重复添加已存在的[角色]时,将忽视该[角色]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    选中要添加的[角色](可多选--<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+                                </td>
+                            </tr>
+                        </table>
+                    </td> 
+                </tr> 
+            </table>
+			<form name="addRoleForm" method="post" action="#">
+				<table>
+					<tr height="10">
+                	</tr>
+					<tr>
+						<td style="padding-left: 30px">
+							&nbsp;
+		                </td>
+						<td>
+							<table>
+								<tr>
+									<td class="inputItemName" height="30" width="100">
+										树节点编号
+		                          	</td> 
+		                        	<td class="inputItemCell" height="30" width="200">
+		                         		<input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
+		                         	</td>
+								</tr>
+								<tr>
+									<td class="inputItemName" height="30" width="100">
+										树节点名称
+		                            </td> 
+		                          	<td class="inputItemCell" height="30" width="200"> 
+		                           		<input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
+		                         	</td>
+								</tr>
+								<tr height="10">
+                				</tr>
+								<tr>
+									<td colspan="2"><div id="roleGridDiv"></div></td>
+								</tr>
+							</table>
+	                    </td>
+					</tr>
+					<tr height="10">
+                 	</tr>
+					<tr>
+	                    <td colspan="2" align="right">
+	                        <!-- 按钮 START --> 
+	                        <table> 
+	                            <tr> 
+	                                <td align="right"> 
+	                                    <input value="添  加" class="buttonSubmitLong" type="button" onclick="closeWin();"> 
+	                                </td> 
+	                                <td width="20"> 
+	                                </td> 
+	                                <td align="right"> 
+	                                    <input value="关  闭" class="buttonResetLong" type="button" onclick="closeWin();"> 
+	                                </td> 
+	                            </tr> 
+	                        </table>
+	                        <!-- 按钮 END --> 
+	                    </td>
+	                 </tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>
