@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.0</jsp-version>
+	<short-name>extjs</short-name>
+	<uri>http://www.org.freedom.org/tags/form</uri>
+	<description>利用extjs扩展Spring Tags</description>
+
+
+	<!-- <extjs:input/> tag -->
+	<tag>
+		<name>input</name>
+		<tag-class>org.freedom.web.servlet.tags.form.ExtjsInputTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Renders an HTML 'input' tag with type 'text' using the bound value.</description>
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<!-- Ext.form.TextField属性 -->
+		<attribute>
+			<name>allowBlank</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>emptyText</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>maxLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>minLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>validator</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute> 
+		<attribute>
+			<name>readOnly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- <extjs:password/> tag -->
+	<tag>
+		<name>password</name>
+		<tag-class>org.freedom.web.servlet.tags.form.ExtjsPasswordInputTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Renders an HTML 'input' tag with type 'text' using the bound value.</description>
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<!-- Ext.form.TextField属性 -->
+		<attribute>
+			<name>allowBlank</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>emptyText</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>maxLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>minLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>validator</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute> 
+		<attribute>
+			<name>readOnly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
