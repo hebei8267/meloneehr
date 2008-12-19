@@ -44,11 +44,11 @@ public class ExtjsPasswordInputTag extends ExtjsInputTag {
         StringBuffer _sbuf = new StringBuffer();
 
         _sbuf.append(" var " + resolveId() + "ExtPwd = new Ext.form.TextField({ ");
-        _sbuf.append("      id: '" + resolveId() + "', ");
-        _sbuf.append("      inputType: 'password', ");
+        _sbuf.append(" id: '" + resolveId() + "', ");
+        _sbuf.append(" inputType: 'password', ");
         // 默认属性生成
         createComponentCommonAttributeScript(_sbuf);
-        _sbuf.append("      renderTo: '" + resolveId() + "Div' ");
+        _sbuf.append(" renderTo: '" + resolveId() + "Div' ");
         _sbuf.append(" }); ");
 
         return _sbuf.toString();

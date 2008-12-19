@@ -61,7 +61,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
         List<String> scriptList = (List<String>) this.pageContext.getAttribute(EXTJS_COMPONENT_SCRIPT_NAME);
         if (scriptList == null) {
             scriptList = new ArrayList<String>();
-            this.pageContext.setAttribute(EXTJS_COMPONENT_SCRIPT_NAME, scriptList);
+            this.pageContext.setAttribute(EXTJS_COMPONENT_SCRIPT_NAME, scriptList, PageContext.PAGE_SCOPE);
         }
 
         scriptList.add(_scriptStr);

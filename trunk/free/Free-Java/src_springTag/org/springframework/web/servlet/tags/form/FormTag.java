@@ -420,7 +420,7 @@ public class FormTag extends AbstractHtmlElementTag {
             
             tagWriter.writerExtjsScript(_buf.toString());
         }
-        this.pageContext.removeAttribute(AbstractExtjsTag.EXTJS_COMPONENT_SCRIPT_NAME);
+        this.pageContext.removeAttribute(AbstractExtjsTag.EXTJS_COMPONENT_SCRIPT_NAME, PageContext.PAGE_SCOPE);
     }
     /**
      * Clears the stored {@link TagWriter}.
