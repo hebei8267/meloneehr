@@ -6,7 +6,7 @@ package org.freedom.web.servlet.tags.form;
 import javax.servlet.jsp.JspException;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.web.servlet.tags.form.AbstractHtmlInputElementTag;
+import org.springframework.web.servlet.tags.form.AbstractDataBoundFormElementTag;
 import org.springframework.web.servlet.tags.form.TagWriter;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsInputTag extends AbstractHtmlInputElementTag {
+public class ExtjsInputTag extends AbstractDataBoundFormElementTag {
 
     private static final long serialVersionUID = 744707304978648098L;
 
@@ -44,6 +44,7 @@ public class ExtjsInputTag extends AbstractHtmlInputElementTag {
         tagWriter.startTag("div");
         writeDefaultAttributes(tagWriter);
         tagWriter.endTag();
+        System.out.println("##################" + pageContext == null);
         // 添加Extjs脚本
         writerScript(tagWriter);
         return SKIP_BODY;
