@@ -7,8 +7,19 @@
 
 <html>
     <head>
-    <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
-    <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+    	<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
+    	<%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+	    <script type="text/javascript">
+	    <!--
+	    	<%// 用户登录 %>
+	        function login(){
+	        	if(Ext.getCmp('userId').isValid()
+	        		&& Ext.getCmp('password').isValid()){
+	        		$("loginForm").submit();
+	        	}
+	        }
+	    -->
+	    </script>
     </head>
     <body>
         <div class="defaultBody">
@@ -130,21 +141,7 @@
                     </table>
                 </form:form>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div>
-                <table class="appFooterTable">
-                    <tr>
-                        <td>
-                            <center>
-                                <a href="">Freedom&Melon</a>&nbsp;｜&nbsp;<a href="mailto:hebei198267@gmail.com">电子邮件</a>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
         </div>
     </body>
 </html>
