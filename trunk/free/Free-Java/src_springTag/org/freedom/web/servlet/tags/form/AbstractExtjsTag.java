@@ -37,7 +37,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
                 return attributeName + ": '" + getDisplayString(evaluate(attributeName, value)) + "', ";
             }
         }
-        return null;
+        return "";
     }
 
     /*
@@ -48,7 +48,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
     @Override
     protected void writeDefaultAttributes(TagWriter tagWriter) throws JspException {
         writeOptionalAttribute(tagWriter, "id", resolveId() + "Div");
-        writeOptionalAttribute(tagWriter, "name", getName());
+        writeOptionalAttribute(tagWriter, "name", getName() + "Div");
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
         List<String> scriptList = (List<String>) this.pageContext.getAttribute(EXTJS_COMPONENT_SCRIPT_NAME);
         if (scriptList == null) {
             scriptList = new ArrayList<String>();
-            this.pageContext.setAttribute(EXTJS_COMPONENT_SCRIPT_NAME, scriptList, PageContext.REQUEST_SCOPE);
+            this.pageContext.setAttribute(EXTJS_COMPONENT_SCRIPT_NAME, scriptList);
         }
 
         scriptList.add(_scriptStr);
