@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.services.privilege.impl;
+package org.freedom.services.permit.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.freedom.core.domain.TreeNode;
 import org.freedom.dao.common.RoleDao;
 import org.freedom.entity.common.Role;
-import org.freedom.services.privilege.IRoleService;
+import org.freedom.services.permit.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

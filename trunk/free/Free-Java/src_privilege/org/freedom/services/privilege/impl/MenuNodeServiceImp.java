@@ -1,7 +1,7 @@
 /*
  * Copyright 2008 by hebei, All rights reserved.
  */
-package org.freedom.services.privilege.impl;
+package org.freedom.services.permit.impl;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -10,7 +10,7 @@ import org.freedom.dao.ui.MenuNodeDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodeType;
-import org.freedom.services.privilege.IMenuNodeService;
+import org.freedom.services.permit.IMenuNodeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
