@@ -5,6 +5,7 @@ package org.freedom.services.privilege;
 
 import org.freedom.core.test.BaseTestCase;
 import org.freedom.entity.ui.MenuNode;
+import org.freedom.services.permit.IMenuNodeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
