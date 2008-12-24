@@ -198,4 +198,66 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	
+	
+	<!-- <extjs:calendar/> tag -->
+	<tag>
+		<name>calendar</name>
+		<tag-class>org.freedom.web.servlet.tags.form.ExtjsCalendarTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Renders an HTML 'input' tag with type 'text' using the bound value.</description>
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<!-- Ext.form.TextField属性 -->
+		<attribute>
+			<name>allowBlank</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>emptyText</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>maxLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>minLength</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>validator</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute> 
+		<attribute>
+			<name>readOnly</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>format</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>

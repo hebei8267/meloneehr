@@ -12,7 +12,8 @@
     	<script type="text/javascript">
 	    <!--
 	    function xx(){
-	    alert($F('nodeType'))
+	    	//alert($F('nodeType'))
+	    	alert($F('calendar'))
 	    	return "ssss";
 	    }
 	    -->
@@ -22,7 +23,7 @@
     	<form:form id="testForm" method="post" modelAttribute="testViewObject">
     	<table>
     		<tr>
-    			<td width="30" rowspan="3"></td>
+    			<td width="30" rowspan="4"></td>
     			<td>
     				<extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
     			</td>
@@ -35,11 +36,12 @@
     		<tr>
     			<td>
     				<extjs:comboBox path="nodeType" items="${testViewObject.nodeTypeList}" 
-    				itemValue="value" itemLabel="label" validator="xx" editable="true"/>
+    				itemValue="value" itemLabel="label" editable="true"/>
     			</td>
     		</tr>
     		<tr>
     			<td>
+    				<extjs:calendar path="calendar" format="Ymd" validator="xx"/>
     			</td>
     		</tr>
     	</table>
