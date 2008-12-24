@@ -26,6 +26,7 @@ public class test extends AbstractViewAction {
     private String password;
     private String nodeType;
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
+    private String calendar;
 
     public test() {
         nodeTypeList.add(new LabelValueBean("<空>", ""));
@@ -77,5 +78,13 @@ public class test extends AbstractViewAction {
 
     public void setNodeType(String nodeType) {
         this.nodeType = nodeType;
+    }
+
+    public String getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(String calendar) {
+        this.calendar = calendar;
     }
 }
