@@ -40,7 +40,7 @@ public class test extends AbstractViewAction {
      * 
      * @return
      */
-    @RequestMapping("/index.faces")
+    // @RequestMapping("/index.faces")
     public String showPage_Action(Model model) {
         // 用户登录页面初始化
         model.addAttribute("testViewObject", this);
