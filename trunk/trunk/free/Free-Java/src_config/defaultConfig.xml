@@ -82,16 +82,16 @@
 			</list>
 		</property>
 	</bean>
-	<!--
+
 	<bean id="loginUserAccessInterceptor" class="org.freedom.view.interceptor.LoginUserAccessInterceptor">
 		<property name="notLoginAllowAccessClassNameList">
 			<list>
-				<value>org.freedom.view.action.jsp.security.FD000S001JspViewAction</value>
-				<value>org.freedom.view.action.ajax.security.FD000S001AjaxViewAction</value>
+				<value>org.freedom.view.action.normal.security.Security001NormalViewAction</value>
+				<value>org.freedom.view.action.ajax.security.Security001AjaxViewAction</value>
 			</list>
 		</property>
 		<property name="sessionTimeOut">
-			<value>index.html</value>
+			<value>sessionTimeOut.jsp</value>
 		</property>	
-	</bean>-->
+	</bean>
 </beans>
