@@ -18,7 +18,7 @@
                 }
                 Ext.Ajax.timeout = 10;
                 Ext.Ajax.request({
-	                url : '${pageContext.request.contextPath}/security/001aaa/loginAction.ajax',
+	                url : '${pageContext.request.contextPath}/security/001/loginAction.ajax',
 	                method: 'post',
 	                failure : defaultAjaxRequestFailure,
 	                success : function(result, request) {
@@ -182,7 +182,8 @@
                     </table>
                 </form:form>
             </div>
-            <%@ include file="/WEB-INF/jsp/base/PageFooter.jsp" %>
+            <%@ include file="/WEB-INF/jsp/base/pageFooter.jsp" %>
+            <%@ include file="/WEB-INF/jsp/base/sysErrorFrom.jsp" %>
         </div>
     </body>
 </html>
