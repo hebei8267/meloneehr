@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 	<!-- ExtJS Begin -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ext-lib/resources/css/ext-all.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ext-lib/resources/css/xtheme-gray.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ext-lib/resources/css/xtheme-gray.css" /> -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/adapter/prototype/prototype.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/adapter/prototype/effects.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/adapter/prototype/ext-prototype-adapter.js"></script>
@@ -12,7 +12,8 @@
         
         
 	<title>Freedom&Melon</title>
-	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/message.js"></script>
 	<script type="text/javascript">
 	<!--
 	    Ext.onReady(function(){

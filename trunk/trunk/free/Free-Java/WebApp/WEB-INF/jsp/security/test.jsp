@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ taglib prefix="extjs" uri="/WEB-INF/extjs-spring-form.tld" %>
+<%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
 
 <html>
     <head>

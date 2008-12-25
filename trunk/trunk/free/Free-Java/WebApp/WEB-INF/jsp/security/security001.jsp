@@ -3,23 +3,64 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ taglib prefix="extjs" uri="/WEB-INF/extjs-spring-form.tld" %>
+<%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
 
 <html>
     <head>
-    	<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
-    	<%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
-	    <script type="text/javascript">
-	    <!--
-	    	<%// 用户登录 %>
-	        function login(){
-	        	if(Ext.getCmp('userId').isValid()
-	        		&& Ext.getCmp('password').isValid()){
-	        		$("loginForm").submit();
-	        	}
-	        }
-	    -->
-	    </script>
+        <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
+        <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+        <script type="text/javascript">
+        <!--
+            // 用户登录
+            function login(){
+                if(!formExtCmpValidate("loginForm")){
+                    return;
+                }
+                Ext.Ajax.timeout = 10;
+                Ext.Ajax.request({
+	                url : '${pageContext.request.contextPath}/security/001aaa/loginAction.ajax',
+	                method: 'post',
+	                failure : defaultAjaxRequestFailure,
+	                success : function(result, request) {
+	                    var oResult = eval("(" + result.responseText + ")");
+	                    
+	                    if(oResult.processResult) {// 成功
+	                        loginSuccess();
+	                    } else {// 失败
+	                        // Ajax系统定式 start
+	                        if(!oResult.processResult && oResult.sessionTimeOut){
+	                            $("systemErrorForm").target = "_top";
+	                            $("systemErrorForm").submit();
+	                            return;
+	                        }
+	                        // Ajax系统定式 end
+	                        
+	                        showMessageBox(oResult.resultMsg);
+	                        formReset();
+	                    }
+	                },
+	                params : {
+	                    userId : $F('userId'),
+	                    password : $F('password')
+	                }
+	            });
+            }
+            // 用户登录成功
+            function loginSuccess(){
+                if(getRadioValueByName("changePassword")== 'true') { //修改用户密码
+                    $("loginForm").action = "${pageContext.request.contextPath}/security/002/showPageAction.faces";
+                } else { //工作区主界面
+                    $("loginForm").action = "${pageContext.request.contextPath}/security/003/showPageAction.faces";
+                }
+                $("loginForm").submit();
+            }
+            // 表单重置
+		    function formReset(){
+		        formExtCmpReset("loginForm");
+		        $("loginForm").reset();
+		    }
+            -->
+            </script>
     </head>
     <body>
         <div class="defaultBody">
@@ -129,7 +170,7 @@
                                                     <td width="20">
                                                     </td>
                                                     <td align="right">
-                                                        <input value="重  置" class="buttonResetLong" type="reset">
+                                                        <input value="重  置" class="buttonResetLong" type="button" onclick="formReset();">
                                                     </td>
                                                 </tr>
                                             </table>
