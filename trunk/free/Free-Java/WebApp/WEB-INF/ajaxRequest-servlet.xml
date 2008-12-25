@@ -15,7 +15,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean> 
-	<!--  
+
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
 			<list>
@@ -23,5 +23,5 @@
 			</list>
 		</property> 
 	</bean>
-	 -->
+
 </beans>  
