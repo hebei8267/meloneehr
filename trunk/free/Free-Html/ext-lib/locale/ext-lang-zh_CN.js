@@ -49,8 +49,8 @@ Date.dayNames = [
 
 if(Ext.MessageBox){
    Ext.MessageBox.buttonText = {
-      ok     : "确定",
-      cancel : "取消",
+      ok     : "确 定",
+      cancel : "取 消",
       yes    : "是",
       no     : "否"
    };
