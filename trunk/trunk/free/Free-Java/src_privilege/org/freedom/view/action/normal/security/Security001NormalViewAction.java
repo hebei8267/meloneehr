@@ -25,8 +25,8 @@ public class Security001NormalViewAction extends AbstractViewAction {
      * 
      * @return
      */
-    //TODO @RequestMapping("/index.faces")
-    public String showPage_Action(Model model) {
+    @RequestMapping("/index.faces")
+    public String showPageAction(Model model) {
         // 用户登录页面初始化
         model.addAttribute("Security001ViewObject", new Security001ViewObject());
 
