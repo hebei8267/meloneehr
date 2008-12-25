@@ -6,7 +6,7 @@
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>1.0</jsp-version>
 	<short-name>extjs</short-name>
-	<uri>http://www.org.freedom.org/tags/form</uri>
+	<uri>http://www.freedom.org/tags/form</uri>
 	<description>利用extjs扩展Spring Tags</description>
 
 
