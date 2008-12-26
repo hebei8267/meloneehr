@@ -19,5 +19,5 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" /> 
 	<context:component-scan base-package="org.freedom.services"/>
 	<context:component-scan base-package="org.freedom.dao"/>
-	<context:component-scan base-package="org.freedom.view.system"/>
+	<context:component-scan base-package="org.freedom.view.domain.system"/>
 </beans>
