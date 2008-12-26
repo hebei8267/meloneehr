@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.freedom.core.domain.TreeNode;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
+import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.services.permit.IMenuNodeService;
+import org.freedom.view.action.SecurityMesssageID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -50,7 +53,7 @@ public class Security003AjaxViewAction extends AbstractViewAction {
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
 
         // 取得request里面的参数
-        String nodeId = ServletRequestUtils.getStringParameter(request, "id");
+        String nodeId = ServletRequestUtils.getStringParameter(request, "nodeId");
 
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
@@ -60,6 +63,36 @@ public class Security003AjaxViewAction extends AbstractViewAction {
         JSONArray jSONArray = JSONArray.fromObject(rootNode.getChildren());
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONArray.toString());
+    }
+
+    /**
+     * 校验选中节点的访问权限
+     * 
+     * @param request
+     * @param response
+     * @throws ServletRequestBindingException
+     * @throws IOException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    @RequestMapping("/security/003/checkMenuNodePermitAction.ajax")
+    public void checkMenuNodePermitAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
+        // 取得request里面的参数
+        String nodeId = ServletRequestUtils.getStringParameter(request, "nodeId");
+        // 取得登录用户信息
+        UserInfoSessionBean user = getUserInfoInSession(request);
+
+        boolean _result = menuNodeService.checkMenuNodePermitService(user.getUserId(), user.getRoleId(), nodeId);
+
+        JosnViewObject outObj = new JosnViewObject();
+        if (!_result) {
+            outObj.setProcessResult(false);
+            outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_NO_ACCESS_MENU_NODE_PERMIT));
+        }
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
     }
 
     public IMenuNodeService getMenuNodeService() {
