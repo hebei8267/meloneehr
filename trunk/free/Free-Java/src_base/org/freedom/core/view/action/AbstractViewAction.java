@@ -91,7 +91,6 @@ public abstract class AbstractViewAction extends BaseBean {
     }
 
     private static String ERROR_INFO = "ERROR_";
-    private static String SPACE = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     private static String NEW_LINE = "<br>";
 
     /**
@@ -107,7 +106,7 @@ public abstract class AbstractViewAction extends BaseBean {
         ResourceBundleMessageSource msgObj = (ResourceBundleMessageSource) WebApplicationContextUtil
                 .getApplicationBean(request, "messageSource");
         if (msgKey.startsWith(ERROR_INFO)) {// 消息级别--错误级别
-            return NEW_LINE + SPACE + msgObj.getMessage(msgKey, args, locale) + SPACE;
+            return NEW_LINE + msgObj.getMessage(msgKey, args, locale);
         }
         return msgObj.getMessage(msgKey, args, locale);
     }

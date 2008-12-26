@@ -18,32 +18,32 @@
                 }
                 Ext.Ajax.timeout = 10;
                 Ext.Ajax.request({
-	                url : '${pageContext.request.contextPath}/security/001/loginAction.ajax',
-	                method: 'post',
-	                failure : defaultAjaxRequestFailure,
-	                success : function(result, request) {
-	                    var oResult = eval("(" + result.responseText + ")");
-	                    
-	                    if(oResult.processResult) {// 成功
-	                        loginSuccess();
-	                    } else {// 失败
-	                        // Ajax系统定式 start
-	                        if(!oResult.processResult && oResult.sessionTimeOut){
-	                            $("systemErrorForm").target = "_top";
-	                            $("systemErrorForm").submit();
-	                            return;
-	                        }
-	                        // Ajax系统定式 end
-	                        
-	                        showMessageBox(oResult.resultMsg);
-	                        formReset();
-	                    }
-	                },
-	                params : {
-	                    userId : $F('userId'),
-	                    password : $F('password')
-	                }
-	            });
+                    url : '${pageContext.request.contextPath}/security/001/loginAction.ajax',
+                    method: 'post',
+                    failure : defaultAjaxRequestFailure,
+                    success : function(result, request) {
+                        var oResult = eval("(" + result.responseText + ")");
+                        
+                        if(oResult.processResult) {// 成功
+                            loginSuccess();
+                        } else {// 失败
+                            // Ajax系统定式 start
+                            if(!oResult.processResult && oResult.sessionTimeOut){
+                                $("systemErrorForm").target = "_top";
+                                $("systemErrorForm").submit();
+                                return;
+                            }
+                            // Ajax系统定式 end
+                            
+                            showMessageBox(oResult.resultMsg);
+                            formReset();
+                        }
+                    },
+                    params : {
+                        userId : $F('userId'),
+                        password : $F('password')
+                    }
+                });
             }
             // 用户登录成功
             function loginSuccess(){
@@ -55,10 +55,10 @@
                 $("loginForm").submit();
             }
             // 表单重置
-		    function formReset(){
-		        formExtCmpReset("loginForm");
-		        $("loginForm").reset();
-		    }
+            function formReset(){
+                formExtCmpReset("loginForm");
+                $("loginForm").reset();
+            }
             -->
             </script>
     </head>
