@@ -47,10 +47,10 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
      * (non-Javadoc)
      * 
      * @seeorg.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.
-     * HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+     * HttpServletRequest, javax.servlet.http.HttpServletResponse,
+     * java.lang.Object)
      */
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         return notLoginCheck(request, response, handler);
     }
 
@@ -80,7 +80,7 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
                 response.setContentType(AbstractViewAction.RESPONSE_CONTENT_TYPE);
                 response.getWriter().write(jSONObject.toString());
             } else {
-                response.sendRedirect(sessionTimeOut);
+                response.sendRedirect(request.getContextPath() + sessionTimeOut);
             }
 
             return false;
