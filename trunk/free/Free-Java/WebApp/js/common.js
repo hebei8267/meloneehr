@@ -59,6 +59,21 @@ function defaultAjaxRequestFailure(result, request) {
 }
 
 var _title = "Freedom&Melon";
-function showMessageBox(msg) {
-	Ext.MessageBox.alert(_title, msg);
+function showMessageBox(msgStr) {
+	Ext.Msg.show({
+		title : _title,
+		msg : msgStr,
+		buttons : Ext.Msg.OK,
+		icon : Ext.MessageBox.INFO
+	});
+}
+
+function showMessageBox(msgStr, fun) {
+	Ext.Msg.show({
+		title : _title,
+		msg : msgStr,
+		buttons : Ext.Msg.OK,
+		fn : fun,
+		icon : Ext.MessageBox.INFO
+	});
 }
