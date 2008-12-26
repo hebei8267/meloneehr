@@ -3,6 +3,8 @@
  */
 package org.freedom.services.permit;
 
+import java.util.List;
+
 import org.freedom.core.domain.TreeNode;
 import org.freedom.entity.ui.MenuNode;
 
@@ -47,9 +49,30 @@ public interface IMenuNodeService {
     public boolean delMenuNodeInfoService(String menuNodeID);
 
     /**
-     * 取得菜单结点树信息
+     * 取得菜单结点树信息(根节点开始)
      * 
+     * @param userID 用户ID
+     * @param roleID 角色ID
      * @return 菜单结点树根节点
      */
-    public TreeNode getAllMenuNodeInfoTreeService();
+    public TreeNode getMenuNodeInfoTreeService(String userID, String roleID);
+
+    /**
+     * 取得菜单结点树信息(指定根节点开始)
+     * 
+     * @param userID 用户ID
+     * @param roleID 角色ID
+     * @param rootID 根节点ID
+     * @return 菜单结点树根节点
+     */
+    public TreeNode getMenuNodeInfoTreeService(String rootID, String userID, String roleID);
+
+    /**
+     * 取得所有导航条类型树节点
+     * 
+     * @param userID 用户ID
+     * @param roleID 角色ID
+     * @return 所有导航条类型树节点列表
+     */
+    public List<TreeNode> getAllAreaMenuNodeService(String userID, String roleID);
 }
