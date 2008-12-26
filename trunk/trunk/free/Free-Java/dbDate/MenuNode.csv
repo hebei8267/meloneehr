@@ -1,10 +1,11 @@
 00000001,系统菜单树根节点,root,true,null,
-00000002,系统设置,area,false,null,00000001
+00000002,系统设定,area,false,null,00000001
 00000003,人事管理,area,false,null,00000001
 00000004,国家信息,node,false,null,00000003
 00000005,民族信息,node,false,null,00000003
 00000006,籍贯信息,node,false,null,00000003
 00000007,组织类型信息,node,false,null,00000003
-00000008,组织相关,folder,false,null,00000002
-00000009,组织结构信息,node,true,bbbbbbbbb.faces,00000008
-00000010,菜单树管理,node,false,FD000S004JspViewAction_ShowPageAction.faces,00000002
+00000008,菜单树设定,node,false,null,00000002
+00000009,角色相关,folder,false,null,00000002
+00000010,角色设定,node,true,null,00000009
+00000011,角色&菜单树关联设定,node,true,null,00000009
