@@ -10,4 +10,5 @@ package org.freedom.view.action;
 public class SecurityMesssageID {
     public final static String ERROR_LOGIN_FAILED = "ERROR_LOGIN_FAILED";
     public final static String ERROR_INVALIDATE_INPUT_PWD = "ERROR_INVALIDATE_INPUT_PWD";
+    public final static String ERROR_NO_ACCESS_MENU_NODE_PERMIT = "ERROR_NO_ACCESS_MENU_NODE_PERMIT";
 }
