@@ -91,7 +91,7 @@
 			</list>
 		</property>
 		<property name="sessionTimeOut">
-			<value>sessionTimeOut.jsp</value>
+			<value>/sessionTimeOut.jsp</value>
 		</property>	
 	</bean>
 </beans>
