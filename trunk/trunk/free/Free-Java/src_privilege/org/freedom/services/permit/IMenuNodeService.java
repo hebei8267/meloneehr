@@ -75,4 +75,14 @@ public interface IMenuNodeService {
      * @return 所有导航条类型树节点列表
      */
     public List<TreeNode> getAllAreaMenuNodeService(String userID, String roleID);
+
+    /**
+     * 校验选中节点的访问权限
+     * 
+     * @param userID 用户ID
+     * @param roleID 角色ID
+     * @param nodeID 节点ID
+     * @return true-校验成功 false-校验失败
+     */
+    public boolean checkMenuNodePermitService(String userID, String roleID, String nodeID);
 }
