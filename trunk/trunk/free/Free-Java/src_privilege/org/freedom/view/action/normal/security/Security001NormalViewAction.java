@@ -4,7 +4,7 @@
 package org.freedom.view.action.normal.security;
 
 import org.freedom.core.view.action.AbstractViewAction;
-import org.freedom.view.action.vobj.Security001ViewObject;
+import org.freedom.view.action.vobj.security.s001.Security001ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

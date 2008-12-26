@@ -22,6 +22,6 @@ public class SessionTimeOutNormalViewAction extends AbstractViewAction {
 
     @RequestMapping("/sessionTimeOut.faces")
     public String showPageAction(Model model) {
-        return "sessionTimeOut";
+        return "/sessionTimeOut";
     }
 }
