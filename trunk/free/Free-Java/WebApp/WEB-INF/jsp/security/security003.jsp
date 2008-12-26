@@ -98,7 +98,7 @@
 	                id : '${item.id}',
 	                loader: new Ext.tree.TreeLoader({
 	                    dataUrl:'${pageContext.request.contextPath}/security/003/getAreaMenuNodeTreeAction.ajax',
-	                    baseParams :{id:'${item.id}'},
+	                    baseParams :{nodeId:'${item.id}'},
 	                    requestMethod : 'post',
 	                    listeners : {
 	                        loadexception : defaultAjaxRequestFailure
@@ -113,17 +113,60 @@
 	            tree.on("click", function(node, event) {
 	                if (node.isLeaf() && node.attributes.actionContent != "") {
 	                    // 检查用户访问菜单节点的权限
-	                    //checkMenuNodePermit(node.id, node.attributes.actionContent);
+	                    checkMenuNodePermit(node.id, node.attributes.actionContent, node.attributes.defaultPermit);
 	                }
 	            })
 	        }
 	        </c:forEach>
 			
-			/** 工作区区域尺寸调整 */
+			// 工作区区域尺寸调整
 			function doWorkFrameLayout(){
 			    Ext.get("workFrame").setWidth(Ext.getCmp("work").getInnerWidth());
 			    Ext.get("workFrame").setHeight(Ext.getCmp("work").getInnerHeight());
 			}
+			// 检查用户访问菜单节点的权限
+	        function checkMenuNodePermit(menuNodeId, actionContent, defaultPermit){
+
+	        	if(actionContent == "" || actionContent == "null"){
+	        		return;
+	        	}
+	        	if(defaultPermit == true){
+	        		updateWorkFrame(actionContent);
+	        		return;
+	        	}
+	            Ext.Ajax.request({
+	                url : '${pageContext.request.contextPath}/security/003/checkMenuNodePermitAction.ajax',
+	                method: 'post',
+	                failure : defaultAjaxRequestFailure,
+	                success : function(result, request) {
+	                    var oResult = eval("(" + result.responseText + ")");
+	                    
+	                    if(oResult.processResult) {// 成功
+	                        updateWorkFrame(actionContent);
+	                    } else {// 失败
+	                        // Ajax系统定式 start
+                            if(!oResult.processResult && oResult.sessionTimeOut){
+                                $("systemErrorForm").target = "_top";
+                                $("systemErrorForm").submit();
+                                return;
+                            }
+                            showMessageBox(oResult.resultMsg);
+                            // Ajax系统定式 end
+                            
+	                        return;//无访问权限
+	                    }
+	                },
+	                params : {
+	                    nodeId : menuNodeId
+	                }
+	            });
+	        }
+	        //更新工作区
+	        function updateWorkFrame(actionContent){
+	            $("systemErrorForm").target = "workFrame";
+	            $("systemErrorForm").action = actionContent;
+	            $("systemErrorForm").submit();
+	        }
 		-->
         </script>
 	</head>
