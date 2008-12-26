@@ -9,6 +9,7 @@
     <head>
         <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+        <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
             // 用户登录
@@ -16,7 +17,7 @@
                 if(!formExtCmpValidate("loginForm")){
                     return;
                 }
-                Ext.Ajax.timeout = 10;
+
                 Ext.Ajax.request({
                     url : '${pageContext.request.contextPath}/security/001/loginAction.ajax',
                     method: 'post',
@@ -33,9 +34,9 @@
                                 $("systemErrorForm").submit();
                                 return;
                             }
+                            showMessageBox(oResult.resultMsg);
                             // Ajax系统定式 end
                             
-                            showMessageBox(oResult.resultMsg);
                             formReset();
                         }
                     },
@@ -59,8 +60,8 @@
                 formExtCmpReset("loginForm");
                 $("loginForm").reset();
             }
-            -->
-            </script>
+        -->
+        </script>
     </head>
     <body>
         <div class="defaultBody">
@@ -75,7 +76,8 @@
                         </tr>
                         <tr>
                             <td class="loginDate">
-                                2008/09/06 星期六
+                                <%=systemDate.getNowDate()%>
+                    			<%=systemDate.getNowWeek()%>
                             </td>
                         </tr>
                     </table>
@@ -99,8 +101,8 @@
                             <!-- 操作说明 -->
                             <table>
                                 <tr>
-                                    <td><img src="images/tip.png"></td>
-                                    <td><span class="need">注意:[<img src="images/need-input.gif">]为必填项</span></td>
+                                    <td><img src="${pageContext.request.contextPath}/images/tip.png"></td>
+                                    <td><span class="need">注意:[<img src="${pageContext.request.contextPath}/images/need-input.gif">]为必填项</span></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -130,7 +132,7 @@
                                     </tr>
                                     <tr>
                                         <td class="inputItemName" height="30" width="100">
-                                            <img src="images/need-input.gif">用户名
+                                            <img src="${pageContext.request.contextPath}/images/need-input.gif">用户名
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
                                             <extjs:input path="userId" minLength="8" maxLength="8" allowBlank="false" />
@@ -138,10 +140,10 @@
                                     </tr>
                                     <tr>
                                         <td class="inputItemName" height="30" width="100">
-                                            <img src="images/need-input.gif">用户密码
+                                            <img src="${pageContext.request.contextPath}/images/need-input.gif">用户密码
                                         </td>
                                         <td class="inputItemCell" height="30" width="200">
-                                            <extjs:password path="password" allowBlank="false" />
+                                            <extjs:password path="password" allowBlank="false" maxLength="20" />
                                         </td>
                                     </tr>
                                     <tr>
