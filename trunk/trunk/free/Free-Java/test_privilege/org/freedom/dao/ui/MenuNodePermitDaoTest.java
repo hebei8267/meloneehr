@@ -64,7 +64,9 @@ public class MenuNodePermitDaoTest extends BaseTestCase {
             MenuNodePermit rolePrivilege = new MenuNodePermit();
 
             for (int i = 0; i < fileLine.size(); i++) {
-
+                if (i == 0) {
+                    continue;
+                }
                 String value = fileLine.get(i);
                 if (i == 0) {
                     MenuNode menuNode = menuNodeDao.getMenuNodeByID(value);
