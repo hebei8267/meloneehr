@@ -58,10 +58,7 @@ function defaultAjaxRequestFailure(result, request) {
 	showMessageBox(getCommunicationErrorMsg());
 }
 
-var _space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-var _newLine = "<br>";
 var _title = "Freedom&Melon";
 function showMessageBox(msg) {
-	var _msg = _newLine + _space + msg + _space;
-	Ext.MessageBox.alert(_title, _msg);
+	Ext.MessageBox.alert(_title, msg);
 }
