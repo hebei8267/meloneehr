@@ -27,6 +27,7 @@ public class test extends AbstractViewAction {
     private String nodeType;
     private List<LabelValueBean> nodeTypeList = new ArrayList<LabelValueBean>();
     private String calendar;
+    private String textArea;
 
     public test() {
         nodeTypeList.add(new LabelValueBean("<空>", ""));
@@ -40,7 +41,7 @@ public class test extends AbstractViewAction {
      * 
      * @return
      */
-    // @RequestMapping("/index.faces")
+    @RequestMapping("/index1.faces")
     public String showPage_Action(Model model) {
         // 用户登录页面初始化
         model.addAttribute("testViewObject", this);
@@ -86,5 +87,13 @@ public class test extends AbstractViewAction {
 
     public void setCalendar(String calendar) {
         this.calendar = calendar;
+    }
+
+    public String getTextArea() {
+        return textArea;
+    }
+
+    public void setTextArea(String textArea) {
+        this.textArea = textArea;
     }
 }
