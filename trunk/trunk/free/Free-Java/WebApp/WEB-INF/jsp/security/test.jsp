@@ -23,7 +23,7 @@
     	<form:form id="testForm" method="post" modelAttribute="testViewObject">
     	<table>
     		<tr>
-    			<td width="30" rowspan="4"></td>
+    			<td width="30" rowspan="5"></td>
     			<td>
     				<extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
     			</td>
@@ -42,6 +42,11 @@
     		<tr>
     			<td>
     				<extjs:calendar path="calendar" format="Ymd" validator="xx"/>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>
+    				<extjs:textArea path="textArea" minLength="8" maxLength="8" allowBlank="false"/>
     			</td>
     		</tr>
     	</table>
