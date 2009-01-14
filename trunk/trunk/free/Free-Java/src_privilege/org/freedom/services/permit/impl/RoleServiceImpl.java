@@ -12,6 +12,7 @@ import org.freedom.core.domain.TreeNode;
 import org.freedom.dao.common.RoleDao;
 import org.freedom.entity.common.Role;
 import org.freedom.services.permit.IRoleService;
+import org.freedom.view.domain.system.RoleTreeNodeViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -98,7 +99,7 @@ public class RoleServiceImpl implements IRoleService {
     public TreeNode getAllRoleInfoTreeService() {
         Role dbRole = roleDao.getRoleByID(Role.ROLE_TREE_ROOT_ID);
         if (dbRole != null) {
-            TreeNode root = new TreeNode();
+            TreeNode root = new RoleTreeNodeViewObject();
 
             root.setId(dbRole.getId());
             root.setText(dbRole.getName());
@@ -123,7 +124,7 @@ public class RoleServiceImpl implements IRoleService {
         for (Role dbChildRole : dbParentRole.getChildRoleSet()) {
             if (dbChildRole != null) {
 
-                TreeNode childRole = new TreeNode();
+                TreeNode childRole = new RoleTreeNodeViewObject();
                 childRole.setId(dbChildRole.getId());
                 childRole.setText(dbChildRole.getName());
                 childRole.setParentNodeID(dbChildRole.getParentRoleID());

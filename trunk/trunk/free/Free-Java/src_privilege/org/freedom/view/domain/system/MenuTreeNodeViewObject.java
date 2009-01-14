@@ -78,7 +78,8 @@ public class MenuTreeNodeViewObject extends TreeNode {
             this.uiNodeTypeName = "叶节点";
         }
         if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
-            super.setIcon("images/area.gif");
+            //TODO hebei icon
+            //super.setIcon("images/area.gif");
         }
         this.uiNodeType = nodeType;
     }
