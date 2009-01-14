@@ -164,7 +164,7 @@
             //更新工作区
             function updateWorkFrame(actionContent){
                 $("systemErrorForm").target = "workFrame";
-                $("systemErrorForm").action = "${pageContext.request.contextPath}" + actionContent;
+                $("systemErrorForm").action = "${pageContext.request.contextPath}" + actionContent + ".faces";
                 $("systemErrorForm").submit();
             }
         -->
