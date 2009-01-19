@@ -124,11 +124,13 @@ public class RoleServiceImpl implements IRoleService {
         for (Role dbChildRole : dbParentRole.getChildRoleSet()) {
             if (dbChildRole != null) {
 
-                TreeNode childRole = new RoleTreeNodeViewObject();
+                RoleTreeNodeViewObject childRole = new RoleTreeNodeViewObject();
                 childRole.setId(dbChildRole.getId());
                 childRole.setText(dbChildRole.getName());
+                childRole.setDetail(dbChildRole.getDetail());
                 childRole.setParentNodeID(dbChildRole.getParentRoleID());
-
+                childRole.setParentNodeText(dbChildRole.getParentRole().getName());
+                
                 parentNode.setLeaf(false);
 
                 parentNode.addChildren(childRole);
