@@ -5,6 +5,7 @@ package org.freedom.web.servlet.tags.form;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.tags.form.TagWriter;
 
 /**
@@ -46,6 +47,9 @@ public class ExtjsTextAreaTag extends AbstractExtjsTag{
     }
 
     public String getHeight() {
+        if (StringUtils.isEmpty(height)) {
+            return "100";
+        }
         return height;
     }
 
