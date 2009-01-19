@@ -26558,7 +26558,15 @@ Ext.form.TextField = Ext.extend(Ext.form.Field,  {
 
     
     validateValue : function(value){
-        if(value.length < 1 || value === this.emptyText){              if(this.allowBlank){
+    	if(typeof this.validator == "function"){
+            var msg = this.validator(value);
+            if(msg !== true){
+                this.markInvalid(msg);
+                return false;
+            }
+        }
+        if(value.length < 1 || value === this.emptyText){              
+             if(this.allowBlank){
                  this.clearInvalid();
                  return true;
              }else{
@@ -26581,13 +26589,13 @@ Ext.form.TextField = Ext.extend(Ext.form.Field,  {
                 return false;
             }
         }
-        if(typeof this.validator == "function"){
-            var msg = this.validator(value);
-            if(msg !== true){
-                this.markInvalid(msg);
-                return false;
-            }
-        }
+//        if(typeof this.validator == "function"){
+//            var msg = this.validator(value);
+//            if(msg !== true){
+//                this.markInvalid(msg);
+//                return false;
+//            }
+//        }
         if(this.regex && !this.regex.test(value)){
             this.markInvalid(this.regexText);
             return false;
