@@ -26,6 +26,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
     public static final String MIN_LENGTH_ATTRIBUTE = "minLength";
     public static final String VALIDATOR_ATTRIBUTE = "validator";
     public static final String READONLY_ATTRIBUTE = "readOnly";
+    public static final String DISABLED_ATTRIBUTE = "disabled";
     private String allowBlank;
     private String emptyText;
     private String width;
@@ -33,6 +34,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
     private String minLength;
     private String validator;
     private String readOnly;
+    private String disabled;
 
     /**
      * 生成属性
@@ -101,6 +103,7 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
         _sbuf.append(getOptionalAttributeScript(MIN_LENGTH_ATTRIBUTE, getMinLength(), false));
         _sbuf.append(getOptionalAttributeScript(VALIDATOR_ATTRIBUTE, getValidator(), false));
         _sbuf.append(getOptionalAttributeScript(READONLY_ATTRIBUTE, getReadOnly(), false));
+        _sbuf.append(getOptionalAttributeScript(DISABLED_ATTRIBUTE, getDisabled(), false));
     }
 
     /**
@@ -168,5 +171,13 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
 
     public void setReadOnly(String readOnly) {
         this.readOnly = readOnly;
+    }
+
+    public String getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(String disabled) {
+        this.disabled = disabled;
     }
 }
