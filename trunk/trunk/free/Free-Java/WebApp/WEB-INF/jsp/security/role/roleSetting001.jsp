@@ -45,7 +45,47 @@
 			    
 			    tree.render();
 			    root.expand();
+			    
+			    tree.on("click", function(node, event) {
+
+                    if (node.id == 'root') {//根节点不做处理,清除详细信息
+                    	Ext.get("parentNodeID").value = "";
+	                    Ext.getCmp("parentNodeTxt").setValue("");
+	                    Ext.getCmp("nodeID").setValue("");
+	                    Ext.getCmp("nodeTxt").setValue("");
+	                    Ext.getCmp("nodeDetail").setValue("");
+                    
+                    } else {
+                    	Ext.get("parentNodeID").value = node.attributes.parentNodeID;
+	                    Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
+	                    Ext.getCmp("nodeID").setValue(node.id);
+	                    Ext.getCmp("nodeTxt").setValue(node.text);
+	                    Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
+                    }
+                })
 			});
+			
+			function checkNodeTxt(){
+				if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
+					if(Ext.getCmp("nodeTxt").getValue() != ""){
+						return getNeedSelectedItem("角色树节点");
+					}
+				} else {
+					if(Ext.getCmp("nodeTxt").getValue() == ""){
+						return getBlankText();
+					}
+				}
+				return true;
+			}
+			
+			function checkNodeDetail(){
+				if(Ext.getCmp("nodeID").getValue()==""){//未选中角色节点
+					if(Ext.getCmp("nodeDetail").getValue()!=""){
+						return getNeedSelectedItem("角色树节点");
+					}
+				}
+				return true;
+			}
 		-->
         </script>
 	</head>
@@ -87,7 +127,7 @@
                 </tr> 
             </table>
 			<div>
-				<form name="roleCfgForm" method="post" action="#">
+				<form:form id="roleCfgForm" method="post" modelAttribute="RoleSetting001ViewObject">
 					<table>
             			<tr height="10">
                 		</tr>
@@ -136,7 +176,8 @@
 					                                    父角色名称
 					                                </td> 
 					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
+					                                	<extjs:input path="parentNodeTxt" disabled="true" />
+					                                    <input type="hidden" id="parentNodeID" name="parentNodeID" value="${RoleSetting001ViewObject.parentNodeID}">
 					                                </td>
 												</tr>
 												<tr>
@@ -144,7 +185,7 @@
 					                                    编号
 					                                </td> 
 					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
+					                                	<extjs:input path="nodeID" disabled="true" />
 					                                </td>
 												</tr>
 												<tr>
@@ -152,7 +193,7 @@
 					                                    <img src="${pageContext.request.contextPath}/images/need-input.gif">名称
 					                                </td> 
 					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText"/>
+					                                    <extjs:input path="nodeTxt" validator="checkNodeTxt" maxLength="20"/>
 					                                </td>
 												</tr>
 												<tr>
@@ -160,7 +201,7 @@
 					                                    详细描述
 					                                </td>
 					                                <td class="inputItemCell" height="115" width="200">
-					                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+					                                	<extjs:textArea path="nodeDetail" validator="checkNodeDetail" maxLength="255"/>
 					                                </td>
 					                            </tr>
 												<tr height="10">
@@ -189,7 +230,7 @@
 		                	</td>
 						</tr>
 					</table>
-				</form>
+				</form:form>
 			</div>
 			<%@ include file="/WEB-INF/jsp/base/pageFooter.jsp" %>
         	<%@ include file="/WEB-INF/jsp/base/sysErrorFrom.jsp" %>
