@@ -47,14 +47,17 @@ public class RoleServiceImpl implements IRoleService {
         return false;
     }
 
-    public boolean delRoleInfoService(String roleID) {
+    public int delRoleInfoService(String roleID, Integer dataVersion) {
         Role dbRole = roleDao.getRoleByID(roleID);
-        if (dbRole != null && checkRole4User(dbRole)) {
-
-            roleDao.delete(dbRole);
-            return true;
+        if (dbRole == null || !dbRole.getVersion().equals(dataVersion)) {
+            return 1;
         }
-        return false;
+        if (!checkRole4User(dbRole)) {
+            return 2;
+        }
+        roleDao.delete(dbRole);
+
+        return 0;
     }
 
     /**

@@ -22,6 +22,7 @@ import org.freedom.view.action.SecurityMesssageID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -62,7 +63,31 @@ public class RoleSetting001AjaxViewAction extends AbstractViewAction {
         JosnViewObject outObj = new JosnViewObject();
         if (!_result) {
             outObj.setProcessResult(false);
-            outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_MO_SYNCHRONIZATION));
+            outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_NO_SYNCHRONIZATION));
+        }
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
+    }
+    @RequestMapping("/security/role/roleSetting/001/delNodeInfoAction.ajax")
+    public void delNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
+        // 取得request里面的参数
+        String roleID = ServletRequestUtils.getStringParameter(request, "roleID");
+        Integer dataVersion = ServletRequestUtils.getIntParameter(request, "dataVersion");
+
+        int _result = roleService.delRoleInfoService(roleID, dataVersion);
+        JosnViewObject outObj = new JosnViewObject();
+        if (_result != 0) {
+            outObj.setProcessResult(false);
+            if (_result == 1) {
+                outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_NO_SYNCHRONIZATION));
+            }
+            if (_result == 2) {
+                outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_DEL_FAILURE_P2, new String[] {
+                        "角色节点", "该角色节点及其所有子角色节点有关联的用户信息" }));
+            }
+
         }
         JSONObject jSONObject = JSONObject.fromObject(outObj);
         response.setContentType(RESPONSE_CONTENT_TYPE);
