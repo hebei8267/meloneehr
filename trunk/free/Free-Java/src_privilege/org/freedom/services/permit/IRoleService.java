@@ -14,21 +14,13 @@ import org.freedom.entity.common.Role;
  */
 public interface IRoleService {
     /**
-     * 添加角色在默认的根节点下
+     * 添加角色在指定的父角色对象下(父节点为空时默认添加到根节点下)
      * 
      * @param role 要添加的角色
+     * @param inheritFlg 继承权限
      * @return true-成功 false-失败
      */
-    public boolean addRoleInfoService(Role role);
-
-    /**
-     * 添加角色在指定的父角色对象下
-     * 
-     * @param role 要添加的角色
-     * @param parentRoleID 父角色ID
-     * @return true-成功 false-失败
-     */
-    public boolean addRoleInfoService(Role role, String parentRoleID);
+    public boolean addRoleInfoService(Role role, boolean inheritFlg);
 
     /**
      * 修改角色信息
@@ -45,7 +37,7 @@ public interface IRoleService {
      * @param dataVersion 版本
      * @return 0-成功 1-失败(数据同步错误) 2-失败(该角色和其所有子角色有关联用户信息)
      */
-    public int delRoleInfoService(String roleID, Integer dataVersion);
+    public int delRoleInfoService(String roleID, int dataVersion);
 
     /**
      * 取得角色树信息
