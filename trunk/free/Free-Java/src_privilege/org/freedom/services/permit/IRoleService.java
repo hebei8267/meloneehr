@@ -42,9 +42,10 @@ public interface IRoleService {
      * 删除指定的角色(删除之前会检查其所有子角色是否有对应的关联用户对象,如果有将不能删除)
      * 
      * @param roleID 要删除的角色ID
-     * @return true-成功 false-失败
+     * @param dataVersion 版本
+     * @return 0-成功 1-失败(数据同步错误) 2-失败(该角色和其所有子角色有关联用户信息)
      */
-    public boolean delRoleInfoService(String roleID);
+    public int delRoleInfoService(String roleID, Integer dataVersion);
 
     /**
      * 取得角色树信息
