@@ -19,23 +19,23 @@
             }
             
             function addRole(){
-            	if(!formExtCmpValidate("addRoleForm")){
+                if(!formExtCmpValidate("addRoleForm")){
                     return;
                 }
                 //表单提交简化版本
-            	formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/002/addRoleAction.ajax", 
-            	               {
-            	               parentRoleID: Ext.getCmp("parentNodeID").getValue(),
-            	               detail: Ext.getCmp("nodeDetail").getValue(),
-            	               name: Ext.getCmp("nodeTxt").getValue(),
-            	               inheritFlg: getRadioValueByName("inheritFlg")},
-            	               addRoleSuccess ,
-            	               addRoleSuccess);
+                formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/002/addRoleAction.ajax", 
+                               {
+                               parentRoleID: Ext.getCmp("parentNodeID").getValue(),
+                               detail: Ext.getCmp("nodeDetail").getValue(),
+                               name: Ext.getCmp("nodeTxt").getValue(),
+                               inheritFlg: getRadioValueByName("inheritFlg")},
+                               addRoleSuccess ,
+                               addRoleSuccess);
             }
             
             function addRoleSuccess(){
-            	parent.window.opener.roleTreeReload();
-            	closeWin();
+                parent.window.opener.roleTreeReload();
+                closeWin();
             }
         --> 
         </script> 
@@ -97,7 +97,7 @@
                                         父角色编号
                                     </td> 
                                     <td class="inputItemCell" height="30" width="200"> 
-                                    	<extjs:input path="parentNodeID" disabled="true" />
+                                        <extjs:input path="parentNodeID" disabled="true" />
                                     </td> 
                                 </tr> 
                                 <tr> 
@@ -105,7 +105,7 @@
                                         父角色名称
                                     </td> 
                                     <td class="inputItemCell" height="30" width="200"> 
-                                    	<extjs:input path="parentNodeTxt" disabled="true" />
+                                        <extjs:input path="parentNodeTxt" disabled="true" />
                                     </td> 
                                 </tr> 
                                 <tr> 

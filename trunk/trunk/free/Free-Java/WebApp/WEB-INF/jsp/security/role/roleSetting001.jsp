@@ -12,8 +12,8 @@
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
-        	var subWin = null;
-        	
+            var subWin = null;
+            
             Ext.onReady(function(){
                 var tree = new Ext.tree.TreePanel({
                     el: 'roleTreeDiv',
@@ -66,11 +66,11 @@
             });
             //清除隐藏信息
             function cleanHiddenItem(){
-            	$("parentNodeID").value = "";
-             	Ext.getCmp("parentNodeTxt").setValue("");
-              	Ext.getCmp("nodeID").setValue("");
-               	Ext.getCmp("nodeTxt").setValue("");
-               	Ext.getCmp("nodeDetail").setValue("");
+                $("parentNodeID").value = "";
+                Ext.getCmp("parentNodeTxt").setValue("");
+                Ext.getCmp("nodeID").setValue("");
+                Ext.getCmp("nodeTxt").setValue("");
+                Ext.getCmp("nodeDetail").setValue("");
             }
             //校验角色节点名称
             function checkNodeTxt(){
@@ -123,11 +123,11 @@
                 var roleNode = roleTree.getNodeById(Ext.getCmp("nodeID").getValue());
 
                 if(Ext.getCmp("nodeTxt").getValue() == roleNode.attributes.text 
-                	&& Ext.getCmp("nodeDetail").getValue() == roleNode.attributes.detail){//角色详细未修改，不做后台提交
-                	showMessageBox(getNoChangeErrorMsg());
-                	return;
-            	}
-            	
+                    && Ext.getCmp("nodeDetail").getValue() == roleNode.attributes.detail){//角色详细未修改，不做后台提交
+                    showMessageBox(getNoChangeErrorMsg());
+                    return;
+                }
+                
                 Ext.Ajax.request({
                     url : '${pageContext.request.contextPath}/security/role/roleSetting/001/updateNodeInfoAction.ajax',
                     method: 'post',
@@ -166,38 +166,38 @@
             }
             //删除角色
             function delRole(){
-            	if($F("parentNodeID") == ""){
-            		showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
-            		return;
-            	}
-            	//表单提交简化版本
-            	formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
-            	               {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
-            	               roleID: Ext.getCmp("nodeID").getValue()},
-            	               roleTreeReload ,
-            	               roleTreeReload);
+                if($F("parentNodeID") == ""){
+                    showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
+                    return;
+                }
+                //表单提交简化版本
+                formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
+                               {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+                               roleID: Ext.getCmp("nodeID").getValue()},
+                               roleTreeReload ,
+                               roleTreeReload);
             }
             //添加角色
             function addRole(){
-            	if(subWin != null){
-	                subWin.close();
-	            }
-	            
-	            $("hnodeID").value = Ext.getCmp("nodeID").getValue();
-	            
-	            var windowOption = "width=390,height=385,left=300,top=100,status=no,resizable=no";
-	            var windowName = "ADD_ROLE";
-	            subWin =  window.open("", windowName, windowOption);
-	            $("roleCfgForm").target = windowName;
-	            $("roleCfgForm").action = "${pageContext.request.contextPath}/security/role/roleSetting/002/showPageAction.faces";
-	            $("roleCfgForm").submit();
-	            return;
+                if(subWin != null){
+                    subWin.close();
+                }
+                
+                $("hnodeID").value = Ext.getCmp("nodeID").getValue();
+                
+                var windowOption = "width=390,height=385,left=300,top=100,status=no,resizable=no";
+                var windowName = "ADD_ROLE";
+                subWin =  window.open("", windowName, windowOption);
+                $("roleCfgForm").target = windowName;
+                $("roleCfgForm").action = "${pageContext.request.contextPath}/security/role/roleSetting/002/showPageAction.faces";
+                $("roleCfgForm").submit();
+                return;
             }
             function closeSubWin(){
-	            if(subWin != null){
-	                subWin.close();
-	            }
-	        }
+                if(subWin != null){
+                    subWin.close();
+                }
+            }
         -->
         </script>
     </head>
