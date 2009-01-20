@@ -90,9 +90,6 @@ public abstract class AbstractViewAction extends BaseBean {
         return getMessage(request, msgKey, args, Locale.CHINA);
     }
 
-    private static String ERROR_INFO = "ERROR_";
-    private static String NEW_LINE = "<br>";
-
     /**
      * 取得消息资源
      * 
@@ -105,9 +102,7 @@ public abstract class AbstractViewAction extends BaseBean {
     protected String getMessage(HttpServletRequest request, String msgKey, Object[] args, Locale locale) {
         ResourceBundleMessageSource msgObj = (ResourceBundleMessageSource) WebApplicationContextUtil
                 .getApplicationBean(request, "messageSource");
-        if (msgKey.startsWith(ERROR_INFO)) {// 消息级别--错误级别
-            return NEW_LINE + msgObj.getMessage(msgKey, args, locale);
-        }
+
         return msgObj.getMessage(msgKey, args, locale);
     }
 
