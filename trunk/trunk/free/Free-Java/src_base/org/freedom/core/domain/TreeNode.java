@@ -36,6 +36,9 @@ public class TreeNode extends BaseBean {
     /** 节点图标 */
     private String icon;
 
+    /** 数据版本号 */
+    protected Integer version;
+
     public TreeNode() {
 
     }
@@ -160,5 +163,23 @@ public class TreeNode extends BaseBean {
      */
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    /**
+     * 取得数据版本号
+     * 
+     * @return 数据版本号
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * 设置数据版本号
+     * 
+     * @param version 数据版本号
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
