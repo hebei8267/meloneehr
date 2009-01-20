@@ -50,14 +50,10 @@
                 tree.on("click", function(node, event) {
 
                     if (node.id == 'root') {//根节点不做处理,清除详细信息
-                        Ext.get("parentNodeID").value = "";
-                        Ext.getCmp("parentNodeTxt").setValue("");
-                        Ext.getCmp("nodeID").setValue("");
-                        Ext.getCmp("nodeTxt").setValue("");
-                        Ext.getCmp("nodeDetail").setValue("");
+                        cleanHiddenItem();
                     
                     } else {
-                        Ext.get("parentNodeID").value = node.attributes.parentNodeID;
+                        $("parentNodeID").value = node.attributes.parentNodeID;
                         Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
                         Ext.getCmp("nodeID").setValue(node.id);
                         Ext.getCmp("nodeTxt").setValue(node.text);
@@ -65,7 +61,13 @@
                     }
                 })
             });
-            
+            function cleanHiddenItem(){
+            	$("parentNodeID").value = "";
+             	Ext.getCmp("parentNodeTxt").setValue("");
+              	Ext.getCmp("nodeID").setValue("");
+               	Ext.getCmp("nodeTxt").setValue("");
+               	Ext.getCmp("nodeDetail").setValue("");
+            }
             function checkNodeTxt(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
                     if(Ext.getCmp("nodeTxt").getValue() != ""){
@@ -112,7 +114,15 @@
                 if(!formExtCmpValidate("roleCfgForm")){
                     return;
                 }
-                
+                var roleTree = Ext.getCmp("roleTree");
+                var roleNode = roleTree.getNodeById(Ext.getCmp("nodeID").getValue());
+
+                if(Ext.getCmp("nodeTxt").getValue() == roleNode.attributes.text 
+                	&& Ext.getCmp("nodeDetail").getValue() == roleNode.attributes.detail){//角色详细未修改，不做后台提交
+                	showMessageBox(getNoChangeErrorMsg());
+                	return;
+            	}
+            	
                 Ext.Ajax.request({
                     url : '${pageContext.request.contextPath}/security/role/roleSetting/001/updateNodeInfoAction.ajax',
                     method: 'post',
@@ -146,6 +156,20 @@
             
             function roleTreeReload(){
                 Ext.getCmp("roleTree").root.reload();
+                cleanHiddenItem();
+            }
+            
+            function delRole(){
+            	if($F("parentNodeID") == ""){
+            		showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
+            		return;
+            	}
+            	//表单提交简化版本
+            	formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
+            	               {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+            	               roleID: Ext.getCmp("nodeID").getValue()},
+            	               roleTreeReload ,
+            	               roleTreeReload);
             }
         -->
         </script>
