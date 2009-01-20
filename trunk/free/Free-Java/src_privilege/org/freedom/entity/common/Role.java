@@ -208,7 +208,7 @@ public class Role extends AbstractEntityBean {
      * 
      * @param parentRoleID 父角色ID
      */
-    protected void setParentRoleID(String parentRoleID) {
+    public void setParentRoleID(String parentRoleID) {
         this.parentRoleID = parentRoleID;
     }
 
