@@ -6,34 +6,34 @@
 <%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
 
 <html>
-	<head>
-		<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
+    <head>
+        <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
-		<script type="text/javascript">
-		<!--
-			Ext.onReady(function(){
-				var tree = new Ext.tree.TreePanel({
-			        el: 'roleTreeDiv',
-			        id: 'roleTree',
-			        title: '角色树信息',
-			        useArrows: true,
-			        animate: true,
-			        enableDD: false,
-			        containerScroll: true,
-			        bodyBorder: false,
-			        autoScroll: true,
-			        rootVisible: true,
-			        height: 300,
-			        width: 300,
-			        loader: new Ext.tree.TreeLoader()
-			    });
-			    
-			    var root = new Ext.tree.AsyncTreeNode({
-			        draggable: false,
-			        id: 'root',
-			        text: '角色树根节点',
-			        icon: '${pageContext.request.contextPath}/images/root.gif',
+        <script type="text/javascript">
+        <!--
+            Ext.onReady(function(){
+                var tree = new Ext.tree.TreePanel({
+                    el: 'roleTreeDiv',
+                    id: 'roleTree',
+                    title: '角色树信息',
+                    useArrows: true,
+                    animate: true,
+                    enableDD: false,
+                    containerScroll: true,
+                    bodyBorder: false,
+                    autoScroll: true,
+                    rootVisible: true,
+                    height: 300,
+                    width: 300,
+                    loader: new Ext.tree.TreeLoader()
+                });
+                
+                var root = new Ext.tree.AsyncTreeNode({
+                    draggable: false,
+                    id: 'root',
+                    text: '角色树根节点',
+                    icon: '${pageContext.request.contextPath}/images/root.gif',
                     loader: new Ext.tree.TreeLoader({
                         dataUrl:'${pageContext.request.contextPath}/security/role/roleSetting/001/getAllRoleInfoTreeAction.ajax',
                         requestMethod : 'post',
@@ -41,75 +41,75 @@
                             loadexception : defaultAjaxRequestFailure
                         }
                     })
-			    });
-			    tree.setRootNode(root);
-			    
-			    tree.render();
-			    root.expand();
-			    
-			    tree.on("click", function(node, event) {
+                });
+                tree.setRootNode(root);
+                
+                tree.render();
+                root.expand();
+                
+                tree.on("click", function(node, event) {
 
                     if (node.id == 'root') {//根节点不做处理,清除详细信息
-                    	Ext.get("parentNodeID").value = "";
-	                    Ext.getCmp("parentNodeTxt").setValue("");
-	                    Ext.getCmp("nodeID").setValue("");
-	                    Ext.getCmp("nodeTxt").setValue("");
-	                    Ext.getCmp("nodeDetail").setValue("");
+                        Ext.get("parentNodeID").value = "";
+                        Ext.getCmp("parentNodeTxt").setValue("");
+                        Ext.getCmp("nodeID").setValue("");
+                        Ext.getCmp("nodeTxt").setValue("");
+                        Ext.getCmp("nodeDetail").setValue("");
                     
                     } else {
-                    	Ext.get("parentNodeID").value = node.attributes.parentNodeID;
-	                    Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
-	                    Ext.getCmp("nodeID").setValue(node.id);
-	                    Ext.getCmp("nodeTxt").setValue(node.text);
-	                    Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
+                        Ext.get("parentNodeID").value = node.attributes.parentNodeID;
+                        Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
+                        Ext.getCmp("nodeID").setValue(node.id);
+                        Ext.getCmp("nodeTxt").setValue(node.text);
+                        Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
                     }
                 })
-			});
-			
-			function checkNodeTxt(){
-				if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
-					if(Ext.getCmp("nodeTxt").getValue() != ""){
-						return getNeedSelectedItem("角色树节点");
-					}
-				} else {
-					if(Ext.getCmp("nodeTxt").getValue() == ""){
-						return getBlankText();
-					}
-				}
-				return true;
-			}
-			
-			function checkNodeDetail(){
-				if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
-					if(Ext.getCmp("nodeDetail").getValue() != ""){
-						return getNeedSelectedItem("角色树节点");
-					}
-				}
-				return true;
-			}
-			
-			function selectedNodeReset(){
-				if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
-					var roleTree = Ext.getCmp("roleTree");
-					var roleNode = roleTree.getNodeById(Ext.getCmp("nodeID").getValue());
-					
-		            Ext.getCmp("nodeTxt").setValue(roleNode.text);
-		            Ext.getCmp("nodeDetail").setValue(roleNode.attributes.detail);
-	            } else {
-	            	showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
-	            }
-			}
-			
-			function updateSelectedNode(){
-				if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
-					updateSelectedNodeAction();
-				} else {
-	            	showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
-	            }
-			}
-			
-			function updateSelectedNodeAction(){
-				if(!formExtCmpValidate("roleCfgForm")){
+            });
+            
+            function checkNodeTxt(){
+                if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
+                    if(Ext.getCmp("nodeTxt").getValue() != ""){
+                        return getNeedSelectedItem("角色树节点");
+                    }
+                } else {
+                    if(Ext.getCmp("nodeTxt").getValue() == ""){
+                        return getBlankText();
+                    }
+                }
+                return true;
+            }
+            
+            function checkNodeDetail(){
+                if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
+                    if(Ext.getCmp("nodeDetail").getValue() != ""){
+                        return getNeedSelectedItem("角色树节点");
+                    }
+                }
+                return true;
+            }
+            
+            function selectedNodeReset(){
+                if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+                    var roleTree = Ext.getCmp("roleTree");
+                    var roleNode = roleTree.getNodeById(Ext.getCmp("nodeID").getValue());
+                    
+                    Ext.getCmp("nodeTxt").setValue(roleNode.text);
+                    Ext.getCmp("nodeDetail").setValue(roleNode.attributes.detail);
+                } else {
+                    showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+                }
+            }
+            
+            function updateSelectedNode(){
+                if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+                    updateSelectedNodeAction();
+                } else {
+                    showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+                }
+            }
+            
+            function updateSelectedNodeAction(){
+                if(!formExtCmpValidate("roleCfgForm")){
                     return;
                 }
                 
@@ -142,17 +142,17 @@
                         detail : Ext.getCmp("nodeDetail").getValue()
                     }
                 });
-			}
-			
-			function roleTreeReload(){
-				Ext.getCmp("roleTree").root.reload();
-			}
-		-->
+            }
+            
+            function roleTreeReload(){
+                Ext.getCmp("roleTree").root.reload();
+            }
+        -->
         </script>
-	</head>
-	<body>
-		<div class="defaultBody">
-			<table class="appTitleTable"> 
+    </head>
+    <body>
+        <div class="defaultBody">
+            <table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
                         角色设定
@@ -179,122 +179,122 @@
                                     <span class="need">注意:[<img src="${pageContext.request.contextPath}/images/need-input.gif">]为必填项</span>
                                 </td>
                             </tr>
-							<tr>
-								<td></td>
-								<td><span style="font-weight: bold;">删除[角色]时,其[子角色]也将一同删除</span></td>
-							</tr>
+                            <tr>
+                                <td></td>
+                                <td><span style="font-weight: bold;">删除[角色]时,其[子角色]也将一同删除</span></td>
+                            </tr>
                         </table>
                     </td> 
                 </tr> 
             </table>
-			<div>
-				<form:form id="roleCfgForm" method="post" modelAttribute="RoleSetting001ViewObject">
-					<table>
-            			<tr height="10">
-                		</tr>
-						<tr>
-							<td style="padding-left: 20px"> 
-		                        &nbsp;
-		                    </td>
-		                    <td>
-		                    	<table>
-		                    		<tr>
-		                    			<td>
-		                    				<table>
-		                    					<tr>
-		                    						<!-- 添加角色 -->
-		                    						<td align="left">
-		                    							<input value="添  加" class="buttonSubmitLong" type="button" onclick="addRole();">
-		                    						</td>
-													<td width="20"> 
-                                            		</td>
-													<!-- 删除角色 -->
-													<td align="left">
-		                                                <input value="删  除" class="buttonDeleteLong" type="button" onclick="delRole();"> 
-		                                            </td>
-		                    					</tr>
-											</table>
-										</td>
-									</tr>
-									<tr height="10">
-                            		</tr>
-									<tr>
-		                                <td> 
-		                                    <div id="roleTreeDiv"> 
-		                                    </div> 
-		                                </td> 
-		                                <td width="30">
-		                                </td> 
-		                                <td valign="top">
-		                                    <table>
-		                                    	<tr> 
-					                                <td colspan="2" class="x-panel-header">
-					                                    角色详细信息
-					                                </td>
-					                            </tr>
-												<tr>
-													<td class="inputItemName" height="30" width="100">
-					                                    父角色名称
-					                                </td> 
-					                                <td class="inputItemCell" height="30" width="200">
-					                                	<extjs:input path="parentNodeTxt" disabled="true" />
-					                                    <input type="hidden" id="parentNodeID" name="parentNodeID" value="${RoleSetting001ViewObject.parentNodeID}">
-					                                </td>
-												</tr>
-												<tr>
-													<td class="inputItemName" height="30" width="100">
-					                                    编号
-					                                </td> 
-					                                <td class="inputItemCell" height="30" width="200">
-					                                	<extjs:input path="nodeID" disabled="true" />
-					                                </td>
-												</tr>
-												<tr>
-													<td class="inputItemName" height="30" width="100">
-					                                    <img src="${pageContext.request.contextPath}/images/need-input.gif">名称
-					                                </td> 
-					                                <td class="inputItemCell" height="30" width="200">
-					                                    <extjs:input path="nodeTxt" validator="checkNodeTxt" maxLength="20"/>
-					                                </td>
-												</tr>
-												<tr>
-					                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
-					                                    详细描述
-					                                </td>
-					                                <td class="inputItemCell" height="115" width="200">
-					                                	<extjs:textArea path="nodeDetail" validator="checkNodeDetail" maxLength="255"/>
-					                                </td>
-					                            </tr>
-												<tr height="10">
-	                            				</tr>
-												<tr>
-													<!-- 按钮 -->
-					                                <td colspan="2" align="right">
-					                                    <table> 
-					                                        <tr> 
-					                                            <td align="right"> 
-					                                                <input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
-					                                            </td> 
-					                                            <td width="20"> 
-					                                            </td> 
-					                                            <td align="right"> 
-					                                                <input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();">
-					                                            </td> 
-					                                        </tr> 
-					                                    </table>
-					                                </td> 
-					                            </tr>
-		                                    </table>
-		                                </td>
-		                            </tr>
-								</table>
-		                	</td>
-						</tr>
-					</table>
-				</form:form>
-			</div>
-			<%@ include file="/WEB-INF/jsp/base/pageFooter.jsp" %>
-        	<%@ include file="/WEB-INF/jsp/base/sysErrorFrom.jsp" %>
-		</div>
-	</body>
+            <div>
+                <form:form id="roleCfgForm" method="post" modelAttribute="RoleSetting001ViewObject">
+                    <table>
+                        <tr height="10">
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 20px"> 
+                                &nbsp;
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <!-- 添加角色 -->
+                                                    <td align="left">
+                                                        <input value="添  加" class="buttonSubmitLong" type="button" onclick="addRole();">
+                                                    </td>
+                                                    <td width="20"> 
+                                                    </td>
+                                                    <!-- 删除角色 -->
+                                                    <td align="left">
+                                                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delRole();"> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr height="10">
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <div id="roleTreeDiv"> 
+                                            </div> 
+                                        </td> 
+                                        <td width="30">
+                                        </td> 
+                                        <td valign="top">
+                                            <table>
+                                                <tr> 
+                                                    <td colspan="2" class="x-panel-header">
+                                                        角色详细信息
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inputItemName" height="30" width="100">
+                                                        父角色名称
+                                                    </td> 
+                                                    <td class="inputItemCell" height="30" width="200">
+                                                        <extjs:input path="parentNodeTxt" disabled="true" />
+                                                        <input type="hidden" id="parentNodeID" name="parentNodeID" value="${RoleSetting001ViewObject.parentNodeID}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inputItemName" height="30" width="100">
+                                                        编号
+                                                    </td> 
+                                                    <td class="inputItemCell" height="30" width="200">
+                                                        <extjs:input path="nodeID" disabled="true" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inputItemName" height="30" width="100">
+                                                        <img src="${pageContext.request.contextPath}/images/need-input.gif">名称
+                                                    </td> 
+                                                    <td class="inputItemCell" height="30" width="200">
+                                                        <extjs:input path="nodeTxt" validator="checkNodeTxt" maxLength="20"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                                        详细描述
+                                                    </td>
+                                                    <td class="inputItemCell" height="115" width="200">
+                                                        <extjs:textArea path="nodeDetail" validator="checkNodeDetail" maxLength="255"/>
+                                                    </td>
+                                                </tr>
+                                                <tr height="10">
+                                                </tr>
+                                                <tr>
+                                                    <!-- 按钮 -->
+                                                    <td colspan="2" align="right">
+                                                        <table> 
+                                                            <tr> 
+                                                                <td align="right"> 
+                                                                    <input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
+                                                                </td> 
+                                                                <td width="20"> 
+                                                                </td> 
+                                                                <td align="right"> 
+                                                                    <input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();">
+                                                                </td> 
+                                                            </tr> 
+                                                        </table>
+                                                    </td> 
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </form:form>
+            </div>
+            <%@ include file="/WEB-INF/jsp/base/pageFooter.jsp" %>
+            <%@ include file="/WEB-INF/jsp/base/sysErrorFrom.jsp" %>
+        </div>
+    </body>
 </html>

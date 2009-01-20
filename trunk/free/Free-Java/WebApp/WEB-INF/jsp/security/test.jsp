@@ -7,52 +7,52 @@
 
 <html>
     <head>
-    	<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
-    	<%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
-    	<script type="text/javascript">
-	    <!--
-	    function xx(){
-	    	//alert($F('nodeType'))
-	    	alert($F('calendar'))
-	    	return "ssss";
-	    }
-	    -->
-	    </script>
+        <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
+        <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+        <script type="text/javascript">
+        <!--
+        function xx(){
+            //alert($F('nodeType'))
+            alert($F('calendar'))
+            return "ssss";
+        }
+        -->
+        </script>
     </head>
     <body>
-    	<form:form id="testForm" method="post" modelAttribute="testViewObject">
-    	<table>
-    		<tr>
-    			<td width="30" rowspan="5"></td>
-    			<td>
-    				<extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
-    			</td>
-    		</tr>
-    		<tr>
-    			<td>
-    				<extjs:password path="password" allowBlank="false" />
-    			</td>
-    		</tr>
-    		<tr>
-    			<td>
-    				<extjs:comboBox path="nodeType" items="${testViewObject.nodeTypeList}" 
-    				itemValue="value" itemLabel="label" editable="true"/>
-    			</td>
-    		</tr>
-    		<tr>
-    			<td>
-    				<extjs:calendar path="calendar" format="Ymd" validator="xx"/>
-    			</td>
-    		</tr>
-    		<tr>
-    			<td>
-    				<extjs:textArea path="textArea" minLength="8" maxLength="8" allowBlank="false"/>
-    			</td>
-    		</tr>
-    	</table>
-    		
-    		
-    		
-    	</form:form>
+        <form:form id="testForm" method="post" modelAttribute="testViewObject">
+        <table>
+            <tr>
+                <td width="30" rowspan="5"></td>
+                <td>
+                    <extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:password path="password" allowBlank="false" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:comboBox path="nodeType" items="${testViewObject.nodeTypeList}" 
+                    itemValue="value" itemLabel="label" editable="true"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:calendar path="calendar" format="Ymd" validator="xx"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:textArea path="textArea" minLength="8" maxLength="8" allowBlank="false"/>
+                </td>
+            </tr>
+        </table>
+            
+            
+            
+        </form:form>
     </body>
 </html>

@@ -77,7 +77,7 @@
                         <tr>
                             <td class="loginDate">
                                 <%=systemDate.getNowDate()%>
-                    			<%=systemDate.getNowWeek()%>
+                                <%=systemDate.getNowWeek()%>
                             </td>
                         </tr>
                     </table>
