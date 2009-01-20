@@ -6,27 +6,27 @@ package org.freedom.view.action.vobj.security.role.rs001;
 import org.freedom.core.view.vo.jsp.AbstractViewObject;
 
 /**
- * 角色设定
+ * 添加角色
  * 
  * @author 何贝
  * @since JDK1.5
  */
-public class RoleSetting001ViewObject extends AbstractViewObject {
+public class RoleSetting002ViewObject extends AbstractViewObject {
 
     /**
      * 
      */
-    private static final long serialVersionUID = -2033986271858423640L;
+    private static final long serialVersionUID = 4356331376934706198L;
     /** 父节点编号 */
     private String parentNodeID;
     /** 父节点名称 */
     private String parentNodeTxt;
-    /** 节点编号 */
-    private String nodeID;
     /** 节点名称 */
     private String nodeTxt;
     /** 节点详细描述 */
     private String nodeDetail;
+    /** 继承权限 */
+    private boolean inheritFlg = true;
 
     /**
      * 取得父节点编号
@@ -65,24 +65,6 @@ public class RoleSetting001ViewObject extends AbstractViewObject {
     }
 
     /**
-     * 取得节点编号
-     * 
-     * @return 节点编号
-     */
-    public String getNodeID() {
-        return nodeID;
-    }
-
-    /**
-     * 设置节点编号
-     * 
-     * @param nodeID 节点编号
-     */
-    public void setNodeID(String nodeID) {
-        this.nodeID = nodeID;
-    }
-
-    /**
      * 取得节点名称
      * 
      * @return 节点名称
@@ -116,6 +98,24 @@ public class RoleSetting001ViewObject extends AbstractViewObject {
      */
     public void setNodeDetail(String nodeDetail) {
         this.nodeDetail = nodeDetail;
+    }
+
+    /**
+     * 取得继承权限
+     * 
+     * @return 继承权限
+     */
+    public boolean getInheritFlg() {
+        return inheritFlg;
+    }
+
+    /**
+     * 设置继承权限
+     * 
+     * @param inheritFlg 继承权限
+     */
+    public void setInheritFlg(boolean inheritFlg) {
+        this.inheritFlg = inheritFlg;
     }
 
 }

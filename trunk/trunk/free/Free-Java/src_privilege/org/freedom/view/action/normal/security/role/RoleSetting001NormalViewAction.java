@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 角色设定
+ * 
  * @author 何贝
  * @since JDK1.5
  */

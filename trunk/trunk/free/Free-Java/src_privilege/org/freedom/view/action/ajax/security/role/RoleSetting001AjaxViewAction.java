@@ -26,6 +26,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 角色设定
+ * 
  * @author 何贝
  * @since JDK1.5
  */
@@ -69,6 +71,7 @@ public class RoleSetting001AjaxViewAction extends AbstractViewAction {
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONObject.toString());
     }
+
     @RequestMapping("/security/role/roleSetting/001/delNodeInfoAction.ajax")
     public void delNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletRequestBindingException, IOException, IllegalAccessException, InvocationTargetException {
