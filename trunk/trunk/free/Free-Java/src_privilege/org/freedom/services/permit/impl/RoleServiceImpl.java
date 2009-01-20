@@ -103,6 +103,7 @@ public class RoleServiceImpl implements IRoleService {
 
             root.setId(dbRole.getId());
             root.setText(dbRole.getName());
+            root.setVersion(dbRole.getVersion());
             root.setParentNodeID(dbRole.getParentRoleID());
 
             // 构建整个角色树结构
@@ -128,9 +129,10 @@ public class RoleServiceImpl implements IRoleService {
                 childRole.setId(dbChildRole.getId());
                 childRole.setText(dbChildRole.getName());
                 childRole.setDetail(dbChildRole.getDetail());
+                childRole.setVersion(dbChildRole.getVersion());
                 childRole.setParentNodeID(dbChildRole.getParentRoleID());
                 childRole.setParentNodeText(dbChildRole.getParentRole().getName());
-                
+
                 parentNode.setLeaf(false);
 
                 parentNode.addChildren(childRole);
@@ -145,11 +147,13 @@ public class RoleServiceImpl implements IRoleService {
             Role dbRole = roleDao.getRoleByID(role.getId());
 
             if (dbRole != null) {
-                dbRole.setName(role.getName());
-                dbRole.setDetail(role.getDetail());
+                if (dbRole.getVersion().equals(role.getVersion())) {
+                    dbRole.setName(role.getName());
+                    dbRole.setDetail(role.getDetail());
 
-                roleDao.save(dbRole);
-                return true;
+                    roleDao.save(dbRole);
+                    return true;
+                }
             }
         }
         return false;
