@@ -28,6 +28,7 @@ import org.hibernate.annotations.NaturalId;
 @Table(name = "W_MENU_NODE_PERMIT")
 @NamedQueries( {
         @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByUserID", query = "select pObj.menuNodeID from MenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByRoleID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? "),
         @NamedQuery(name = "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),
         @NamedQuery(name = "MenuNodePermit.delMenuNodePermitByMenuNodeID", query = "delete MenuNodePermit pObj where pObj.menuNodeID = ? ") })
 public class MenuNodePermit extends AbstractEntityBean {
@@ -41,7 +42,7 @@ public class MenuNodePermit extends AbstractEntityBean {
 
     /** 登录用户角色ID */
     @NaturalId
-    @Column(name = "ROLE_ID", length = 20)
+    @Column(name = "ROLE_ID", length = 20, nullable = false)
     private String roleID;
 
     /** 菜单树结点 */
@@ -51,7 +52,7 @@ public class MenuNodePermit extends AbstractEntityBean {
 
     /** 菜单树结点ID */
     @NaturalId
-    @Column(name = "NODE_ID", length = 20)
+    @Column(name = "NODE_ID", length = 20, nullable = false)
     private String menuNodeID;
 
     /**

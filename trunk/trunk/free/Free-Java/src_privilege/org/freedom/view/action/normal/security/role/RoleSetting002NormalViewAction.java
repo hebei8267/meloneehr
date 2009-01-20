@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.entity.common.Role;
 import org.freedom.view.SysConstant;
-import org.freedom.view.action.vobj.security.role.rs001.RoleSetting002ViewObject;
+import org.freedom.view.action.vobj.security.role.rs002.RoleSetting002ViewObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -61,4 +61,5 @@ public class RoleSetting002NormalViewAction extends AbstractViewAction {
 
         return "WEB-INF/jsp/security/role/roleSetting002";
     }
+
 }

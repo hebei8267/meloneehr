@@ -1,7 +1,7 @@
 /*
  * Copyright 2009 by hebei, All rights reserved.
  */
-package org.freedom.view.action.vobj.security.role.rs001;
+package org.freedom.view.action.vobj.security.role.rs002;
 
 import org.freedom.core.view.vo.jsp.AbstractViewObject;
 

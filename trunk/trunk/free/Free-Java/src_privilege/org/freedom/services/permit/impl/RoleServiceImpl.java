@@ -10,7 +10,10 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.freedom.core.domain.TreeNode;
 import org.freedom.dao.common.RoleDao;
+import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.entity.common.Role;
+import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.services.permit.IRoleService;
 import org.freedom.view.domain.system.RoleTreeNodeViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,32 +32,58 @@ public class RoleServiceImpl implements IRoleService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
-    public boolean addRoleInfoService(Role role) {
-        return addRoleInfoService(role, Role.ROLE_TREE_ROOT_ID);
-    }
+    public boolean addRoleInfoService(Role role, boolean inheritFlg) {
 
-    public boolean addRoleInfoService(Role role, String parentRoleID) {
         if (StringUtils.isNotBlank(role.getName())) {
-            Role parentRole = roleDao.getRoleByID(parentRoleID);
+            if (StringUtils.isBlank(role.getParentRoleID())) {// 父节点为空时默认添加到根节点
+                role.setParentRoleID(Role.ROLE_TREE_ROOT_ID);
+            }
+
+            Role parentRole = roleDao.getRoleByID(role.getParentRoleID());
             if (parentRole != null) {
                 role.setParentRole(parentRole);
                 role.setId(roleDao.getMaxID());
-
+                // 添加角色
                 roleDao.save(role);
+
+                if (inheritFlg) {// 继承权限
+                    List<MenuNodePermit> permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(parentRole.getId());
+
+                    for (MenuNodePermit _permitList : permitList) {
+                        MenuNodePermit newPermit = new MenuNodePermit();
+
+                        MenuNode menuNode = _permitList.getMenuNode();
+                        newPermit.setMenuNode(menuNode);
+
+                        newPermit.setRole(role);
+
+                        menuNodePermitDao.save(newPermit);
+                    }
+                }
                 return true;
             }
         }
+
         return false;
     }
 
-    public int delRoleInfoService(String roleID, Integer dataVersion) {
+    public int delRoleInfoService(String roleID, int dataVersion) {
         Role dbRole = roleDao.getRoleByID(roleID);
         if (dbRole == null || !dbRole.getVersion().equals(dataVersion)) {
             return 1;
         }
-        if (!checkRole4User(dbRole)) {
+
+        List<String> roleIDList = new ArrayList<String>();
+        // 取得所有角色ID
+        getSubRoleID(dbRole, roleIDList);
+
+        if (!checkRole4User(dbRole, roleIDList)) {
             return 2;
         }
+
+        // 删除角色能访问的菜单节点
+        menuNodePermitDao.delMenuNodePermitByRoleID(roleIDList);
+        // 删除角色
         roleDao.delete(dbRole);
 
         return 0;
@@ -64,12 +93,10 @@ public class RoleServiceImpl implements IRoleService {
      * 检验该角色是否可以删除(该角色和和其所有子角色是否关联用户信息)
      * 
      * @param role 检验的角色
+     * @param roleIDList 所有子角色ID
      * @return true-未关联用户信息(可以删除) false-关联用户信息(不能删除)
      */
-    private boolean checkRole4User(Role role) {
-        List<String> roleIDList = new ArrayList<String>();
-
-        getSubRoleID(role, roleIDList);
+    private boolean checkRole4User(Role role, List<String> roleIDList) {
 
         int count = roleDao.getRole4UserCount(roleIDList);
 
@@ -167,6 +194,8 @@ public class RoleServiceImpl implements IRoleService {
     // ---------------------------------------------------------------------------
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private MenuNodePermitDao menuNodePermitDao;
 
     public RoleDao getRoleDao() {
         return roleDao;
@@ -175,4 +204,13 @@ public class RoleServiceImpl implements IRoleService {
     public void setRoleDao(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
+
+    public MenuNodePermitDao getMenuNodePermitDao() {
+        return menuNodePermitDao;
+    }
+
+    public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
+        this.menuNodePermitDao = menuNodePermitDao;
+    }
+
 }
