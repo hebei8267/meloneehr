@@ -12,12 +12,14 @@
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
+        	var subWin = null;
+        	
             Ext.onReady(function(){
                 var tree = new Ext.tree.TreePanel({
                     el: 'roleTreeDiv',
                     id: 'roleTree',
                     title: '角色树信息',
-                    useArrows: true,
+                    //useArrows: true,
                     animate: true,
                     enableDD: false,
                     containerScroll: true,
@@ -60,7 +62,9 @@
                         Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
                     }
                 })
+                tree.expandAll();
             });
+            //清除隐藏信息
             function cleanHiddenItem(){
             	$("parentNodeID").value = "";
              	Ext.getCmp("parentNodeTxt").setValue("");
@@ -68,6 +72,7 @@
                	Ext.getCmp("nodeTxt").setValue("");
                	Ext.getCmp("nodeDetail").setValue("");
             }
+            //校验角色节点名称
             function checkNodeTxt(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
                     if(Ext.getCmp("nodeTxt").getValue() != ""){
@@ -80,7 +85,7 @@
                 }
                 return true;
             }
-            
+            //校验角色节点详细
             function checkNodeDetail(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
                     if(Ext.getCmp("nodeDetail").getValue() != ""){
@@ -89,7 +94,7 @@
                 }
                 return true;
             }
-            
+            //重置选择的角色信息
             function selectedNodeReset(){
                 if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
                     var roleTree = Ext.getCmp("roleTree");
@@ -101,7 +106,7 @@
                     showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
                 }
             }
-            
+            //更新选择的角色信息
             function updateSelectedNode(){
                 if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
                     updateSelectedNodeAction();
@@ -109,7 +114,7 @@
                     showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
                 }
             }
-            
+            //更新选择的角色信息
             function updateSelectedNodeAction(){
                 if(!formExtCmpValidate("roleCfgForm")){
                     return;
@@ -153,12 +158,13 @@
                     }
                 });
             }
-            
+            //角色树重新加载
             function roleTreeReload(){
                 Ext.getCmp("roleTree").root.reload();
+                Ext.getCmp("roleTree").expandAll();
                 cleanHiddenItem();
             }
-            
+            //删除角色
             function delRole(){
             	if($F("parentNodeID") == ""){
             		showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
@@ -171,10 +177,31 @@
             	               roleTreeReload ,
             	               roleTreeReload);
             }
+            //添加角色
+            function addRole(){
+            	if(subWin != null){
+	                subWin.close();
+	            }
+	            
+	            $("hnodeID").value = Ext.getCmp("nodeID").getValue();
+	            
+	            var windowOption = "width=390,height=385,left=300,top=100,status=no,resizable=no";
+	            var windowName = "ADD_ROLE";
+	            subWin =  window.open("", windowName, windowOption);
+	            $("roleCfgForm").target = windowName;
+	            $("roleCfgForm").action = "${pageContext.request.contextPath}/security/role/roleSetting/002/showPageAction.faces";
+	            $("roleCfgForm").submit();
+	            return;
+            }
+            function closeSubWin(){
+	            if(subWin != null){
+	                subWin.close();
+	            }
+	        }
         -->
         </script>
     </head>
-    <body>
+    <body onunload="closeSubWin();">
         <div class="defaultBody">
             <table class="appTitleTable"> 
                 <tr> 
@@ -271,6 +298,7 @@
                                                     </td> 
                                                     <td class="inputItemCell" height="30" width="200">
                                                         <extjs:input path="nodeID" disabled="true" />
+                                                        <input type="hidden" id="hnodeID" name="hnodeID">
                                                     </td>
                                                 </tr>
                                                 <tr>
