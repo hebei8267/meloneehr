@@ -1,8 +1,7 @@
 /**
  * 校验指定表单内的Extjs元素
  * 
- * @param formID
- *            表单ID
+ * @param formID 表单ID
  */
 function formExtCmpValidate(formID) {
 	var elements = Form.getElements(formID);
@@ -22,8 +21,7 @@ function formExtCmpValidate(formID) {
 /**
  * 重置指定表单内的Extjs元素
  * 
- * @param formID
- *            表单ID
+ * @param formID 表单ID
  */
 function formExtCmpReset(formID) {
 	var elements = Form.getElements(formID);
@@ -39,8 +37,7 @@ function formExtCmpReset(formID) {
 /**
  * 根据指定名称取得Radio的选中值
  * 
- * @param radioName
- *            Radio名称
+ * @param radioName Radio名称
  */
 function getRadioValueByName(radioName) {
 	var _value = null;
@@ -51,6 +48,38 @@ function getRadioValueByName(radioName) {
 	});
 	return _value;
 }
+
+function formAjaxSubmit(_url, _params, _fnSuccess, _fnFailure) {
+	Ext.Ajax.request({
+		url : _url,
+		method : 'post',
+		failure : defaultAjaxRequestFailure,
+		success : function(result, request) {
+			var oResult = eval("(" + result.responseText + ")");
+
+			if (oResult.processResult) {// 成功
+				if (typeof _fnSuccess == "function") {
+					_fnSuccess();
+				}
+			} else {// 失败
+				// Ajax系统定式 start
+				if (!oResult.processResult && oResult.sessionTimeOut) {
+					$("systemErrorForm").target = "_top";
+					$("systemErrorForm").submit();
+					return;
+				}
+				showMessageBox(oResult.resultMsg);
+				// Ajax系统定式 end
+
+				if (typeof _fnFailure == "function") {
+					_fnFailure();
+				}
+			}
+		},
+		params : _params
+	});
+}
+
 /**
  * 默认ajax请求失败处理
  */
