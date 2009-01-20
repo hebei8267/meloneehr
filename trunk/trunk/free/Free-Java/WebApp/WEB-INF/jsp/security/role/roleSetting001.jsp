@@ -15,6 +15,7 @@
 			Ext.onReady(function(){
 				var tree = new Ext.tree.TreePanel({
 			        el: 'roleTreeDiv',
+			        id: 'roleTree',
 			        title: '角色树信息',
 			        useArrows: true,
 			        animate: true,
@@ -79,12 +80,72 @@
 			}
 			
 			function checkNodeDetail(){
-				if(Ext.getCmp("nodeID").getValue()==""){//未选中角色节点
-					if(Ext.getCmp("nodeDetail").getValue()!=""){
+				if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
+					if(Ext.getCmp("nodeDetail").getValue() != ""){
 						return getNeedSelectedItem("角色树节点");
 					}
 				}
 				return true;
+			}
+			
+			function selectedNodeReset(){
+				if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+					var roleTree = Ext.getCmp("roleTree");
+					var roleNode = roleTree.getNodeById(Ext.getCmp("nodeID").getValue());
+					
+		            Ext.getCmp("nodeTxt").setValue(roleNode.text);
+		            Ext.getCmp("nodeDetail").setValue(roleNode.attributes.detail);
+	            } else {
+	            	showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+	            }
+			}
+			
+			function updateSelectedNode(){
+				if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+					updateSelectedNodeAction();
+				} else {
+	            	showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+	            }
+			}
+			
+			function updateSelectedNodeAction(){
+				if(!formExtCmpValidate("roleCfgForm")){
+                    return;
+                }
+                
+                Ext.Ajax.request({
+                    url : '${pageContext.request.contextPath}/security/role/roleSetting/001/updateNodeInfoAction.ajax',
+                    method: 'post',
+                    failure : defaultAjaxRequestFailure,
+                    success : function(result, request) {
+                        var oResult = eval("(" + result.responseText + ")");
+                        
+                        if(oResult.processResult) {// 成功
+                            roleTreeReload();
+                        } else {// 失败
+                            // Ajax系统定式 start
+                            if(!oResult.processResult && oResult.sessionTimeOut){
+                                $("systemErrorForm").target = "_top";
+                                $("systemErrorForm").submit();
+                                return;
+                            }
+                            showMessageBox(oResult.resultMsg);
+                            // Ajax系统定式 end
+                            
+                            roleTreeReload();
+                        }
+                    },
+                    params : {
+                        version : Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+                        id : Ext.getCmp("nodeID").getValue(),
+                        name : Ext.getCmp("nodeTxt").getValue(),
+                        detail : Ext.getCmp("nodeDetail").getValue()
+                    }
+                });
+			}
+			
+			function roleTreeReload(){
+				Ext.getCmp("roleTree").root.reload();
 			}
 		-->
         </script>
@@ -212,12 +273,12 @@
 					                                    <table> 
 					                                        <tr> 
 					                                            <td align="right"> 
-					                                                <input value="更  新" class="buttonSubmitLong" type="button"> 
+					                                                <input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
 					                                            </td> 
 					                                            <td width="20"> 
 					                                            </td> 
 					                                            <td align="right"> 
-					                                                <input value="重  置" class="buttonResetLong" type="button">
+					                                                <input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();">
 					                                            </td> 
 					                                        </tr> 
 					                                    </table>
