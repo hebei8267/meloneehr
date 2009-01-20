@@ -45,7 +45,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Role extends AbstractEntityBean {
 
     private static final long serialVersionUID = 2814135309469292776L;
-    /** 角色树更节点ID */
+    /** 角色树根节点ID */
     public static String ROLE_TREE_ROOT_ID = "00000001";
     /** 系统管理员ID */
     public static String ADMIN_ROLE_ID = "00000002";
