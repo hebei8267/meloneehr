@@ -31,7 +31,7 @@ public class RoleServiceTest extends BaseTestCase {
     public void addRoleCase1() throws Exception {
         Role role = new Role();
         role.setName("根节点下角色");
-        boolean result = roleService.addRoleInfoService(role);
+        boolean result = roleService.addRoleInfoService(role, false);
         assertEquals(true, result);
     }
 
@@ -39,7 +39,8 @@ public class RoleServiceTest extends BaseTestCase {
     public void addRoleCase2() throws Exception {
         Role role = new Role();
         role.setName("系统管理员下角色");
-        boolean result = roleService.addRoleInfoService(role, Role.ADMIN_ROLE_ID);
+        role.setParentRoleID(Role.ADMIN_ROLE_ID);
+        boolean result = roleService.addRoleInfoService(role, false);
         assertEquals(true, result);
     }
 
@@ -48,7 +49,7 @@ public class RoleServiceTest extends BaseTestCase {
 
         Role role1 = new Role();
         role1.setName("添加失败的角色");
-        boolean result1 = roleService.addRoleInfoService(role1, "");
+        boolean result1 = roleService.addRoleInfoService(role1, false);
         assertEquals(false, result1);
     }
 

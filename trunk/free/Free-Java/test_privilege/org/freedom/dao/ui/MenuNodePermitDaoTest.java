@@ -58,15 +58,16 @@ public class MenuNodePermitDaoTest extends BaseTestCase {
     @Test
     public void case1() throws IOException {
         List<List<String>> csvFileContent = CSVFileUtils.readCSVFile(ROOT_PATH + "MenuNodePermit.csv");
-
+        boolean first = true;
         for (List<String> fileLine : csvFileContent) {
-
+            if (first) {
+                first = false;
+                continue;
+            }
             MenuNodePermit rolePrivilege = new MenuNodePermit();
 
             for (int i = 0; i < fileLine.size(); i++) {
-                if (i == 0) {
-                    continue;
-                }
+
                 String value = fileLine.get(i);
                 if (i == 0) {
                     MenuNode menuNode = menuNodeDao.getMenuNodeByID(value);
