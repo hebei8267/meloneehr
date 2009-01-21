@@ -44,12 +44,16 @@ public abstract class AbstractExtjsTag extends AbstractDataBoundFormElementTag {
      * @param isStringType
      * @throws JspException
      */
-    protected String getOptionalAttributeScript(String attributeName, String value, boolean isStringType)
-            throws JspException {
+    protected String getOptionalAttributeScript(String attributeName, String value, boolean isStringType) throws JspException {
 
         if (value != null) {
             if (false == isStringType) {// type int,boolean
-                return attributeName + ": " + getDisplayString(evaluate(attributeName, value)) + ", ";
+                // 不生成disabled状态,因为表单提交时disabled的元素不提交,改用只读和其样式表替代
+                if (DISABLED_ATTRIBUTE.equals(attributeName)) {
+                    return READONLY_ATTRIBUTE + ": true, ctCls: 'readonly', ";
+                } else {
+                    return attributeName + ": " + getDisplayString(evaluate(attributeName, value)) + ", ";
+                }
             } else {// type string
                 return attributeName + ": '" + getDisplayString(evaluate(attributeName, value)) + "', ";
             }

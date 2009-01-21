@@ -164,7 +164,7 @@ public class ExtjsComboBoxTag extends AbstractExtjsTag {
             writeHiddenTagIfNecessary(tagWriter);
         }
 
-        // TODO hebei ignore
+        // hebei ignore
         // 添加Extjs脚本
         saveComponentScript(createComponentScript());
         return EVAL_PAGE;
