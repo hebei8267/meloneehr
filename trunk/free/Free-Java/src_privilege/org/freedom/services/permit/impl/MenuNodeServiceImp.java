@@ -41,8 +41,7 @@ public class MenuNodeServiceImp implements IMenuNodeService {
     }
 
     public boolean addMenuNodeInfoService(MenuNode menuNode, String parentMenuNodeID) {
-        if (StringUtils.isNotBlank(menuNode.getNodeTxt())
-                && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
+        if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {
 
             MenuNode parentMenuNode = menuNodeDao.getMenuNodeByID(parentMenuNodeID);
@@ -141,17 +140,67 @@ public class MenuNodeServiceImp implements IMenuNodeService {
         return null;
     }
 
+    public TreeNode getMenuNodeInfoTreeService(String rootID) {
+        // 取得菜单树结点信息
+        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootID);
+        if (dbNodeRoot != null) {
+            MenuTreeNodeViewObject menuTreeNode = new MenuTreeNodeViewObject();
+
+            menuTreeNode.setId(dbNodeRoot.getId());
+            menuTreeNode.setText(dbNodeRoot.getNodeTxt());
+            menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            menuTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            menuTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+            menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+
+            // 创建导航区菜单树结构
+            buildMenuNodeInfoTree(menuTreeNode, dbNodeRoot);
+
+            return menuTreeNode;
+        }
+        return null;
+    }
+
     /**
      * 构建整个菜单树结构
      * 
-     * @param menuTreeNodeVO 父节点
-     * @param dbNodeRoot 数据库中取得的菜单节点
+     * @param parentNode 父节点
+     * @param dbParentNode 数据库中取得的菜单节点
+     */
+    private void buildMenuNodeInfoTree(MenuTreeNodeViewObject parentNode, MenuNode dbParentNode) {
+        for (MenuNode dbNode : dbParentNode.getChildNodeList()) {
+            if (dbNode != null) {
+                MenuTreeNodeViewObject menuTreeNode = new MenuTreeNodeViewObject();
+
+                menuTreeNode.setId(dbNode.getId());
+                menuTreeNode.setText(dbNode.getNodeTxt());
+                menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                menuTreeNode.setActionContent(dbNode.getActionContent());
+                menuTreeNode.setUiNodeType(dbNode.getNodeType());
+                menuTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
+                menuTreeNode.setParentNodeID(dbNode.getParentNodeID());
+                menuTreeNode.setUiNodeIndex(dbNode.getIndex().toString());
+                
+                parentNode.addChildren(menuTreeNode);
+
+                buildMenuNodeInfoTree(menuTreeNode, dbNode);
+            }
+        }
+
+    }
+
+    /**
+     * 构建整个菜单树结构
+     * 
+     * @param parentNode 父节点
+     * @param dbParentNode 数据库中取得的菜单节点
      * @param roleMenuNodePermitList 访问的菜单树结点权限列表
      * @param roleID 角色ID
      */
-    private void buildMenuNodeInfoTree(MenuTreeNodeViewObject parentNode, MenuNode dbNodeRoot,
+    private void buildMenuNodeInfoTree(MenuTreeNodeViewObject parentNode, MenuNode dbParentNode,
             List<String> roleMenuNodePermitList, String roleID) {
-        for (MenuNode dbNode : dbNodeRoot.getChildNodeList()) {
+        for (MenuNode dbNode : dbParentNode.getChildNodeList()) {
 
             if (dbNode != null) {
                 // 系统管理员ID
@@ -178,8 +227,7 @@ public class MenuNodeServiceImp implements IMenuNodeService {
     }
 
     public boolean modMenuNodeInfoService(MenuNode menuNode) {
-        if (StringUtils.isNotBlank(menuNode.getNodeTxt())
-                && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
+        if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {
             MenuNode _dbMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getId());
 
@@ -221,8 +269,7 @@ public class MenuNodeServiceImp implements IMenuNodeService {
      * @param roleMenuNodePermitList 拥有访问权限列表
      * @return
      */
-    private List<TreeNode> buildAllAreaMenuNodeList(MenuNode parentNode, String roleID,
-            List<String> roleMenuNodePermitList) {
+    private List<TreeNode> buildAllAreaMenuNodeList(MenuNode parentNode, String roleID, List<String> roleMenuNodePermitList) {
         List<TreeNode> _reList = new ArrayList<TreeNode>();
         for (MenuNode menuNode : parentNode.getChildNodeList()) {
             // 系统管理员ID

@@ -72,7 +72,7 @@ public class MenuNode extends AbstractEntityBean {
 
     /** 页面迁移内容 */
     @Basic
-    @Column(name = "ACTION_CONTENT", nullable = false, length = 100)
+    @Column(name = "ACTION_CONTENT", nullable = false, length = 255)
     private String actionContent;
 
     /** Index */
