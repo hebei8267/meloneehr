@@ -395,14 +395,14 @@ public class FormTag extends AbstractHtmlElementTag {
             // Remove exposed nestedPath value.
             this.pageContext.removeAttribute(NESTED_PATH_VARIABLE_NAME, PageContext.REQUEST_SCOPE);
         }
-        // TODO hebei ignore
+        // hebei ignore
         writerJavascript();
         
         return EVAL_PAGE;
     }
 
     /**
-     * TODO hebei ignore
+     * hebei ignore
      * 
      * 添加javascript脚本
      * @throws JspException 
