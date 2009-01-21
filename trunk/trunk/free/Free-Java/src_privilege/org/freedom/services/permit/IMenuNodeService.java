@@ -49,7 +49,7 @@ public interface IMenuNodeService {
     public boolean delMenuNodeInfoService(String menuNodeID);
 
     /**
-     * 取得菜单结点树信息(根节点开始)
+     * 取得菜单结点树信息(根节点开始)包含权限校验
      * 
      * @param userID 用户ID
      * @param roleID 角色ID
@@ -58,7 +58,7 @@ public interface IMenuNodeService {
     public TreeNode getMenuNodeInfoTreeService(String userID, String roleID);
 
     /**
-     * 取得菜单结点树信息(指定根节点开始)
+     * 取得菜单结点树信息(指定根节点开始)包含权限校验
      * 
      * @param userID 用户ID
      * @param roleID 角色ID
@@ -66,6 +66,14 @@ public interface IMenuNodeService {
      * @return 菜单结点树根节点
      */
     public TreeNode getMenuNodeInfoTreeService(String rootID, String userID, String roleID);
+
+    /**
+     * 取得菜单结点树信息(指定根节点开始)不包含权限校验
+     * 
+     * @param rootID 根节点ID
+     * @return 菜单结点树根节点
+     */
+    public TreeNode getMenuNodeInfoTreeService(String rootID);
 
     /**
      * 取得所有导航条类型树节点
