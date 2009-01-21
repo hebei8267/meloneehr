@@ -5,6 +5,7 @@ package org.freedom.view.domain.system;
 
 import org.freedom.core.domain.TreeNode;
 import org.freedom.entity.ui.MenuNodeType;
+import org.freedom.view.SysConstant;
 
 /**
  * @author 何贝
@@ -78,8 +79,7 @@ public class MenuTreeNodeViewObject extends TreeNode {
             this.uiNodeTypeName = "叶节点";
         }
         if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
-            //TODO hebei icon
-            //super.setIcon("images/area.gif");
+            setIcon(SysConstant.WEB_PROJECT_NAME + "/images/area.gif");
         }
         this.uiNodeType = nodeType;
     }
