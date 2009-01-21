@@ -8,7 +8,8 @@ package org.freedom.view;
  * @since JDK1.5
  */
 public class SysConstant {
-    // TODO SYS Constant
-    public final static String WEB_PROJECT_NAME = "a";
+    // 用户请求index.faces时设置
+    // org.freedom.view.action.normal.security.Security001NormalViewAction
+    public static String WEB_PROJECT_NAME = "";
     public final static String ROLE_TREE_ROOT_NAME = "角色树更节点";
 }

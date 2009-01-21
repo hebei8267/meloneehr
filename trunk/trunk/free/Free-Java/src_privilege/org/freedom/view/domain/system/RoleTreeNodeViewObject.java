@@ -24,7 +24,7 @@ public class RoleTreeNodeViewObject extends TreeNode {
 
     public RoleTreeNodeViewObject() {
 
-        setIcon("/" + SysConstant.WEB_PROJECT_NAME + "/images/role.gif");
+        setIcon(SysConstant.WEB_PROJECT_NAME + "/images/role.gif");
 
     }
 
