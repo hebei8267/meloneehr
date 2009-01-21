@@ -1,7 +1,8 @@
 /**
  * 校验指定表单内的Extjs元素
  * 
- * @param formID 表单ID
+ * @param formID
+ *            表单ID
  */
 function formExtCmpValidate(formID) {
 	var elements = Form.getElements(formID);
@@ -21,7 +22,8 @@ function formExtCmpValidate(formID) {
 /**
  * 重置指定表单内的Extjs元素
  * 
- * @param formID 表单ID
+ * @param formID
+ *            表单ID
  */
 function formExtCmpReset(formID) {
 	var elements = Form.getElements(formID);
@@ -37,7 +39,8 @@ function formExtCmpReset(formID) {
 /**
  * 根据指定名称取得Radio的选中值
  * 
- * @param radioName Radio名称
+ * @param radioName
+ *            Radio名称
  */
 function getRadioValueByName(radioName) {
 	var _value = null;
@@ -47,6 +50,27 @@ function getRadioValueByName(radioName) {
 		_value = node.value;
 	});
 	return _value;
+}
+/**
+ * 根据指定名称设置Radio的选中值
+ * 
+ * @param radioName
+ *            Radio名称
+ * @param radioValue
+ *            Radio值
+ */
+function setRadioValueByName(radioName, radioValue) {
+	var objs = document.getElementsByName(radioName);
+
+	for (var i = 0; i < objs.length; i++) {
+		var _v1 = String(objs[i].value);
+		var _v2 = String(radioValue);
+
+		if (_v1 == _v2) {
+			objs[i].checked = true;
+			break;
+		}
+	}
 }
 
 function formAjaxSubmit(_url, _params, _fnSuccess, _fnFailure) {
