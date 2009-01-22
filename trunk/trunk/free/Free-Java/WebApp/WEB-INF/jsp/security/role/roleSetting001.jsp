@@ -170,7 +170,14 @@
                     showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
                     return;
                 }
-                //表单提交简化版本
+                showConfirm(getDelConfirmTipMsg(), delRoleAction);
+            }
+            //删除角色
+            function delRoleAction(btn){
+            	if (btn != 'yes') {
+	                return;
+	            }
+            	//表单提交简化版本
                 formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
                                {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
                                roleID: Ext.getCmp("nodeID").getValue()},

@@ -14,6 +14,8 @@
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
         <script type="text/javascript">
         <!--
+        	var subWin = null;
+        	
             Ext.onReady(function(){
 
 			    var role = Ext.data.Record.create([
@@ -118,8 +120,15 @@
 	            	} else {
 	            		//选中菜单节点
 	            		menuNodeSelected(node);
-	            		//加载角色列表
-	            		roleListInfonLoad(node);
+	            		
+	            		if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
+	            			$("selectedMenuNode").value = node.id;
+	            			
+	            			//加载角色列表
+	            			roleListInfonLoad(node);
+	            			//关闭子窗口
+	            			closeSubWin();
+	            		}
 	            	}
 	            });
 	            tree.expandAll();
@@ -130,11 +139,8 @@
 			}
 			//加载角色列表
 			function roleListInfonLoad(node){
-				if(($F("selectedMenuNode")!= node.id)){
-                    $("selectedMenuNode").value = node.id;
-                    //加载列表
-                    Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : Ext.getCmp("nodeID").getValue()}});
-                }
+                //加载列表
+            	Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : Ext.getCmp("nodeID").getValue()}});
 			}
 			//清除隐藏信息
             function cleanHiddenItem(){
@@ -202,13 +208,66 @@
             function addMenuNode(){
                 openSubWindow('addMenuNode.html',390,355);
             }
+            //添加角色
             function addMenuNodeRole(){
-                openSubWindow('addMenuNodeRole.html',390,395);
+            	if(subWin != null){
+                    subWin.close();
+                }
+                
+                if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
+               		showMessageBox(getNeedSelectedItemErrorMsg("要删除的菜单树节点", "树根节点不能添加适用角色"));
+               		return;
+                }
+                
+                var windowOption = "width=390,height=395,left=300,top=100,status=no,resizable=no";
+                var windowName = "ADD_MENU_NODE_ROLE";
+                subWin =  window.open("", windowName, windowOption);
+                $("menuCfgForm").target = windowName;
+                $("menuCfgForm").action = "${pageContext.request.contextPath}/security/menu/menuSetting/003/showPageAction.faces";
+                $("menuCfgForm").submit();
+                return;
+            }
+            //添加角色(回调函数)
+        	function addRoleListCall(newAddRoleList){
+        		var gridStore = Ext.getCmp('roleGrid').getStore(); 		
+        		
+        		var oldRoleList = new Array();
+	            for(var i1=0;i1<gridStore.getCount();i1++){
+	                oldRoleList[i1] = gridStore.getAt(i1);
+	            }
+        		
+       			for(var i2=0; i2<newAddRoleList.length; i2++){
+       				var _newAddData = newAddRoleList[i2];
+       				
+       				var addFlg = false;
+       				for(var i3=0; i3<oldRoleList.length; i3++){
+       					var _oldRoleData = oldRoleList[i3];
+       					
+        				if(_newAddData.data.id == _oldRoleData.data.id){
+        					break;
+        				} else {
+        					if(!(i3+1<oldRoleList.length)){
+        						addFlg = true;
+        					}
+        				}
+       				}
+       				
+       				if(addFlg){
+       					gridStore.insert(0,_newAddData);
+       				}
+       			}
+       			
+       			Ext.getCmp('roleGrid').getView().refresh();
+        	}
+            function closeSubWin(){
+                if(subWin != null){
+                    subWin.close();
+                }
             }
         -->
         </script>
     </head>
-    <body>
+    <body onunload="closeSubWin();">
         <div class="defaultBody">
             <table class="appTitleTable"> 
                 <tr> 
