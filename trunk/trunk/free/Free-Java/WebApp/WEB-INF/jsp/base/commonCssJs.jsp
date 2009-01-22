@@ -14,6 +14,7 @@
     <title>Freedom&Melon</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/message.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/validate.js"></script>
     <script type="text/javascript">
     <!--
         Ext.onReady(function(){
