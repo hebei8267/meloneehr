@@ -18,10 +18,15 @@ function getNeedSelectedItemErrorMsg(itemName, detail) {
 function getNoChangeErrorMsg() {
 	return "未编辑任何数据！";
 }
-
+// ************************************************
+// Extjs error message
+// ************************************************
 function getBlankText() {
 	return "该输入项为必输项";
 }
 function getNeedSelectedItem(itemName) {
 	return "未选择" + itemName;
+}
+function getNumText() {
+	return "该输入项只能包数字";
 }
