@@ -189,6 +189,24 @@ public class RoleServiceImpl implements IRoleService {
         return false;
     }
 
+    public List<Role> getAllRoleInfoListService() {
+        List<Role> dbRoleList = roleDao.getAll();
+
+        List<Role> _resultRoleList = new ArrayList<Role>();
+
+        for (Role dbRole : dbRoleList) {
+            Role _role = new Role();
+
+            _role.setId(dbRole.getId());
+            _role.setName(dbRole.getName());
+
+            _resultRoleList.add(_role);
+        }
+
+        return _resultRoleList;
+
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
