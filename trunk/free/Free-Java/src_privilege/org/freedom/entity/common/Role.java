@@ -36,7 +36,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @NamedQueries( {
         @NamedQuery(name = "Role.getRoleByID", query = "select obj from Role obj where obj.id = ? "),
         @NamedQuery(name = "Role.getMaxID", query = "select max(obj.id) from Role obj "),
-        @NamedQuery(name = "Role.getRole4UserCount", query = "select count(r.id) from Role r,User u where r.id = u.roleID and r.id in (:ids) ") })
+        @NamedQuery(name = "Role.getRole4UserCount", query = "select count(r.id) from Role r,User u where r.id = u.roleID and r.id in (:ids) "),
+        @NamedQuery(name = "Role.getRoleListByMenuNodeID", query = "select robj from Role robj, MenuNodePermit pObj where robj.id = pObj.roleID and pObj.menuNodeID = ? ") })
 // @NamedNativeQuery(name = "Role.getRole4UserCounta", query = "select
 // count(r.*) as ff from W_USER_ROLE r, W_USER u where r.ROLE_ID = u.ROLE_ID and
 // r.ROLE_ID in (?) ", resultSetMapping = "roleCount")

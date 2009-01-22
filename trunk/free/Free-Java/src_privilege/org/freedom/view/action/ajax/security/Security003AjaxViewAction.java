@@ -16,6 +16,7 @@ import org.freedom.core.domain.TreeNode;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
+import org.freedom.services.permit.IMenuNodePermitService;
 import org.freedom.services.permit.IMenuNodeService;
 import org.freedom.view.action.SecurityMesssageID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class Security003AjaxViewAction extends AbstractViewAction {
     private static final long serialVersionUID = 5384836167102534578L;
     @Autowired
     private IMenuNodeService menuNodeService;
+    @Autowired
+    private IMenuNodePermitService menuNodePermitService;
 
     /**
      * 取得树节点数据
@@ -83,7 +86,7 @@ public class Security003AjaxViewAction extends AbstractViewAction {
         // 取得登录用户信息
         UserInfoSessionBean user = getUserInfoInSession(request);
 
-        boolean _result = menuNodeService.checkMenuNodePermitService(user.getUserId(), user.getRoleId(), nodeId);
+        boolean _result = menuNodePermitService.checkMenuNodePermitService(user.getUserId(), user.getRoleId(), nodeId);
 
         JosnViewObject outObj = new JosnViewObject();
         if (!_result) {
@@ -101,5 +104,13 @@ public class Security003AjaxViewAction extends AbstractViewAction {
 
     public void setMenuNodeService(IMenuNodeService menuNodeService) {
         this.menuNodeService = menuNodeService;
+    }
+
+    public IMenuNodePermitService getMenuNodePermitService() {
+        return menuNodePermitService;
+    }
+
+    public void setMenuNodePermitService(IMenuNodePermitService menuNodePermitService) {
+        this.menuNodePermitService = menuNodePermitService;
     }
 }
