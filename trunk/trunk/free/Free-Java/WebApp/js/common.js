@@ -130,3 +130,7 @@ function showMessageBox(msgStr, fun) {
 		icon : Ext.MessageBox.INFO
 	});
 }
+
+function showConfirm(msgStr, fun) {
+	Ext.MessageBox.confirm(_title, msgStr, fun);
+}
