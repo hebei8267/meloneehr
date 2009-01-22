@@ -26,6 +26,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 主框架
+ * 
  * @author 何贝
  * @since JDK1.5
  */

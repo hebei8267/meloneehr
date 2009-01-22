@@ -21,6 +21,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 修改用户密码
+ * 
  * @author 何贝
  * @since JDK1.5
  */
@@ -35,8 +37,8 @@ public class Security002AjaxViewAction extends AbstractViewAction {
     private ILoginLogoutService loginLogoutService;
 
     @RequestMapping("/security/002/modPwdAction.ajax")
-    public void modPwdAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException {
+    public void modPwdAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
         // 取得request里面的参数
         String userId = ServletRequestUtils.getStringParameter(request, "userId");
         String oldPassword = ServletRequestUtils.getStringParameter(request, "oldPassword");

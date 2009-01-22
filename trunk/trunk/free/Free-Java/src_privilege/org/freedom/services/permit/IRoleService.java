@@ -3,6 +3,8 @@
  */
 package org.freedom.services.permit;
 
+import java.util.List;
+
 import org.freedom.core.domain.TreeNode;
 import org.freedom.entity.common.Role;
 
@@ -45,4 +47,11 @@ public interface IRoleService {
      * @return 角色树根节点
      */
     public TreeNode getAllRoleInfoTreeService();
+
+    /**
+     * 取得角色列表信息
+     * 
+     * @return 角色列表信息
+     */
+    public List<Role> getAllRoleInfoListService();
 }

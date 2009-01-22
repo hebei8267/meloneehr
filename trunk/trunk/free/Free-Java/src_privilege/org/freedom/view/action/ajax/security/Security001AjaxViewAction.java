@@ -23,6 +23,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 用户登录
+ * 
  * @author 何贝
  * @since JDK1.5
  */
@@ -37,8 +39,8 @@ public class Security001AjaxViewAction extends AbstractViewAction {
     private ILoginLogoutService loginLogoutService;
 
     @RequestMapping("/security/001/loginAction.ajax")
-    public void loginAction(HttpServletRequest request, HttpServletResponse response)
-            throws ServletRequestBindingException, IOException {
+    public void loginAction(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException,
+            IOException {
         // 取得request里面的参数
         String userId = ServletRequestUtils.getStringParameter(request, "userId");
         String password = ServletRequestUtils.getStringParameter(request, "password");
