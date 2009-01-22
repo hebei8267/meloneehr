@@ -14,7 +14,6 @@ import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
-import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.permit.IMenuNodeService;
 import org.freedom.view.domain.system.MenuTreeNodeViewObject;
@@ -31,7 +30,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("menuNodeService")
 @Scope("prototype")
-public class MenuNodeServiceImp implements IMenuNodeService {
+public class MenuNodeServiceImpl implements IMenuNodeService {
 
     // ---------------------------------------------------------------------------
     // 接口实现
@@ -181,7 +180,7 @@ public class MenuNodeServiceImp implements IMenuNodeService {
                 menuTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
                 menuTreeNode.setParentNodeID(dbNode.getParentNodeID());
                 menuTreeNode.setUiNodeIndex(dbNode.getIndex().toString());
-                
+
                 parentNode.addChildren(menuTreeNode);
 
                 buildMenuNodeInfoTree(menuTreeNode, dbNode);
@@ -283,17 +282,6 @@ public class MenuNodeServiceImp implements IMenuNodeService {
             }
         }
         return _reList;
-    }
-
-    public boolean checkMenuNodePermitService(String userID, String roleID, String nodeID) {
-        if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员ID
-            return true;
-        }
-        MenuNodePermit permit = menuNodePermitDao.getMenuNodePermitByRoleIDAndMenuNodeID(roleID, nodeID);
-        if (permit != null) {
-            return true;
-        }
-        return false;
     }
 
     // ---------------------------------------------------------------------------
