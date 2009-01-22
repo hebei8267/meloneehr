@@ -16,59 +16,71 @@
         <!--
             Ext.onReady(function(){
 
-			    var myData = [['00000001', '系统管理员'], ['00000002', '一般用户'], ['00000003', '行政人员']];
-			    
-			    // create the data store
-			    var store = new Ext.data.SimpleStore({
-			        fields: [{
-			            name: 'roleID'
-			        }, {
-			            name: 'roleName'
-			        }]
-			    });
-			    store.loadData(myData);
-			    
-			    var sm = new Ext.grid.CheckboxSelectionModel({
-			        header: '',
-			        singleSelect: true,
-			        listeners: {
-			            rowselect: function(sm, row, rec){
-			                // setFromData(rec);
-			            },
-			            rowdeselect: function(sm, row, rec){
-			                // cleanFromData();
-			            }
-			        }
-			    });
+			    var role = Ext.data.Record.create([
+	                {name: 'id'},
+	                {name: 'name'}
+	            ]);
+	            
+	            // create the data store
+	            var store = new Ext.data.Store({
+	                id : 'roleStore',
+	                proxy : new Ext.data.HttpProxy({
+	                    url : '${pageContext.request.contextPath}/security/menu/menuSetting/001/getAccessMenuNodePermitRoleInfoListAction.ajax',
+	                    method: 'POST'
+	                }),
+	                reader : new Ext.data.JsonReader({
+	                    totalProperty: "totalProperty",
+	                    root: "dataList",
+	                    successProperty :'sessionTimeOut'
+	                }, role),
+	                listeners : {
+	                    loadexception : function(){
+	                        showMessageBox(getCommunicationErrorMsg());
+	                    }
+	                }
+	            });
+	            var sm = new Ext.grid.CheckboxSelectionModel({
+	                header : '',
+	                listeners : {
+	                    rowselect : function(sm, row, rec) {
+	                        // setFromData(rec);
+	                    },
+	                    rowdeselect : function(sm, row, rec) {
+	                        // cleanFromData();
+	                    }
+	                }
+	            });
 			    
 			    // create the Grid
-			    var grid = new Ext.grid.GridPanel({
-			        store: store,
-			        id: 'roleGrid',
-			        el: 'roleGridDiv',
-			        columns: [sm, new Ext.grid.RowNumberer({
-			            header: '序号',// 自动行号
-			            width: 35
-			        }), {
-			            id: 'roleID',
-			            header: "编号",
-			            width: 80,
-			            sortable: true,
-			            dataIndex: 'roleID'
-			        }, {
-			            id: 'roleName',
-			            header: "名称",
-			            width: 150,
-			            sortable: true,
-			            dataIndex: 'roleName'
-			        }],
-			        stripeRows: true,
-			        height: 250,
-			        width: 307,
-			        title: '适用角色信息'
-			    });
-			    
-			    grid.render();
+	            var grid = new Ext.grid.GridPanel({
+	                store : store,
+	                id : 'roleGrid',
+	                el : 'roleGridDiv',
+	                columns : [
+	                    sm, 
+	                    new Ext.grid.RowNumberer({
+	                        header : '序号',// 自动行号
+	                        width : 35
+	                    }), {
+	                        id : 'id',
+	                        header : "编号",
+	                        width : 85,
+	                        sortable : true,
+	                        dataIndex : 'id'
+	                    }, {
+	                        id : 'name',
+	                        header : "名称",
+	                        width : 161,
+	                        sortable : true,
+	                        dataIndex : 'name'
+	                }],
+	                stripeRows : true,
+	                height : 250,
+	                width : 307,
+	                title : '适用角色信息'
+	            });
+	
+	            grid.render();
 			    
 			    //************************************************
 			    //************************************************
@@ -101,12 +113,29 @@
 	            tree.on("click", function(node, event) {
 	            	if (node.id == '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
 	            		cleanHiddenItem();
+	            		//清空角色列表内容
+	            		cleanRoleInfoList();
 	            	} else {
+	            		//选中菜单节点
 	            		menuNodeSelected(node);
+	            		//加载角色列表
+	            		roleListInfonLoad(node);
 	            	}
 	            });
 	            tree.expandAll();
 			});
+			//清空角色列表内容
+			function cleanRoleInfoList(){
+				Ext.getCmp('roleGrid').getStore().removeAll();
+			}
+			//加载角色列表
+			function roleListInfonLoad(node){
+				if(($F("selectedMenuNode")!= node.id)){
+                    $("selectedMenuNode").value = node.id;
+                    //加载列表
+                    Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : Ext.getCmp("nodeID").getValue()}});
+                }
+			}
 			//清除隐藏信息
             function cleanHiddenItem(){
             	Ext.getCmp("nodeID").setValue("");
@@ -129,11 +158,46 @@
 				setRadioValueByName("applyArea", true);
 				Ext.getCmp("showIndex").setValue(node.attributes.uiNodeIndex);
 			}
+			//校验菜单节点名称
             function checkNodeTxt(){
+            	if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
+                    if(Ext.getCmp("nodeTxt").getValue() != ""){
+                        return getNeedSelectedItem("菜单树节点");
+                    }
+                } else {
+                    if(Ext.getCmp("nodeTxt").getValue() == ""){
+                        return getBlankText();
+                    }
+                }
+            	return true;
             }
+            //校验Action URL
             function checkActionContent(){
+            	if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
+                    if(Ext.getCmp("actionContent").getValue() != ""){
+                        return getNeedSelectedItem("菜单树节点");
+                    }
+                } else {
+                    if(Ext.getCmp("actionContent").getValue() == ""){
+                        return getBlankText();
+                    }
+                }
+            	return true;
             }
+            //校验显示位置
             function checkShowIndex(){
+            	if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
+                    if(Ext.getCmp("showIndex").getValue() != ""){
+                        return getNeedSelectedItem("菜单树节点");
+                    }
+                } else {
+                    if(Ext.getCmp("showIndex").getValue() != ""){
+                    	if(!isDigits(Ext.getCmp("showIndex").getValue())){
+                    		return getNumText();
+                    	}
+                    }
+                }
+            	return true;
             }
             function addMenuNode(){
                 openSubWindow('addMenuNode.html',390,355);
@@ -186,6 +250,8 @@
             </table>
             <div>
             	<form:form id="menuCfgForm" method="post" modelAttribute="MenuSetting001ViewObject">
+            		<%// 选中菜单节点 %>
+            		<input type="hidden" id="selectedMenuNode" name="selectedMenuNode" value="">
                     <table>
                         <tr height="10">
                         </tr>
