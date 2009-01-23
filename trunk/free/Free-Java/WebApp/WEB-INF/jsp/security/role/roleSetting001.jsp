@@ -174,10 +174,10 @@
             }
             //删除角色
             function delRoleAction(btn){
-            	if (btn != 'yes') {
-	                return;
-	            }
-            	//表单提交简化版本
+                if (btn != 'yes') {
+                    return;
+                }
+                //表单提交简化版本
                 formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
                                {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
                                roleID: Ext.getCmp("nodeID").getValue()},
