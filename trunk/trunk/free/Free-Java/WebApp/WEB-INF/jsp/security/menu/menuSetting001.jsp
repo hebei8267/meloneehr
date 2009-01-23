@@ -215,7 +215,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-               		showMessageBox(getNeedSelectedItemErrorMsg("要删除的菜单树节点", "树根节点不能添加适用角色"));
+               		showMessageBox(getNeedSelectedItemErrorMsg("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
                		return;
                 }
                 
@@ -246,10 +246,13 @@
         				if(_newAddData.data.id == _oldRoleData.data.id){
         					break;
         				} else {
-        					if(!(i3+1<oldRoleList.length)){
+        					if(!(i3+1<oldRoleList.length)){//最后一个对象也不相同时
         						addFlg = true;
         					}
         				}
+       				}
+       				if(oldRoleList.length == 0){//原对象列表中一个对象都没有
+       					addFlg = true;
        				}
        				
        				if(addFlg){
@@ -258,6 +261,38 @@
        			}
        			
        			Ext.getCmp('roleGrid').getView().refresh();
+       			Ext.getCmp('roleGrid').getStore().sort("id", "ASC");
+        	}
+        	//删除角色
+        	function delMenuNodeRole(){
+        		if(subWin != null){
+                    subWin.close();
+                }
+                
+                var selectObjs = Ext.getCmp('roleGrid').getSelections();
+	            if(selectObjs == null || selectObjs.length == 0){//未选择添加角色
+	                showMessageBox(getNeedOneSelectedErrorMsg('角色'));
+	                return;
+	            }else{
+	                showConfirm(getDelConfirmTipMsg(), delMenuNodeRoleAction);
+	                return;
+	            }
+        	}
+        	//删除角色
+        	function delMenuNodeRoleAction(btn){
+        		if (btn != 'yes') {
+	                return;
+	            }
+	            
+	            var selectObjs = Ext.getCmp('roleGrid').getSelections();
+	            var gridStore = Ext.getCmp('roleGrid').getStore()
+
+	            for(var i=0;i<selectObjs.length;i++){
+	                gridStore.remove(selectObjs[i])
+	            }
+	            
+	            Ext.getCmp('roleGrid').getView().refresh();
+       			gridStore.sort("id", "ASC");
         	}
             function closeSubWin(){
                 if(subWin != null){
@@ -349,7 +384,7 @@
                                                     </td>
                                                     <!-- 删除角色 -->
                                                     <td align="left">
-                                                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delSelectedRole();"> 
+                                                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delMenuNodeRole();"> 
                                                     </td>
                                                 </tr>
                                             </table>
