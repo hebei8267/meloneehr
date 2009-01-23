@@ -36,8 +36,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "W_MENU_NODE")
-@NamedQueries( {
-        @NamedQuery(name = "MenuNode.getMenuNodeByID", query = "select obj from MenuNode obj where obj.id = ? "),
+@NamedQueries( { @NamedQuery(name = "MenuNode.getMenuNodeByID", query = "select obj from MenuNode obj where obj.id = ? "),
         @NamedQuery(name = "MenuNode.getMaxID", query = "select max(obj.id) from MenuNode obj ") })
 public class MenuNode extends AbstractEntityBean {
 
@@ -88,7 +87,7 @@ public class MenuNode extends AbstractEntityBean {
 
     /** 父节点 */
     @ManyToOne(fetch = FetchType.EAGER)
-    //@ManyToOne(fetch = FetchType.LAZY)
+    // @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_NODE_H_ID")
     private MenuNode parentNode;
 
