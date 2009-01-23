@@ -82,8 +82,8 @@ public class ExtjsComboBoxTag extends AbstractExtjsTag {
                             getItemValue())) : null);
                     String labelProperty = (getItemLabel() != null ? ObjectUtils.getDisplayString(evaluate("itemLabel",
                             getItemLabel())) : null);
-                    OptionWriter optionWriter = new OptionWriter(itemsObject, getBindStatus(), valueProperty,
-                            labelProperty, isHtmlEscape());
+                    OptionWriter optionWriter = new OptionWriter(itemsObject, getBindStatus(), valueProperty, labelProperty,
+                            isHtmlEscape());
                     optionWriter.writeOptions(tagWriter);
                 }
             }
@@ -210,7 +210,7 @@ public class ExtjsComboBoxTag extends AbstractExtjsTag {
     }
 
     public static final String EDIT_ABLE_ATTRIBUTE = "editable";
-    private String editable;
+    private String editable = "false";
 
     public String getEditable() {
         return editable;
