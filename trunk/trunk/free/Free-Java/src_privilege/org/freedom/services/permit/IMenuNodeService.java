@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.freedom.core.domain.TreeNode;
 import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.ui.MenuNodeType;
 
 /**
  * 菜单树结点相关服务
@@ -84,4 +85,10 @@ public interface IMenuNodeService {
      */
     public List<TreeNode> getAllAreaMenuNodeService(String userID, String roleID);
 
+    /**
+     * 取得菜单节点类型列表
+     * 
+     * @return 菜单节点类型列表
+     */
+    public List<MenuNodeType> getMenuNodeTypeInfoListService();
 }

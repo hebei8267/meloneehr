@@ -284,6 +284,10 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return _reList;
     }
 
+    public List<MenuNodeType> getMenuNodeTypeInfoListService() {
+        return menuNodeTypeDao.getAll();
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
