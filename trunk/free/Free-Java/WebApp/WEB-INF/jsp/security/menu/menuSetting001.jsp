@@ -6,6 +6,7 @@
 <%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
 
 <%@ page language="java" import="org.freedom.entity.ui.MenuNode" %>
+<%@ page language="java" import="org.freedom.entity.ui.MenuNodeType" %>
 
 <html>
     <head>
@@ -214,7 +215,11 @@
                 if(subWin != null){
                     subWin.close();
                 }
-                 
+
+                if(Ext.getCmp("nodeID").getValue() != "" && "<%=MenuNodeType.LEAF_NODE_TYPE%>" == Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.uiNodeType){
+                	showMessageBox(getRightSelectedErrorMsg("菜单树节点", "叶节点不能添加子节点"));
+                    return;
+                } 
                 var windowOption = "width=390,height=405,left=300,top=100,status=no,resizable=no";
                 var windowName = "ADD_MENU_NODE";
                 subWin =  window.open("", windowName, windowOption);

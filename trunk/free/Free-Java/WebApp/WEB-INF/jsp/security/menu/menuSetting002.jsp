@@ -16,6 +16,7 @@
             function closeWin(){
                 parent.close();
             }
+            
             function checkShowIndex(){
                 if(Ext.getCmp("showIndex").getValue() != ""){
                     if(!isDigits(Ext.getCmp("showIndex").getValue())){
@@ -23,6 +24,27 @@
                     }
                 }
                 return true;
+            }
+            //添加菜单
+            function addMenuNode(){
+            	if(!formExtCmpValidate("addMenuForm")){
+                    return;
+                }
+                //表单提交简化版本
+                formAjaxSubmit("${pageContext.request.contextPath}/security/menu/menuSetting/002/addMenuNodeInfoAction.ajax", 
+                               {
+                               parentNodeID: Ext.getCmp("parentNodeID").getValue(),
+                               nodeTxt: Ext.getCmp("nodeTxt").getValue(),
+                               nodeType: Ext.getCmp("nodeType").getValue(),
+                               actionContent: Ext.getCmp("actionContent").getValue(),
+                               defaultPermit: getRadioValueByName("defaultPermit"),
+                               inheritFlg: getRadioValueByName("inheritFlg"),
+                               index: Ext.getCmp("showIndex").getValue()},
+                               addMenuNodeSuccess);
+            }
+            function addMenuNodeSuccess(){
+                parent.window.opener.menuTreeReload();
+                closeWin();
             }
         -->
         </script>
@@ -89,6 +111,7 @@
                                     </td> 
                                     <td class="inputItemCell" height="30" width="200">
                                         <extjs:input path="parentNodeID" disabled="true" />
+                                        <form:hidden path="parentNodeTypeID"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,7 +136,7 @@
                                     </td> 
                                     <td class="inputItemCell" height="30" width="200">
                                         <extjs:comboBox path="nodeType" items="${MenuSetting002ViewObject.nodeTypeList}" 
-                                        itemValue="value" itemLabel="label"/>
+                                        itemValue="value" itemLabel="label" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -162,7 +185,7 @@
                                         <table> 
                                             <tr> 
                                                 <td align="right"> 
-                                                    <input value="添  加" class="buttonSubmitLong" type="button" onclick="closeWin();"> 
+                                                    <input value="添  加" class="buttonSubmitLong" type="button" onclick="addMenuNode();"> 
                                                 </td> 
                                                 <td width="20"> 
                                                 </td> 
