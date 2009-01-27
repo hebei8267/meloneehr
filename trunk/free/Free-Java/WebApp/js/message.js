@@ -20,6 +20,7 @@ function getNeedSelectedItemErrorMsg(itemName) {
 }
 
 function getNeedSelectedItemErrorMsg(itemName, detail) {
+	detail += "！";
 	if (itemName.length >= detail.length) {
 		var i1 = itemName.length - detail.length + 1;
 		for (var i2 = 0; i2 < i1; i2++) {
