@@ -235,44 +235,24 @@ public class MenuNode extends AbstractEntityBean {
             // 插入到新位置
             childNodeList.add(this.getIndex() - 1, this);
             // 调正顺序
-            int index = 1;
-            for (MenuNode _menuNode : childNodeList) {
-                _menuNode.setIndex(index);
-                index++;
-            }
+            _updateNodeIndex();
         }
 
     }
 
     /**
-     * 更新节点的index
-     * 
-     * @param menuNode 节点
+     * 调正顺序
      */
-    private void updateNodeIndex(MenuNode menuNode) {
+    private void _updateNodeIndex() {
+
         int index = 1;
-        // 向列表尾部添加
-        if (menuNode.getIndex() == null || menuNode.getIndex() > childNodeList.size()) {
-            for (MenuNode _menuNode : childNodeList) {
-                if (_menuNode.getIndex() != null) {
-                    _menuNode.setIndex(index);
-                    index++;
-                }
-            }
-            menuNode.setIndex(index);
-
-        } else {// 像列表中间插于
-            for (int i = 0; i < childNodeList.size(); i++) {
-                if (menuNode.getIndex() == i + 1) {
-                    menuNode.setIndex(index);
-                    index++;
-                }
-
-                MenuNode _menuNode = childNodeList.get(i);
+        for (MenuNode _menuNode : childNodeList) {
+            if (_menuNode != null) {
                 _menuNode.setIndex(index);
                 index++;
             }
         }
+
     }
 
     /**
@@ -281,10 +261,14 @@ public class MenuNode extends AbstractEntityBean {
      * @param menuNode 子节点
      */
     public void addChildNode(MenuNode menuNode) {
+        // 向列表尾部添加
+        if (menuNode.getIndex() == null || menuNode.getIndex() == 0 || menuNode.getIndex() > childNodeList.size()) {
+            this.childNodeList.add(menuNode);
+        } else {// 像列表中间插于
+            this.childNodeList.add(menuNode.getIndex() - 1, menuNode);
+        }
 
-        updateNodeIndex(menuNode);
-
-        this.childNodeList.add(menuNode);
+        _updateNodeIndex();
     }
 
     /**
