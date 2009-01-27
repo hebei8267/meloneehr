@@ -143,7 +143,7 @@
             //加载角色列表
             function roleListInfonLoad(node){
                 //加载列表
-                Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : Ext.getCmp("nodeID").getValue()}});
+                Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : node.id}});
             }
             //清除隐藏信息
             function cleanHiddenItem(){
@@ -346,6 +346,7 @@
             	Ext.getCmp("menuTree").root.reload();
                 Ext.getCmp("menuTree").expandAll();
                 cleanHiddenItem();
+                cleanRoleInfoList();
             }
             function closeSubWin(){
                 if(subWin != null){
