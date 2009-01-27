@@ -95,9 +95,40 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return true;
     }
 
-    public boolean delMenuNodeInfoService(String menuNodeID) {
-        // TODO Auto-generated method stub
-        return false;
+    public int delMenuNodeInfoService(String menuNodeID, int dataVersion) {
+        // 取得菜单树结点信息
+        MenuNode dbMenuNode = menuNodeDao.getMenuNodeByID(menuNodeID);
+        if (dbMenuNode == null || !dbMenuNode.getVersion().equals(dataVersion)) {
+            return 1;
+        }
+        List<String> menuIDList = new ArrayList<String>();
+        // 取得所有菜单ID
+        getSubMenuID(dbMenuNode, menuIDList);
+
+        // 删除菜单节点的访问权限
+        menuNodePermitDao.delMenuNodePermitByMenuNodeID(menuIDList);
+        // 删除菜单节点
+        menuNodeDao.delete(dbMenuNode);
+        return 0;
+    }
+
+    /**
+     * 取得所有子菜单ID
+     * 
+     * @param menuNode 父菜单
+     * @param menuIDList 保存菜单ID的容器
+     */
+    private void getSubMenuID(MenuNode menuNode, List<String> menuIDList) {
+        if (menuNode != null) {
+            menuIDList.add(menuNode.getId());
+
+            for (MenuNode subNode : menuNode.getChildNodeList()) {
+
+                if (subNode != null) {
+                    getSubMenuID(subNode, menuIDList);
+                }
+            }
+        }
     }
 
     public TreeNode getMenuNodeInfoTreeService(String userID, String roleID) {
@@ -152,7 +183,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             menuTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
             menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
             menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
-
+            menuTreeNode.setVersion(dbNodeRoot.getVersion());
+            
             // 创建导航区菜单树结构
             buildMenuNodeInfoTree(menuTreeNode, dbNodeRoot);
 
@@ -180,6 +212,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 menuTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
                 menuTreeNode.setParentNodeID(dbNode.getParentNodeID());
                 menuTreeNode.setUiNodeIndex(dbNode.getIndex().toString());
+                menuTreeNode.setVersion(dbNode.getVersion());
 
                 parentNode.addChildren(menuTreeNode);
 

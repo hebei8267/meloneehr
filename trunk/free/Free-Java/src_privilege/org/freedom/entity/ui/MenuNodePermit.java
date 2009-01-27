@@ -29,8 +29,7 @@ import org.hibernate.annotations.NaturalId;
 @NamedQueries( {
         @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByUserID", query = "select pObj.menuNodeID from MenuNodePermit pObj, User uObj where uObj.id = ? and uObj.roleID = pObj.roleID "),
         @NamedQuery(name = "MenuNodePermit.getMenuNodePermitListByRoleID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? "),
-        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? "),
-        @NamedQuery(name = "MenuNodePermit.delMenuNodePermitByMenuNodeID", query = "delete MenuNodePermit pObj where pObj.menuNodeID = ? ") })
+        @NamedQuery(name = "MenuNodePermit.getMenuNodePermitByRoleIDAndMenuNodeID", query = "select pObj from MenuNodePermit pObj where pObj.roleID = ? and pObj.menuNodeID = ? ") })
 public class MenuNodePermit extends AbstractEntityBean {
 
     private static final long serialVersionUID = -350595423265400452L;

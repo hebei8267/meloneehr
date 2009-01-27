@@ -15,10 +15,12 @@ import net.sf.json.JSONObject;
 import org.freedom.core.domain.TreeNode;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.DataListBean;
+import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.services.permit.IMenuNodePermitService;
 import org.freedom.services.permit.IMenuNodeService;
+import org.freedom.view.action.SecurityMesssageID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -80,6 +82,34 @@ public class MenuSetting001AjaxViewAction extends AbstractViewAction {
         DataListBean<Role> dataList = new DataListBean<Role>();
         dataList.setDataList(roleList);
         JSONObject jSONObject = JSONObject.fromObject(dataList);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
+    }
+
+    /**
+     * 删除菜单节点
+     * 
+     * @param request
+     * @param response
+     * @throws ServletRequestBindingException
+     * @throws IOException
+     */
+    @RequestMapping("/security/menu/menuSetting/001/delMenuNodeInfoAction.ajax")
+    public void delMenuNodeInfoAction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletRequestBindingException, IOException {
+        // 取得request里面的参数
+        String menuNodeID = ServletRequestUtils.getStringParameter(request, "nodeID");
+        Integer dataVersion = ServletRequestUtils.getIntParameter(request, "dataVersion");
+
+        int _result = menuNodeService.delMenuNodeInfoService(menuNodeID, dataVersion);
+        JosnViewObject outObj = new JosnViewObject();
+        if (_result != 0) {
+            outObj.setProcessResult(false);
+
+            outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_NO_SYNCHRONIZATION));
+
+        }
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONObject.toString());
     }

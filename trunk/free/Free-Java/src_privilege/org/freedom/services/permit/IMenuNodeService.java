@@ -45,9 +45,10 @@ public interface IMenuNodeService {
      * 删除指定的菜单结点(同时删除角色和其关联的信息)
      * 
      * @param menuNodeID 要删除的菜单结点ID
-     * @return true-成功 false-失败
+     * @param dataVersion 版本
+     * @return 0-成功 1-失败(数据同步错误)
      */
-    public boolean delMenuNodeInfoService(String menuNodeID);
+    public int delMenuNodeInfoService(String menuNodeID, int dataVersion);
 
     /**
      * 取得菜单结点树信息(根节点开始)包含权限校验
