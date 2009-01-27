@@ -50,6 +50,17 @@ public class MenuNodePermitDao extends HibernateDaoImpl<MenuNodePermit> {
     }
 
     /**
+     * 根据菜单节点ID取得可访问的菜单树结点权限列表
+     * 
+     * @param menuNodeID 菜单节点ID
+     * @return 可访问的菜单树结点权限列表
+     */
+    @SuppressWarnings("unchecked")
+    public List<MenuNodePermit> getMenuNodePermitListByMenuNodeID(String menuNodeID) {
+        return getHibernateTemplate().findByNamedQuery("MenuNodePermit.getMenuNodePermitListByMenuNodeID", menuNodeID);
+    }
+
+    /**
      * 根据用户ID和菜单节点ID取得访问权限对象
      * 
      * @param roleID 登录用户角色ID

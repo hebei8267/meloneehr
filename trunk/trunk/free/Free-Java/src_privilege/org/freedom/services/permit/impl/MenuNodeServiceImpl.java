@@ -14,6 +14,7 @@ import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.dao.ui.MenuNodeTypeDao;
 import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
+import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.permit.IMenuNodeService;
 import org.freedom.view.domain.system.MenuTreeNodeViewObject;
@@ -43,7 +44,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             }
 
             MenuNode parentMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getParentNodeID());
-            if (parentMenuNode == null) {
+            if (parentMenuNode != null) {
                 boolean _check = menuNodeTypeCheck(parentMenuNode, menuNode);
                 // 子菜单节点类型检查
                 if (_check) {
@@ -53,9 +54,21 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                     parentMenuNode.addChildNode(menuNode);
                     // 添加菜单节点
                     menuNodeDao.save(menuNode);
+                    // 继承权限且其不拥有默认权限时
+                    if (inheritFlg && Boolean.FALSE.equals(menuNode.getDefaultPermit())) {
+                        List<MenuNodePermit> permitList = menuNodePermitDao.getMenuNodePermitListByMenuNodeID(parentMenuNode
+                                .getId());
 
-                    if (inheritFlg) {// 继承权限
-                        // TODO
+                        for (MenuNodePermit _permitList : permitList) {
+                            MenuNodePermit newPermit = new MenuNodePermit();
+
+                            Role role = _permitList.getRole();
+                            newPermit.setMenuNode(menuNode);
+
+                            newPermit.setRole(role);
+
+                            menuNodePermitDao.save(newPermit);
+                        }
                     }
 
                     return 0;
@@ -83,17 +96,17 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             }
         }
         // [导航条]节点下面只能是[文件夹]节点或者[叶节点]节点
-        if (MenuNodeType.AREA_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
+        // [文件夹]节点下面只能是[文件夹]节点或者[叶节点]节点
+        if (MenuNodeType.AREA_NODE_TYPE.equals(parentMenuNode.getNodeType())
+                || MenuNodeType.FOLDER_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
             if (!(MenuNodeType.FOLDER_NODE_TYPE.equals(childMenuNode.getNodeType()) || MenuNodeType.LEAF_NODE_TYPE
                     .equals(childMenuNode.getNodeType()))) {
                 return false;
             }
         }
         // [文件夹]节点下面只能是[叶节点]节点
-        if (MenuNodeType.FOLDER_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
-            if (!MenuNodeType.LEAF_NODE_TYPE.equals(childMenuNode.getNodeType())) {
-                return false;
-            }
+        if (MenuNodeType.LEAF_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
+            return false;
         }
 
         return true;
