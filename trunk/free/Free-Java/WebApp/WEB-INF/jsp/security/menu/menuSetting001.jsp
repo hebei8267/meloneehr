@@ -113,6 +113,17 @@
                 tree.render();
                 root.expand();
                 tree.on("click", function(node, event) {
+                    if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
+                  		$("selectedMenuNode").value = node.id;
+                  		
+                  		//关闭子窗口
+                        closeSubWin();
+                        
+                        if (node.id != '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
+                        	//加载角色列表
+                            roleListInfonLoad(node);
+                        }
+                    }
                     if (node.id == '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
                         cleanHiddenItem();
                         //清空角色列表内容
@@ -120,15 +131,6 @@
                     } else {
                         //选中菜单节点
                         menuNodeSelected(node);
-                        
-                        if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
-                            $("selectedMenuNode").value = node.id;
-                            
-                            //加载角色列表
-                            roleListInfonLoad(node);
-                            //关闭子窗口
-                            closeSubWin();
-                        }
                     }
                 });
                 tree.expandAll();
@@ -144,6 +146,8 @@
             }
             //清除隐藏信息
             function cleanHiddenItem(){
+            	$("selectedMenuNode").value = "<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>";
+            	
                 Ext.getCmp("nodeID").setValue("");
                 $("nodeTypeID").value = "";
                 Ext.getCmp("nodeType").setValue("");
@@ -306,6 +310,38 @@
                 Ext.getCmp('roleGrid').getView().refresh();
                 gridStore.sort("id", "ASC");
             }
+            //删除菜单节点
+            function delMenuNode(){
+            	if(subWin != null){
+                    subWin.close();
+                }
+                
+                if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
+                    showMessageBox(getNeedSelectedItemErrorMsg("要删除的菜单树节点", "树根节点不能删除"));
+                    return;
+                }
+                
+                showConfirm(getDelConfirmTipMsg(), delMenuNodeAction);
+            }
+            //删除菜单节点
+            function delMenuNodeAction(btn){
+            	if (btn != 'yes') {
+                    return;
+                }
+                
+                //表单提交简化版本
+                formAjaxSubmit("${pageContext.request.contextPath}/security/menu/menuSetting/001/delMenuNodeInfoAction.ajax", 
+                               {dataVersion: Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+                               nodeID: Ext.getCmp("nodeID").getValue()},
+                               menuTreeReload ,
+                               menuTreeReload);
+            }
+            //菜单树重新加载
+            function menuTreeReload(){
+            	Ext.getCmp("menuTree").root.reload();
+                Ext.getCmp("menuTree").expandAll();
+                cleanHiddenItem();
+            }
             function closeSubWin(){
                 if(subWin != null){
                     subWin.close();
@@ -357,7 +393,7 @@
             <div>
                 <form:form id="menuCfgForm" method="post" modelAttribute="MenuSetting001ViewObject">
                     <%// 选中菜单节点 %>
-                    <input type="hidden" id="selectedMenuNode" name="selectedMenuNode" value="">
+                    <input type="hidden" id="selectedMenuNode" name="selectedMenuNode" value="<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>">
                     <table>
                         <tr height="10">
                         </tr>
@@ -379,7 +415,7 @@
                                                     </td>
                                                     <!-- 删除菜单树节点 -->
                                                     <td align="left">
-                                                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delSelectedMenuNode();"> 
+                                                        <input value="删  除" class="buttonDeleteLong" type="button" onclick="delMenuNode();"> 
                                                     </td>
                                                 </tr>
                                             </table>
