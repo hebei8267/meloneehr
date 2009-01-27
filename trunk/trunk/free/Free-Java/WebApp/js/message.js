@@ -38,6 +38,17 @@ function getNoChangeErrorMsg() {
 function getNeedOneSelectedErrorMsg(itemName) {
 	return "最少要选择一条[" + itemName + "]记录！";
 }
+function getRightSelectedErrorMsg(itemName, detail) {
+	detail += "！";
+	if (itemName.length >= detail.length) {
+		var i1 = itemName.length - detail.length + 1;
+		for (var i2 = 0; i2 < i1; i2++) {
+			detail += "&nbsp;&nbsp;&nbsp;&nbsp;";
+		}
+	}
+	return "选择的[" + itemName + "]不符合要求！<br><br><b><font color='red'>" + detail
+			+ "</font></b>";;
+}
 // ************************************************
 // Extjs error message
 // ************************************************
