@@ -24,6 +24,8 @@ public class MenuSetting002ViewObject extends AbstractViewObject {
     private String parentNodeID;
     /** 父菜单节点名称 */
     private String parentNodeTxt;
+    /** 父菜单节点类型 */
+    private String parentNodeTypeID;
     /** 节点名称 */
     private String nodeTxt;
     /** 节点类型 */
@@ -38,12 +40,6 @@ public class MenuSetting002ViewObject extends AbstractViewObject {
     private boolean inheritFlg = false;
     /** 显示位置 */
     private String showIndex;
-
-    public MenuSetting002ViewObject(List<MenuNodeType> menuNodeTypeList) {
-        for (MenuNodeType menuNodeType : menuNodeTypeList) {
-            nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
-        }
-    }
 
     /**
      * 取得父菜单节点编号
@@ -79,6 +75,24 @@ public class MenuSetting002ViewObject extends AbstractViewObject {
      */
     public void setParentNodeTxt(String parentNodeTxt) {
         this.parentNodeTxt = parentNodeTxt;
+    }
+
+    /**
+     * 取得父菜单节点类型
+     * 
+     * @return 父菜单节点类型
+     */
+    public String getParentNodeTypeID() {
+        return parentNodeTypeID;
+    }
+
+    /**
+     * 设置父菜单节点类型
+     * 
+     * @param parentNodeTypeID 父菜单节点类型
+     */
+    public void setParentNodeTypeID(String parentNodeTypeID) {
+        this.parentNodeTypeID = parentNodeTypeID;
     }
 
     /**
@@ -133,6 +147,17 @@ public class MenuSetting002ViewObject extends AbstractViewObject {
      */
     public void setNodeTypeList(List<LabelValueBean> nodeTypeList) {
         this.nodeTypeList = nodeTypeList;
+    }
+
+    /**
+     * 设置节点类型列表
+     * 
+     * @param nodeTypeList 节点类型列表
+     */
+    public void setNodeTypeInfoList(List<MenuNodeType> menuNodeTypeList) {
+        for (MenuNodeType menuNodeType : menuNodeTypeList) {
+            nodeTypeList.add(new LabelValueBean(menuNodeType.getName(), menuNodeType.getSlaveID()));
+        }
     }
 
     /**

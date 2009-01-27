@@ -49,10 +49,11 @@ public class MenuSetting002NormalViewAction extends AbstractViewAction {
     public String showPageAction(HttpServletRequest request, Model model) throws ServletRequestBindingException {
         // 取得菜单节点类型列表
         List<MenuNodeType> _menuNodeTypeList = menuNodeService.getMenuNodeTypeInfoListService();
-        MenuSetting002ViewObject vObj = new MenuSetting002ViewObject(_menuNodeTypeList);
+        MenuSetting002ViewObject vObj = new MenuSetting002ViewObject();
         // 取得request里面的参数
         String pNodeID = ServletRequestUtils.getStringParameter(request, "nodeID");
         String pNodeTxt = ServletRequestUtils.getStringParameter(request, "nodeTxt");
+        String parentNodeTypeID = ServletRequestUtils.getStringParameter(request, "nodeTypeID");
 
         if (StringUtils.isEmpty(pNodeID)) {
             vObj.setParentNodeID(MenuNode.MENU_NODE_TREE_ROOT_ID);
@@ -64,7 +65,26 @@ public class MenuSetting002NormalViewAction extends AbstractViewAction {
         } else {
             vObj.setParentNodeTxt(pNodeTxt);
         }
-
+        if (StringUtils.isEmpty(parentNodeTypeID)) {
+            vObj.setParentNodeTypeID(MenuNodeType.ROOT_NODE_TYPE);
+        } else {
+            vObj.setParentNodeTypeID(parentNodeTypeID);
+        }
+        if (_menuNodeTypeList != null) {
+            if (MenuNodeType.ROOT_NODE_TYPE.equals(vObj.getParentNodeTypeID())) {
+                if (_menuNodeTypeList.size() >= 1) {
+                    _menuNodeTypeList.remove(3);
+                    _menuNodeTypeList.remove(2);
+                    _menuNodeTypeList.remove(0);
+                }
+            } else {
+                if (_menuNodeTypeList.size() >= 2) {
+                    _menuNodeTypeList.remove(1);
+                    _menuNodeTypeList.remove(0);
+                }
+            }
+            vObj.setNodeTypeInfoList(_menuNodeTypeList);
+        }
         model.addAttribute("MenuSetting002ViewObject", vObj);
         return "WEB-INF/jsp/security/menu/menuSetting002";
     }
