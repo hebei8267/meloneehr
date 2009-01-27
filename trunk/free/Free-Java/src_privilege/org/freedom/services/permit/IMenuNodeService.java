@@ -17,21 +17,13 @@ import org.freedom.entity.ui.MenuNodeType;
  */
 public interface IMenuNodeService {
     /**
-     * 添加菜单结点在默认的根节点下
-     * 
-     * @param menuNode 要添加的角色
-     * @return true-成功 false-失败
-     */
-    public boolean addMenuNodeInfoService(MenuNode menuNode);
-
-    /**
-     * 添加菜单结点在指定的父菜单结点对象下
+     * 添加菜单结点在指定的父菜单结点对象下(默认的根节点下)
      * 
      * @param menuNode 要添加的菜单结点
-     * @param parentMenuNodeID 父菜单结点ID
-     * @return true-成功 false-失败
+     * @param inheritFlg 继承权限
+     * @return 0-成功 1-失败(数据同步错误) 2-失败(节点类型不匹配)
      */
-    public boolean addMenuNodeInfoService(MenuNode menuNode, String parentMenuNodeID);
+    public int addMenuNodeInfoService(MenuNode menuNode, boolean inheritFlg);
 
     /**
      * 修改菜单结点信息

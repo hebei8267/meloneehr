@@ -35,30 +35,36 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     // ---------------------------------------------------------------------------
     // 接口实现
     // ---------------------------------------------------------------------------
-    public boolean addMenuNodeInfoService(MenuNode menuNode) {
-        return addMenuNodeInfoService(menuNode, MenuNode.MENU_NODE_TREE_ROOT_ID);
-    }
-
-    public boolean addMenuNodeInfoService(MenuNode menuNode, String parentMenuNodeID) {
+    public int addMenuNodeInfoService(MenuNode menuNode, boolean inheritFlg) {
         if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {
+            if (StringUtils.isBlank(menuNode.getParentNodeID())) {// 父节点为空时默认添加到根节点
+                menuNode.setParentNodeID(MenuNode.MENU_NODE_TREE_ROOT_ID);
+            }
 
-            MenuNode parentMenuNode = menuNodeDao.getMenuNodeByID(parentMenuNodeID);
+            MenuNode parentMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getParentNodeID());
+            if (parentMenuNode == null) {
+                boolean _check = menuNodeTypeCheck(parentMenuNode, menuNode);
+                // 子菜单节点类型检查
+                if (_check) {
+                    menuNode.setParentNode(parentMenuNode);
+                    menuNode.setId(menuNodeDao.getMaxID());
 
-            // 子菜单节点类型检查
-            if (menuNodeTypeCheck(parentMenuNode, menuNode)) {
+                    parentMenuNode.addChildNode(menuNode);
+                    // 添加菜单节点
+                    menuNodeDao.save(menuNode);
 
-                menuNode.setParentNode(parentMenuNode);
-                menuNode.setId(menuNodeDao.getMaxID());
+                    if (inheritFlg) {// 继承权限
+                        // TODO
+                    }
 
-                parentMenuNode.addChildNode(menuNode);
-
-                menuNodeDao.save(menuNode);
-                return true;
-
+                    return 0;
+                } else {
+                    return 2;
+                }
             }
         }
-        return false;
+        return 1;
     }
 
     /**
@@ -69,9 +75,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
      * @return 检查结果
      */
     private boolean menuNodeTypeCheck(MenuNode parentMenuNode, MenuNode childMenuNode) {
-        if (parentMenuNode == null) {
-            return false;
-        }
+
         // [根]节点下面只能是[导航条]节点
         if (MenuNodeType.ROOT_NODE_TYPE.equals(parentMenuNode.getNodeType())) {
             if (!MenuNodeType.AREA_NODE_TYPE.equals(childMenuNode.getNodeType())) {
@@ -184,7 +188,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
             menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
             menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
             menuTreeNode.setVersion(dbNodeRoot.getVersion());
-            
+
             // 创建导航区菜单树结构
             buildMenuNodeInfoTree(menuTreeNode, dbNodeRoot);
 

@@ -344,7 +344,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param parentNodeID 父节点ID
      */
-    protected void setParentNodeID(String parentNodeID) {
+    public void setParentNodeID(String parentNodeID) {
         this.parentNodeID = parentNodeID;
     }
 
