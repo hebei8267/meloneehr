@@ -29,7 +29,6 @@
                                detail: Ext.getCmp("nodeDetail").getValue(),
                                name: Ext.getCmp("nodeTxt").getValue(),
                                inheritFlg: getRadioValueByName("inheritFlg")},
-                               addRoleSuccess ,
                                addRoleSuccess);
             }
             
