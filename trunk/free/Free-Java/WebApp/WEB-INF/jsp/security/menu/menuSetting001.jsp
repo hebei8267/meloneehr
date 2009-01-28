@@ -122,7 +122,7 @@
                         
                         if (node.id != '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
                         	//加载角色列表
-                            roleListInfonLoad(node);
+                            roleListInfonLoad(node.id);
                         }
                     }
                     if (node.id == '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
@@ -141,9 +141,9 @@
                 Ext.getCmp('roleGrid').getStore().removeAll();
             }
             //加载角色列表
-            function roleListInfonLoad(node){
+            function roleListInfonLoad(nodeId){
                 //加载列表
-                Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : node.id}});
+                Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : nodeId}});
             }
             //清除隐藏信息
             function cleanHiddenItem(){
@@ -236,7 +236,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getNeedSelectedItemErrorMsg("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
+                    showMessageBox(getNeedSelectedItemErrorMsg2("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
                     return;
                 }
                 
@@ -322,7 +322,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getNeedSelectedItemErrorMsg("要删除的菜单树节点", "树根节点不能删除"));
+                    showMessageBox(getNeedSelectedItemErrorMsg2("要删除的菜单树节点", "树根节点不能删除"));
                     return;
                 }
                 
@@ -352,6 +352,42 @@
                 if(subWin != null){
                     subWin.close();
                 }
+            }
+            //重置选择的菜单信息
+            function selectedNodeReset(){
+            	if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+                    //加载角色列表
+                    roleListInfonLoad(Ext.getCmp("nodeID").getValue());
+                    //选中菜单节点
+                    menuNodeSelected(Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()));
+                } else {
+                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "树根节点无法重置操作"));
+                }
+            }
+            //更新选择的菜单信息
+            function updateSelectedNode(){
+            	if(Ext.getCmp("nodeID").getValue() != ""){//选中菜单节点
+                    updateSelectedNodeAction();
+                } else {
+                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "树根节点无法更新操作"));
+                }
+            }
+            //更新选择的菜单信息
+            function updateSelectedNodeAction(){
+            	if(!formExtCmpValidate("menuCfgForm")){
+                    return;
+                }
+                var menuTree = Ext.getCmp("menuTree");
+                var menuNode = menuTree.getNodeById(Ext.getCmp("nodeID").getValue());
+                // TODO hebei mod check
+                alert(3)
+                
+                //表单提交简化版本
+        /*        formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
+                               {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+                               roleID: Ext.getCmp("nodeID").getValue()},
+                               menuTreeReload ,
+                               menuTreeReload);*/
             }
         -->
         </script>
@@ -532,12 +568,12 @@
                                                         <table> 
                                                             <tr> 
                                                                 <td align="right"> 
-                                                                    <input value="更  新" class="buttonSubmitLong" type="button"> 
+                                                                    <input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
                                                                 </td> 
                                                                 <td width="20"> 
                                                                 </td> 
                                                                 <td align="right"> 
-                                                                    <input value="重  置" class="buttonResetLong" type="button"> 
+                                                                    <input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();"> 
                                                                 </td> 
                                                             </tr> 
                                                         </table>

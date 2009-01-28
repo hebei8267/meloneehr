@@ -109,7 +109,7 @@
                     Ext.getCmp("nodeTxt").setValue(roleNode.text);
                     Ext.getCmp("nodeDetail").setValue(roleNode.attributes.detail);
                 } else {
-                    showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+                    showMessageBox(getRightSelectedErrorMsg("角色树节点", "树根节点无法重置操作"));
                 }
             }
             //更新选择的角色信息
@@ -117,7 +117,7 @@
                 if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
                     updateSelectedNodeAction();
                 } else {
-                    showMessageBox(getNeedSelectedItemErrorMsg("角色树节点"));
+                    showMessageBox(getRightSelectedErrorMsg("角色树节点", "树根节点无法更新操作"));
                 }
             }
             //更新选择的角色信息
@@ -133,7 +133,7 @@
                     showMessageBox(getNoChangeErrorMsg());
                     return;
                 }
-                
+
                 Ext.Ajax.request({
                     url : '${pageContext.request.contextPath}/security/role/roleSetting/001/updateNodeInfoAction.ajax',
                     method: 'post',
@@ -177,7 +177,7 @@
                 }
                 
                 if($F("parentNodeID") == ""){
-                    showMessageBox(getNeedSelectedItemErrorMsg("要删除的角色树节点", "树根节点不能删除"));
+                    showMessageBox(getNeedSelectedItemErrorMsg2("要删除的角色树节点", "树根节点不能删除"));
                     return;
                 }
                 
