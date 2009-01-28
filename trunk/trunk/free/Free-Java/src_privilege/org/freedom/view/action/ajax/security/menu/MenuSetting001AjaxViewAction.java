@@ -114,6 +114,17 @@ public class MenuSetting001AjaxViewAction extends AbstractViewAction {
         response.getWriter().write(jSONObject.toString());
     }
 
+    /**
+     * 更新菜单节点
+     * 
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/security/menu/menuSetting/001/updateNodeInfoAction.ajax")
+    public void updateNodeInfoAction(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
     public IMenuNodeService getMenuNodeService() {
         return menuNodeService;
     }
