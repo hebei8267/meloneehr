@@ -15,18 +15,12 @@ function getNeedSameInputErrorMsg(itemName1, itemName2) {
 	return "输入的[" + itemName1 + "]和[" + itemName2 + "]不一样！";
 }
 
-function getNeedSelectedItemErrorMsg(itemName) {
+function getNeedSelectedItemErrorMsg1(itemName) {
 	return "未选择[" + itemName + "]！";
 }
 
-function getNeedSelectedItemErrorMsg(itemName, detail) {
-	detail += "！";
-	if (itemName.length >= detail.length) {
-		var i1 = itemName.length - detail.length + 1;
-		for (var i2 = 0; i2 < i1; i2++) {
-			detail += "&nbsp;&nbsp;&nbsp;&nbsp;";
-		}
-	}
+function getNeedSelectedItemErrorMsg2(itemName, detail) {
+	detail = _formatDetail(itemName, detail);
 	return "未选择[" + itemName + "]！<br><br><b><font color='red'>注意: " + detail
 			+ "</font></b>";
 }
@@ -39,15 +33,19 @@ function getNeedOneSelectedErrorMsg(itemName) {
 	return "最少要选择一条[" + itemName + "]记录！";
 }
 function getRightSelectedErrorMsg(itemName, detail) {
-	detail += "！";
+	detail = _formatDetail(itemName, detail);
+	return "未选择正确的[" + itemName + "]！<br><br><b><font color='red'>注意: "
+			+ detail + "</font></b>";;
+}
+function _formatDetail(itemName, detail) {
+	detail += "！&nbsp;&nbsp;&nbsp;&nbsp;";
 	if (itemName.length >= detail.length) {
 		var i1 = itemName.length - detail.length + 1;
 		for (var i2 = 0; i2 < i1; i2++) {
 			detail += "&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 	}
-	return "选择的[" + itemName + "]不符合要求！<br><br><b><font color='red'>" + detail
-			+ "</font></b>";;
+	return detail;
 }
 // ************************************************
 // Extjs error message
