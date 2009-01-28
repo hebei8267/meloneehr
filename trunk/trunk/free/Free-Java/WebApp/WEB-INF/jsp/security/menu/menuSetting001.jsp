@@ -115,13 +115,13 @@
                 root.expand();
                 tree.on("click", function(node, event) {
                     if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
-                  		$("selectedMenuNode").value = node.id;
-                  		
-                  		//关闭子窗口
+                        $("selectedMenuNode").value = node.id;
+                        
+                        //关闭子窗口
                         closeSubWin();
                         
                         if (node.id != '<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>') {//根节点不做处理,清除详细信息
-                        	//加载角色列表
+                            //加载角色列表
                             roleListInfonLoad(node.id);
                         }
                     }
@@ -147,8 +147,8 @@
             }
             //清除隐藏信息
             function cleanHiddenItem(){
-            	$("selectedMenuNode").value = "<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>";
-            	
+                $("selectedMenuNode").value = "<%=MenuNode.MENU_NODE_TREE_ROOT_ID%>";
+                
                 Ext.getCmp("nodeID").setValue("");
                 $("nodeTypeID").value = "";
                 Ext.getCmp("nodeType").setValue("");
@@ -217,7 +217,7 @@
                 }
 
                 if(Ext.getCmp("nodeID").getValue() != "" && "<%=MenuNodeType.LEAF_NODE_TYPE%>" == Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.uiNodeType){
-                	showMessageBox(getRightSelectedErrorMsg("菜单树节点", "叶节点不能添加子节点"));
+                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "叶节点不能添加子节点"));
                     return;
                 } 
                 var windowOption = "width=390,height=405,left=300,top=100,status=no,resizable=no";
@@ -317,7 +317,7 @@
             }
             //删除菜单节点
             function delMenuNode(){
-            	if(subWin != null){
+                if(subWin != null){
                     subWin.close();
                 }
                 
@@ -330,7 +330,7 @@
             }
             //删除菜单节点
             function delMenuNodeAction(btn){
-            	if (btn != 'yes') {
+                if (btn != 'yes') {
                     return;
                 }
                 
@@ -343,7 +343,7 @@
             }
             //菜单树重新加载
             function menuTreeReload(){
-            	Ext.getCmp("menuTree").root.reload();
+                Ext.getCmp("menuTree").root.reload();
                 Ext.getCmp("menuTree").expandAll();
                 cleanHiddenItem();
                 cleanRoleInfoList();
@@ -355,7 +355,7 @@
             }
             //重置选择的菜单信息
             function selectedNodeReset(){
-            	if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
+                if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
                     //加载角色列表
                     roleListInfonLoad(Ext.getCmp("nodeID").getValue());
                     //选中菜单节点
@@ -366,7 +366,7 @@
             }
             //更新选择的菜单信息
             function updateSelectedNode(){
-            	if(Ext.getCmp("nodeID").getValue() != ""){//选中菜单节点
+                if(Ext.getCmp("nodeID").getValue() != ""){//选中菜单节点
                     updateSelectedNodeAction();
                 } else {
                     showMessageBox(getRightSelectedErrorMsg("菜单树节点", "树根节点无法更新操作"));
@@ -374,16 +374,24 @@
             }
             //更新选择的菜单信息
             function updateSelectedNodeAction(){
-            	if(!formExtCmpValidate("menuCfgForm")){
+                if(!formExtCmpValidate("menuCfgForm")){
                     return;
                 }
                 var menuTree = Ext.getCmp("menuTree");
                 var menuNode = menuTree.getNodeById(Ext.getCmp("nodeID").getValue());
                 // TODO hebei mod check
-                alert(3)
-                
+                if(Ext.getCmp("nodeTxt").getValue() == menuNode.attributes.text
+                    && getRadioValueByName("defaultPermit") == String(menuNode.attributes.defaultPermit)
+                    && Ext.getCmp("actionContent").getValue() == menuNode.attributes.actionContent
+                    && getRadioValueByName("applyArea") == String(true)
+                    && Ext.getCmp("showIndex").getValue() == menuNode.attributes.uiNodeIndex){//菜单详细未修改，不做后台提交
+                    showMessageBox(getNoChangeErrorMsg());
+                    return;
+                }
+               
+                alert(1)
                 //表单提交简化版本
-        /*        formAjaxSubmit("${pageContext.request.contextPath}/security/role/roleSetting/001/delNodeInfoAction.ajax", 
+        /*        formAjaxSubmit("${pageContext.request.contextPath}/security/menu/menuSetting/001/updateNodeInfoAction.ajax", 
                                {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
                                roleID: Ext.getCmp("nodeID").getValue()},
                                menuTreeReload ,
