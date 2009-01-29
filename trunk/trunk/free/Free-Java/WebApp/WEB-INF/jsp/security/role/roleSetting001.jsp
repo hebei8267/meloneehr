@@ -50,28 +50,28 @@
                 root.expand();
                 
                 tree.on("click", function(node, event) {
-					if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
-                    	$("selectedMenuNode").value = node.id;
-                    		
-                    	//关闭子窗口
+                    if(($F("selectedMenuNode")!= node.id)){//选择其它节点时
+                        $("selectedMenuNode").value = node.id;
+                            
+                        //关闭子窗口
                         closeSubWin();
                     }
                     if (node.id == 'root') {//根节点不做处理,清除详细信息
                         cleanHiddenItem();
                     } else {
-                    	$("parentNodeID").value = node.attributes.parentNodeID;
-	                    Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
-	                    Ext.getCmp("nodeID").setValue(node.id);
-	                    Ext.getCmp("nodeTxt").setValue(node.text);
-	                    Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
+                        $("parentNodeID").value = node.attributes.parentNodeID;
+                        Ext.getCmp("parentNodeTxt").setValue(node.attributes.parentNodeText);
+                        Ext.getCmp("nodeID").setValue(node.id);
+                        Ext.getCmp("nodeTxt").setValue(node.text);
+                        Ext.getCmp("nodeDetail").setValue(node.attributes.detail);
                     }
                 })
                 tree.expandAll();
             });
             //清除隐藏信息
             function cleanHiddenItem(){
-            	$("selectedMenuNode").value = "root";
-            	
+                $("selectedMenuNode").value = "root";
+                
                 $("parentNodeID").value = "";
                 Ext.getCmp("parentNodeTxt").setValue("");
                 Ext.getCmp("nodeID").setValue("");
@@ -172,7 +172,7 @@
             }
             //删除角色
             function delRole(){
-            	if(subWin != null){
+                if(subWin != null){
                     subWin.close();
                 }
                 
@@ -258,7 +258,7 @@
             </table>
             <div>
                 <form:form id="roleCfgForm" method="post" modelAttribute="RoleSetting001ViewObject">
-                	<%// 选中菜单节点 %>
+                    <%// 选中菜单节点 %>
                     <input type="hidden" id="selectedMenuNode" name="selectedMenuNode" value="root">
                     <table>
                         <tr height="10">
