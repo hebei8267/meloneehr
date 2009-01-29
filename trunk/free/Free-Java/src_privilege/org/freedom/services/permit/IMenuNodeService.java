@@ -26,12 +26,14 @@ public interface IMenuNodeService {
     public int addMenuNodeInfoService(MenuNode menuNode, boolean inheritFlg);
 
     /**
-     * 修改菜单结点信息
+     * 修改菜单结点信息(包含其权限适用角色列表,同时也会修改其所有父节点的权限适用角色列表)
      * 
      * @param menuNode 要修改的菜单结点
-     * @return true-成功 false-失败
+     * @param roleIDList 菜单权限适用角色列表
+     * @param applyArea true-仅该节点 false-包含所有子节点
+     * @return 0-成功 1-失败(数据同步错误)
      */
-    public boolean modMenuNodeInfoService(MenuNode menuNode);
+    public int modMenuNodeInfoService(MenuNode menuNode, List<String> roleIDList, boolean applyArea);
 
     /**
      * 删除指定的菜单结点(同时删除角色和其关联的信息)

@@ -196,11 +196,14 @@ public class RoleServiceImpl implements IRoleService {
 
         for (Role dbRole : dbRoleList) {
             Role _role = new Role();
+            // 不显示[角色树更节点]和[系统管理员]
+            if (!Role.ROLE_TREE_ROOT_ID.equals(dbRole.getId()) && !Role.ADMIN_ROLE_ID.equals(dbRole.getId())) {
+                _role.setId(dbRole.getId());
+                _role.setName(dbRole.getName());
 
-            _role.setId(dbRole.getId());
-            _role.setName(dbRole.getName());
+                _resultRoleList.add(_role);
+            }
 
-            _resultRoleList.add(_role);
         }
 
         return _resultRoleList;
