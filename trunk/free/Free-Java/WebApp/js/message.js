@@ -8,7 +8,7 @@ function getDelConfirmTipMsg() {
 // error message
 // ************************************************
 function getCommunicationErrorMsg() {
-	return "和服务通信时发生错误,请稍候再试！";
+	return "和服务器通信时发生错误,请稍候再试！";
 }
 
 function getNeedSameInputErrorMsg(itemName1, itemName2) {
