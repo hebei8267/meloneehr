@@ -455,6 +455,10 @@
                                     删除菜单树节点的[角色]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
                                 </td>
                             </tr>
+                            <tr>
+								<td></td>
+								<td>菜单树节点的[角色]修改以后,左边的[导航]不会更新(可以刷新整个页面使其更新)</td>
+							</tr>
                         </table>
                     </td> 
                 </tr> 
