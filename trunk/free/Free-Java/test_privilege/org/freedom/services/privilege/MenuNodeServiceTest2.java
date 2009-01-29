@@ -3,6 +3,9 @@
  */
 package org.freedom.services.privilege;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.freedom.core.test.BaseTestCase;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.services.permit.IMenuNodeService;
@@ -29,13 +32,17 @@ public class MenuNodeServiceTest2 extends BaseTestCase {
     public void modMenuNodeCase1() throws Exception {
         MenuNode node = new MenuNode();
 
-        node.setId("00000016");
+        node.setId("00000011");
         node.setNodeTxt("mmmmmmmm");
         node.setActionContent("mmmmmmmm");
         node.setIndex(1);
-
-        boolean result = menuNodeService.modMenuNodeInfoService(node);
-        assertEquals(true, result);
+        node.setVersion(0);
+        node.setDefaultPermit(false);
+        List<String> roleIDList = new ArrayList<String>();
+        roleIDList.add("00000003");
+        roleIDList.add("00000004");
+        System.out.println(menuNodeService.modMenuNodeInfoService(node, roleIDList, false));
+        // boolean result = menuNodeService.modMenuNodeInfoService(node);
+        // assertEquals(true, result);
     }
-
 }
