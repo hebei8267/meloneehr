@@ -25,7 +25,8 @@ import org.freedom.dao.ui.MenuNodeTypeDaoTest;
                        UserDaoTest.class, 
                        MenuNodeTypeDaoTest.class,
                        MenuNodeDaoTest.class,
-                       MenuNodePermitDaoTest.class})
+                       //MenuNodePermitDaoTest.class
+                       })
 public class AllDaoTest extends BaseTestCase {
 
 }
