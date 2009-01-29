@@ -12,6 +12,7 @@ import org.freedom.dao.ui.MenuNodePermitDao;
 import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodePermit;
+import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.permit.IMenuNodePermitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -117,8 +118,54 @@ public class MenuNodePermitServiceImpl implements IMenuNodePermitService {
                     }
                 }
             }
+            // 递归调用,修改其父节点
             updateMenuParentNodePermit(parentNode.getParentNode(), roleIDList);
         }
+    }
+
+    public void updateSubMenuNodePermitService(MenuNode parentNode, List<String> roleIDList) {
+        // 叶节点没有子节点
+        if (MenuNodeType.LEAF_NODE_TYPE.equals(parentNode.getNodeType())) {
+            return;
+        }
+        List<MenuNode> childNodeList = parentNode.getChildNodeList();
+
+        for (MenuNode childNode : childNodeList) {
+            if (childNode == null) {
+                continue;
+            }
+
+            // 菜单节点的默认权限为[有访问限制]
+            if (childNode.getDefaultPermit() == false) {
+                List<MenuNodePermit> permitList = menuNodePermitDao.getMenuNodePermitListByMenuNodeID(childNode.getId());
+                // 以数据库中的角色列表对象为基础进行比较--不存在当前权限对象时做删除操作
+                for (MenuNodePermit permit : permitList) {
+                    if (!roleIDList.contains(permit.getRoleID())) {
+                        menuNodePermitDao.delete(permit);
+                    }
+                }
+                // 以新角色列表对象为基础进行比较--不存在当前权限对象时做添加操作
+                for (String roleID : roleIDList) {
+                    if (roleID.equals(Role.ADMIN_ROLE_ID) || roleID.equals(Role.ROLE_TREE_ROOT_ID)) {
+                        // 系统管理员默认拥有所有权限,不用添加权限
+                        continue;
+                    }
+                    MenuNodePermit _newPermit = new MenuNodePermit();
+                    _newPermit.setMenuNodeID(childNode.getId());
+                    _newPermit.setRoleID(roleID);
+
+                    if (!permitList.contains(_newPermit)) {
+                        _newPermit.setMenuNode(menuNodeDao.getMenuNodeByID(_newPermit.getMenuNodeID()));
+                        _newPermit.setRole(roleDao.getRoleByID(_newPermit.getRoleID()));
+                        // 不存在当前权限对象时做添加操作
+                        menuNodePermitDao.save(_newPermit);
+                    }
+                }
+            }
+            // 递归调用,修改其子节点
+            updateSubMenuNodePermitService(childNode, roleIDList);
+        }
+
     }
 
     // ---------------------------------------------------------------------------
