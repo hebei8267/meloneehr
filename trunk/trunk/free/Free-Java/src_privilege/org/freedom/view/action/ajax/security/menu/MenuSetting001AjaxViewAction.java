@@ -4,6 +4,8 @@
 package org.freedom.view.action.ajax.security.menu;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.freedom.core.domain.TreeNode;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.DataListBean;
@@ -119,10 +122,32 @@ public class MenuSetting001AjaxViewAction extends AbstractViewAction {
      * 
      * @param request
      * @param response
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws ServletRequestBindingException
+     * @throws IOException
      */
     @RequestMapping("/security/menu/menuSetting/001/updateNodeInfoAction.ajax")
-    public void updateNodeInfoAction(HttpServletRequest request, HttpServletResponse response) {
+    public void updateNodeInfoAction(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException,
+            InvocationTargetException, ServletRequestBindingException, IOException {
+        MenuNode menuNode = new MenuNode();
+        // 取得request里面的参数
+        BeanUtils.populate(menuNode, request.getParameterMap());
+        boolean applyArea = ServletRequestUtils.getBooleanParameter(request, "applyArea");
+        String roleIdArray[] = ServletRequestUtils.getRequiredStringParameters(request, "roleIdList");
+        List<String> roleIDList = Arrays.asList(roleIdArray);
 
+        int _result = menuNodeService.modMenuNodeInfoService(menuNode, roleIDList, applyArea);
+        JosnViewObject outObj = new JosnViewObject();
+        if (_result != 0) {
+            outObj.setProcessResult(false);
+
+            outObj.setResultMsg(getMessage(request, SecurityMesssageID.ERROR_DATA_NO_SYNCHRONIZATION));
+
+        }
+        JSONObject jSONObject = JSONObject.fromObject(outObj);
+        response.setContentType(RESPONSE_CONTENT_TYPE);
+        response.getWriter().write(jSONObject.toString());
     }
 
     public IMenuNodeService getMenuNodeService() {

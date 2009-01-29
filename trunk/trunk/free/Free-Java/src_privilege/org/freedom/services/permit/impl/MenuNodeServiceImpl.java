@@ -16,6 +16,7 @@ import org.freedom.entity.common.Role;
 import org.freedom.entity.ui.MenuNode;
 import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.entity.ui.MenuNodeType;
+import org.freedom.services.permit.IMenuNodePermitService;
 import org.freedom.services.permit.IMenuNodeService;
 import org.freedom.view.domain.system.MenuTreeNodeViewObject;
 
@@ -275,25 +276,29 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         }
     }
 
-    public boolean modMenuNodeInfoService(MenuNode menuNode) {
+    public int modMenuNodeInfoService(MenuNode menuNode, List<String> roleIDList, boolean applyArea) {
+        // 菜单详细项不为空
         if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {
             MenuNode _dbMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getId());
+            if (_dbMenuNode != null && _dbMenuNode.getVersion().equals(menuNode.getVersion())) {
+                _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());
+                _dbMenuNode.setDefaultPermit(menuNode.getDefaultPermit());
+                _dbMenuNode.setActionContent(menuNode.getActionContent());
+                // index变更
+                if (menuNode.getIndex() != null && !_dbMenuNode.getIndex().equals(menuNode.getIndex())) {
+                    _dbMenuNode.setIndex(menuNode.getIndex());
+                    _dbMenuNode.updateNodeIndex();
+                }
+                // 菜单详细信息部分更新操作
+                menuNodeDao.save(_dbMenuNode);
+                // 菜单权限信息部分更新操作
+                menuNodePermitService.updateMenuNodePermitService(_dbMenuNode, roleIDList);
 
-            _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());
-            _dbMenuNode.setDefaultPermit(menuNode.getDefaultPermit());
-            _dbMenuNode.setActionContent(menuNode.getActionContent());
-            // index变更
-            if (menuNode.getIndex() != null && !_dbMenuNode.getIndex().equals(menuNode.getIndex())) {
-                _dbMenuNode.setIndex(menuNode.getIndex());
-                _dbMenuNode.updateNodeIndex();
+                return 0;
             }
-
-            menuNodeDao.save(_dbMenuNode);
-            return true;
-
         }
-        return false;
+        return 1;
     }
 
     public List<TreeNode> getAllAreaMenuNodeService(String userID, String roleID) {
@@ -347,6 +352,8 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
     private MenuNodeTypeDao menuNodeTypeDao;
     @Autowired
     private MenuNodePermitDao menuNodePermitDao;
+    @Autowired
+    private IMenuNodePermitService menuNodePermitService;
 
     public MenuNodeDao getMenuNodeDao() {
         return menuNodeDao;
@@ -370,6 +377,14 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
 
     public void setMenuNodePermitDao(MenuNodePermitDao menuNodePermitDao) {
         this.menuNodePermitDao = menuNodePermitDao;
+    }
+
+    public IMenuNodePermitService getMenuNodePermitService() {
+        return menuNodePermitService;
+    }
+
+    public void setMenuNodePermitService(IMenuNodePermitService menuNodePermitService) {
+        this.menuNodePermitService = menuNodePermitService;
     }
 
 }

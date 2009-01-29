@@ -90,7 +90,7 @@ public class MenuNodePermit extends AbstractEntityBean {
      * 
      * @param roleID 登录用户角色ID
      */
-    protected void setRoleID(String roleID) {
+    public void setRoleID(String roleID) {
         this.roleID = roleID;
     }
 
@@ -129,7 +129,7 @@ public class MenuNodePermit extends AbstractEntityBean {
      * 
      * @param menuNodeID 菜单树结点ID
      */
-    protected void setMenuNodeID(String menuNodeID) {
+    public void setMenuNodeID(String menuNodeID) {
         this.menuNodeID = menuNodeID;
     }
 
