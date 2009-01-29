@@ -173,3 +173,14 @@ table {
 .iconButton {
     cursor: pointer;
 }
+
+.bigButtonArea { 
+	background-image: url(../images/reset_btn.jpg);
+    background-repeat: repeat;
+    height: 50px;
+    width: 200px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+    font: 40px arial;
+}
