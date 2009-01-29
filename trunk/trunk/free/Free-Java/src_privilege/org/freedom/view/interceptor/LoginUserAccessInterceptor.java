@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
+import org.freedom.view.SysConstant;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
@@ -63,8 +64,7 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
      * @return
      * @throws IOException
      */
-    private boolean notLoginCheck(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws IOException {
+    private boolean notLoginCheck(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println(handler.getClass().getName());
         if (notLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
             // 用户登录Action
@@ -80,7 +80,7 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
                 response.setContentType(AbstractViewAction.RESPONSE_CONTENT_TYPE);
                 response.getWriter().write(jSONObject.toString());
             } else {
-                response.sendRedirect(request.getContextPath() + sessionTimeOut);
+                response.sendRedirect(SysConstant.WEB_PROJECT_NAME + sessionTimeOut);
             }
 
             return false;
