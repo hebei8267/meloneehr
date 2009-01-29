@@ -16,6 +16,7 @@
         <script type="text/javascript">
         <!--
             var subWin = null;
+            var roleGridModFlg = false;
             
             Ext.onReady(function(){
 
@@ -144,6 +145,7 @@
             function roleListInfonLoad(nodeId){
                 //加载列表
                 Ext.getCmp('roleGrid').getStore().load({params : {selectedMenuNodeID : nodeId}});
+                roleGridModFlg = false;
             }
             //清除隐藏信息
             function cleanHiddenItem(){
@@ -283,6 +285,8 @@
                 
                 Ext.getCmp('roleGrid').getView().refresh();
                 Ext.getCmp('roleGrid').getStore().sort("id", "ASC");
+                
+                roleGridModFlg = true;
             }
             //删除角色
             function delMenuNodeRole(){
@@ -314,6 +318,8 @@
                 
                 Ext.getCmp('roleGrid').getView().refresh();
                 gridStore.sort("id", "ASC");
+                
+                roleGridModFlg = true;
             }
             //删除菜单节点
             function delMenuNode(){
@@ -384,18 +390,31 @@
                     && getRadioValueByName("defaultPermit") == String(menuNode.attributes.defaultPermit)
                     && Ext.getCmp("actionContent").getValue() == menuNode.attributes.actionContent
                     && getRadioValueByName("applyArea") == String(true)
-                    && Ext.getCmp("showIndex").getValue() == menuNode.attributes.uiNodeIndex){//菜单详细未修改，不做后台提交
+                    && Ext.getCmp("showIndex").getValue() == menuNode.attributes.uiNodeIndex
+                    && roleGridModFlg == false){//菜单详细未修改，不做后台提交
                     showMessageBox(getNoChangeErrorMsg());
                     return;
                 }
+                
+                //角色列表Store
+                var gridStore = Ext.getCmp('roleGrid').getStore();
+                var roleIdList = new Array();
+				for(var i1=0;i1<gridStore.getCount();i1++){
+                    roleIdList[i1] = gridStore.getAt(i1).data.id;
+                }
                
-                alert(1)
                 //表单提交简化版本
-        /*        formAjaxSubmit("${pageContext.request.contextPath}/security/menu/menuSetting/001/updateNodeInfoAction.ajax", 
-                               {dataVersion: Ext.getCmp("roleTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
-                               roleID: Ext.getCmp("nodeID").getValue()},
+                formAjaxSubmit("${pageContext.request.contextPath}/security/menu/menuSetting/001/updateNodeInfoAction.ajax", 
+                               {version: Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.version,
+                               id: Ext.getCmp("nodeID").getValue(),
+                               nodeTxt: Ext.getCmp("nodeTxt").getValue(),
+                               defaultPermit: getRadioValueByName("defaultPermit"),
+                               actionContent: Ext.getCmp("actionContent").getValue(),
+                               index: Ext.getCmp("showIndex").getValue(),
+                               applyArea: getRadioValueByName("applyArea"),
+                               roleIdList: roleIdList},
                                menuTreeReload ,
-                               menuTreeReload);*/
+                               menuTreeReload);
             }
         -->
         </script>
@@ -537,9 +556,9 @@
                                                         <img src="${pageContext.request.contextPath}/images/need-input.gif">访问限制
                                                     </td> 
                                                     <td class="inputItemCell" height="30" width="200">
-                                                        <form:radiobutton path="defaultPermit" value="false"/>
+                                                        <form:radiobutton path="defaultPermit" value="true"/>
                                                         <label>无限制</label>
-                                                        <form:radiobutton path="defaultPermit" value="true" />
+                                                        <form:radiobutton path="defaultPermit" value="false" />
                                                         <label>有限制</label>
                                                     </td>
                                                 </tr>
