@@ -34,11 +34,19 @@ public interface IMenuNodePermitService {
     public List<Role> getAccessMenuNodePermitRoleInfoListService(String menuNodeID);
 
     /**
-     * 菜单节点的默认权限为[有访问限制]操作,因为菜单树结构原因,同时修改其父节点的相关权限(只添加,不删除)
      * 更新菜单树结点的可访问角色列表(访问角色列表与roleIDList内容信息相匹配,没有的添加,多余的删除)
+     * 菜单节点的默认权限为[有访问限制]时操作,因为菜单树结构原因,同时修改其父节点的相关权限(只添加,不删除)
      * 
      * @param menuNode 菜单节点
      * @param roleIDList 可访问角色ID列表
      */
     public void updateMenuNodePermitService(MenuNode menuNode, List<String> roleIDList);
+
+    /**
+     * 更新其所有子菜单树结点的可访问角色列表(访问角色列表与roleIDList内容信息相匹配,没有的添加,多余的删除)
+     * 
+     * @param parentNode 父菜单节点
+     * @param roleIDList 可访问角色ID列表
+     */
+    public void updateSubMenuNodePermitService(MenuNode parentNode, List<String> roleIDList);
 }

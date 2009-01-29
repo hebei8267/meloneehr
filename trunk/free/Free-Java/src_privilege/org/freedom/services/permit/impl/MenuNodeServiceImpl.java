@@ -295,6 +295,11 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 // 菜单权限信息部分更新操作
                 menuNodePermitService.updateMenuNodePermitService(_dbMenuNode, roleIDList);
 
+                // 权限修改包含所有子节点
+                if (!applyArea && !MenuNodeType.LEAF_NODE_TYPE.equals(_dbMenuNode.getNodeType())) {
+                    // 更新其所有子菜单树结点的可访问角色列表
+                    menuNodePermitService.updateSubMenuNodePermitService(_dbMenuNode, roleIDList);
+                }
                 return 0;
             }
         }
