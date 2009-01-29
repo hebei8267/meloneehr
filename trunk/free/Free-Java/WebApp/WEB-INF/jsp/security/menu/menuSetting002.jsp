@@ -27,7 +27,7 @@
             }
             //添加菜单
             function addMenuNode(){
-            	if(!formExtCmpValidate("addMenuForm")){
+                if(!formExtCmpValidate("addMenuForm")){
                     return;
                 }
                 //表单提交简化版本

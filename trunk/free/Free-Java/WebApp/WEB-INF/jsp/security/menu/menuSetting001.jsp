@@ -399,7 +399,7 @@
                 //角色列表Store
                 var gridStore = Ext.getCmp('roleGrid').getStore();
                 var roleIdList = new Array();
-				for(var i1=0;i1<gridStore.getCount();i1++){
+                for(var i1=0;i1<gridStore.getCount();i1++){
                     roleIdList[i1] = gridStore.getAt(i1).data.id;
                 }
                
