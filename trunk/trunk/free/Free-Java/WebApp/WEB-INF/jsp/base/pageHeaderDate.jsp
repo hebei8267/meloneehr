@@ -3,12 +3,12 @@
     <table class="titleTable">
         <tr>
             <td colspan="2" class="loginUserInfo">
-                您好! <c:out value="${userInfo.userName}"/>
+                  <span class="need">（<c:out value="${userInfo.roleName}"/>）</span>&nbsp;您好! <c:out value="${userInfo.userName}"/>
             </td>
         </tr>
         <tr>
             <td class="loginDate">
-                <input type="button" value="退出系统" onclick="userLoginOutSystem();" class="buttonLoginOutLong">
+                <input type="button" value="退出系统" onclick="userLoginOutSystem();" class="buttonLoginOutLong">&nbsp;
                 <%=systemDate.getNowDate()%>
                 <%=systemDate.getNowWeek()%>
             </td>
