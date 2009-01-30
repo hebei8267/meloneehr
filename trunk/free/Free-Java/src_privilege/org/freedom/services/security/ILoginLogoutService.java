@@ -3,6 +3,7 @@
  */
 package org.freedom.services.security;
 
+import org.freedom.entity.common.Role;
 import org.freedom.entity.common.User;
 
 /**
@@ -31,4 +32,11 @@ public interface ILoginLogoutService {
      */
     public boolean modUserPwdService(String userID, String oldPassword, String newPassword);
 
+    /**
+     * 取得角色信息根据其ID
+     * 
+     * @param roleID 角色ID
+     * @return 角色信息
+     */
+    public Role getRoleInfoService(String roleID);
 }
