@@ -238,7 +238,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getNeedSelectedItemErrorMsg2("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
+                    showMessageBox(getRightSelectedErrorMsg("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
                     return;
                 }
                 
@@ -328,7 +328,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getNeedSelectedItemErrorMsg2("要删除的菜单树节点", "树根节点不能删除"));
+                    showMessageBox(getRightSelectedErrorMsg("要删除的菜单树节点", "树根节点不能删除"));
                     return;
                 }
                 

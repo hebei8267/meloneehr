@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
+<%@ page language="java" import="org.freedom.entity.common.Role" %>
 
 <html>
     <head>
@@ -177,8 +178,12 @@
                 }
                 
                 if($F("parentNodeID") == ""){
-                    showMessageBox(getNeedSelectedItemErrorMsg2("要删除的角色树节点", "树根节点不能删除"));
+                    showMessageBox(getRightSelectedErrorMsg("要删除的角色树节点", "树根节点不能删除"));
                     return;
+                }
+                if("<%=Role.ADMIN_ROLE_ID%>" == Ext.getCmp("nodeID").getValue()){
+                	showMessageBox(getRightSelectedErrorMsg("要删除的角色树节点","系统管理员树节点不能删除"));
+                	return;
                 }
                 
                 showConfirm(getDelConfirmTipMsg(), delRoleAction);
@@ -200,7 +205,11 @@
                 if(subWin != null){
                     subWin.close();
                 }
-                
+
+                if("<%=Role.ADMIN_ROLE_ID%>" == Ext.getCmp("nodeID").getValue()){
+                	showMessageBox(getRightSelectedErrorMsg("父角色树节点","系统管理员不能包含子角色树节点"));
+                	return;
+                }
                 $("hnodeID").value = Ext.getCmp("nodeID").getValue();
                 
                 var windowOption = "width=390,height=385,left=300,top=100,status=no,resizable=no";
