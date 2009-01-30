@@ -276,10 +276,29 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         }
     }
 
+    /**
+     * 移除空角色ID对象
+     * 
+     * @param roleIDList
+     */
+    private List<String> formatRoleIDList(List<String> roleIDList) {
+        List<String> _newRoleIDList = new ArrayList<String>();
+        for (String roleID : roleIDList) {
+
+            if (StringUtils.isNotBlank(roleID)) {
+                _newRoleIDList.add(roleID);
+            }
+        }
+        return _newRoleIDList;
+    }
+
     public int modMenuNodeInfoService(MenuNode menuNode, List<String> roleIDList, boolean applyArea) {
         // 菜单详细项不为空
         if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {
+            // 移除空角色ID对象
+            roleIDList = formatRoleIDList(roleIDList);
+
             MenuNode _dbMenuNode = menuNodeDao.getMenuNodeByID(menuNode.getId());
             if (_dbMenuNode != null && _dbMenuNode.getVersion().equals(menuNode.getVersion())) {
                 _dbMenuNode.setNodeTxt(menuNode.getNodeTxt());

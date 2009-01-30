@@ -49,4 +49,13 @@ public class MenuNodeDao extends HibernateDaoImpl<MenuNode> {
 
         return formatMaxID(maxID);
     }
+
+    public void delete(MenuNode menuNode) {
+        MenuNode parentNode = getMenuNodeByID(menuNode.getParentNodeID());
+        parentNode.removeSubNode(menuNode);
+        // 更新兄弟节点index
+        save(parentNode);
+        // 删除自己
+        super.delete(menuNode);
+    }
 }
