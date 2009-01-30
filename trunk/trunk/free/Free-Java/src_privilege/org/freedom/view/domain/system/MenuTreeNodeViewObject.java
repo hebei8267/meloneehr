@@ -8,6 +8,8 @@ import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.view.SysConstant;
 
 /**
+ * 菜单树节点显示对象(不包含checkbox)
+ * 
  * @author 何贝
  * @since JDK1.5
  */
