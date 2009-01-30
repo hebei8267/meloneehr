@@ -4,6 +4,7 @@
 package org.freedom.view.domain.system;
 
 import org.freedom.core.domain.TreeNode;
+import org.freedom.entity.common.Role;
 import org.freedom.view.SysConstant;
 
 /**
@@ -24,8 +25,22 @@ public class RoleTreeNodeViewObject extends TreeNode {
 
     public RoleTreeNodeViewObject() {
 
-        setIcon(SysConstant.WEB_PROJECT_NAME + "/images/role.gif");
+        super.setIcon(SysConstant.WEB_PROJECT_NAME + "/images/role.gif");
 
+    }
+
+    /**
+     * 设置节点编号
+     * 
+     * @param id 节点编号
+     */
+    @Override
+    public void setId(String id) {
+        if (Role.ADMIN_ROLE_ID.equals(id)) {
+            super.setIcon(SysConstant.WEB_PROJECT_NAME + "/images/role_admin.gif");
+        }
+
+        super.setId(id);
     }
 
     /**

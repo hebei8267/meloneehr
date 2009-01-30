@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.freedom.core.entity.AbstractEntityBean;
@@ -71,6 +72,7 @@ public class Role extends AbstractEntityBean {
     private Set<User> loginUserSet = new HashSet<User>();
 
     /** 子角色Set */
+    @OrderBy("id")
     @OneToMany(mappedBy = "parentRole", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Role> childRoleSet = new HashSet<Role>();
 
