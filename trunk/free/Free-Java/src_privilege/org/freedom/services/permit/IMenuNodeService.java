@@ -72,6 +72,15 @@ public interface IMenuNodeService {
     public TreeNode getMenuNodeInfoTreeService(String rootID);
 
     /**
+     * 取得菜单结点树信息(指定根节点开始)包含权限校验
+     * 
+     * @param rootID 根节点ID
+     * @param roleID 角色ID
+     * @return 菜单结点树根节点
+     */
+    public TreeNode getMenuNodeInfoTreeEmbodyPermitService(String rootID, String roleID);
+
+    /**
      * 取得所有导航条类型树节点
      * 
      * @param userID 用户ID

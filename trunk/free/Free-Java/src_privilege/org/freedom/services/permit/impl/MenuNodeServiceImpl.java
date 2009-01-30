@@ -18,6 +18,7 @@ import org.freedom.entity.ui.MenuNodePermit;
 import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.permit.IMenuNodePermitService;
 import org.freedom.services.permit.IMenuNodeService;
+import org.freedom.view.domain.system.MenuTreeChkBoxNodeViewObject;
 import org.freedom.view.domain.system.MenuTreeNodeViewObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -188,6 +189,96 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return null;
     }
 
+    public TreeNode getMenuNodeInfoTreeEmbodyPermitService(String rootID, String roleID) {
+        // 取得菜单树结点信息
+        MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootID);
+        if (dbNodeRoot != null) {
+            MenuTreeChkBoxNodeViewObject menuTreeNode = new MenuTreeChkBoxNodeViewObject();
+
+            menuTreeNode.setId(dbNodeRoot.getId());
+            menuTreeNode.setText(dbNodeRoot.getNodeTxt());
+            menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNodeRoot.getNodeType()));
+            menuTreeNode.setActionContent(dbNodeRoot.getActionContent());
+            menuTreeNode.setUiNodeType(dbNodeRoot.getNodeType());
+            menuTreeNode.setDefaultPermit(dbNodeRoot.getDefaultPermit());
+            menuTreeNode.setParentNodeID(dbNodeRoot.getParentNodeID());
+            menuTreeNode.setVersion(dbNodeRoot.getVersion());
+
+            List<MenuNodePermit> permitList = null;
+            if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员系统默认拥有所有权限
+                menuTreeNode.setChecked(true);
+            } else {
+                // 无访问限制
+                if (menuTreeNode.getDefaultPermit()) {
+                    menuTreeNode.setChecked(true);
+                } else {// 有访问限制
+                    permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(roleID);
+
+                    menuTreeNode.setChecked(isHoldMenuNodePermit(menuTreeNode.getId(), permitList));
+                }
+            }
+
+            // 创建导航区菜单树结构
+            buildMenuNodeInfoTree(menuTreeNode, dbNodeRoot, permitList, roleID);
+
+            return menuTreeNode;
+        }
+
+        return null;
+    }
+
+    /**
+     * 构建整个菜单树结构
+     * 
+     * @param parentNode 父节点
+     * @param dbParentNode 数据库中取得的菜单节点
+     * @param permitLis 菜单角色权限列表
+     * @param roleID 角色ID
+     */
+    private void buildMenuNodeInfoTree(MenuTreeChkBoxNodeViewObject parentNode, MenuNode dbParentNode,
+            List<MenuNodePermit> permitList, String roleID) {
+        for (MenuNode dbNode : dbParentNode.getChildNodeList()) {
+            if (dbNode != null) {
+                MenuTreeChkBoxNodeViewObject menuTreeNode = new MenuTreeChkBoxNodeViewObject();
+
+                menuTreeNode.setId(dbNode.getId());
+                menuTreeNode.setText(dbNode.getNodeTxt());
+                menuTreeNode.setLeaf(MenuNodeType.LEAF_NODE_TYPE.equals(dbNode.getNodeType()));
+                menuTreeNode.setActionContent(dbNode.getActionContent());
+                menuTreeNode.setUiNodeType(dbNode.getNodeType());
+                menuTreeNode.setDefaultPermit(dbNode.getDefaultPermit());
+                menuTreeNode.setParentNodeID(dbNode.getParentNodeID());
+                menuTreeNode.setUiNodeIndex(dbNode.getIndex().toString());
+                menuTreeNode.setVersion(dbNode.getVersion());
+                if (Role.ADMIN_ROLE_ID.equals(roleID)) {// 系统管理员系统默认拥有所有权限
+                    menuTreeNode.setChecked(true);
+                } else {
+                    // 无访问限制
+                    if (menuTreeNode.getDefaultPermit()) {
+                        menuTreeNode.setChecked(true);
+                    } else {// 有访问限制
+                        menuTreeNode.setChecked(isHoldMenuNodePermit(menuTreeNode.getId(), permitList));
+                    }
+                }
+
+                parentNode.addChildren(menuTreeNode);
+
+                buildMenuNodeInfoTree(menuTreeNode, dbNode, permitList, roleID);
+            }
+        }
+    }
+
+    private boolean isHoldMenuNodePermit(String menuNodeID, List<MenuNodePermit> permitList) {
+        if (permitList != null) {
+            for (MenuNodePermit permit : permitList) {
+                if (permit.getMenuNodeID().equals(menuNodeID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public TreeNode getMenuNodeInfoTreeService(String rootID) {
         // 取得菜单树结点信息
         MenuNode dbNodeRoot = menuNodeDao.getMenuNodeByID(rootID);
@@ -237,7 +328,6 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 buildMenuNodeInfoTree(menuTreeNode, dbNode);
             }
         }
-
     }
 
     /**
