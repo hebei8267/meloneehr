@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.freedom.core.domain.UserInfoSessionBean;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
+import org.freedom.entity.common.Role;
 import org.freedom.entity.common.User;
 import org.freedom.services.security.ILoginLogoutService;
 import org.freedom.view.action.SecurityMesssageID;
@@ -75,6 +76,10 @@ public class Security001AjaxViewAction extends AbstractViewAction {
         userInfo.setUserId(user.getId());
         userInfo.setUserName(user.getName());
         userInfo.setRoleId(user.getRoleID());
+        Role role = loginLogoutService.getRoleInfoService(user.getRoleID());
+        if (role != null) {
+            userInfo.setRoleName(role.getName());
+        }
 
         saveUserInfo(request, userInfo);
     }

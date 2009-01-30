@@ -3,7 +3,9 @@
  */
 package org.freedom.services.security.impl;
 
+import org.freedom.dao.common.RoleDao;
 import org.freedom.dao.common.UserDao;
+import org.freedom.entity.common.Role;
 import org.freedom.entity.common.User;
 import org.freedom.services.security.ILoginLogoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +43,18 @@ public class LoginLogoutServiceImpl implements ILoginLogoutService {
         return null;
     }
 
+    public Role getRoleInfoService(String roleID) {
+        return roleDao.getRoleByID(roleID);
+
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
     @Autowired
     private UserDao userDao = null;
+    @Autowired
+    private RoleDao roleDao = null;
 
     public UserDao getUserDao() {
         return userDao;
@@ -54,4 +63,13 @@ public class LoginLogoutServiceImpl implements ILoginLogoutService {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
+
+    public RoleDao getRoleDao() {
+        return roleDao;
+    }
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
+
 }
