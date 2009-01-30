@@ -226,28 +226,28 @@ public class MenuNode extends AbstractEntityBean {
      * 更新节点的index
      */
     public void updateNodeIndex() {
-
+        if (parentNode == null) {
+            return;
+        }
         List<MenuNode> childNodeList = parentNode.getChildNodeList();
-
-        if (this.getIndex() < childNodeList.size()) {
-            // 移除对象
-            childNodeList.remove(this);
-            // 插入到新位置
-            childNodeList.add(this.getIndex() - 1, this);
-            // 调正顺序
-            _updateNodeIndex();
+        if (childNodeList == null) {
+            return;
         }
 
-    }
+        // 删除自己
+        childNodeList.remove(this);
+        // 插入到新位置
+        if (this.getIndex() > childNodeList.size()) {
+            childNodeList.add(this);
+        } else {
+            childNodeList.add(this.getIndex() - 1, this);
+        }
 
-    /**
-     * 调正顺序
-     */
-    private void _updateNodeIndex() {
-
+        // 调正自己的顺序
         int index = 1;
         for (MenuNode _menuNode : childNodeList) {
             if (_menuNode != null) {
+
                 _menuNode.setIndex(index);
                 index++;
             }
@@ -268,7 +268,17 @@ public class MenuNode extends AbstractEntityBean {
             this.childNodeList.add(menuNode.getIndex() - 1, menuNode);
         }
 
-        _updateNodeIndex();
+        int index = 1;
+        if (childNodeList == null) {
+            return;
+        }
+        for (MenuNode _menuNode : childNodeList) {
+            if (_menuNode != null) {
+                _menuNode.setIndex(index);
+                index++;
+            }
+        }
+
     }
 
     /**
@@ -278,10 +288,12 @@ public class MenuNode extends AbstractEntityBean {
      */
     public void removeSubNode(MenuNode menuNode) {
         int index = 1;
+
+        MenuNode _delMenuNode = null;
         for (Iterator<MenuNode> iterator = childNodeList.iterator(); iterator.hasNext();) {
             MenuNode _menuNode = iterator.next();
             if (_menuNode.equals(menuNode)) {
-                iterator.remove();
+                _delMenuNode = _menuNode;
                 continue;
             }
             if (_menuNode != null) {
@@ -289,6 +301,9 @@ public class MenuNode extends AbstractEntityBean {
                 index++;
             }
 
+        }
+        if (_delMenuNode != null) {
+            childNodeList.remove(_delMenuNode);
         }
 
     }
