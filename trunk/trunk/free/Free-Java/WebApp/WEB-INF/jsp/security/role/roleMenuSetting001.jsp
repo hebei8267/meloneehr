@@ -9,6 +9,8 @@
 	<head>
 		<%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+        <!-- ExtJS CheckBox Tree -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/chkTree/TreeCheckNodeUI.js"></script>
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
 		<script type="text/javascript">
 		<!--
@@ -58,11 +60,11 @@
 			        el: 'menuTreeDiv',
 			        id: 'menuTree',
 			        title: '菜单树信息',
-			        // ********************************
-			        // checkTree独有属性
+			        <%// ******************************** %>
+			        <%// checkTree独有属性 %>
 			        checkModel: 'cascade', //对树的级联多选
 			        onlyLeafCheckable: false,//对树所有结点都可选
-			        // ********************************
+			        <%// ******************************** %>
 			        animate: true,
 			        enableDD: false,
 			        containerScroll: true,
@@ -70,47 +72,29 @@
 			        autoScroll: true,
 			        rootVisible: false,
 			        height: 300,
-			        width: 307,
-			        loader: new Ext.tree.TreeLoader({
-			            baseAttrs: {
-			                uiProvider: Ext.ux.TreeCheckNodeUI
-			            }
-			        })
+			        width: 300
 			    });
 			    
 			    var menuTreeRoot = new Ext.tree.AsyncTreeNode({
-			        draggable: false,
-			        id: 'root',
-			        text: '菜单树根节点',
-			        icon: '${pageContext.request.contextPath}/images/root.gif',
-			        children: [{
-			            leaf: false,
-			            text: '系统设置',
-			            icon: '${pageContext.request.contextPath}/images/area.gif',
-			            children: [{
-			                leaf: true,
-			                text: '菜单树管理'
-			            }, {
-			                leaf: false,
-			                text: '角色相关',
-			                children: [{
-			                    leaf: true,
-			                    text: '角色设定'
-			                }, {
-			                    leaf: true,
-			                    text: '角色&菜单树关联设定'
-			                }]
-			            }]
-			        }, {
-			            leaf: true,
-			            icon: '${pageContext.request.contextPath}/images/area.gif',
-			            text: '人事管理'
-			        }, {
-			            leaf: true,
-			            icon: '${pageContext.request.contextPath}/images/area.gif',
-			            text: '财务管理'
-			        }]
-			    });
+                    draggable: false,
+                    id: 'root',
+                    text: '菜单树根节点',
+                    icon: '${pageContext.request.contextPath}/images/root.gif',
+                    loader: new Ext.tree.TreeLoader({
+                    	<%// ******************************** %>
+                    	<%// checkTree特殊参数 %>
+                    	baseAttrs: {
+			                uiProvider: Ext.ux.TreeCheckNodeUI
+			            },
+			            <%// ******************************** %>
+                        dataUrl:'${pageContext.request.contextPath}/security/role/roleMenuSetting/001/getAllMenuInfoTreeAction.ajax',
+                        requestMethod : 'post',
+                        listeners : {
+                            loadexception : defaultAjaxRequestFailure
+                        }
+                    })
+                });
+			    
 			    menuTree.setRootNode(menuTreeRoot);
 			    
 			    menuTree.render();

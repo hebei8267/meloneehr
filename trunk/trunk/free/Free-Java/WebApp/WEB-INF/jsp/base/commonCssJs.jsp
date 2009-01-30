@@ -7,8 +7,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/adapter/prototype/ext-prototype-adapter.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/ext-all-debug.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/locale/ext-lang-zh_CN.js"></script>
-    <!-- ExtJS CheckBox Tree Begin -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/chkTree/TreeCheckNodeUI.js"></script>
     <!-- ExtJS End-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/default.css">
         
