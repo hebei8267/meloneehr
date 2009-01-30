@@ -25,6 +25,8 @@ public class UserInfoSessionBean extends BaseBean {
     private String userName;
     /** 登录用户角色ID */
     private String roleId;
+    /** 登录用户角色名称 */
+    private String roleName;
 
     public String getUserId() {
         return userId;
@@ -48,5 +50,13 @@ public class UserInfoSessionBean extends BaseBean {
 
     public void setRoleId(String roleId) {
         this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }
