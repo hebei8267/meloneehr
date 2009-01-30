@@ -10,7 +10,6 @@ import org.junit.runners.Suite;
 import org.freedom.dao.common.RoleDaoTest;
 import org.freedom.dao.common.UserDaoTest;
 import org.freedom.dao.ui.MenuNodeDaoTest;
-import org.freedom.dao.ui.MenuNodePermitDaoTest;
 import org.freedom.dao.ui.MenuNodeTypeDaoTest;
 
 /**
