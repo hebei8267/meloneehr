@@ -17,48 +17,39 @@
 			    //角色树
 			    //************************************************
 			    var roleTree = new Ext.tree.TreePanel({
-			        el: 'roleTreeDiv',
-			        title: '角色树信息',
-			        useArrows: true,
-			        animate: true,
-			        enableDD: false,
-			        containerScroll: true,
-			        bodyBorder: false,
-			        autoScroll: true,
-			        rootVisible: false,
-			        height: 300,
-			        width: 300,
-			        loader: new Ext.tree.TreeLoader()
-			    });
+                    el: 'roleTreeDiv',
+                    id: 'roleTree',
+                    title: '角色树信息',
+                    //useArrows: true,
+                    animate: true,
+                    enableDD: false,
+                    containerScroll: true,
+                    bodyBorder: false,
+                    autoScroll: true,
+                    rootVisible: false,
+                    height: 300,
+                    width: 300,
+                    loader: new Ext.tree.TreeLoader()
+                });
 			    
 			    var roleTreeRoot = new Ext.tree.AsyncTreeNode({
-			        draggable: false,
-			        id: 'root',
-			        text: '角色树根节点',
-			        icon: '${pageContext.request.contextPath}/images/root.gif',
-			        children: [{
-			            leaf: true,
-			            text: '系统管理员',
-			            icon: '${pageContext.request.contextPath}/images/role.gif',
-			        }, {
-			            leaf: false,
-			            icon: '${pageContext.request.contextPath}/images/role.gif',
-			            text: '一般用户',
-			            children: [{
-			                leaf: true,
-			                text: '行政人员',
-			                icon: '${pageContext.request.contextPath}/images/role.gif'
-			            }]
-			        }, {
-			            leaf: true,
-			            icon: '${pageContext.request.contextPath}/images/role.gif',
-			            text: '临时用户'
-			        }]
-			    });
-			    roleTree.setRootNode(roleTreeRoot);
-			    
-			    roleTree.render();
-			    roleTreeRoot.expand();
+                    draggable: false,
+                    id: 'root',
+                    text: '角色树根节点',
+                    icon: '${pageContext.request.contextPath}/images/root.gif',
+                    loader: new Ext.tree.TreeLoader({
+                        dataUrl:'${pageContext.request.contextPath}/security/role/roleMenuSetting/001/getAllRoleInfoTreeAction.ajax',
+                        requestMethod : 'post',
+                        listeners : {
+                            loadexception : defaultAjaxRequestFailure
+                        }
+                    })
+                });
+                roleTree.setRootNode(roleTreeRoot);
+                
+                roleTree.render();
+                roleTreeRoot.expand();
+			    roleTree.expandAll();
 			    
 			    //************************************************
 			    //菜单树
@@ -124,6 +115,7 @@
 			    
 			    menuTree.render();
 			    menuTreeRoot.expand();
+			    menuTree.expandAll();
 			});
 
 			function showCheckNode(){
@@ -144,7 +136,7 @@
 			<table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
-                        角色&菜单树关联设定
+                        角色#菜单树关联设定
                     </td> 
                     <td class="appScreenID"> 
                         - ROLE Menu SETTINGS 001 -
