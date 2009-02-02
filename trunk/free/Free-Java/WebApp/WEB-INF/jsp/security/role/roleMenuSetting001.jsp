@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ taglib prefix="extjs" uri="http://www.freedom.org/tags/form"%>
+<%@ page language="java" import="org.freedom.entity.common.Role" %>
 
 <html>
 	<head>
@@ -30,8 +31,7 @@
                     autoScroll: true,
                     rootVisible: false,
                     height: 300,
-                    width: 300,
-                    loader: new Ext.tree.TreeLoader()
+                    width: 300
                 });
 			    
 			    var roleTreeRoot = new Ext.tree.AsyncTreeNode({
@@ -56,10 +56,9 @@
                 roleTree.on("click", function(node, event) {
                     if(($F("selectedRoleNode")!= node.id)){//选择其它节点时
                         $("selectedRoleNode").value = node.id;
-                        //TODO
-                        var _tmpMenuTree = Ext.getCmp("menuTree");
-                        _tmpMenuTree.root.reload();
-	                	_tmpMenuTree.expandAll();
+                        
+                        //加载菜单树
+                    	loadMenuTree();
                     }
                 });
 			    
@@ -113,16 +112,59 @@
 	            menuTree.expandAll();
 			});
 
-			function showCheckNode(){
-				var array = Ext.getCmp('menuTree').getChecked();
-				var _text = '';
-				if(array != null){
-					for (var i = 0; i < array.length; i++) {
-						_text += array[i].text + '\n';
-					} 
-					alert(_text);
+			//更新角色树结点的可访问菜单列表
+			function updateSelectedNode(){
+				if($F('selectedRoleNode') == ""){//未选中角色节点
+					showMessageBox(getRightSelectedErrorMsg("角色树节点","系统管理员默认拥有所有权限"));
+					return;
 				}
+				if($F('selectedRoleNode') == "<%=Role.ADMIN_ROLE_ID%>"){//选中角色节点为系统管理员
+					showMessageBox(getRightSelectedErrorMsg("角色树节点","系统管理员默认拥有所有权限"));
+					return;
+				}
+				var menuArray = Ext.getCmp('menuTree').getChecked();
+				var menuIDList = new Array();
+				
+				if(menuArray != null){
+					for (var i = 0; i < menuArray.length; i++) {
+						menuIDList[i] = menuArray[i].id;
+					}
+				}
+				
+				//表单提交简化版本
+                formAjaxSubmit("${pageContext.request.contextPath}//security/role/roleMenuSetting/001/updateMenuNodePermitInfoAction.ajax", 
+                               {dataVersion: Ext.getCmp("roleTree").getNodeById($F("selectedRoleNode")).attributes.version,
+                               roleId: $F("selectedRoleNode"),
+                               menuIDList: menuIDList},
+                               roleTreeReload ,
+                               roleTreeReload);
 			}
+			//角色树重新加载
+			function roleTreeReload(){
+				//清空选中角色节点
+				$("selectedRoleNode").value = "";
+				//加载角色树
+                var _tmpRoleTree = Ext.getCmp("roleTree");
+          		_tmpRoleTree.root.reload();
+	           	_tmpRoleTree.expandAll();
+                //加载菜单树
+                loadMenuTree();
+			}
+			//重置选择的角色信息
+            function selectedNodeReset(){
+                if($F('selectedRoleNode') != ""){//选中角色节点
+                	//加载菜单树
+                    loadMenuTree();
+                } else {
+                    showMessageBox(getRightSelectedErrorMsg1("角色树节点"));
+                }
+            }
+            //加载菜单树
+            function loadMenuTree(){
+            	var _tmpMenuTree = Ext.getCmp("menuTree");
+          		_tmpMenuTree.root.reload();
+	           	_tmpMenuTree.expandAll();
+            }
 		-->
         </script>
 	</head>
@@ -196,12 +238,12 @@
 					                 		<table> 
 					                     		<tr> 
 					                        		<td align="right"> 
-					                               		<input value="更  新" class="buttonSubmitLong" type="button" onclick="showCheckNode();"> 
+					                               		<input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
 					                               	</td> 
 					                          		<td width="20"> 
 					                         		</td> 
 					                              	<td align="right"> 
-					                              		<input value="重  置" class="buttonResetLong" type="button">
+					                              		<input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();">
 					                             	</td> 
 					                          	</tr> 
 					                   		</table>
