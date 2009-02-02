@@ -22,10 +22,13 @@ function getNoChangeErrorMsg() {
 function getNeedOneSelectedErrorMsg(itemName) {
 	return "最少要选择一条[" + itemName + "]记录！";
 }
+function getRightSelectedErrorMsg1(itemName) {
+	return "未选择正确的[" + itemName + "]！";
+}
 function getRightSelectedErrorMsg(itemName, detail) {
 	detail = _formatDetail(itemName, detail);
 	return "未选择正确的[" + itemName + "]！<br><br><b><font color='red'>注意: "
-			+ detail + "</font></b>";;
+			+ detail + "</font></b>";
 }
 function _formatDetail(itemName, detail) {
 	detail += "！&nbsp;&nbsp;&nbsp;&nbsp;";
