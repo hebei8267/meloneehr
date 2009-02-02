@@ -39,7 +39,7 @@
                     }, role),
                     listeners : {
                         loadexception : function(){
-                            showMessageBox(getCommunicationErrorMsg());
+                            showMessageBox(getErrorMsg_AM001());
                         }
                     }
                 });
@@ -175,11 +175,11 @@
             function checkNodeTxt(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
                     if(Ext.getCmp("nodeTxt").getValue() != ""){
-                        return getNeedSelectedItem("菜单树节点");
+                        return getErrorMsg_EM002("菜单树节点");
                     }
                 } else {
                     if(Ext.getCmp("nodeTxt").getValue() == ""){
-                        return getBlankText();
+                        return getErrorMsg_EM001();
                     }
                 }
                 return true;
@@ -188,11 +188,11 @@
             function checkActionContent(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
                     if(Ext.getCmp("actionContent").getValue() != ""){
-                        return getNeedSelectedItem("菜单树节点");
+                        return getErrorMsg_EM002("菜单树节点");
                     }
                 } else {
                     if(Ext.getCmp("actionContent").getValue() == ""){
-                        return getBlankText();
+                        return getErrorMsg_EM001();
                     }
                 }
                 return true;
@@ -201,12 +201,12 @@
             function checkShowIndex(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
                     if(Ext.getCmp("showIndex").getValue() != ""){
-                        return getNeedSelectedItem("菜单树节点");
+                        return getErrorMsg_EM002("菜单树节点");
                     }
                 } else {
                     if(Ext.getCmp("showIndex").getValue() != ""){
                         if(!isDigits(Ext.getCmp("showIndex").getValue())){
-                            return getNumText();
+                            return getErrorMsg_EM003();
                         }
                     }
                 }
@@ -219,7 +219,7 @@
                 }
 
                 if(Ext.getCmp("nodeID").getValue() != "" && "<%=MenuNodeType.LEAF_NODE_TYPE%>" == Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()).attributes.uiNodeType){
-                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "叶节点不能添加子节点"));
+                    showMessageBox(getErrorMsg_AM006("菜单树节点", "叶节点不能添加子节点"));
                     return;
                 } 
                 var windowOption = "width=390,height=405,left=300,top=100,status=no,resizable=no";
@@ -238,7 +238,7 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getRightSelectedErrorMsg("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
+                    showMessageBox(getErrorMsg_AM006("要添加适用角色的菜单树节点", "树根节点不能添加适用角色"));
                     return;
                 }
                 
@@ -296,10 +296,10 @@
                 
                 var selectObjs = Ext.getCmp('roleGrid').getSelections();
                 if(selectObjs == null || selectObjs.length == 0){//未选择添加角色
-                    showMessageBox(getNeedOneSelectedErrorMsg('角色'));
+                    showMessageBox(getErrorMsg_AM004('角色'));
                     return;
                 }else{
-                    showConfirm(getDelConfirmTipMsg(), delMenuNodeRoleAction);
+                    showConfirm(getTipMsg_AM001(), delMenuNodeRoleAction);
                     return;
                 }
             }
@@ -328,11 +328,11 @@
                 }
                 
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中菜单节点
-                    showMessageBox(getRightSelectedErrorMsg("要删除的菜单树节点", "树根节点不能删除"));
+                    showMessageBox(getErrorMsg_AM006("要删除的菜单树节点", "树根节点不能删除"));
                     return;
                 }
                 
-                showConfirm(getDelConfirmTipMsg(), delMenuNodeAction);
+                showConfirm(getTipMsg_AM001(), delMenuNodeAction);
             }
             //删除菜单节点
             function delMenuNodeAction(btn){
@@ -367,7 +367,7 @@
                     //选中菜单节点
                     menuNodeSelected(Ext.getCmp("menuTree").getNodeById(Ext.getCmp("nodeID").getValue()));
                 } else {
-                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "树根节点无法重置操作"));
+                    showMessageBox(getErrorMsg_AM006("菜单树节点", "树根节点无法重置操作"));
                 }
             }
             //更新选择的菜单信息
@@ -375,7 +375,7 @@
                 if(Ext.getCmp("nodeID").getValue() != ""){//选中菜单节点
                     updateSelectedNodeAction();
                 } else {
-                    showMessageBox(getRightSelectedErrorMsg("菜单树节点", "树根节点无法更新操作"));
+                    showMessageBox(getErrorMsg_AM006("菜单树节点", "树根节点无法更新操作"));
                 }
             }
             //更新选择的菜单信息
@@ -392,7 +392,7 @@
                     && getRadioValueByName("applyArea") == String(true)
                     && Ext.getCmp("showIndex").getValue() == menuNode.attributes.uiNodeIndex
                     && roleGridModFlg == false){//菜单详细未修改，不做后台提交
-                    showMessageBox(getNoChangeErrorMsg());
+                    showMessageBox(getErrorMsg_AM003());
                     return;
                 }
                 

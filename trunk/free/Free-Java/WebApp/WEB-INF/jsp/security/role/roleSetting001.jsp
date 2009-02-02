@@ -83,11 +83,11 @@
             function checkNodeTxt(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
                     if(Ext.getCmp("nodeTxt").getValue() != ""){
-                        return getNeedSelectedItem("角色树节点");
+                        return getErrorMsg_EM002("角色树节点");
                     }
                 } else {
                     if(Ext.getCmp("nodeTxt").getValue() == ""){
-                        return getBlankText();
+                        return getErrorMsg_EM001();
                     }
                 }
                 return true;
@@ -96,7 +96,7 @@
             function checkNodeDetail(){
                 if(Ext.getCmp("nodeID").getValue() == ""){//未选中角色节点
                     if(Ext.getCmp("nodeDetail").getValue() != ""){
-                        return getNeedSelectedItem("角色树节点");
+                        return getErrorMsg_EM002("角色树节点");
                     }
                 }
                 return true;
@@ -110,7 +110,7 @@
                     Ext.getCmp("nodeTxt").setValue(roleNode.text);
                     Ext.getCmp("nodeDetail").setValue(roleNode.attributes.detail);
                 } else {
-                    showMessageBox(getRightSelectedErrorMsg("角色树节点", "树根节点无法重置操作"));
+                    showMessageBox(getErrorMsg_AM006("角色树节点", "树根节点无法重置操作"));
                 }
             }
             //更新选择的角色信息
@@ -118,7 +118,7 @@
                 if(Ext.getCmp("nodeID").getValue() != ""){//选中角色节点
                     updateSelectedNodeAction();
                 } else {
-                    showMessageBox(getRightSelectedErrorMsg("角色树节点", "树根节点无法更新操作"));
+                    showMessageBox(getErrorMsg_AM006("角色树节点", "树根节点无法更新操作"));
                 }
             }
             //更新选择的角色信息
@@ -131,7 +131,7 @@
 
                 if(Ext.getCmp("nodeTxt").getValue() == roleNode.attributes.text 
                     && Ext.getCmp("nodeDetail").getValue() == roleNode.attributes.detail){//角色详细未修改，不做后台提交
-                    showMessageBox(getNoChangeErrorMsg());
+                    showMessageBox(getErrorMsg_AM003());
                     return;
                 }
 
@@ -178,15 +178,15 @@
                 }
                 
                 if($F("parentNodeID") == ""){
-                    showMessageBox(getRightSelectedErrorMsg("要删除的角色树节点", "树根节点不能删除"));
+                    showMessageBox(getErrorMsg_AM006("要删除的角色树节点", "树根节点不能删除"));
                     return;
                 }
                 if("<%=Role.ADMIN_ROLE_ID%>" == Ext.getCmp("nodeID").getValue()){
-                	showMessageBox(getRightSelectedErrorMsg("要删除的角色树节点","系统管理员树节点不能删除"));
+                	showMessageBox(getErrorMsg_AM006("要删除的角色树节点","系统管理员树节点不能删除"));
                 	return;
                 }
                 
-                showConfirm(getDelConfirmTipMsg(), delRoleAction);
+                showConfirm(getTipMsg_AM001(), delRoleAction);
             }
             //删除角色
             function delRoleAction(btn){
@@ -207,7 +207,7 @@
                 }
 
                 if("<%=Role.ADMIN_ROLE_ID%>" == Ext.getCmp("nodeID").getValue()){
-                	showMessageBox(getRightSelectedErrorMsg("父角色树节点","系统管理员不能包含子角色树节点"));
+                	showMessageBox(getErrorMsg_AM006("父角色树节点","系统管理员不能包含子角色树节点"));
                 	return;
                 }
                 $("hnodeID").value = Ext.getCmp("nodeID").getValue();
