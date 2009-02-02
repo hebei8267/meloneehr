@@ -173,7 +173,7 @@
             <table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
-                        角色#菜单树关联设定
+                        角色&菜单树关联设定
                     </td> 
                     <td class="appScreenID"> 
                         - ROLE Menu SETTINGS 001 -
