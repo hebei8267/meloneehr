@@ -212,8 +212,9 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                 if (menuTreeNode.getDefaultPermit()) {
                     menuTreeNode.setChecked(true);
                 } else {// 有访问限制
-                    permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(roleID);
-
+                    if (permitList == null) {// 权限列表为空时,初始化
+                        permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(roleID);
+                    }
                     menuTreeNode.setChecked(isHoldMenuNodePermit(menuTreeNode.getId(), permitList));
                 }
             }
@@ -257,6 +258,9 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                     if (menuTreeNode.getDefaultPermit()) {
                         menuTreeNode.setChecked(true);
                     } else {// 有访问限制
+                        if (permitList == null) {// 权限列表为空时,初始化
+                            permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(roleID);
+                        }
                         menuTreeNode.setChecked(isHoldMenuNodePermit(menuTreeNode.getId(), permitList));
                     }
                 }

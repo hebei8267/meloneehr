@@ -168,6 +168,47 @@ public class MenuNodePermitServiceImpl implements IMenuNodePermitService {
 
     }
 
+    public int updateMenuNodePermitService(String roleID, int dataVersion, List<String> menuIDList) {
+
+        Role role = roleDao.getRoleByID(roleID);
+        if (role != null && role.getVersion().equals(dataVersion)) {
+            List<MenuNodePermit> permitList = menuNodePermitDao.getMenuNodePermitListByRoleID(roleID);
+
+            // 以数据库中的角色列表对象为基础进行比较--不存在当前权限对象时做删除操作
+            for (MenuNodePermit permit : permitList) {
+                if (!menuIDList.contains(permit.getMenuNodeID())) {
+                    menuNodePermitDao.delete(permit);
+                }
+            }
+            // 以新角色列表对象为基础进行比较--不存在当前权限对象时做添加操作
+            for (String menuID : menuIDList) {
+                if (roleID.equals(Role.ADMIN_ROLE_ID) || roleID.equals(Role.ROLE_TREE_ROOT_ID)) {
+                    // 系统管理员默认拥有所有权限,不用添加权限
+                    continue;
+                }
+
+                MenuNode menuNode = menuNodeDao.getMenuNodeByID(menuID);
+                // 菜单节点的默认权限为[无访问限制]时,不用添加权限
+                if (menuNode.getDefaultPermit() == true) {
+                    continue;
+                }
+
+                MenuNodePermit _newPermit = new MenuNodePermit();
+                _newPermit.setMenuNodeID(menuID);
+                _newPermit.setRoleID(roleID);
+
+                if (!permitList.contains(_newPermit)) {
+                    _newPermit.setMenuNode(menuNodeDao.getMenuNodeByID(_newPermit.getMenuNodeID()));
+                    _newPermit.setRole(roleDao.getRoleByID(_newPermit.getRoleID()));
+                    // 不存在当前权限对象时做添加操作
+                    menuNodePermitDao.save(_newPermit);
+                }
+            }
+            return 0;
+        }
+        return 1;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------

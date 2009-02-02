@@ -43,6 +43,16 @@ public interface IMenuNodePermitService {
     public void updateMenuNodePermitService(MenuNode menuNode, List<String> roleIDList);
 
     /**
+     * 更新菜单树结点的可访问角色列表
+     * 
+     * @param roleID 角色ID
+     * @param dataVersion
+     * @param menuIDList 菜单节点列表
+     * @return 0-成功 1-失败(数据同步错误)
+     */
+    public int updateMenuNodePermitService(String roleID, int dataVersion, List<String> menuIDList);
+
+    /**
      * 更新其所有子菜单树结点的可访问角色列表(访问角色列表与roleIDList内容信息相匹配,没有的添加,多余的删除)
      * 
      * @param parentNode 父菜单节点
