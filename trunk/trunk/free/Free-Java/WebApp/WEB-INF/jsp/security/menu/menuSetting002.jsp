@@ -57,7 +57,7 @@
                         添加树节点信息
                     </td> 
                     <td class="appScreenID"> 
-                        - MENU SETTINGS 002 -
+                        -MENU SETTING 002-
                     </td> 
                 </tr>
                 <tr> 

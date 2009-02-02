@@ -113,7 +113,7 @@
                         添加角色信息
                     </td> 
                     <td class="appScreenID"> 
-                        - MENU SETTINGS 003 -
+                        -MENU SETTING 003-
                     </td> 
                 </tr>
                 <tr> 

@@ -47,7 +47,7 @@
                         添加角色信息
                     </td> 
                     <td class="appScreenID"> 
-                        - ROLE SETTINGS 002 -
+                        -ROLE SETTING 002-
                     </td> 
                 </tr> 
                 <tr> 

@@ -85,7 +85,7 @@
                         用户密码变更
                         </td>
                         <td class="appScreenID">
-                        - SECURITY 002 -
+                        -SECURITY 002-
                         </td>
                     </tr>
                     <tr>

@@ -427,7 +427,7 @@
                         菜单树设定
                     </td> 
                     <td class="appScreenID"> 
-                        - MENU SETTINGS 001 -
+                        -MENU SETTING 001-
                     </td> 
                 </tr>
                 <tr> 
