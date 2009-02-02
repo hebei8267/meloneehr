@@ -50,6 +50,9 @@
 				<value>org.freedom.entity.ui.MenuNode</value>
 				<value>org.freedom.entity.ui.MenuNodeType</value>
 				<value>org.freedom.entity.ui.MenuNodePermit</value>
+				
+				<value>org.freedom.entity.dictionary.common.Country</value>
+				<value>org.freedom.entity.dictionary.organization.OrganizationType</value>
 			</list>
 		</property>
 		<!--	
