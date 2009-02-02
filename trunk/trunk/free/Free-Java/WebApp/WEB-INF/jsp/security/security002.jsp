@@ -56,7 +56,7 @@
                 var _newPassword = Ext.getCmp("newPassword").getValue();
                 var _confirmPassword = Ext.getCmp("confirmPassword").getValue();
                 if(_newPassword != _confirmPassword) {
-                    return getNeedSameInputErrorMsg("新密码", "新密码(确认用)");
+                    return getErrorMsg_AM002("新密码", "新密码(确认用)");
                 } else {
                     return true;
                 }

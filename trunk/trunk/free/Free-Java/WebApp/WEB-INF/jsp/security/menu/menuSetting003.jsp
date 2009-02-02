@@ -20,7 +20,7 @@
             function addRoleList(){
                 var selectObjs = Ext.getCmp('roleGrid').getSelections();
                 if(selectObjs == null || selectObjs.length == 0){//未选择添加角色
-                    showMessageBox(getNeedOneSelectedErrorMsg('角色'));
+                    showMessageBox(getErrorMsg_AM004('角色'));
                     return;
                 }
                 
@@ -53,7 +53,7 @@
                     }, role),
                     listeners : {
                         loadexception : function(){
-                            showMessageBox(getCommunicationErrorMsg());
+                            showMessageBox(getErrorMsg_AM001());
                         }
                     }
                 });

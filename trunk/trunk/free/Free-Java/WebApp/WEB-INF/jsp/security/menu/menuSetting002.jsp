@@ -20,7 +20,7 @@
             function checkShowIndex(){
                 if(Ext.getCmp("showIndex").getValue() != ""){
                     if(!isDigits(Ext.getCmp("showIndex").getValue())){
-                        return getNumText();
+                        return getErrorMsg_EM003();
                     }
                 }
                 return true;
