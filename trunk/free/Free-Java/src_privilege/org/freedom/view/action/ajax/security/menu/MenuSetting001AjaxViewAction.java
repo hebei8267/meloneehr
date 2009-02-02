@@ -134,8 +134,8 @@ public class MenuSetting001AjaxViewAction extends AbstractViewAction {
         // 取得request里面的参数
         BeanUtils.populate(menuNode, request.getParameterMap());
         boolean applyArea = ServletRequestUtils.getBooleanParameter(request, "applyArea");
-        String roleIdArray[] = ServletRequestUtils.getRequiredStringParameters(request, "roleIdList");
-        List<String> roleIDList = Arrays.asList(roleIdArray);
+        String roleIDArray[] = ServletRequestUtils.getRequiredStringParameters(request, "roleIdList");
+        List<String> roleIDList = Arrays.asList(roleIDArray);
 
         int _result = menuNodeService.modMenuNodeInfoService(menuNode, roleIDList, applyArea);
         JosnViewObject outObj = new JosnViewObject();
