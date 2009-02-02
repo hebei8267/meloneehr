@@ -1,31 +1,33 @@
 // ************************************************
 // tip message
 // ************************************************
-function getDelConfirmTipMsg() {
+function getTipMsg_AM001() {
 	return "确认要删除所选记录？";
 }
 // ************************************************
 // error message
 // ************************************************
-function getCommunicationErrorMsg() {
+function getErrorMsg_AM001() {
 	return "和服务器通信时发生错误,请稍候再试！";
 }
 
-function getNeedSameInputErrorMsg(itemName1, itemName2) {
+function getErrorMsg_AM002(itemName1, itemName2) {
 	return "输入的[" + itemName1 + "]和[" + itemName2 + "]不一样！";
 }
 
-function getNoChangeErrorMsg() {
+function getErrorMsg_AM003() {
 	return "未编辑任何数据！";
 }
 
-function getNeedOneSelectedErrorMsg(itemName) {
+function getErrorMsg_AM004(itemName) {
 	return "最少要选择一条[" + itemName + "]记录！";
 }
-function getRightSelectedErrorMsg1(itemName) {
+
+function getErrorMsg_AM005(itemName) {
 	return "未选择正确的[" + itemName + "]！";
 }
-function getRightSelectedErrorMsg(itemName, detail) {
+
+function getErrorMsg_AM006(itemName, detail) {
 	detail = _formatDetail(itemName, detail);
 	return "未选择正确的[" + itemName + "]！<br><br><b><font color='red'>注意: "
 			+ detail + "</font></b>";
@@ -43,12 +45,14 @@ function _formatDetail(itemName, detail) {
 // ************************************************
 // Extjs error message
 // ************************************************
-function getBlankText() {
+function getErrorMsg_EM001() {
 	return "该输入项为必输项";
 }
-function getNeedSelectedItem(itemName) {
+
+function getErrorMsg_EM002(itemName) {
 	return "未选择" + itemName;
 }
-function getNumText() {
+
+function getErrorMsg_EM003() {
 	return "该输入项只能包数字";
 }

@@ -108,7 +108,7 @@ function formAjaxSubmit(_url, _params, _fnSuccess, _fnFailure) {
  * 默认ajax请求失败处理
  */
 function defaultAjaxRequestFailure(result, request) {
-	showMessageBox(getCommunicationErrorMsg());
+	showMessageBox(getErrorMsg_AM001());
 }
 
 var _title = "Freedom&Melon";
