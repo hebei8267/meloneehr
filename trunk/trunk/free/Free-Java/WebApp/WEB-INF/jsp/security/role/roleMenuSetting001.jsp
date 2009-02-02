@@ -51,11 +51,36 @@
                 
                 roleTree.render();
                 roleTreeRoot.expand();
-			    roleTree.expandAll();
+                roleTree.expandAll();
+                
+                roleTree.on("click", function(node, event) {
+                    if(($F("selectedRoleNode")!= node.id)){//选择其它节点时
+                        $("selectedRoleNode").value = node.id;
+                        //TODO
+                        var _tmpMenuTree = Ext.getCmp("menuTree");
+                        _tmpMenuTree.root.reload();
+	                	_tmpMenuTree.expandAll();
+                    }
+                });
+			    
 			    
 			    //************************************************
 			    //菜单树
 			    //************************************************
+			    var menuTreeLoader = new Ext.tree.TreeLoader({
+				                        dataUrl:'${pageContext.request.contextPath}/security/role/roleMenuSetting/001/getAllMenuInfoTreeAction.ajax',
+				                        baseParams :{roleId: $F("selectedRoleNode")},
+				                        requestMethod : 'post',
+				                        baseAttrs: {
+							                uiProvider: Ext.ux.TreeCheckNodeUI
+							            },
+				                        listeners : {
+				                            loadexception : defaultAjaxRequestFailure
+				                        }
+				                    });
+				menuTreeLoader.on('beforeload',function(treeLoader,node){
+			               this.baseParams.roleId = $F("selectedRoleNode");
+			            }, menuTreeLoader);
 			    var menuTree = new Ext.tree.TreePanel({
 			        el: 'menuTreeDiv',
 			        id: 'menuTree',
@@ -79,27 +104,13 @@
                     draggable: false,
                     id: 'root',
                     text: '菜单树根节点',
-                    icon: '${pageContext.request.contextPath}/images/root.gif',
-                    loader: new Ext.tree.TreeLoader({
-                    	<%// ******************************** %>
-                    	<%// checkTree特殊参数 %>
-                    	baseAttrs: {
-			                uiProvider: Ext.ux.TreeCheckNodeUI
-			            },
-			            <%// ******************************** %>
-                        dataUrl:'${pageContext.request.contextPath}/security/role/roleMenuSetting/001/getAllMenuInfoTreeAction.ajax',
-                        requestMethod : 'post',
-                        listeners : {
-                            loadexception : defaultAjaxRequestFailure
-                        }
-                    })
+                    loader: menuTreeLoader
                 });
 			    
 			    menuTree.setRootNode(menuTreeRoot);
 			    
 			    menuTree.render();
-			    menuTreeRoot.expand();
-			    menuTree.expandAll();
+	            menuTree.expandAll();
 			});
 
 			function showCheckNode(){
@@ -154,6 +165,8 @@
             </table>
 			<div>
 				<form name="roleMenuCfgForm" method="post" action="#">
+					<%// 选中菜单节点 %>
+                    <input type="hidden" id="selectedRoleNode" name="selectedRoleNode" value="">
 					<table>
             			<tr height="10">
                 		</tr>
