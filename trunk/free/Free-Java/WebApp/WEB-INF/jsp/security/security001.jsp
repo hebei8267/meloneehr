@@ -93,7 +93,7 @@
                         用户登录
                         </td>
                         <td class="appScreenID">
-                        - SECURITY 001 -
+                        -SECURITY 001-
                         </td>
                     </tr>
                     <tr>

@@ -236,7 +236,7 @@
                         角色设定
                     </td> 
                     <td class="appScreenID"> 
-                        - ROLE SETTINGS 001 -
+                        -ROLE SETTING 001-
                     </td> 
                 </tr>
                 <tr> 
