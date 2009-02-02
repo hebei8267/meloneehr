@@ -14,14 +14,14 @@
         <link rel="stylesheet" type="text/css" href="../../../css/default.css">
         <title>Freedom&Melon</title>
 		<script type="text/javascript" src="../../../js/common.js"></script>
-		<script type="text/javascript" src="role.js"></script>
+		<script type="text/javascript" src="organizationType.js"></script>
 		<script type="text/javascript">
 		<!--
 			window.onload = function () {
 				focusInput();
 			}
 			function addRole(){
-				openSubWindow('addRole.html',390,385);
+				openSubWindow('addOrganizationType.html',390,280);
 			}
 		-->
         </script>
@@ -31,10 +31,10 @@
 			<table class="appTitleTable"> 
                 <tr> 
                     <td class="appTitle">
-                        角色设定
+                        组织类型
                     </td> 
                     <td class="appScreenID"> 
-                        -ROLE SETTING 001-
+                        -ORG TYPE SETTING 001-
                     </td> 
                 </tr>
                 <tr> 
@@ -57,7 +57,7 @@
                             </tr>
 							<tr>
 								<td></td>
-								<td><span style="font-weight: bold;">删除[角色]时,其[子角色]也将一同删除</span></td>
+								<td>删除已有[组织类型]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)</td>
 							</tr>
                         </table>
                     </td> 
@@ -78,13 +78,13 @@
 		                    			<td>
 		                    				<table>
 		                    					<tr>
-		                    						<!-- 添加角色 -->
+		                    						<!-- 添加国家 -->
 		                    						<td align="left">
 		                    							<input value="添  加" class="buttonSubmitLong" type="button" onclick="addRole();">
 		                    						</td>
 													<td width="20"> 
                                             		</td>
-													<!-- 删除角色 -->
+													<!-- 删除国家 -->
 													<td align="left">
 		                                                <input value="删  除" class="buttonDeleteLong" type="button" onclick="delRole();"> 
 		                                            </td>
@@ -96,7 +96,7 @@
                             		</tr>
 									<tr>
 		                                <td> 
-		                                    <div id="roleTreeDiv"> 
+		                                    <div id="organizationTypeInfoGridDiv"> 
 		                                    </div> 
 		                                </td> 
 		                                <td width="30">
@@ -105,17 +105,9 @@
 		                                    <table>
 		                                    	<tr> 
 					                                <td colspan="2" class="x-panel-header">
-					                                    角色详细信息
+					                                    组织类型详细信息
 					                                </td>
 					                            </tr>
-												<tr>
-													<td class="inputItemName" height="30" width="100">
-					                                    父角色名称
-					                                </td> 
-					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText readonly" readonly="true"/>
-					                                </td>
-												</tr>
 												<tr>
 													<td class="inputItemName" height="30" width="100">
 					                                    编号

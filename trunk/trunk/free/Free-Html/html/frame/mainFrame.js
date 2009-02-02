@@ -102,6 +102,26 @@ function initConfigTree(){
                 text: '角色&菜单树关联设定',
 				hrefSrc: '../privilege/role/role&Menu.html'
             }]
+        },{
+        	leaf: false,
+            text: '数据字典',
+            children: [{
+                leaf: false,
+                text: '公共相关',
+				children: [{
+					leaf: true,
+	                text: '国家',
+					hrefSrc: '../dictionary/common/country.html'
+				}]
+            },{
+            	leaf: false,
+                text: '组织相关',
+				children: [{
+					leaf: true,
+	                text: '组织类型',
+					hrefSrc: '../dictionary/organization/organizationType.html'
+				}]
+            }]
         }]
     });
     tree.setRootNode(root);
