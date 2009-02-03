@@ -18,6 +18,7 @@
     <script type="text/javascript">
     <!--
         Ext.onReady(function(){
+        	Ext.BLANK_IMAGE_URL = '${pageContext.request.contextPath}/ext-lib/resources/images/default/s.gif';
             Ext.QuickTips.init();
         });
     -->
