@@ -59,15 +59,7 @@
                 });
                 
                 var sm = new Ext.grid.CheckboxSelectionModel({
-                    header : '',
-                    listeners : {
-                        rowselect : function(sm, row, rec) {
-                            // setFromData(rec);
-                        },
-                        rowdeselect : function(sm, row, rec) {
-                            // cleanFromData();
-                        }
-                    }
+                    header : ''
                 });
                 
                 // create the Grid
