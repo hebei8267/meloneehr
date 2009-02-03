@@ -12,7 +12,75 @@
         <%@ include file="/WEB-INF/jsp/base/importCommonPackage.jsp" %>
 		<script type="text/javascript">
 		<!--
+			Ext.onReady(function() {
 			
+				var country = Ext.data.Record.create([
+                    {name: 'id'},
+                    {name: 'name'},
+                    {name: 'detail'}
+                ]);
+                
+				// create the data store
+                var store = new Ext.data.Store({
+                    id : 'countryStore',
+                    proxy : new Ext.data.HttpProxy({
+                        url : '${pageContext.request.contextPath}/dictionary/common/countrySetting/001/getAllCountryInfoListAction.ajax',
+                        method: 'POST'
+                    }),
+                    reader : new Ext.data.JsonReader({
+                        totalProperty: "totalProperty",
+                        root: "dataList",
+                        successProperty :'sessionTimeOut'
+                    }, country),
+                    listeners : {
+                        loadexception : function(){
+                            showMessageBox(getErrorMsg_AM001());
+                        }
+                    }
+                });
+                
+				var sm = new Ext.grid.CheckboxSelectionModel({
+                    header : '',
+                    listeners : {
+                        rowselect : function(sm, row, rec) {
+                            // setFromData(rec);
+                        },
+                        rowdeselect : function(sm, row, rec) {
+                            // cleanFromData();
+                        }
+                    }
+                });
+			
+				// create the Grid
+				var grid = new Ext.grid.GridPanel({
+					store : store,
+					id : 'countryInfoGrid',
+					el : 'countryInfoGridDiv',
+					columns : [sm, new Ext.grid.RowNumberer({
+						header : '序号',// 自动行号
+						width : 35
+					}), {
+						id : 'countryID',
+						header : "编号",
+						width : 80,
+						sortable : true,
+						dataIndex : 'id'
+					}, {
+						id : 'countryName',
+						header : "名称",
+						width : 150,
+						sortable : true,
+						dataIndex : 'name'
+					}],
+					stripeRows : true,
+					height : 300,
+					width : 300,
+					title : '国家信息'
+				});
+			
+				grid.render();
+				store.load();
+			});
 		-->
         </script>
 	</head>
@@ -103,7 +171,7 @@
 					                                    <img src="${pageContext.request.contextPath}/images/need-input.gif">编号
 					                                </td> 
 					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText"/>
+					                                	<extjs:input path="countryID" />
 					                                </td>
 												</tr>
 												<tr>
@@ -111,7 +179,7 @@
 					                                    <img src="${pageContext.request.contextPath}/images/need-input.gif">名称
 					                                </td> 
 					                                <td class="inputItemCell" height="30" width="200">
-					                                    <input type="text" size="20" maxlength="20" class="x-form-text inputText"/>
+					                                    <extjs:input path="countryTxt" />
 					                                </td>
 												</tr>
 												<tr>
@@ -119,7 +187,7 @@
 					                                    详细描述
 					                                </td>
 					                                <td class="inputItemCell" height="115" width="200">
-					                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+					                                    <extjs:textArea path="countryDetail" />
 					                                </td>
 					                            </tr>
 												<tr height="10">

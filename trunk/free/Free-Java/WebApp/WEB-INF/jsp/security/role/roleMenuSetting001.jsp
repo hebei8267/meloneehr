@@ -194,7 +194,7 @@
                                     <img src="${pageContext.request.contextPath}//images/tip.png">
                                 </td>
                                 <td>
-                                    选择某个角色后,将在右面显示其所能访问的[菜单]项目,<span class="need">勾选</span>状态为有访问[权限]
+                                    选择某个[角色]后,将在右面显示[菜单]树项目,树节点为<span class="need">勾选</span>状态时则表示有访问该[菜单]节点[权限]
                                 </td>
                             </tr>
                             <tr>
