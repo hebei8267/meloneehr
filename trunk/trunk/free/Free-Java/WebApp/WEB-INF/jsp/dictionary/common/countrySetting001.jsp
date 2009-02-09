@@ -17,7 +17,8 @@
                 var country = Ext.data.Record.create([
                     {name: 'id'},
                     {name: 'name'},
-                    {name: 'detail'}
+                    {name: 'detail'},
+                    {name: 'version'}
                 ]);
                 
                 // create the data store
@@ -89,7 +90,7 @@
             function setFromData(rec){
             	//extjs Ext.data.Record id
                 $("selectedCountryID").value = rec.id;
-                
+
                 Ext.getCmp("countryID").setValue(rec.data.id);
                 Ext.getCmp("countryTxt").setValue(rec.data.name);
                 Ext.getCmp("countryDetail").setValue(rec.data.detail);
@@ -114,18 +115,7 @@
                     showMessageBox(getErrorMsg_AM005("国家信息"));
                 }
             }
-            function checkCountryID(){
-            	if($F("selectedCountryID") == ""){//未选中国家信息
-                    if(Ext.getCmp("countryID").getValue() != ""){
-                        return getErrorMsg_EM002("国家信息");
-                    }
-                } else {
-                    if(Ext.getCmp("countryID").getValue() == ""){
-                        return getErrorMsg_EM001();
-                    }
-                }
-                return true;
-            }
+
             function checkCountryTxt(){
             	if($F("selectedCountryID") == ""){//未选中国家信息
                     if(Ext.getCmp("countryTxt").getValue() != ""){
@@ -145,6 +135,43 @@
                     }
                 }
                 return true;
+            }
+            //更新选择的国家信息
+            function updateSelectedNode(){
+                if($F("selectedCountryID") != ""){//选中角色节点
+                    updateSelectedNodeAction();
+                } else {
+                    showMessageBox(getErrorMsg_AM005("国家信息"));
+                }
+            }
+            //更新选择的国家信息
+            function updateSelectedNodeAction(){
+            	if(!formExtCmpValidate("countryCfgForm")){
+                    return;
+                }
+                
+                var country = Ext.getCmp("countryInfoGrid").getStore().getById($F("selectedCountryID"));
+                
+                if(Ext.getCmp("countryTxt").getValue() == country.data.name 
+                    && Ext.getCmp("countryDetail").getValue() == country.data.detail){//国家详细未修改，不做后台提交
+                    showMessageBox(getErrorMsg_AM003());
+                    return;
+                }
+
+                //表单提交简化版本
+                formAjaxSubmit("${pageContext.request.contextPath}/dictionary/common/countrySetting/001/updateCountryInfoAction.ajax", 
+                               {version: country.data.version,
+                               id: Ext.getCmp("countryID").getValue(),
+                               name: Ext.getCmp("countryTxt").getValue(),
+                               detail: Ext.getCmp("countryDetail").getValue()},
+                               countryGridReload ,
+                               countryGridReload);
+            }
+            //国家列表重新加载
+            function countryGridReload(){
+                Ext.getCmp("countryInfoGrid").getStore().reload()
+                //清除详细表单数据
+                cleanFromData();
             }
         -->
         </script>
@@ -234,7 +261,7 @@
                                                         <img src="${pageContext.request.contextPath}/images/need-input.gif">编号
                                                     </td> 
                                                     <td class="inputItemCell" height="30" width="200">
-                                                        <extjs:input path="countryID" validator="checkCountryID" maxLength="20"/>
+                                                        <extjs:input path="countryID" disabled="true"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -261,7 +288,7 @@
                                                         <table> 
                                                             <tr> 
                                                                 <td align="right"> 
-                                                                    <input value="更  新" class="buttonSubmitLong" type="button"> 
+                                                                    <input value="更  新" class="buttonSubmitLong" type="button" onclick="updateSelectedNode();"> 
                                                                 </td> 
                                                                 <td width="20"> 
                                                                 </td> 
