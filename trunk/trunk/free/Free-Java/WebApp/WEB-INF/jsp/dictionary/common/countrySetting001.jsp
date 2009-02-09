@@ -87,15 +87,64 @@
             });
             //设置详细表单数据
             function setFromData(rec){
+            	//extjs Ext.data.Record id
+                $("selectedCountryID").value = rec.id;
+                
                 Ext.getCmp("countryID").setValue(rec.data.id);
                 Ext.getCmp("countryTxt").setValue(rec.data.name);
                 Ext.getCmp("countryDetail").setValue(rec.data.detail);
+                
             }
             //清除详细表单数据
             function cleanFromData(){
+            	//extjs Ext.data.Record id
+                $("selectedCountryID").value = "";
+                
                 Ext.getCmp("countryID").setValue("");
                 Ext.getCmp("countryTxt").setValue("");
                 Ext.getCmp("countryDetail").setValue("");
+            }
+            //重置选择的国家信息
+            function selectedNodeReset(){
+            	if($F("selectedCountryID") != ""){//选中国家信息
+                    var country = Ext.getCmp("countryInfoGrid").getStore().getById($F("selectedCountryID"));
+                    //设置详细表单数据
+                    setFromData(country);
+                } else {
+                    showMessageBox(getErrorMsg_AM005("国家信息"));
+                }
+            }
+            function checkCountryID(){
+            	if($F("selectedCountryID") == ""){//未选中国家信息
+                    if(Ext.getCmp("countryID").getValue() != ""){
+                        return getErrorMsg_EM002("国家信息");
+                    }
+                } else {
+                    if(Ext.getCmp("countryID").getValue() == ""){
+                        return getErrorMsg_EM001();
+                    }
+                }
+                return true;
+            }
+            function checkCountryTxt(){
+            	if($F("selectedCountryID") == ""){//未选中国家信息
+                    if(Ext.getCmp("countryTxt").getValue() != ""){
+                        return getErrorMsg_EM002("国家信息");
+                    }
+                } else {
+                    if(Ext.getCmp("countryTxt").getValue() == ""){
+                        return getErrorMsg_EM001();
+                    }
+                }
+                return true;
+            }
+            function checkCountryDetail(){
+            	if($F("selectedCountryID") == ""){//未选中国家信息
+                    if(Ext.getCmp("countryDetail").getValue() != ""){
+                        return getErrorMsg_EM002("国家信息");
+                    }
+                }
+                return true;
             }
         -->
         </script>
@@ -135,6 +184,8 @@
             </table>
             <div>
                 <form:form id="countryCfgForm" method="post" modelAttribute="CountrySetting001ViewObject">
+                	<%// 选中国家信息ID %>
+                    <input type="hidden" id="selectedCountryID" name="selectedCountryID" value="">
                     <table>
                         <tr height="10">
                         </tr>
@@ -183,7 +234,7 @@
                                                         <img src="${pageContext.request.contextPath}/images/need-input.gif">编号
                                                     </td> 
                                                     <td class="inputItemCell" height="30" width="200">
-                                                        <extjs:input path="countryID" />
+                                                        <extjs:input path="countryID" validator="checkCountryID" maxLength="20"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -191,7 +242,7 @@
                                                         <img src="${pageContext.request.contextPath}/images/need-input.gif">名称
                                                     </td> 
                                                     <td class="inputItemCell" height="30" width="200">
-                                                        <extjs:input path="countryTxt" />
+                                                        <extjs:input path="countryTxt" validator="checkCountryTxt" maxLength="20"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -199,7 +250,7 @@
                                                         详细描述
                                                     </td>
                                                     <td class="inputItemCell" height="115" width="200">
-                                                        <extjs:textArea path="countryDetail" />
+                                                        <extjs:textArea path="countryDetail" validator="checkCountryDetail" maxLength="255"/>
                                                     </td>
                                                 </tr>
                                                 <tr height="10">
@@ -215,7 +266,7 @@
                                                                 <td width="20"> 
                                                                 </td> 
                                                                 <td align="right"> 
-                                                                    <input value="重  置" class="buttonResetLong" type="button">
+                                                                    <input value="重  置" class="buttonResetLong" type="button" onclick="selectedNodeReset();">
                                                                 </td> 
                                                             </tr> 
                                                         </table>

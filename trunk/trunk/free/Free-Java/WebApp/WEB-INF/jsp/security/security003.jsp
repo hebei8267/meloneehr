@@ -109,6 +109,7 @@
             
                 tree.render();
                 root.expand();
+                tree.expandAll();
     
                 tree.on("click", function(node, event) {
                     if (node.isLeaf() && node.attributes.actionContent != "") {
