@@ -25,12 +25,12 @@ public interface IRoleService {
     public boolean addRoleInfoService(Role role, boolean inheritFlg);
 
     /**
-     * 修改角色信息
+     * 更新角色信息
      * 
-     * @param role 要修改的角色
+     * @param role 要更新的角色
      * @return true-成功 false-失败
      */
-    public boolean modRoleInfoService(Role role);
+    public boolean updateRoleInfoService(Role role);
 
     /**
      * 删除指定的角色(删除之前会检查其所有子角色是否有对应的关联用户对象,如果有将不能删除)

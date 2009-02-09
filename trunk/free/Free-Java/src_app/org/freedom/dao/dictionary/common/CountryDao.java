@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.freedom.core.dao.impl.HibernateDaoImpl;
 import org.freedom.entity.dictionary.common.Country;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,6 +19,12 @@ import org.springframework.stereotype.Component;
  */
 @Component("countryDao")
 public class CountryDao extends HibernateDaoImpl<Country> {
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Country> getAll() {
+        return getHibernateTemplate().findByCriteria(DetachedCriteria.forClass(Country.class).addOrder(Order.asc("id")));
+    }
+
     /**
      * 根据国家ID取得国家信息
      * 
