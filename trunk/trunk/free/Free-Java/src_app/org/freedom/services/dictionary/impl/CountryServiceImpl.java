@@ -5,6 +5,7 @@ package org.freedom.services.dictionary.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.freedom.dao.dictionary.common.CountryDao;
 import org.freedom.entity.dictionary.common.Country;
 import org.freedom.services.dictionary.ICountryService;
@@ -28,6 +29,25 @@ public class CountryServiceImpl implements ICountryService {
         return countryDao.getAll();
     }
 
+    public boolean updateCountryInfoService(Country country) {
+
+        if (StringUtils.isNotBlank(country.getId()) && StringUtils.isNotBlank(country.getName())) {
+            Country dbCountry = countryDao.getCountryByID(country.getId());
+
+            if (dbCountry != null) {
+                if (dbCountry.getVersion().equals(country.getVersion())) {
+
+                    dbCountry.setName(country.getName());
+                    dbCountry.setDetail(country.getDetail());
+
+                    countryDao.save(dbCountry);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
@@ -41,4 +61,5 @@ public class CountryServiceImpl implements ICountryService {
     public void setCountryDao(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
+
 }

@@ -386,7 +386,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
         return _newRoleIDList;
     }
 
-    public int modMenuNodeInfoService(MenuNode menuNode, List<String> roleIDList, boolean applyArea) {
+    public int updateMenuNodeInfoService(MenuNode menuNode, List<String> roleIDList, boolean applyArea) {
         // 菜单详细项不为空
         if (StringUtils.isNotBlank(menuNode.getNodeTxt()) && !MenuNodeType.NONE_NODE_TYPE.equals((menuNode.getNodeType()))
                 && StringUtils.isNotBlank(menuNode.getActionContent())) {

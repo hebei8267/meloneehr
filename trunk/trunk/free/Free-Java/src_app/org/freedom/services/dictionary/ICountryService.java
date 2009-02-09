@@ -20,4 +20,12 @@ public interface ICountryService {
      * @return 国家列表信息
      */
     public List<Country> getAllCountryInfoListService();
+
+    /**
+     * 更新国家信息
+     * 
+     * @param country 要更新的国家信息
+     * @return true-成功 false-失败
+     */
+    public boolean updateCountryInfoService(Country country);
 }

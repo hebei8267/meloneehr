@@ -61,7 +61,7 @@ public class RoleSetting001AjaxViewAction extends AbstractViewAction {
         // 取得request里面的参数
         BeanUtils.populate(role, request.getParameterMap());
 
-        boolean _result = roleService.modRoleInfoService(role);
+        boolean _result = roleService.updateRoleInfoService(role);
         JosnViewObject outObj = new JosnViewObject();
         if (!_result) {
             outObj.setProcessResult(false);

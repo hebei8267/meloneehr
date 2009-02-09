@@ -172,7 +172,7 @@ public class RoleServiceImpl implements IRoleService {
         }
     }
 
-    public boolean modRoleInfoService(Role role) {
+    public boolean updateRoleInfoService(Role role) {
         if (StringUtils.isNotBlank(role.getName())) {
             Role dbRole = roleDao.getRoleByID(role.getId());
 

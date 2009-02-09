@@ -137,7 +137,7 @@ public class MenuSetting001AjaxViewAction extends AbstractViewAction {
         String roleIDArray[] = ServletRequestUtils.getRequiredStringParameters(request, "roleIdList");
         List<String> roleIDList = Arrays.asList(roleIDArray);
 
-        int _result = menuNodeService.modMenuNodeInfoService(menuNode, roleIDList, applyArea);
+        int _result = menuNodeService.updateMenuNodeInfoService(menuNode, roleIDList, applyArea);
         JosnViewObject outObj = new JosnViewObject();
         if (_result != 0) {
             outObj.setProcessResult(false);
