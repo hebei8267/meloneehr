@@ -6,8 +6,6 @@ package org.freedom.core.dao.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.freedom.core.dao.IGenericDao;
@@ -111,15 +109,15 @@ public class HibernateDaoImpl<T> extends HibernateDaoSupport implements IGeneric
         return (Class) params[index];
     }
 
-    protected String getCurrentDate() {
-        Date date = new Date();
-        return dateFormat(date);
-    }
-
-    protected String dateFormat(Date date) {
-        SimpleDateFormat sm = new SimpleDateFormat("yyyyMMdd");
-        return sm.format(date);
-    }
+//    protected String getCurrentDate() {
+//        Date date = new Date();
+//        return dateFormat(date);
+//    }
+//
+//    protected String dateFormat(Date date) {
+//        SimpleDateFormat sm = new SimpleDateFormat("yyyyMMdd");
+//        return sm.format(date);
+//    }
 
     protected String formatMaxID(String id) {
         int iid = Integer.valueOf(id);
