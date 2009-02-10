@@ -15,6 +15,15 @@ import org.freedom.entity.dictionary.common.Country;
  */
 public interface ICountryService {
     /**
+     * 删除指定的国家信息
+     * 
+     * @param countryID 要删除的国家信息ID
+     * @param dataVersion 版本
+     * @return 0-成功 1-失败(数据同步错误) 2-失败(该国家信息和其他对象有关联关系)
+     */
+    public int delCountryInfoService(String countryID, int dataVersion);
+
+    /**
      * 取得国家列表信息
      * 
      * @return 国家列表信息

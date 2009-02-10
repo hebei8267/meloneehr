@@ -48,6 +48,21 @@ public class CountryServiceImpl implements ICountryService {
         return false;
     }
 
+    public int delCountryInfoService(String countryID, int dataVersion) {
+        Country dbCountry = countryDao.getCountryByID(countryID);
+        if (dbCountry == null || !dbCountry.getVersion().equals(dataVersion)) {
+            return 1;
+        }
+        try {
+
+        } catch (Exception e) {
+            // TODO: 外键关联未实现
+        }
+        // 删除国家信息
+        countryDao.delete(dbCountry);
+        return 0;
+    }
+
     // ---------------------------------------------------------------------------
     // DAO
     // ---------------------------------------------------------------------------
