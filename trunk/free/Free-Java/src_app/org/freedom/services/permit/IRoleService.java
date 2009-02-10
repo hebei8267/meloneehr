@@ -25,14 +25,6 @@ public interface IRoleService {
     public boolean addRoleInfoService(Role role, boolean inheritFlg);
 
     /**
-     * 更新角色信息
-     * 
-     * @param role 要更新的角色
-     * @return true-成功 false-失败
-     */
-    public boolean updateRoleInfoService(Role role);
-
-    /**
      * 删除指定的角色(删除之前会检查其所有子角色是否有对应的关联用户对象,如果有将不能删除)
      * 
      * @param roleID 要删除的角色ID
@@ -42,6 +34,13 @@ public interface IRoleService {
     public int delRoleInfoService(String roleID, int dataVersion);
 
     /**
+     * 取得角色列表信息
+     * 
+     * @return 角色列表信息
+     */
+    public List<Role> getAllRoleInfoListService();
+
+    /**
      * 取得角色树信息
      * 
      * @return 角色树根节点
@@ -49,9 +48,10 @@ public interface IRoleService {
     public TreeNode getAllRoleInfoTreeService();
 
     /**
-     * 取得角色列表信息
+     * 更新角色信息
      * 
-     * @return 角色列表信息
+     * @param role 要更新的角色
+     * @return true-成功 false-失败
      */
-    public List<Role> getAllRoleInfoListService();
+    public boolean updateRoleInfoService(Role role);
 }

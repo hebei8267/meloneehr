@@ -14,13 +14,12 @@ import org.freedom.entity.common.User;
  */
 public interface ILoginLogoutService {
     /**
-     * 用户登录效验
+     * 取得角色信息根据其ID
      * 
-     * @param userID 用户ID
-     * @param password 用户密码
-     * @return 成功-用户信息 失败-null
+     * @param roleID 角色ID
+     * @return 角色信息
      */
-    public User userLoginService(String userID, String password);
+    public Role getRoleInfoService(String roleID);
 
     /**
      * 修改用户密码
@@ -33,10 +32,11 @@ public interface ILoginLogoutService {
     public boolean modUserPwdService(String userID, String oldPassword, String newPassword);
 
     /**
-     * 取得角色信息根据其ID
+     * 用户登录效验
      * 
-     * @param roleID 角色ID
-     * @return 角色信息
+     * @param userID 用户ID
+     * @param password 用户密码
+     * @return 成功-用户信息 失败-null
      */
-    public Role getRoleInfoService(String roleID);
+    public User userLoginService(String userID, String password);
 }
