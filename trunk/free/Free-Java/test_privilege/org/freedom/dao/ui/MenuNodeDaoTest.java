@@ -71,7 +71,7 @@ public class MenuNodeDaoTest extends BaseTestCase2 {
                 } else if (i == 5) {
                     MenuNode parentNode = menuNodeDao.getMenuNodeByID(value);
 
-                    parentNode.addChildNode(menuNode);
+                    parentNode.addChildMenuNode(menuNode);
 
                     menuNode.setParentNode(parentNode);
                 }

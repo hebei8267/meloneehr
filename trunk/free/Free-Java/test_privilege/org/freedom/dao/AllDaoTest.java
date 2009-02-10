@@ -11,6 +11,7 @@ import org.freedom.dao.common.RoleDaoTest;
 import org.freedom.dao.common.UserDaoTest;
 import org.freedom.dao.dictionary.common.CountryDaoTest;
 import org.freedom.dao.dictionary.organization.OrganizationTypeDaoTest;
+import org.freedom.dao.organization.OrganizationDaoTest;
 import org.freedom.dao.ui.MenuNodeDaoTest;
 import org.freedom.dao.ui.MenuNodeTypeDaoTest;
 
@@ -29,6 +30,7 @@ import org.freedom.dao.ui.MenuNodeTypeDaoTest;
                        //MenuNodePermitDaoTest.class
                        CountryDaoTest.class,
                        OrganizationTypeDaoTest.class,
+                       OrganizationDaoTest.class,
                        })
 public class AllDaoTest extends BaseTestCase {
 
