@@ -34,7 +34,7 @@ import org.hibernate.annotations.NaturalId;
  * @since JDK1.5
  */
 @Entity
-@Table(name = "M_ORGANIZATION")
+@Table(name = "W_ORGANIZATION")
 @NamedQueries( {})
 public class Organization extends AbstractEntityBean {
 
