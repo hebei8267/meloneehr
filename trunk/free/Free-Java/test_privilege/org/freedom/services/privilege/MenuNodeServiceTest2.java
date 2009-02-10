@@ -41,7 +41,7 @@ public class MenuNodeServiceTest2 extends BaseTestCase {
         List<String> roleIDList = new ArrayList<String>();
         roleIDList.add("00000003");
         roleIDList.add("00000004");
-        System.out.println(menuNodeService.modMenuNodeInfoService(node, roleIDList, false));
+        System.out.println(menuNodeService.updateMenuNodeInfoService(node, roleIDList, false));
         // boolean result = menuNodeService.modMenuNodeInfoService(node);
         // assertEquals(true, result);
     }
