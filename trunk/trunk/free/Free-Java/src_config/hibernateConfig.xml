@@ -53,6 +53,8 @@
 				
 				<value>org.freedom.entity.dictionary.common.Country</value>
 				<value>org.freedom.entity.dictionary.organization.OrganizationType</value>
+				
+				<value>org.freedom.entity.organization.Organization</value>
 			</list>
 		</property>
 		<!--	
