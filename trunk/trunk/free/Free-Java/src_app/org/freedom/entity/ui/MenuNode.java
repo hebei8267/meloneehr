@@ -260,7 +260,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param menuNode 子节点
      */
-    public void addChildNode(MenuNode menuNode) {
+    public void addChildMenuNode(MenuNode menuNode) {
         // 向列表尾部添加
         if (menuNode.getIndex() == null || menuNode.getIndex() == 0 || menuNode.getIndex() > childNodeList.size()) {
             this.childNodeList.add(menuNode);
@@ -286,7 +286,7 @@ public class MenuNode extends AbstractEntityBean {
      * 
      * @param menuNode 子节点
      */
-    public void removeSubNode(MenuNode menuNode) {
+    public void removeChildMenuNode(MenuNode menuNode) {
         int index = 1;
 
         MenuNode _delMenuNode = null;
