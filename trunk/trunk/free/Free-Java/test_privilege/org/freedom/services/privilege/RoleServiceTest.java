@@ -59,7 +59,7 @@ public class RoleServiceTest extends BaseTestCase {
         role.setId("00000007");
         role.setName("修改后的角色");
         role.setDetail("修改后的描述");
-        boolean result = roleService.modRoleInfoService(role);
+        boolean result = roleService.updateRoleInfoService(role);
         assertEquals(true, result);
     }
 
