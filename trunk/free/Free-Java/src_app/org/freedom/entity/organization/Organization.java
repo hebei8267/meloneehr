@@ -4,6 +4,7 @@
 package org.freedom.entity.organization;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -14,7 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -35,7 +35,7 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "M_ORGANIZATION")
-@NamedQueries( { @NamedQuery(name = "Organization.getOrganizationByID", query = "select obj from Organization obj where obj.id = ? and obj.startDate = sysdate "), })
+@NamedQueries( {})
 public class Organization extends AbstractEntityBean {
 
     /**
@@ -432,6 +432,60 @@ public class Organization extends AbstractEntityBean {
      */
     public void setLocalCountry(Country localCountry) {
         this.localCountry = localCountry;
+    }
+
+    /**
+     * 添加子组织
+     * 
+     * @param organization 子组织
+     */
+    public void addChildOrganization(Organization organization) {
+        // 向列表尾部添加
+        if (organization.getIndex() == null || organization.getIndex() == 0
+                || organization.getIndex() > childOrganizationList.size()) {
+            this.childOrganizationList.add(organization);
+        } else {// 像列表中间插于
+            this.childOrganizationList.add(organization.getIndex() - 1, organization);
+        }
+
+        int index = 1;
+        if (childOrganizationList == null) {
+            return;
+        }
+        for (Organization _organization : childOrganizationList) {
+            if (_organization != null) {
+                _organization.setIndex(index);
+                index++;
+            }
+        }
+
+    }
+
+    /**
+     * 删除子组织
+     * 
+     * @param menuNode 子组织
+     */
+    public void removeChildOrganization(Organization organization) {
+        int index = 1;
+
+        Organization _delOrganization = null;
+        for (Iterator<Organization> iterator = childOrganizationList.iterator(); iterator.hasNext();) {
+            Organization _organization = iterator.next();
+            if (_organization.equals(organization)) {
+                _delOrganization = _organization;
+                continue;
+            }
+            if (_organization != null) {
+                _organization.setIndex(index);
+                index++;
+            }
+
+        }
+        if (_delOrganization != null) {
+            childOrganizationList.remove(_delOrganization);
+        }
+
     }
 
     /**

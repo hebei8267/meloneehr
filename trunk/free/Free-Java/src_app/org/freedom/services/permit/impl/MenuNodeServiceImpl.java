@@ -53,7 +53,7 @@ public class MenuNodeServiceImpl implements IMenuNodeService {
                     menuNode.setParentNode(parentMenuNode);
                     menuNode.setId(menuNodeDao.getMaxID());
 
-                    parentMenuNode.addChildNode(menuNode);
+                    parentMenuNode.addChildMenuNode(menuNode);
                     // 添加菜单节点
                     menuNodeDao.save(menuNode);
                     // 继承权限且其不拥有默认权限时

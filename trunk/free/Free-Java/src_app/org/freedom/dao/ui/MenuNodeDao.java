@@ -52,7 +52,7 @@ public class MenuNodeDao extends HibernateDaoImpl<MenuNode> {
 
     public void delete(MenuNode menuNode) {
         MenuNode parentNode = getMenuNodeByID(menuNode.getParentNodeID());
-        parentNode.removeSubNode(menuNode);
+        parentNode.removeChildMenuNode(menuNode);
         // 更新兄弟节点index
         save(parentNode);
         // 删除自己

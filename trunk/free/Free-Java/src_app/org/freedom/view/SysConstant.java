@@ -13,4 +13,6 @@ public class SysConstant {
     public static String WEB_PROJECT_NAME = "";
     public final static String ROLE_TREE_ROOT_NAME = "角色树更节点";
     public final static String MENU_NODE_TREE_ROOT_NAME = "系统菜单树根节点";
+    // PostgreSQL DB
+    public final static String DB_SYS_DATE_YMD = "to_char(now(), 'yyyymmdd')";
 }
