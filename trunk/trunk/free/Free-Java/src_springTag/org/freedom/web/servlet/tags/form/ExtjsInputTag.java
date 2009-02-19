@@ -13,7 +13,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsInputTag extends AbstractExtjsTag {
+public class ExtjsInputTag extends AbstractExtjsInputTag {
 
     private static final long serialVersionUID = 744707304978648098L;
 

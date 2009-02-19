@@ -12,7 +12,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsCalendarTag extends AbstractExtjsTag {
+public class ExtjsCalendarTag extends AbstractExtjsInputTag {
 
     private static final long serialVersionUID = 2368410327414870091L;
     public static final String FORMAT_ATTRIBUTE = "format";
