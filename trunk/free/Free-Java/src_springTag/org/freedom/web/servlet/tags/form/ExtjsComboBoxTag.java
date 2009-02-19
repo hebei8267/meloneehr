@@ -22,7 +22,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsComboBoxTag extends AbstractExtjsTag {
+public class ExtjsComboBoxTag extends AbstractExtjsInputTag {
 
     private static final long serialVersionUID = 1386239435396539631L;
     public static final String LIST_VALUE_PAGE_ATTRIBUTE = SelectTag.LIST_VALUE_PAGE_ATTRIBUTE;

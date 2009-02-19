@@ -12,7 +12,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsTextAreaTag extends AbstractExtjsTag{
+public class ExtjsTextAreaTag extends AbstractExtjsInputTag{
 
     /**
      * 

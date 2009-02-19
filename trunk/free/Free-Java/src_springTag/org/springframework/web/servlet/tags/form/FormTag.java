@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-import org.freedom.web.servlet.tags.form.AbstractExtjsTag;
+import org.freedom.web.servlet.tags.form.AbstractExtjsInputTag;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.core.Conventions;
 import org.springframework.util.ObjectUtils;
@@ -409,7 +409,7 @@ public class FormTag extends AbstractHtmlElementTag {
      */
     @SuppressWarnings("unchecked")
     private void writerJavascript() throws JspException{
-        List<String> scriptList = (List<String>) this.pageContext.getAttribute(AbstractExtjsTag.EXTJS_COMPONENT_SCRIPT_NAME);
+        List<String> scriptList = (List<String>) this.pageContext.getAttribute(AbstractExtjsInputTag.EXTJS_COMPONENT_SCRIPT_NAME);
         if (scriptList != null) {
             StringBuffer _buf = new StringBuffer();
             for (String _script : scriptList) {
@@ -420,7 +420,7 @@ public class FormTag extends AbstractHtmlElementTag {
             
             tagWriter.writerExtjsScript(_buf.toString());
         }
-        this.pageContext.removeAttribute(AbstractExtjsTag.EXTJS_COMPONENT_SCRIPT_NAME, PageContext.PAGE_SCOPE);
+        this.pageContext.removeAttribute(AbstractExtjsInputTag.EXTJS_COMPONENT_SCRIPT_NAME, PageContext.PAGE_SCOPE);
     }
     /**
      * Clears the stored {@link TagWriter}.
