@@ -88,6 +88,8 @@
 			<list>
 				<value>org.freedom.view.action.normal.security.Security001NormalViewAction</value>
 				<value>org.freedom.view.action.ajax.security.Security001AjaxViewAction</value>
+				<value>org.freedom.view.action.normal.security.TestNormalViewAction</value>
+				<value>org.freedom.view.action.ajax.security.TestAjaxViewAction</value>
 			</list>
 		</property>
 		<property name="sessionTimeOut">
