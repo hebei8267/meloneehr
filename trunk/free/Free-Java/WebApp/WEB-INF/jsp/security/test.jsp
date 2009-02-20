@@ -23,7 +23,7 @@
         <form:form id="testForm" method="post" modelAttribute="testViewObject">
         <table>
             <tr>
-                <td width="30" rowspan="5"></td>
+                <td width="30" rowspan="6"></td>
                 <td>
                     <extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
                 </td>
@@ -47,6 +47,12 @@
             <tr>
                 <td>
                     <extjs:textArea path="textArea" minLength="8" maxLength="8" allowBlank="false"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:tree path="myTree" width="300" height="300" rootNodeId="ROOT" dataUrl="index1.ajax"
+                    title="1234567" useArrows="false" allExpand="false"/>
                 </td>
             </tr>
         </table>
