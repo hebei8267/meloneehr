@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since JDK1.5
  */
 @Controller
-public class test extends AbstractViewAction {
+public class TestNormalViewAction extends AbstractViewAction {
     /**
      * 
      */
@@ -29,7 +29,9 @@ public class test extends AbstractViewAction {
     private String calendar;
     private String textArea;
 
-    public test() {
+    private String myTree = "111";
+
+    public TestNormalViewAction() {
         nodeTypeList.add(new LabelValueBean("<空>", ""));
         nodeTypeList.add(new LabelValueBean("1", "11"));
         nodeTypeList.add(new LabelValueBean("2", "22"));
@@ -95,5 +97,13 @@ public class test extends AbstractViewAction {
 
     public void setTextArea(String textArea) {
         this.textArea = textArea;
+    }
+
+    public String getMyTree() {
+        return myTree;
+    }
+
+    public void setMyTree(String myTree) {
+        this.myTree = myTree;
     }
 }
