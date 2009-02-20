@@ -5,11 +5,14 @@ package org.freedom.web.servlet.tags.tree;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.commons.lang.StringUtils;
 import org.freedom.view.SysConstant;
 import org.freedom.web.servlet.tags.AbstractExtjsTag;
 import org.springframework.web.servlet.tags.form.TagWriter;
 
 /**
+ * 普通树结构
+ * 
  * @author 何贝
  * @since JDK1.5
  */
@@ -28,6 +31,8 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     public static final String ROOT_ICON_ATTRIBUTE = "rootIcon";
     public static final String ALL_EXPAND_ATTRIBUTE = "allExpand";
 
+    public static final String CLICK_EVENT = "click";
+
     protected String title;
     protected String useArrows = "true";
     protected String rootVisible = "true";
@@ -35,6 +40,8 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     protected String dataUrl;
     protected String rootIcon = "images/root.gif";
     protected String allExpand;
+
+    protected String click;
 
     /*
      * (non-Javadoc)
@@ -88,7 +95,7 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(" } ");
         _sbuf.append(" }) ");
         _sbuf.append(" }); ");
-        //渲染树结构
+        // 渲染树结构
         _sbuf.append(" " + resolveId() + "ExtTree.setRootNode(" + resolveId() + "ExtTreeRoot); ");
         _sbuf.append(" " + resolveId() + "ExtTree.render(); ");
         // 根节点展开
@@ -97,7 +104,10 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         if (Boolean.TRUE.toString().equals(getAllExpand())) {
             _sbuf.append(" " + resolveId() + "ExtTree.expandAll(); ");
         }
-
+        // 树节点选中事件
+        if (StringUtils.isNotBlank(click)) {
+            _sbuf.append(" " + resolveId() + "ExtTree.on('click'," + getClick() + "); ");
+        }
         return _sbuf.toString();
     }
 
@@ -155,6 +165,14 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
 
     public void setAllExpand(String allExpand) {
         this.allExpand = allExpand;
+    }
+
+    public String getClick() {
+        return click;
+    }
+
+    public void setClick(String click) {
+        this.click = click;
     }
 
 }
