@@ -28,8 +28,7 @@
                     autoScroll: true,
                     rootVisible: true,
                     height: 300,
-                    width: 300,
-                    loader: new Ext.tree.TreeLoader()
+                    width: 300
                 });
                 
                 var root = new Ext.tree.AsyncTreeNode({
