@@ -16,7 +16,7 @@ public class ExtjsCalendarTag extends AbstractExtjsInputTag {
 
     private static final long serialVersionUID = 2368410327414870091L;
     public static final String FORMAT_ATTRIBUTE = "format";
-    private String format;
+    protected String format;
 
     /*
      * (non-Javadoc)
