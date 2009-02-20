@@ -210,7 +210,7 @@ public class ExtjsComboBoxTag extends AbstractExtjsInputTag {
     }
 
     public static final String EDIT_ABLE_ATTRIBUTE = "editable";
-    private String editable = "false";
+    protected String editable = "false";
 
     public String getEditable() {
         return editable;

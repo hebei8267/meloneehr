@@ -12,14 +12,13 @@ import org.springframework.web.servlet.tags.form.TagWriter;
  * @author 何贝
  * @since JDK1.5
  */
-public class ExtjsTextAreaTag extends AbstractExtjsInputTag{
+public class ExtjsTextAreaTag extends AbstractExtjsInputTag {
 
     /**
      * 
      */
     private static final long serialVersionUID = -7575776274386241317L;
-    public static final String HEIGHT_ATTRIBUTE = "height";
-    private String height;
+
     @Override
     protected String createComponentScript() throws JspException {
         StringBuffer _sbuf = new StringBuffer();
@@ -46,15 +45,12 @@ public class ExtjsTextAreaTag extends AbstractExtjsInputTag{
         return SKIP_BODY;
     }
 
+    @Override
     public String getHeight() {
         if (StringUtils.isEmpty(height)) {
             return "100";
         }
         return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
     }
 
 }
