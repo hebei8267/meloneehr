@@ -16,6 +16,10 @@
             alert($F('calendar'))
             return "ssss";
         }
+        
+        function showNode(node, event){
+        	alert(node.id)
+        }
         -->
         </script>
     </head>
@@ -52,7 +56,7 @@
             <tr>
                 <td>
                     <extjs:tree path="myTree" width="300" height="300" rootNodeId="ROOT" dataUrl="index1.ajax"
-                    title="1234567" useArrows="false" allExpand="false"/>
+                    title="1234567" useArrows="false" allExpand="false" click="showNode"/>
                 </td>
             </tr>
         </table>
