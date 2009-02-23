@@ -30,6 +30,8 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     public static final String DATA_URL_ATTRIBUTE = "dataUrl";
     public static final String ROOT_ICON_ATTRIBUTE = "rootIcon";
     public static final String ALL_EXPAND_ATTRIBUTE = "allExpand";
+    public static final String BASE_PARAMS_ATTRIBUTE = "baseParams";
+    public static final String IS_CHECK_TREE_ATTRIBUTE = "isCheckTree";
 
     public static final String CLICK_EVENT = "click";
 
@@ -40,6 +42,8 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     protected String dataUrl;
     protected String rootIcon = "images/root.gif";
     protected String allExpand;
+    protected String baseParams;
+    protected String isCheckTree = "false";
 
     protected String click;
 
@@ -75,6 +79,11 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(getOptionalAttributeScript(ROOT_VISIBLE_ATTRIBUTE, getRootVisible(), false));
         _sbuf.append(getOptionalAttributeScript(WIDTH_ATTRIBUTE, getWidth(), false));
         _sbuf.append(getOptionalAttributeScript(HEIGHT_ATTRIBUTE, getHeight(), false));
+        // checkBoxTree参数 TODO hebei
+        if (StringUtils.isNotBlank(isCheckTree) && Boolean.TRUE.toString().equals(isCheckTree)) {
+            _sbuf.append(" checkModel: 'cascade', ");// 对树的级联多选
+            _sbuf.append(" onlyLeafCheckable: false, ");// 对树所有结点都可选
+        }
         _sbuf.append(" animate: true, ");
         _sbuf.append(" enableDD: false, ");
         _sbuf.append(" containerScroll: true, ");
@@ -90,6 +99,14 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(" loader: new Ext.tree.TreeLoader({ ");
         _sbuf.append(" dataUrl:'" + SysConstant.WEB_PROJECT_NAME + "/" + getDataUrl() + "', ");
         _sbuf.append(" requestMethod : 'post', ");
+        // 树节点载入参数对象
+        if (StringUtils.isNotBlank(baseParams)) {
+            _sbuf.append(" baseParams : " + getBaseParams() + ", ");
+        }
+        // checkBoxTree参数
+        if (StringUtils.isNotBlank(isCheckTree) && Boolean.TRUE.toString().equals(isCheckTree)) {
+            _sbuf.append(" baseAttrs: { uiProvider: Ext.ux.TreeCheckNodeUI }, ");
+        }
         _sbuf.append(" listeners : { ");
         _sbuf.append(" loadexception : defaultAjaxRequestFailure ");
         _sbuf.append(" } ");
@@ -173,6 +190,22 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
 
     public void setClick(String click) {
         this.click = click;
+    }
+
+    public String getBaseParams() {
+        return baseParams;
+    }
+
+    public void setBaseParams(String baseParams) {
+        this.baseParams = baseParams;
+    }
+
+    public String getIsCheckTree() {
+        return isCheckTree;
+    }
+
+    public void setIsCheckTree(String isCheckTree) {
+        this.isCheckTree = isCheckTree;
     }
 
 }
