@@ -9,6 +9,8 @@
     <head>
         <%@ include file="/WEB-INF/jsp/base/pageHeader.jsp" %>
         <%@ include file="/WEB-INF/jsp/base/commonCssJs.jsp" %>
+        <!-- ExtJS CheckBox Tree -->
+        <script type="text/javascript" src="${pageContext.request.contextPath}/ext-lib/chkTree/TreeCheckNodeUI.js"></script>
         <script type="text/javascript">
         <!--
         function xx(){
@@ -56,7 +58,8 @@
             <tr>
                 <td>
                     <extjs:tree path="myTree" width="300" height="300" rootNodeId="ROOT" dataUrl="index1.ajax"
-                    title="1234567" useArrows="false" allExpand="false" click="showNode"/>
+                    title="1234567" useArrows="false" allExpand="false" click="showNode" baseParams="{aaa:'123'}"
+                    isCheckTree ="true"/>
                 </td>
             </tr>
         </table>
