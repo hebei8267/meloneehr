@@ -16,6 +16,8 @@ import org.freedom.entity.ui.MenuNode;
 import org.freedom.services.permit.IMenuNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -33,7 +35,9 @@ public class TestAjaxViewAction extends AbstractViewAction {
     private IMenuNodeService menuNodeService;
 
     @RequestMapping("/index1.ajax")
-    public void getAllMenuInfoTreeAction(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getAllMenuInfoTreeAction(HttpServletRequest request, HttpServletResponse response) throws IOException,
+            ServletRequestBindingException {
+        System.out.println(ServletRequestUtils.getStringParameter(request, "aaa"));
         // 取得所有菜单结点树信息(根节点开始)不包含权限校验
         TreeNode rootNode = menuNodeService.getMenuNodeInfoTreeService(MenuNode.MENU_NODE_TREE_ROOT_ID);
 
