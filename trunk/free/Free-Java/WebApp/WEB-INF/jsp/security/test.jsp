@@ -29,7 +29,6 @@
         <form:form id="testForm" method="post" modelAttribute="testViewObject">
         <table>
             <tr>
-                <td width="30" rowspan="6"></td>
                 <td>
                     <extjs:input path="input" minLength="8" maxLength="8" allowBlank="false" />
                 </td>
@@ -57,9 +56,31 @@
             </tr>
             <tr>
                 <td>
-                    <extjs:tree path="myTree" width="300" height="300" rootNodeId="ROOT" dataUrl="index1.ajax"
-                    title="1234567" useArrows="false" allExpand="false" click="showNode" baseParams="{aaa:'123'}"
+                    <extjs:tree path="myTree" width="200" height="200" rootNodeId="ROOT" dataUrl="index1.ajax"
+                    title="111" useArrows="false" allExpand="false" click="showNode" baseParams="{aaa:'111-1'}"
                     isCheckTree ="true"/>
+                </td>
+                <td>
+                    <extjs:tree path="myTree2" width="200" height="200" rootNodeId="ROOT" dataUrl="index1.ajax"
+                    title="222" useArrows="true" allExpand="true" click="showNode" baseParams="{aaa:'222-2'}"
+          			/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <extjs:grid path="myGrid" dataUrl="index2.ajax" width="200" height="200"
+                    title="111">
+                    	<extjs:gridColumn id="name" header="名称" align="right" sortable="true"/>
+                    	<extjs:gridColumn id="id" header="编号" />
+                    </extjs:grid>
+                </td>
+                <td>
+                    <extjs:grid path="myGrid2" dataUrl="index2.ajax" width="200" height="200" 
+                    title="222" hasRowNumberer="true">
+                    	
+                    	<extjs:gridColumn id="id" header="编号" width="40"/>
+                    	<extjs:gridColumn id="name" header="名称" align="right"/>
+                    </extjs:grid>
                 </td>
             </tr>
         </table>
