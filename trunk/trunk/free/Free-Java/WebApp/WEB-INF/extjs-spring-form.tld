@@ -430,4 +430,101 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	
+	<!-- <extjs:grid/> tag -->
+	<tag>
+		<name>grid</name>
+		<tag-class>org.freedom.web.servlet.tags.grid.ExtjsGridTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Renders an HTML 'input' tag with type 'text' using the bound value.</description>
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<attribute>
+			<name>dataUrl</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<!-- 以上为必填内容 -->
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>stripeRows</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>hasRowNumberer</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+	</tag>
+	<!-- <extjs:gridColumn/> -->
+	<tag>
+		<name>gridColumn</name>
+		<tag-class>org.freedom.web.servlet.tags.grid.ExtjsGridColumnTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+	      	<name>id</name>
+	      	<required>true</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>header</name>
+	      	<required>true</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <!-- 以上为必填内容 -->
+	    <attribute>
+	      	<name>sortable</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>dataIndex</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>width</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>align</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	</tag>
 </taglib>
