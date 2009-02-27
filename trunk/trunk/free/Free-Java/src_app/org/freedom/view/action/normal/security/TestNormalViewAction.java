@@ -30,6 +30,9 @@ public class TestNormalViewAction extends AbstractViewAction {
     private String textArea;
 
     private String myTree = "111";
+    private String myTree2 = "222";
+    private String myGrid;
+    private String myGrid2;
 
     public TestNormalViewAction() {
         nodeTypeList.add(new LabelValueBean("<空>", ""));
@@ -105,5 +108,29 @@ public class TestNormalViewAction extends AbstractViewAction {
 
     public void setMyTree(String myTree) {
         this.myTree = myTree;
+    }
+
+    public String getMyGrid() {
+        return myGrid;
+    }
+
+    public void setMyGrid(String myGrid) {
+        this.myGrid = myGrid;
+    }
+
+    public String getMyTree2() {
+        return myTree2;
+    }
+
+    public void setMyTree2(String myTree2) {
+        this.myTree2 = myTree2;
+    }
+
+    public String getMyGrid2() {
+        return myGrid2;
+    }
+
+    public void setMyGrid2(String myGrid2) {
+        this.myGrid2 = myGrid2;
     }
 }
