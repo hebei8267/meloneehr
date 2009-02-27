@@ -40,7 +40,7 @@ public class CountrySetting001AjaxViewAction extends AbstractViewAction {
     @Autowired
     private ICountryService countryService;
 
-    @RequestMapping("/dictionary/common/countrySetting/001/getAllCountryInfoListAction")
+    @RequestMapping("/dictionary/common/countrySetting/001/getAllCountryInfoListAction.ajax")
     public void getAllCountryInfoListAction(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Country> countryList = countryService.getAllCountryInfoListService();
 
@@ -53,7 +53,7 @@ public class CountrySetting001AjaxViewAction extends AbstractViewAction {
         response.getWriter().write(jSONObject.toString());
     }
 
-    @RequestMapping("/dictionary/common/countrySetting/001/updateCountryInfoAction")
+    @RequestMapping("/dictionary/common/countrySetting/001/updateCountryInfoAction.ajax")
     public void updateCountryInfoAction(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException,
             InvocationTargetException, IOException, ServletRequestBindingException {
         Country country = new Country();

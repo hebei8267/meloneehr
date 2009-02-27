@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.freedom.core.view.action.AbstractViewAction;
 import org.freedom.core.view.vo.ajax.JosnViewObject;
 import org.freedom.view.SysConstant;
@@ -52,6 +53,10 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
      * java.lang.Object)
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 第一次请求时设置web程序名称
+        if (StringUtils.isBlank(SysConstant.WEB_PROJECT_NAME)) {
+            SysConstant.WEB_PROJECT_NAME = request.getContextPath();
+        }
         return notLoginCheck(request, response, handler);
     }
 
