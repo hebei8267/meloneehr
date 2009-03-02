@@ -17,4 +17,5 @@ public class SysConstant {
     public final static String DB_SYS_DATE_YMD = "to_char(now(), 'yyyymmdd')";
     // TODO hebei 公共js修改后,该处也要修改
     public final static String EXTJS_GRID_AJAX_LOAD_EXCEPTION = " function() { showMessageBox(getErrorMsg_AM001()); } ";
+    public final static String EXTJS_GRID_ROW_NUMBERER_HEADER = "序号";
 }
