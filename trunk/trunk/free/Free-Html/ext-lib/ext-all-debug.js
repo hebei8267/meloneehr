@@ -33391,7 +33391,9 @@ Ext.extend(Ext.grid.RowSelectionModel, Ext.grid.AbstractSelectionModel,  {
 
     
     selectRow : function(index, keepExisting, preventViewNotify){
-        if(this.locked || (index < 0 || index >= this.grid.store.getCount()) || this.isSelected(index)) return;
+//TODO hebei添加数据网格全选后,可在选择
+    	if(this.locked || (index < 0 || index >= this.grid.store.getCount())) return;
+//      if(this.locked || (index < 0 || index >= this.grid.store.getCount()) || this.isSelected(index)) return;
         var r = this.grid.store.getAt(index);
         if(r && this.fireEvent("beforerowselect", this, index, keepExisting, r) !== false){
             if(!keepExisting || this.singleSelect){
