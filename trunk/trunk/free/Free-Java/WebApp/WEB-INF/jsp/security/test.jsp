@@ -64,12 +64,12 @@
             <tr>
                 <td>
                     <extjs:tree path="myTree" width="200" height="200" rootNodeId="ROOT" dataUrl="index1.ajax"
-                    title="111" useArrows="false" allExpand="false" click="showNode" baseParams="{aaa:'111-1'}"
+                    title="111" useArrows="false" allExpand="false" clickFn="showNode" baseParams="{aaa:'111-1'}"
                     isCheckTree ="true"/>
                 </td>
                 <td>
                     <extjs:tree path="myTree2" width="200" height="200" rootNodeId="ROOT" dataUrl="index1.ajax"
-                    title="222" useArrows="true" allExpand="true" click="showNode" baseParams="{aaa:'222-2'}"
+                    title="222" useArrows="true" allExpand="true" clickFn="showNode" baseParams="{aaa:'222-2'}"
           			/>
                 </td>
             </tr>
@@ -77,8 +77,8 @@
                 <td>
                     <extjs:grid path="myGrid" dataUrl="index2.ajax" width="200" height="200"
                     title="111">
-                    	<extjs:gridColumn id="name" header="名称" align="right" sortable="true"/>
-                    	<extjs:gridColumn id="id" header="编号" />
+                    	<extjs:gridColumn id="name" header="编号" align="right" sortable="true"/>
+                    	<extjs:gridColumn id="id" header="名称" />
                     </extjs:grid>
                 </td>
                 <td>
