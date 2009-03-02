@@ -29,11 +29,22 @@ public class ExtjsGridTag extends AbstractExtjsTag {
 
     public static final String LIST_VALUE_PAGE_ATTRIBUTE = "org.freedom.web.servlet.tags.grid.ExtjsGridTag.listValue";
     public static final String GRID_COLUMN_PAGE_ATTRIBUTE = "org.freedom.web.servlet.tags.grid.ExtjsGridTag.gridColumn";
-
+    /** 数据url */
     protected String dataUrl;
+    /** 数据斑马栏 */
     protected String stripeRows = "true";
+    /** 表格title */
     protected String title;
+    /** 显示自动编号栏 */
     protected String hasRowNumberer = "false";
+    /** 是否为单选模式 */
+    protected String singleSelect = "true";
+    /** 选中记录js函数 */
+    protected String rowselectFn;
+    /** 放弃选择记录js函数 */
+    protected String rowdeselectFn;
+    /** 选中记录checkbox栏 */
+    protected String checkboxSelection = "false";
 
     @Override
     protected int writeTagContent(TagWriter tagWriter) throws JspException {
@@ -71,6 +82,8 @@ public class ExtjsGridTag extends AbstractExtjsTag {
         createExtDataRecordScript(gridColumnInfoList, _sbuf);
         // 创建Ext.data.Store对象
         createDataStoreScript(_sbuf);
+        // 创建Ext.grid.CheckboxSelectionModel对象
+        createExtGridSelectionModel(_sbuf);
         // 创建Ext.grid.GridPanel对象
         createExtGridPanel(gridColumnInfoList, _sbuf);
         // 清理gridColumn信息
@@ -130,6 +143,32 @@ public class ExtjsGridTag extends AbstractExtjsTag {
     }
 
     /**
+     * 创建Ext.grid.CheckboxSelectionModel对象
+     * 
+     * @param _sbuf
+     * @throws JspException
+     */
+    private void createExtGridSelectionModel(StringBuffer _sbuf) throws JspException {
+        _sbuf.append(" var " + resolveId() + "SelectionModel = new Ext.grid.CheckboxSelectionModel({ ");
+        _sbuf.append(" header : '', ");
+        _sbuf.append(" singleSelect: " + getSingleSelect() + ", ");
+        _sbuf.append(" listeners: { ");
+        // 记录选中
+        if (StringUtils.isNotBlank(getRowselectFn())) {
+            _sbuf.append(" rowselect: " + getRowselectFn());
+        }
+        // 记录为选中
+        if (StringUtils.isNotBlank(getRowdeselectFn())) {
+            if (StringUtils.isNotBlank(getRowselectFn())) {
+                _sbuf.append(",");
+            }
+            _sbuf.append(" rowdeselect: " + getRowdeselectFn());
+        }
+        _sbuf.append(" } ");
+        _sbuf.append(" }); ");
+    }
+
+    /**
      * 创建Ext.grid.GridPanel对象
      * 
      * @param gridColumnInfoList
@@ -143,11 +182,15 @@ public class ExtjsGridTag extends AbstractExtjsTag {
         _sbuf.append(" store : " + resolveId() + "Store, ");
         _sbuf.append(" id : '" + resolveId() + "', ");
         _sbuf.append(" el : '" + resolveId() + "Div', ");
-        // sm : sm,
+        _sbuf.append(" sm : " + resolveId() + "SelectionModel,");
         _sbuf.append(" columns : [ ");
-        // sm,
+        // 是否显示选中记录checkbox栏
+        if (StringUtils.isNotBlank(checkboxSelection) && Boolean.TRUE.toString().equals(checkboxSelection)) {
+            _sbuf.append(resolveId() + "SelectionModel, ");
+        }
+        // 是否显示自动编号栏
         if (StringUtils.isNotBlank(hasRowNumberer) && Boolean.TRUE.toString().equals(hasRowNumberer)) {
-            _sbuf.append(" new Ext.grid.RowNumberer({ header : '序号', width : 35 }),");
+            _sbuf.append(" new Ext.grid.RowNumberer({ header : '" + SysConstant.EXTJS_GRID_ROW_NUMBERER_HEADER + "', width : 35 }),");
         }
 
         for (Iterator<GridColumnInfo> iterator = gridColumnInfoList.iterator(); iterator.hasNext();) {
@@ -227,6 +270,38 @@ public class ExtjsGridTag extends AbstractExtjsTag {
 
     public void setHasRowNumberer(String hasRowNumberer) {
         this.hasRowNumberer = hasRowNumberer;
+    }
+
+    public String getSingleSelect() {
+        return singleSelect;
+    }
+
+    public void setSingleSelect(String singleSelect) {
+        this.singleSelect = singleSelect;
+    }
+
+    public String getRowselectFn() {
+        return rowselectFn;
+    }
+
+    public void setRowselectFn(String rowselectFn) {
+        this.rowselectFn = rowselectFn;
+    }
+
+    public String getRowdeselectFn() {
+        return rowdeselectFn;
+    }
+
+    public void setRowdeselectFn(String rowdeselectFn) {
+        this.rowdeselectFn = rowdeselectFn;
+    }
+
+    public String getCheckboxSelection() {
+        return checkboxSelection;
+    }
+
+    public void setCheckboxSelection(String checkboxSelection) {
+        this.checkboxSelection = checkboxSelection;
     }
 
 }
