@@ -483,7 +483,33 @@
 			<rtexprvalue>true</rtexprvalue>
 			<description>HTML Standard Attribute</description>
 		</attribute>
+		<attribute>
+	      	<name>singleSelect</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>rowselectFn</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>rowdeselectFn</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
+	    <attribute>
+	      	<name>checkboxSelection</name>
+	      	<required>false</required>
+	      	<rtexprvalue>true</rtexprvalue>
+	      	<description>HTML Standard Attribute</description>
+	    </attribute>
 	</tag>
+	
+	
 	<!-- <extjs:gridColumn/> -->
 	<tag>
 		<name>gridColumn</name>
@@ -526,5 +552,6 @@
 	      	<rtexprvalue>true</rtexprvalue>
 	      	<description>HTML Standard Attribute</description>
 	    </attribute>
+	    
 	</tag>
 </taglib>
