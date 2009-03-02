@@ -190,7 +190,8 @@ public class ExtjsGridTag extends AbstractExtjsTag {
         }
         // 是否显示自动编号栏
         if (StringUtils.isNotBlank(hasRowNumberer) && Boolean.TRUE.toString().equals(hasRowNumberer)) {
-            _sbuf.append(" new Ext.grid.RowNumberer({ header : '" + SysConstant.EXTJS_GRID_ROW_NUMBERER_HEADER + "', width : 35 }),");
+            _sbuf.append(" new Ext.grid.RowNumberer({ header : '" + SysConstant.EXTJS_GRID_ROW_NUMBERER_HEADER
+                    + "', width : 35 }),");
         }
 
         for (Iterator<GridColumnInfo> iterator = gridColumnInfoList.iterator(); iterator.hasNext();) {
@@ -237,6 +238,18 @@ public class ExtjsGridTag extends AbstractExtjsTag {
 
         _sbuf.append(resolveId() + "Panel.render(); ");
         _sbuf.append(resolveId() + "Store.load(); ");
+    }
+
+    @Override
+    public String getWidth() {
+        Assert.hasText(dataUrl, "'width' must not be empty");
+        return width;
+    }
+
+    @Override
+    public String getHeight() {
+        Assert.hasText(dataUrl, "'height' must not be empty");
+        return height;
     }
 
     public String getDataUrl() {

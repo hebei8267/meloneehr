@@ -8,6 +8,7 @@ import javax.servlet.jsp.JspException;
 import org.apache.commons.lang.StringUtils;
 import org.freedom.view.SysConstant;
 import org.freedom.web.servlet.tags.AbstractExtjsTag;
+import org.springframework.util.Assert;
 import org.springframework.web.servlet.tags.form.TagWriter;
 
 /**
@@ -44,8 +45,23 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     protected String allExpand;
     protected String baseParams;
     protected String isCheckTree = "false";
+    /**
+     * 节点级联模式
+     * 
+     * 'cascade'和'parentCascade'和'childCascade'
+     * 
+     * 默认--'cascade'
+     */
+    protected String checkModel = "cascade";
+    /**
+     * 节点选中模式 默认--所有树结点都可选
+     */
+    protected String onlyLeafCheckable = "false";
 
-    protected String click;
+    /**
+     * 节点选择事件js函数
+     */
+    protected String clickFn;
 
     /*
      * (non-Javadoc)
@@ -64,13 +80,12 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     }
 
     /**
-     * @return
+     * 生产树结构对象
+     * 
+     * @param _sbuf
      * @throws JspException
      */
-    @Override
-    protected String createComponentScript() throws JspException {
-        StringBuffer _sbuf = new StringBuffer();
-        // 生产树结构对象
+    private void createExtTreePanel(StringBuffer _sbuf) throws JspException {
         _sbuf.append(" var " + resolveId() + "ExtTree = new Ext.tree.TreePanel({ ");
         _sbuf.append(" el: '" + resolveId() + "Div', ");
         _sbuf.append(" id: '" + resolveId() + "', ");
@@ -79,10 +94,10 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(getOptionalAttributeScript(ROOT_VISIBLE_ATTRIBUTE, getRootVisible(), false));
         _sbuf.append(getOptionalAttributeScript(WIDTH_ATTRIBUTE, getWidth(), false));
         _sbuf.append(getOptionalAttributeScript(HEIGHT_ATTRIBUTE, getHeight(), false));
-        // checkBoxTree参数 TODO hebei
+        // checkBoxTree特有参数
         if (StringUtils.isNotBlank(isCheckTree) && Boolean.TRUE.toString().equals(isCheckTree)) {
-            _sbuf.append(" checkModel: 'cascade', ");// 对树的级联多选
-            _sbuf.append(" onlyLeafCheckable: false, ");// 对树所有结点都可选
+            _sbuf.append(" checkModel: '" + getCheckModel() + "', ");
+            _sbuf.append(" onlyLeafCheckable: " + getOnlyLeafCheckable() + ", ");
         }
         _sbuf.append(" animate: true, ");
         _sbuf.append(" enableDD: false, ");
@@ -90,7 +105,15 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(" bodyBorder: false, ");
         _sbuf.append(" autoScroll: true ");
         _sbuf.append(" }); ");
-        // 生成根节点
+    }
+
+    /**
+     * 生成根节点
+     * 
+     * @param _sbuf
+     * @throws JspException
+     */
+    private void createExtTreeRootNode(StringBuffer _sbuf) throws JspException {
         _sbuf.append(" var " + resolveId() + "ExtTreeRoot = new Ext.tree.AsyncTreeNode({ ");
         _sbuf.append(" draggable: false, ");
         _sbuf.append(" id: '" + getRootNodeId() + "', ");
@@ -112,6 +135,20 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         _sbuf.append(" } ");
         _sbuf.append(" }) ");
         _sbuf.append(" }); ");
+    }
+
+    /**
+     * @return
+     * @throws JspException
+     */
+    @Override
+    protected String createComponentScript() throws JspException {
+        StringBuffer _sbuf = new StringBuffer();
+        // 生产树结构对象
+        createExtTreePanel(_sbuf);
+        // 生成根节点
+        createExtTreeRootNode(_sbuf);
+
         // 渲染树结构
         _sbuf.append(" " + resolveId() + "ExtTree.setRootNode(" + resolveId() + "ExtTreeRoot); ");
         _sbuf.append(" " + resolveId() + "ExtTree.render(); ");
@@ -122,10 +159,22 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
             _sbuf.append(" " + resolveId() + "ExtTree.expandAll(); ");
         }
         // 树节点选中事件
-        if (StringUtils.isNotBlank(click)) {
-            _sbuf.append(" " + resolveId() + "ExtTree.on('click'," + getClick() + "); ");
+        if (StringUtils.isNotBlank(clickFn)) {
+            _sbuf.append(" " + resolveId() + "ExtTree.on('click'," + getClickFn() + "); ");
         }
         return _sbuf.toString();
+    }
+
+    @Override
+    public String getWidth() {
+        Assert.hasText(dataUrl, "'width' must not be empty");
+        return width;
+    }
+
+    @Override
+    public String getHeight() {
+        Assert.hasText(dataUrl, "'height' must not be empty");
+        return height;
     }
 
     public String getTitle() {
@@ -153,6 +202,7 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     }
 
     public String getRootNodeId() {
+        Assert.hasText(dataUrl, "'rootNodeId' must not be empty");
         return rootNodeId;
     }
 
@@ -161,6 +211,7 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
     }
 
     public String getDataUrl() {
+        Assert.hasText(dataUrl, "'dataUrl' must not be empty");
         return dataUrl;
     }
 
@@ -184,12 +235,12 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
         this.allExpand = allExpand;
     }
 
-    public String getClick() {
-        return click;
+    public String getClickFn() {
+        return clickFn;
     }
 
-    public void setClick(String click) {
-        this.click = click;
+    public void setClickFn(String clickFn) {
+        this.clickFn = clickFn;
     }
 
     public String getBaseParams() {
@@ -206,6 +257,22 @@ public class ExtjsTreeTag extends AbstractExtjsTag {
 
     public void setIsCheckTree(String isCheckTree) {
         this.isCheckTree = isCheckTree;
+    }
+
+    public String getCheckModel() {
+        return checkModel;
+    }
+
+    public void setCheckModel(String checkModel) {
+        this.checkModel = checkModel;
+    }
+
+    public String getOnlyLeafCheckable() {
+        return onlyLeafCheckable;
+    }
+
+    public void setOnlyLeafCheckable(String onlyLeafCheckable) {
+        this.onlyLeafCheckable = onlyLeafCheckable;
     }
 
 }
