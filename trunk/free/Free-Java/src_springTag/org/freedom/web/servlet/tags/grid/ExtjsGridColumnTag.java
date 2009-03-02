@@ -42,11 +42,11 @@ public class ExtjsGridColumnTag extends AbstractFormTag {
     }
 
     public void setId(String id) {
-        Assert.hasText(header, "'header' must not be empty");
         this.id = id;
     }
 
     public String getHeader() {
+        Assert.hasText(header, "'header' must not be empty");
         return header;
     }
 
