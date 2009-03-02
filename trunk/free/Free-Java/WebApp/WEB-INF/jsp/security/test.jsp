@@ -22,6 +22,13 @@
         function showNode(node, event){
         	alert(node.id)
         }
+        
+        function getGridSelectData(sm, row, rec){
+        	alert("Select    "+rec.data.id)
+        }
+        function getGridDeselectData(sm, row, rec){
+        	alert("Deselect    "+rec.data.id)
+        }
         -->
         </script>
     </head>
@@ -76,7 +83,10 @@
                 </td>
                 <td>
                     <extjs:grid path="myGrid2" dataUrl="index2.ajax" width="200" height="200" 
-                    title="222" hasRowNumberer="true">
+                    title="222" hasRowNumberer="true" singleSelect="false" 
+                    rowselectFn="getGridSelectData"
+                    rowdeselectFn="getGridDeselectData"
+                    checkboxSelection="true">
                     	
                     	<extjs:gridColumn id="id" header="编号" width="40"/>
                     	<extjs:gridColumn id="name" header="名称" align="right"/>
