@@ -52,10 +52,19 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 
-	<!-- Spring Frame -->
+	<!--Spring ApplicationContext 载入 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- Spring 刷新Introspector防止内存泄露 
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>-->
+	<!-- 支持session scope的Spring bean -->
+    <listener>                                                        
+         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
 
 	<!-- Spring MVC -->
 	<servlet>
