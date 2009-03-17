@@ -8,7 +8,7 @@ import java.util.List;
 import org.freedom.core.dao.impl.HibernateDaoImpl;
 import org.freedom.entity.ui.MenuNodeType;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 菜单树结点类型Dao
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("menuNodeTypeDao")
+@Repository("menuNodeTypeDao")
 public class MenuNodeTypeDao extends HibernateDaoImpl<MenuNodeType> {
     /**
      * 取得菜单树结点类型列表

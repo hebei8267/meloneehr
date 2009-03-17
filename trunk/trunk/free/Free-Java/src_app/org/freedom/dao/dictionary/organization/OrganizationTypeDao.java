@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.freedom.core.dao.impl.HibernateDaoImpl;
 import org.freedom.entity.dictionary.organization.OrganizationType;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 组织类型Dao
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("organizationTypeDao")
+@Repository("organizationTypeDao")
 public class OrganizationTypeDao extends HibernateDaoImpl<OrganizationType> {
     /**
      * 根据组织类型ID取得组织类型
