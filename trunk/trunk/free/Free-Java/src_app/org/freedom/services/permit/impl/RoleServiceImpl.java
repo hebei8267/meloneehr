@@ -18,7 +18,7 @@ import org.freedom.services.permit.IRoleService;
 import org.freedom.view.domain.system.RoleTreeNodeViewObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * 角色对象相关服务
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("roleService")
+@Service("roleService")
 @Scope("prototype")
 public class RoleServiceImpl implements IRoleService {
     // ---------------------------------------------------------------------------
