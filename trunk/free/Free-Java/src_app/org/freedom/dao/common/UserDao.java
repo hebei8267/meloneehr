@@ -8,7 +8,7 @@ import java.util.List;
 import org.freedom.core.dao.impl.HibernateDaoImpl;
 import org.freedom.entity.common.User;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 登录用户Dao
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("userDao")
+@Repository("userDao")
 public class UserDao extends HibernateDaoImpl<User> {
     /**
      * 根据用户ID取得用户信息

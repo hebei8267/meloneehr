@@ -9,7 +9,7 @@ import org.freedom.core.dao.impl.HibernateDaoImpl;
 import org.freedom.entity.dictionary.common.Country;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 国家Dao
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("countryDao")
+@Repository("countryDao")
 public class CountryDao extends HibernateDaoImpl<Country> {
     @Override
     @SuppressWarnings("unchecked")

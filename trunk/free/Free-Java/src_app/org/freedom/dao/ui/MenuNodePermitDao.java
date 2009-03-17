@@ -14,7 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 角色可访问菜单树结点权限Dao
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("menuNodePermitDao")
+@Repository("menuNodePermitDao")
 public class MenuNodePermitDao extends HibernateDaoImpl<MenuNodePermit> {
     /**
      * 取得用户可访问的菜单树结点权限列表

@@ -13,7 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 登录用户角色Dao
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("roleDao")
+@Repository("roleDao")
 public class RoleDao extends HibernateDaoImpl<Role> {
     /**
      * 根据用户ID取得用户信息
