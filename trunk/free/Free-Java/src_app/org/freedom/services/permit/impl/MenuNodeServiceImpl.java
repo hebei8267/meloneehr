@@ -23,7 +23,7 @@ import org.freedom.view.domain.system.MenuTreeNodeViewObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * 菜单树结点相关服务
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("menuNodeService")
+@Service("menuNodeService")
 @Scope("prototype")
 public class MenuNodeServiceImpl implements IMenuNodeService {
 

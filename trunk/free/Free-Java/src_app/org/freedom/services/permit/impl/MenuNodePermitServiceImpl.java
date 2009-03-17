@@ -16,13 +16,13 @@ import org.freedom.entity.ui.MenuNodeType;
 import org.freedom.services.permit.IMenuNodePermitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 何贝
  * @since JDK1.5
  */
-@Component("menuNodePermitService")
+@Service("menuNodePermitService")
 @Scope("prototype")
 public class MenuNodePermitServiceImpl implements IMenuNodePermitService {
     public boolean checkMenuNodePermitService(String userID, String roleID, String nodeID) {

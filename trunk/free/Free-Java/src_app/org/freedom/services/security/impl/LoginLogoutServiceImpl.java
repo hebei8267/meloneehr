@@ -10,13 +10,13 @@ import org.freedom.entity.common.User;
 import org.freedom.services.security.ILoginLogoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 何贝
  * @since JDK1.5
  */
-@Component("loginLogoutService")
+@Service("loginLogoutService")
 @Scope("prototype")
 public class LoginLogoutServiceImpl implements ILoginLogoutService {
     // ---------------------------------------------------------------------------
