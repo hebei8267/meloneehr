@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import struts.extra.ExtraArrayList;
+
 /**
  * @author 何贝
  * @since JDK1.5
@@ -14,7 +16,7 @@ import org.apache.struts.action.ActionForm;
 public class ListActionForm extends ActionForm {
     private List<DataBean> dataList = new ExtraArrayList<DataBean>() {
         @Override
-        protected DataBean newElement() {
+        protected DataBean newInstance() {
             return new DataBean();
         }
     };

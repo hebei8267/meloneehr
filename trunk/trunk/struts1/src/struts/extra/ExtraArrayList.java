@@ -1,7 +1,7 @@
 /*
  * Copyright 2009 by hebei, All rights reserved.
  */
-package struts.form;
+package struts.extra;
 
 import java.util.ArrayList;
 
@@ -20,12 +20,12 @@ public abstract class ExtraArrayList<T> extends ArrayList<T> {
         if (index >= super.size()) {
             int _index = index - super.size();
             while (_index >= 0) {
-                super.add(newElement());
+                super.add(newInstance());
                 _index--;
             }
         }
         return super.get(index);
     }
 
-    protected abstract T newElement();
+    protected abstract T newInstance();
 }
