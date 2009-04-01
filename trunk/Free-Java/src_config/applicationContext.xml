@@ -101,7 +101,7 @@
 	</bean>
 	
 	<!-- request过滤 -->
-	<bean id="loginUserAccessInterceptor" class="org.freedom.sys.interceptor.LoginUserAccessInterceptor">
+	<bean id="httpAccessInterceptor" class="org.freedom.sys.interceptor.HttpAccessInterceptor">
 		<property name="notLoginAllowAccessClassNameList">
 			<list>
 				<value>org.freedom.view.action.normal.security.Security001NormalViewAction</value>
