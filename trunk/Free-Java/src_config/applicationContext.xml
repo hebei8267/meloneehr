@@ -37,6 +37,7 @@
 		</property>
 	</bean>
 	<!-- Hibernate配置 -->
+	<bean id="entityInterceptor" class="org.freedom.sys.interceptor.HibernateInterceptor"/>
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource">
 			<ref bean="dataSource" />
@@ -45,8 +46,7 @@
 			<bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
 		</property>
 		<property name="entityInterceptor">
-			<bean class="org.freedom.sys.interceptor.HibernateInterceptor"
-				scope="singleton" />
+			<ref bean="entityInterceptor" />
 		</property>
 		<property name="hibernateProperties">
 			<props>
