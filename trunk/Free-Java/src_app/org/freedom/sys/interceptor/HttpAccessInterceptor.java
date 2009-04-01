@@ -24,7 +24,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @author 何贝
  * @since JDK1.5
  */
-public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
+public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * 未登录用户允许访问的Action地址列表
@@ -58,11 +58,11 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.isBlank(SysConstant.WEB_PROJECT_NAME)) {
             SysConstant.WEB_PROJECT_NAME = request.getContextPath();
         }
-        return notLoginCheck(request, response, handler);
+        return loginCheck(request, response, handler);
     }
 
     /**
-     * 未登录用户检查
+     * 用户是否登录检查
      * 
      * @param request HttpServletRequest
      * @param response HttpServletResponse
@@ -70,7 +70,7 @@ public class LoginUserAccessInterceptor extends HandlerInterceptorAdapter {
      * @return
      * @throws IOException
      */
-    private boolean notLoginCheck(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+    private boolean loginCheck(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println(handler.getClass().getName());
         if (notLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
             // 用户登录Action
