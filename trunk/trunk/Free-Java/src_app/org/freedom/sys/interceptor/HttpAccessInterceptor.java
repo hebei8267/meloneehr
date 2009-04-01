@@ -16,8 +16,10 @@ import org.apache.commons.lang.StringUtils;
 import org.freedom.core.utils.WebApplicationContextUtil;
 import org.freedom.sys.SysConstant;
 import org.freedom.sys.modules.UserInfoSessionBean;
+import org.freedom.sys.utils.HttpAccessLogUtils;
 import org.freedom.sys.view.JosnViewObject;
 import org.freedom.view.action.AbstractViewAction;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
@@ -27,7 +29,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @since JDK1.5
  */
 public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
-
     /**
      * 未登录用户允许访问的Action地址列表
      */
@@ -60,6 +61,29 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
         return loginCheck(request, response, handler);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#postHandle(javax.servlet.http.HttpServletRequest,
+     *      javax.servlet.http.HttpServletResponse, java.lang.Object, org.springframework.web.servlet.ModelAndView)
+     */
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
+
+        // 输出日志
+        if (HttpAccessLogUtils.getLogger().isDebugEnabled()) {
+            String url = "Request URI --> " + request.getRequestURI();
+            String processClass = "Process Class Name --> " + handler.getClass().getName();
+            if (modelAndView == null) {
+                HttpAccessLogUtils.debug(url, processClass);
+            } else {
+                String jspName = "Jsp Path --> " + modelAndView.getViewName() + ".jsp";
+                HttpAccessLogUtils.debug(url, processClass, jspName);
+            }
+        }
+    }
+
     /**
      * 用户是否登录检查
      * 
@@ -70,8 +94,6 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
      * @throws IOException
      */
     private boolean loginCheck(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        // TODO sysout
-        System.out.println(handler.getClass().getName());
         if (notLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
             // 请求Action符合未登录用户允许访问的Action地址
             return true;
