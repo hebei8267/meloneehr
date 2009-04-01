@@ -43,12 +43,12 @@ public abstract class AbstractEntityBean extends BaseBean {
 
     /** Update_Timestamp */
     @Basic
-    @Column(name = "UPDATE_DATE", nullable = false)
+    @Column(name = "UPDATE_DATE", nullable = false, updatable = true)
     protected Timestamp updateDate;
 
     /** Update_User_ID */
     @Basic
-    @Column(name = "UPDATE_USER_ID", nullable = false, length = 20)
+    @Column(name = "UPDATE_USER_ID", nullable = false, length = 20, updatable = true)
     protected String updateUserId;
 
     /** Hibernate_Version */
