@@ -14,9 +14,25 @@
 	| owebsite: http://jakarta.apache.org/log4j
 -->
 
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
-	debug="false">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
+	<appender name="HTTP_ACCESS_CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%n===================== %d{yyyy/MM/dd HH:mm:ss} =====================%n%m
+				%n===================== %d{yyyy/MM/dd HH:mm:ss} =====================%n"/>
+		</layout>
+	</appender>
+	<appender name="HTTP_ACCESS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:/HTTP_ACCESS.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM-dd"/>
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy/MM/dd HH:mm:ss} %m%n"/>
+		</layout>
+	</appender>
 	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 
@@ -26,27 +42,16 @@
 		</layout>
 	</appender>
 
+	
+	<category name="org.freedom.sys.utils.HttpAccessLogUtils">
+		<level value="DEBUG"/>
+		<appender-ref ref="HTTP_ACCESS_CONSOLE"/>
+		<!--<appender-ref ref="HTTP_ACCESS"/>-->
+	</category >
 	<!--
-		<category name="org.hibernate">
-		<priority value="DEBUG"/>
-		</category>
-	-->
-
-	<!--
-		<category name="org.jboss.seam">
-		<priority value="DEBUG" />
-		</category>
-	-->
-
-	<!--
-		<category name="org.jboss.kernel">
-		<priority value="DEBUG"/>
-		</category>
-	-->
-
-	<root>
-		<priority value="INFO" />
-		<appender-ref ref="CONSOLE" />
-	</root>
-
+		<root>
+			<priority value="INFO" />
+			<appender-ref ref="CONSOLE" />
+		</root>
+		-->
 </log4j:configuration>
