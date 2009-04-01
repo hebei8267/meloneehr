@@ -6,6 +6,7 @@ package org.freedom.sys.interceptor;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import org.freedom.sys.SysConstant;
 import org.hibernate.EmptyInterceptor;
 
 /**
@@ -26,6 +27,12 @@ public class HibernateInterceptor extends EmptyInterceptor {
     private final String UPDATE_DATE = "updateDate";
 
     private final String UPDATE_USER_ID = "updateUserId";
+
+    private String userId = null;
+
+    public HibernateInterceptor() {
+
+    }
 
     @Override
     public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState, String[] propertyNames,
@@ -63,25 +70,29 @@ public class HibernateInterceptor extends EmptyInterceptor {
                 setCreateDate = true;
             }
             if (UPDATE_DATE.equals(propertyNames[i])) {
-                if (nowTime == null)
+                if (nowTime == null) {
                     nowTime = new Timestamp(System.currentTimeMillis());
+                }
                 state[i] = nowTime;
                 setUpdateDate = true;
             }
             if (CREATE_USER_ID.equals(propertyNames[i])) {
-                // TODO hebei HibernateInterceptor
-                if (state[i] == null) {
-                    System.out.println(CREATE_USER_ID + " Not Set!");
+
+                if (userId == null) {
+                    state[i] = SysConstant.SYS_USER_ID;
+                } else {
+                    state[i] = userId;
                 }
-                state[i] = "sys";
                 setCreateUserID = true;
             }
             if (UPDATE_USER_ID.equals(propertyNames[i])) {
-                // TODO hebei HibernateInterceptor
-                if (state[i] == null) {
-                    System.out.println(UPDATE_USER_ID + " Not Set!");
+
+                if (userId == null) {
+                    state[i] = SysConstant.SYS_USER_ID;
+                } else {
+                    state[i] = userId;
                 }
-                state[i] = "sys";
+
                 setUpdateUserID = true;
             }
             if (setCreateDate && setUpdateDate && setUpdateUserID && setCreateUserID) {
@@ -89,5 +100,19 @@ public class HibernateInterceptor extends EmptyInterceptor {
             }
         }
         throw new IllegalStateException("[" + entity.toString() + "] createDate/updateDate Not Set!");
+    }
+
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

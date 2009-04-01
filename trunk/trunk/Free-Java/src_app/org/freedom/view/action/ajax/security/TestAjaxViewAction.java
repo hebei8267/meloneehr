@@ -44,6 +44,7 @@ public class TestAjaxViewAction extends AbstractViewAction {
     @RequestMapping("/index1.ajax")
     public void getAllMenuInfoTreeAction(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletRequestBindingException {
+        // TODO sysout
         System.out.println(ServletRequestUtils.getStringParameter(request, "aaa"));
         // 取得所有菜单结点树信息(根节点开始)不包含权限校验
         TreeNode rootNode = menuNodeService.getMenuNodeInfoTreeService(MenuNode.MENU_NODE_TREE_ROOT_ID);
@@ -56,7 +57,7 @@ public class TestAjaxViewAction extends AbstractViewAction {
     @RequestMapping("/index2.ajax")
     public void getAllCountryInfoListAction(HttpServletResponse response) throws IOException {
         List<Country> countryList = countryService.getAllCountryInfoListService();
-        
+
         // Json对象格式化
         DataListBean<Country> dataList = new DataListBean<Country>();
         dataList.setDataList(countryList);
@@ -65,7 +66,5 @@ public class TestAjaxViewAction extends AbstractViewAction {
         response.setContentType(RESPONSE_CONTENT_TYPE);
         response.getWriter().write(jSONObject.toString());
     }
-
-  
 
 }

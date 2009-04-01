@@ -23,7 +23,7 @@ public class RoleTreeNode extends TreeNode {
     private String detail;
 
     public RoleTreeNode() {
-
+        // TODO hebei
         super.setIcon(SysConstant.WEB_PROJECT_NAME + "/images/role.gif");
 
     }

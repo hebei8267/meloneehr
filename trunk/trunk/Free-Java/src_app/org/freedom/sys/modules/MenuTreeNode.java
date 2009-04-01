@@ -70,6 +70,7 @@ public class MenuTreeNode extends TreeNode {
      * @param nodeType 节点类型
      */
     public void setUiNodeType(String nodeType) {
+        //TODO hebei
         if (MenuNodeType.NONE_NODE_TYPE.equals(nodeType)) {
             this.uiNodeTypeName = "未定义";
         } else if (MenuNodeType.AREA_NODE_TYPE.equals(nodeType)) {
