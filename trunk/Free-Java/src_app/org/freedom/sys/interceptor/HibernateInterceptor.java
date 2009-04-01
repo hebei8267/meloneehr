@@ -38,18 +38,30 @@ public class HibernateInterceptor extends EmptyInterceptor {
     public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState, String[] propertyNames,
             org.hibernate.type.Type[] types) {
         boolean setUpdateDate = false;
+        boolean setUpdateUser = false;
 
         for (int i = 0; i < propertyNames.length; i++) {
+            if (!setUpdateUser && UPDATE_USER_ID.equals(propertyNames[i])) {
+                if (userId == null) {
+                    currentState[i] = SysConstant.SYS_USER_ID;
+                } else {
+                    currentState[i] = userId;
+                }
+                setUpdateUser = true;
+            }
+
             if (!setUpdateDate && UPDATE_DATE.equals(propertyNames[i])) {
                 currentState[i] = new Timestamp(System.currentTimeMillis());
                 setUpdateDate = true;
             }
+
+            if (setUpdateUser && setUpdateDate) {
+                return true;
+            }
         }
-        if (setUpdateDate) {
-            return true;
-        } else {
-            throw new IllegalStateException("[" + entity.toString() + "] updateDate Not Set!");
-        }
+
+        throw new IllegalStateException("[" + entity.toString() + "] updateDate Not Set!");
+
     }
 
     @Override
@@ -62,21 +74,21 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
         for (int i = 0; i < propertyNames.length; i++) {
 
-            if (CREATE_DATE.equals(propertyNames[i])) {
+            if (!setCreateDate && CREATE_DATE.equals(propertyNames[i])) {
                 if (nowTime == null) {
                     nowTime = new Timestamp(System.currentTimeMillis());
                 }
                 state[i] = nowTime;
                 setCreateDate = true;
             }
-            if (UPDATE_DATE.equals(propertyNames[i])) {
+            if (!setUpdateDate && UPDATE_DATE.equals(propertyNames[i])) {
                 if (nowTime == null) {
                     nowTime = new Timestamp(System.currentTimeMillis());
                 }
                 state[i] = nowTime;
                 setUpdateDate = true;
             }
-            if (CREATE_USER_ID.equals(propertyNames[i])) {
+            if (!setCreateUserID && CREATE_USER_ID.equals(propertyNames[i])) {
 
                 if (userId == null) {
                     state[i] = SysConstant.SYS_USER_ID;
@@ -85,7 +97,7 @@ public class HibernateInterceptor extends EmptyInterceptor {
                 }
                 setCreateUserID = true;
             }
-            if (UPDATE_USER_ID.equals(propertyNames[i])) {
+            if (!setUpdateUserID && UPDATE_USER_ID.equals(propertyNames[i])) {
 
                 if (userId == null) {
                     state[i] = SysConstant.SYS_USER_ID;
