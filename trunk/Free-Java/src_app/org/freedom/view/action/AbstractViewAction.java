@@ -18,6 +18,7 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.freedom.core.bean.BaseBean;
 import org.freedom.core.utils.WebApplicationContextUtil;
+import org.freedom.sys.SysConstant;
 import org.freedom.sys.modules.UserInfoSessionBean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
@@ -32,7 +33,6 @@ public abstract class AbstractViewAction extends BaseBean {
     private static final long serialVersionUID = -7494181740833493859L;
     /** Ajax处理结果 默认页面编码UTF-8 */
     public static String RESPONSE_CONTENT_TYPE = "text/html;charset=UTF-8;";
-    public static final String USER_INFO = "userInfo";
 
     public AbstractViewAction() {
 
@@ -116,7 +116,7 @@ public abstract class AbstractViewAction extends BaseBean {
     protected boolean saveUserInfo(HttpServletRequest request, UserInfoSessionBean userInfo) {
         HttpSession session = request.getSession();
         if (session != null) {
-            session.setAttribute(USER_INFO, userInfo);
+            session.setAttribute(SysConstant.USER_INFO, userInfo);
             return true;
         }
         return false;
@@ -131,7 +131,7 @@ public abstract class AbstractViewAction extends BaseBean {
     protected UserInfoSessionBean getUserInfoInSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session != null) {
-            return (UserInfoSessionBean) session.getAttribute(USER_INFO);
+            return (UserInfoSessionBean) session.getAttribute(SysConstant.USER_INFO);
         }
         return null;
     }
@@ -145,7 +145,7 @@ public abstract class AbstractViewAction extends BaseBean {
     protected boolean removeUserInfo(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session != null) {
-            session.removeAttribute(USER_INFO);
+            session.removeAttribute(SysConstant.USER_INFO);
             return true;
         }
         return false;

@@ -16,9 +16,10 @@ import org.springframework.stereotype.Component;
  * @author 何贝
  * @since JDK1.5
  */
-@Component("systemDateViewObject")
+@Component("systemDate")
 @Scope("prototype")
 public class SystemDate {
+    //TODO hebei
     private final String dayNames[] = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
     private Date nowDate = new Date();
 

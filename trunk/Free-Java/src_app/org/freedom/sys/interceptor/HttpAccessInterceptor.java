@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.freedom.core.utils.WebApplicationContextUtil;
 import org.freedom.sys.SysConstant;
+import org.freedom.sys.modules.UserInfoSessionBean;
 import org.freedom.sys.view.JosnViewObject;
 import org.freedom.view.action.AbstractViewAction;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -43,14 +45,11 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
         this.sessionTimeOut = sessionTimeOut;
     }
 
-    private final static String AJAX_VIEW_ACTION = "AjaxViewAction";
-
     /*
      * (non-Javadoc)
      * 
      * @seeorg.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.
-     * HttpServletRequest, javax.servlet.http.HttpServletResponse,
-     * java.lang.Object)
+     * HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -71,21 +70,22 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
      * @throws IOException
      */
     private boolean loginCheck(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        // TODO sysout
         System.out.println(handler.getClass().getName());
         if (notLoginAllowAccessClassNameList.contains(handler.getClass().getName())) {
-            // 用户登录Action
+            // 请求Action符合未登录用户允许访问的Action地址
             return true;
         } else if (existSessionInfo(request)) {
-            // 登录用户的其他Action
+            // 请求Action包含登录用户信息
             return true;
         } else { // 用户未登录 引导到登录界面
-            if (handler.getClass().getName().endsWith(AJAX_VIEW_ACTION)) {// Ajax请求
+            if (handler.getClass().getName().endsWith(SysConstant.AJAX_VIEW_ACTION)) {// Ajax请求
 
                 JSONObject jSONObject = JSONObject.fromObject(new JosnViewObject(false, true));
 
                 response.setContentType(AbstractViewAction.RESPONSE_CONTENT_TYPE);
                 response.getWriter().write(jSONObject.toString());
-            } else {
+            } else {// faces请求
                 response.sendRedirect(SysConstant.WEB_PROJECT_NAME + sessionTimeOut);
             }
 
@@ -102,11 +102,14 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
     private boolean existSessionInfo(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session != null) {
-            if (session.getAttribute(AbstractViewAction.USER_INFO) != null) {
+            UserInfoSessionBean userInfo = (UserInfoSessionBean) session.getAttribute(SysConstant.USER_INFO);
+            if (userInfo != null) {
+                HibernateInterceptor entityInterceptor = (HibernateInterceptor) WebApplicationContextUtil.getApplicationBean(request,
+                        SysConstant.ENTITY_INTERCEPTOR);
+                entityInterceptor.setUserId(userInfo.getUserId());
                 return true;
             }
         }
         return false;
     }
-
 }
