@@ -72,4 +72,9 @@ public class CountryServiceImpl implements ICountryService {
     @Autowired
     private CountryDao countryDao;
 
+    public void saveCountryInfo(Country country) {
+        countryDao.save(country);
+        
+    }
+
 }

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
-import org.freedom.core.utils.WebApplicationContextUtil;
 import org.freedom.sys.SysConstant;
 import org.freedom.sys.modules.UserInfoSessionBean;
 import org.freedom.sys.utils.HttpAccessLogUtils;
@@ -126,9 +125,6 @@ public class HttpAccessInterceptor extends HandlerInterceptorAdapter {
         if (session != null) {
             UserInfoSessionBean userInfo = (UserInfoSessionBean) session.getAttribute(SysConstant.USER_INFO);
             if (userInfo != null) {
-                HibernateInterceptor entityInterceptor = (HibernateInterceptor) WebApplicationContextUtil.getApplicationBean(request,
-                        SysConstant.ENTITY_INTERCEPTOR);
-                entityInterceptor.setUserId(userInfo.getUserId());
                 return true;
             }
         }

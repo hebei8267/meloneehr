@@ -8,8 +8,6 @@ package org.freedom.sys;
  * @since JDK1.5
  */
 public class SysConstant {
-    // applicationContext.xml文件中定义的"entityInterceptor"Bean的ID
-    public static final String ENTITY_INTERCEPTOR = "entityInterceptor";
     // 用户session key
     public static final String USER_INFO = "userInfo";
     // 添加数据是默认用户ID

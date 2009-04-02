@@ -34,6 +34,10 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
     }
 
+    public HibernateInterceptor(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState, String[] propertyNames,
             org.hibernate.type.Type[] types) {
