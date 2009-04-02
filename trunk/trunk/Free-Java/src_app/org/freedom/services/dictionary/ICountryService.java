@@ -37,4 +37,7 @@ public interface ICountryService {
      * @return true-成功 false-失败
      */
     public boolean updateCountryInfoService(Country country);
+
+    // TODO del
+    public void saveCountryInfo(Country country);
 }
