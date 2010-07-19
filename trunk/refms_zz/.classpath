@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk5"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="Web/WEB-INF/lib/json-lib-2.2.1-jdk15.jar"/>
+	<classpathentry kind="lib" path="C:/apache-tomcat-6.0.20/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/apache-tomcat-6.0.20/lib/jsp-api.jar"/>
+	<classpathentry kind="output" path="Web/WEB-INF/classes"/>
+</classpath>

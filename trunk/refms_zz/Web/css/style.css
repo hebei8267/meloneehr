@@ -1,0 +1,219 @@
+body {
+    background-color: #fff;
+    padding: 0;
+    margin: 0px auto auto auto;
+    color: #424849;
+    font: normal 10pt Arial, Helvetica, sans-serif;
+}
+
+#main_container {
+    width: 99%;
+    height: auto;
+    margin: auto;
+    padding: 0px;
+    min-width: 900px;
+}
+
+#header {
+    width: 99%;
+    height: 51px;
+    margin: auto;
+}
+
+#header1 {
+    width: 99%;
+    height: 51px;
+}
+
+#logo {
+    width: 369px;
+    height: 41px;
+    float: left;
+    padding: 5px 0 0 0px;
+}
+
+.banner_adds {
+    width: 99%;
+    float: left;
+}
+
+#main_content {
+    width: 100%;
+    margin: auto;
+    clear: both;
+    background-color: #FFFFFF;
+}
+
+.footer {
+}
+
+.spilt_line {
+    width: 100%;
+    height: 2px;
+    background-image: url(../images/title_line.jpg);
+    background-repeat: repeat-x;
+}
+
+/*-------------------------------------------------------------------------*/
+.app_title_table {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.app_title {
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.app_screen_id {
+    text-align: right;
+    padding-right: 10px;
+    font-size: 9pt;
+}
+
+.oper_tip {
+    padding-left: 10px;
+    width: 100%;
+}
+
+/*-------------------------------------------------------------------------*/
+.app_button_table {
+    margin-bottom: 1em;
+}
+
+/*-------------------------------------------------------------------------*/
+.app_comp_table {
+    margin-bottom: 1em;
+}
+
+.app_comp_table th {
+    padding: 6px;
+    font-weight: bold;
+    font-size: 10pt;
+    background: url('../images/panel_title.png') repeat-x;
+    border: 1px solid #99BBE8;
+    text-align: left;
+	color:#15428b;
+}
+
+.app_comp_table td {
+    border: 1px solid #99BBE8;
+}
+
+/*-------------------------------------------------------------------------*/
+.input_item_name {
+    background-color: #EEEEEE;
+    text-align: right;
+    padding-right: 10px;
+    height: 30px;
+}
+
+.input_item_name2 {
+    background-color: #EEEEEE;
+    text-align: right;
+    padding-right: 10px;
+    height: 95px;
+}
+
+.input_item_cell {
+    background-color: #FFFFCC;
+    text-align: left;
+    height: 30px;
+}
+
+.input_item_cell2 {
+    background-color: #FFFFCC;
+    text-align: left;
+    height: 95px;
+}
+
+/*-------------------------------------------------------------------------*/
+.input_text {
+    border: 1px solid #C8D2D9;
+    background-color: #FFFFFF;
+    margin: 0px;
+    height: 18px;
+    width: 140px;
+    float: left;
+    margin-left: 10px;
+}
+
+.input_text_long {
+    border: 1px solid #C8D2D9;
+    background-color: #FFFFFF;
+    margin: 0px;
+    height: 18px;
+    width: 477px;
+    float: left;
+    margin-left: 10px;
+}
+.input_textarea {
+    border: 1px solid #C8D2D9;
+    background-color: #FFFFFF;
+    margin: 0px;
+    width: 140px;
+    float: left;
+    margin-left: 10px;
+    height: 80px;
+}
+.input_textarea_long {
+    border: 1px solid #C8D2D9;
+    background-color: #FFFFFF;
+    margin: 0px;
+    width: 477px;
+    float: left;
+    margin-left: 10px;
+    height: 80px;
+}
+
+.input_checked {
+    margin-left: 10px;
+}
+
+/*-------------------------------------------------------------------------*/
+.btn_submit {
+    background-image: url(../images/btn_submit.jpg);
+    background-repeat: repeat-x;
+    height: 23px;
+    width: 85px;
+    border: 1px solid #000000;
+    font-weight: bold;
+}
+
+.btn_reset {
+    background-image: url(../images/btn_reset.jpg);
+    background-repeat: repeat-x;
+    height: 23px;
+    width: 85px;
+    border: 1px solid #000000;
+    font-weight: bold;
+}
+
+.btn_reset_short {
+    background-image: url(../images/btn_reset.jpg);
+    background-repeat: repeat-x;
+    height: 23px;
+    width: 65px;
+    border: 1px solid #000000;
+    font-weight: bold;
+}
+
+.btn_delete {
+    background-image: url(../images/btn_delete.jpg);
+    background-repeat: repeat-x;
+    height: 23px;
+    width: 85px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/*-------------------------------------------------------------------------*/
+.left_comp_tree {
+    width: 200px;
+    margin: 0;
+    overflow: auto;
+}
+

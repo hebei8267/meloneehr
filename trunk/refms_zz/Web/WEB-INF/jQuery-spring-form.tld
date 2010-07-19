@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.0</jsp-version>
+	<short-name>jQuery</short-name>
+	<uri>http://www.myjQuery.com/tags/form</uri>
+	<description>利用jQuery扩展Spring Tags</description>
+
+	<!-- <jQuery:tree/> tag -->
+	<tag>
+		<name>tree</name>
+		<tag-class>com.jquery.web.servlet.tags.tree.JQueryEasyUITreeTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Renders an HTML 'jQuery' tag with type 'tree' using the
+			bound value.</description>
+		<!-- 必填内容 Begin -->
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>dataUrl</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>取得数据的AJAX地址</description>
+		</attribute>
+		<!-- 触发事件 -->
+		<attribute>
+			<name>clickFn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>节点点击事件</description>
+		</attribute>
+	</tag>
+
+
+	<!-- <jQuery:grid/> tag -->
+	<tag>
+		<name>grid</name>
+		<tag-class>com.jquery.web.servlet.tags.grid.JQueryEasyUIDataGridTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Renders an HTML 'jQuery' tag with type 'grid' using the
+			bound value.</description>
+		<!-- 必填内容 Begin -->
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>dataUrl</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>取得数据的AJAX地址</description>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>表格的宽度</description>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>表格的高度</description>
+		</attribute>
+		<!-- 必填内容 End -->
+		<attribute>
+			<name>striped</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>行条纹--[true]或[false]</description>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>表格的标题</description>
+		</attribute>
+		<attribute>
+			<name>rowNumbers</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>行编号--[true]或[false]</description>
+		</attribute>
+		<attribute>
+			<name>singleSelect</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>行是否单选--[true]或[false]</description>
+		</attribute>
+		<attribute>
+			<name>pagination</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>是否包含分页栏--[true]或[false]</description>
+		</attribute>
+		<attribute>
+			<name>queryParams</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>分页时的自定义参数--js对象</description>
+		</attribute>
+		<!-- 触发事件 -->
+	</tag>
+
+	<!-- <jQuery:gridColumn/> -->
+	<tag>
+		<name>gridColumn</name>
+		<tag-class>com.jquery.web.servlet.tags.grid.JQueryEasyUIDataGridColumnTag</tag-class>
+		<body-content>empty</body-content>
+		<!-- 必填内容 Begin -->
+		<attribute>
+			<name>field</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<!-- 必填内容 End -->
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>align</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>visible</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+	</tag>
+
+	<!-- <jQuery:calendar/> tag -->
+	<tag>
+		<name>calendar</name>
+		<tag-class>com.jquery.web.servlet.tags.from.JQueryUICalendarTag</tag-class>
+		<body-content>empty</body-content>
+		<description>Renders an HTML 'input' tag with type 'calendar' using
+			the bound value.</description>
+		<!-- 必填内容 Begin -->
+		<attribute>
+			<name>path</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>Path to property for data binding</description>
+		</attribute>
+		<!-- 必填内容 End -->
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>HTML Standard Attribute</description>
+		</attribute>
+		<attribute>
+			<name>changeMonth</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>是否包含月下拉框--[true]或[false]</description>
+		</attribute>
+		<attribute>
+			<name>changeYear</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>是否包含年下拉框--[true]或[false]</description>
+		</attribute>
+	</tag>
+
+</taglib>
