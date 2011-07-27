@@ -3,5 +3,29 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/jcaptcha-1.0.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/jcaptcha-api-1.0.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-asm-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-beans-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-context-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-core-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-expression-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-security-acl-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-security-config-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-security-core-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-security-taglibs-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-security-web-3.0.3.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-web-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/spring-webmvc-3.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/apache-tomcat-6.0.18/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/jackson-core-asl-1.6.0.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/jackson-mapper-asl-1.6.0.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="webApp/WEB-INF/lib/commons-io-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
