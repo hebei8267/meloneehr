@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Tuser">
+
+    <typeAlias alias="tuser" type="cn.com.free.model.Tuser"/>
+
+    <resultMap id="tuserResult" class="tuser">
+        <result property="orgCd" column="ORG_CD"/>
+        <result property="usrId" column="USR_ID"/>
+        <result property="roleId" column="ROLE_ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="loginPwd" column="LOGIN_PWD"/>
+        <result property="usrNm" column="USR_NM"/>
+        <result property="jobPstn" column="JOB_PSTN"/>
+        <result property="usrEmail" column="USR_EMAIL"/>
+        <result property="telNo" column="TEL_NO"/>
+        <result property="mobile" column="MOBILE"/>
+        <result property="delFlg" column="DEL_FLG"/>
+        <result property="serFlg" column="SER_FLG"/>
+        <result property="usrState" column="USR_STATE"/>
+        <result property="regAct" column="REG_ACT"/>
+        <result property="crtUsrId" column="CRT_USR_ID"/>
+        <result property="crtTime" column="CRT_TIME"/>
+        <result property="updtUsrId" column="UPDT_USR_ID"/>
+        <result property="updtTime" column="UPDT_TIME"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="commonColumns">
+	    <![CDATA[
+        	ORG_CD ,
+        	USR_ID ,
+        	ROLE_ID ,
+        	LOGIN_ID ,
+        	LOGIN_PWD ,
+        	USR_NM ,
+        	JOB_PSTN ,
+        	USR_EMAIL ,
+        	TEL_NO ,
+        	MOBILE ,
+        	DEL_FLG ,
+        	SER_FLG ,
+        	USR_STATE ,
+        	REG_ACT ,
+        	CRT_USR_ID ,
+        	CRT_TIME ,
+        	UPDT_USR_ID ,
+        	UPDT_TIME 
+	    ]]>
+	</sql>
+
+	<sql id="dynamicWhere">
+	    <dynamic prepend="WHERE">
+	       <isNotEmpty prepend="AND" property="orgCd">
+	             ORG_CD = #orgCd#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="usrId">
+	             USR_ID = #usrId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="roleId">
+	             ROLE_ID = #roleId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="loginId">
+	             LOGIN_ID = #loginId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="loginPwd">
+	             LOGIN_PWD = #loginPwd#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="usrNm">
+	             USR_NM = #usrNm#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobPstn">
+	             JOB_PSTN = #jobPstn#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="usrEmail">
+	             USR_EMAIL = #usrEmail#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="telNo">
+	             TEL_NO = #telNo#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="mobile">
+	             MOBILE = #mobile#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="delFlg">
+	             DEL_FLG = #delFlg#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="serFlg">
+	             SER_FLG = #serFlg#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="usrState">
+	             USR_STATE = #usrState#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="regAct">
+	             REG_ACT = #regAct#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="crtUsrId">
+	             CRT_USR_ID = #crtUsrId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="crtTime">
+	             CRT_TIME = #crtTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updtUsrId">
+	             UPDT_USR_ID = #updtUsrId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updtTime">
+	             UPDT_TIME = #updtTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="ids">
+	       		ID in ($ids$)
+	       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	
+    <insert id="insert" parameterClass="tuser">
+    <![CDATA[
+        INSERT INTO
+        T_USER (
+        	ORG_CD ,
+        	USR_ID ,
+        	ROLE_ID ,
+        	LOGIN_ID ,
+        	LOGIN_PWD ,
+        	USR_NM ,
+        	JOB_PSTN ,
+        	USR_EMAIL ,
+        	TEL_NO ,
+        	MOBILE ,
+        	DEL_FLG ,
+        	SER_FLG ,
+        	USR_STATE ,
+        	REG_ACT ,
+        	CRT_USR_ID ,
+        	CRT_TIME ,
+        	UPDT_USR_ID ,
+        	UPDT_TIME 
+        ) VALUES (
+        	#orgCd# ,
+        	#usrId# ,
+        	#roleId# ,
+        	#loginId# ,
+        	#loginPwd# ,
+        	#usrNm# ,
+        	#jobPstn# ,
+        	#usrEmail# ,
+        	#telNo# ,
+        	#mobile# ,
+        	#delFlg# ,
+        	#serFlg# ,
+        	#usrState# ,
+        	#regAct# ,
+        	#crtUsrId# ,
+        	#crtTime# ,
+        	#updtUsrId# ,
+        	#updtTime# 
+        )
+    ]]>
+        <selectKey resultClass="java.lang.Long" type="pre" keyProperty="usrId" >
+            SELECT  SEQ_T_USER.nextval AS ID FROM DUAL
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterClass="tuser">
+    <![CDATA[
+        UPDATE T_USER SET
+	        ORG_CD = #orgCd# ,
+	        ROLE_ID = #roleId# ,
+	        LOGIN_ID = #loginId# ,
+	        LOGIN_PWD = #loginPwd# ,
+	        USR_NM = #usrNm# ,
+	        JOB_PSTN = #jobPstn# ,
+	        USR_EMAIL = #usrEmail# ,
+	        TEL_NO = #telNo# ,
+	        MOBILE = #mobile# ,
+	        DEL_FLG = #delFlg# ,
+	        SER_FLG = #serFlg# ,
+	        USR_STATE = #usrState# ,
+	        REG_ACT = #regAct# ,
+	        CRT_USR_ID = #crtUsrId# ,
+	        CRT_TIME = #crtTime# ,
+	        UPDT_USR_ID = #updtUsrId# ,
+	        UPDT_TIME = #updtTime# 
+        WHERE 
+	        USR_ID = #usrId# 
+    ]]>
+    </update>
+
+
+    <delete id="delete" parameterClass="map">
+    <![CDATA[
+        delete from T_USER
+    ]]>
+		<include refid="dynamicWhere"/>
+    </delete>
+    
+    <select id="getById" resultMap="tuserResult">
+	    select <include refid="commonColumns"/>
+	    <![CDATA[
+	        from T_USER 
+	        where 
+		        USR_ID = #usrId# 
+	    ]]>
+    </select>
+	 
+    <select id="count" resultClass="long">
+    <![CDATA[
+        select count(*) from T_USER
+    ]]>
+		<include refid="dynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="pageSelect" resultMap="tuserResult">
+    	select <include refid="commonColumns"/>
+	    <![CDATA[
+	        from T_USER 
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+
+	
+</sqlMap>
