@@ -24,6 +24,7 @@
 	    ]]>
 	</sql>
 
+	<!-- 动态查询条件 -->
 	<sql id="dynamicWhere">
 	    <dynamic prepend="WHERE">
 	       <#list table.columns as column>
@@ -37,6 +38,7 @@
 	    </dynamic>	
 	</sql>
 	
+	<!-- 新增对象 -->
     <insert id="insert" parameterClass="${classNameLower}">
     <![CDATA[
         INSERT INTO
@@ -55,6 +57,7 @@
         </selectKey>
     </insert>
 
+	<!-- 修改对象 -->
     <update id="update" parameterClass="${classNameLower}">
     <![CDATA[
         UPDATE ${table.sqlName} SET
@@ -70,7 +73,7 @@
     ]]>
     </update>
 
-
+	<!-- 删除对象 -->
     <delete id="delete" parameterClass="map">
     <![CDATA[
         delete from ${table.sqlName}
@@ -78,6 +81,7 @@
 		<include refid="dynamicWhere"/>
     </delete>
     
+    <!-- 根据主键取得对象 -->
     <select id="getById" resultMap="${classNameLower}Result">
 	    select <include refid="commonColumns"/>
 	    <![CDATA[
@@ -88,7 +92,8 @@
 		        </#list>
 	    ]]>
     </select>
-	 
+
+	<!-- 计算对象的数量 --> 
     <select id="count" resultClass="long">
     <![CDATA[
         select count(*) from ${table.sqlName}
@@ -122,5 +127,4 @@
     
     </#if>
 	</#list>
-	
 </sqlMap>
