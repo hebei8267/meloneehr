@@ -51,6 +51,7 @@
 	    ]]>
 	</sql>
 
+	<!-- 动态查询条件 -->
 	<sql id="dynamicWhere">
 	    <dynamic prepend="WHERE">
 	       <isNotEmpty prepend="AND" property="orgCd">
@@ -113,6 +114,7 @@
 	    </dynamic>	
 	</sql>
 	
+	<!-- 新增对象 -->
     <insert id="insert" parameterClass="tuser">
     <![CDATA[
         INSERT INTO
@@ -161,6 +163,7 @@
         </selectKey>
     </insert>
 
+	<!-- 修改对象 -->
     <update id="update" parameterClass="tuser">
     <![CDATA[
         UPDATE T_USER SET
@@ -186,7 +189,7 @@
     ]]>
     </update>
 
-
+	<!-- 删除对象 -->
     <delete id="delete" parameterClass="map">
     <![CDATA[
         delete from T_USER
@@ -194,6 +197,7 @@
 		<include refid="dynamicWhere"/>
     </delete>
     
+    <!-- 根据主键取得对象 -->
     <select id="getById" resultMap="tuserResult">
 	    select <include refid="commonColumns"/>
 	    <![CDATA[
@@ -202,7 +206,8 @@
 		        USR_ID = #usrId# 
 	    ]]>
     </select>
-	 
+
+	<!-- 计算对象的数量 --> 
     <select id="count" resultClass="long">
     <![CDATA[
         select count(*) from T_USER
@@ -225,5 +230,4 @@
 		</dynamic>
     </select>
 
-	
 </sqlMap>
