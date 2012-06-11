@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	  					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<description>aspect配置</description>
+	<!-- PointcutsDefinition.java已在applicationContext.xml文件中context:component-scan定义 -->
+	
+	
+	
+	<!-- 下面的不定义，就得去该类(SampleAdvice)中编写"@Component" -->
+	<bean class="org.springside.examples.showcase.common.aspect.SampleAdvice" />
+
+</beans>

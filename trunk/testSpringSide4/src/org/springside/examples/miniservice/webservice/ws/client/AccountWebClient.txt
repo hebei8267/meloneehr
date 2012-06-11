@@ -1,0 +1,27 @@
+package org.springside.examples.miniservice.webservice.ws.client;
+
+import java.rmi.RemoteException;
+
+import org.springside.examples.miniservice.AccountServiceProxy;
+import org.springside.examples.miniservice.AccountService_PortType;
+import org.springside.examples.miniservice.UserDTO;
+import org.springside.examples.miniservice.UserListResponse;
+
+// 其他辅助类自己通过Eclipse的逆向生成
+public class AccountWebClient {
+	public static void main(String[] args) throws RemoteException {
+		AccountServiceProxy wsproxy = new AccountServiceProxy();
+		AccountService_PortType ws = wsproxy.getAccountService_PortType();
+
+		UserListResponse re = ws.searchUser("admin", "admin");
+
+		System.out.println(re.getCode());
+		System.out.println(re.getMessage());
+		UserDTO[] users = re.getUserList();
+
+		for (UserDTO userDTO : users) {
+			System.out.println(userDTO.getId());
+			System.out.println(userDTO.getName());
+		}
+	}
+}

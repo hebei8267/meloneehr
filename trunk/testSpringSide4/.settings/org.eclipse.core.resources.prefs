@@ -1,0 +1,9 @@
+#Fri Jun 08 17:49:28 CST 2012
+eclipse.preferences.version=1
+encoding//src/org/springside/examples/showcase/cache/memcached/MyMenCached.java=UTF-8
+encoding//src/org/springside/modules/test/cache/memcached/MemcachedSimulator.java=UTF-8
+encoding//src/org/springside/modules/test/data/DataFixtures.java=UTF-8
+encoding//src/org/springside/modules/test/log/Log4jMockAppender.java=UTF-8
+encoding//src/org/springside/modules/test/spring/SpringTransactionalTestCase.java=UTF-8
+encoding//src/org/springside/modules/utils/Collections3.java=UTF-8
+encoding/<project>=UTF-8
