@@ -1,0 +1,73 @@
+响应码	含义
+100	继续
+101	分组交换协议
+200	OK
+201	被创建
+202	被采纳
+203	非授权信息
+204	无内容
+205	重置内容
+206	部分内容
+300	多选项
+301	永久地传递
+302	找到
+303	参见其他
+304	未改动
+305	使用代理
+307	暂时重定向
+400	错误请求
+401	未授权
+402	要求付费
+403	禁止
+404	未找到
+405	不允许的方法
+406	不被采纳
+407	要求代理授权
+408	请求超时
+409	冲突
+410	过期的
+411	要求的长度
+412	前提不成立
+413	请求实例太大
+414	请求URL太大
+415	不支持的媒体类型
+416	无法满足的请求范围
+417	失败的预期
+500	内部错误
+501	未被使用
+502	网关错误
+503	不可用的服务
+504	网关超时
+505	HTTP版本未被支持
+
+
+public enum Status {  
+    OK(200, "OK"),  
+    CREATED(201, "Created"),  
+    ACCEPTED(202, "Accepted"),  
+    NO_CONTENT(204, "No Content"),  
+    MOVED_PERMANENTLY(301, "Moved Permanently"),  
+    SEE_OTHER(303, "See Other"),  
+    NOT_MODIFIED(304, "Not Modified"),  
+    TEMPORARY_REDIRECT(307, "Temporary Redirect"),  
+    BAD_REQUEST(400, "Bad Request"),  
+    UNAUTHORIZED(401, "Unauthorized"),  
+    FORBIDDEN(403, "Forbidden"),  
+    NOT_FOUND(404, "Not Found"),  
+    NOT_ACCEPTABLE(406, "Not Acceptable"),  
+    CONFLICT(409, "Conflict"),  
+    GONE(410, "Gone"),  
+    PRECONDITION_FAILED(412, "Precondition Failed"),  
+    UNSUPPORTED_MEDIA_TYPE(415, "Unsupported Media Type"),  
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),  
+    SERVICE_UNAVAILABLE(503, "Service Unavailable");  
+  
+    public enum Family {  
+        INFORMATIONAL, SUCCESSFUL, REDIRECTION,  
+        CLIENT_ERROR, SERVER_ERROR, OTHER  
+    }  
+  
+    public Family getFamily()  
+    public int getStatusCode()  
+    public static Status fromStatusCode(final int statusCode)  
+}  
