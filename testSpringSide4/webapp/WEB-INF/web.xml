@@ -45,6 +45,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
 	<!-- Filter 定义 -->
 	<!-- Character Encoding filter -->
 	<filter>
@@ -65,6 +66,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
 
 	<!-- SiteMesh Web-Page Layout filter -->
 	<filter>
@@ -75,6 +77,18 @@
 		<filter-name>sitemeshFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+
+		<!-- 自定义登录Filter-->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>org.springside.examples.showcase.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 
 	<!-- Srping OpenSessionInView filter -->
 	<filter>
@@ -113,19 +127,19 @@
 	</servlet-mapping>
 
 
-	<!-- JMX JSON Agent servlet-->
+	<!-- JMX JSON Agent servlet -->
 	<servlet>
-      <servlet-name>jolokia-agent</servlet-name>
-      <servlet-class>org.jolokia.http.AgentServlet</servlet-class>
-      <load-on-startup>3</load-on-startup>
-    </servlet>
+		<servlet-name>jolokia-agent</servlet-name>
+		<servlet-class>org.jolokia.http.AgentServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
 
-    <servlet-mapping>
-      <servlet-name>jolokia-agent</servlet-name>
-      <url-pattern>/jolokia/*</url-pattern>
-    </servlet-mapping>
-    
-    
+	<servlet-mapping>
+		<servlet-name>jolokia-agent</servlet-name>
+		<url-pattern>/jolokia/*</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- 出错页面定义 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
