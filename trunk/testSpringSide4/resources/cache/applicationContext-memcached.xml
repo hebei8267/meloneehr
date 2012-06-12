@@ -5,6 +5,7 @@
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端连接实际的Memcached服务器 -->
+	<beans profile="development,functional,test">
 	<bean id="spyMemcachedClient"
 		class="org.springside.modules.cache.memcached.SpyMemcachedClient">
 		<property name="memcachedClient">
@@ -21,11 +22,11 @@
 		<property name="updateTimeout" value="1000" />
 		<property name="shutdownTimeout" value="1000" />
 	</bean>
-
+</beans>
 
 	<!-- ####################################################################################### -->
 	<!-- production -->
-	<beans profile="development,functional,test">
+	<beans profile="production">
 		<!-- SpyMemcached客户端 -->
 		<bean id="spyMemcachedClient"
 			class="org.springside.modules.cache.memcached.SpyMemcachedClient"
