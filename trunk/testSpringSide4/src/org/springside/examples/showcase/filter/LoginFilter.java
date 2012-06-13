@@ -11,63 +11,62 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter {
 
-	protected FilterConfig filterConfig;
+	private static String SESSION_ID = "MY_TEST";
 
 	@Override
 	public void destroy() {
-		this.filterConfig = null;
+
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
 		HttpServletRequest _request = (HttpServletRequest) request;
-		HttpSession _session = _request.getSession();
-		String user = (String) _session.getAttribute("username");
-		Cookie userCookie = getCookieValue(_request.getCookies(), "username");
+		HttpServletResponse _response = (HttpServletResponse) response;
 
-		// 判断用户是否登录
-		if (null == userCookie) {
-			// 判断当前页面是否为login.jsp
-			String url = _request.getRequestURL().toString();
-			if (-1 == url.indexOf("security")) {
-				ServletContext sc = filterConfig.getServletContext();
-				RequestDispatcher rd = sc.getRequestDispatcher("/");
+		// String url = _request.getRequestURL().toString();
+		System.out.println(_request.getRequestURL().toString());
 
-				try {
-					rd.forward(request, response);
-					return;
-				} catch (ServletException se) {
-					filterConfig.getServletContext().log(se.getMessage());
-				} catch (IOException e) {
-					filterConfig.getServletContext().log(e.getMessage());
+		Cookie cookies[] = _request.getCookies();
+		Cookie sCookie = null;
+
+		String sid = "";
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				sCookie = cookies[i];
+				if (sCookie.getName().equals(SESSION_ID)) {
+					sid = sCookie.getValue();
 				}
 			}
 		}
 
-		chain.doFilter(request, response);
+		if (sid == null || sid.length() == 0) {
+			sid = java.util.UUID.randomUUID().toString();
+			Cookie mycookies = new Cookie(SESSION_ID, sid);
+			//设置cookie经过多长秒后被删除。如果0，就说明立即删除。如果是负数就表明当浏览器关闭时自动删除。  
+			mycookies.setMaxAge(-1);
+			// if (this.cookieDomain != null && this.cookieDomain.length() > 0)
+			// {
+			//mycookies.setDomain("mytest");
+			// }
+			mycookies.setPath("/");
+			_response.addCookie(mycookies);
+		}
+
+		chain.doFilter(_request, _response);
+
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		this.filterConfig = arg0;
+
 	}
 
-	protected Cookie getCookieValue(Cookie[] cookies, String name) {
-		// 判断是否存在Cookie
-		if (null != cookies) {
-			for (Cookie c : cookies) {
-				if (c.getName().equals(name)) {
-					return c;
-				}
-			}
-		}
-
-		return null;
-	}
 }
