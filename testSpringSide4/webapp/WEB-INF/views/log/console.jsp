@@ -16,7 +16,7 @@
 <body>
 	<h2>Log4j控制頁面</h2>
 	<h3>管理基本级别</h3>
-	<form:form id="defaultLoggerForm" action="${ctx}/log/defaultsetting" method="post" class="form-horizontal">
+	<form:form id="defaultLoggerForm" action="${ctx}/sc/log/defaultsetting" method="post" class="form-horizontal">
 		<div class="control-group">
 			<label for="rootLoggerLevel" class="control-label">Root Logger Level:</label>
 			<div class="controls">
@@ -40,7 +40,7 @@
 		</div>
 	</form:form>
 	<h3>管理任意Logger级别</h3>
-	<form:form id="anyLoggerForm" action="${ctx}/log/loggersetting" method="post" class="form-horizontal">
+	<form:form id="anyLoggerForm" action="${ctx}/sc/log/loggersetting" method="post" class="form-horizontal">
 		<div class="control-group">
 			<label for="loggerName" class="control-label">Logger Name:</label>
 			<div class="controls">
