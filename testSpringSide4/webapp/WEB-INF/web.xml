@@ -66,7 +66,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
+
 
 	<!-- SiteMesh Web-Page Layout filter -->
 	<filter>
@@ -79,7 +79,7 @@
 	</filter-mapping>
 
 
-		<!-- 自定义登录Filter-->
+	<!-- 自定义登录Filter -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>org.springside.examples.showcase.filter.LoginFilter</filter-class>
@@ -88,7 +88,7 @@
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/sc/*</url-pattern>
 	</filter-mapping>
-	
+
 
 	<!-- Srping OpenSessionInView filter -->
 	<filter>
@@ -139,6 +139,9 @@
 		<url-pattern>/jolokia/*</url-pattern>
 	</servlet-mapping>
 
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 	<!-- 出错页面定义 -->
 	<error-page>
