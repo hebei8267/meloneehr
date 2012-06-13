@@ -18,7 +18,7 @@
 			<br>
 			<textarea style="height: 150px;width: 550px;">
 				<!-- 定义首页 -->
-				<mvc:view-controller path="/" view-name="index" />
+				参见   index.html
 			</textarea>
 		</p>
 	</body>
