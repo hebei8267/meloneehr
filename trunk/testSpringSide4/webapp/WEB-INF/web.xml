@@ -42,7 +42,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/sc/*</url-pattern>
 	</servlet-mapping>
 
 
@@ -86,7 +86,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/sc/*</url-pattern>
 	</filter-mapping>
 	
 
