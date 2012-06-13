@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<h2>综合演示用例</h2>
-		<form:form id="inputForm" modelAttribute="user" action="${ctx}/common/user/save" method="post" class="form-horizontal">
+		<form:form id="inputForm" modelAttribute="user" action="${ctx}/sc/common/user/save" method="post" class="form-horizontal">
 			<input type="hidden" id="userId" name="id" value="${user.id}"/>
 			<fieldset>
 				<legend>

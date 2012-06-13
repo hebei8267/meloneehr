@@ -30,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<a href="${ctx}/common/user/create">创建</a>
+				<a href="${ctx}/sc/common/user/create">创建</a>
 				<c:forEach items="${users}" var="user">
 					<tr>
 						<td>
@@ -49,14 +49,19 @@
 							${user.status}&nbsp;
 						</td>
 						<td>
-							<a href="${ctx}/common/user/get/${user.id}" id="editLink-${user.loginName}">修改(AOP)</a>
+							<a href="${ctx}/sc/common/user/get/${user.id}" id="editLink-${user.loginName}">修改(AOP)</a>
 						</td>
 						<td>
-							<a href="${ctx}/common/user/getByEffective/${user.id}" id="editLink-${user.loginName}">取得数据(缓存中)，不能做后续修改操作</a>
+							<a href="${ctx}/sc/common/user/getByEffective/${user.id}" id="editLink-${user.loginName}">取得数据(缓存中)，不能做后续修改操作</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		关于AOP参见<br>
+		org.springside.examples.showcase.common.aspect.PointcutsDefinition.java
+		org.springside.examples.showcase.common.aspect.SampleAdvice.java
+		
 	</body>
 </html>
