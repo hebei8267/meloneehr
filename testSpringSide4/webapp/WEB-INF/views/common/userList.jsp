@@ -49,7 +49,7 @@
 							${user.status}&nbsp;
 						</td>
 						<td>
-							<a href="${ctx}/common/user/get/${user.id}" id="editLink-${user.loginName}">修改</a>
+							<a href="${ctx}/common/user/get/${user.id}" id="editLink-${user.loginName}">修改(AOP)</a>
 						</td>
 						<td>
 							<a href="${ctx}/common/user/getByEffective/${user.id}" id="editLink-${user.loginName}">取得数据(缓存中)，不能做后续修改操作</a>
