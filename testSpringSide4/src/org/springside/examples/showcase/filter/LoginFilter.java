@@ -26,7 +26,8 @@ public class LoginFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest _request = (HttpServletRequest) request;
 		HttpServletResponse _response = (HttpServletResponse) response;
@@ -43,19 +44,18 @@ public class LoginFilter implements Filter {
 				sCookie = cookies[i];
 				if (sCookie.getName().equals(SESSION_ID)) {
 					sid = sCookie.getValue();
+					System.out.println("###########get Cookie value" + sid);
 				}
 			}
 		}
 
 		if (sid == null || sid.length() == 0) {
+			System.out.println("###########create Cookie");
 			sid = java.util.UUID.randomUUID().toString();
 			Cookie mycookies = new Cookie(SESSION_ID, sid);
-			//设置cookie经过多长秒后被删除。如果0，就说明立即删除。如果是负数就表明当浏览器关闭时自动删除。  
+			// 设置cookie经过多长秒后被删除。如果0，就说明立即删除。如果是负数就表明当浏览器关闭时自动删除。
 			mycookies.setMaxAge(-1);
-			// if (this.cookieDomain != null && this.cookieDomain.length() > 0)
-			// {
-			//mycookies.setDomain("mytest");
-			// }
+
 			mycookies.setPath("/");
 			_response.addCookie(mycookies);
 		}
