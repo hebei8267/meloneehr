@@ -2,6 +2,8 @@ package org.springside.examples.showcase.common.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,16 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String list(Model model) {
+	public String list(HttpServletRequest request,Model model) {
+		HttpSession	s=	request.getSession();
+		System.out.println(s.getAttribute("AAAAA"));
+		System.out.println(s.getAttribute("BBBBB"));
+		System.out.println(s.getAttribute("CCCCC"));
+		s.removeAttribute("BBBBB");
+		System.out.println(s.getAttribute("AAAAA"));
+		System.out.println(s.getAttribute("BBBBB"));
+		System.out.println(s.getAttribute("CCCCC"));
+		
 		List<User> users = accountManager.getAllUser();
 		model.addAttribute("users", users);
 		return "common/userList";
