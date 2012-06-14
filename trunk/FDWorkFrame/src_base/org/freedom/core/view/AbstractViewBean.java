@@ -1,0 +1,168 @@
+/*
+ * Copyright 2008 by hebei, All rights reserved.
+ */
+package org.freedom.core.view;
+
+import java.util.Locale;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import org.freedom.core.bean.BaseBean;
+import org.freedom.core.domain.UserInfoSessionBean;
+import org.freedom.core.util.FacesContextUtil;
+import org.freedom.core.util.SpringContextUtils;
+
+/**
+ * 公共View对象基类
+ * 
+ * @author 何贝
+ * @since JDK1.5
+ */
+public abstract class AbstractViewBean extends BaseBean {
+    private final String USER_INFO = "userInfo";
+
+    public AbstractViewBean() {
+
+    }
+
+    /** Bean生命周期中初始化方法 */
+    @PostConstruct
+    protected void _create() {
+        create();
+    }
+
+    /** Bean生命周期中初始化方法 */
+    public void create() {
+
+    }
+
+    /** Bean生命周期中销毁方法 */
+    @PreDestroy
+    protected void _destroy() {
+        destroy();
+    }
+
+    /** Bean生命周期中销毁方法 */
+    public void destroy() {
+
+    }
+
+    /**
+     * 默认初始化方法
+     */
+    public void init() {
+
+    }
+
+    /**
+     * 添加错误消息
+     * 
+     * @param msgKey 消息内容Key
+     */
+    protected void addErrorMessage(String msgKey) {
+        String msgStr = getMessage(msgKey);
+        FacesMessage msg = new FacesMessage(msgStr);
+        FacesContext.getCurrentInstance().addMessage("", msg);
+    }
+
+    /**
+     * 取得消息资源
+     * 
+     * @param msgKey 消息Key
+     * @return 消息
+     */
+    protected String getMessage(String msgKey) {
+        return getMessage(msgKey, null, Locale.CHINA);
+    }
+
+    /**
+     * 取得消息资源
+     * 
+     * @param msgKey 消息Key
+     * @param args 消息Param
+     * @return 消息
+     */
+    protected String getMessage(String msgKey, Object[] args) {
+        return getMessage(msgKey, args, Locale.CHINA);
+    }
+
+    /**
+     * 取得消息资源
+     * 
+     * @param msgKey 消息Key
+     * @param args 消息Param
+     * @param locale Locale
+     * @return
+     */
+    protected String getMessage(String msgKey, Object[] args, Locale locale) {
+        return SpringContextUtils.getMessage(msgKey, args, locale);
+    }
+
+    /**
+     * 取得 HttpSession
+     * 
+     * @return HttpSession
+     */
+    private HttpSession getSession() {
+        return FacesContextUtil.getSession();
+    }
+
+    /**
+     * 保存登录用户信息
+     * 
+     * @param userInfo 登录用户信息
+     * @return 执行结果
+     */
+    protected boolean saveUserInfo(UserInfoSessionBean userInfo) {
+        HttpSession session = getSession();
+        if (session != null) {
+            session.setAttribute(USER_INFO, userInfo);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 取得登录用户信息
+     * 
+     * @return
+     */
+    protected UserInfoSessionBean getUserInfoInSession() {
+        HttpSession session = getSession();
+        if (session != null) {
+            return (UserInfoSessionBean) session.getAttribute(USER_INFO);
+        }
+        return null;
+    }
+
+    /**
+     * 删除登录用户信息
+     * 
+     * @param userInfo 登录用户信息
+     * @return 执行结果
+     */
+    protected boolean removeUserInfo() {
+        HttpSession session = getSession();
+        if (session != null) {
+            session.removeAttribute(USER_INFO);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 取得 RequestParameterMap
+     * 
+     * @return RequestParameterMap
+     */
+    @SuppressWarnings("unchecked")
+    protected Map getRequestParameterMap() {
+        return FacesContextUtil.getRequestParameterMap();
+
+    }
+}

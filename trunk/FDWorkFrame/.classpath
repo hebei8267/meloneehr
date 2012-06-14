@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src_permission"/>
+	<classpathentry kind="src" path="src_faces"/>
+	<classpathentry kind="src" path="src_config"/>
+	<classpathentry kind="src" path="src_base"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/c3p0-0.9.1.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/common-annotations.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jsf-api.jar" sourcepath="C:/tools/opensource/mojarra-1.2_09-b02-FCS-source/mojarra-1.2_09-b02-FCS-sources/jsf-tools/src.zip"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jsf-facelets.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jsf-impl.jar" sourcepath="C:/tools/opensource/mojarra-1.2_09-b02-FCS-source/mojarra-1.2_09-b02-FCS-sources/jsf-api/template-src.zip"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jta.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/p6spy.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/postgresql-8.2-506.jdbc3.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-api-1.5.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-log4j12-1.5.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.5-with-dependencies/spring-framework-2.5.5/src.zip"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc.jar" sourcepath="C:/tools/opensource/spring-framework-2.5.5-with-dependencies/spring-framework-2.5.5/dist/module-sources/spring-webmvc-sources.jar"/>
+	<classpathentry kind="output" path="WebApp/WEB-INF/classes"/>
+</classpath>
