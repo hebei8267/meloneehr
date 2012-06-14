@@ -96,6 +96,11 @@
 			<param-name>cookiePath</param-name>
 			<param-value>/</param-value>
 		</init-param>
+		<!-- Memcached Session 超时时间(单位：分钟) -->
+		<init-param>
+			<param-name>sessionTimeout</param-name>
+			<param-value>1</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>MemcachedSessionFilter</filter-name>
@@ -152,6 +157,13 @@
 		<url-pattern>/jolokia/*</url-pattern>
 	</servlet-mapping>
 
+
+	<!-- session 超时时间(单位：分钟),使用MemcachedSessionFilter时无效 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- 默认首页访问地址 -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
