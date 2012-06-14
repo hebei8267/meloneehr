@@ -6,16 +6,20 @@ import javax.servlet.http.HttpSession;
 public class HttpServletRequestWrapper extends javax.servlet.http.HttpServletRequestWrapper {
 	private String sid = "";
 
-	public HttpServletRequestWrapper(String sid, HttpServletRequest request) {
+	/** Memcached Session 超时时间(单位：分钟) */
+	private String sessionTimeout;
+
+	public HttpServletRequestWrapper(String sid, HttpServletRequest request, String sessionTimeout) {
 		super(request);
 		this.sid = sid;
+		this.sessionTimeout = sessionTimeout;
 	}
 
 	public HttpSession getSession(boolean create) {
-		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(create));
+		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(create), sessionTimeout);
 	}
 
 	public HttpSession getSession() {
-		return new MemcachedHttpSessionWrapper(this.sid, super.getSession());
+		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(), sessionTimeout);
 	}
 }
