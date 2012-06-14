@@ -10,6 +10,7 @@ import org.springside.modules.utils.SpringContextHolder;
 
 public class MemcachedSessionService {
 	private static Logger logger = LoggerFactory.getLogger(MemcachedSessionService.class);
+
 	private static MemcachedSessionService instance = null;
 
 	private SpyMemcachedClient mc;
@@ -29,9 +30,14 @@ public class MemcachedSessionService {
 	public Map getSession(String id) {
 		long s1 = System.currentTimeMillis();
 
-		Map session = null;
+		// String jsonString = mc.get(id);
+		// Map session = jsonMapper.fromJson(jsonString, Map.class);
+		if (null != mc.get(id)) {
+			logger.debug(mc.get(id).getClass().toString());
+			logger.debug(mc.get(id).toString());
+		}
+		Map session = mc.get(id);
 
-		session = (Map) mc.get(id);
 		if (session == null) {
 			session = new HashMap();
 			// 单位：秒
@@ -56,7 +62,7 @@ public class MemcachedSessionService {
 		// 设置key/value
 		map.put(key, value);
 		// 注意时间????????
-		mc.safeSet(id, 0, value);
+		mc.safeSet(id, 0, map);
 
 		logger.debug("saveSession()" + (System.currentTimeMillis() - s1));
 
