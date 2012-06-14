@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.PostgreSQLDialect
+				</prop>
+				<prop key="hibernate.query.substitutions">
+					true 1, false 0
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.c3p0.minPoolSize">5</prop>
+				<prop key="hibernate.c3p0.maxPoolSize">5</prop>
+				<prop key="hibernate.c3p0.timeout">600</prop>
+				<prop key="hibernate.c3p0.max_statement">50</prop>
+				<prop key="hibernate.c3p0.testConnectionOnCheckout">
+					false
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="hibernateProperties">
+			<ref local="hibernateProperties"></ref>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="entityInterceptor">
+			<bean class="org.freedom.core.interceptor.HibernateInterceptor"
+				scope="singleton" />
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>org.freedom.entity.common.User</value>
+				<value>org.freedom.entity.common.Role</value>
+
+				<value>org.freedom.entity.ui.MenuNode</value>
+				<value>org.freedom.entity.ui.MenuNodeType</value>
+				<value>org.freedom.entity.ui.MenuNodePermit</value>
+				
+				<value>org.freedom.entity.dictionary.common.Country</value>
+				<value>org.freedom.entity.dictionary.organization.OrganizationType</value>
+				
+				<value>org.freedom.entity.organization.Organization</value>
+			</list>
+		</property>
+		<!--	
+			<property name="packagesToScan" value="org.freedom.entity"/>
+			-->
+	</bean>
+</beans>
