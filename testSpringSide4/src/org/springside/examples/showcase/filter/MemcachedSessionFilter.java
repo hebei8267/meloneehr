@@ -30,7 +30,8 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 	private String sessionTimeout;
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+			ServletException {
 
 		HttpServletRequest _request = (HttpServletRequest) request;
 		HttpServletResponse _response = (HttpServletResponse) response;
@@ -69,7 +70,7 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 			_response.addCookie(mycookies);
 		}
 
-		chain.doFilter(new HttpServletRequestWrapper(sid, _request,sessionTimeout), _response);
+		chain.doFilter(new HttpServletRequestWrapper(sid, _request, sessionTimeout), _response);
 
 	}
 
