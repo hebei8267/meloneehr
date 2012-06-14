@@ -1,0 +1,251 @@
+body {
+    font: 13px arial, helvetica, clean, sans-serif;
+}
+
+.defaultBody {
+    min-width: 700px;
+}
+
+.defaultPopWindowBody {
+    min-width: 300px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* tile begin */
+.titleTable {
+    width: 100%;
+    height: 45px;
+    background-repeat: no-repeat;
+    background-image: url(../images/app-title.gif);
+}
+
+.loginUser {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding-right: 35px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.loginDate {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding-right: 35px;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+/* tile end */
+.spiltLine {
+    width: 100%;
+    height: 5px;
+    background-image: url(../images/title-line.jpg);
+    background-repeat: repeat-x;
+}
+/* app tile begin */
+.appTitleTable {
+    width: 100%;
+}
+
+.searchTable {
+    border-collapse: collapse;
+    border: 3px solid #dcdcdc;
+}
+
+.appTitle {
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.appScreenID {
+    text-align: right;
+    padding-right: 30px;
+    font: 11px arial, helvetica, clean, sans-serif;
+}
+
+.appScreenIDPopWindow {
+    text-align: right;
+    padding-right: 30px;
+}
+/* app tile end */
+.appFooterTable {
+    width: 100%;
+    height: 50px;
+}
+
+.opTip {
+    padding-left: 10px;
+}
+
+.need {
+    color: red;
+}
+/* app input item begin */
+.itemTitle {
+    overflow: hidden;
+    zoom: 1;
+    font: bold 13px arial, tahoma, verdana, sans-serif;
+    padding: 5px 3px 4px 5px;
+    border: 1px solid #dcdcdc;
+    line-height: 15px;
+    background: transparent url(../images/white-top-bottom.gif) repeat-x 0 -1px;
+}
+
+.inputItemName {
+    font: 13px arial, helvetica, clean, sans-serif;
+    background-color: #FFFFCC;
+    text-align: right;
+    padding-right: 5px;
+    border: 1px solid;
+    border-color: #d0d0d0;
+}
+
+.inputItemCell {
+    background-color: #FFFFCC;
+    padding-left: 10px;
+    padding-right: 5px;
+    border: 1px solid;
+    border-color: #d0d0d0;
+}
+
+.readonly {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 147px;
+    height: 18px;
+    color: gray;
+    cursor: default;
+    opacity: .6;
+    -moz-opacity: .6;
+}
+
+.inputText {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 147px;
+    height: 18px;
+}
+
+.inputSelect {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+}
+
+.inputMultSelect {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 155px;
+}
+
+.inputTextarea {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 147px;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+.textareaReadonly {
+    font: 13px arial, helvetica, clean, sans-serif;
+    padding: 1px 3px;
+    background: #fff url(../images/text-bg.gif) repeat-x 0 0;
+    border: 1px solid #B5B8C8;
+    width: 150px;
+    color: gray;
+    cursor: default;
+    opacity: .6;
+    -moz-opacity: .6;
+}
+
+.inputText:focus, .inputTextarea:focus, .inputSelect:focus {
+    background: #FFFFA0;
+}
+/* app input item end */
+.buttonSubmitLong {
+    background-image: url(../images/submit_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonSubmit {
+    background-image: url(../images/submit_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 50px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonResetLong {
+    background-image: url(../images/reset_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonLoginOutLong {
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonReset {
+    background-image: url(../images/reset_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 50px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonDeleteLong {
+    background-image: url(../images/delete_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 90px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.buttonDelete {
+    background-image: url(../images/delete_btn.jpg);
+    background-repeat: repeat-x;
+    height: 20px;
+    width: 50px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.iconButton {
+    cursor: pointer;
+}
+
+
+
