@@ -1,0 +1,5 @@
+CascadeType.PERSIST：级联新增
+CascadeType.MERGE:级联合并
+CascadeType.REFRESH:级联刷新
+CascadeType.REMOVE:级联删除
+CascadeType.ALL:以上四种都是
