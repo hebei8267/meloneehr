@@ -12,10 +12,10 @@ public class MemcachedHttpSessionWrapper extends MemcachedHttpSession {
 	@SuppressWarnings("rawtypes")
 	private Map map = null;
 
-	public MemcachedHttpSessionWrapper(String sid, HttpSession session) {
+	public MemcachedHttpSessionWrapper(String sid, HttpSession session, String sessionTimeout) {
 		super(session);
 		this.sid = sid;
-		this.map = MemcachedSessionService.getInstance().getSession(sid);
+		this.map = MemcachedSessionService.getInstance(sessionTimeout).getSession(sid);
 	}
 
 	@Override

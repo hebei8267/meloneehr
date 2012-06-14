@@ -26,6 +26,9 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 
 	private String cookiePath = "/";
 
+	/** Memcached Session 超时时间(单位：分钟) */
+	private String sessionTimeout;
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
@@ -66,7 +69,7 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 			_response.addCookie(mycookies);
 		}
 
-		chain.doFilter(new HttpServletRequestWrapper(sid, _request), _response);
+		chain.doFilter(new HttpServletRequestWrapper(sid, _request,sessionTimeout), _response);
 
 	}
 
@@ -74,6 +77,7 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.sessionId = filterConfig.getInitParameter("sessionId");
 		this.cookieDomain = filterConfig.getInitParameter("cookieDomain");
+		this.sessionTimeout = filterConfig.getInitParameter("sessionTimeout");
 
 		if (this.cookieDomain == null) {
 			this.cookieDomain = "";
@@ -82,6 +86,10 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 		this.cookiePath = filterConfig.getInitParameter("cookiePath");
 		if (this.cookiePath == null || this.cookiePath.length() == 0) {
 			this.cookiePath = "/";
+		}
+
+		if (this.sessionTimeout == null) {// 默认10分钟
+			this.sessionTimeout = "10";
 		}
 	}
 

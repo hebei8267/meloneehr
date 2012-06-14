@@ -15,11 +15,29 @@ public class MemcachedSessionService {
 
 	private SpyMemcachedClient mc;
 
-	public static synchronized MemcachedSessionService getInstance() {
+	/** Memcached Session 超时时间(单位：秒) */
+	private int _sessionTimeout;
+
+	// 数量不得超过60* 60* 24 *30（在30天的秒数）
+	// 0代表永久有效
+	void setSessionTimeout(String sessionTimeout) {
+		if (null == sessionTimeout) {
+			return;
+		}
+		_sessionTimeout = Integer.parseInt(sessionTimeout) * 60;
+		System.out.println("#################################################_sessionTimeout=" + _sessionTimeout);
+	}
+
+	public static synchronized MemcachedSessionService getInstance(String sessionTimeout) {
 		if (instance == null) {
 			instance = new MemcachedSessionService();
 		}
+		instance.setSessionTimeout(sessionTimeout);
 		return instance;
+	}
+
+	public static synchronized MemcachedSessionService getInstance() {
+		return getInstance(null);
 	}
 
 	private MemcachedSessionService() {
@@ -30,8 +48,6 @@ public class MemcachedSessionService {
 	public Map getSession(String id) {
 		long s1 = System.currentTimeMillis();
 
-		// String jsonString = mc.get(id);
-		// Map session = jsonMapper.fromJson(jsonString, Map.class);
 		if (null != mc.get(id)) {
 			logger.debug(mc.get(id).getClass().toString());
 			logger.debug(mc.get(id).toString());
@@ -41,10 +57,7 @@ public class MemcachedSessionService {
 		if (session == null) {
 			session = new HashMap();
 			// 单位：秒
-			// 数量不得超过60* 60* 24 *30（在30天的秒数）
-			// 0代表永久有效
-			// 注意时间????????
-			boolean r = mc.safeSet(id, 0, session);
+			boolean r = mc.safeSet(id, _sessionTimeout, session);
 			logger.debug("Create new Session()" + r);
 
 		}
@@ -57,12 +70,13 @@ public class MemcachedSessionService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void saveSession(String id, String key, Object value) {
 		long s1 = System.currentTimeMillis();
+
 		// 取得Session对象
 		Map map = getSession(id);
 		// 设置key/value
 		map.put(key, value);
-		// 注意时间????????
-		mc.safeSet(id, 0, map);
+		// 单位：秒
+		mc.safeSet(id, _sessionTimeout, map);
 
 		logger.debug("saveSession()" + (System.currentTimeMillis() - s1));
 
@@ -71,10 +85,14 @@ public class MemcachedSessionService {
 	@SuppressWarnings("rawtypes")
 	public void removeAttribute(String id, String key) {
 		long s1 = System.currentTimeMillis();
+
 		// 取得Session对象
 		Map map = getSession(id);
+		// 删除attribute
 		map.remove(key);
-		// 此处是否要更新
+		// 单位：秒
+		mc.safeSet(id, _sessionTimeout, map);
+
 		logger.debug("removeAttribute()" + (System.currentTimeMillis() - s1));
 
 	}
