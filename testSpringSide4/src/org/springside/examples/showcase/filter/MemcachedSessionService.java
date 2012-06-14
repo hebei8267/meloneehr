@@ -25,14 +25,15 @@ public class MemcachedSessionService {
 			return;
 		}
 		_sessionTimeout = Integer.parseInt(sessionTimeout) * 60;
-		System.out.println("#################################################_sessionTimeout=" + _sessionTimeout);
+		logger.debug("Set Session Timeout " + _sessionTimeout);
 	}
 
 	public static synchronized MemcachedSessionService getInstance(String sessionTimeout) {
 		if (instance == null) {
 			instance = new MemcachedSessionService();
+			instance.setSessionTimeout(sessionTimeout);
 		}
-		instance.setSessionTimeout(sessionTimeout);
+
 		return instance;
 	}
 
