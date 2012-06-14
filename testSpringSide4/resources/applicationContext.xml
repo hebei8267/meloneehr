@@ -74,6 +74,11 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 
+
+	<!-- 使用静态变量缓存applicationContext -->
+	<bean class="org.springside.modules.utils.SpringContextHolder"
+		lazy-init="false" />
+
 	<!-- production/local development环境 -->
 	<beans profile="production,development">
 		<context:property-placeholder
@@ -92,25 +97,28 @@
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
 	</beans>
-	
+
 	<!-- unit test环境 -->
 	<beans profile="test">
-		<context:property-placeholder ignore-resource-not-found="true"
+		<context:property-placeholder
+			ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
-          			  classpath*:/application.test.properties" />	
-		
+          			  classpath*:/application.test.properties" />
+
 		<!-- 嵌入式内存中数据库 -->
 		<jdbc:embedded-database id="dataSource" type="H2">
 			<jdbc:script location="classpath:sql/h2/schema.sql" />
 		</jdbc:embedded-database>
 
-		<jdbc:embedded-database id="quartzDataSource" type="H2">
+		<jdbc:embedded-database id="quartzDataSource"
+			type="H2">
 			<jdbc:script location="classpath:sql/h2/quartz.sql" />
 		</jdbc:embedded-database>
-		
+
 		<!-- 初始化默认数据 -->
-		<bean class="org.springside.modules.test.data.DataInitializer" lazy-init="false">	
-			<property name="dataSource" ref="dataSource"/>
+		<bean class="org.springside.modules.test.data.DataInitializer"
+			lazy-init="false">
+			<property name="dataSource" ref="dataSource" />
 			<property name="dataFile" value="/data/sample-data.xml" />
 		</bean>
 	</beans>
