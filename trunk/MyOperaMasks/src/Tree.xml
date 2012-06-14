@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DomainTreeNode>
+	<userData>Demos</userData>
+	<text>Operamasks Demos</text>
+	<expended>true</expended>
+	<DomainTreeNode>
+		<userData>简单例子1</userData>
+		<text>简单例子1</text>
+		<url>/index/example1.faces</url>
+		<expended>false</expended>
+	</DomainTreeNode>
+	<DomainTreeNode>
+		<userData>简单例子2</userData>
+		<text>简单例子2</text>
+		<url>/index/example2.faces</url>
+		<expended>false</expended>
+	</DomainTreeNode>
+	<DomainTreeNode>
+		<userData>简单例子3</userData>
+		<text>简单例子3</text>
+		<url>/index/example3.xhtml</url>
+		<expended>false</expended>
+	</DomainTreeNode>
+</DomainTreeNode>
