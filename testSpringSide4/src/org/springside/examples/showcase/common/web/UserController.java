@@ -37,8 +37,8 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String list(HttpServletRequest request,Model model) {
-		HttpSession	s=	request.getSession();
+	public String list(HttpServletRequest request, Model model) {
+		HttpSession s = request.getSession();
 		System.out.println(s.getAttribute("AAAAA"));
 		System.out.println(s.getAttribute("BBBBB"));
 		System.out.println(s.getAttribute("CCCCC"));
@@ -46,7 +46,7 @@ public class UserController {
 		System.out.println(s.getAttribute("AAAAA"));
 		System.out.println(s.getAttribute("BBBBB"));
 		System.out.println(s.getAttribute("CCCCC"));
-		
+
 		List<User> users = accountManager.getAllUser();
 		model.addAttribute("users", users);
 		return "common/userList";
@@ -60,13 +60,17 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "get/{id}")
-	public String getUser(@PathVariable("id") Long id, Model model) {
+	public String getUser(HttpServletRequest request, @PathVariable("id") Long id, Model model) {
+		HttpSession s = request.getSession();
+		System.out.println(s.getAttribute("AAAAA"));
+		System.out.println(s.getAttribute("BBBBB"));
+		System.out.println(s.getAttribute("CCCCC"));
 
 		model.addAttribute("user", accountManager.getUser(id));
 		initStatus(model);
 		return "common/userForm";
 	}
-	
+
 	/**
 	 * 更具用户ID取得用户信息
 	 * 
@@ -77,7 +81,7 @@ public class UserController {
 	@RequestMapping(value = "getByEffective/{id}")
 	public String getUserEffective(@PathVariable("id") Long id, Model model) {
 
-		model.addAttribute("user", accountManager.getUser(id,null));
+		model.addAttribute("user", accountManager.getUser(id, null));
 		initStatus(model);
 		return "common/userForm";
 	}
