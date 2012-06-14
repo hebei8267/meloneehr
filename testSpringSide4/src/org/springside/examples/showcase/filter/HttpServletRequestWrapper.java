@@ -15,10 +15,12 @@ public class HttpServletRequestWrapper extends javax.servlet.http.HttpServletReq
 		this.sessionTimeout = sessionTimeout;
 	}
 
+	@Override
 	public HttpSession getSession(boolean create) {
 		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(create), sessionTimeout);
 	}
 
+	@Override
 	public HttpSession getSession() {
 		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(), sessionTimeout);
 	}

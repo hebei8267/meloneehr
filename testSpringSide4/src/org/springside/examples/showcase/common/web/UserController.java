@@ -2,8 +2,6 @@ package org.springside.examples.showcase.common.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +35,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String list(HttpServletRequest request, Model model) {
-		HttpSession s = request.getSession();
-		System.out.println(s.getAttribute("AAAAA"));
-		System.out.println(s.getAttribute("BBBBB"));
-		System.out.println(s.getAttribute("CCCCC"));
-		s.removeAttribute("BBBBB");
-		System.out.println(s.getAttribute("AAAAA"));
-		System.out.println(s.getAttribute("BBBBB"));
-		System.out.println(s.getAttribute("CCCCC"));
+	public String list(Model model) {
 
 		List<User> users = accountManager.getAllUser();
 		model.addAttribute("users", users);
@@ -60,12 +50,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "get/{id}")
-	public String getUser(HttpServletRequest request, @PathVariable("id") Long id, Model model) {
-		HttpSession s = request.getSession();
-		System.out.println(s.getAttribute("AAAAA"));
-		System.out.println(s.getAttribute("BBBBB"));
-		System.out.println(s.getAttribute("CCCCC"));
-
+	public String getUser(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("user", accountManager.getUser(id));
 		initStatus(model);
 		return "common/userForm";

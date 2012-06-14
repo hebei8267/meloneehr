@@ -29,7 +29,7 @@ public class MemcachedSessionService {
 	}
 
 	public static synchronized MemcachedSessionService getInstance(String sessionTimeout) {
-		if (instance == null) {
+		if (null == instance) {
 			instance = new MemcachedSessionService();
 			instance.setSessionTimeout(sessionTimeout);
 		}
