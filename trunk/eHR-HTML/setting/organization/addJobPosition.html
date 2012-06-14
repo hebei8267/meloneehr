@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../../ext/build/locale/ext-lang-zh_CN.js">
+        </script>
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css">
+        <title>Melone-eHR 人力资源管理</title>
+        <script type="text/javascript" src="../../js/common.js">
+        </script>
+        <script type="text/javascript" src="addJobPosition.js">
+        </script>
+    </head>
+    <body>
+        <div class="defaultPopWindowBody">
+        	<br>
+            <table class="appTitleTable">
+                <tr>
+                    <td class="appTitle">
+                    	添加职务信息
+                    </td>
+                </tr>
+                <tr>
+	                <td class="appScreenIDPopWindow">
+	                - DICTIONARY-F 0011 -
+	                </td>
+                </tr>
+                <tr>
+                    <table class="spiltLine">
+                        <tr>
+                            <td>
+                                <!-- 分割线 -->
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tip">
+                        <!-- 操作说明 --><img src="../../images/tip.png"><span class="need">注意:[<img src="../../images/cube-red.png">]为必填项</span>
+						<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除已有[适用组织范围]&nbsp;(可多选&nbsp;--&nbsp;
+						<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table>
+                <tr>
+                    <td style="padding-left: 20px">
+                        &nbsp;
+                    </td>
+                    <td valign="top">
+                        <table>
+                            <tr>
+                                <td colspan="4" class="itemTitle">
+                                    职务详细信息
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemName" height="30" width="100">
+                                    <img src="../../images/cube-red.png">名称
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="inputText">
+                                </td>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <img src="../../images/cube-red.png">职务类型
+                                </td>
+                                <td class="inputItemCell" height="30" width="200">
+                                    <input type="text" size="20" maxlength="20" class="readonly" readonly="true">
+									<img src="../../images/zoom.png" title="选择" class="iconButton">
+									<img src="../../images/em-cross.png" title="清除" class="iconButton">
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="inputItemName" height="30" width="100">
+                                    <img src="../../images/cube-red.png">适用组织范围
+                                </td>
+                                <td class="inputItemCell" height="170" width="200">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-top: 5px;">
+                                                <input type="radio" name="aa" value="1" checked="true">适用组织
+                                            </td>
+                                            <td style="padding-top: 5px;">
+                                                <input type="radio" name="aa" value="2">非适用组织
+                                            </td>
+                                        </tr>
+										<tr>
+                                            <td style="padding-top: 5px;" colspan="2">
+                                                <select class="inputMultSelect" size="6" multiple="true">
+                                                    <option><img src="../../images/cube-red.png"><img src="images/cube-red.png">软件公司</option>
+                                                    <option>综合业务部</option>
+                                                    <option>质量管理部</option>
+                                                    <option>开发一部</option>
+                                                    <option>开发二部</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+										<tr>
+											<td style="padding-top: 5px;">
+                                                <input value="添加" class="buttonSubmit" type="button" onclick="openSubWindow('setOrgArea.html','630','470')">
+                                            </td>
+											<td style="padding-top: 5px;">
+												<input value="删除" class="buttonDelete" type="button">
+											</td>
+										</tr>
+                                    </table>
+                                </td>
+                                <td class="inputItemName" height="30" width="100" valign="top" style="padding-top: 5px;">
+                                    详细描述
+                                </td>
+                                <td class="inputItemCell" height="115" width="200">
+                                    <textarea rows="5" cols="20" class="inputTextarea"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+			                    <td height="10">
+			                    </td>
+			                </tr>
+                            <tr>
+                            	<td colspan="4" align="right">
+                                <!-- 按钮 START -->
+                                <table>
+                                    <tr>
+                                        <td align="right">
+                                            <input value="添  加" class="buttonSubmitLong" type="button">
+                                        </td>
+                                        <td width="20">
+                                        </td>
+                                        <td align="right">
+                                            <input value="关  闭" class="buttonResetLong" type="button" onclick="javascript:parent.close();">
+                                        </td>
+                                    </tr>
+                                </table><!-- 按钮 END -->
+								</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="../../ext/resources/css/xtheme-gray.css" />
+        <script type="text/javascript" src="../../ext/adapter/ext/ext-base.js">
+        </script>
+        <script type="text/javascript" src="../../ext/ext-all.js">
+        </script>
+        <script type="text/javascript" src="../../ext/build/locale/ext-lang-zh_CN.js">
+        </script>
+        <!-- ExtJS -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css">
+        <title>Melone-eHR 人力资源管理</title>
+        <script type="text/javascript" src="../../js/common.js">
+        </script>
+        <script type="text/javascript" src="setOrgArea.js">
+        </script>
+    </head>
+    <body>
+        <div class="defaultPopWindowBody">
+            <br>
+            <table class="appTitleTable">
+            	<tr>
+                	<td class="appTitle">
+                    	组织范围设定
+                    </td>
+                </tr>
+                <tr>
+                    <td class="appScreenIDPopWindow">
+                   		- ORGANIZATION-O 001 -
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <table class="spiltLine">
+                        <tr>
+                            <td>
+                                <!-- 分割线 -->
+                            </td>
+                        </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tip">
+                        <!-- 操作说明 --><img src="../../images/tip.png">删除已有[适用组织范围]&nbsp;(可多选&nbsp;--&nbsp;<span style="font-weight: bold;">按住Ctrl多选,Shift连续选择</span>)
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table>
+                <tr>
+                    <td style="padding-left: 20px">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <div id="organizationInfoTreeDiv">
+                        </div>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;<input value="添  加" class="buttonSubmit" type="button">&nbsp;&nbsp;&nbsp;
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;<input value="删  除" class="buttonDelete" type="button">&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td valign="top" height="300" width="250">
+                        <table>
+                            <tr>
+                                <td class="itemTitle">
+                                    适用组织范围
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="inputItemCell" width="250">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-top:7px;padding-bottom:7px;">
+                                                <select class="inputMultSelect" size="15" multiple="true" style="width:230px;height:260px;">
+                                                    <option>**软件公司</option>
+                                                    <option>综合业务部</option>
+                                                    <option>质量管理部</option>
+                                                    <option>开发一部</option>
+                                                    <option>开发二部</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+					<td height="10">
+			   		</td>
+				</tr>
+             	<tr>
+                    <td colspan="4" align="right">
+                        <!-- 按钮 START -->
+                        <table>
+                            <tr>
+                                <td align="right">
+                                    <input value="添  加" class="buttonSubmitLong" type="button">
+                                </td>
+                                <td width="20">
+                                </td>
+                                <td align="right">
+                                    <input value="关  闭" class="buttonResetLong" type="button" onclick="javascript:parent.close();">
+                                </td>
+                            </tr>
+                        </table><!-- 按钮 END -->
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </body>
+</html>
