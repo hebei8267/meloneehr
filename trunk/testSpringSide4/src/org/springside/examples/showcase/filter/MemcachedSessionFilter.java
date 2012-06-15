@@ -93,7 +93,7 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 				if (cookie.getName().equals(sessionId)) {
 					String sid = cookie.getValue();
 
-					logger.debug("Get Cookie sid value" + sid);
+					logger.debug("Get Cookie sid value " + sid);
 					return sid;
 				}
 			}
