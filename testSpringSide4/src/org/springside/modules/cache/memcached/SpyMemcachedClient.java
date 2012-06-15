@@ -118,6 +118,7 @@ public class SpyMemcachedClient implements DisposableBean {
 	 * 异步Incr方法, 不支持默认值, 若key不存在返回-1.
 	 */
 	public Future<Long> asyncIncr(String key, int by) {
+
 		return memcachedClient.asyncIncr(key, by);
 	}
 
@@ -132,11 +133,33 @@ public class SpyMemcachedClient implements DisposableBean {
 		logger.warn("spymemcached client receive an exception with key:" + key, e);
 	}
 
-	@Override
 	public void destroy() throws Exception {
 		if (memcachedClient != null) {
 			memcachedClient.shutdown(shutdownTimeout, TimeUnit.MILLISECONDS);
 		}
+	}
+
+	/**
+	 * Replace an object with the given value (transcoded with the default
+	 * transcoder) iff there is already a value for the given key.
+	 * 
+	 * The exp value is passed along to memcached exactly as given, and will be
+	 * processed per the memcached protocol specification:
+	 * 
+	 * The actual value sent may either be Unix time (number of seconds since
+	 * January 1, 1970, as a 32-bit value), or a number of seconds starting from
+	 * current time. In the latter case, this number of seconds may not exceed
+	 * 60*60*24*30 (number of seconds in 30 days); if the number sent by a
+	 * client is larger than that, the server will consider it to be real Unix
+	 * time value rather than an offset from current time.
+	 * 
+	 * @param key - the key under which this object should be added.
+	 * @param exp - the expiration of this object
+	 * @param o - the object to store
+	 * @return a future representing the processing of this operation
+	 */
+	public Future<Boolean> replace(String key, int exp, Object o) {
+		return memcachedClient.replace(key, exp, o);
 	}
 
 	public MemcachedClient getMemcachedClient() {
