@@ -21,6 +21,9 @@
 				<!-- 定义首页 -->
 				参见   index.html
 			</textarea>
+			
+			<br>
+			中央式缓存MemcachedSession的使用参见MemcachedSessionFilter.java
 			<form:form action="${ctx}/sc/index/setSession" method="post">
 				<input id="submit" class="btn btn-primary" type="submit" value="Set Session"/>
 			</form:form>
