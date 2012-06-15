@@ -16,6 +16,8 @@
 			classpath*:/cache/applicationContext-ehcache.xml
 			classpath*:/cache/applicationContext-memcached.xml
 			classpath*:applicationContext-aspect.xml
+			classpath*:/schedule/applicationContext-jdk-timer.xml
+			classpath*:/schedule/applicationContext-quartz-cron-local.xml
 		</param-value>
 	</context-param>
 
@@ -156,6 +158,36 @@
 		<servlet-name>jolokia-agent</servlet-name>
 		<url-pattern>/jolokia/*</url-pattern>
 	</servlet-mapping>
+
+
+	<!-- 高效读取静态内容 Content Servlet 配置 -->
+	<servlet>
+		<servlet-name>StaticContentServlet</servlet-name>
+		<servlet-class>org.springside.examples.showcase.web.StaticContentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaticContentServlet</servlet-name>
+		<url-pattern>/static-content</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RemoteContentServlet</servlet-name>
+		<servlet-class>org.springside.examples.showcase.web.RemoteContentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoteContentServlet</servlet-name>
+		<url-pattern>/remote-content</url-pattern>
+	</servlet-mapping>
+	<!-- Cache Control Header filter -->
+	<filter>
+		<filter-name>cacheControlHeaderFilter</filter-name>
+		<filter-class>org.springside.examples.showcase.web.CacheControlHeaderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>cacheControlHeaderFilter</filter-name>
+		<url-pattern>/static/*</url-pattern>
+	</filter-mapping>
+
 
 
 	<!-- session 超时时间(单位：分钟),使用MemcachedSessionFilter时无效 -->
