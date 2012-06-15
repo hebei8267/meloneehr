@@ -30,29 +30,36 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 	private String sessionTimeout;
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-			ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest _request = (HttpServletRequest) request;
 		HttpServletResponse _response = (HttpServletResponse) response;
 
 		logger.debug(_request.getRequestURL().toString());
 
-		Cookie cookies[] = _request.getCookies();
-		Cookie sCookie = null;
+		// 从Cookie中取得Session的key
+		String sid = getCookieValue(_request);
 
-		String sid = "";
-		if (cookies != null && cookies.length > 0) {
-			for (int i = 0; i < cookies.length; i++) {
-				sCookie = cookies[i];
-				if (sCookie.getName().equals(sessionId)) {
-					sid = sCookie.getValue();
+		// TODO:在此作身份验证
 
-					logger.debug("Get Cookie sid value" + sid);
-				}
-			}
-		}
+		// 判断当前时候否存在Cookie，如果没有则创建新的Cookie
+		createCookie(sid, _response);
 
+		HttpServletRequestWrapper _requestWrapper = new HttpServletRequestWrapper(sid, _request, sessionTimeout);
+		// 更新截止日期
+		_requestWrapper.updateExpirationDate();
+
+		chain.doFilter(_requestWrapper, _response);
+
+	}
+
+	/**
+	 * 判断当前时候否存在Cookie，如果没有则创建新的Cookie
+	 * 
+	 * @param sid Session的key
+	 * @param response
+	 */
+	private void createCookie(String sid, HttpServletResponse response) {
 		if (sid == null || sid.length() == 0) {
 			sid = java.util.UUID.randomUUID().toString();
 
@@ -67,11 +74,32 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 			}
 			mycookies.setPath(this.cookiePath);
 
-			_response.addCookie(mycookies);
+			response.addCookie(mycookies);
+		}
+	}
+
+	/**
+	 * 从Cookie中取得Session的key
+	 * 
+	 * @param request HttpServletRequest
+	 * @return Session的key
+	 */
+	private String getCookieValue(HttpServletRequest request) {
+		Cookie cookies[] = request.getCookies();
+
+		if (cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				if (cookie.getName().equals(sessionId)) {
+					String sid = cookie.getValue();
+
+					logger.debug("Get Cookie sid value" + sid);
+					return sid;
+				}
+			}
 		}
 
-		chain.doFilter(new HttpServletRequestWrapper(sid, _request, sessionTimeout), _response);
-
+		return null;
 	}
 
 	@Override

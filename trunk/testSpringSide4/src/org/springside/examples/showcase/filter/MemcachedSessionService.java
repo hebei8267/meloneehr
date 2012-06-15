@@ -17,6 +17,7 @@ public class MemcachedSessionService {
 
 	/** Memcached Session 超时时间(单位：秒) */
 	private int _sessionTimeout;
+	private static String USER_SESSION_PREFIX = "USER_SESSION_";
 
 	// 数量不得超过60* 60* 24 *30（在30天的秒数）
 	// 0代表永久有效
@@ -25,7 +26,7 @@ public class MemcachedSessionService {
 			return;
 		}
 		_sessionTimeout = Integer.parseInt(sessionTimeout) * 60;
-		logger.debug("Set Session Timeout " + _sessionTimeout);
+		// logger.debug("Set Session Timeout " + _sessionTimeout);
 	}
 
 	public static synchronized MemcachedSessionService getInstance(String sessionTimeout) {
@@ -47,63 +48,83 @@ public class MemcachedSessionService {
 
 	@SuppressWarnings("rawtypes")
 	public Map getSession(String id) {
-		long s1 = System.currentTimeMillis();
+		// long s1 = System.currentTimeMillis();
 
-		if (null != mc.get(id)) {
-			logger.debug(mc.get(id).getClass().toString());
-			logger.debug(mc.get(id).toString());
-		}
-		Map session = mc.get(id);
+		String _id = USER_SESSION_PREFIX + id;
+		Map session = mc.get(_id);
 
 		if (session == null) {
 			session = new HashMap();
 			// 单位：秒
-			boolean r = mc.safeSet(id, _sessionTimeout, session);
-			logger.debug("Create new Session()" + r);
+			boolean r = mc.safeSet(_id, _sessionTimeout, session);
 
+			logger.debug("Create new Session()" + r);
 		}
 
-		logger.debug("getSession()" + (System.currentTimeMillis() - s1));
+		// logger.debug("getSession()" + (System.currentTimeMillis() - s1));
 
 		return session;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void saveSession(String id, String key, Object value) {
-		long s1 = System.currentTimeMillis();
+		// long s1 = System.currentTimeMillis();
 
 		// 取得Session对象
 		Map map = getSession(id);
 		// 设置key/value
 		map.put(key, value);
-		// 单位：秒
-		mc.safeSet(id, _sessionTimeout, map);
 
-		logger.debug("saveSession()" + (System.currentTimeMillis() - s1));
+		String _id = USER_SESSION_PREFIX + id;
+		// 单位：秒
+		mc.safeSet(_id, _sessionTimeout, map);
+
+		// logger.debug("saveSession()" + (System.currentTimeMillis() - s1));
 
 	}
 
 	@SuppressWarnings("rawtypes")
 	public void removeAttribute(String id, String key) {
-		long s1 = System.currentTimeMillis();
+		// long s1 = System.currentTimeMillis();
 
 		// 取得Session对象
 		Map map = getSession(id);
 		// 删除attribute
 		map.remove(key);
-		// 单位：秒
-		mc.safeSet(id, _sessionTimeout, map);
 
-		logger.debug("removeAttribute()" + (System.currentTimeMillis() - s1));
+		String _id = USER_SESSION_PREFIX + id;
+		// 单位：秒
+		mc.safeSet(_id, _sessionTimeout, map);
+
+		// logger.debug("removeAttribute()" + (System.currentTimeMillis() -
+		// s1));
 
 	}
 
 	public void removeSession(String id) {
-		long s1 = System.currentTimeMillis();
+		// long s1 = System.currentTimeMillis();
 
-		mc.safeDelete(id);
+		String _id = USER_SESSION_PREFIX + id;
+		mc.safeDelete(_id);
 
-		logger.debug("removeSession()" + (System.currentTimeMillis() - s1));
+		// logger.debug("removeSession()" + (System.currentTimeMillis() - s1));
+	}
+
+	/**
+	 * 更新截止日期
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateExpirationDate(String id) {
+		// long s1 = System.currentTimeMillis();
+
+		// 取得Session对象
+		Map map = getSession(id);
+
+		String _id = USER_SESSION_PREFIX + id;
+		mc.replace(_id, _sessionTimeout, map);
+
+		// logger.debug("removeAttribute()" + (System.currentTimeMillis() -
+		// s1));
 	}
 
 }

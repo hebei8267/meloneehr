@@ -24,4 +24,11 @@ public class HttpServletRequestWrapper extends javax.servlet.http.HttpServletReq
 	public HttpSession getSession() {
 		return new MemcachedHttpSessionWrapper(this.sid, super.getSession(), sessionTimeout);
 	}
+
+	/**
+	 * 更新截止日期
+	 */
+	public void updateExpirationDate() {
+		new MemcachedHttpSessionWrapper(this.sid, super.getSession(), sessionTimeout).updateExpirationDate();
+	}
 }
