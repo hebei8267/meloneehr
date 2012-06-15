@@ -21,17 +21,17 @@
 		<li id="cache-tab">
 			<a href="${ctx}/sc/story/cache/">Cache演示</a>
 		</li>
+		<li id="schedule-tab">
+			<a href="${ctx}/sc/story/schedule/">定时任务演示</a>
+		</li>
+		<li id="web-tab">
+			<a href="${ctx}/sc/story/web/">Web演示</a>
+		</li>
 		<li id="jms-tab">
 			<a href="${ctx}/story/jms/">JMS演示</a>
 		</li>
-		<li id="schedule-tab">
-			<a href="${ctx}/story/schedule/">定时任务演示</a>
-		</li>
 		<li id="security-tab">
 			<a href="${ctx}/story/security/">安全演示</a>
-		</li>
-		<li id="web-tab">
-			<a href="${ctx}/story/web/">Web演示</a>
 		</li>
 		<li id="executablewar-tab">
 			<a href="${ctx}/story/executablewar/">可运行war包演示</a>
