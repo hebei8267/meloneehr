@@ -46,4 +46,11 @@ public class MemcachedHttpSessionWrapper extends MemcachedHttpSession {
 		this.map.put(name, value);
 		MemcachedSessionService.getInstance().saveSession(this.sid, name, value);
 	}
+
+	/**
+	 * 更新截止日期
+	 */
+	public void updateExpirationDate() {
+		MemcachedSessionService.getInstance().updateExpirationDate(this.sid);
+	}
 }
