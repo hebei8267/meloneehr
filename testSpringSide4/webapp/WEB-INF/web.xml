@@ -108,6 +108,10 @@
 		<filter-name>MemcachedSessionFilter</filter-name>
 		<url-pattern>/sc/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>MemcachedSessionFilter</filter-name>
+		<url-pattern>/rs/*</url-pattern>
+	</filter-mapping>
 
 
 	<!-- Srping OpenSessionInView filter -->
