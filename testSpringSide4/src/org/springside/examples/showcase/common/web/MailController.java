@@ -16,14 +16,14 @@ public class MailController {
 	private SimpleMailService simpleMailService;
 
 	@RequestMapping(value = "sendSimpleMail")
-	public void sendSimpleMail() {
+	public String sendSimpleMail() {
 		simpleMailService.sendNotificationMail("calvinTest");
-
+		return "story/utilizes";
 	}
 
 	@RequestMapping(value = "sendMimeMail")
-	public void sendMimeMail() {
+	public String sendMimeMail() {
 		mimeMailService.sendNotificationMail("calvinTest");
-	
+		return "story/utilizes";
 	}
 }
