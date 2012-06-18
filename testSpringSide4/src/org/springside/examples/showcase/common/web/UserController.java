@@ -105,7 +105,7 @@ public class UserController {
 
 		accountManager.saveUser(user);
 		redirectAttributes.addFlashAttribute("message", "保存用户成功");
-		return "redirect:/common/user";
+		return "redirect:/sc/common/user";
 	}
 
 	/**
