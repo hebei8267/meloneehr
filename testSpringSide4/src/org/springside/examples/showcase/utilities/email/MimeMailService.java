@@ -46,8 +46,9 @@ public class MimeMailService {
 			MimeMessage msg = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true, DEFAULT_ENCODING);
 
-			helper.setTo("springside3.demo@gmail.com");
-			helper.setFrom("he_bei@founder.com.cn");
+			
+			helper.setFrom("springside3.demo@gmail.com");
+			helper.setTo("he_bei@founder.com.cn");
 			helper.setSubject("用户修改通知");
 
 			String content = generateContent(userName);
