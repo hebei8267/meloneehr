@@ -27,6 +27,9 @@
 		<li id="web-tab">
 			<a href="${ctx}/sc/story/web/">Web演示</a>
 		</li>
+		<li id="utilizes-tab">
+			<a href="${ctx}/sc/story/utilizes/">工具类演示</a>
+		</li>
 		<li id="jms-tab">
 			<a href="${ctx}/story/jms/">JMS演示</a>
 		</li>
@@ -36,8 +39,6 @@
 		<li id="executablewar-tab">
 			<a href="${ctx}/story/executablewar/">可运行war包演示</a>
 		</li>
-		<li id="utilizes-tab">
-			<a href="${ctx}/story/utilizes/">工具类演示</a>
-		</li>
+		
 	</ul>
 </div>
