@@ -31,14 +31,10 @@
 			<a href="${ctx}/sc/story/utilizes/">工具类演示</a>
 		</li>
 		<li id="jms-tab">
-			<a href="${ctx}/story/jms/">JMS演示</a>
+			<a href="${ctx}/sc/story/jms/">JMS演示</a>
 		</li>
 		<li id="security-tab">
 			<a href="${ctx}/story/security/">安全演示</a>
-		</li>
-		<li id="executablewar-tab">
-			<a href="${ctx}/story/executablewar/">可运行war包演示</a>
-		</li>
-		
+		</li>		
 	</ul>
 </div>
