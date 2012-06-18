@@ -19,6 +19,7 @@
 			classpath*:/schedule/applicationContext-jdk-timer.xml
 			classpath*:/schedule/applicationContext-quartz-cron-local.xml
 			classpath*:/email/applicationContext-email.xml
+			classpath*:/jms/applicationContext-jms-simple.xml
 		</param-value>
 	</context-param>
 
