@@ -15,9 +15,6 @@
 <sitemesh:head />
 </head>
 <body>
-	<div data-role="page">
-		<sitemesh:body />
-	</div>
-	<!-- /page -->
+	<sitemesh:body />
 </body>
 </html>
