@@ -3,9 +3,14 @@
 	<excludes>
 		<pattern>/static/*</pattern>
 		<pattern>/rs/*</pattern>
+		<!-- <pattern>/ws/*</pattern>为测试是否需要添加WebServices -->
 	</excludes>
-	
+
 	<decorator name="default" page="default.jsp">
-		<pattern>/*</pattern>
+		<pattern>/sc*</pattern>
+	</decorator>
+
+	<decorator name="mobile" page="mobile.jsp">
+		<pattern>/msc*</pattern>
 	</decorator>
 </decorators>

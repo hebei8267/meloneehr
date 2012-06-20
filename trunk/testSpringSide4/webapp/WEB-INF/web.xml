@@ -48,6 +48,23 @@
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>/sc/*</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+	<!-- Spring MVC Servlet(mobile View) -->
+	<servlet>
+		<servlet-name>springMobileServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc-mobile.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMobileServlet</servlet-name>
+		<url-pattern>/msc/*</url-pattern>
+	</servlet-mapping>
 
 
 	<!-- Filter 定义 -->
