@@ -134,6 +134,7 @@
 
 
 	<!-- Srping OpenSessionInView filter -->
+	<!-- Open Entity Manager in View filter -->
 	<filter>
 		<filter-name>SpringOpenEntityManagerInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
