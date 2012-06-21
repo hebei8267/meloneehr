@@ -34,7 +34,7 @@
 			<a href="${ctx}/sc/story/jms/">JMS演示</a>
 		</li>
 		<li id="security-tab">
-			<a href="${ctx}/story/security/">安全演示</a>
+			<a href="${ctx}/sc/story/security/">安全演示</a>
 		</li>		
 	</ul>
 </div>
