@@ -1,6 +1,6 @@
 Linux下的Memcache安装
 
-inux下Memcache服务器端的安装
+Linux下Memcache服务器端的安装
 服务器端主要是安装memcache服务器端，目前的最新版本是 memcached-1.3.0 。
 下载：http://www.danga.com/memcached/dist/memcached-1.2.2.tar.gz
 另外，Memcache用到了libevent这个库用于Socket的处理，所以还需要安装libevent，libevent的最新版本是libevent-1.3。（如果你的系统已经安装了libevent，可以不用安装）
