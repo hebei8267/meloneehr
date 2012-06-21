@@ -14,7 +14,7 @@ public interface UserJpaDao extends PagingAndSortingRepository<User, Long> {
 	public User findByLoginName(String loginName);
 
 	public List<User> findByLoginNameAndName(String loginName, String name);
-//??????????????????????
+// 分页
 	public Page<User> findByName(String name, Pageable pageable);
 
 }

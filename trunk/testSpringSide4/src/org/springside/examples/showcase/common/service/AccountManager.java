@@ -178,8 +178,15 @@ public class AccountManager {
 		return userJpaDao.count();
 	}
 
+	/**
+	 * 分页
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public Page<User> findByName(String name) {
-		return userJpaDao.findByName(name, new PageRequest(1, 2));
+		//页数从0开始
+		return userJpaDao.findByName(name, new PageRequest(0, 3));
 	}
 
 	/**
