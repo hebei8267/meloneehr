@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -176,11 +178,10 @@ public class AccountManager {
 		return userJpaDao.count();
 	}
 
-	//
-	// public User findUserByLoginName(String loginName) {
-	// return userJpaDao.findByLoginName(loginName);
-	// }
-	//
+	public Page<User> findByName(String name) {
+		return userJpaDao.findByName(name, new PageRequest(1, 2));
+	}
+
 	/**
 	 * 发送用户变更消息.
 	 * 

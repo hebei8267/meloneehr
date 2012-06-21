@@ -1,10 +1,12 @@
 package org.springside.examples.showcase.common.web;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,6 +69,18 @@ public class UserController {
 	public String getUserEffective(@PathVariable("id") Long id, Model model) {
 
 		model.addAttribute("user", accountManager.getUser(id, null));
+		// TODO 测试分页
+		Page<User> users = accountManager.findByName("111");
+		System.out.println(users.getTotalElements());
+		System.out.println(users.getSize());
+		System.out.println(users.getNumber());
+		System.out.println(users.getNumberOfElements());
+		List<User> userList = users.getContent();
+		for (Iterator iterator = userList.iterator(); iterator.hasNext();) {
+			User user = (User) iterator.next();
+			System.out.println(user.getLoginName());
+		}
+
 		initStatus(model);
 		return "common/userForm";
 	}
