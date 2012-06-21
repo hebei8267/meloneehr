@@ -71,14 +71,17 @@ public class UserController {
 		model.addAttribute("user", accountManager.getUser(id, null));
 		// TODO 测试分页
 		Page<User> users = accountManager.findByName("111");
-		System.out.println(users.getTotalElements());
-		System.out.println(users.getSize());
-		System.out.println(users.getNumber());
-		System.out.println(users.getNumberOfElements());
+		System.out.println("TotalElements "+users.getTotalElements());//共有多少数据
+		System.out.println("TotalPages "+users.getTotalPages());//共有多少页数据
+		System.out.println("Size "+users.getSize());//每页有多少数据
+		System.out.println("Number "+users.getNumber());//第几页  数字加一
+		System.out.println("NumberOfElements "+users.getNumberOfElements());//该页有几个数据
+	
+
 		List<User> userList = users.getContent();
 		for (Iterator iterator = userList.iterator(); iterator.hasNext();) {
 			User user = (User) iterator.next();
-			System.out.println(user.getLoginName());
+			System.out.println("user LoginName "+user.getLoginName());
 		}
 
 		initStatus(model);
