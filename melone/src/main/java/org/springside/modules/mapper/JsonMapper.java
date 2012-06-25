@@ -102,6 +102,7 @@ public class JsonMapper {
 	 * 反序列化复杂Collection如List<Bean>, 先使用函數createCollectionType构造类型,然后调用本函数.
 	 * @see #createCollectionType(Class, Class...)
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T fromJson(String jsonString, JavaType javaType) {
 		if (StringUtils.isEmpty(jsonString)) {
 			return null;
@@ -127,6 +128,7 @@ public class JsonMapper {
 	/**
 	 * 當JSON裡只含有Bean的部分屬性時，更新一個已存在Bean，只覆蓋該部分的屬性.
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T update(String jsonString, T object) {
 		try {
 			return (T) mapper.readerForUpdating(object).readValue(jsonString);

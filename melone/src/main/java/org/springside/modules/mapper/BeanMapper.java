@@ -39,6 +39,7 @@ public class BeanMapper {
 	/**
 	 * 基于Dozer转换Collection中对象的类型.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static <T> List<T> mapList(Collection sourceList, Class<T> destinationClass) {
 		List<T> destinationList = Lists.newArrayList();
 		for (Object sourceObject : sourceList) {
