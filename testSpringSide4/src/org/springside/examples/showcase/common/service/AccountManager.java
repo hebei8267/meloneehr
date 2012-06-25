@@ -185,7 +185,7 @@ public class AccountManager {
 	 * @return
 	 */
 	public Page<User> findByName(String name) {
-		//页数从0开始
+		// 页数从0开始
 		return userJpaDao.findByName(name, new PageRequest(0, 3));
 	}
 
