@@ -21,5 +21,9 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.springframework.context.support-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.springframework.orm-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.springframework.web-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.springframework.core-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
