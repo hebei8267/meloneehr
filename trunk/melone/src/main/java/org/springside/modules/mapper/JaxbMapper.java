@@ -93,6 +93,7 @@ public class JaxbMapper {
 	/**
 	 * Xml->Java Object.
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
