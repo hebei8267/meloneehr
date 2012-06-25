@@ -145,6 +145,7 @@ public class Servlets {
 	 * 
 	 * 比如有m2
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Map<String, Object> getParametersStartingWith(ServletRequest request, String prefix) {
 		Validate.notNull(request, "Request must not be null");
 		Enumeration paramNames = request.getParameterNames();
