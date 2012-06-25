@@ -12,8 +12,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.math.NumberUtils;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -23,8 +24,7 @@ import org.springframework.core.io.ResourceLoader;
 /**
  * Properties文件载入工具类. 可载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的值.
  * 
- * 本类有两种使用方法:
- * 1. 
+ * 本类有两种使用方法: 1.
  * 
  * @author calvin
  */
@@ -87,7 +87,8 @@ public class PropertiesLoader {
 	}
 
 	/**
-	 * 取出Boolean类型的Property，但以System的Property优先.如果都為Null則返回Default值,如果内容不为true/false则返回false.
+	 * 取出Boolean类型的Property，但以System的Property优先.如果都為Null則返回Default值,如果内容不为true/
+	 * false则返回false.
 	 */
 	public Boolean getBoolean(String key, boolean defaultValue) {
 		String strResult = getProperty(key);
