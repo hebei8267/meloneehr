@@ -100,10 +100,6 @@ public abstract class IdEntity implements Serializable {
 		this.version = version;
 	}
 
-	public abstract int hashCode();
-
-	public abstract boolean equals(Object obj);
-
 	public IdEntity() {
 
 	}
