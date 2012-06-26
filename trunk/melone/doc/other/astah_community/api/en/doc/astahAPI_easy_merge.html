@@ -1,0 +1,58 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[Easy Merge]</h2>
+<I>Easy Merge function of astah* API is supported in astah* UML and professional.</I>
+
+<h4>Easy Merge</h4>
+<p>
+<ol>
+<li>Open a project file</li>
+<li>Easy Merge</li>
+<li>Save as a project file</li>
+</ol>
+
+<TABLE border="1">
+<tr><td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        prjAccessor.easyMerge(&quot;C:\\API\\pro305_ref.asta&quot;, false);
+        
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td></tr>
+</TABLE>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

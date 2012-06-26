@@ -1,0 +1,152 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[How to Handle Project]</h2>
+<ol>
+<li><a href="#project_accessor_get">Getting ProjectAccessor</a></li>
+<li><a href="#open">Opening Project</a></li>
+<li><a href="#close">Closing Project</a></li>
+<li><a href="#create">Creating Project</a></li>
+<li><a href="#save">Saving Project</a></li>
+<li><a href="#save_as">Saving Project in another name</a></li>
+<li><a href="#get_project">Getting an original model of Project</a></li>
+</ol>
+
+Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for details of Interfaces and methods.
+
+<h4>[ProjectAccessor]</h4>
+By using ProjectAccessor, execute the following operations : open/close/save/save as/input XMI/output XMI/configure reference model/easy merge/search models.<br>
+
+<h4><a name="project_accessor_get">[Getting ProjectAccessor]</a></h4>
+Use getProjectAccessor method of ProjectAccessorFactory class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    <b>ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();</b>
+    prjAccessor.open("C:\\test.asta");
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="open">[Opening Project]</a></h4>
+Use open method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    <b>prjAccessor.open("C:\\test.asta");</b>
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="close">[Closing astah* Project]</a></h4>
+Use close method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    prjAccessor.open("C:\\test.asta");
+    <b>prjAccessor.close();</b>
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="create">[creating Project]</a></h4>
+Use create method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    <b>prjAccessor.create("C:\\test.asta");</b>
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="save">[Saving project]</a></h4>
+Use save method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    prjAccessor.create("C:\\test.asta");
+    <b>prjAccessor.save();</b>
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="save_as">[Saving Project in another name]</a></h4>
+Use saveAs method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    prjAccessor.create("C:\\test.asta");
+    <b>prjAccessor.saveAs("C:\\test2.asta");</b>
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="get_project">[Getting an original model of Project]</a></h4>
+Use getProject method of ProjectAccessor class.<br>
+<p>
+<I>Sample</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+    prjAccessor.create("C:\\test.asta");
+    <b>IModel model = prjAccessor.getProject();</b>
+    prjAccessor.saveAs("C:\\test2.asta");
+    prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

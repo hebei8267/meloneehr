@@ -1,0 +1,210 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[DiagramEditor]</h2>
+
+<ol>
+    <li><a href="#diagram_editor_outline">DiagramEditor</a></li>
+    <li><a href="#transaction">Transaction operation</a></li>
+    <li><a href="#setDiagram">setDiagram method</a></li>
+    <li><a href="#diagram_editor">DiagramEditor</a></li>
+    <li><a href="#basic_diagram_editor">BasicDiagramEditor</a></li>
+    <li><a href="#structure_diagram_editor">StructureDiagramEditor</a></li>
+    <li><a href="#class_diagram_editor">ClassDiagramEditor</a></li>
+    <li><a href="#usecase_diagram_editor">UseCaseDiagramEditor</a></li>
+    <li><a href="#state_machineDiagram_editor">StateMachineDiagramEditor</a></li>
+    <li><a href="#composite_structure_editor">CompositeStructureDiagramEditor</a></li>
+    <li><a href="#er_diagram_editor">ERDiagramEditor</a></li>
+    <li><a href="#mindmap_editor">MindmapEditor</a></li>
+    <li><a href="#create_presentation_requirement_dgm">RequirementDiagramEditor</a></li>
+</ol>
+
+<p>Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for Interfaces and methods.<br>
+Presentation of astah* API is supported in astah* UML and professional.
+</p>
+
+<h4><a name="diagram_editor_outline">[DiagramEditor]</a></h4>
+Use DiagramEditor to create/delete diagrams and presentations.<br>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>Diagram</b></td>
+        <td nowrap><b>Editor name</b></td>
+        <td nowrap><b>Parent Editor</b></td>
+        <td nowrap><b>Parent Editor</b></td>
+        <td nowrap><b>Parent Editor</b></td>
+        <td nowrap><b>Parent Editor</b></td>
+    </tr>
+    <tr>
+        <td nowrap>Class Diagram/Object Diagram Interface</td>
+        <td nowrap>ClassDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>UseCase Diagram Interface</td>
+        <td nowrap>UseCaseDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Statemachine Diagram Interface</td>
+        <td nowrap>StateMachineDiagramEditor</td>
+        <td nowrap>BehaviorDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Composite StructureDiagram Interface</td>
+        <td nowrap>CompositeStructureDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ER Diagram Interface</td>
+        <td nowrap>ERDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Mind Map Interface</td>
+        <td nowrap>MindmapEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Diagram Interface</td>
+        <td nowrap>RequirementDiagramEditor</td>
+        <td nowrap>ClassDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+    </tr>
+</table>
+
+
+<h4><a name="transaction">[Transaction Operation]</a></h4>
+Transaction operation is required when creating/modifying/deleting diagrams.<br>
+Please read <a href="astahAPI_transaction.html">Transaction operation</a>.<br>
+
+
+<h4><a name="setDiagram">[setDiagram Method]</a></h4>
+Set the target diagram by using setDiagram method before calling DiagramEditor method when editng/deleting diagrams or presentations.<br>
+If the target diagram is not set, an InvalidEditingException appears. If a diagram is created by using DiagramEditor API, the diagram will be set automatically.<br>
+
+
+<h4><a name="diagram_editor">[DiagramEditor]</a></h4>
+<ul>
+<li>Delete diagrams from project by using delete, deleteDiagram method of DiagramEditor<br>
+<li>Delete presentation from project by using deletePresentation method of DiagramEditor<br>
+<li>Create a text presentation by using createText method of DiagramEditor<br>
+<li>Create an image presentation by using createImage method of DiagramEditor<br>
+<li>Create a rectangle presentation by using createRect method of DiagramEditor<br>
+<li>Create a line presentation by using createLine method of DiagramEditor<br>
+</ul>
+
+<h4><a name="basic_diagram_editor">[BasicDiagramEditor]</a></h4>
+<ul>
+<li>Create a note presentation by using createNote method of BasicDiagramEditor<br>
+<li>Create a note anchor presentation by using createNoteAnchor method of BasicDiagramEditor<br>
+</ul>
+
+<h4><a name="structure_diagram_editor">[StructureDiagramEditor]</a></h4>
+<ul>
+<li>Create a rectanglar presentation(INodePresentation) by using createNodePresentation method of StructureDiagramEditor<br>
+<li>Create a line presentation(ILinkPresentation) by using createLinkPresentation method of StructureDiagramEditor<br>
+</ul>
+
+<h4><a name="class_diagram_editor">[ClassDiagramEditor]</a></h4>
+<ul>
+<li>Create Class Diagram/Object Diagram by using createClassDiagram method of ClassDiagramEditor<br>
+<li>Create Package presentation/Class presentation by using createNodePresentation method of ClassDiagramEditor's parent interface, StructureDiagramEditor<br>
+<li>Create Association presentation/Generalization presentation/Realization presentation/Dependency presentation/TemplateBinding presentation by using<br>
+createLinkPresentation method of ClassDiagramEditor's parent interface, StructureDiagramEditor<br>
+<li>Create Association class presentation by using createAssociationClassPresentation method of ClassDiagramEditor<br>
+<li>Create an InstanceSpecification presentation by using createInstanceSpecification method of ClassDiagramEditor<br>
+<li>Create a link presentation by using createInstanceSpecificationLink method of ClassDiagramEditor<br>
+</ul>
+
+<h4><a name="usecase_diagram_editor">[UseCaseDiagramEditor]</a></h4>
+<ul>
+<li>Create UseCase Diagram by using createUseCaseDiagram method of UseCaseDiagramEditor<br>
+<li>Create UseCase presentation by using createNodePresentation method of UseCaseDiagramEditor's parent interface, StructureDiagramEditor<br>
+<li>Create an Extend presentation/Include presentation by using createLinkPresentation method of UseCaseDiagramEditor's parent interface, StructureDiagramEditor<br>
+</ul>
+
+<h4><a name="state_machineDiagram_editor">[StateMachineDiagramEditor]</a></h4>
+<ul>
+<li>Create Statemachine diagram by using createStatemachineDiagram method of StateMachineDiagramEditor<br>
+<li>Create a initialpseudostate presentation by using createInitialPseudostate method of StateMachineDiagramEditor<br>
+<li>Create a state presentation by using createState method of StateMachineDiagramEditor<br>
+<li>Create a Finalstate presentation by using createFinalState method of StateMachineDiagramEditor<br>
+<li>Create a transition presentation by using createTransition method of StateMachineDiagramEditor<br>
+</ul>
+
+<h4><a name="composite_structure_editor">[CompositeStructureDiagramEditor]</a></h4>
+<ul>
+<li>Create Composite Structure diagram by using createCompositeStructureDiagram method of CompositeStructureDiagramEditor<br>
+<li>Create a Structured Class presentation by using createStructuredClassPresentation method of CompositeStructureDiagramEditor<br>
+<li>Create a Port presentation on a part or structured class by using createPortPresentation(INodePresentation partPresentation, String name, String dataType, Point2D location) method of CompositeStructureDiagramEditor<br>
+<li>Create a Port presentation on a part or structured class by using createPortPresentation(INodePresentation partPresentation) method of CompositeStructureDiagramEditor<br>
+<li>Create a provided interface presentation for a port or a part by using createProvidedInterfacePresentation(INodePresentation endPresentation) method of CompositeStructureDiagramEditor<br>
+<li>Create a provided interface presentation for a port or a part by using createProvidedInterfacePresentation(INodePresentation endPresentation, Point2D location) method of CompositeStructureDiagramEditor<br>
+<li>Create a provided interface presentation for a port or a part by using createProvidedInterfacePresentation(INodePresentation endPresentation, IClass interfaceModel, Point2D location) method of CompositeStructureDiagramEditor<br>
+<li>Create a required interface presentation for a port or a part by using createRequiredInterfacePresentation(INodePresentation endPresentation) method of CompositeStructureDiagramEditor<br>
+<li>Create a required interface presentation for a port or a part by using createRequiredInterfacePresentation(INodePresentation endPresentation, Point2D location) method of CompositeStructureDiagramEditor<br>
+<li>Create a required interface presentation for a port or a part by using createRequiredInterfacePresentation(INodePresentation endPresentation, IClass interfaceModel, Point2D location) method of CompositeStructureDiagramEditor<br>
+</ul>
+
+<h4><a name="er_diagram_editor">[ERDiagramEditor](professional only)</a></h4>
+<ul>
+<li>Create an ER Diagram by using createERDiagram method of ERDiagramEditor<br>
+<li>Create an Entity presentation by using createNodePresentation method of ERDiagramEditor<br>
+<li>Create an Identifying relationship/Non-Identifying relationship/subtype presentations by using createLinkPresentation method of ERDiagramEditor<br>
+</ul>
+
+<h4><a name="mindmap_editor">[MindmapEditor]</a></h4>
+<ul>
+<li>Create a Mind Map by using createMindmapDiagram method of MindmapEditor<br>
+<li>Create a child topic presentation by using createTopic method of MindmapEditor<br>
+<li>Move a topic by using moveTo method of MindmapEditor<br>
+<li>Delete all child topics of selected topic by using deleteChildren method of MindmapEditor<br>
+<li>Create a link line between topics by using createMMLinkPresentation method of MindmapEditor<br>
+</ul>
+MindmapDiagramEditor has been deprecated since astah* 6.0. Please use MindmapEditor.<br>
+
+<h4><a name="requirement_diagram_editor">[RequirementDiagramEditor]</a></h4>
+<ul>
+<li>Create Requirement Diagram by using createRequirementDiagram method of RequirementDiagramEditor<br>
+<li>Create Requirement presentation/TestCase presentation by using createNodePresentation method of RequirementDiagramEditor's parent interface, StructureDiagramEditor<br>
+<li>Create DeriveReqt presentation/Copy presentation/Satidfy presentation/Verify presentation/Refine presentation/Trace presentation by using<br>
+createLinkPresentation method of RequirementDiagramEditor's parent interface, StructureDiagramEditor<br>
+</ul>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

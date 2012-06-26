@@ -1,0 +1,670 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+
+<h2>[Presentation Overview]</h2>
+<ol>
+<li><a href="#presentation_outline">Presentation Overview</a></li>
+<li><a href="#presentation_list">Presentation List</a></li>
+</ol>
+
+Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for details of Interfaces and methods.
+<p>
+Presentation of astah* API is supported in astah* UML and professional. (ER Diagrams are available in astah* professional only.)
+
+<h4><a name="presentation_outline">[Presentation Overview]</a></h4>
+IPresentation is a base interface of presentation. INodePresentation, ILinkPresentation and ICell are derived from IPresentation.<br>
+ICell is an interface of CRUD presentation. IHeaderCell and IValueCell are derived from ICell.<br>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>Name of presentation interface</b></td>
+        <td nowrap><b>Description</b></td>
+        <td nowrap><b>Include</b></td>
+    </tr>
+    <tr>
+        <td nowrap>INodePresentation</td>
+        <td nowrap>Interface for Rectangular presentation</td>
+        <td nowrap>
+        Package, Frame, Note, Class, InstanceSpecification, UseCase, State,<br>
+        Partition, Action, Lifeline, Execution Specification, External Entity,<br>
+        ER Entity, Requirement, TestCase, Topic, Boundary and etc.
+        </td>
+    </tr>
+    <tr>
+        <td nowrap>ILinkPresentation</td>
+        <td nowrap>Interface for Line presentation</td>
+        <td nowrap>
+        Nest, NoteAnchor, Association, Generalization, Realization, Usage,<br>
+        Dependency, Template Binding, Link, Connector, Extend, Include, Transition,<br>
+        Control Flow/Object Flow, Message, Anchor, DataFlow, <br>
+        DeriveReqt,Copy,Satidfy,Verify,Refine,Trace,Identifying Relationship,<br>
+        Non-Identifying Relationship, Many to many Relationship, Subtype, Edge, Link <br>
+        between topics and etc.
+        </td>
+    </tr>
+    <tr>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>Interface for header cells of CRUD</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>IValueCell</td>
+        <td nowrap>Interface for value cells of CRUD</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ITopicPresentation</td>
+        <td nowrap>Interface for topics(@deprecated)</td>
+        <td nowrap>INodePresentation</td>
+    </tr>
+</table>
+
+<h4><a name="presentation_list">[Presentation List]</a></h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>Type</b></td>
+        <td nowrap><b>Model</b></td>
+        <td nowrap><b>Presentation Type</b></td>
+        <td nowrap><b>Model:Presentation</b></td>
+    </tr>
+    <tr>
+        <td nowrap>Model Presentation</td>
+        <td nowrap>IModel</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Subsystem Presentation</td>
+        <td nowrap>ISubsystem</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Package Presentation</td>
+        <td nowrap>IPackage</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Nest Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Frame Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Note Presentation</td>
+        <td nowrap>IComment</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>NoteAnchor Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Text Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Rectangle Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Oval Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Line Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>FreeHand Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Image Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Class Presentation</td>
+        <td nowrap>IClass</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Association Class Presentation</td>
+        <td nowrap>IAssociationClass</td>
+        <td nowrap>INodePresentaion,ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Association Presentation</td>
+        <td nowrap>IAssociation</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Generalization Presentation</td>
+        <td nowrap>IGeneralization</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Realization Presentation</td>
+        <td nowrap>IRealization</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Usage Presentation</td>
+        <td nowrap>IUsage</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Dependency Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Template Binding Presentation</td>
+        <td nowrap>ITemplateBinding</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Instance Specification Presentation</td>
+        <td nowrap>IInstanceSpecification</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Link Presentation</td>
+        <td nowrap>ILink</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Part Presentation</td>
+        <td nowrap>IAttribute</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Port Presentation</td>
+        <td nowrap>IPort</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Connector Presentation</td>
+        <td nowrap>IConnector</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>UseCase Presentation</td>
+        <td nowrap>IUseCase</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Extend Presentation</td>
+        <td nowrap>IExtend</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Include Presentation</td>
+        <td nowrap>IInclude</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>InitialPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>State Presentation</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>FinalState Presentation</td>
+        <td nowrap>IFinalState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Transition Presentation</td>
+        <td nowrap>ITransition</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>ShallowHistoryPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>DeepHistoryPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>JunctionPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>ChoisePseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>ForkPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>JoinPseudoState Presentation</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>SubmachineStatePseudoState Presentation</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>SubamachineState Presentation</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Partition Presentation</td>
+        <td nowrap>IPartition</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>InitialNode Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Action Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Flow Final Node</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>SignalSendingAction Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>AcceptEventAction Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Process Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Connector Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>CallBehaviorAction Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>ActivityFinal Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Control Flow/Object Flow Presentation</td>
+        <td nowrap>IFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Decision Node/Merge Node Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>ForkNode Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>JoinNode Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Object Node Presentation</td>
+        <td nowrap>IObjectNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Lifeline Presentation</td>
+        <td nowrap>ILifeline</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Execution Specification Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Message Presentation</td>
+        <td nowrap>IMessage</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Stop Presentation</td>
+        <td nowrap>ITermination</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>InteractionUse Presentation</td>
+        <td nowrap>IInteractionUse</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>CombinedFragment Presentation</td>
+        <td nowrap>ICombinedFragment</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>StateInvariant Presentation</td>
+        <td nowrap>IStateInvariant</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Lane Presentation</td>
+        <td nowrap>IPartition</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Process Presentation</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Transition Presentation</td>
+        <td nowrap>IFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>InitialNode Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>FinalNode Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Fork Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Join Presentation</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>External Entity Presentation</td>
+        <td nowrap>IExternalEntity</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Process Presentation</td>
+        <td nowrap>IProcessBox</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>Datastore Presentation</td>
+        <td nowrap>IDataStore</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Anchor Presentation</td>
+        <td nowrap>IAnchor</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    <tr>
+        <td nowrap>DataFlow Presentation</td>
+        <td nowrap>IDataFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Requirement Presentation</td>
+        <td nowrap>IRequirement</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>TestCase Presentation</td>
+        <td nowrap>ITestCase</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>DeriveReqt Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Copy Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Satidfy Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Verify Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Refine Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Trace Presentation</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr
+    
+    <tr>
+        <td nowrap>ER Entity Presentation</td>
+        <td nowrap>IEREntity</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Identifying Relationship Presentation</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Non-Identifying Relationship Presentation</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Many to many relationship Presentation</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>Subtype Presentation</td>
+        <td nowrap>IERSubtypeRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1:n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>Topic Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Edge Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Link between topics Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>Boundary Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>CRUD value cell Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>IValueCell</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUD header cell Presentation</td>
+        <td nowrap>IElement</td>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>1:n</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUD entire cell Presentation</td>
+        <td nowrap>null</td>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>-</td>
+    </tr>
+    
+</table>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

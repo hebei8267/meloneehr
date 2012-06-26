@@ -1,0 +1,656 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[Supported Models]</h2>
+Supported models are as follows:
+<ul>
+<li>astah* community : Reference only</li>
+<li>astah* UML and professional : Reference, Create, Modify</li>
+</ul>
+
+<h4>[Class Diagram and Usecase Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Class Diagram</td>
+	<td>IClassDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Package</td>
+	<td>IPackage</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Model</td>
+	<td>IModel</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Subsystem</td>
+	<td>ISubsystem</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Class</td>
+	<td>IClass</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Interface</td>
+	<td>IClass</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Attribute</td>
+	<td>IAttribute</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Operation</td>
+	<td>IOperation</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Parameter</td>
+	<td>IParameter</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Association</td>
+	<td>IAssociation</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>AssociationClass</td>
+	<td>IAssociationClass</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Generalization</td>
+	<td>IGeneralization</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Realization</td>
+	<td>IRealization</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Dependency</td>
+	<td>IDependency</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Usage</td>
+	<td>IUsage</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Qualifier</td>
+	<td>IAttribute</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Template Parameter</td>
+	<td>IClassifierTemplateParameter</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Template Binding</td>
+	<td>ITemplateBinding</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Usecase Diagram</td>
+	<td>IUseCaseDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Actor</td>
+	<td>IClass</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Usecase</td>
+	<td>IUseCase</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Extend</td>
+	<td>IExtend</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>ExtentionPoint</td>
+	<td>IExtentionPoint</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Include</td>
+	<td>IInclude</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>TaggedValue</td>
+	<td>ITaggedValue</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Constraint</td>
+	<td>IConstraint</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Multiplicity</td>
+	<td>IMultiplicityRange</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Comment</td>
+	<td>IComment</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+</table>
+
+<h4>[Statemachine Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Statemachine Diagram</td>
+	<td>IStatemachineDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Statemachine</td>
+	<td>IStateMachine</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Transition</td>
+	<td>ITransition</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>State</td>
+	<td>IState</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+<tr>
+	<td>Pseudostate</td>
+	<td>IPseudostate</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+</table>
+
+<h4>[Activity Diagram and Flow Chart]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Activity Diagram</td>
+	<td>IActivityDiagram - isFlowChart()==false</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Partition</td>
+	<td>IPartition</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Action</td>
+	<td>IAction</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Activity</td>
+	<td>IActivity</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Activity Node</td>
+	<td>IActivityNode</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>ControlNode</td>
+	<td>IControlNode</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>ObjectNode</td>
+	<td>IObjectNode</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Flow</td>
+	<td>IFlow</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Flowchart</td>
+	<td>IActivityDiagram - isFlowChart()==true</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Elements in Flow Chart</td>
+	<td>IActivityNode</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<h4>[Sequence Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Sequence Diagram</td>
+	<td>ISequenceDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Lifeline</td>
+	<td>ILifeline</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Message</td>
+	<td>IMessage</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>State</td>
+	<td>IState</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>State Invariant</td>
+	<td>IStateInvariant</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>CombinedFragment</td>
+	<td>ICombinedFragment</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Interaction</td>
+	<td>IInteraction</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>InteractionOperand</td>
+	<td>IInteractionOperand</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>InteractionFragment</td>
+	<td>IInteractionFragment</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>InterfactionUse</td>
+	<td>IInteractionUse</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Gate</td>
+	<td>IGate</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<h4>[Composite Structure Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+    <th>Model</th>
+    <th>Class</th>
+    <th>Reference</th>
+    <th>Create/Modify</th>
+</tr>
+<tr>
+    <td>Composite Structure Diagram</td>
+    <td>ICompositeStructureDiagram</td>
+    <td align=center>›</td>
+    <td align=center>›</td>
+</tr>
+<tr>
+    <td>Structured Class</td>
+    <td>IClass</td>
+    <td align=center>›</td>
+    <td align=center>›</td>
+</tr>
+<tr>
+    <td>Part</td>
+    <td>IAttribute</td>
+    <td align=center>›</td>
+    <td align=center>›</td>
+</tr>
+<tr>
+    <td>Port</td>
+    <td>IPort</td>
+    <td align=center>›</td>
+    <td align=center>›</td>
+</tr>
+<tr>
+    <td>Connector</td>
+    <td>IConnector</td>
+    <td align=center>›</td>
+    <td align=center>›</td>
+</tr>
+</table>
+
+<h4>[ER Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>ER Diagram</td>
+	<td>IERDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Model</td>
+	<td>IERModel</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Entity</td>
+	<td>IEREntity</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Attribute</td>
+	<td>IERAttribute</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Datatype</td>
+	<td>IERDatatype</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Domain</td>
+	<td>IERDomain</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Relationship</td>
+	<td>IERRelationship</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>ER Schema</td>
+	<td>IERSchema</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>ER SubtypeRelationship</td>
+	<td>IERSubtypeRelationship</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+</table>
+(*)astah* professional only.
+
+<h4>[DFD]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>DFD Diagram</td>
+	<td>IDataFlowDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>ProcessBox</td>
+	<td>IProcessBox</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>ExternalEntity</td>
+	<td>IExternalEntity</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>DataStore</td>
+	<td>IDataStore</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Anchor</td>
+	<td>IDataStore</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>DataFlow</td>
+	<td>IDataFlow</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<h4>[CRUD]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>CRUD diagram</td>
+	<td>IMatrixDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Header Cell</td>
+	<td>IHeaderCell</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+<tr>
+	<td>Value</td>
+	<td>IValueCell</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<h4>[Mind Map]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Mind Map</td>
+	<td>IMindMapDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes</td>
+</tr>
+</table>
+
+<h4>[Requirement Diagram]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Requirement Diagram</td>
+	<td>IRequirementDiagram</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>Requirement</td>
+	<td>IRequirement</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+<tr>
+	<td>TestCase</td>
+	<td>ITestCase</td>
+	<td align=center>Yes</td>
+	<td align=center>Yes(*)</td>
+</tr>
+</table>
+(*)astah* professional only.
+
+
+<h4>[Requirement Table]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Requirement Table</td>
+	<td>IRequirementTable</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<h4>[Traceability Map]</h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+<tr>
+	<th>Model</th>
+	<th>Class</th>
+	<th>Reference</th>
+	<th>Create/Modify</th>
+</tr>
+<tr>
+	<td>Traceability Map</td>
+	<td>ITraceabilityMap</td>
+	<td align=center>Yes</td>
+	<td align=center>No</td>
+</tr>
+</table>
+
+<p>
+*Stereotypes are handled as strings.
+
+<h4>[Restrictions]</h4>
+<ul>
+<li><b>Models that are not included on the list are not supported.
+</b><br>
+</ul>
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

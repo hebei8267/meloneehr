@@ -1,0 +1,611 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[How to get Model Information]</h2>
+<ol>
+<li><a href="#class_diagram">How to get Model Information of Class Diagram</a></li>
+<li><a href="#activity_diagram">How to get Model Information of Activity Diagram</a></li>
+<li><a href="#sequence_diagram">How to get Model Information of Sequence Diagram</a></li>
+<li><a href="#statemachine_diagram">How to get Model Information of Statemachine Diagram</a></li>
+<li><a href="#dataflow_diagram">How to get Model Information of Data Flow Diagram</a></li>
+<li><a href="#crud">How to get Model Information of CRUD</a></li>
+<li><a href="#diagrams">How to get Diagrams</a></li>
+<li><a href="#alias">How to get Alias</a></li>
+<li><a href="#hyperlink">How to get Hyperlink</a></li>
+<li><a href="#flowchart">How to get basic elements in Flowchart</a></li>
+<li><a href="#search">How to search models from ProjectAccessor</a></li>
+</ol>
+
+Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for details of Interfaces and methods.
+
+<h3><a name="class_diagram">[How to get Model Information of Class Diagram]</a></h3>
+
+<h4>How to get Attribute information of class</h4>
+Get the array of Attributes by calling Class (IClass) Method getAttributes().<br>
+If the class is associated with other classes, the information of the association end will
+be included in Attribute information objects. <br>
+For example, if Class0 has attribute0 and is associated with Class1 (association end role name class1),
+the attribute information of Class0 will be shown like <a href="png\IAttribute_IAssociation.png">this figure</a>.<br>
+<br>
+<h4>How to get Operation information of class</h4>
+Get the array of Operations by calling Class (IClass) Method getOperations().<br>
+<br>
+<h4>How to get Dependency information of class</h4>
+Get the array of all Dependencies of the selected class by calling
+Class (IClass) Method getClientDependencies(). By calling getSupplier(),
+you can get the supplier class of the selected class. <br>
+For example, in case that Class0 depends on Class1, the information will be
+shown like <a href="png\IDependency.png">this figure</a>.<br>
+<br>
+<h4>How to get Realization information of class</h4>
+Get the array of Realizations between the selected class and
+the realized interfaces by calling Class (IClass) Method getClientRealizations().
+By calling getSupplier(), you can get the realized interfaces.<br>
+For example, in case that Class1 realizes Class0, the information will be shown
+like <a href="png\IRealization.png">this figure</a>.<br>
+<br>
+<h4>How to get Generalization information of class</h4>
+Get the array of Generalizations between the selected class
+and its superclass by calling Class (IClass) Method getGeneralizations().
+By calling getSuperType(), you can get its superclass information.<br>
+For example, in case that Class1 inherits Class0, the information
+will be like <a href="png\IGeneralization.png">this figure</a>.<br>
+<br>
+<h4>How to get Template Class of a class</h4>
+You can get the array of templateBindings (ITemplateBinding) by calling Class (IClass) Method getTemplateBindings().
+By calling getTemplate() of templateBindings (ITemplateBinding), you can get its template class.<br>
+<br>
+<h4>How to get Template Parameter of a template class </h4>
+Get the array of templateParameters (ITemplateParameter) by calling Class (IClass) Method getTemplateParameters().
+By calling getTemplate() of templateBindings (ITemplateBinding), you can get its template class.<br>
+<h4> </h4>
+<h4>How to get a model of project accessor</h4>    
+All model information in astah* Project file is stored under the model of project accessor (Project model) in a tree structure.<br>
+First, get the ProjectAccessor object and open astah* project file, then get Project Model (IModel Class object).<br>
+<br>
+ClassDefinitionBuilder.java<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ // Open project file and get project model
+ ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+ prjAccessor.open(inputFile);
+ IModel iModel = prjAccessor.getProject();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<br>
+<h4>How to get packages under Package recursively</h4>
+It is defined that Package would include Subsystems and Models that
+inherit IPackage.<br>
+Get all model elements directly under the package (IPackage) in an array by
+calling getOwnedElements() and get only packages abstracted from it.<br>
+<br>
+ClassDefinitionBuilder.java<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * Get packages under Package recursively.
+     * 
+     * @param iPackage
+     *     Selected Package
+     * @param iPackages
+     *     The list of all stored packages
+     * @return The list of all stored packages
+     */
+    private List getPackages(IPackage iPackage, List iPackages) {
+ INamedElement[] iNamedElements = iPackage.getOwnedElements();
+ for (int i = 0; i &lt; iNamedElements.length; i++) {
+     INamedElement iNamedElement = iNamedElements[i];
+     if (iNamedElement instanceof IPackage) {
+iPackages.add(iNamedElement);
+getPackages((IPackage)iNamedElement, iPackages);
+     }
+ }
+ return iPackages;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<h4>How to get Classes under Package</h4>
+Get all model elements directly under the package in an array by calling getOwnedElements() and get only classes abstracted from it.<br>   
+<br>
+ClassDefinitionBuilder.java<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * Get classes under the selected Package.
+     * 
+     * @param iPackage
+     *     Selected package
+     * @return the list of all stored classes
+     */
+    private List getIClasses(IPackage iPackage) {
+ List iClasses = new ArrayList();
+ INamedElement[] iNamedElements = iPackage.getOwnedElements();
+ for (int i = 0; i &lt; iNamedElements.length; i++) {
+     INamedElement iNamedElement = iNamedElements[i];
+     if (iNamedElement instanceof IClass) {
+iClasses.add(iNamedElement);
+     }
+ }
+ return iClasses;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<h4>How to get Full Path Name of class</h4>
+Get the name of class by calling getName() in case they are
+subclasses of INamedElement (i.g. IClass).<br>
+In addition, by calling getOwner() that obtains the owned model
+elements, the Full Path name from the project model can be obtained.<br>
+<br>
+ClassDefinitionBuilder.java<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * Get the class name with Full Path
+     * 
+     * @param iClass
+     *     Class
+     * @return Class name (Full Path)
+     */
+    private String getFullName(IClass iClass) {
+ StringBuffer sb = new StringBuffer();
+ IElement owner = iClass.getOwner();
+ while (owner != null &amp;&amp; owner instanceof INamedElement &amp;&amp; owner.getOwner() != null) {
+     sb.insert(0, ((INamedElement) owner).getName() + &quot;::&quot;);
+     owner = owner.getOwner();
+ }
+ sb.append(iClass.getName());
+ return sb.toString();
+    }
+</samp></pre></td>
+</tr>
+</TABLE>
+<br>
+
+<h3><a name="activity_diagram">[How to get Model Information of Activity Diagram]</a></h3>
+
+<h4>How to get Partition</h4> 
+Get the array of partitions (IPartition) by calling getPartitions() Method   
+of IActivity. <br>   
+By calling getSuperPartition() and getSuperPartition(), you can get hierarchy   
+information of partitions.<br>  
+For example, in case of Partition0 and Partition1, the information    
+will be like <a href="png/activityDgmRelatedAPI.png">this figure</a>.  
+<br>
+
+<h4>How to get Control Flow</h4>
+Get the array of control flow (IFlow) by calling getFlows() Method   
+of IActivity. <br>  
+By calling getIncomings() and getOutgoings(), you can get information of control 
+flow of actions.<br> 
+For example, in case of two control flows, the information    
+will be like <a href="png/activityDgmRelatedAPI.png">this figure</a>.<h4>How 
+to get Actions and Start Point</h4>
+Get the array of ActivityNode (IActivityNode) by calling getActivityNode() Method   
+of IActivity. <br>  
+By calling getActivityNode() of Partition (IPartition), you can get actions' information 
+in a partition.<br> 
+For example, the information for actions0 and start point will be like <a href="png/activityDgmRelatedAPI.png">this figure</a>.
+
+<h3><a name="sequence_diagram">[How to get Model Information of Sequence Diagram]</a></h3>
+
+<h4>How to get Lifeline</h4>
+Get the array of Lifeline (ILifeline) by calling getLifelines() Method   
+of Interaction(IInteraction). <br>   
+For example, the information of LifeLine0 will be like <a href="png/sequenceDgmRelatedAPI.png">this figure</a>.  
+<br>
+
+<h4>How to get CompoundFragment</h4>
+Get the array of CombinedFragment (ICombinedFragment) and Message (IMessage) by calling getFragments() Method   
+of Interaction(IInteraction). <br>   
+For example, the information of alt compound fragment will be like <a href="png/sequenceDgmRelatedAPI.png">this figure</a>.  
+<br>
+
+<h4>How to get Operand</h4>
+Get the array of InteractionOperand (IInteractionOperand) by calling getInteractionOperands() Method   
+of CombinedFragment(ICombinedFragment). <br>   
+For example, the information of two compound fragments in alt compound fragment will be like <a href="png/sequenceDgmRelatedAPI.png">this figure</a>.  
+<br>
+
+<h4>How to get Message</h4>
+Get the array of CombinedFragment(ICombinedFragment) and Message (IMessage) by calling getFragments() Method   
+of Interaction(IInteraction). <br>   
+For example, the information of Message0 will be like <a href="png/sequenceDgmRelatedAPI.png">this figure</a>.  
+<br>
+
+<h3><a name="statemachine_diagram">[How to get Model Information of Statemachine Diagram]</a></h3>
+
+<h4>How to get State and SubmachineState</h4>
+Get the statemachine (IStateMachine) by calling getStateMachine() Method   
+of statemachine diagram (IStateMachineDiagram). <br>    
+Get the state (IState) by calling getVertexes() Method of statemachine (IStateMachine) .<br>
+Submachine state can be judged by isSubmachineState() of state (IState). <br>   
+
+<h4>How to get InitialPseudoState, DeepHistoryPseudoState, ForkPseudoState,etc</h4>
+Get the statemachine (IStateMachine) by calling getStateMachine() Method   
+of statemachine diagram (IStateMachineDiagram). <br>    
+You can get the pseudoState (IPseudoState) by calling getVertexes() Method of statemachine (IStateMachine) .<br>
+DeepHistoryPseudostate or forkPseudoState can be judged by isForkPseudostate() of state (IPseudoState). <br> 
+
+<h3><a name="dataflow_diagram">[How to get Model Information of Data Flow Diagram]</a></h3>
+
+<h4>How to get Process</h4>
+Get the process (IProcessBox) by calling getDataFlowNodes() Method   
+of dataFlow diagram (IDataFlowDiagram). <br>    
+You can get the dataFlowDiagram(IDataFlowDiagram) of process by calling getDataFlowDiagram() Method of process(IProcessBox) .<br>
+<br>
+
+<h4>How to get DataFlow</h4>
+Get the dataflow (IDataFlow) by calling getIncomings() Method and getOutgoings() of processBox (IProcessBox). <br>    
+<br>
+
+<h4>How to get ExternalEntity</h4>
+Get the external entity (IExternalEntity) by calling geDataFlowNodes() Method of dataFlowDiagram (IDataFlowDiagram). <br>    
+<br>
+
+<h4>How to get DataStore</h4>
+Get the dataStore (IDataStore) by calling geDataFlowNodes() Method of dataFlowDiagram (IDataFlowDiagram). <br>    
+<br>
+
+<h3><a name="crud">[How to get Model Information of CRUD]</a></h3>
+
+<h4>How to get Header Cells</h4>
+Get the header cell (IHeaderCell) by calling getColumnHeaders() Method and getRowHeaders() Method of CRUD (IMatrixDiagram). <br>    
+<br>
+
+<h4>How to get Value Cells</h4>
+You can get the value cell (IValueCell) by calling getShowValueCell (row, column) Method of CRUD diagram (IMatrixDiagram). <br>    
+<br>
+
+<h3><a name="diagrams">[How to get Diagrams]</a></h3>    
+NamedElement (INamedElement) is the parent of diagram (IDiagram), package (IPackage) and partition (IPartition) etc.<br>     
+All diagrams can be got by getDiagrams() of an namedElement.<br>      
+<p>
+<I>Example: How to get an activity diagram</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+public List getActivityDiagram(IPackage iPackage) {
+    List activityDiagrams = new ArrayList();
+    
+    IDiagram[] dgms = iPackage.getDiagrams();
+    for (int i = 0; i &lt; dgms.length; i++) {
+ IDiagram dgm = dgms[i];
+ if (dgm instanceof IActivityDiagram 
+&amp;&amp; !((IActivityDiagram )dgm).isFlowChart()) {
+ activityDiagrams.add(dgm);
+ }
+    }
+    return activityDiagrams;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+<p>
+<I>Example: How to get an sequence diagram</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+public List getFlowCharts(IPackage iPackage) {
+    List flowCharts = new ArrayList();
+    
+    IDiagram[] dgms = iPackage.getDiagrams();
+    for (int i = 0; i &lt; dgms.length; i++) {
+ IDiagram dgm = dgms[i];
+ if (dgm instanceof IActivityDiagram 
+&amp;&amp; ((IActivityDiagram )dgm).isFlowChart()) {
+     flowCharts.add(dgm);
+ }
+    }
+    return flowCharts ;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="alias">[How to get Alias]</a></h3>
+Alias is hold by taggedValue in a model.TaggedValues can be got by ITaggedValue<br>    
+If key of alias1 is "jude.multi_language.alias1" and key of alias2 is "jude.multi_language.alias2",    
+use the following codes:<br>    
+
+<p>
+<I>Example: How to get alias1</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private static final String KEY_ALIAS1 = &quot;jude.multi_language.alias1&quot;;
+
+private String geAlias1(INamedElement element) {
+    ITaggedValue[] tvs = element.getTaggedValues();
+    for (int i = 0; i &lt; tvs.length; i++) {
+ ITaggedValue tv = tvs[i];
+ if (KEY_ALIAS1.equals(tv.getKey())) {
+     return tv.getValue();
+ }
+    }
+    return null;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="hyperlink">[How to get Hyperlink]</a></h3>
+IHyperlinkOwner is generalized by INamedElement and IPresentation.<br>      
+
+A list containing IHyperlinks of an IHyperlinkOwner can be got by getHyperlinks() 
+method.&nbsp;      
+
+<p>
+<I>Example for getting hyperlink</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private void showHyperlinkStrings(INamedElement element) {
+   
+    IHyperlink[] links = element.getHyperlinks();
+    for (int i = 0; i &lt; links.length; i++) {
+ IHyperlink link = links[i];
+ if(link.isFile()) {
+     System.out.println(link.getName());
+     System.out.println(link.getPath());
+     System.out.println(link.getComment());
+ } else if(link.isModel()) {
+     System.out.println(link.getName());
+     System.out.println(link.getPath());
+     System.out.println(link.getComment());
+ } else if(link.isURL()) {
+     System.out.println(link.getName()); 
+     System.out.println(link.getPath());
+     System.out.println(link.getComment());
+ }    
+     }
+}</samp></pre></td>
+</tr>
+</TABLE>
+<p>
+
+Name of a model is id which can be got by getId() of IElementImp.  
+
+<p>
+<I>Example: How to get hyperlink</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+type=file,name=astah_com.log,path=C:/Documents and Settings,comment= Target is a file
+type=url,name=http://www.change-vision.com,path=http://,comment= Target is a web page
+type=model,name=9a1411-1112fec29a5-0804d01aa6c5fb9fe2aab956b4ca593a,path=,comment= Target is a astah* model
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="flowchart">[How to get basic elements in Flowchart]</a></h3>
+Flowchart is a kind of activity diagram in astah*. Basic elements in a flowchart are action with stereotypes.<br>  
+<p>
+<I>How to get loop start element</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private static final String LOOP_START_ELEMENT = &quot;loop_start&quot;;
+
+public List getLoopStartElements(IActivityDiagram iActivityDiagram) {
+   List loopStartElements = new ArrayList();
+
+   IActivity iActivity = iActivityDiagram.getActivity();
+   IActivityNode[] activityNodes = iActivity.getActivityNodes();
+   for (int i = 0; i &lt; activityNodes.length; i++) {
+ IActivityNode node = activityNodes[i];
+ String[] stereotypes = node.getStereotypes();
+ for (int j = 0; j &lt; stereotypes.length; j++) {
+    if (LOOP_START_ELEMENT.equals(stereotypes[j])) {
+ loopStartElements.add(node);
+ break;
+    }
+ }
+    }
+    return loopStartElements;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+<h4>Stereotype list of basic elements</h4>
+process1 (As standard process, there is no stereotype)<br> 
+process2 (flow_process)<br>
+Predefined Process (predefined_process)<br>     
+Hand Work (hand_work)<br>     
+Preparation (preparation)<br>
+Server(server)<br>
+Machine(machine)<br>
+Data(data)<br>
+Stored Data(stored_data)<br> 
+Internal Storage(internal_storage)<br> 
+Sequential Storage(sequential_storage)<br> 
+Disk(disk)<br>
+Database(database)<br>
+Document(document)<br>
+Hand Inputting(hand_inputting)<br> 
+Display(display)<br>
+Judgement(judgement)<br>
+Loop Start(loop_start)<br> 
+Loop End(loop_end)<br> 
+Internal Connector(internal_connector)<br> 
+External Connector(external_connector) 
+
+<h3><a name="search">[How to search models from ProjectAccessor]</a></h3>
+There are three methods to search from ProjectAccessor.<br>
+<br>
+public INamedElement[] findElements(Class elementKind, String name) throws ProjectNotFoundException;<br>
+Search by name and element kind. This search does not apply for presentations such as ITopicPresentation.<br>
+<p>
+<I>Sample : findElements(Class elementKind, String name)</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//Search a class diagram named classDgm0
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(IClassDiagram.class, "classDgm0");</b>
+//Search a Class named A
+<b>iNamedElements = prjAccessor.findElements(IClass.class, "A");</b>
+//Search an attribute named B
+<b>iNamedElements = prjAccessor.findElements(IAttribute.class, "B");</b>
+//Search an operation named C
+<b>iNamedElements = prjAccessor.findElements(IOperation.class, "C");</b>
+//Search an association named D
+
+<b>iNamedElements = prjAccessor.findElements(IAssociation.class, "D");</b>
+//Search an UseCase named E
+<b>iNamedElements = prjAccessor.findElements(IUseCase.class, "E");</b>
+//Search an Include named F
+<b>iNamedElements = prjAccessor.findElements(IInclude.class, "F");</b>
+
+//Search a state named G
+<b>iNamedElements = prjAccessor.findElements(IState.class, "G");</b>
+//Search a pseudostate named H
+<b>iNamedElements = prjAccessor.findElements(IPseudostate.class, "H");</b>
+//Search a transition named I
+<b>iNamedElements = prjAccessor.findElements(ITransition.class, "I");</b>
+
+//Search a partition named J
+<b>iNamedElements = prjAccessor.findElements(IPartition.class, "J");</b>
+//Search an action named K
+<b>iNamedElements = prjAccessor.findElements(IAction.class, "K");</b>
+//Search an objectnode named L
+<b>iNamedElements = prjAccessor.findElements(IObjectNode.class, "L");</b>
+//Search a flow named M
+<b>iNamedElements = prjAccessor.findElements(IFlow.class, "M");</b>
+
+
+//Search a lifeline named N
+<b>iNamedElements = prjAccessor.findElements(ILifeline.class, "N");</b>
+//Search a message named O
+<b>iNamedElements = prjAccessor.findElements(IMessage.class, "O");</b>
+
+//Search an External entity named P
+<b>iNamedElements = prjAccessor.findElements(IExternalEntity.class, "P");</b>
+//Search a datastore named Q
+<b>iNamedElements = prjAccessor.findElements(IDataStore.class, "Q");</b>
+
+//Search an ER model named R
+<b>iNamedElements = prjAccessor.findElements(IERModel.class, "R");</b>
+//Search an ERdomain named S
+<b>iNamedElements = prjAccessor.findElements(IERDomain.class, "S");</b>
+//Search an ER data type named USER_DEFINED_DATATYPE1
+<b>iNamedElements = prjAccessor.findElements(IERDatatype.class, "USER_DEFINED_DATATYPE1");</b>
+//Search an ER Entity named T
+<b>iNamedElements = prjAccessor.findElements(IEREntity.class, "T");</b>
+//Search an ER attribute named U
+<b>iNamedElements = prjAccessor.findElements(IERAttribute.class, "U");</b>
+//Search an ER relationship named V
+<b>iNamedElements = prjAccessor.findElements(IERRelationship.class, "V");</b>
+//Search an ERsubtype relationship named W
+<b>iNamedElements = prjAccessor.findElements(IERSubtypeRelationship.class, "W");</b>
+//Search an ER index named X
+<b>iNamedElements = prjAccessor.findElements(IERIndex.class, "X");</b>
+
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+public abstract INamedElement[] findElements(Class elementKind) throws ProjectNotFoundException;<br>
+Search elements by element type. This search does not apply for presentations such as ITopicPresentation.<br>
+<p>
+<I>Example : Search a class diagram named classDgm0 by using findElements(Class elementKind)</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//Search a class diagram
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(IClassDiagram.class);</b>
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+public INamedElement[] findElements(ModelFinder picker) throws ProjectNotFoundException;<br>
+Search element by using ModelFinder.<br>
+<p>
+<I>Example : Search by using findElements(ModelFinder picker)</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    //A class that implements ModelFinder interface which extracts Class diagram
+    class ClassDiagramPicker implements <b>ModelFinder</b> {
+        <b>public boolean isTarget(INamedElement namedElement)</b> {
+            if (namedElement instanceof IClassDiagram) {
+                return true;
+            }
+            return false;
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//Search a class diagram named classDgm0
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(new ClassDiagramPicker());</b>
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
