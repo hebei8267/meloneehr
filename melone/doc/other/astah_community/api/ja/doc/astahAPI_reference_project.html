@@ -1,0 +1,201 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+<h2>【参照プロジェクトの設定】</h2>
+astah* APIの参照プロジェクト機能は、astah* professionalでサポートしています。
+
+<h3>【astah* API で参照プロジェクトを追加する】</h3>
+参照プロジェクトを追加します。
+<p>
+<I>astah*プロジェクトファイルのOPEN → 参照プロジェクトを追加 → astah*プロジェクトファイルとして保存</I>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        prjAccessor.addReferenceProject(&quot;C:\\API\\pro305_ref.asta&quot;);
+        
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3>【astah* API で参照プロジェクトを更新する】</h3>
+参照プロジェクトを更新します。
+<p>
+<I>astah*プロジェクトファイルのOPEN → 参照プロジェクトを更新 → astah*プロジェクトファイルとして保存</I>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        
+        String path = &quot;C:\\API\\pro305_ref.asta&quot;;
+        int status = prjAccessor.getReferenceProjectStatus(path);
+        if (status == ProjectAccessor.REFERENCE_PROJECT_STATUS_NEED_UPDATE) {
+            prjAccessor.updateReferenceProject(path);
+        }
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3>【astah* API で参照プロジェクトを削除する】</h3>
+参照プロジェクトを削除します。
+<p>
+<I>astah*プロジェクトファイルのOPEN　→　参照プロジェクトを削除　→　astah*プロジェクトファイルとして保存</I>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        prjAccessor.removeReferenceProject(&quot;C:\\API\\pro305_ref.asta&quot;);
+        
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3>【astah* API で参照プロジェクトを解除する】</h3>
+参照プロジェクトを解除します。
+<p>
+<I>astah*プロジェクトファイルのOPEN　→　参照プロジェクトを解除　→　astah*プロジェクトファイルとして保存</I>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        prjAccessor.clearReferenceProject(&quot;C:\\API\\pro305_ref.asta&quot;);
+        
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3>【astah* API で参照プロジェクトのパスを変更する】</h3>
+参照プロジェクトのパスを変更します。
+<p>
+<I>astah*プロジェクトファイルのOPEN　→　参照プロジェクトのパスを変更　→　astah*プロジェクトファイルとして保存</I>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+import com.change_vision.jude.api.inf.project.ProjectAccessor;
+import com.change_vision.jude.api.inf.project.ProjectAccessorFactory;
+
+public class Test {
+  public static void main(String[] args) {
+    try {
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        
+        prjAccessor.open(&quot;C:\\API\\pro305.asta&quot;);
+        prjAccessor.changeReferenceProject(&quot;C:\\API\\pro305_ref.asta&quot;,&quot;C:\\API2\\pro305_ref.asta&quot;);
+        
+        prjAccessor.saveAs(&quot;C:\\API\\pro305_2.asta&quot;); 
+        
+        prjAccessor.close();
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+  }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

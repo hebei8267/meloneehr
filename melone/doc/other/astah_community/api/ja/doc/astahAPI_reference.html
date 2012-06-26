@@ -1,0 +1,603 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+
+<h2>【モデル情報の取得】</h2>
+<ol>
+<li><a href="#class_diagram">クラス図のモデル情報の取得</a></li>
+<li><a href="#activity_diagram">アクティビティ図のモデル情報の取得</a></li>
+<li><a href="#sequence_diagram">シーケンス図のモデル情報の取得</a></li>
+<li><a href="#statemachine_diagram">ステートマシン図のモデル情報の取得</a></li>
+<li><a href="#dataflow_diagram">データフロー図のモデル情報の取得</a></li>
+<li><a href="#crud">CRUDのモデル情報の取得</a></li>
+<li><a href="#diagram">図の取得</a></li>
+<li><a href="#alias">別名の取得</a></li>
+<li><a href="#hyperlink">ハイパーリンクの取得</a></li>
+<li><a href="#flowchart">フローチャートの基本要素の取得</a></li>
+<li><a href="#search">ProjectAccessorから要素を検索</a></li>
+</ol>
+
+各インターフェース、メソッドの詳細については、<a href="javadoc/index.html">astah* APIのJavaDoc</a>をご覧ください。
+
+<h4><a name="class_diagram">【クラス図のモデル情報の取得】</a></h4>
+ここでは、モデル情報の取得方法をクラス図やオブジェクト図、またはサンプルプログラムを併用して一部の例を紹介します。
+
+<h4>クラスの属性情報の取得</h4>
+クラス(IClass)のメソッドgetAttributes()を用いることで、属性(IAttribute)の配列を取得できます。クラスが他クラスと
+関連している場合、属性情報オブジェクトには関連端の情報も含まれます。<br>
+例えば、Class0が属性attribute0とClass1への関連（関連端のロール名class1）を持っている場合は、<a href="png\IAttribute_IAssociation.png">図</a>の様になります。<br>
+<br>
+<h4>クラスの操作情報の取得</h4>
+クラス(IClass)のメソッドgetOperations()を利用することで、操作(IOperation)の配列を取得できます。<br>
+<br>
+<h4>クラスの依存情報の取得</h4>
+クラス(IClass)のメソッドgetClientDependencies()を利用することで、そのクラスが依存するクラスに繋がる依存(IDependency)の
+配列を取得できます。また、それらに対しメソッドgetSupplier()を用いることで、依存元のクラスを取得できます。<br>
+例えば、Class0がClass1に依存している場合の情報は、<a href="png\IDependency.png">図</a>の様になります。<br>
+<br>
+<h4>クラスの実現情報の取得</h4>
+クラス(IClass)のメソッドgetClientRealizations()を利用することで、そのクラスが実現しているインターフェースクラスに
+繋がる実現(IRealization)の配列を取得できます。また、それらに対しメソッドgetSupplier()を用いることで、実現されている
+インターフェースクラスを取得できます。<br>
+例えば、Class1がClass0を実現している場合の情報は、<a href="png\IRealization.png">図</a>の様になります。<br>
+<br>
+<h4>クラスの汎化情報の取得</h4>
+クラス(IClass)のメソッドgetGeneralizations()を利用することで、そのクラスのスーパークラスに繋がる汎化(IGeneralization)の
+配列を取得できます。また、それらの汎化に対しメソッドgetSuperType()を用いることで、スーパークラスを取得できます。<br>
+例えば、Class1がClass0を継承している場合の情報は、<a href="png\IGeneralization.png">図</a>の様になります。
+<br>
+<h4>テンプレートクラスの取得</h4>
+クラス(IClass)のメソッドgetTemplateBindings()を利用することで、そのクラスのテンプレートクラスに繋がるテンプレートバインディング(ITemplateBinding)
+の配列を取得できます。テンプレートバインディング(ITemplateBinding)のgetTemplate()を利用することでテンプレートクラスを取得できます。
+<br>
+<h4>テンプレートクラスのテンプレートパラメータ情報の取得</h4>
+クラス(IClass)のメソッドgetTemplateParameters()を利用することで、そのクラスのテンプレートパラメータ(IClassifierTemplateParameter)の配列を取得できます。
+<br>
+<h4>プロジェクトを表す（起点となる）モデルの取得</h4>
+astah*プロジェクトファイルの全モデル情報は、プロジェクトを表すモデル（以下、プロジェクトモデル）の下にツリー状に存在します。<br>
+まずProjectAccessorオブジェクトを取得して、astah*プロジェクトファイルを開きプロジェクトモデル(IModelクラスのオブジェクト)を取得します。<br>
+<br>
+ClassDefinitionBuilder.javaより<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+        // プロジェクトを開いて、プロジェクトモデルを取得する
+        ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+        prjAccessor.open(inputFile);
+        IModel iModel = prjAccessor.getProject();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<br>
+<h4>パッケージ配下のパッケージを、再帰的に全て取得</h4>
+パッケージ(IPackage)を継承するサブシステムやモデルも、パッケージに含めます。<br>
+パッケージ(IPackage)の直下にある全モデル要素を、メソッドgetOwnedElements()の利用により                                                                                                
+配列として取得し、その中からパッケージのみ抽出します。また、取得したパッケージに対しても                                                                                                
+同様の処理を行い、再帰的に全てのパッケージを取得します。<br>
+<br>
+ClassDefinitionBuilder.javaより<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * 指定パッケージ配下のパッケージを、再帰的に全て取得する。
+     * 
+     * @param iPackage
+     *            指定パッケージ
+     * @param iPackages
+     *            パッケージ一覧を格納するリスト
+     * @return パッケージ一覧を格納したリスト
+     */
+    private List getPackages(IPackage iPackage, List iPackages) {
+        INamedElement[] iNamedElements = iPackage.getOwnedElements();
+        for (int i = 0; i &lt; iNamedElements.length; i++) {
+            INamedElement iNamedElement = iNamedElements[i];
+            if (iNamedElement instanceof IPackage) {
+                iPackages.add(iNamedElement);
+                getPackages((IPackage)iNamedElement, iPackages);
+            }
+        }
+        return iPackages;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<h4>パッケージ配下のクラスの取得</h4>
+パッケージ(IPackage)直下にある全モデル要素を、メソッドgetOwnedElements()を用いることで配列として取得し、その中からクラスのみを抽出します。<br>
+<br>
+ClassDefinitionBuilder.javaより<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * 指定パッケージ配下のクラスを取得する。
+     * 
+     * @param iPackage
+     *            指定パッケージ
+     * @return クラス一覧を格納したリスト
+     */
+    private List getIClasses(IPackage iPackage) {
+        List iClasses = new ArrayList();
+        INamedElement[] iNamedElements = iPackage.getOwnedElements();
+        for (int i = 0; i &lt; iNamedElements.length; i++) {
+            INamedElement iNamedElement = iNamedElements[i];
+            if (iNamedElement instanceof IClass) {
+                iClasses.add(iNamedElement);
+            }
+        }
+        return iClasses;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+<h4>クラスのフルパス名の取得</h4>
+クラス(IClass)を含め、INamedElementのサブクラスの場合、メソッドgetName()を用いることで名前を取得できます。<br>
+さらに自分を所有するモデル要素を所得するメソッドgetOwner()を組み合わせることによって、                                                                                                
+プロジェクトモデルからのフルパス名を取得できます。<br>
+<br>
+ClassDefinitionBuilder.javaより<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    /**
+     * クラスの名前をフルパスで取得する
+     * 
+     * @param iClass
+     *            クラス
+     * @return クラス名（フルパス）
+     */
+    private String getFullName(IClass iClass) {
+        StringBuffer sb = new StringBuffer();
+        IElement owner = iClass.getOwner();
+        while (owner != null &amp;&amp; owner instanceof INamedElement &amp;&amp; owner.getOwner() != null) {
+            sb.insert(0, ((INamedElement) owner).getName() + &quot;::&quot;);
+            owner = owner.getOwner();
+        }
+        sb.append(iClass.getName());
+        return sb.toString();
+    }
+</samp></pre></td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="activity_diagram">【アクティビティ図のモデル情報の取得】</a></h4>
+ここでは、アクティビティ図に関連するモデル情報の取得方法をクラス図とオブジェクト図を併用して、一部の例を紹介します。
+
+<h4>パーティション情報の取得</h4>
+アクティビティ(IActivity)のメソッドgetPartitions()を用いることで、パーティション(IPartition)の配列を取得できます。<br>
+アクティビティ(IActivity)のメソッドgetSubPartition()とgetSuperParition()を用いることで、パーティション(IPartition)の階層を取得できます。<br>
+例えば、Partition0とPartition1の情報は<a href="png\activityDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+<h4>制御フロー情報の取得</h4>
+アクティビティ(IActivity)のメソッドgetFlows()を用いることで、制御フロー(IFlow)の配列を取得できます。<br>
+アクティビティノード(IActivityNode)のメソッドgetIncomings()とgetOutgoings()を用いることでアクションに関連する制御フローを取得できます。<br>
+例えば、二つの制御フローの情報は<a href="png\activityDgmRelatedAPI.png">図</a>の様になります。<br>
+
+<h4>アクションや開始ノードなどの情報の取得</h4>
+アクティビティ(IActivity)のメソッドgetActivityNode()を用いることで、アクティビティノード(IActivityNode)の配列を取得できます。<br>
+さらにパーティション(IPartition)のメソッドgetActivityNode()を用いることでパーティションに含まれるアクションを取得できます。<br>
+例えば、action0と開始ノードの情報は<a href="png\activityDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+<h4><a name="sequence_diagram">【シーケンス図のモデル情報の取得】</a></h4>
+ここでは、シーケンス図に関連するモデル情報の取得方法をクラス図とオブジェクト図を併用して、一部の例を紹介します。
+
+<h4>ライフライン情報の取得</h4>
+インタラクション(IInteraction)のメソッドgetLifelines()を用いることで、ライフライン(ILifeline)の配列を取得できます。<br>
+例えば、LifeLine0の情報は<a href="png\sequenceDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+<h4>複合フラグメント情報の取得</h4>
+ライフライン(IInteraction)のメソッドgetFragments()を用いることで、このライフライン(ILifeline)に関連する<br>
+複合フラグメント(ICombinedFragment)と<メッセージ(IMessage)の配列を取得できます。<br>
+例えば、alt複合フラグメントの情報は、<a href="png\sequenceDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+<h4>オペランド情報の取得</h4>
+複合フラグメント(ICombinedFragment)のメソッドgetInteractionOperands()を用いることでオペランド(IInteractionOperand)の配列を取得できます。<br>
+例えば、alt複合フラグメントにある二つの複合フラグメントの情報は、<a href="png\sequenceDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+<h4>メッセージ情報の取得</h4>
+ライフライン(IInteraction)のメソッドgetFragments()を用いることで、このライフライン(ILifeline)に関連する複合フラグメント(ICombinedFragment)<br>
+とメッセージ(IMessage)の配列を取得できます。さらに、ライフライン(IInteraction)のメソッドgetFragments(IInteractionOperand operand)を用いて<br>                                                           
+特定のオペランドに属するメッセージ(IMessage)の配列を取得できます。<br>
+例えば、Message0の情報は<a href="png\sequenceDgmRelatedAPI.png">図</a>の様になります。<br>
+<br>
+
+
+<h4><a name="statemachine_diagram">【ステートマシン図のモデル情報の取得】</a></h4>
+ここでは、ステートマシン図に関連するモデル情報の取得方法を紹介します。
+
+<h4>状態とサブマシン状態情報の取得</h4>
+ステートマシン図(IStateMachineDiagram)のメソッドgetStateMachine()を用いることで、図のステートマシン(IStateMachine)を取得できます。<br>
+図のステートマシン(IStateMachine)のメソッドgetVertexes()を用いて、ステートマシン(IStateMachine)に含まれる状態(IState)の配列を取得できます。<br>
+状態(IState)のメソッドisSubmachineState()を用いることでブマシン状態を判定できます。<br>
+<br>
+
+<h4>開始擬似状態と浅い履歴擬似状態、深い履歴擬似状態、フォーク擬似状態などの情報の取得</h4>
+ステートマシン図(IStateMachineDiagram)のメソッドgetStateMachine()を用いることで、図のステートマシン(IStateMachine)を取得できます。<br>
+図のステートマシン(IStateMachine)のメソッドgetVertexes()を用いて、ステートマシン(IStateMachine)に含まれる擬似状態(IPseudoState)の配列を取得できます。<br>
+擬似状態(IPseudoState)のisForkPseudostate()などのメソッドを用いることでフォーク擬似状態や開始擬似状態などを判定できます。<br>
+<br>
+
+<h4><a name="dataflow_diagram">【データフロー図のモデル情報の取得】</a></h4>
+ここでは、データフロー図に関連するモデル情報の取得方法を紹介します。
+
+<h4>プロセス情報の取得</h4>
+データフロー図(IDataFlowDiagram)のメソッドgetDataFlowNodes()を用いることで、プロセス(IProcessBox)の配列を取得できます。<br>
+プロセス(IProcessBox)のメソッドgetDataFlowDiagram()を用いて、プロセス(IProcessBox)の詳細を表すデータフロー図(IDataFlowDiagram)を取得できます。<br>
+<br>
+
+<h4>データフロー情報の取得</h4>
+プロセス(IProcessBox)のメソッドgetIncomings()とgetOutgoings()を用いることで、プロセス(IProcessBox)に繋がるデータフローを取得できます。<br>
+<br>
+
+<h4>外部エンティティ情報の取得</h4>
+データフロー図(IDataFlowDiagram)のメソッドgeDataFlowNodes()を用いることで、外部エンティティ(IExternalEntity)の配列を取得できます。<br>
+<br>
+
+<h4>データストア情報の取得</h4>
+データフロー図(IDataFlowDiagram)のメソッドgeDataFlowNodes()を用いることで、データストア(IDataStore)の配列を取得できます。<br>
+<br>
+
+<h4><a name="crud">【CRUDのモデル情報の取得】</a></h4>
+ここでは、CRUDに関連するモデル情報の取得方法を紹介します。
+
+<h4>ヘッダー情報の取得</h4>
+CRUD(IMatrixDiagram)のメソッドgetColumnHeaders()とgetRowHeaders()を用いることで、ヘッダーの配列を取得できます。<br>
+<br>
+
+<h4>値情報の取得</h4>
+CRUD(IMatrixDiagram)のメソッドgetShowValueCell(row, column)を用いることで、特定の行と列の値を取得できます。
+
+<h3><a name="diagram">【図の取得】</a></h3>
+名前付き要素(INamedElement)は、図(IDiagram)やパッケージ(IPackage)、パーティション(IPartition)などの親クラスです。<br>
+名前付き要素(INamedElement)のメソッドgetDiagrams()を用いることで配下の全図を取得できます。<br>
+<p>
+<I>（例）アクティビティ図の取得</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+public List getActivityDiagram(IPackage iPackage) {
+    List activityDiagrams = new ArrayList();
+    
+    IDiagram[] dgms = iPackage.getDiagrams();
+    for (int i = 0; i &lt; dgms.length; i++) {
+        IDiagram dgm = dgms[i];
+        if (dgm instanceof IActivityDiagram 
+                &amp;&amp; !((IActivityDiagram )dgm).isFlowChart()) {
+               activityDiagrams.add(dgm);
+        }
+    }
+    return activityDiagrams;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+<p>
+<I>（例）フローチャートの取得</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+public List getFlowCharts(IPackage iPackage) {
+    List flowCharts = new ArrayList();
+    
+    IDiagram[] dgms = iPackage.getDiagrams();
+    for (int i = 0; i &lt; dgms.length; i++) {
+        IDiagram dgm = dgms[i];
+        if (dgm instanceof IActivityDiagram 
+                &amp;&amp; ((IActivityDiagram )dgm).isFlowChart()) {
+            flowCharts.add(dgm);
+        }
+    }
+    return flowCharts ;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="alias">【別名の取得】</a></h3>
+別名の情報は、内部ではタグ付き値として保持しています。タグ付き値にはITaggedValueを通してアクセスできます。<br>
+タグ付き値のキーは別名１が"jude.multi_language.alias1"、別名２が"jude.multi_language.alias2"となっておりますので<br>
+以下のコードのように取得することが可能です。<br>
+
+<p>
+<I>（例）別名１の取得</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private static final String KEY_ALIAS1 = &quot;jude.multi_language.alias1&quot;;
+
+private String geAlias1(INamedElement element) {
+    ITaggedValue[] tvs = element.getTaggedValues();
+    for (int i = 0; i &lt; tvs.length; i++) {
+        ITaggedValue tv = tvs[i];
+        if (KEY_ALIAS1.equals(tv.getKey())) {
+            return tv.getValue();
+        }
+    }
+    return null;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="hyperlink">【ハイパーリンクの取得】</a></h3>
+INamedElementおよびIPresentationはIHyperlinkOwnerを継承しています。<br>    
+IHyperlinkOwnerのgetHyperlinks()によって保持しているハイパーリンク(IHyperlink)のリストを取得することが可能です。<br>
+
+<p>
+<I>（例）ハイパーリンクの取得</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private void showHyperlinkStrings(INamedElement element) {
+   
+    IHyperlink[] links = element.getHyperlinks();
+    for (int i = 0; i &lt; links.length; i++) {
+        IHyperlink link = links[i];
+        if(link.isFile()) {
+            System.out.println(link.getName());
+            System.out.println(link.getPath());
+            System.out.println(link.getComment());
+        } else if(link.isModel()) {
+            System.out.println(link.getName());
+            System.out.println(link.getPath());
+            System.out.println(link.getComment());
+        } else if(link.isURL()) {
+            System.out.println(link.getName()); 
+            System.out.println(link.getPath());
+            System.out.println(link.getComment());
+        }                     
+     }
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>以下の例のように、ハイパーリンクの種類がモデルになる場合、nameがモデルのid、IElementImpのgetId()によって取得することも可能です。<br>
+
+<p>
+<I>（例）ハイパーリンク文字列</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+type=file,name=astah_com.log,path=C:/Documents and Settings,comment= Target is a file
+type=url,name=http://www.change-vision.com,path=http://,comment= Target is a web page
+type=model,name=9a1411-1112fec29a5-0804d01aa6c5fb9fe2aab956b4ca593a,path=,comment= Target is a astah* model
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h3><a name="flowchart">【フローチャートの基本要素の取得】</a></h3>
+astah*はフローチャートをアクティビティ図の一系統に考えています。アクションにステレオタイプを付加することで、
+基本要素オブジェクトを実現しています。<br>
+<p>
+<I>（例）ループ開始要素の取得</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+private static final String LOOP_START_ELEMENT = &quot;loop_start&quot;;
+
+public List getLoopStartElements(IActivityDiagram iActivityDiagram) {
+   List loopStartElements = new ArrayList();
+   
+   IActivity iActivity = iActivityDiagram.getActivity();
+   IActivityNode[] activityNodes = iActivity.getActivityNodes();
+   for (int i = 0; i &lt; activityNodes.length; i++) {
+        IActivityNode node = activityNodes[i];
+        String[] stereotypes = node.getStereotypes();
+        for (int j = 0; j &lt; stereotypes.length; j++) {
+           if (LOOP_START_ELEMENT.equals(stereotypes[j])) {
+               loopStartElements.add(node);
+               break;
+           }
+        }
+    }
+    return loopStartElements;
+}</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h4>基本要素オブジェクトのステレオタイプ一覧</h4>
+処理１ <--- 標準アイコンの要素にステレオタイプを付加しません。<br>
+処理２(flow_process)<br>
+定義済処理 (predefined_process)<br>                 
+手作業 (hand_work)<br>                 
+準備 (preparation)<br>                 
+サーバー(server)<br>
+端末(machine)<br>
+データ(data)<br>
+記憶データ(stored_data)<br>
+内部記憶(internal_storage)<br>
+順次アクセス(sequential_storage)<br>
+ディスク１(disk)<br>
+ディスク２(database)<br>
+文書(document)<br>
+手操作入力(hand_inputting)<br>
+表示(display)<br>
+判断(judgement)<br>
+ループ開始(loop_start)<br>
+ループ終了(loop_end)<br>
+ページ内結合子(internal_connector)<br>
+ページ外結合子(external_connector)<br>
+
+<h3><a name="search">【ProjectAccessorから要素を検索】</a></h3>
+ProjectAccessorには3つの検索メソッドが用意されています。<br>
+<br>
+public INamedElement[] findElements(Class elementKind, String name) throws ProjectNotFoundException;<br>
+要素の種類と名前で要素を検索します。ITopicPresentationなどのプレゼンテーションは検索対象となりません。<br>
+<p>
+<I>（例）findElements(Class elementKind, String name)の使用</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//classDgm0という名前のクラス図を検索
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(IClassDiagram.class, "classDgm0");</b>
+//Aという名前のクラスを検索
+<b>iNamedElements = prjAccessor.findElements(IClass.class, "A");</b>
+//Bという名前の属性を検索
+<b>iNamedElements = prjAccessor.findElements(IAttribute.class, "B");</b>
+//Cという名前の操作を検索
+<b>iNamedElements = prjAccessor.findElements(IOperation.class, "C");</b>
+//Dという名前の関連を検索
+
+<b>iNamedElements = prjAccessor.findElements(IAssociation.class, "D");</b>
+//Eという名前のユースケースを検索
+<b>iNamedElements = prjAccessor.findElements(IUseCase.class, "E");</b>
+//Fという名前の包含を検索
+<b>iNamedElements = prjAccessor.findElements(IInclude.class, "F");</b>
+
+//Gという名前の状態を検索
+<b>iNamedElements = prjAccessor.findElements(IState.class, "G");</b>
+//Hという名前の擬似状態を検索
+<b>iNamedElements = prjAccessor.findElements(IPseudostate.class, "H");</b>
+//Iという名前の遷移を検索
+<b>iNamedElements = prjAccessor.findElements(ITransition.class, "I");</b>
+
+//Jという名前のパーティションを検索
+<b>iNamedElements = prjAccessor.findElements(IPartition.class, "J");</b>
+//Kという名前のアクションを検索
+<b>iNamedElements = prjAccessor.findElements(IAction.class, "K");</b>
+//Lという名前のオブジェクトノードを検索
+<b>iNamedElements = prjAccessor.findElements(IObjectNode.class, "L");</b>
+//Mという名前のフローを検索
+<b>iNamedElements = prjAccessor.findElements(IFlow.class, "M");</b>
+
+
+//Nという名前のライフラインを検索
+<b>iNamedElements = prjAccessor.findElements(ILifeline.class, "N");</b>
+//Oという名前のメッセージを検索
+<b>iNamedElements = prjAccessor.findElements(IMessage.class, "O");</b>
+
+//Pという名前の外部エンティティを検索
+<b>iNamedElements = prjAccessor.findElements(IExternalEntity.class, "P");</b>
+//Qという名前のデータストアを検索
+<b>iNamedElements = prjAccessor.findElements(IDataStore.class, "Q");</b>
+
+//Rという名前のERモデルを検索
+<b>iNamedElements = prjAccessor.findElements(IERModel.class, "R");</b>
+//Sという名前のERドメインを検索
+<b>iNamedElements = prjAccessor.findElements(IERDomain.class, "S");</b>
+//USER_DEFINED_DATATYPE1という名前のERデータタイプを検索
+<b>iNamedElements = prjAccessor.findElements(IERDatatype.class, "USER_DEFINED_DATATYPE1");</b>
+//Tという名前のERエンティティを検索
+<b>iNamedElements = prjAccessor.findElements(IEREntity.class, "T");</b>
+//Uという名前のER属性を検索
+<b>iNamedElements = prjAccessor.findElements(IERAttribute.class, "U");</b>
+//Vという名前のERリレーションシップを検索
+<b>iNamedElements = prjAccessor.findElements(IERRelationship.class, "V");</b>
+//Wという名前のERサブタイプリレーションシップを検索
+<b>iNamedElements = prjAccessor.findElements(IERSubtypeRelationship.class, "W");</b>
+//Xという名前のERインデックスを検索
+<b>iNamedElements = prjAccessor.findElements(IERIndex.class, "X");</b>
+
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+public abstract INamedElement[] findElements(Class elementKind) throws ProjectNotFoundException;<br>
+要素の種類で要素を検索します。ITopicPresentationなどのプレゼンテーションは検索対象となりません。<br>
+<p>
+<I>（例）findElements(Class elementKind)の使用</I>
+<I>classDgm0という名前のクラス図を検索</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//クラス図を検索
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(IClassDiagram.class);</b>
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+public INamedElement[] findElements(ModelFinder picker) throws ProjectNotFoundException;<br>
+ModelFinderで要素を検索します。<br>
+<p>
+<I>（例）findElements(ModelFinder picker)の使用</I>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    //クラス図を抽出するModelFinderインターフェースを実装したクラス
+    class ClassDiagramPicker implements <b>ModelFinder</b> {
+        <b>public boolean isTarget(INamedElement namedElement)</b> {
+            if (namedElement instanceof IClassDiagram) {
+                return true;
+            }
+            return false;
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:\\test.asta");
+//classDgm0という名前のクラス図を検索
+<b>INamedElement[] iNamedElements = prjAccessor.findElements(new ClassDiagramPicker());</b>
+prjAccessor.close();
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<p>
+
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

@@ -1,0 +1,698 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+
+<h2>【図情報(プレゼンテーション)の概要】</h2>
+<ol>
+<li><a href="#presentation_outline">図情報(プレゼンテーション)概要</a></li>
+<li><a href="#presentation_list">図情報(プレゼンテーション)一覧</a></li>
+</ol>
+
+各インターフェース、メソッドの詳細については、<a href="javadoc/index.html">astah* API JavaDoc</a>をご覧ください。<br>
+<p>
+astah* APIの図情報の参照/作成/編集/削除機能は、astah* UML, professionalでサポートしています。
+ただし、ER図の図情報の作成/編集/削除機能は、astah* professionalでのみ利用可能です。
+
+<h4><a name="presentation_outline">【図情報(プレゼンテーション)概要】</a></h4>
+プレゼンテーション基底インターフェースはIPresentationで、それを継承するINodePresentation、ILinkPresentation、ICellがあります。
+ICellはCRUDのプレゼンテーションのインターフェースで、それをIHeaderCell、IValueCellが継承しています。<br>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>プレゼンテーションインターフェース名</b></td>
+        <td nowrap><b>概要</b></td>
+        <td nowrap><b>例</b></td>
+    </tr>
+    <tr>
+        <td nowrap>INodePresentation</td>
+        <td nowrap>矩形プレゼンテーションに対するインターフェース</td>
+        <td nowrap>
+        パッケージ、フレーム、ノート、<br>
+        クラス、パート、ポート、インスタンス仕様、ユースケース、<br>
+        状態、パーティション、アクション、ライフライン、活性区間、<br>
+        外部エンティティ、ERエンティティ、<br>
+        要求、テストケース、<br>
+        トピック、境界<br>のプレゼンテーションなど
+        </td>
+    </tr>
+    <tr>
+        <td nowrap>ILinkPresentation</td>
+        <td nowrap>線プレゼンテーションに対するインターフェース</td>
+        <td nowrap>
+        ネスト、ノートアンカー、関連、汎化、<br>
+        実現、使用依存、依存、<br>
+        テンプレートバインディング、リンク、コネクタ<br>
+        拡張、包含、<br>
+        遷移、制御フロー/オブジェクトフロー、メッセージ、<br>
+        アンカー、データフロー、<br>
+        導出、コピー、満足、検証、洗練、トレース、<br>
+        依存型リレーションシップ、非依存型リレーションシップ、<br>
+        多対多型リレーションシップ、サブタイプ<br>
+        エッジ、トピック間リンク<br>
+        のプレゼンテーションなど
+        </td>
+    </tr>
+    <tr>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>CRUDのヘッダーセルに対するインターフェース</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>IValueCell</td>
+        <td nowrap>CRUDの値のセルに対するインターフェース</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ITopicPresentation</td>
+        <td nowrap>トピックに対するインターフェース(@deprecated)</td>
+        <td nowrap>INodePresentation</td>
+    </tr>
+</table>
+
+<h4><a name="presentation_list">【図情報(プレゼンテーション)一覧】</a></h4>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>種別</b></td>
+        <td nowrap><b>モデル</b></td>
+        <td nowrap><b>プレゼンテーションの型</b></td>
+        <td nowrap><b>モデル:プレゼンテーション</b></td>
+    </tr>
+    <tr>
+        <td nowrap>モデル・プレゼンテーション</td>
+        <td nowrap>IModel</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>サブシステム・プレゼンテーション</td>
+        <td nowrap>ISubsystem</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>パッケージ・プレゼンテーション</td>
+        <td nowrap>IPackage</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>ネスト・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>フレーム・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ノート・プレゼンテーション</td>
+        <td nowrap>IComment</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>ノートアンカー・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>テキスト・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>長方形・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>楕円・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>直線・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>フリーハンド・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>画像・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>クラス・プレゼンテーション</td>
+        <td nowrap>IClass</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>関連クラス・プレゼンテーション</td>
+        <td nowrap>IAssociationClass</td>
+        <td nowrap>INodePresentaion,ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>関連・プレゼンテーション</td>
+        <td nowrap>IAssociation</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>汎化・プレゼンテーション</td>
+        <td nowrap>IGeneralization</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>実現・プレゼンテーション</td>
+        <td nowrap>IRealization</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>使用依存・プレゼンテーション</td>
+        <td nowrap>IUsage</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>依存・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>テンプレートバインディング・プレゼンテーション</td>
+        <td nowrap>ITemplateBinding</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>インスタンス仕様・プレゼンテーション</td>
+        <td nowrap>IInstanceSpecification</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>リンク・プレゼンテーション</td>
+        <td nowrap>ILink</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>パート・プレゼンテーション</td>
+        <td nowrap>IAttribute</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>ポート・プレゼンテーション</td>
+        <td nowrap>IPort</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>コネクター・プレゼンテーション</td>
+        <td nowrap>IConnector</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>ユースケース・プレゼンテーション</td>
+        <td nowrap>IUseCase</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>拡張・プレゼンテーション</td>
+        <td nowrap>IExtend</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>包含・プレゼンテーション</td>
+        <td nowrap>IInclude</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>開始疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>状態・プレゼンテーション</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>終了状態・プレゼンテーション</td>
+        <td nowrap>IFinalState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>遷移・プレゼンテーション</td>
+        <td nowrap>ITransition</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>浅い履歴疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>深い履歴疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>ジャンクション疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>選択疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>フォーク疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>ジョイン疑似状態・プレゼンテーション</td>
+        <td nowrap>IPseudostate</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>サブマシン状態の擬似状態・プレゼンテーション</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>サブマシン状態・プレゼンテーション</td>
+        <td nowrap>IState</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>パーティション・プレゼンテーション</td>
+        <td nowrap>IPartition</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>開始ノード・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>アクション・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>フロー終了ノード・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>シグナル送信アクション・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>イベント受信アクション・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>プロセス・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>コネクタ・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>振る舞い呼び出しアクション・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>アクティビティ終了・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>制御フロー/オブジェクトフロー・プレゼンテーション</td>
+        <td nowrap>IFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>デシジョンノード・マージノード・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>フォークノード・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>ジョインノード・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>オブジェクトノード・プレゼンテーション</td>
+        <td nowrap>IObjectNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>ライフライン・プレゼンテーション</td>
+        <td nowrap>ILifeline</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>活性区間・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>メッセージ・プレゼンテーション</td>
+        <td nowrap>IMessage</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>停止・プレゼンテーション</td>
+        <td nowrap>ITermination</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>相互作用の利用・プレゼンテーション</td>
+        <td nowrap>IInteractionUse</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>複合フラグメント・プレゼンテーション</td>
+        <td nowrap>ICombinedFragment</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>状態不変式・プレゼンテーション</td>
+        <td nowrap>IStateInvariant</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>パート・プレゼンテーション</td>
+        <td nowrap>IAttribute</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>ポート・プレゼンテーション</td>
+        <td nowrap>IPort</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>コネクタ・プレゼンテーション</td>
+        <td nowrap>IConnector</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>レーン・プレゼンテーション</td>
+        <td nowrap>IPartition</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>処理・プレゼンテーション</td>
+        <td nowrap>IAction</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>遷移・プレゼンテーション</td>
+        <td nowrap>IFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>開始・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>終了・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>分岐・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>合流・プレゼンテーション</td>
+        <td nowrap>IControlNode</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>外部エンティティ・プレゼンテーション</td>
+        <td nowrap>IExternalEntity</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>プロセス・プレゼンテーション</td>
+        <td nowrap>IProcessBox</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>データストア・プレゼンテーション</td>
+        <td nowrap>IDataStore</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>アンカー・プレゼンテーション</td>
+        <td nowrap>IAnchor</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    <tr>
+        <td nowrap>データフロー・プレゼンテーション</td>
+        <td nowrap>IDataFlow</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対1</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>要求・プレゼンテーション</td>
+        <td nowrap>IRequirement</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>テストケース・プレゼンテーション</td>
+        <td nowrap>ITestCase</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>導出・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>コピー・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>満足・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>検証・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>洗練・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>トレース・プレゼンテーション</td>
+        <td nowrap>IDependency</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>ERエンティティ・プレゼンテーション</td>
+        <td nowrap>IEREntity</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>依存型リレーションシップ・プレゼンテーション</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>非依存型リレーションシップ・プレゼンテーション</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>多対多型リレーションシップ・プレゼンテーション</td>
+        <td nowrap>IERRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>サブタイプ・プレゼンテーション</td>
+        <td nowrap>IERSubtypeRelationship</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>1対n</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>トピック・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>エッジ・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>トピック間リンク・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>ILinkPresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>境界・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>INodePresentaion</td>
+        <td nowrap>-</td>
+    </tr>
+    
+    <tr>
+        <td nowrap>CRUDの値のセル・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>IValueCell</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUDのヘッダーセル・プレゼンテーション</td>
+        <td nowrap>IElement</td>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>1対n</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUDの全体ヘッダーセル・プレゼンテーション</td>
+        <td nowrap>null</td>
+        <td nowrap>IHeaderCell</td>
+        <td nowrap>-</td>
+    </tr>
+    
+</table>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

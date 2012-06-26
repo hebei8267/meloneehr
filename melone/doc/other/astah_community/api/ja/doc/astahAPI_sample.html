@@ -1,0 +1,80 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+
+<h2>【サンプルアプリケーションの説明】</h2>
+
+<h4>【ClassDefinitionExporter】</h4>
+astah*プロジェクトファイルに含まれるクラスの情報をCSV形式で出力します。クラスのフルパス名、属性および操作、定義、継承元、実現元の５つの項目が出力されます。
+
+<h4>コンパイルの方法</h4>
+利用するシステムのコマンドプロンプト、もしくはJavaのIDEツール（統合開発環境）などでコンパイルします。
+この時、astah*のインストールフォルダと、インストールフォルダに含まれるastah-api.jarにクラスパスを通す必要があります。<br>
+<br>
+サンプル:Windowsコマンドプロンプト用のバッチファイルcompile.batを用いたコンパイル方法<br>
+<br>
+<TABLE border="1">
+<tr>
+<td>
+C:\Program Files\astah-XXXXXXXXXX\api\sample\csvexporter&gt;compile<br>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<br>
+<h4>実行の方法</h4>
+利用するシステムのコマンドプロンプト、もしくはJavaのIDEツール（統合開発環境）などで、
+第一引数としてastah*プロジェクトファイル名を、第二引数として出力先となるcsv形式ファイル名を
+指定して実行します。この時、インストールフォルダに含まれるastah-api.jarとastah-community.jar(astah-pro.jar)に                                                                                                
+クラスパスを通す必要があります。<br>
+また、大きなastah*プロジェクトファイルを扱う場合は、java実行環境に対するメモリーオプションを
+指定する必要があります。<br>
+<br>
+サンプル:Windowsコマンドプロンプト用のバッチファイルrun.batを用いた実行方法<br>
+<br>
+<TABLE border="1">
+<tr>
+<td>
+C:\Program Files\astah-XXXXXXXXXX\api\sample\csvexporter&gt;run ..\APISample.asta APISample.csv<br>                                                                                                
+</td>
+</tr>
+</TABLE>
+<p>
+
+<h4>【ImportDBToJudeDialog】</h4>
+astah* DBリバースツールでDBに接続し、astah*モデルに変換するアプリケーションです。
+astah* DBリバースツールの利用方法は<a href="../../db_reverse.html">astah* DBリバースツール利用ガイド</a>をご覧ください。
+(このサンプルプログラムはastah* professionalでご利用いただけます。)
+
+<h4>【astah*モデルの参照、作成】</h4>
+astah* インストールフォルダ配下のapi\sampleフォルダにastah*モデルの参照、作成のサンプルアプリケーションが含まれています。
+<ol>
+<li>astah*モデルの参照 : APIForReadingModelsSample.java</li>
+<li>astah*モデルの作成 : APIForEditingModelsSample.java</li>
+</ol>
+
+<ul>
+<li><b>パッケージcom.change_vision.jude.api.test.modelのユニットテストのソースコード</b><br>
+<br>
+astah* APIのユニットテストのソースコードです。astah* APIを利用する上で参考としてご利用いただけます。
+</ul>
+<br>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+
