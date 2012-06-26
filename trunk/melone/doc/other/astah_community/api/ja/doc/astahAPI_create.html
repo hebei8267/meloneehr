@@ -1,0 +1,130 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+<h2>【モデルの作成/削除】</h2>
+
+<p>各インターフェース、メソッドの詳細については<a href="javadoc/index.html">astah* APIのJavaDoc</a>をご覧ください。<br>
+astah* APIのモデル作成/編集/削除機能は、astah* UML, professionalでサポートしています。
+</p>
+
+<h4>【トランザクション操作】</h4>
+モデルを作成/削除する場合、トランザクション操作が必要です。<br>
+<a href="astahAPI_transaction.html">トランザクション操作(モデル/図/プレゼンテーションの作成・編集・削除時)</a>をご覧ください。<br>
+
+<h4>【クラス図に関連するモデルの作成】</h4>
+BasicModelEditorのcreateClassメソッドなどを用いて、クラス図のクラスなどのモデルを作成します。
+
+<h4>【ユースケース図に関連するモデルの作成】</h4>
+UsseCaseModelEditorのcreateUseCaseメソッドなどを用いて、ユースケース図のユースケースなどのモデルを作成します。
+
+<h4>【合成構造図に関連するモデルの作成】</h4>
+CompositeStructureModelEditorのcreateClassメソッドなどを用いて、合成構造図のクラスなどのモデルを作成します。
+
+<h4>【ER図に関連するモデルの作成】(professionalのみ)</h4>
+ERModelEditorのcreateEREntityメソッドなどを用いて、ER図のERエンティティなどのモデルを作成します。
+
+<h4>【マインドマップに関連するモデルの作成】(UML、professionalのみ)</h4>
+MindmapDiagramEditorのaddChildメソッドなどを用いて、マインドマップのトピックなどのモデルを作成/移動します。
+
+<h4>【要求図に関連するモデルの作成】(professionalのみ)</h4>
+BasicModelEditorのcreateRequirementメソッドなどを用いて、要求図の要求などのモデルを作成します。
+
+<h4>【クラス図に関連するモデルの作成例】</h4>     
+パッケージ1つと配下のクラス2つ、そして、その間の関連を作成します。
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+public class APIForEditingModelsSample {
+
+    public static void main(String[] args) {
+
+        try {
+            System.out.println(&quot;Creating new project...&quot;);
+
+            // プロジェクトを作成して、起点となるモデルを取得
+            ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+            prjAccessor.create(&quot;./SampleModel.asta&quot;);
+            IModel project = prjAccessor.getProject();
+
+            System.out.println(&quot;Creating new elements in the project...&quot;);
+
+            // クラスなどのモデル要素を作成または編集する場合、まとまり単位としてトランザクション操作が必要
+            TransactionManager.beginTransaction();
+
+            // クラス関連のモデル要素を作成するエディタを取得
+            BasicModelEditor basicModelEditor = ModelEditorFactory.getBasicModelEditor();
+
+            // パッケージを作成
+            IPackage packageA = basicModelEditor.createPackage(project, &quot;PackageA&quot;);
+
+            // 指定のパッケージにクラスを作成
+            IClass classA = basicModelEditor.createClass(packageA, &quot;ClassA&quot;);
+            // クラスの定義を追加
+            classA.setDefinition(&quot;Definition of ClassA&quot;);
+            // クラスに属性を追加
+            basicModelEditor.createAttribute(classA, &quot;attribute0&quot;, &quot;int&quot;);
+            // クラスに操作を追加
+            basicModelEditor.createOperation(classA, &quot;operation0&quot;, &quot;void&quot;);
+
+            // 指定のパッケージにクラスを作成
+            IClass classB = basicModelEditor.createClass(packageA, &quot;ClassB&quot;);
+
+            // クラス間の関連を作成
+            basicModelEditor.createAssociation(classA, classB, &quot;association name&quot;,
+                    &quot;classA end&quot;, &quot;classB end&quot;);
+
+            // トランザクションの終了
+            TransactionManager.endTransaction();
+
+            // プロジェクトを保存
+            prjAccessor.save();
+
+            // プロジェクトを閉じる
+            prjAccessor.close();
+
+            System.out.println(&quot;Finished&quot;);
+
+        } catch (LicenseNotFoundException e) {
+            e.printStackTrace();
+        } catch (ProjectNotFoundException e) {
+            e.printStackTrace();
+        } catch (ProjectLockedException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InvalidEditingException e) {
+            // トランザクションの放棄
+            TransactionManager.abortTransaction();
+            // 不正編集の例外メッセージを取得
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

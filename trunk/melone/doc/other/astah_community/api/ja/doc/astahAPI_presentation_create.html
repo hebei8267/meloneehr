@@ -1,0 +1,616 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+<h2>【図要素の作成/削除】</h2>
+
+<ol>
+<li><a href="#create_presentation">各図要素の作成</a></li>
+    <ul><li><a href="#create_presentation_common_dgm">共通図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_class_dgm">クラス図の図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_usecase_dgm">ユースケース図の図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_state_machine_dgm">ステートマシン図の図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_cs_dgm">合成構造図の図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_er_dgm">ER図の図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_mm_dgm">マインドマップの図要素の作成例</a></li></ul>
+    <ul><li><a href="#create_presentation_requirement_dgm">要求図の図要素の作成例</a></li></ul>
+<li><a href="#delete_presentation">各図要素の削除</a></li>
+</ol>
+
+astah* APIの図情報の参照/作成/編集/削除は、astah* UML, professionalでサポートしています。ただし、ER図の作成/編集/削除はastah* professionalでのみ利用可能です。
+</p>
+
+<h4><a name="transaction">【トランザクション操作】</a></h4>
+図要素を作成・編集・削除する場合、トランザクション操作が必要です。<br>
+<a href="astahAPI_transaction.html">トランザクション操作(モデル/図/図要素の作成・編集・削除時)</a>をご覧ください。<br>
+
+<h4><a name="create_presentation">【各図要素の作成】</a></h4>
+1.モデル(IElement)を取得する<br>
+2.トランザクションを開始する<br>
+3.各DiagramEditorのsetDiagramメソッドで編集する対象の図を設定する<br>
+4.各DiagramEditorのcreateXXXメソッドに、取得もしくは作成したモデルを設定してプレゼンテーション(IPresentation)を作成する<br>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>クラス図/オブジェクト図</b></td>
+        <td nowrap><b>ClassDiagramEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>ユースケース図</b></td>
+        <td nowrap><b>UseCaseDiagramEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>ステートマシン図</b></td>
+        <td nowrap><b>StateMachineDiagramEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>合成構造図</b></td>
+        <td nowrap><b>CompositeStructureDiagramEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>ER図</b></td>
+        <td nowrap><b>ERDiagramEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>マインドマップ</b></td>
+        <td nowrap><b>MindmapEditor</b></td>
+    </tr>
+    <tr>
+        <td nowrap><b>要求図</b></td>
+        <td nowrap><b>RequirementDiagramEditor</b></td>
+    </tr>
+</table>
+5.トランザクションを終了する<br>
+6.必要に応じてプロジェクトを保存する<br>
+<br>
+
+<h4><a name="create_presentation_common_dgm">【共通図要素の作成例】</a></h4>
+例：指定した図に、文字列、位置を指定してノート・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createNotePresentation(IDiagram dgm, String note, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        ClassDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getClassDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNote(note, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+例：指定した図に、ノート・プレゼンテーション、接続元プレゼンテーション間にノートアンカー・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createNoteAnchorPresentation(IDiagram dgm, INodePresentation note, IPresentation annotatedElement) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        ILinkPresentation ps = null;
+        ClassDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getClassDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNoteAnchor(note, annotatedElement);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_class_dgm">【クラス図の図要素の作成例】</a></h4>
+例１：指定した図に、クラス・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createClassPresentation(IDiagram dgm, IClass iClass, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        ClassDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getClassDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNodePresentation(iClass, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例２：ルート配下にクラスを作成、かつ指定した図に位置を指定してクラス・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createClassModelAndPresentation(IDiagram dgm, String className, Point2D location)
+            throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        BasicModelEditor bme = ProjectAccessorFactory.getProjectAccessor().getModelEditorFactory().getBasicModelEditor();
+        ClassDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getClassDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //create model
+            IClass iClass = bme.createClass(project, className);
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNodePresentation(iClass, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例３：指定した図に、関連、関連元クラス・プレゼンテーション、関連・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createAssociationPresentation(IDiagram dgm, IAssociation iAssociation, INodePresentation sourcePs, INodePresentation targetPs) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        ILinkPresentation ps = null;
+        ClassDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getClassDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createLinkPresentation(iAssociation, sourcePs, targetPs);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_usecase_dgm">【ユースケース図の図要素の作成例】</a></h4>
+例１：指定した図に、位置を指定してユースケース・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createUseCasePresentation(IDiagram dgm, IUseCase iUseCase, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        UseCaseDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getUseCaseDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNodePresentation(iUseCase, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+例２：指定した図に、拡張、拡張元ユースケース・プレゼンテーション、拡張先ユースケース・プレゼンテーションで拡張・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createExtendPresentation(IDiagram dgm, IExtend iExtend, INodePresentation sourcePs, INodePresentation targetPs) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        ILinkPresentation ps = null;
+        UseCaseDiagramEditor cde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getUseCaseDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cde.setDiagram(dgm);
+            //create presentation
+            ps = cde.createLinkPresentation(iExtend, sourcePs, targetPs);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_state_machine_dgm">【ステートマシン図の図要素の作成例】</a></h4>
+例１：指定した図に、名前、親プレゼンテーション、位置を指定して状態・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createStatePresentation(IDiagram dgm, String stateName, INodePresentation parent, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        StateMachineDiagramEditor ste = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getStateMachineDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            ste.setDiagram(dgm);
+            //create presentation
+            ps = ste.createState(stateName, parent, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例２：指定した図に、遷移元IVertex・プレゼンテーション、遷移先IVertex・プレゼンテーション間における遷移・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createTransitionPresentation(IDiagram dgm, INodePresentation sourcePs, INodePresentation targetPs) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        ILinkPresentation ps = null;
+        StateMachineDiagramEditor ste = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getStateMachineDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            ste.setDiagram(dgm);
+            //create presentation
+            ps = ste.createTransition(sourcePs, targetPs);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_cs_dgm">【合成構造図の図要素の作成例】</a></h4>
+例１：指定した図に、構造化クラス・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createClassPresentation(IDiagram dgm, IClass iClass, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        CompositeStructureDiagramEditor cse = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getCompositeStructureDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cse.setDiagram(dgm);
+            //create presentation
+            ps = cse.createStructuredClassPresentation(iClass, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例２：指定した構造化クラスに内部パート・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createPartPresentation(IDiagram dgm, IClass parentClass, IClass partBaseClass, INodePresentation parentClassPresentation, String partName, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        BasicModelEditor bme = ModelEditorFactory.getBasicModelEditor();
+        CompositeStructureDiagramEditor cse = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getCompositeStructureDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            IAssociation asso = bme.createAssociation(parentClass, partBaseClass, "", "", partName);
+            IAttribute[] memberEnds = asso.getMemberEnds();
+            memberEnds[0].setComposite();
+            
+            //set diagram
+            cse.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNodePresentation(memberEnds[1], parentClassPresentation, location);
+            
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例３：指定した構造化クラスに外部パート・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createExternalPartPresentation(IDiagram dgm, IClass partBaseClass, INodePresentation parentClassPresentation, IClass externalPartBaseClass, IAttribute part1, String externalPartName, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        BasicModelEditor bme = ModelEditorFactory.getBasicModelEditor();
+        CompositeStructureDiagramEditor cse = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getCompositeStructureDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            IAssociation asso = bme.createAssociation(partBaseClass, externalPartBaseClass, "", "", externalPartName);
+            IAttribute[] memberEnds = asso.getMemberEnds();
+            IConnector connector = csme.createConnector(part1, null, memberEnds[1], null);
+            
+            //set diagram
+            cse.setDiagram(dgm);
+            //create presentation
+            ps = cde.createNodePresentation(memberEnds[1], parentClassPresentation, location);
+            
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例４：指定した構造化クラス/パートプレゼンテーションに、ポート・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createPortPresentation(IDiagram dgm, INodePresentation parentNode) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        CompositeStructureDiagramEditor cse = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getCompositeStructureDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            cse.setDiagram(dgm);
+            //create presentation
+            ps = cse.createPortPresentation(parentNode);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_er_dgm">【ER図の図要素の作成例】</a></h4>
+例１：指定した図に、位置を指定してERエンティティ・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createEREntityPresentation(IDiagram dgm, IEREntity iEREntity, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        ERDiagramEditor ede = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getERDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            ede.setDiagram(dgm);
+            //create presentation
+            ps = ede.createNodePresentation(iEREntity, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例２：指定した図に、ERリレーションシップ、ERリレーションシップ元ERエンティティ・プレゼンテーション、ERリレーションシップ先エンティティ・プレゼンテーション間にERリレーションシップ・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createERRelationshipPresentation(IDiagram dgm, IERRelationship iERRelationship, INodePresentation sourcePs, INodePresentation targetPs) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        ILinkPresentation ps = null;
+        ERDiagramEditor ede = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getERDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            ede.setDiagram(dgm);
+            //create presentation
+            ps = ede.createLinkPresentation(iERRelationship, sourcePs, targetPs);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_mm_dgm">【マインドマップ図の図要素作成例】</a></h4>
+例１：指定したマインドマップのルートトピック配下に、トピック・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createTopicPresentation(IMindMapDiagram dgm, String topicName) 
+            throws InvalidUsingException, ClassNotFoundException {
+        INodePresentation ps = null;
+       	MindmapEditor mme = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getMindmapEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            mme.setDiagram(dgm);
+            INodePresentation iRootTopic = dgm.getRoot();
+            //create presentation
+            ps = mme.addChild(iRootTopic, topicName);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+例２：トピック間リンク・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public ILinkPresentation createMMLinkPresentation(IDiagram dgm, INodePresentation sourcePs, INodePresentation targetPs) 
+            throws ClassNotFoundException, InvalidUsingException {
+        ILinkPresentation ps = null;
+       	MindmapEditor mme = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getMindmapEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            mme.setDiagram(dgm);
+            //create presentation
+            ps = mme.createMMLinkPresentation(sourcePs, targetPs);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<h4><a name="create_presentation_requirement_dgm">【要求図の図要素の作成例】</a></h4>
+例１：指定した図に、要求・プレゼンテーションを作成<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public INodePresentation createRequirementPresentation(IDiagram dgm, IRequirement iRequirement, Point2D location) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+        INodePresentation ps = null;
+        RequirementDiagramEditor rde = ProjectAccessorFactory.getProjectAccessor().getDiagramEditorFactory().getRequirementDiagramEditor();
+        try {
+            TransactionManager.beginTransaction();
+            //set diagram
+            rde.setDiagram(dgm);
+            //create presentation
+            ps = rde.createNodePresentation(iRequirement, location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+        return ps;
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="delete_presentation">【各図要素の削除】</a></h4>
+1.プレゼンテーション(IPresentqation)を取得する<br>
+2.トランザクションを開始する<br>
+3.各DiagramEditorのsetDiagramメソッドで編集する図を設定する<br>
+4.各DiagramEditorのdeletePresentationメソッドに、削除したいプレゼンテーションを渡してプレゼンテーション(IPresentation)を削除する<br>
+5.トランザクションを終了する<br>
+6.必要に応じてプロジェクトを保存する<br>
+<br>
+例：図の削除<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+	private void deletePresentation(IDiagram diagram, IPresentation ps) throws ClassNotFoundException, InvalidEditingException, InvalidUsingException {
+		ERDiagramEditor editor = DiagramEditorFactory.getERDiagramEditor();
+		try {
+			TransactionManager.beginTransaction();
+			editor.setDiagram(diagram);
+			editor.deletePresentation(ps);
+			TransactionManager.endTransaction();
+		} catch (InvalidEditingException e) {
+			e.printStackTrace();
+			TransactionManager.abortTransaction();
+		}
+	}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

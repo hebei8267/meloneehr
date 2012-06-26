@@ -1,0 +1,75 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+<h2>【モデルの編集方法】</h2>
+
+<p>各インターフェース、メソッドの詳細については<a href="javadoc/index.html">astah* APIのJavaDoc</a>をご覧ください。<br>
+astah* APIのモデルの作成/編集/削除機能は、astah* UML, professionalでサポートしています。
+<p>
+モデルを編集する場合、トランザクション操作が必要です。<br>
+<a href="astahAPI_transaction.html">トランザクション操作(モデル/図/プレゼンテーションの作成・編集・削除時)</a>をご覧ください。<br>
+
+<p><i>クラス名と定義の編集</i>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+  try {
+      TransactionManager.beginTransaction();
+      BasicModelEditor bme = ModelEditorFactory.getBasicModelEditor();
+      //クラスを作成
+      IClass class0 = bme.createClass(project, &quot;class0&quot;);
+      //名前を設定
+      class0.setName(&quot;new class name&quot;);
+      //定義を設定
+      class0.setDefinition(&quot;Definition of the class&quot;);
+      TransactionManager.endTransaction();
+  } catch (InvalidEditingException e) {
+      TransactionManager.abortTransaction();
+ }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><i>ERエンティティ物理名の編集(professionalのみ)</i>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+  IERModel erModel = (IERModel) getElement(project.getOwnedElements(), &quot;ER_Model&quot;);
+  schema = erModel.getSchemata()[0];
+  IEREntity[] entities = schema.getEntities();
+  for (int i = 0; i &lt; entities.length; i++) {
+      if (&quot;Entity0&quot;.equals(entities[i].getName())) {
+      try {
+         TransactionManager.beginTransaction();
+         //物理名を設定
+         entities[i].setPhysicalName(&quot;entity0 physical name&quot;);
+         TransactionManager.endTransaction();
+      } catch (InvalidEditingException e) {
+         TransactionManager.abortTransaction();
+      }
+  }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

@@ -1,0 +1,201 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* API 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* API 利用ガイド</h1>
+<hr>
+
+<h2>【各DiagramEditorの概要】</h2>
+<ol>
+<li><a href="#diagram_editor_outline">DiagramEditor</a></li>
+<li><a href="#transaction">トランザクション操作</a></li>
+<li><a href="#setDiagram">setDiagramメソッド</a></li>
+<li><a href="#diagram_editor">DiagramEditor</a></li>
+<li><a href="#basic_diagram_editor">BasicDiagramEditor</a></li>
+<li><a href="#structure_diagram_editor">StructureDiagramEditor</a></li>
+<li><a href="#class_diagram_editor">ClassDiagramEditor</a></li>
+<li><a href="#usecase_diagram_editor">UseCaseDiagramEditor</a></li>
+<li><a href="#state_machineDiagram_editor">StateMachineDiagramEditor</a></li>
+<li><a href="#composite_structure_editor">CompositeStructureDiagramEditor</a></li>
+<li><a href="#er_diagram_editor">ERDiagramEditor</a></li>
+<li><a href="#mindmap_editor">MindmapEditor</a></li>
+<li><a href="#mindmap_diagram_editor">MindmapDiagramEditor(非推奨)</a></li>
+<li><a href="#requirement_diagram_editor">RequirementDiagramEditor</a></li>
+</ol>
+
+<p>
+各インターフェース、メソッドの詳細については<a href="javadoc/index.html">astah* API JavaDoc</a>をご覧ください。<br>
+astah* APIの図情報の参照/作成/編集/削除機能は、astah* UML, professionalでサポートしています。
+</p>
+
+<h4><a name="diagram_editor_outline">【DiagramEditor】</a></h4>
+DiagramEditorを継承する各Editorで図の作成/削除、図情報(プレゼンテーション)の作成/削除などを行います。<br>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>図名</b></td>
+        <td nowrap><b>エディタ名</b></td>
+        <td nowrap><b>親エディタ</b></td>
+        <td nowrap><b>親エディタ</b></td>
+        <td nowrap><b>親エディタ</b></td>
+        <td nowrap><b>親エディタ</b></td>
+    </tr>
+    <tr>
+        <td nowrap>クラス図/オブジェクト図を編集するインターフェース</td>
+        <td nowrap>ClassDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ユースケース図を編集するインターフェース</td>
+        <td nowrap>UseCaseDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ステートマシン図を編集するインターフェース</td>
+        <td nowrap>StateMachineDiagramEditor</td>
+        <td nowrap>BehaviorDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>合成構造図を編集するインターフェース</td>
+        <td nowrap>CompositeStructureDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>ER図を編集するインターフェース</td>
+        <td nowrap>ERDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>マインドマップを編集するインターフェース</td>
+        <td nowrap>MindmapEditor</td>
+        <td nowrap>DiagramEditor</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+        <td nowrap>-</td>
+    </tr>
+    <tr>
+        <td nowrap>要求図を編集するインターフェース</td>
+        <td nowrap>RequirementDiagramEditor</td>
+        <td nowrap>ClassDiagramEditor</td>
+        <td nowrap>StructureDiagramEditor</td>
+        <td nowrap>BasicDiagramEditor</td>
+        <td nowrap>DiagramEditor</td>
+    </tr>
+</table>
+
+
+<h4><a name="transaction">【トランザクション操作】</a></h4>
+図・プレゼンテーションを作成/編集/削除する場合、トランザクション操作が必要です。<br>
+TransacionManagerのbeginTransactionメソッドなどを用いて、トランザクション操作を実現できます。<br>
+
+
+<h4><a name="setDiagram">【setDiagramメソッド】</a></h4>
+図・プレゼンテーションを編集/削除する場合、各DiagramEditorのメソッドを呼ぶ前に、
+対象の図をsetDiagramメソッドで設定する必要があります。<br>
+対象の図が未設定の場合はInvalidEditingExceptionがスローされます。
+ただし、各DiagramEditorで図を作成した場合は、その図が自動的に設定されます。<br>
+
+<h4><a name="diagram_editor">【DiagramEditor】</a></h4>
+・DiagramEditorのdelete、deleteDiagramメソッドを用いて、図をプロジェクトから削除します。<br>
+・DiagramEditorのdeletePresentationメソッドを用いて、プレゼンテーションをプロジェクトから削除します。<br>
+・DiagramEditorのcreateTextメソッドを用いて、テキストプレゼンテーションを作成します。<br>
+・DiagramEditorのcreateImageメソッドを用いて、画像プレゼンテーションを作成します。<br>
+・DiagramEditorのcreateRectメソッドを用いて、長方形プレゼンテーションを作成します。<br>
+・DiagramEditorのcreateLineメソッドを用いて、直線プレゼンテーションを作成します。<br>
+
+<h4><a name="basic_diagram_editor">【BasicDiagramEditor】</a></h4>
+・BasicDiagramEditorのcreateNoteメソッドを用いて、ノートプレゼンテーションを作成します。<br>
+・BasicDiagramEditorのcreateNoteAnchorメソッドを用いて、ノートアンカープレゼンテーションを作成します。<br>
+
+<h4><a name="structure_diagram_editor">【StructureDiagramEditor】</a></h4>
+・StructureDiagramEditorのcreateNodePresentationメソッドを用いて、矩形プレゼンテーション(INodePresentation)を作成します。<br>
+・StructureDiagramEditorのcreateLinkPresentationメソッドを用いて、線プレゼンテーション(ILinkPresentation)を作成します。<br>
+
+<h4><a name="class_diagram_editor">【ClassDiagramEditor】</a></h4>
+・ClassDiagramEditorのcreateClassDiagramメソッドを用いて、クラス図/オブジェクト図を作成します。<br>
+・ClassDiagramEditorの親インターフェースStructureDiagramEditorのcreateNodePresentationメソッドを用いて、<br>
+パッケージ・プレゼンテーション/クラス・プレゼンテーションを作成します。<br>
+・ClassDiagramEditorの親インターフェースStructureDiagramEditorのcreateLinkPresentationメソッドを用いて、<br>
+関連・プレゼンテーション/汎化・プレゼンテーション/実現・プレゼンテーション/依存・プレゼンテーション/テンプレートバインディング・プレゼンテーションなどを作成します。<br>
+・ClassDiagramEditorのcreateAssociationClassPresentationメソッドを用いて、関連クラス・プレゼンテーションを作成します。<br>
+・ClassDiagramEditorのcreateInstanceSpecificationメソッドを用いて、インスタンス仕様・プレゼンテーションを作成します。<br>
+・ClassDiagramEditorのcreateInstanceSpecificationLinkメソッドを用いて、リンク・プレゼンテーションを作成します。<br>
+
+<h4><a name="usecase_diagram_editor">【UseCaseDiagramEditor】</a></h4>
+・UseCaseDiagramEditorのcreateUseCaseDiagramメソッドを用いて、ユースケース図を作成します。<br>
+・UseCaseDiagramEditorの親インターフェースStructureDiagramEditorのcreateNodePresentationメソッドを用いて、<br>
+ユースケース・プレゼンテーションを作成します。<br>
+・UseCaseDiagramEditorの親インターフェースStructureDiagramEditorのcreateLinkPresentationメソッドを用いて、<br>
+拡張・プレゼンテーション/包含・プレゼンテーションを作成します。<br>
+
+<h4><a name="state_machineDiagram_editor">【StateMachineDiagramEditor】</a></h4>
+・StateMachineDiagramEditorのcreateStatemachineDiagramメソッドを用いて、ステートマシン図を作成します。<br>
+・StateMachineDiagramEditorのcreateInitialPseudostateメソッドを用いて、開始擬似状態・プレゼンテーションを作成します。<br>
+・StateMachineDiagramEditorのcreateStateメソッドを用いて、状態・プレゼンテーションを作成します。<br>
+・StateMachineDiagramEditorのcreateFinalStateメソッドを用いて、終了状態・プレゼンテーションを作成します。<br>
+・StateMachineDiagramEditorのcreateTransitionメソッドを用いて、遷移・プレゼンテーションを作成します。<br>
+・その他プレゼンテーションもStateMachineDiagramEditorの各メソッドで各プレゼンテーションを作成します。<br>
+
+<h4><a name="composite_structure_editor">【CompositeStructureDiagramEditor】</a></h4>
+・CompositeStructureDiagramEditorのcreateCompositeStructureDiagramメソッドを用いて、合成構造図を作成します。<br>
+・CompositeStructureDiagramEditorのcreateStructuredClassPresentation(IElement model, Point2D location)メソッドを用いて、構造化クラス・プレゼンテーションを作成します。<br>
+・CompositeStructureDiagramEditorのcreatePortPresentation(INodePresentation partPresentation, String name, String dataType, Point2D location)メソッドを用いて、構造化クラス・パート上のポートプレゼンテーションを作成します。<br>
+・CompositeStructureDiagramEditorのcreatePortPresentation(INodePresentation partPresentation)メソッドを用いて、構造化クラス・パートの左上にポートプレゼンテーションを作成します。<br>
+・CompositeStructureDiagramEditorのcreateProvidedInterfacePresentation(INodePresentation endPresentation)メソッドを用いて、ポートまたはパートへの右側に提供インターフェースを作成します。<br>
+・CompositeStructureDiagramEditorのcreateProvidedInterfacePresentation(INodePresentation endPresentation, Point2D location)メソッドを用いて、ポートまたはパートへの提供インターフェースを作成します。<br>
+・CompositeStructureDiagramEditorのcreateProvidedInterfacePresentation(INodePresentation endPresentation, IClass interfaceModel, Point2D location)メソッドを用いて、ポートまたはパートへの提供インターフェースを作成します。<br>
+・CompositeStructureDiagramEditorのcreateRequiredInterfacePresentation(INodePresentation endPresentation)メソッドを用いて、ポートまたはパートへの右側に要求インターフェースを作成します。<br>
+・CompositeStructureDiagramEditorのcreateRequiredInterfacePresentation(INodePresentation endPresentation, Point2D location)メソッドを用いて、ポートまたはパートへの要求インターフェースを作成します。<br>
+・CompositeStructureDiagramEditorのcreateRequiredInterfacePresentation(INodePresentation endPresentation, IClass interfaceModel, Point2D location)メソッドを用いて、ポートまたはパートへの要求インターフェースを作成します。<br>
+
+<h4><a name="er_diagram_editor">【ERDiagramEditor】(professionalのみ)</a></h4>
+・ERDiagramEditorのcreateERDiagramメソッドを用いて、ER図を作成します。<br>
+・ERDiagramEditorのcreateNodePresentationメソッドを用いて、
+エンティティ・プレゼンテーションを作成します。<br>
+・ERDiagramEditorのcreateLinkPresentationメソッドを用いて、
+依存型リレーションシップ・プレゼンテーション/非依存型リレーションシップ・プレゼンテーション/サブタイプ・プレゼンテーションを作成します。<br>
+
+<h4><a name="mindmap_editor">【MindmapEditor】</a></h4>
+・MindmapEditorのcreateMindmapDiagramメソッドを用いて、マインドマップを作成します。<br>
+・MindmapEditorのcreateTopicメソッドを用いて、指定されたトピックの子トピックに指定された名前のトピック・プレゼンテーションを作成します。<br>
+・MindmapEditorのmoveToメソッドを用いて、指定されたトピックの子トピックに指定されたトピックを移動できます。<br>
+・MindmapEditorのdeleteChildrenメソッドを用いて、指定トピックのすべての子トピックを削除できます。<br>
+・MindmapEditorのcreateMMLinkPresentationメソッドを用いて、トピック間リンク・プレゼンテーションを作成します。<br>
+
+<h4><a name="mindmap_diagram_editor">【MindmapDiagramEditor】</a></h4>
+・astah* 6.0より非推奨(@deprecated)になりました。MindmapEditorをご利用ください。<br>
+
+<h4><a name="requirement_diagram_editor">【RequirementDiagramEditor】</a></h4>
+・RequirementDiagramEditorのcreateRequirementDiagramメソッドを用いて、要求図を作成します。<br>
+・RequirementDiagramEditorの親インターフェースStructureDiagramEditorのcreateNodePresentationメソッドを用いて、<br>
+要求・プレゼンテーション/テストケース・プレゼンテーションを作成します。<br>
+・RequirementDiagramEditorの親インターフェースStructureDiagramEditorのcreateLinkPresentationメソッドを用いて、<br>
+導出/コピー/満足/検証/洗練/トレースなどを作成します。<br>
+
+<hr>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+
