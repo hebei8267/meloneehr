@@ -1,0 +1,47 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+
+<h2>[How to obtain presentation information]</h2>
+Use getPresentations() of IDiagram to get information of presentations in the diagram or cell (value cell or header cell) in CRUD.
+<p>
+
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+ProjectAccessor prjAccessor = ProjectAccessorFactory.getProjectAccessor();
+prjAccessor.open("C:a.asta", true, false, true);
+IModel project = prjAccessor.getProject();
+IDiagram[] diagrams = project.getDiagrams();
+for (int i = 0; i < diagrams.length; i++) {
+    IPresentation[] iPresentations = diagrams[i].getPresentations();
+}
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<h4><a name="from_model">[How to get presentation information from model]</a></h4>
+Use getPresentations() of IElement to get information of presentations.<br>
+<ul>
+  <li>Each model has one presentation in Object Diagram, Statemachine Diagram, Activity Diagram, Sequence Diagram and Communication Diagram.<br>
+  <li>Some presentations such as Noteanchor or Frame have not models.
+</ul>
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+

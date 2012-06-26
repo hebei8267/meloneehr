@@ -1,0 +1,515 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<P align="right">December 26, 2010<br>
+Change Vision, Inc.</p>
+<hr>
+<br>
+<h2>[What's astah* API]</h2>
+astah* API is a Java Interface Group for developing applications software using astah* model data.<br>
+This document explains how to develop applications using astah* API.<br>
+<h2>[Permission to Use]</h2>
+<ul>
+<li>Redistribution of astah-api.jar (.jar format file of astah* API) is not allowed.
+<li>By using astah* API, you are agreeing to be bound by the terms of [astah* END-USER LICENSE AGREEMENT].
+</ul>
+<h2>[astah* API System Requirements]</h2>
+In order to run applications created by using astah* API, you need to have the system environments that enable astah* to run.<br>
+<ul>
+<li>Ensure that an appropriate version of Java is installed to run astah*
+<li>astah* software needs to be installed
+<ul>
+<li>astah-api.jar is required for application compilation
+<li>Both of astah-api.jar and astah-pro.jar (astah-community.jar) are required for execution of applications
+<li>Optional JAVA VM memory management setup is needed when the size of your astah* project file is large
+<br><b>(Example of set up for VM Startup Option as initial heap size 16MB and maximum heap size 256MB)<br>
+-Xms16m -Xmx256m</b>
+</ul>
+<li>Supported astah* API features
+<ul>
+<li>astah* community supports reference function of astah* API
+<li>astah* UML, professional support reference, create and edit functions of astah* API
+</ul>
+</ul>
+
+<h2>[How to use astah* API and Samples]</h2>
+<ol>
+<li><a href="astahAPI_project_accessor.html">How to handle projects</a></li>
+<li><a href="astahAPI_reference.html">How to get Model Information</a></li>
+<li><a href="astahAPI_create.html">How to create models</a></li>
+<li><a href="astahAPI_edit.html">How to edit models</a></li>
+<li><a href="astahAPI_presentation_outline.html">Presentation overview</a></li>
+<li><a href="astahAPI_presentation_reference.html">How to obtain presentation information</a></li>
+<li><a href="astahAPI_diagram_editor_outline.html">DiagramEditor</a></li>
+<li><a href="astahAPI_diagram_create.html">Creating/Deleting diagrams</a></li>
+<li><a href="astahAPI_presentation_create.html">Creating/Deleting Presentation</a></li>
+<li><a href="astahAPI_presentation_edit.html">Editing presentations</a></li>
+<li><a href="astahAPI_transaction.html">Transaction operation</a></li>
+<li><a href="astahAPI_language.html">Programming Language Information for Project</a></li>
+<li><a href="astahAPI_xmi.html">Import/Export XMI</a></li>
+<li><a href="astahAPI_reference_project.html">Add, Update and Delete Reference Project</a></li>
+<li><a href="astahAPI_easy_merge.html">Easy Merge</a></li>
+<li><a href="astahAPI_sample.html">Sample Applications</a></li>
+<li><a href="astahAPI_models.html">Supported Models</a></li>
+</ol>
+Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for details.
+
+<h2>[Features]</h2>
+astah* API enables you to get, create, modify and delete astah* models and use them on applications software.<br>
+
+<p><i>[Model]</i>
+<ul>
+<li>Referencing of models is available for following diagrams:<br>
+Class Diagram, UseCase Diagram, Statemachine Diagram, Activity Diagram, Sequence Diagram, Flowchart, DataFlow Diagram(DFD), ER Diagram and Requirement Diagram.
+<li>Creating/Modifying/Deleting of models are available for following diagrams:<br>
+Class Diagram, UseCase Diagram, Statemachine Diagram, Composite Structure Diagram, ER Diagram and Requirement Diagram
+</ul>
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>-</b></td>
+        <td nowrap align=center><b>Reference</b></td>
+        <td nowrap align=center><b>Create<font color=red>*</font></b></td>
+        <td nowrap align=center><b>Modify<font color=red>*</font></b></td>
+        <td nowrap align=center><b>Delete<font color=red>*</font></b></td>
+    </tr>
+    <tr>
+        <td nowrap>Class Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>UseCase Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Statemachine Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Activity Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Sequence Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Communication Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Component Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Deployment Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Composite Structure Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Flowchart</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>DataFlow Diagram(DFD)</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>ER Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUD</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Mind Map</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Table</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>Traceability Map</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+</table>
+<font color=red>*</font>astah* UML, professional only.
+
+<p><i>[Diagram]</i>
+<ul>
+<li>Reference/deleting of diagrams are available for all diagrams<br>
+<li>Creating/Modifying of diagrams are available for following diagrams:<br>
+  Class Diagram, UseCase Diagram, Statemachine Diagram, Composite Structure Diagram, ER Diagram, Mind Map and Requirement Diagram
+</ul>
+
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>-</b></td>
+        <td nowrap align=center><b>Reference</b></td>
+        <td nowrap align=center><b>Create<font color=red>*</font></b></td>
+        <td nowrap align=center><b>Modify<font color=red>*</font></b></td>
+        <td nowrap align=center><b>Delete<font color=red>*</font></b></td>
+    </tr>
+    <tr>
+        <td nowrap>Class Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>UseCase Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Statemachin Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Activity Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Sequence Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Communication Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Component Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Deployment Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Composite Structure Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Flowchart</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>Data Flow Diagram(DFD)</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>ER Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUD</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>Mind Map</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Table</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>Traceability Map</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+</table>
+<font color=red>*</font>astah* UML, professional only.
+
+<p><i>[Presentation]</i>
+<ul>
+<li>Reference of presentations is available for following diagrams:<br>
+Class Diagram, UseCase Diagram, Statemachine Diagram, Activity Diagram, Sequence Diagram, Flowchart,  DataFlow Diagram(DFD), ER Diagram, CRUD, Mind Map and Requirement Diagram.
+<li>Creating/Modifying/Deleting of presentations are available for following diagrams:<br>
+Class Diagram, UseCase Diagram, Statemachine Diagram, Composite Structure Diagram, ER Diagram, Mind Map and Requirement Diagram
+<li>Presentation is available in astah* UML, professional only.
+</ul>
+
+<table border="1" cellspacing="1" cellpadding="1" bordercolor="#cccccc">
+    <tr>
+        <td nowrap><b>-</b></td>
+        <td nowrap align=center><b>Reference<font color=red>*</font><br></b></td>
+        <td nowrap align=center><b>Create<font color=red>*</font><br></b></td>
+        <td nowrap align=center><b>Modify<font color=red>*</font><br></b></td>
+        <td nowrap align=center><b>Delete<font color=red>*</font><br></b></td>
+    </tr>
+    <tr>
+        <td nowrap>Class Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>UseCase Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Statemachine Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Activity Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Sequence Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Communication Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Component Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Deployment Diagram</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Composite Structure Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Flowchart</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Data Flow Diagram(DFD)</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>ER Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>CRUD</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Mind Map</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Table</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+    <tr>
+        <td nowrap>Requirement Diagram</td>
+        <td nowrap align=center>Yes</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+        <td nowrap align=center>Yes(professional only)</td>
+    </tr>
+    <tr>
+        <td nowrap>Traceability Map</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+        <td nowrap align=center>N/A</td>
+    </tr>
+</table>
+<font color=red>*</font>astah* UML, professional only.
+<br>
+<br>
+
+<h2>[Notes]</h2>
+<ul>
+<li>Multi-threading of astah* API is not supported</li>
+<li>When opening a project file by astah* API (ProjectAccessor.open(String projectName)), an error may occur due to the file lock.
+In this case, please close the project file which may be opened in astah*, and then try reopening it by astah* API. Or, you can specify
+the method to open a project file in read-only mode. (Set true to allowReadOnly).<br>
+ProjectAccessor.open(String projectName, boolean isIgnoreModelVersion, boolean lockMode,  boolean allowReadOnly)
+</ul> 
+
+<h2>[Additional information about Model elements]</h2>
+
+<h4>What is the difference between UML metamodel and astah* API?</h4>
+A part of the class structure of astah* API is different from the one of UML metamodel.
+astah* API has a simplified structure. Some of abstract model elements in the UML metamodel   
+inheritance structure are eliminated because they would not be instantiated as model elements.  
+
+<h4>Class elements which contain Icon Notations</h4>
+There are some elements that can be shown as normal class notations such as Actor, Interface,   
+ Boundary, Entity, Control, and these are classes that have stereotypes.
+For example, Actor is a class that has a stereotype of "Actor", and Interface is a class   
+that has a stereotype of "Interface".
+
+<h4>About TaggedValue(ITaggedValue)</h4>
+astah* uses TaggedValus for derived information of Attributes and Role names, and expressions   
+about UseCase descriptions.
+
+<hr>
+Copyright(C) 2010 Change Vision, Inc. All rights reserved. 
+<br>
+</body>
+</html>
+

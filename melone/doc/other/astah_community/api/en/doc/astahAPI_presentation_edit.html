@@ -1,0 +1,149 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[Editing presentations]</h2>
+Editing Presentation of astah* API is supported in astah* UML and professional.</font>
+
+<h4><a name="transaction">[Transaction Operation]</a></h4>
+Transaction Operation is required when creating/modifying/deleting presentations.<br>
+Please read <a href="astahAPI_transaction.html">Transaction operation</a>.<br>
+
+<p><b><i>How to specify location of INodePresentations(such as Class, InstanceSpecifcication, UseCase, State, ER Entity, Topic and etc)<br></i></b>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public void setLocation(INodePresentation ps, Point2D location) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setLocation(location);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><b><i>How to set start and end points of ILinkPresentations(such as Association, Dependency, Generalization, Realization, TemplateBinding, Include, Extension, Identifying Relationship, Non-Identifying Relationship, Subtype, Link between topics and etc)
+</i></b><br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public void setPoints(ILinkPresentation ps, Point2D[] points) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setPoints(points);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><i><b>How to set with of INodePresentations(such as Class, InstanceSpecifcication, UseCase, State, ER Entity, Topic and etc)<br></b></i>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public void setWidth(INodePresentation ps, double width) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setWidth(width);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><i><b>How to set heights of INodePresentations(such as Class, InstanceSpecifcication, UseCase, State, ER Entity, Topic and etc)</i><br></b>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public void setHeight(INodePresentation ps, double height) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setHeight(height);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><b><i>How to set label of INodePresentationss(such as Class, InstanceSpecifcication, UseCase, State, ER Entity, Topic and etc)<br></i></b><br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    public void setLabel(INodePresentation ps, String label) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setLabel(label);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p><b><i>How to set background color for INodePresentations(such as Class, InstanceSpecifcication, UseCase, State, ER Entity, Topic and etc)</i></b><br>
+–setProperty() method accepts "fill.color" key only.<br>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+    //(EX)red:color="#FF0000" green:color="#00FF00" blue:color="#0000FF" 
+    public void setColor(INodePresentation ps, String color) {
+        try {
+            TransactionManager.beginTransaction();
+            ps.setProperty("fill.color", color);
+            TransactionManager.endTransaction();
+        } catch (InvalidEditingException e) {
+            e.printStackTrace();
+            TransactionManager.abortTransaction();
+        }
+    }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+<br>
+
+<a href="index.html">HOME</a>
+</body>
+</html>
+

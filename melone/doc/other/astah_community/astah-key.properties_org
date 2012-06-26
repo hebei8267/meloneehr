@@ -1,0 +1,126 @@
+# astah* community 6.3 key bind file
+# This file is for you to customize shortcut keys for astah*.
+# To customize shortcut keys, make a copy of this file and name it to "astah-key.properties". 
+# And then remove # from the shortcut keys you want to change(xxx.key) and change the key value as you like.
+# Note 1: Make sure you do not make duplicated shortcut keys.
+# Note 2: Some operations share the same shortcut key by default.
+#         (e.g. "Control D" is shared with "diagramview.popupmenu.delete_from_model.key","managementview.menu.edit.delete_from_model.key" and the other.)
+#         If the key you would like to change is shared with other operations, make sure you let them all have the same keys.
+# Note 3: If you update astah* to newer version, review the new "astah-key.properties_org" file which should contain
+#         the list of all operations with shortcut keys for the version,
+#         so add new ones into your "astah-key.properties" and customize if you would like.
+
+
+#ManagementWindowProp
+#Align Bottom
+#managementview.menu.alignment.align_horizontally.align_bottom.key=control alt DOWN
+#Align Horizontal Center
+#managementview.menu.alignment.align_horizontally.align_horizontal_center.key=control alt MINUS
+#Align Top
+#managementview.menu.alignment.align_horizontally.align_top.key=control alt UP
+#Align Left
+#managementview.menu.alignment.align_vertically.align_left.key=control alt LEFT
+#Align Right
+#managementview.menu.alignment.align_vertically.align_right.key=control alt RIGHT
+#Align Vertical Center
+#managementview.menu.alignment.align_vertically.align_vertical_center.key=control alt I
+#Copy
+#managementview.menu.edit.copy.key=control C
+#BMP,PNG
+#managementview.menu.edit.copybmp_png.key=control alt C
+#Delete from Diagram
+#managementview.menu.edit.delete_from_diagram.key=DELETE
+#Delete from Model
+#managementview.menu.edit.delete_from_model.key=control D
+#Line
+#managementview.menu.edit.line_style_line.key=control L
+#Line(Right Angle)
+#managementview.menu.edit.line_style_line_right_angle.key=control E
+#Paste
+#managementview.menu.edit.paste.key=control V
+#Redo
+#managementview.menu.edit.redo.key=control Y
+#Select All
+#managementview.menu.edit.select_all.key=control A
+#Undo
+#managementview.menu.edit.undo.key=control Z
+#Exit
+#managementview.menu.file.exit.key=control Q
+#New
+#managementview.menu.file.new.key=control N
+#Print ...
+#managementview.menu.file.print.key=control P
+#Save
+#managementview.menu.file.save.key=control S
+#Version Information ...
+#managementview.menu.help.version.key=control H
+#Fit to Window
+#managementview.menu.view.both_fit_window.key=control 0
+#Back to Previous Editor
+#managementview.menu.view.drop_down_back_list.key=alt LEFT
+#Forward to Next Editor
+#managementview.menu.view.drop_down_forward_list.key=alt RIGHT
+#Diagram View
+#managementview.menu.view.project_view.diagram_view.key=control shift D
+#Inheritance Tree
+#managementview.menu.view.project_view.inheritance_view.key=control shift G
+#Project View
+#managementview.menu.view.project_view.key=control shift P
+#Map View
+#managementview.menu.view.project_view.map_view.key=control shift M
+#Structure Tree
+#managementview.menu.view.project_view.structure_view.key=control shift S
+#Zoom
+#managementview.menu.view.zoom.key=control 1
+#Zoom In
+#managementview.menu.view.zoom_in.key=control OPEN_BRACKET
+#Zoom Out
+#managementview.menu.view.zoom_out.key=control CLOSE_BRACKET
+#Close
+#managementview.menu.window.close_current.key=control W
+
+
+#DiagramEditorProp
+#Diagram Editor Move Down
+#diagramview.action.dgm_editor_move_down.key=control released DOWN
+#Diagram Editor Move Up
+#diagramview.action.dgm_editor_move_up.key=control released UP
+#Start Editing Node
+#diagramview.action.start_editing_node.key=released F2
+#Add Stereotype
+#diagramview.popupmenu.add_stereotype.key=control alt released S
+#Add Attribute
+#diagramview.popupmenu.attribute.key=control released R
+#Fit to Window
+#diagramview.popupmenu.both_fit_window.key=control 0
+#Copy
+#diagramview.popupmenu.copy.key=control C
+#BMP,PNG
+#diagramview.popupmenu.copy_bmp_png.key=control alt C
+#Delete from Diagram
+#diagramview.popupmenu.delete_from_diagram.key=DELETE
+#Delete from Model
+#diagramview.popupmenu.delete_from_model.key=control D
+#Add Operation
+#diagramview.popupmenu.method.key=control released M
+#Paste
+#diagramview.popupmenu.paste.key=control V
+#Redo
+#diagramview.popupmenu.redo.key=control Y
+#Select All
+#diagramview.popupmenu.select_all.key=control A
+#Undo
+#diagramview.popupmenu.undo.key=control Z
+#Zoom
+#diagramview.popupmenu.zoom.key=control 1
+#Zoom In
+#diagramview.popupmenu.zoom_in.key=control OPEN_BRACKET
+#Zoom Out
+#diagramview.popupmenu.zoom_out.key=control CLOSE_BRACKET
+
+
+#ProjectViewProp
+#Delete
+#projectview.popupmenu.item.delete.key=control D
+#Delete from Diagram
+#projectview.popupmenu.item.delete_from_diagram.key=DELETE

@@ -1,0 +1,77 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>astah* API User Guide</title>
+</head>
+
+<body>
+
+<h1>astah* API User Guide</h1>
+<hr>
+
+<h2>[How to edit models]</h2>
+
+Please refer to <a href="javadoc/index.html">astah* API JavaDoc</a> for details of Interfaces and methods.<br>
+Editing models is supported in astah* UML and professional.<br>
+<p>
+Transaction operation is required when editing models in astah* API. Please see the <a href="astahAPI_transaction.html">Transaction operation</a>.
+
+
+<p>
+<i>Sample: Edit class name and its definition</i>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+  try {
+      TransactionManager.beginTransaction();
+      BasicModelEditor bme = ModelEditorFactory.getBasicModelEditor();
+      // Create a class
+      IClass class0 = bme.createClass(project, &quot;class0&quot;);
+      // Set name
+      class0.setName(&quot;new class name&quot;);
+      // Set definition
+      class0.setDefinition(&quot;Definition of the class&quot;);
+      TransactionManager.endTransaction();
+  } catch (InvalidEditingException e) {
+      TransactionManager.abortTransaction();
+  }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<p>
+<i>Sample: Edit physical name of ER entity (professional only)</i>
+<TABLE border="1">
+<tr>
+<td>
+<pre><samp>
+  IERModel erModel = (IERModel) getElement(project.getOwnedElements(), &quot;ER_Model&quot;);
+  schema = erModel.getSchemata()[0];
+  IEREntity[] entities = schema.getEntities();
+  for (int i = 0; i &lt; entities.length; i++) {
+      if (&quot;Entity0&quot;.equals(entities[i].getName())) {
+      try {
+         TransactionManager.beginTransaction();
+         // Set physical name
+         entities[i].setPhysicalName(&quot;entity0 physical name&quot;);
+         TransactionManager.endTransaction();
+      } catch (InvalidEditingException e) {
+         TransactionManager.abortTransaction();
+      }
+  }
+</samp></pre>
+</td>
+</tr>
+</TABLE>
+
+<hr>
+
+<a href="index.html">Home</a>
+</body>
+</html>
+
