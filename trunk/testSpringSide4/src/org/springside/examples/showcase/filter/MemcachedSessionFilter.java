@@ -41,6 +41,7 @@ public class MemcachedSessionFilter extends HttpServlet implements Filter {
 		String sid = getCookieValue(_request);
 
 		// TODO:在此作身份验证
+		// 用户重复登录时未做判断
 
 		// 判断当前时候否存在Cookie，如果没有则创建新的Cookie
 		createCookie(sid, _response);
