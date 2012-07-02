@@ -47,6 +47,10 @@ public class User extends IdEntity {
 	private String name;
 	/** 用户Email */
 	private String email;
+	/** 用户详细描述 */
+	private String desc;
+	/** 第一次登录标记 */
+	private boolean loginFlg;
 
 	/** 用户关联角色 */
 	// private List<Group> groupList = Lists.newArrayList();// 有序的关联对象集合
