@@ -4,86 +4,77 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
 		<link href="../css/menu/style.css" rel="stylesheet" type="text/css">
+		
+		<link type="text/css" href="../css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+
+				// Accordion
+				$("#accordion").accordion({ header: "h3" });
+
+				
+
+			});
+		</script>
 	</head>
 
 	<body>
 		<ul id="nav">
 			<li class="current">
-				<a href="">信息统计</a>
+				<a href="">&#9660;AAAA</a>
 				<ul>
 					<li>
-						<a href="">销售信息统计</a>
+						<a href="">&#9658;AAAA1</a>
 						<ul>
 							<li>
-								<a href="">销售额统计（区间）</a>
+								<a href="">BBBB</a>
 							</li>
 							<li>
-								<a href="">销售额统计（月）</a>
+								<a href="">CCCC</a>
 							</li>
 							<li>
-								<a href="">销售额统计（天）</a>
-							</li>
-							<li>
-								<a href="">销售额统计（小时）？？</a>
-							</li>
-							<li>
-								<a href="">支付类型统计（月）？？</a>
+								<a href="">DDDD</a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="">库存信息</a>
+						<a href="">&#9830;AAAA2</a>
 					</li>
 					<li>
-						<a href="">货品信息</a>
+						<a href="">&#9658;AAAA3</a>
 						<ul>
 							<li>
-								<a href="">货品销量（销售）</a>
-							</li>
-							<li>
-								<a href="">货品销量（供应商）</a>
-							</li>
-							<li>
-								<a href="">货品销量（热卖品）</a>
+								<a href="">EEEE</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</li>
 			<li>
-				<a href="">货品销售</a>
+				<a href="">BBBB</a>
 			</li>
 			<li>
-				<a href="">货品退换</a>
-				<ul>
-					<li>
-						<a href="">换货（按货单）</a>
-					</li>
-					<li>
-						<a href="">换货（按货品）</a>
-					</li>
-					<li>
-						<a href="">退货（按货单）</a>
-					</li>
-					<li>
-						<a href="">退货（按货品）</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="">货单管理</a>
-				<ul>
-					<li>
-						<a href="">货单重打印</a>
-					</li>
-					<li>
-						<a href="">货单作废</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="">关于</a>
+				<a href="">About</a>
 			</li>
 		</ul>
+		
+		<!-- Accordion -->
+		<h2 class="demoHeaders">Accordion</h2>
+		<div id="accordion">
+			<div>
+				<h3><a href="#">First</a></h3>
+				<div>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</div>
+			</div>
+			<div>
+				<h3><a href="#">Second</a></h3>
+				<div>Phasellus mattis tincidunt nibh.</div>
+			</div>
+			<div>
+				<h3><a href="#">Third</a></h3>
+				<div>Nam dui erat, auctor a, dignissim quis.</div>
+			</div>
+		</div>
 	</body>
 </html>
