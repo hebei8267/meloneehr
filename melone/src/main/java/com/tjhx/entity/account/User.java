@@ -1,25 +1,12 @@
 package com.tjhx.entity.account;
 
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springside.modules.utils.Collections3;
 
-import com.google.common.collect.Lists;
 import com.tjhx.entity.base.IdEntity;
 
 /**
@@ -31,9 +18,9 @@ import com.tjhx.entity.base.IdEntity;
  */
 @Entity
 // 表名与类名不相同时重新定义表名.
-@Table(name = "t_acct_user")
+@Table(name = "T_ACCT_USER")
 // 默认的缓存策略.
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
 
 	private static final long serialVersionUID = -6992234020981066235L;
