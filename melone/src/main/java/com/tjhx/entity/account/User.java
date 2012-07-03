@@ -2,6 +2,8 @@ package com.tjhx.entity.account;
 
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,16 +23,11 @@ import com.google.common.collect.Lists;
 import com.tjhx.entity.base.IdEntity;
 
 /**
- * 用户.
+ * 用户
  * 
- * 使用JPA annotation定义ORM关系.
- * 使用Hibernate annotation定义JPA未覆盖的部分.
+ * 使用JPA annotation定义ORM关系. 使用Hibernate annotation定义JPA未覆盖的部分.
  * 
- * @author calvin
- */
-/**
- * @author hebei
- * 
+ * @author
  */
 @Entity
 // 表名与类名不相同时重新定义表名.
@@ -39,22 +36,23 @@ import com.tjhx.entity.base.IdEntity;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
 
+	private static final long serialVersionUID = -6992234020981066235L;
+
 	/** 登录名称 */
 	private String loginName;
 	/** 登录密码 */
 	private String password;
 	/** 用户名称-汉字 */
-	private String name;
+	private String userName;
 	/** 用户Email */
-	private String email;
+	private String userEmail;
 	/** 用户详细描述 */
-	private String desc;
+	private String userDesc;
 	/** 第一次登录标记 */
-	private boolean loginFlg;
+	private boolean firstLoginFlg;
 
-	/** 用户关联角色 */
-	// private List<Group> groupList = Lists.newArrayList();// 有序的关联对象集合
-
+	@Basic
+	@Column(name = "LOGIN_NAME", nullable = false)
 	public String getLoginName() {
 		return loginName;
 	}
@@ -63,6 +61,8 @@ public class User extends IdEntity {
 		this.loginName = loginName;
 	}
 
+	@Basic
+	@Column(name = "PASSWORD", nullable = false)
 	public String getPassword() {
 		return password;
 	}
@@ -71,21 +71,48 @@ public class User extends IdEntity {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	@Basic
+	@Column(name = "USER_NAME", nullable = false)
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getEmail() {
-		return email;
+	@Basic
+	@Column(name = "USER_EMAIL")
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
+
+	@Basic
+	@Column(name = "USER_DESC")
+	public String getUserDesc() {
+		return userDesc;
+	}
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
+	}
+
+	@Basic
+	@Column(name = "FIRST_LOGIN_FLG")
+	public boolean isFirstLoginFlg() {
+		return firstLoginFlg;
+	}
+
+	public void setFirstLoginFlg(boolean firstLoginFlg) {
+		this.firstLoginFlg = firstLoginFlg;
+	}
+
+	/** 用户关联角色 */
+	// private List<Group> groupList = Lists.newArrayList();// 有序的关联对象集合
 
 	// // 多对多定义
 	// @ManyToMany
