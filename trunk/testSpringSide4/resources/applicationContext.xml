@@ -16,6 +16,7 @@
 	<description>Spring公共配置</description>
 
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<!-- 通过exclude-filter 把所有 @Controller注解的表现层控制器组件排除 -->
 	<context:component-scan base-package="org.springside.examples.showcase">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
