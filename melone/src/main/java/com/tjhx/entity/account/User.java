@@ -1,11 +1,9 @@
 package com.tjhx.entity.account;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
 
 import com.tjhx.entity.base.IdEntity;
 
@@ -28,7 +26,7 @@ public class User extends IdEntity {
 	/** 登录名称 */
 	private String loginName;
 	/** 登录密码 */
-	private String password;
+	private String passWord;
 	/** 用户名称-汉字 */
 	private String userName;
 	/** 用户Email */
@@ -38,62 +36,116 @@ public class User extends IdEntity {
 	/** 第一次登录标记 */
 	private boolean firstLoginFlg;
 
-	@Basic
-	@Column(name = "LOGIN_NAME", nullable = false, length = 32)
+	/**
+	 * 取得登录名称
+	 * 
+	 * @return 登录名称
+	 */
+	@NaturalId
+	@Column(nullable = false, length = 32)
 	public String getLoginName() {
 		return loginName;
 	}
 
+	/**
+	 * 设置登录名称
+	 * 
+	 * @param loginName 登录名称
+	 */
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
 
-	@Basic
-	@Column(name = "PASSWORD", nullable = false, length = 16)
-	public String getPassword() {
-		return password;
+	/**
+	 * 取得登录密码
+	 * 
+	 * @return 登录密码
+	 */
+	@Column(nullable = false, length = 16)
+	public String getPassWord() {
+		return passWord;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	/**
+	 * 设置登录密码
+	 * 
+	 * @param passWord 登录密码
+	 */
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
 
-	@Basic
-	@Column(name = "USER_NAME", nullable = false, length = 32)
+	/**
+	 * 取得用户名称-汉字
+	 * 
+	 * @return 用户名称-汉字
+	 */
+	@Column(nullable = false, length = 32)
 	public String getUserName() {
 		return userName;
 	}
 
+	/**
+	 * 设置用户名称-汉字
+	 * 
+	 * @param userName 用户名称-汉字
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	@Basic
-	@Column(name = "USER_EMAIL", length = 32)
+	/**
+	 * 取得用户Email
+	 * 
+	 * @return 用户Email
+	 */
+	@Column(length = 32)
 	public String getUserEmail() {
 		return userEmail;
 	}
 
+	/**
+	 * 设置用户Email
+	 * 
+	 * @param userEmail 用户Email
+	 */
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
 
-	@Basic
-	@Column(name = "USER_DESC")
+	/**
+	 * 取得用户详细描述
+	 * 
+	 * @return 用户详细描述
+	 */
 	public String getUserDesc() {
 		return userDesc;
 	}
 
+	/**
+	 * 设置用户详细描述
+	 * 
+	 * @param userDesc 用户详细描述
+	 */
 	public void setUserDesc(String userDesc) {
 		this.userDesc = userDesc;
 	}
 
-	@Basic
-	@Column(name = "FIRST_LOGIN_FLG", length = 1)
-	public boolean isFirstLoginFlg() {
+	/**
+	 * 取得第一次登录标记
+	 * 
+	 * @return 第一次登录标记
+	 */
+	@Column(length = 1)
+	public boolean getFirstLoginFlg() {
 		return firstLoginFlg;
 	}
 
+	/**
+	 * 设置第一次登录标记
+	 * 
+	 * @param firstLoginFlg 第一次登录标记
+	 */
 	public void setFirstLoginFlg(boolean firstLoginFlg) {
 		this.firstLoginFlg = firstLoginFlg;
 	}
