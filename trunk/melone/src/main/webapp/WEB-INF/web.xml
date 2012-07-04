@@ -16,7 +16,7 @@
 	<!-- 設定Spring Context的默认Profile -->
 	<context-param>
 		<param-name>spring.profiles.default</param-name>
-		<param-value>production</param-value>
+		<param-value>development</param-value>
 	</context-param>
 
 	<!--Spring ApplicationContext 载入 -->

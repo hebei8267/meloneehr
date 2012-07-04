@@ -14,12 +14,12 @@
             <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
-       <!--     <property name="hibernate.cache.use_second_level_cache" value="true" />
+    		<property name="hibernate.cache.use_second_level_cache" value="true" />
             <property name="hibernate.cache.use_structured_entries" value ="true" />
             <property name="hibernate.cache.use_query_cache" value="true" />
             <property name="hibernate.cache.provider_class" value="com.googlecode.hibernate.memcached.MemcachedCacheProvider" />
-            <property name="hibernate.memcached.servers" value="localhost:11211" />
-            <property name="hibernate.memcached.cacheTimeSeconds" value="300" />-->
+            <property name="hibernate.memcached.servers" value="${memcached.url}" />
+            <property name="hibernate.memcached.cacheTimeSeconds" value="300" /><!-- 缓存失效时间,单位秒 -->
         </properties>
 	</persistence-unit>
 </persistence>
