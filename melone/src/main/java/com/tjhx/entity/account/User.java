@@ -20,7 +20,7 @@ import com.tjhx.entity.base.IdEntity;
 // 表名与类名不相同时重新定义表名.
 @Table(name = "T_ACCT_USER")
 // 默认的缓存策略.
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
 
 	private static final long serialVersionUID = -6992234020981066235L;
@@ -39,7 +39,7 @@ public class User extends IdEntity {
 	private boolean firstLoginFlg;
 
 	@Basic
-	@Column(name = "LOGIN_NAME", nullable = false)
+	@Column(name = "LOGIN_NAME", nullable = false, length = 32)
 	public String getLoginName() {
 		return loginName;
 	}
@@ -49,7 +49,7 @@ public class User extends IdEntity {
 	}
 
 	@Basic
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD", nullable = false, length = 16)
 	public String getPassword() {
 		return password;
 	}
@@ -59,7 +59,7 @@ public class User extends IdEntity {
 	}
 
 	@Basic
-	@Column(name = "USER_NAME", nullable = false)
+	@Column(name = "USER_NAME", nullable = false, length = 32)
 	public String getUserName() {
 		return userName;
 	}
@@ -69,7 +69,7 @@ public class User extends IdEntity {
 	}
 
 	@Basic
-	@Column(name = "USER_EMAIL")
+	@Column(name = "USER_EMAIL", length = 32)
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -89,7 +89,7 @@ public class User extends IdEntity {
 	}
 
 	@Basic
-	@Column(name = "FIRST_LOGIN_FLG")
+	@Column(name = "FIRST_LOGIN_FLG", length = 1)
 	public boolean isFirstLoginFlg() {
 		return firstLoginFlg;
 	}

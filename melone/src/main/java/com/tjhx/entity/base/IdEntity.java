@@ -61,7 +61,7 @@ public abstract class IdEntity implements Serializable {
 	}
 
 	@Basic
-	@Column(name = "CREATE_USER_ID", nullable = false, length = 20, updatable = false)
+	@Column(name = "CREATE_USER_ID", nullable = false, length = 32, updatable = false)
 	public String getCreateUserId() {
 		return createUserId;
 	}
@@ -71,7 +71,7 @@ public abstract class IdEntity implements Serializable {
 	}
 
 	@Basic
-	@Column(name = "UPDATE_USER_ID", nullable = false, length = 20)
+	@Column(name = "UPDATE_USER_ID", nullable = false, length = 32)
 	public String getUpdateUserId() {
 		return updateUserId;
 	}
