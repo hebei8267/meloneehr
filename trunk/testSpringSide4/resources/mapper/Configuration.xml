@@ -6,4 +6,30 @@
 	<typeAliases>
 		<typeAlias alias="User" type="org.springside.examples.showcase.common.entity.User" />
 	</typeAliases>
-</configuration>
+</configuration
+
+
+<!-- 
+<configuration>  
+	<typeAliases>
+		<typeAlias type="com.xxt.ibatis.dbcp.domain.User" alias="User" />
+	</typeAliases>
+	<mappers>  
+		<mapper resource="com/xxt/ibatis/dbcp/domain/user.map.xml" />  
+	</mappers>  
+</configuration>  
+
+实体类映射文件user.map.xml
+<mapper namespace="com.xxt.ibatis.dbcp.domain.User">  
+	<resultMap type="User" id="userMap">  
+		<id property="id" column="id" />  
+        <result property="name" column="name" />  
+        <result property="password" column="password" />  
+        <result property="createTime" column="createtime" />  
+     </resultMap>  
+     <select id="getUser" parameterType="User" resultMap="userMap">  
+       select * from user where id = #{id}  
+     </select>  
+<mapper/>
+
+ -->
