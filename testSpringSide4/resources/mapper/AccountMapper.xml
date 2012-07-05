@@ -8,4 +8,4 @@
 		from ss_user
 		where id = #{id}
 	</select>	
-</mapper> 
+</mapper>
