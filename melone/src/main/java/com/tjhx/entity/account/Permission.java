@@ -1,7 +1,6 @@
 package com.tjhx.entity.account;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -14,53 +13,37 @@ import com.tjhx.entity.base.IdEntity;
  * 资源访问权限
  */
 @Entity
-@Table(name = "T_ACCT_PERMISSION")
+@Table(name = "T_ROLE_FUN_PERM")
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Permission extends IdEntity {
 
 	private static final long serialVersionUID = -4090640196673810332L;
-	/** 显示名称 */
-	private String displayName;
-	/** 操作URL */
-	private String url;
+
+	/** 功能资源 */
+	private Function function;
 	/** 角色 */
 	private Role role;
 
 	/**
-	 * 取得显示名称
+	 * 取得功能资源
 	 * 
-	 * @return 显示名称
+	 * @return 功能资源
 	 */
-	@Column(nullable = false, length = 32)
-	public String getDisplayName() {
-		return displayName;
+	// CascadeType.REFRESH级联刷新
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	// @JoinColumn表示外键的列
+	@JoinColumn(name = "FUN_UUID")
+	public Function getFunction() {
+		return function;
 	}
 
 	/**
-	 * 设置显示名称
+	 * 设置功能资源
 	 * 
-	 * @param displayName 显示名称
+	 * @param function 功能资源
 	 */
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-
-	/**
-	 * 取得操作URL
-	 * 
-	 * @return 操作URL
-	 */
-	public String getUrl() {
-		return url;
-	}
-
-	/**
-	 * 设置操作URL
-	 * 
-	 * @param url 操作URL
-	 */
-	public void setUrl(String url) {
-		this.url = url;
+	public void setFunction(Function function) {
+		this.function = function;
 	}
 
 	/**

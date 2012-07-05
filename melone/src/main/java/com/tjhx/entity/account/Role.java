@@ -21,7 +21,7 @@ import com.tjhx.entity.base.IdEntity;
  * 角色
  */
 @Entity
-@Table(name = "T_ACCT_ROLE")
+@Table(name = "T_ROLE")
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
@@ -115,7 +115,7 @@ public class Role extends IdEntity {
 	public String getPermissionNames() {
 		List<String> permissionNameList = Lists.newArrayList();
 		for (Permission permission : getPermissionSet()) {
-			permissionNameList.add(permission.getDisplayName());
+			permissionNameList.add(permission.getFunction().getDisplayName());
 		}
 		return StringUtils.join(permissionNameList, ",");
 	}
