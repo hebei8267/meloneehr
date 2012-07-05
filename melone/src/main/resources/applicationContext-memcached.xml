@@ -10,7 +10,7 @@
 			class="org.springside.modules.cache.memcached.SpyMemcachedClient">
 			<property name="memcachedClient">
 				<bean class="net.spy.memcached.spring.MemcachedClientFactoryBean">
-					<property name="servers" value="${memcached.url_server}" />
+					<property name="servers" value="${memcached.url}" />
 					<!-- 默认是TEXT -->
 					<property name="protocol" value="TEXT" />
 					<!-- 默认是ARRAY_MOD -->
