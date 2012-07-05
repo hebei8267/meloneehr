@@ -10,6 +10,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath*:/applicationContext.xml
+			classpath*:/applicationContext-memcached.xml
 		</param-value>
 	</context-param>
 
