@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.account.UserJpaDao;
+import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
 import com.tjhx.service.ServiceException;
 
@@ -42,15 +43,16 @@ public class AccountManager {
 	 * 更新用户信息
 	 * 
 	 * @param user 用户信息
+	 * @param role 角色名称
 	 */
 	@Transactional(readOnly = false)
-	public void updateUser(User user) {
+	public void updateUser(User user, Role role) {
 		User _user = userJpaDao.findOne(user.getUuid());
 		if (null == _user) {
-			// TODO
+			// TODO 用户不存在
 			throw new ServiceException();
 		}
-
+		user.setRole(role);
 		userJpaDao.save(user);
 	}
 
@@ -58,8 +60,16 @@ public class AccountManager {
 	 * 添加新用户信息
 	 * 
 	 * @param user 用户信息
+	 * @param role 角色名称
 	 */
-	public void saveNewUser(User user) {
+	@Transactional(readOnly = false)
+	public void saveNewUser(User user, Role role) {
+		User _user = findByLoginName(user.getLoginName());
+		if (null != _user) {
+			// TODO 用户登录名重复
+			throw new ServiceException();
+		}
+		user.setRole(role);
 		userJpaDao.save(user);
 	}
 
