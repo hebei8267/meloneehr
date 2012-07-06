@@ -63,7 +63,7 @@ public class RoleManager {
 	 */
 	@Transactional(readOnly = false)
 	public void saveNewUser(Role role, Set<Permission> permissionSet) {
-		Role _role = findByName(role.getRoleName());
+		Role _role = findByName(role.getName());
 		if (null != _role) {
 			// TODO 角色名称重复
 			throw new ServiceException();

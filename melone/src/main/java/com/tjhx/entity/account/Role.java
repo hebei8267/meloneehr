@@ -27,9 +27,9 @@ public class Role extends IdEntity {
 
 	private static final long serialVersionUID = 7216626205866676484L;
 	/** 角色名称 */
-	private String roleName;
+	private String name;
 	/** 角色详细描述 */
-	private String roleDesc;
+	private String descTxt;
 	/** 权限信息集合 */
 	private Set<Permission> permissionSet = Sets.newHashSet();
 
@@ -39,17 +39,17 @@ public class Role extends IdEntity {
 	 * @return 角色名称
 	 */
 	@Column(nullable = false, unique = true, length = 32)
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
 
 	/**
 	 * 设置角色名称
 	 * 
-	 * @param roleName 角色名称
+	 * @param name 角色名称
 	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -57,17 +57,17 @@ public class Role extends IdEntity {
 	 * 
 	 * @return 角色详细描述
 	 */
-	public String getRoleDesc() {
-		return roleDesc;
+	public String getDescTxt() {
+		return descTxt;
 	}
 
 	/**
 	 * 设置角色详细描述
 	 * 
-	 * @param roleDesc 角色详细描述
+	 * @param descTxt 角色详细描述
 	 */
-	public void setRoleDesc(String roleDesc) {
-		this.roleDesc = roleDesc;
+	public void setDescTxt(String descTxt) {
+		this.descTxt = descTxt;
 	}
 
 	/**
