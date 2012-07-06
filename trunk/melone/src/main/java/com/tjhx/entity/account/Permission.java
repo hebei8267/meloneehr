@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.tjhx.entity.base.IdEntity;
+import com.tjhx.entity.IdEntity;
 
 /**
  * 资源访问权限

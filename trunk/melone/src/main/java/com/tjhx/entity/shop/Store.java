@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.tjhx.entity.base.IdEntity;
+import com.tjhx.entity.IdEntity;
 
 /**
  * 仓库
