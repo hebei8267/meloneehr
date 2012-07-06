@@ -53,5 +53,8 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/spring-data-jpa-1.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/hibernate-validator-4.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jmemcached-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/spymemcached-2.8.1.jar"/>
 	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>
