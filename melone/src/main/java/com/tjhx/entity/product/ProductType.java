@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.tjhx.entity.base.IdEntity;
+import com.tjhx.entity.IdEntity;
 
 /**
  * 产品类型

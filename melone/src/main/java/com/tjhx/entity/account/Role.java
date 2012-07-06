@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.tjhx.entity.base.IdEntity;
+import com.tjhx.entity.IdEntity;
 
 /**
  * 角色

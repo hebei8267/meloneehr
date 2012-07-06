@@ -1,4 +1,4 @@
-package com.tjhx.entity.base;
+package com.tjhx.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
