@@ -1,7 +1,10 @@
 package com.tjhx.entity.shop;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
@@ -31,6 +34,10 @@ public class Shop extends IdEntity {
 	private String faxNum;
 	/** 门店详细描述 */
 	private String descTxt;
+	/** 仓库信息 */
+	private Store store;
+	/** 仓库编号 */
+	private String storeId;
 
 	/**
 	 * 取得门店编号
@@ -143,6 +150,48 @@ public class Shop extends IdEntity {
 	 */
 	public void setDescTxt(String descTxt) {
 		this.descTxt = descTxt;
+	}
+
+	/**
+	 * 取得仓库信息
+	 * 
+	 * @return 仓库信息
+	 */
+	@OneToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "STORE_UUID")
+	public Store getStore() {
+		return store;
+	}
+
+	/**
+	 * 设置仓库信息
+	 * 
+	 * @param store 仓库信息
+	 */
+	public void setStore(Store store) {
+		if (null != store) {
+			setStoreId(store.getId());
+		}
+		this.store = store;
+	}
+
+	/**
+	 * 取得仓库编号
+	 * 
+	 * @return 仓库编号
+	 */
+	@Column(length = 16)
+	public String getStoreId() {
+		return storeId;
+	}
+
+	/**
+	 * 设置仓库编号
+	 * 
+	 * @param storeId 仓库编号
+	 */
+	protected void setStoreId(String storeId) {
+		this.storeId = storeId;
 	}
 
 }
