@@ -36,6 +36,8 @@ public class Product extends IdEntity {
 	private double retailPrice;
 	/** 会员价 */
 	private double memberPrice;
+	/** 产品详细描述 */
+	private String descTxt;
 	/** 产品品牌 */
 	private ProductBrand ProductBrand;
 	/** 产品类型 */
@@ -173,6 +175,24 @@ public class Product extends IdEntity {
 	 */
 	public void setMemberPrice(double memberPrice) {
 		this.memberPrice = memberPrice;
+	}
+
+	/**
+	 * 取得产品详细描述
+	 * 
+	 * @return 产品详细描述
+	 */
+	public String getDescTxt() {
+		return descTxt;
+	}
+
+	/**
+	 * 设置产品详细描述
+	 * 
+	 * @param descTxt 产品详细描述
+	 */
+	public void setDescTxt(String descTxt) {
+		this.descTxt = descTxt;
 	}
 
 	/**
