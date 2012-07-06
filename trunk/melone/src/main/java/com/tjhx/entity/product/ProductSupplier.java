@@ -35,7 +35,7 @@ public class ProductSupplier extends IdEntity {
 	private String addr;
 	/** 供应商邮编 */
 	private String postCode;
-	/** 门店详细描述 */
+	/** 供应商详细描述 */
 	private String descTxt;
 	/** 税务登记号 */
 	private String taxRegNum;
@@ -197,18 +197,18 @@ public class ProductSupplier extends IdEntity {
 	}
 
 	/**
-	 * 取得门店详细描述
+	 * 取得供应商详细描述
 	 * 
-	 * @return 门店详细描述
+	 * @return 供应商详细描述
 	 */
 	public String getDescTxt() {
 		return descTxt;
 	}
 
 	/**
-	 * 设置门店详细描述
+	 * 设置供应商详细描述
 	 * 
-	 * @param descTxt 门店详细描述
+	 * @param descTxt 供应商详细描述
 	 */
 	public void setDescTxt(String descTxt) {
 		this.descTxt = descTxt;

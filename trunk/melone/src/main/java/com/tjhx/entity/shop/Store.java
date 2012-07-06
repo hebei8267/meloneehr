@@ -30,6 +30,8 @@ public class Store extends IdEntity {
 	private String telNum;
 	/** 仓库地址 */
 	private String addr;
+	/** 仓库详细描述 */
+	private String descTxt;
 	/** 仓库所属类型 */
 	private StoreType storeType;
 
@@ -107,6 +109,24 @@ public class Store extends IdEntity {
 	 */
 	public void setAddr(String addr) {
 		this.addr = addr;
+	}
+
+	/**
+	 * 取得仓库详细描述
+	 * 
+	 * @return 仓库详细描述
+	 */
+	public String getDescTxt() {
+		return descTxt;
+	}
+
+	/**
+	 * 设置仓库详细描述
+	 * 
+	 * @param descTxt 仓库详细描述
+	 */
+	public void setDescTxt(String descTxt) {
+		this.descTxt = descTxt;
 	}
 
 	/**
