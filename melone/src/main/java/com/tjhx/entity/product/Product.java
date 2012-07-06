@@ -2,15 +2,26 @@ package com.tjhx.entity.product;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
+
+import com.tjhx.entity.base.IdEntity;
 
 /**
  * 产品
  */
-public class Product {
+@Entity
+@Table(name = "T_PRODUCT")
+// 默认的缓存策略.
+// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Product extends IdEntity {
+
+	private static final long serialVersionUID = 7536024990256617583L;
+
 	/** 产品编号 */
 	private String id;
 	/** 产品条形码 */

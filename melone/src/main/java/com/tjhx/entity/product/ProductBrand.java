@@ -6,7 +6,9 @@ import javax.persistence.Table;
 
 import com.tjhx.entity.base.IdEntity;
 
-/** 产品品牌 */
+/**
+ * 产品品牌
+ */
 @Entity
 @Table(name = "T_PRODUCT_BRAND")
 // 默认的缓存策略.
