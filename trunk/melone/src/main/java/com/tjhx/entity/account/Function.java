@@ -22,7 +22,7 @@ public class Function extends IdEntity {
 	/** 功能URL */
 	private String funUrl;
 	/** 功能描述 */
-	private String funDesc;
+	private String descTxt;
 	/** 功能标记 */
 	private String funFlg;
 
@@ -68,17 +68,17 @@ public class Function extends IdEntity {
 	 * 
 	 * @return 功能描述
 	 */
-	public String getFunDesc() {
-		return funDesc;
+	public String getDescTxt() {
+		return descTxt;
 	}
 
 	/**
 	 * 设置功能描述
 	 * 
-	 * @param funDesc 功能描述
+	 * @param descTxt 功能描述
 	 */
-	public void setFunDesc(String funDesc) {
-		this.funDesc = funDesc;
+	public void setDescTxt(String descTxt) {
+		this.descTxt = descTxt;
 	}
 
 	/**
