@@ -11,6 +11,6 @@ import com.tjhx.entity.account.Function;
 
 public interface FunctionJpaDao extends CrudRepository<Function, Integer> {
 	// mybatis
-//select f.* from t_function f,t_role r, t_role_fun_perm rfp
-//	where f.uuid=rfp.fun_uuid and rfp.role_uuid=r.uuid and r.role_name=''
+	// select f.* from t_function f,t_role r, t_role_fun_perm rfp
+	// where f.uuid=rfp.fun_uuid and rfp.role_uuid=r.uuid and r.role_name=''
 }
