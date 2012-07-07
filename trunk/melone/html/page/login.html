@@ -3,31 +3,50 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
-		<link type="text/css" href="../css/960grid/css/reset.css" rel="stylesheet"/>
-		<link type="text/css" href="../css/960grid/css/text.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/960grid/css/960.css" rel="stylesheet"/>
-		
-		<!-- 开发用 -->
-		<link type="text/css" href="../css/960grid/css/demo.css" rel="stylesheet"/>
+		<link type="text/css" href="../css/style.css" rel="stylesheet"/>
+		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#loginBtn').click(function() {
+					window.location = './main.html';
+				});
+				$('#forgetBtn').click(function() {
+					window.location = './restPwd.html';
+				});
+			});
+
+		</script>
 	</head>
 	<body>
 		<div class="container_16">
-			<div class="grid_6">&nbsp;</div>
-			<div class="grid_10">
-				<table>
-					<tr>
-						<td>用户名</td>
-						<td><input type="text"/></td>
-					</tr>
-					<tr>
-						<td>密码</td>
-						<td><input type="text"/></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>忘记密码？&nbsp;&nbsp;<input type="button" value="登录"/></td>
-					</tr>
-				</table>
+			<div class="grid_7 prefix_9">
+				<form class="form" style="margin-top: 300px">
+					<table>
+						<tr>
+							<td class="item_name" width="70px">
+								<label for="name">用户名:</label>
+							</td>
+							<td class="item">
+								<input type="text" name="name" id="name" />
+							</td>
+						</tr>
+						<tr>
+							<td class="item_name">
+								<label for="passWd">密码:</label>
+							</td>
+							<td class="item">
+								<input type="text" name="passWd" id="passWd" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right" class="item">
+								<a id="forgetBtn" class="forget_link" style="margin-right: 10px">忘记密码?</a>
+								<input id="loginBtn" class="submit" type="button" value="登录" />
+							</td>
+						</tr>
+					</table>
+				</form>
 			</div>
 			<div class="clear"></div>
 		</div>

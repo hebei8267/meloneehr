@@ -3,68 +3,277 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
-		<link type="text/css" href="../css/960grid/css/reset.css" rel="stylesheet"/>
-		<link type="text/css" href="../css/960grid/css/text.css" rel="stylesheet"/>
+		<link type="text/css" href="../css/menu/style.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/960grid/css/960.css" rel="stylesheet"/>
-		
-		<!-- 开发用 -->
-		<link type="text/css" href="../css/960grid/css/demo.css" rel="stylesheet"/>
+		<link type="text/css" href="../css/table/style.css" rel="stylesheet"/>
+		<link type="text/css" href="../css/style.css" rel="stylesheet"/>
+		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 	</head>
 	<body>
 		<div class="container_16">
-			<div class="grid_14 prefix_2">
-				<table>
+			<div class='grid_16'>
+				<ul id="nav">
+					<li class="current">
+						<a href="http://www.script-tutorials.com/">Home</a>
+					</li>
+					<li>
+						<a href="http://www.script-tutorials.com/">Tutorials</a>
+					</li>
+					<li>
+						<a href="#">配置管理</a>
+						<ul>
+							<li>
+								<a href="#">产品相关</a>
+								<ul>
+									<li>
+										<a href="#">产品品牌</a>
+									</li>
+									<li>
+										<a href="#">产品类型</a>
+									</li>
+									<li>
+										<a href="#">产品标签</a>
+									</li>
+									<li>
+										<a href="#">供应商（产品）</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">门店相关</a>
+								<ul>
+									<a href="#">仓库类型</a>
+							</li>
+							<li>
+								<a href="#">仓库</a>
+							</li>
+							<li>
+								<a href="#">门店</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<li>
+							<a href="#">系统相关</a>
+							<ul>
+								<li>
+									<a href="#">用户</a>
+								</li>
+								<li>
+									<a href="#">角色</a>
+								</li>
+							</ul>
+						</li>
+				</ul>
+				</li>
+				<li>
+					<a href="">关于</a>
+				</li>
+				<li>
+					<a href="">联系我们</a>
+				</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_16">
+				<h2><a>配置管理</a>&#8711; <a>系统相关</a>&#8711; <a>用户</a></h2>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_11 suffix_5">
+				<table class="search_table">
 					<tr>
-						<td>所属门店</td>
-						<td>
+						<td class="item_name" width="70px">
+							用户编号:
+						</td>
+						<td class="item" width="210px">
+							<input type="text"/>
+						</td>
+						<td class="item_name" width="70px">
+							用户名:
+						</td>
+						<td class="item" width="210px">
+							<input type="text"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="item_name">
+							所属门店:
+						</td>
+						<td class="item">
 							<select>
 								<option></option>
 								<option>一号店</option>
 								<option>二号店</option>
 							</select>
 						</td>
-						<td>用户编号</td>
-						<td><input type="text"/></td>
-						<td>用户名</td>
-						<td><input type="text"/></td>
-						<td><input type="button" value="查询"/></td>
+						<td colspan="2" align="right">
+							<input type="button" class="submit" value="查询"/>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<div class="clear"></div>
-			
-			<div class="grid_14 prefix_2">
-				<input type="button" value="新增"/>
-				<input type="button" value="删除"/>
+			<div class="grid_16">
+				<input type="button" class="submit" value="新增"/>
+				<input type="button" class="submit" value="删除"/>
 			</div>
 			<div class="clear"></div>
-			
 			<div class="grid_14 prefix_2">
+				<table id="rounded-corner">
+					<thead>
+						<tr>
+							<th class="rounded-left">Company</th>
+							<th>Q1</th>
+							<th>Q2</th>
+							<th>Q3</th>
+							<th class="rounded-right">Q4</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="4" class="rounded-foot-left">
+								<em>The above data were fictional and made up, please do not sue me</em>
+							</td>
+							<td class="rounded-foot-right">
+								&nbsp;
+							</td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr>
+							<td>
+								Microsoft
+							</td>
+							<td>
+								20.3
+							</td>
+							<td>
+								30.5
+							</td>
+							<td>
+								23.5
+							</td>
+							<td>
+								40.3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Google
+							</td>
+							<td>
+								50.2
+							</td>
+							<td>
+								40.63
+							</td>
+							<td>
+								45.23
+							</td>
+							<td>
+								39.3
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Apple
+							</td>
+							<td>
+								25.4
+							</td>
+							<td>
+								30.2
+							</td>
+							<td>
+								33.3
+							</td>
+							<td>
+								36.7
+							</td>
+						</tr>
+						<tr>
+							<td>
+								IBM
+							</td>
+							<td>
+								20.4
+							</td>
+							<td>
+								15.6
+							</td>
+							<td>
+								22.3
+							</td>
+							<td>
+								29.3
+							</td>
+						</tr>
+					</tbody>
+				</table>
 				<table width="100%">
 					<tr>
-						<td><input type="checkbox"></input>全选</td>
-						<td>用户编号</td>
-						<td>用户名</td>
-						<td>所属门店</td>
-						<td>详细描述</td>
-						<td>操作</td>
+						<td>
+							<input type="checkbox">
+							</input>
+							全选
+						</td>
+						<td>
+							用户编号
+						</td>
+						<td>
+							用户名
+						</td>
+						<td>
+							所属门店
+						</td>
+						<td>
+							详细描述
+						</td>
+						<td>
+							操作
+						</td>
 					</tr>
-					
 					<tr>
-						<td><input type="checkbox"></input></td>
-						<td>001</td>
-						<td>张三</td>
-						<td>一号店</td>
-						<td>管理员</td>
-						<td><input type="button" value="详细"/></td>
+						<td>
+							<input type="checkbox">
+							</input>
+						</td>
+						<td>
+							001
+						</td>
+						<td>
+							张三
+						</td>
+						<td>
+							一号店
+						</td>
+						<td>
+							管理员
+						</td>
+						<td>
+							<input type="button" value="详细"/>
+						</td>
 					</tr>
-					
 					<tr>
-						<td><input type="checkbox"></input></td>
-						<td>002</td>
-						<td>李四</td>
-						<td>二号店</td>
-						<td>职员</td>
-						<td><input type="button" value="详细"/></td>
+						<td>
+							<input type="checkbox">
+							</input>
+						</td>
+						<td>
+							002
+						</td>
+						<td>
+							李四
+						</td>
+						<td>
+							二号店
+						</td>
+						<td>
+							职员
+						</td>
+						<td>
+							<input type="button" value="详细"/>
+						</td>
 					</tr>
 				</table>
 			</div>
