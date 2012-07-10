@@ -25,7 +25,9 @@ textarea {
 	height: 150px;
 	line-height: 150%;
 }
-
+input[type=checkbox]{
+	width: 30px;
+}
 input:hover, textarea:hover, input:focus, textarea:focus {
 	border-color: #989898;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
