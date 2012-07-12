@@ -7,7 +7,39 @@
 		<link type="text/css" href="../css/960grid/css/960.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/table/style.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/style.css" rel="stylesheet"/>
+		<link type="text/css" href="../css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet"/>
+		
 		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script>
+		$(function() {
+			$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 300,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Create an account": function() {
+					$( this ).dialog( "close" );
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+
+			$( "#create-user" )
+				.button()
+				.click(function() {
+					$( "#dialog-form" ).dialog( "open" );
+			});
+			$( "#create-user2" )
+				.button()
+				.click(function() {
+					$("#somediv").load('../page/111111.html').dialog({modal:true}); 
+			});
+		});
+		</script>
 	</head>
 	<body>
 		<div class="container_16">
@@ -122,14 +154,14 @@
 				<table id="rounded-corner">
 					<thead>
 						<tr>
-							<th class="rounded-left">
+							<th class="rounded-left" width="10">
 							<input type="checkbox">
 							</input></th>
-							<th>用户编号</th>
-							<th>用户名</th>
-							<th>所属门店</th>
-							<th>详细描述</th>
-							<th class="rounded-right">操作</th>
+							<th width="150">用户编号</th>
+							<th width="150">用户名</th>
+							<th width="150">所属门店</th>
+							<th width="150">详细描述</th>
+							<th width="60" class="rounded-right">操作</th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -161,7 +193,7 @@
 								管理员
 							</td>
 							<td>
-								<input type="button" class="submit" value="详细"/>
+								<input id="create-user" type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 						<tr>
@@ -182,7 +214,7 @@
 								职员
 							</td>
 							<td>
-								<input type="button" class="submit" value="详细"/>
+								<input id="create-user2" type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 					</tbody>
@@ -190,5 +222,22 @@
 			</div>
 			<div class="clear"></div>
 		</div>
+		
+		<div id="dialog-form" title="Create new user">
+			<p class="validateTips">All form fields are required.</p>
+		
+			<form>
+			<fieldset>
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+				<label for="email">Email</label>
+				<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+			</fieldset>
+			</form>
+		</div>
+		
+		<div id='somediv'></div>
 	</body>
 </html>
