@@ -8,37 +8,33 @@
 		<link type="text/css" href="../css/table/style.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/style.css" rel="stylesheet"/>
 		<link type="text/css" href="../css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet"/>
-		
+
 		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="../js/jquery-ui-1.8.21.custom.min.js"></script>
 		<script>
-		$(function() {
-			$( "#dialog-form" ).dialog({
-			autoOpen: false,
-			height: 300,
-			width: 350,
-			modal: true,
-			buttons: {
-				"Create an account": function() {
-					$( this ).dialog( "close" );
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
+			$(function() {
+				$( "#serchBtn" ).button();
+				
+				$("#dialog-form").dialog({
+					autoOpen : false,
+					height : 300,
+					width : 350,
+					modal : true,
+					buttons : {
+						"Create an account" : function() {
+							$(this).dialog("close");
+						},
+						Cancel : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
 
-			$( "#create-user" )
-				.button()
-				.click(function() {
-					$( "#dialog-form" ).dialog( "open" );
+				$("#create-user").button().click(function() {
+					$("#dialog-form").dialog("open");
+				});
+
 			});
-			$( "#create-user2" )
-				.button()
-				.click(function() {
-					$("#somediv").load('../page/111111.html').dialog({modal:true}); 
-			});
-		});
 		</script>
 	</head>
 	<body>
@@ -114,32 +110,25 @@
 			<div class="grid_11 suffix_5">
 				<table class="search_table">
 					<tr>
-						<td class="item_name" width="70px">
-							用户编号:
-						</td>
+						<td class="item_name" width="70px"> 用户编号: </td>
 						<td class="item" width="210px">
-							<input type="text"/>
+						<input type="text" class="text ui-widget-content ui-corner-all"/>
 						</td>
-						<td class="item_name" width="70px">
-							用户名:
-						</td>
+						<td class="item_name" width="70px"> 用户名: </td>
 						<td class="item" width="210px">
-							<input type="text"/>
+						<input type="text" class="text ui-widget-content ui-corner-all"/>
 						</td>
 					</tr>
 					<tr>
-						<td class="item_name">
-							所属门店:
-						</td>
+						<td class="item_name"> 所属门店: </td>
 						<td class="item">
-							<select>
-								<option></option>
-								<option>一号店</option>
-								<option>二号店</option>
-							</select>
-						</td>
+						<select class="text ui-widget-content ui-corner-all">
+							<option></option>
+							<option>一号店</option>
+							<option>二号店</option>
+						</select></td>
 						<td colspan="2" align="right">
-							<input type="button" class="submit" value="查询"/>
+						<input id="serchBtn" type="button" class="submit" value="查询"/>
 						</td>
 					</tr>
 				</table>
@@ -166,55 +155,33 @@
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="5" class="rounded-foot-left">
-								<em>The above data were fictional and made up, please do not sue me</em>
-							</td>
-							<td class="rounded-foot-right">
-								&nbsp;
-							</td>
+							<td colspan="5" class="rounded-foot-left"><em>The above data were fictional and made up, please do not sue me</em></td>
+							<td class="rounded-foot-right"> &nbsp; </td>
 						</tr>
 					</tfoot>
 					<tbody>
 						<tr>
 							<td>
-								<input type="checkbox">
-								</input>
-							</td>
+							<input type="checkbox">
+							</input> </td>
+							<td> 001 </td>
+							<td> 张三 </td>
+							<td> 一号店 </td>
+							<td> 管理员 </td>
 							<td>
-								001
-							</td>
-							<td>
-								张三
-							</td>
-							<td>
-								一号店
-							</td>
-							<td>
-								管理员
-							</td>
-							<td>
-								<input id="create-user" type="button" class="submit" value="详细"/>
+							<input id="create-user" type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox">
-								</input>
-							</td>
+							<input type="checkbox">
+							</input> </td>
+							<td> 002 </td>
+							<td> 李四 </td>
+							<td> 二号店 </td>
+							<td> 职员 </td>
 							<td>
-								002
-							</td>
-							<td>
-								李四
-							</td>
-							<td>
-								二号店
-							</td>
-							<td>
-								职员
-							</td>
-							<td>
-								<input id="create-user2" type="button" class="submit" value="详细"/>
+							<input type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 					</tbody>
@@ -222,22 +189,23 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		
+
 		<div id="dialog-form" title="Create new user">
-			<p class="validateTips">All form fields are required.</p>
-		
+			<p class="validateTips">
+				All form fields are required.
+			</p>
+
 			<form>
-			<fieldset>
-				<label for="name">Name</label>
-				<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
-				<label for="email">Email</label>
-				<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
-			</fieldset>
+				<fieldset>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+					<label for="email">Email</label>
+					<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+				</fieldset>
 			</form>
 		</div>
-		
-		<div id='somediv'></div>
+
 	</body>
 </html>
