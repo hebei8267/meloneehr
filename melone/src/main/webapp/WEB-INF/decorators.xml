@@ -4,12 +4,14 @@
 		<pattern>/static/*</pattern>
 	</excludes>
 
-<decorator name="noMenu" page="noMenu.jsp">
-		<pattern>/sc*</pattern>
-	</decorator>
-	
 	<decorator name="default" page="default.jsp">
 		<pattern>/sc/account*</pattern>
 	</decorator>
+
+	<decorator name="noMenu" page="default-nomenu.jsp">
+		<pattern>/sc*</pattern>
+	</decorator>
+
+
 
 </decorators>
