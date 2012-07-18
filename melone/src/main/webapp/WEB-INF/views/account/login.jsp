@@ -9,24 +9,26 @@
 				$("#loginBtn").button();
 
 				$("#loginBtn").click(function() {
+					$("#inputForm").attr("action", "${ctx}/sc/account/login");
+		        	$("#inputForm").submit();
 				});
 			});
 		</script>
 	</head>
 	<body>
 		<div class="grid_7 prefix_9">
-			<form:form action="" method="post" class="form" style="margin-top: 300px">
+			<form:form method="post" class="form" style="margin-top: 300px" id="inputForm">
 				<table>
 					<tr>
-						<td class="item_name" width="70px"><label for="name">用户名:</label></td>
+						<td class="item_name" width="70px">用户名:</td>
 						<td class="item">
-						<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"/>
+							<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"/>
 						</td>
 					</tr>
 					<tr>
-						<td class="item_name"><label for="passWd">密码:</label></td>
+						<td class="item_name">密码:</td>
 						<td class="item">
-						<input type="text" name="passWd" id="passWd" class="text ui-widget-content ui-corner-all"/>
+							<input type="text" name="passWd" id="passWd" class="text ui-widget-content ui-corner-all"/>
 						</td>
 					</tr>
 					<tr>
