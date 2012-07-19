@@ -1,10 +1,11 @@
 package com.tjhx.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 // JPA Entity基类的标识
 @MappedSuperclass
+@EntityListeners({ IdListener.class })
 public abstract class IdEntity implements Serializable {
 
 	private static final long serialVersionUID = -4108066747601937361L;
@@ -29,11 +31,11 @@ public abstract class IdEntity implements Serializable {
 	/** 对象唯一标识 */
 	private Integer uuid;
 	/** 对象创建时间（Timestamp） */
-	private Timestamp createDate;
+	private Date createDate;
 	/** Create_User_ID */
 	private String createUserId;
 	/** 对象更新时间（Timestamp） */
-	private Timestamp updateDate;
+	private Date updateDate;
 	/** Update_User_ID */
 	private String updateUserId;
 	/** Hibernate_Version */
@@ -52,11 +54,11 @@ public abstract class IdEntity implements Serializable {
 
 	@Basic
 	@Column(name = "CREATE_DATE", nullable = false, updatable = false)
-	public Timestamp getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
@@ -82,11 +84,11 @@ public abstract class IdEntity implements Serializable {
 
 	@Basic
 	@Column(name = "UPDATE_DATE", nullable = false)
-	public Timestamp getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Timestamp updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 
