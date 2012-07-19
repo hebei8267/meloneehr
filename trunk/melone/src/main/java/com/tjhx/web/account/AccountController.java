@@ -29,6 +29,13 @@ public class AccountController extends BaseController {
 	@RequestMapping(value = "login")
 	public String userLogin_Action(Model model, @RequestParam("name") String loginName,
 			@RequestParam("passWd") String passWd, HttpSession session) {
+//		User u=new User();
+//		u.setLoginName("sa");
+//		u.setPassWord("sasa");
+//		u.setName("sa");
+//		u.setFirstLoginFlg(false);
+//		accountManager.saveNewUser(u, null);
+		
 		User user = accountManager.findByLoginName(loginName);
 
 		// 校验用户信息
@@ -39,6 +46,7 @@ public class AccountController extends BaseController {
 			addError(model, "msg_001");
 			return null;
 		}
+		//return null;
 	}
 
 	/**
