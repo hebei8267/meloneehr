@@ -21,7 +21,3 @@ jQuery.extend(jQuery.validator.messages, {
 		max: jQuery.validator.format("请输入一个最大为 {0} 的值"),
 		min: jQuery.validator.format("请输入一个最小为 {0} 的值")
 });
-
-function required_msg(arg1){
-	return arg1 + "为必选字段";
-}
