@@ -2,25 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="sc_ctx">${ctx}/sc</c:set>
 <html>
 	<head>
 		<script>		
 			$().ready(function() {
-				//var container = $('div.container');
 				$("#inputForm").validate({
-					//errorLabelContainer: $("#inputForm div.error"),
 					rules: {
 						name: "required",
 						passWd: {
 							required: true,
 							minlength: 6
-						}
-					},
-					messages: {
-						name: required_msg("用户名"),
-						passWd: {
-							required: required_msg("用户名"),
-							minlength: jQuery.format("At least {0} characters required!")
 						}
 					}
 				});
@@ -30,7 +22,7 @@
 				$("#loginBtn").button();
 
 				$("#loginBtn").click(function() {
-					$("#inputForm").attr("action", "${ctx}/sc/account/login");
+					$("#inputForm").attr("action", "${sc_ctx}/account/login");
 		        	$("#inputForm").submit();
 				});
 			});
@@ -39,12 +31,11 @@
 	<body>
 		<div class="grid_8 prefix_8">
 			<form:form method="post" class="form cmxform" style="margin-top: 300px" id="inputForm">
-				<div class="error"></div>
 				<table>
 					<tr>
 						<td class="item_name" width="70px">用户名:</td>
 						<td class="item">
-							<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"/><br>
+							<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"/>
 						</td>
 					</tr>
 					<tr>

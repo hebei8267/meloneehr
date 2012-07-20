@@ -59,8 +59,9 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
 
 .item_name {
 	text-align: right;
-	padding: 5px 3px 4px 5px;
+	padding: 8px 3px 4px 5px;
 	overflow: hidden;
+	vertical-align: top;
 }
 .item {
 	padding: 0 5px 0 5px;
