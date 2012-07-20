@@ -1,1 +1,2 @@
-index									com.tjhx.web.Index
+/index									com.tjhx.web.Index
+/account/login							com.tjhx.web.account.AccountController
