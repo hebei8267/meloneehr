@@ -5,11 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.account.User;
+import com.tjhx.globals.Constants;
 import com.tjhx.service.account.AccountManager;
 import com.tjhx.web.BaseController;
 
@@ -26,27 +26,22 @@ public class AccountController extends BaseController {
 	 * @param passWd 密码
 	 * @return
 	 */
+	// PathVariable
 	@RequestMapping(value = "login")
 	public String userLogin_Action(Model model, @RequestParam("name") String loginName,
 			@RequestParam("passWd") String passWd, HttpSession session) {
-//		User u=new User();
-//		u.setLoginName("sa");
-//		u.setPassWord("sasa");
-//		u.setName("sa");
-//		u.setFirstLoginFlg(false);
-//		accountManager.saveNewUser(u, null);
-		
+
 		User user = accountManager.findByLoginName(loginName);
 
 		// 校验用户信息
 		if (checkUserInfo(user, loginName, passWd)) {
-			session.setAttribute("_MELONE_USER_INFO", user);
-			return "aa";
+			session.setAttribute(Constants.SESSION_USER_INFO, user);
+			// TODO hebei
+			return "shop/shopList";
 		} else {
-			addError(model, "msg_001");
+			addError(model, "ERR_MSG_001");
 			return null;
 		}
-		//return null;
 	}
 
 	/**
@@ -63,4 +58,10 @@ public class AccountController extends BaseController {
 		}
 		return false;
 	}
+	// User u=new User();
+	// u.setLoginName("sa");
+	// u.setPassWord("sasasa");
+	// u.setName("sa");
+	// u.setFirstLoginFlg(false);
+	// accountManager.saveNewUser(u, null);
 }
