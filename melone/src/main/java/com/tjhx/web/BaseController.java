@@ -108,9 +108,18 @@ public class BaseController {
 	}
 
 	/**
+	 * 初始化消息列表
+	 */
+	public void initMsgList() {
+		tipMsgList = null;
+		warnMsgList = null;
+		errMsgList = null;
+	}
+
+	/**
 	 * 将消息保存至表单中
 	 */
-	public void setMsgListIntoPageMode() {
+	public void insertMsgListToPageMode() {
 		if (null != _model) {
 			if (null != tipMsgList) {
 				_model.addAttribute(Constants.SESSION_TIP_MSG_LIST, tipMsgList);
