@@ -22,9 +22,12 @@ public class ControllerAdvice {
 		// 连接点所在的目标对象
 		if (call.getTarget() instanceof BaseController) {
 			BaseController _controller = (BaseController) call.getTarget();
+			// 初始化消息列表
+			_controller.initMsgList();
+			// controller处理
 			Object reval = call.proceed();
 			// 将消息保存至表单中
-			_controller.setMsgListIntoPageMode();
+			_controller.insertMsgListToPageMode();
 			return reval;
 		}
 		return call.proceed();
