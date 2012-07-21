@@ -7,8 +7,6 @@ import javax.persistence.PreUpdate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
-import org.hibernate.event.spi.SaveOrUpdateEvent;
-import org.hibernate.event.spi.SaveOrUpdateEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,12 +22,11 @@ public class IdListener {
 
 	@PrePersist
 	@PreUpdate
-	public void onSaveOrUpdate(IdEntity object) throws HibernateException {
+	public void onSaveOrUpdate(IdEntity entity) throws HibernateException {
 
 		// 如果对象是IdEntity子类,添加审计信息.
-
-		IdEntity entity = (IdEntity) object;
 		// String loginName = SpringSecurityUtils.getCurrentUserName();
+		// TODO hebei
 		String loginName = null;
 		if (null == loginName || StringUtils.isBlank(loginName)) {
 			loginName = "1";
@@ -38,7 +35,7 @@ public class IdListener {
 			// 创建新对象
 			entity.setCreateDate(new Date());
 			entity.setCreateUserId(loginName);
-			
+
 			entity.setUpdateDate(new Date());
 			entity.setUpdateUserId(loginName);
 		} else {
@@ -46,7 +43,8 @@ public class IdListener {
 			entity.setUpdateDate(new Date());
 			entity.setUpdateUserId(loginName);
 
-			logger.info("对象(ID:{}) 被 {} 在 {} 修改", new Object[] { entity.getUuid(), loginName, new Date() });
+			logger.info("{} 对象(ID:{}) 被 {} 在 {} 修改", new Object[] { entity.getClass().getName(), entity.getUuid(),
+					loginName, new Date() });
 		}
 
 	}
