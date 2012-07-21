@@ -35,6 +35,7 @@
 			</props>
 		</property>
 	</bean>
+	
 
 	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -69,13 +70,23 @@
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
 
-	
+
 	<!-- AOP -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
+
 
 	<!-- 使用静态变量缓存 applicationContext -->
 	<bean class="org.springside.modules.utils.SpringContextHolder" lazy-init="false" />
+
+
+	<!-- 自定义消息资源 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource"
+		lazy-init="false">
+		<property name="basename">
+			<value>messages</value>
+		</property>
+	</bean>
 
 
 	<!-- production/local development环境 -->
