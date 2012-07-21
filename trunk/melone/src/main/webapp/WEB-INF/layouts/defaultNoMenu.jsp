@@ -24,7 +24,6 @@
 	</head>
 	<body>
 		<div class="container_16">
-
 			<sitemesh:body />
 
 			<%@ include file="/WEB-INF/layouts/footer.jsp"%>

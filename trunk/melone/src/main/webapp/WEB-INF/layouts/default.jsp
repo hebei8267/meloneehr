@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<%@ include file="/WEB-INF/layouts/header-menu.jsp"%>
+			<%@ include file="/WEB-INF/layouts/headerMenu.jsp"%>
 
 			<sitemesh:body />
 
