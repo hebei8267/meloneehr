@@ -24,8 +24,8 @@
 	</head>
 	<body>
 		<div class="container_16">
+			<%@ include file="/WEB-INF/layouts/infoList.jsp"%>
 			<sitemesh:body />
-
 			<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 		</div>
 	</body>
