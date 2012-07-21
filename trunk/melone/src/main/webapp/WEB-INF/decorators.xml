@@ -8,7 +8,7 @@
 		<pattern>/sc/account*</pattern>
 	</decorator>
 
-	<decorator name="noMenu" page="default-nomenu.jsp">
+	<decorator name="noMenu" page="defaultNoMenu.jsp">
 		<pattern>/sc*</pattern>
 	</decorator>
 
