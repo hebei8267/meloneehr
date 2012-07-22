@@ -37,7 +37,7 @@ public class AccountController extends BaseController {
 		if (checkUserInfo(user, loginName, passWd)) {
 			session.setAttribute(Constants.SESSION_USER_INFO, user);
 			// TODO hebei
-			return "shop/shopList";
+			return "shop/storeTypeList";
 		} else {
 			addError(model, "ERR_MSG_001");
 			return null;
