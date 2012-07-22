@@ -5,13 +5,7 @@
 	</excludes>
 
 	<decorator name="default" page="default.jsp">
-		<pattern>/sc/account*</pattern>
+		<pattern>/*</pattern>
 	</decorator>
-
-	<decorator name="noMenu" page="defaultNoMenu.jsp">
-		<pattern>/sc*</pattern>
-	</decorator>
-
-
 
 </decorators>
