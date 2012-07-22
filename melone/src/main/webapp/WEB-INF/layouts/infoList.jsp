@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.tjhx.globals.Constants" %>
+<c:if test="${!empty __SESSION_TIP_MSG_LIST || !empty __SESSION_WARN_MSG_LIST || !empty __SESSION_ERR_MSG_LIST}" >
 <script>		
 $().ready(function() {
-	<c:if test="${!empty __SESSION_TIP_MSG_LIST || !empty __SESSION_WARN_MSG_LIST || !empty __SESSION_ERR_MSG_LIST}" >
 	$( "#__dialog-message" ).dialog({
 		modal: true,
 		buttons: {
@@ -12,9 +12,9 @@ $().ready(function() {
 			}
 		}
 	});
-	</c:if>
 });
 </script>
+</c:if>
 
 <div id="__dialog-message" title="系统消息">
 	<c:if test="${!empty __SESSION_TIP_MSG_LIST}" >
