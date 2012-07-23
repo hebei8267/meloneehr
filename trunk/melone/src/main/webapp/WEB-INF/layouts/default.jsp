@@ -13,6 +13,7 @@
 		<link type="text/css" href="${ctx}/static/css/jqueryValidate/cmxform.css" rel="stylesheet" />
 		<link type="text/css" href="${ctx}/static/css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
 		<link type="text/css" href="${ctx}/static/css/menu/style.css" rel="stylesheet" />
+		<link type="text/css" href="${ctx}/static/css/table/style.css" rel="stylesheet" />
 		
 		<script type="text/javascript" src="${ctx}/static/js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="${ctx}/static/js/jquery.validate.js"></script>
