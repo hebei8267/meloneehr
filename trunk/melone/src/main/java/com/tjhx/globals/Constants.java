@@ -1,6 +1,9 @@
 package com.tjhx.globals;
 
 public class Constants {
+	/** JSP页面请求前缀 */
+	public static final String PAGE_REQUEST_PREFIX = "sc";
+
 	/** 提示消息 */
 	public static final String SESSION_TIP_MSG_LIST = "__SESSION_TIP_MSG_LIST";
 	/** 警告消息 */
