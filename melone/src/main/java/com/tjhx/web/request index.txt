@@ -2,4 +2,4 @@
 /account/login							com.tjhx.web.account.AccountController
 
 
-/shop/storeTypeList
+/syscfg/storeType/list 					com.tjhx.web.syscfg.StoreTypeController
