@@ -8,4 +8,5 @@
 		<pattern>/*</pattern>
 	</decorator>
 
+	<decorator name="menu" page="headerMenu.jsp" />
 </decorators>
