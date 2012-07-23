@@ -37,7 +37,7 @@ public class AccountController extends BaseController {
 		if (checkUserInfo(user, loginName, passWd)) {
 			session.setAttribute(Constants.SESSION_USER_INFO, user);
 			// TODO hebei
-			return "shop/storeTypeList";
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 		} else {
 			addError(model, "ERR_MSG_001");
 			return null;
