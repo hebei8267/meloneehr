@@ -4,6 +4,7 @@
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
 <html>
 	<head>
 		<script>		
@@ -11,17 +12,8 @@
 				$("#createBtn,#delBtn").button();
 
 				$("#createBtn").click(function() {
-					var dialog = $("<div title='仓库类型新增'></div>");  
-			        $(dialog).load("${ctx}/popsc/syscfg/storeType/create", function() {
-			        	$(dialog).dialog({
-			        		resizable: false,
-							modal: true,
-							width: 400,
-							height: 450
-						});
-			        });
-					//$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/create");
-		        	//$("#listForm").submit();
+					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/create");
+		        	$("#listForm").submit();
 				});
 				
 				$("#delBtn").click(function() {
@@ -42,7 +34,7 @@
 		</div>
 		<div class="clear"></div>
 		
-		<form:form method="post" class="form cmxform" id="listForm">
+		<form method="post" class="form cmxform" id="listForm">
 		<div class="grid_16">
 			<input id="createBtn" type="button" class="submit" value="新增"/>
 			<input id="delBtn" type="button" class="submit" value="删除"/>
@@ -82,6 +74,8 @@
 							${storeType.descTxt}&nbsp;
 						</td>
 						<td>
+							<a>查看</a>
+							&nbsp;&nbsp;
 							<a href="${sc_ctx}/syscfg/storeType/get/${storeType.uuid}">编辑</a>
 						</td>
 					</tr>
@@ -90,6 +84,6 @@
 			</table>
 		</div>
 		<div class="clear"></div>
-		</form:form>
+		</form>
 	</body>
 </html>
