@@ -25,13 +25,14 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-<filter>
-		<filter-name>ff</filter-name>
-		<filter-class>com.tjhx.JspFilter</filter-class>
+	<filter>
+		<filter-name>SecuritypFilter</filter-name>
+		<filter-class>com.tjhx.common.filter.SecuritypFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>ff</filter-name>
-		<url-pattern>/*</url-pattern>
+		<filter-name>SecuritypFilter</filter-name>
+		<url-pattern>/sc/*</url-pattern>
+		<url-pattern>/popsc/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- Filter 定义 -->
@@ -62,7 +63,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>sitemeshFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/sc/*</url-pattern>
+		<url-pattern>/popsc/*</url-pattern>
 	</filter-mapping>
 
 	<!-- Srping OpenSessionInView filter -->
@@ -93,6 +95,10 @@
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>/sc/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springServlet</servlet-name>
+		<url-pattern>/popsc/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- session 超时时间(单位：分钟),使用MemcachedSessionFilter时无效 -->

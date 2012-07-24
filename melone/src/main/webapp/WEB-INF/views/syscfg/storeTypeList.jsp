@@ -11,11 +11,22 @@
 				$("#createBtn,#delBtn").button();
 
 				$("#createBtn").click(function() {
-					
+					var dialog = $("<div title='仓库类型新增'></div>");  
+			        $(dialog).load("${ctx}/popsc/syscfg/storeType/create", function() {
+			        	$(dialog).dialog({
+			        		resizable: false,
+							modal: true,
+							width: 400,
+							height: 450
+						});
+			        });
+					//$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/create");
+		        	//$("#listForm").submit();
 				});
 				
 				$("#delBtn").click(function() {
-					
+					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/del");
+		        	$("#listForm").submit();
 				});
 			});
 		</script>
@@ -31,6 +42,7 @@
 		</div>
 		<div class="clear"></div>
 		
+		<form:form method="post" class="form cmxform" id="listForm">
 		<div class="grid_16">
 			<input id="createBtn" type="button" class="submit" value="新增"/>
 			<input id="delBtn" type="button" class="submit" value="删除"/>
@@ -78,5 +90,6 @@
 			</table>
 		</div>
 		<div class="clear"></div>
+		</form:form>
 	</body>
 </html>
