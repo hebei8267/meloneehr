@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
 <html>
 	<head>
 		<script>		
@@ -30,7 +31,7 @@
 	</head>
 	<body>
 		<div class="grid_8 prefix_8">
-			<form:form method="post" class="form cmxform" style="margin-top: 300px" id="inputForm">
+			<form method="post" class="form cmxform" style="margin-top: 300px" id="inputForm">
 				<table>
 					<tr>
 						<td class="item_name" width="70px">用户名:</td>
@@ -53,7 +54,7 @@
 						</td>
 					</tr>
 				</table>
-			</form:form>
+			</form>
 		</div>
 		<div class="clear"></div>
 	</body>

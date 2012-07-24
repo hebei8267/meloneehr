@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.shop.StoreType;
+import com.tjhx.globals.Constants;
 import com.tjhx.service.shop.StoreTypeManager;
 import com.tjhx.web.BaseController;
 
@@ -44,13 +46,23 @@ public class StoreTypeController extends BaseController {
 	}
 
 	@RequestMapping(value = "create")
-	public String createStoreType_Action() {
+	public String createStoreType_Action(Model model) {
+		StoreType storeType = new StoreType();
+
+		model.addAttribute("storeType", storeType);
 		return "syscfg/storeTypeForm";
 	}
 
 	@RequestMapping(value = "save")
-	public String saveStoreType_Action(Model model) {
-		// TODO hebei
-		return "";
+	public String saveStoreType_Action(@RequestParam("name") String name, @RequestParam("descTxt") String descTxt,
+			Model model) {
+
+		StoreType storeType = new StoreType();
+		storeType.setName(name);
+		storeType.setDescTxt(descTxt);
+
+		storeTypeManager.saveNewStoreType(storeType);
+
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 	}
 }
