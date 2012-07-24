@@ -4,9 +4,14 @@
 		<pattern>/static/*</pattern>
 	</excludes>
 
+	<decorator name="pop" page="popWin.jsp">
+		<pattern>/popsc*</pattern>
+	</decorator>
+
 	<decorator name="default" page="default.jsp">
-		<pattern>/*</pattern>
+		<pattern>/sc*</pattern>
 	</decorator>
 
 	<decorator name="menu" page="headerMenu.jsp" />
+
 </decorators>
