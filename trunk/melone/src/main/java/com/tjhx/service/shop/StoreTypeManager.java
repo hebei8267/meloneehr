@@ -25,6 +25,26 @@ public class StoreTypeManager {
 		return (List<StoreType>) storeTypeJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
 
+	/**
+	 * 根据编号取得仓库类型信息
+	 * 
+	 * @param uuid 仓库类型编号
+	 * @return 仓库类型信息
+	 */
+	public StoreType getStoreTypeByUuid(Integer uuid) {
+
+		return storeTypeJpaDao.findOne(uuid);
+	}
+
+	/**
+	 * 删除仓库类型信息
+	 * 
+	 * @param uuid 仓库类型编号
+	 */
+	public void delStoreTypeByUuid(Integer uuid) {
+		storeTypeJpaDao.delete(uuid);
+	}
+
 	@Autowired
 	public void setStoreTypeJpaDao(StoreTypeJpaDao storeTypeJpaDao) {
 		this.storeTypeJpaDao = storeTypeJpaDao;
