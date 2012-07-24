@@ -33,6 +33,7 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
 .submit {
 	margin-top: 2px;
 	width: auto;
+	margin-bottom: 4px;
 }
 
 .forget_link:hover {
