@@ -76,7 +76,7 @@ public class BaseController {
 	 * @param model 页面模型对象
 	 * @param msgId 消息编号
 	 */
-	protected void addError(Model model, String msgId) {
+	public void addError(Model model, String msgId) {
 		addError(model, msgId, (String[]) null);
 	}
 
