@@ -50,6 +50,7 @@ public class StoreTypeController extends BaseController {
 		StoreType storeType = new StoreType();
 
 		model.addAttribute("storeType", storeType);
+
 		return "syscfg/storeTypeForm";
 	}
 
@@ -60,9 +61,17 @@ public class StoreTypeController extends BaseController {
 		StoreType storeType = new StoreType();
 		storeType.setName(name);
 		storeType.setDescTxt(descTxt);
-
-		storeTypeManager.saveNewStoreType(storeType);
-
-		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
+		
+		return null;
+		
+//		try {
+//			storeTypeManager.saveNewStoreType(storeType);
+//		} catch (Exception ex) {
+//			// 添加错误消息
+//			addError(model, ex.getMessage());
+//			return null;
+//		}
+//
+//		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 	}
 }
