@@ -11,7 +11,13 @@
 			$().ready(function() {
 				$("#inputForm").validate({
 					rules: {
-						name: "required"
+						name: {
+							required: true,
+							maxlength: 32
+						},
+						descTxt: {
+							maxlength: 255
+						}
 					}
 				});
 				
@@ -34,7 +40,7 @@
 			 <page:param name="sysCfg">current</page:param>
 		</page:applyDecorator>
 		
-		<div class="grid_16">
+		<div class="grid_16 titleNav">
 			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711; 
 			<c:if test="${empty storeType.uuid}" >
 			新增

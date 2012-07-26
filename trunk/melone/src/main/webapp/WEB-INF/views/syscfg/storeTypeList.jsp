@@ -9,14 +9,38 @@
 	<head>
 		<script>		
 			$().ready(function() {
-				$("#createBtn,#delBtn").button();
+				// 全选/全部选
+				$("#checkAll").click(function() {
+					$('input[name="uuid"]').attr("checked",this.checked);
+				});
+				var $subCheckBox = $("input[name='uuid']");
+				$subCheckBox.click(function(){
+					$("#checkAll").attr("checked",$subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
+				});
+				// 按钮CSS
+				$("#newBtn,#delBtn,#serchBtn").button();
 
-				$("#createBtn").click(function() {
-					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/create");
+				//--------------------------------------------------------------------
+				// 新增按钮点击
+				//--------------------------------------------------------------------
+				$("#newBtn").click(function() {
+					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/new");
 		        	$("#listForm").submit();
 				});
-				
+				//--------------------------------------------------------------------
+				// 删除按钮点击
+				//--------------------------------------------------------------------
 				$("#delBtn").click(function() {
+					var uuids = "";
+					$.each($subCheckBox, function(index, _checkBox) {
+						if(_checkBox.checked){
+							uuids += _checkBox.value + ",";
+						}
+				    });
+					if(uuids.length > 0){
+						uuids = uuids.substring(0, uuids.length - 1);
+					}
+					$("#uuids").val(uuids);
 					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/del");
 		        	$("#listForm").submit();
 				});
@@ -25,31 +49,37 @@
 	</head>
 	<body>
 		<%// 系统菜单  %>
-		<page:applyDecorator name="menu" >
-			 <page:param name="sysCfg">current</page:param>
-		</page:applyDecorator>
+		<page:applyDecorator name="menu" />
 		
-		<div class="grid_16">
+		<div class="grid_16 titleNav">
 			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a></h2>
 		</div>
 		<div class="clear"></div>
 		
 		<form method="post" class="form cmxform" id="listForm">
+		
+		<%// ----------------------------------------------------------- %>
+		<%// 列表操作 %>
+		<%// ----------------------------------------------------------- %>
 		<div class="grid_16">
-			<input id="createBtn" type="button" class="submit" value="新增"/>
+			<input id="newBtn" type="button" class="submit" value="新增"/>
 			<input id="delBtn" type="button" class="submit" value="删除"/>
 		</div>
 		<div class="clear"></div>
 		
+		<%// ----------------------------------------------------------- %>
+		<%// 列表 %>
+		<%// ----------------------------------------------------------- %>
 		<div class="grid_16">
+			<input type="hidden" name="uuids" id="uuids"/>
 			<table id="rounded-corner">
 				<thead>
 					<tr>
-						<th class="rounded-left" width="10">
-							<input type="checkbox"></input>
+						<th class="rounded-left" width="25">
+							<input id="checkAll" type="checkbox"></input>
 						</th>
 						<th width="150">仓库类型名称</th>
-						<th width="280">详细描述</th>
+						<th width="420">详细描述</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
@@ -64,8 +94,8 @@
 					</c:if>
 					<c:forEach items="${storeTypeList}" var="storeType">
 					<tr>
-						<td>
-							<input type="checkbox" name="storeType" value="${storeType.uuid}"></input>
+						<td class="first">
+							<input type="checkbox" name="uuid" value="${storeType.uuid}"></input>
 						</td>
 						<td>
 							${storeType.name}&nbsp;
@@ -73,10 +103,8 @@
 						<td>
 							${storeType.descTxt}&nbsp;
 						</td>
-						<td>
-							<a>查看</a>
-							&nbsp;&nbsp;
-							<a href="${sc_ctx}/syscfg/storeType/get/${storeType.uuid}">编辑</a>
+						<td align="center">
+							<a href="${sc_ctx}/syscfg/storeType/edit/${storeType.uuid}">编辑</a>
 						</td>
 					</tr>
 					</c:forEach>
