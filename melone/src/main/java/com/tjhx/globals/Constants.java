@@ -3,6 +3,10 @@ package com.tjhx.globals;
 public class Constants {
 	/** 错误消息前缀 */
 	public static final String ERR_MSG_PREFIX = "ERR_MSG";
+	/** 提示消息前缀 */
+	public static final String TIP_MSG_PREFIX = "TIP_MSG";
+	/** 警告消息前缀 */
+	public static final String WARN_MSG_PREFIX = "WARN__MSG";
 
 	/** JSP页面请求前缀 */
 	public static final String PAGE_REQUEST_PREFIX = "sc";
