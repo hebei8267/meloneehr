@@ -39,7 +39,7 @@ public class AccountController extends BaseController {
 			// TODO hebei
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 		} else {
-			addError(model, "ERR_MSG_ACC_001");
+			addInfoMsg(model, "ERR_MSG_ACC_001");
 			return null;
 		}
 	}
