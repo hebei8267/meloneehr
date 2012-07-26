@@ -12,6 +12,6 @@
 		<pattern>/sc*</pattern>
 	</decorator>
 
-	<decorator name="menu" page="headerMenu.jsp" />
+	<decorator name="menu" page="menu.jsp" />
 
 </decorators>
