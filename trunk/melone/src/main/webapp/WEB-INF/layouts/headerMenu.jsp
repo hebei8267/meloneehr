@@ -7,10 +7,10 @@
 
 <div class='grid_16'>
 	<ul id="nav">
-		<li class="<sitemesh:getProperty property="home" default=""/>">
+		<li>
 			<a href="#">Home</a>
 		</li>
-		<li class="<sitemesh:getProperty property="sysCfg" default=""/>">
+		<li>
 			<a href="#">配置管理</a>
 			<ul>
 				<li>
