@@ -49,6 +49,7 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
     padding: 7px 0 7px 0;
     /*background: #335599 url(./images/bg.png) repeat-x 0 -110px;*/
     background: #B9C9FE;
+    margin-bottom: 4px;
     
     border-radius:10px; /*some css3*/
     -moz-border-radius:10px;
@@ -67,4 +68,9 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
 .item {
 	padding: 0 5px 0 5px;
 	overflow: hidden;
+}
+
+.titleNav{
+	margin-left: 15px;
+	margin-bottom: 15px;
 }
