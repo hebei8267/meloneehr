@@ -43,8 +43,8 @@ public class IdListener {
 			entity.setUpdateDate(new Date());
 			entity.setUpdateUserId(loginName);
 
-			logger.info("{} 对象(ID:{}) 被 {} 在 {} 修改", new Object[] { entity.getClass().getName(), entity.getUuid(),
-					loginName, new Date() });
+			logger.info("{} 对象(ID:{}) 被 {} 在 {} 修改", new Object[] { entity.getClass().getSimpleName(),
+					entity.getUuid(), loginName, new Date() });
 		}
 
 	}
