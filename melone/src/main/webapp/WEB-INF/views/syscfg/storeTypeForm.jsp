@@ -18,8 +18,9 @@
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
-					history.go(-1);
+					$(location).attr('href', '${sc_ctx}/syscfg/storeType/list');
 				});
+				
 				$("#saveBtn").click(function() {
 					$("#inputForm").attr("action", "${sc_ctx}/syscfg/storeType/save");
 		        	$("#inputForm").submit();
@@ -34,22 +35,30 @@
 		</page:applyDecorator>
 		
 		<div class="grid_16">
-			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711; 新增</h2>
+			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711; 
+			<c:if test="${empty storeType.uuid}" >
+			新增
+			</c:if>
+			<c:if test="${!empty storeType.uuid}" >
+			编辑
+			</c:if>
+			</h2>
 		</div>
 		<div class="clear"></div>
 		
-		<form method="POST" class="form cmxform" id="inputForm">
+		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="storeType">
+			<form:hidden path="uuid"/>
 			<table>
 				<tr>
 					<td class="item_name" width="100px">仓库类型名称:</td>
 					<td class="item">
-						<form:input path="storeType.name" class="text ui-widget-content ui-corner-all"/>
+						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="item_name">详细描述:</td>
 					<td class="item">
-						<form:textarea path="storeType.descTxt" class="text ui-widget-content ui-corner-all"/>
+						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
@@ -61,6 +70,6 @@
 					</td>
 				</tr>
 			</table>
-		</form>
+		</form:form>
 	</body>
 </html>
