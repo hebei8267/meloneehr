@@ -52,8 +52,9 @@ public class StoreTypeManager {
 	 * 
 	 * @param uuid 仓库类型编号
 	 */
-	public void delStoreTypeByUuid(Integer uuid) {
-		storeTypeJpaDao.delete(uuid);
+	@Transactional(readOnly = false)
+	public void delStoreTypeByUuid(String uuid) {
+		storeTypeJpaDao.delete(Integer.parseInt(uuid));
 	}
 
 	/**
