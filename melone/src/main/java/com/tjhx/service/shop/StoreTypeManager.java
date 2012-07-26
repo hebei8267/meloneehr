@@ -1,5 +1,6 @@
 package com.tjhx.service.shop;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,25 @@ public class StoreTypeManager {
 		}
 
 		storeTypeJpaDao.save(storeType);
+	}
+
+	/**
+	 * 更新仓库类型信息
+	 * 
+	 * @param storeType 仓库类型信息
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
+	 */
+	@Transactional(readOnly = false)
+	public void updateStoreType(StoreType storeType) throws IllegalAccessException, InvocationTargetException {
+		StoreType _dbStoreType = storeTypeJpaDao.findOne(storeType.getUuid());
+		if (null == _dbStoreType) {
+			// 仓库类型不存在!
+			throw new ServiceException("ERR_MSG_CFG_002");
+		}
+		_dbStoreType.setName(storeType.getName());
+		_dbStoreType.setDescTxt(storeType.getDescTxt());
+		storeTypeJpaDao.save(_dbStoreType);
 	}
 
 	@Autowired
