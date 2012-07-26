@@ -1,6 +1,9 @@
 #rounded-corner {
 	text-align: left;
 	border-collapse: collapse;
+	
+	width:60em;
+	table-layout:fixed;
 }
 
 #rounded-corner thead th.rounded-left {
@@ -21,6 +24,13 @@
 	background: #e8edff;
 	border-top: 1px solid #fff;
 	color: #669;
+	border-left: 1px solid #fff;
+	
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+#rounded-corner td.first {
+	border-left: 0px;
 }
 #rounded-corner tfoot td.rounded-foot-left {
 	background: #e8edff url('./images/botleft.png') left bottom no-repeat;
