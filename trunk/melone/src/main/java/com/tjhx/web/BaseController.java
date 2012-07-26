@@ -21,77 +21,40 @@ public class BaseController {
 	private Model _model;
 
 	/**
-	 * 添加提示消息
+	 * 添加消息
 	 * 
 	 * @param model 页面模型对象
 	 * @param msgId 消息编号
 	 */
-	protected void addTip(Model model, String msgId) {
-		addTip(model, msgId, (String[]) null);
+	protected void addInfoMsg(Model model, String msgId) {
+		addInfoMsg(model, msgId, (String[]) null);
 	}
 
 	/**
-	 * 添加提示消息
+	 * 添加消息
 	 * 
 	 * @param model 页面模型对象
 	 * @param msgId 消息编号
 	 * @param msgParam 消息参数
 	 */
-	protected void addTip(Model model, String msgId, String... msgParam) {
-		if (null == tipMsgList) {
-			tipMsgList = new ArrayList<String>();
+	protected void addInfoMsg(Model model, String msgId, String... msgParam) {
+		if (msgId.startsWith(Constants.TIP_MSG_PREFIX)) {
+			if (null == tipMsgList) {
+				tipMsgList = new ArrayList<String>();
+			}
+			tipMsgList.add(getMsg(msgId, msgParam));
+		} else if (msgId.startsWith(Constants.WARN_MSG_PREFIX)) {
+			if (null == warnMsgList) {
+				warnMsgList = new ArrayList<String>();
+			}
+			warnMsgList.add(getMsg(msgId, msgParam));
+		} else if (msgId.startsWith(Constants.ERR_MSG_PREFIX)) {
+			if (null == errMsgList) {
+				errMsgList = new ArrayList<String>();
+			}
+			errMsgList.add(getMsg(msgId, msgParam));
 		}
-		tipMsgList.add(getMsg(msgId, msgParam));
-		this._model = model;
-	}
 
-	/**
-	 * 添加警告消息
-	 * 
-	 * @param model 页面模型对象
-	 * @param msgId 消息编号
-	 */
-	protected void addWarn(Model model, String msgId) {
-		addWarn(model, msgId, (String[]) null);
-	}
-
-	/**
-	 * 添加警告消息
-	 * 
-	 * @param model 页面模型对象
-	 * @param msgId 消息编号
-	 * @param msgParam 消息参数
-	 */
-	protected void addWarn(Model model, String msgId, String... msgParam) {
-		if (null == warnMsgList) {
-			warnMsgList = new ArrayList<String>();
-		}
-		warnMsgList.add(getMsg(msgId, msgParam));
-		this._model = model;
-	}
-
-	/**
-	 * 添加错误消息
-	 * 
-	 * @param model 页面模型对象
-	 * @param msgId 消息编号
-	 */
-	public void addError(Model model, String msgId) {
-		addError(model, msgId, (String[]) null);
-	}
-
-	/**
-	 * 添加错误消息
-	 * 
-	 * @param model 页面模型对象
-	 * @param msgId 消息编号
-	 * @param msgParam 消息参数
-	 */
-	protected void addError(Model model, String msgId, String... msgParam) {
-		if (null == errMsgList) {
-			errMsgList = new ArrayList<String>();
-		}
-		errMsgList.add(getMsg(msgId, msgParam));
 		this._model = model;
 	}
 
