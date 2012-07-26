@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.shop.StoreType;
 import com.tjhx.globals.Constants;
@@ -44,9 +45,13 @@ public class StoreTypeController extends BaseController {
 
 	}
 
-	@RequestMapping(value = "del/{id}")
-	public String delStoreType_Action(@PathVariable("id") Integer id, Model model) {
-		storeTypeManager.delStoreTypeByUuid(id);
+	@RequestMapping(value = "del")
+	public String delStoreType_Action(@RequestParam("uuids") String ids, Model model) {
+		String[] idArray = ids.split(",");
+		for (int i = 0; i < idArray.length; i++) {
+			storeTypeManager.delStoreTypeByUuid(idArray[i]);
+		}
+
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 	}
 
