@@ -7,9 +7,19 @@
 <c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
 <html>
 	<head>
-		<script>		
+		<script>
 			$().ready(function() {
+				$("#listForm").validate({
+					rules: {
+						delBtn: {
+							requiredSelect: 'uuid'
+						}
+					}
+				});
+				
+				//--------------------------------------------------------------------
 				// 全选/全部选
+				//--------------------------------------------------------------------
 				$("#checkAll").click(function() {
 					$('input[name="uuid"]').attr("checked",this.checked);
 				});
@@ -17,16 +27,19 @@
 				$subCheckBox.click(function(){
 					$("#checkAll").attr("checked",$subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
 				});
+				
+				//--------------------------------------------------------------------
 				// 按钮CSS
+				//--------------------------------------------------------------------
 				$("#newBtn,#delBtn,#serchBtn").button();
 
 				//--------------------------------------------------------------------
 				// 新增按钮点击
 				//--------------------------------------------------------------------
 				$("#newBtn").click(function() {
-					$("#listForm").attr("action", "${sc_ctx}/syscfg/storeType/new");
-		        	$("#listForm").submit();
+					$(location).attr('href', '${sc_ctx}/syscfg/storeType/new');
 				});
+				
 				//--------------------------------------------------------------------
 				// 删除按钮点击
 				//--------------------------------------------------------------------
@@ -63,7 +76,7 @@
 		<%// ----------------------------------------------------------- %>
 		<div class="grid_16">
 			<input id="newBtn" type="button" class="submit" value="新增"/>
-			<input id="delBtn" type="button" class="submit" value="删除"/>
+			<input id="delBtn" name="delBtn" type="button" class="submit" value="删除"/>
 		</div>
 		<div class="clear"></div>
 		
