@@ -2,8 +2,8 @@
 	text-align: left;
 	border-collapse: collapse;
 	
-	width:60em;
-	table-layout:fixed;
+	width: 100%;
+	table-layout: fixed;
 }
 
 #rounded-corner thead th.rounded-left {
