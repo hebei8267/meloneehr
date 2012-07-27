@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="../js/jquery-ui-1.8.21.custom.min.js"></script>
 		<script>
 			$(function() {
-				$( "#serchBtn" ).button();
+				$( "#serchBtn,#btn1,#btn2,#create-user2" ).button();
 				
 				$("#dialog-form").dialog({
 					autoOpen : false,
@@ -30,7 +30,7 @@
 					}
 				});
 
-				$("#create-user").button().click(function() {
+				$("#create-user1").button().click(function() {
 					$("#dialog-form").dialog("open");
 				});
 
@@ -92,14 +92,6 @@
 						</ul>
 					</li>
 				</ul>
-				</li>
-				<li>
-					<a href="">关于</a>
-				</li>
-				<li>
-					<a href="">联系我们</a>
-				</li>
-				</ul>
 			</div>
 			<div class="clear"></div>
 			<div class="grid_16">
@@ -119,12 +111,12 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="item_name"> 所属门店: </td>
+						<td class="item_name"> 所属部门: </td>
 						<td class="item">
 						<select class="text ui-widget-content ui-corner-all">
 							<option></option>
-							<option>一号店</option>
-							<option>二号店</option>
+							<option>一部</option>
+							<option>二部</option>
 						</select></td>
 						<td colspan="2" align="right">
 						<input id="serchBtn" type="button" class="submit" value="查询"/>
@@ -134,8 +126,8 @@
 			</div>
 			<div class="clear"></div>
 			<div class="grid_16">
-				<input type="button" class="submit" value="新增"/>
-				<input type="button" class="submit" value="删除"/>
+				<input id="btn1" type="button" class="submit" value="新增"/>
+				<input id="btn2" type="button" class="submit" value="删除"/>
 			</div>
 			<div class="clear"></div>
 			<div class="grid_16">
@@ -165,10 +157,10 @@
 							</input> </td>
 							<td> 001 </td>
 							<td> 张三 </td>
-							<td> 一号店 </td>
+							<td> 一部 </td>
 							<td> 管理员 </td>
 							<td>
-							<input id="create-user" type="button" class="submit" value="详细"/>
+							<input id="create-user1" type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 						<tr>
@@ -177,10 +169,10 @@
 							</input> </td>
 							<td> 002 </td>
 							<td> 李四 </td>
-							<td> 二号店 </td>
+							<td> 二部 </td>
 							<td> 职员 </td>
 							<td>
-							<input type="button" class="submit" value="详细"/>
+							<input id="create-user2" type="button" class="submit" value="详细"/>
 							</td>
 						</tr>
 					</tbody>
