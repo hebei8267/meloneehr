@@ -23,10 +23,18 @@
 		<sitemesh:head />
 	</head>
 	<body>
-		<%@ include file="/WEB-INF/layouts/infoList.jsp"%>
-		<div class="container_16">
-			<sitemesh:body />
-			<%@ include file="/WEB-INF/layouts/footer.jsp"%>
+	<div id="__frame_main">
+		<div id="__frame_content">
+			<%@ include file="/WEB-INF/layouts/infoList.jsp"%>
+			<div class="container_16">
+				<sitemesh:body />
+			</div>
 		</div>
+		<div id="__frame_footer">
+			<div class="container_16">
+			<%@ include file="/WEB-INF/layouts/footer.jsp"%>
+			</div>
+		</div>
+	</div>
 	</body>
 </html>
