@@ -119,10 +119,10 @@ public class StoreTypeController extends BaseController {
 			try {
 				storeTypeManager.updateStoreType(storeType);
 			} catch (ServiceException ex) {
-				blankStoreType(model);
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
-				return "syscfg/storeTypeForm";
+				// 恢复初始状态
+				return editStoreType_Action(storeType.getUuid(), model);
 			}
 		}
 
