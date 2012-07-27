@@ -16,6 +16,7 @@ public class GeneratorMain {
 		g.clean();
 
 		// 通过数据库表生成文件,注意: oracle
-		g.generateTable("T_USER");
+		//g.generateTable("T_USER");
+		g.generateAllTable();
 	}
 }

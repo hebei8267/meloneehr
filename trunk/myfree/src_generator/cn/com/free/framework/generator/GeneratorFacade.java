@@ -39,7 +39,9 @@ public class GeneratorFacade {
 
 	public Generator createGeneratorForDbTable() {
 		Generator g = new Generator();
-		g.setTemplateRootDir(new File("template").getAbsoluteFile());
+		// TODO 可以更换生成模板
+		g.setTemplateRootDir(new File("template\\hibernate").getAbsoluteFile());
+		// g.setTemplateRootDir(new File("template\\ibatis").getAbsoluteFile());
 		g.setOutRootDir(GeneratorProperties.getRequiredProperty("outRoot"));
 		return g;
 	}
