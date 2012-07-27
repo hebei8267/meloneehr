@@ -1,5 +1,18 @@
-body { font:15px/150% Tahoma,Verdana,STHeiTi,simsun,sans-serif; }
-/* tutorial */
+body,html { font:15px/150% Tahoma,Verdana,STHeiTi,simsun,sans-serif; height:99.3%; }
+
+#__frame_main {
+	position: relative;
+	min-height: 99.3%;
+}
+#__frame_content {
+	padding-bottom: 30px;/* 不至被footer盖住 */
+}
+#__frame_footer {
+	position: absolute;
+	bottom: 0;
+	height: 20px;
+	width: 100%;
+}
 
 input, textarea, select { 
 	padding: 9px;
