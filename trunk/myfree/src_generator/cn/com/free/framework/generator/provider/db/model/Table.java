@@ -73,10 +73,18 @@ public class Table {
 
 	public void setClassName(String customClassName) {
 		this.customClassName = customClassName;
+
 	}
 
 	public String getClassName() {
-		String defaultValue = StringHelper.makeAllWordFirstLetterUpperCase(StringHelper.toUnderscoreName(getSqlName()));
+		String defaultValue;
+		// TODO melone 专用
+		if (getSqlName().startsWith("t_") || getSqlName().startsWith("T_")) {
+			String sqlName = getSqlName().substring(2);
+			defaultValue = StringHelper.makeAllWordFirstLetterUpperCase(StringHelper.toUnderscoreName(sqlName));
+		} else {
+			defaultValue = StringHelper.makeAllWordFirstLetterUpperCase(StringHelper.toUnderscoreName(getSqlName()));
+		}
 		return StringHelper.emptyIf(customClassName, defaultValue);
 	}
 
