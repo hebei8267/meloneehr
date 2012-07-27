@@ -93,11 +93,19 @@ public class StoreTypeManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateStoreType(StoreType storeType) throws IllegalAccessException, InvocationTargetException {
+
 		StoreType _dbStoreType = storeTypeJpaDao.findOne(storeType.getUuid());
 		if (null == _dbStoreType) {
 			// 仓库类型不存在!
 			throw new ServiceException("ERR_MSG_CFG_002");
 		}
+
+		StoreType _dbStoreType2 = findByName(storeType.getName());
+		// 该名称(仓库类型)已存在!
+		if (null != _dbStoreType2 && storeType.getUuid() != _dbStoreType2.getUuid()) {
+			throw new ServiceException("ERR_MSG_CFG_001");
+		}
+
 		_dbStoreType.setName(storeType.getName());
 		_dbStoreType.setDescTxt(storeType.getDescTxt());
 		storeTypeJpaDao.save(_dbStoreType);

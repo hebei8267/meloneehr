@@ -23,6 +23,12 @@ public class StoreTypeController extends BaseController {
 	@Autowired
 	private StoreTypeManager storeTypeManager;
 
+	/**
+	 * 仓库类型列表展现
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = { "list", "" })
 	public String storeTypeList_Action(Model model) {
 		List<StoreType> storeTypeList = storeTypeManager.getAllStoreType();
@@ -32,6 +38,12 @@ public class StoreTypeController extends BaseController {
 		return "syscfg/storeTypeList";
 	}
 
+	/**
+	 * 仓库类型编辑
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "edit/{id}")
 	public String editStoreType_Action(@PathVariable("id") Integer id, Model model) {
 
@@ -45,6 +57,13 @@ public class StoreTypeController extends BaseController {
 
 	}
 
+	/**
+	 * 删除仓库类型
+	 * 
+	 * @param ids
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "del")
 	public String delStoreType_Action(@RequestParam("uuids") String ids, Model model) {
 		String[] idArray = ids.split(",");
@@ -55,6 +74,12 @@ public class StoreTypeController extends BaseController {
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 	}
 
+	/**
+	 * 新增仓库类型初始化
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "new")
 	public String newStoreType_Action(Model model) {
 		blankStoreType(model);
@@ -67,6 +92,15 @@ public class StoreTypeController extends BaseController {
 		model.addAttribute("storeType", storeType);
 	}
 
+	/**
+	 * 新增/修改 仓库类型
+	 * 
+	 * @param storeType
+	 * @param model
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
 	@RequestMapping(value = "save")
 	public String saveStoreType_Action(@ModelAttribute("storeType") StoreType storeType, Model model)
 			throws IllegalAccessException, InvocationTargetException {
