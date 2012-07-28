@@ -81,7 +81,7 @@ public class StoreTypeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String newStoreType_Action(Model model) {
+	public String initStoreType_Action(Model model) {
 		blankStoreType(model);
 
 		return "syscfg/storeTypeForm";
