@@ -28,7 +28,7 @@ public class ${className}Controller extends BaseController {
 	private ${className}Manager ${classNameLower}Manager;
 	
 	/**
-	 * ${table.tableAlias}列表展现
+	 * 取得${table.tableAlias}信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -43,7 +43,7 @@ public class ${className}Controller extends BaseController {
 	}
 	
 	/**
-	 * ${table.tableAlias}编辑
+	 * 编辑${table.tableAlias}信息
 	 * 
 	 * @param model
 	 * @return
@@ -62,7 +62,7 @@ public class ${className}Controller extends BaseController {
 	}
 
 	/**
-	 * 删除${table.tableAlias}
+	 * 删除${table.tableAlias}信息
 	 * 
 	 * @param ids
 	 * @param model
@@ -86,14 +86,11 @@ public class ${className}Controller extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String init${className}_Action(Model model) {
-		blank${className}(model);
-
-		return "${classNameLower}Form";
-	}
-
-	private void blank${className}(Model model) {
+		// TODO 修改点
 		${className} ${classNameLower} = new ${className}();
 		model.addAttribute("${classNameLower}", ${classNameLower});
+		
+		return "${classNameLower}Form";
 	}
 
 	/**
@@ -110,15 +107,7 @@ public class ${className}Controller extends BaseController {
 			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == ${classNameLower}.getUuid()) {// 新增操作
-
-			try {
-				${classNameLower}Manager.addNew${className}(${classNameLower});
-			} catch (ServiceException ex) {
-				blank${className}(model);
-				// 添加错误消息
-				addInfoMsg(model, ex.getMessage());
-				return "${classNameLower}Form";
-			}
+			${classNameLower}Manager.addNew${className}(${classNameLower});
 		} else {// 修改操作
 			try {
 				${classNameLower}Manager.update${className}(${classNameLower});
