@@ -1,10 +1,14 @@
+<#include "/macro.include"/>
+<#include "/java_copyright.include">
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
-<c:set var="ctx" value="\$\{pageContext.request.contextPath\}" />
-<c:set var="sc_ctx">\$\{ctx\}/sc</c:set>
-<c:set var="pop_sc_ctx">\$\{ctx\}/popsc</c:set>
+<c:set var="ctx" value="${r"${pageContext.request.contextPath}"}" />
+<c:set var="sc_ctx">${r"${"}ctx}/sc</c:set>
+<c:set var="pop_sc_ctx">${r"${"}ctx}/popsc</c:set>
 <html>
 	<head>
 		<script>
@@ -36,7 +40,8 @@
 				// 新增按钮点击
 				//--------------------------------------------------------------------
 				$("#newBtn").click(function() {
-					$(location).attr('href', '\$\{sc_ctx\}/\$\{classNameLower\}/new');
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					$(location).attr('href', '${r"${sc_ctx}"}/${classNameLower}/new');
 				});
 				
 				//--------------------------------------------------------------------
@@ -53,7 +58,8 @@
 						uuids = uuids.substring(0, uuids.length - 1);
 					}
 					$("#uuids").val(uuids);
-					$("#listForm").attr("action", "\$\{sc_ctx\}/\$\{classNameLower\}/del");
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					$("#listForm").attr("action", "${r"${sc_ctx}"}/${classNameLower}/del");
 		        	$("#listForm").submit();
 				});
 			});
@@ -98,7 +104,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="\$\{empty \$\{classNameLower\}List\}" >
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					<c:if test="${r"${empty"} ${classNameLower}List}" >
 					<tfoot>
 						<tr>
 							<td colspan="3" class="rounded-foot-left"><em>无记录</em></td>
@@ -106,10 +113,11 @@
 						</tr>
 					</tfoot>
 					</c:if>
-					<c:forEach items="\$\{\$\{classNameLower\}List\}" var="storeType">
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					<c:forEach items="${r"${"}${classNameLower}List}" var="${classNameLower}">
 					<tr>
 						<td class="first">
-							<input type="checkbox" name="uuid" value="\$\{\$\{classNameLower\}.uuid\}"></input>
+							<input type="checkbox" name="uuid" value="${r"${"}${classNameLower}.uuid}"></input>
 						</td>
 						<#list table.columns as column>
 						<td>
@@ -117,7 +125,8 @@
 						</td>
 						</#list>
 						<td align="center">
-							<a href="\$\{sc_ctx\}/\$\{classNameLower\}/edit/\$\{\$\{classNameLower\}.uuid\}">编辑</a>
+							// ？？？？？？？？？？？？？？？？？？？？？？
+							<a href="${r"${"}sc_ctx\}/${classNameLower}/edit/{${classNameLower}.uuid}">编辑</a>
 						</td>
 					</tr>
 					</c:forEach>

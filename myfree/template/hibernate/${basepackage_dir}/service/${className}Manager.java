@@ -26,7 +26,6 @@ public class ${className}Manager {
 	 * 
 	 * @return ${table.tableAlias}信息列表
 	 */
-	@SuppressWarnings("unchecked")
 	public List<${className}> getAll${className}() {
 		return (List<${className}>) ${classNameLower}JpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
@@ -37,7 +36,7 @@ public class ${className}Manager {
 	 * @param uuid ${table.tableAlias}编号
 	 * @return ${table.tableAlias}信息
 	 */
-	public ${className} ge${className}ByUuid(Integer uuid) {
+	public ${className} get${className}ByUuid(Integer uuid) {
 		return ${classNameLower}JpaDao.findOne(uuid);
 	}
 	
@@ -80,9 +79,9 @@ public class ${className}Manager {
 	public void update${className}(${className} ${classNameLower}) throws IllegalAccessException, InvocationTargetException {
 		//----------------------------------------------------------------------------
 		// TODO 修改开始
-		${className} _db${className} = storeTypeJpaDao.findOne(storeType.getUuid());
+		${className} _db${className} = ${classNameLower}JpaDao.findOne(${classNameLower}.getUuid());
 		if (null == _db${className}) {
-			// 仓库类型不存在!
+			// ${table.tableAlias}不存在!
 			throw new ServiceException("?????????????????");
 		}
 
