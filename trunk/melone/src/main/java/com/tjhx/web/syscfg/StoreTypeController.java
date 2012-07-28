@@ -68,7 +68,7 @@ public class StoreTypeController extends BaseController {
 	public String delStoreType_Action(@RequestParam("uuids") String ids, Model model) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
-			storeTypeManager.delStoreTypeByUuid(idArray[i]);
+			storeTypeManager.delStoreTypeByUuid(Integer.parseInt(idArray[i]));
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
@@ -108,7 +108,7 @@ public class StoreTypeController extends BaseController {
 		if (null == storeType.getUuid()) {// 新增操作
 
 			try {
-				storeTypeManager.saveNewStoreType(storeType);
+				storeTypeManager.addNewStoreType(storeType);
 			} catch (ServiceException ex) {
 				blankStoreType(model);
 				// 添加错误消息
@@ -121,8 +121,6 @@ public class StoreTypeController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
-				// 恢复初始状态
-				return editStoreType_Action(storeType.getUuid(), model);
 			}
 		}
 
