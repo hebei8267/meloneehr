@@ -58,29 +58,12 @@ public class StoreTypeManager {
 	}
 
 	/**
-	 * 取得仓库类型信息
-	 * 
-	 * @param name 仓库类型名称
-	 * @return 仓库类型信息
-	 */
-	public StoreType findByName(String name) {
-		return storeTypeJpaDao.findByName(name);
-	}
-
-	/**
 	 * 添加新仓库类型信息
 	 * 
 	 * @param storeType 仓库类型信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewStoreType(StoreType storeType) {
-
-		StoreType _dbStoreType = findByName(storeType.getName());
-		// 该名称(仓库类型)已存在!
-		if (null != _dbStoreType) {
-			throw new ServiceException("ERR_MSG_CFG_001");
-		}
-
 		storeTypeJpaDao.save(storeType);
 	}
 
@@ -97,11 +80,14 @@ public class StoreTypeManager {
 		StoreType _dbStoreType = storeTypeJpaDao.findOne(storeType.getUuid());
 		if (null == _dbStoreType) {
 			// 仓库类型不存在!
-			throw new ServiceException("ERR_MSG_CFG_002");
+			throw new ServiceException("ERR_MSG_CFG_001");
 		}
 
+		// 仓库类型名称-汉字
 		_dbStoreType.setName(storeType.getName());
+		// 仓库类型详细描述
 		_dbStoreType.setDescTxt(storeType.getDescTxt());
+
 		storeTypeJpaDao.save(_dbStoreType);
 	}
 
