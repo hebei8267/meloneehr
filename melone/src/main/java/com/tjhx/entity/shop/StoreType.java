@@ -26,7 +26,7 @@ public class StoreType extends IdEntity {
 	 * 
 	 * @return 仓库类型名称-汉字
 	 */
-	@Column(nullable = false, length = 32, unique = true)
+	@Column(nullable = false, length = 32)
 	public String getName() {
 		return name;
 	}
