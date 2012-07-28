@@ -90,12 +90,6 @@ public class ${className}Manager {
 			throw new ServiceException("?????????????????");
 		}
 
-		${className} _db${className}2 = findByName(${classNameLower}.getName());
-		// 该名称(仓库类型)已存在!
-		if (null != _db${className}2 && ${classNameLower}.getUuid() != _db${className}2.getUuid()) {
-			throw new ServiceException("???????????????????");
-		}
-
 		_db${className}.setName(${classNameLower}.getName());
 		_db${className}.setDescTxt(${classNameLower}.getDescTxt());
 		
