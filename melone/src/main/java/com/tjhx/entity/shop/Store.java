@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -34,6 +35,8 @@ public class Store extends IdEntity {
 	private String descTxt;
 	/** 仓库所属类型 */
 	private StoreType storeType;
+	/** 仓库所属类型对象唯一标识 */
+	private Integer storeTypeUuid;
 
 	/**
 	 * 取得仓库编号
@@ -147,6 +150,25 @@ public class Store extends IdEntity {
 	 */
 	public void setStoreType(StoreType storeType) {
 		this.storeType = storeType;
+	}
+
+	/**
+	 * 取得仓库所属类型对象唯一标识
+	 * 
+	 * @return 仓库所属类型对象唯一标识
+	 */
+	@Transient
+	public Integer getStoreTypeUuid() {
+		return storeTypeUuid;
+	}
+
+	/**
+	 * 设置仓库所属类型对象唯一标识
+	 * 
+	 * @param storeTypeUuid 仓库所属类型对象唯一标识
+	 */
+	public void setStoreTypeUuid(Integer storeTypeUuid) {
+		this.storeTypeUuid = storeTypeUuid;
 	}
 
 }

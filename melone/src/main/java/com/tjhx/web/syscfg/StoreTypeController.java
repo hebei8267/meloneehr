@@ -82,14 +82,10 @@ public class StoreTypeController extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String initStoreType_Action(Model model) {
-		blankStoreType(model);
-
-		return "syscfg/storeTypeForm";
-	}
-
-	private void blankStoreType(Model model) {
 		StoreType storeType = new StoreType();
 		model.addAttribute("storeType", storeType);
+
+		return "syscfg/storeTypeForm";
 	}
 
 	/**
@@ -106,15 +102,7 @@ public class StoreTypeController extends BaseController {
 			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == storeType.getUuid()) {// 新增操作
-
-			try {
-				storeTypeManager.addNewStoreType(storeType);
-			} catch (ServiceException ex) {
-				blankStoreType(model);
-				// 添加错误消息
-				addInfoMsg(model, ex.getMessage());
-				return "syscfg/storeTypeForm";
-			}
+			storeTypeManager.addNewStoreType(storeType);
 		} else {// 修改操作
 			try {
 				storeTypeManager.updateStoreType(storeType);

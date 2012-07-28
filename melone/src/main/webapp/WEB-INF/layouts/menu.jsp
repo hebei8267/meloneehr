@@ -33,7 +33,7 @@
 				<li>
 					<a href="#">门店相关</a>
 					<ul>
-						<a href="#">仓库类型</a>
+						<a href="${sc_ctx}/syscfg/storeType/list">仓库类型</a>
 						<li>
 							<a href="#">仓库</a>
 						</li>
