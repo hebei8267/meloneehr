@@ -12,10 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tjhx.dao.shop.StoreTypeJpaDao;
-import com.tjhx.entity.shop.StoreType;
-import com.tjhx.service.ServiceException;
-
 import ${basepackage}.dao.${className}JpaDao;
 import ${basepackage}.entity.${className};
 import ${basepackage}.service.ServiceException;
