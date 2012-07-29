@@ -130,8 +130,15 @@ public class ShopController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
-				// 新增门店初始化
-				return initShop_Action(model);
+
+				// 新增门店初始化-清空重复门店编号
+				shop.setId(null);
+				model.addAttribute("shop", shop);
+
+				// 初始化仓库信息下拉菜单
+				initStoreSelect(model);
+
+				return "syscfg/shopForm";
 			}
 		} else {// 修改操作
 			try {
