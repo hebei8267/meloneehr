@@ -5,7 +5,7 @@ package com.tjhx.common.hibernate.memcached;
 //import org.hibernate.cache.CacheProvider;
 
 //http://code.google.com/p/hibernate-memcached/source/browse/trunk/?r=109#trunk%2Fhibernate-memcached
-	
+//  利用Memcached作为Hibernate的二级缓存
 //	http://masterkey.iteye.com/blog/186304
 public class MemcachedCacheProvider// implements CacheProvider
 {
