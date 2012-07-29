@@ -17,6 +17,9 @@
 					rules: {
 						// ？？？？？？？？？？？？？？？？？？？？？？
 						// 添加表单效验
+						delBtn: {
+							requiredSelect: 'uuid'
+						}
 					}
 				});
 				
