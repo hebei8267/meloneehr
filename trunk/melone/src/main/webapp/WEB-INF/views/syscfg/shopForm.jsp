@@ -19,12 +19,15 @@
 							required: true,
 							maxlength: 32
 						},
-						storeTypeUuid: {
+						storeId: {
 							required: true
 						},
 						telNum: {
 							required: true,
 							isPhone: true
+						},
+						faxNum: {
+							isTel: true
 						},
 						addr: {
 							required: true,
@@ -39,11 +42,11 @@
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
-					$(location).attr('href', '${sc_ctx}/syscfg/store/list');
+					$(location).attr('href', '${sc_ctx}/syscfg/shop/list');
 				});
 				
 				$("#saveBtn").click(function() {
-					$("#inputForm").attr("action", "${sc_ctx}/syscfg/store/save");
+					$("#inputForm").attr("action", "${sc_ctx}/syscfg/shop/save");
 		        	$("#inputForm").submit();
 				});
 			});			
@@ -56,43 +59,43 @@
 		</page:applyDecorator>
 		
 		<div class="grid_16 titleNav">
-			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库</a>&#8711; 
-			<c:if test="${empty store.uuid}" >
+			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>门店</a>&#8711; 
+			<c:if test="${empty shop.uuid}" >
 			新增
 			</c:if>
-			<c:if test="${!empty store.uuid}" >
+			<c:if test="${!empty shop.uuid}" >
 			编辑
 			</c:if>
 			</h2>
 		</div>
 		<div class="clear"></div>
 		
-		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="store">
+		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="shop">
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">仓库编号:</td>
+					<td class="item_name" width="100px">门店编号:</td>
 					<td class="item">
-					<c:if test="${empty store.uuid}" >
+					<c:if test="${empty shop.uuid}" >
 						<form:input path="id" class="text ui-widget-content ui-corner-all"/>
 					</c:if>
-					<c:if test="${!empty store.uuid}" >
-						&nbsp;${store.id}
+					<c:if test="${!empty shop.uuid}" >
+						&nbsp;${shop.id}
 					</c:if>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">仓库名称:</td>
+					<td class="item_name" width="100px">门店名称:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">仓库类型:</td>
+					<td class="item_name" width="100px">仓库信息:</td>
 					<td class="item">
-						<form:select path="storeTypeUuid" class="text ui-widget-content ui-corner-all">
+						<form:select path="storeId" class="text ui-widget-content ui-corner-all">
 							<form:option value="" label="请选择......"/>
-							<form:options items="${storeTypeList}" itemValue="uuid"  itemLabel="name"/>
+							<form:options items="${storeList}" itemValue="id"  itemLabel="name"/>
 						</form:select>
 					</td>
 				</tr>
@@ -103,7 +106,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">仓库地址:</td>
+					<td class="item_name" width="100px">传真号码:</td>
+					<td class="item">
+						<form:input path="faxNum" class="text ui-widget-content ui-corner-all"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">门店地址:</td>
 					<td class="item">
 						<form:input path="addr" class="text ui-widget-content ui-corner-all"/>
 					</td>

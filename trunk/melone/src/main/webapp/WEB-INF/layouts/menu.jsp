@@ -38,7 +38,7 @@
 							<a href="${sc_ctx}/syscfg/store/list">仓库</a>
 						</li>
 						<li>
-							<a href="#">门店</a>
+							<a href="${sc_ctx}/syscfg/shop/list">门店</a>
 						</li>
 					</ul>
 				</li>
