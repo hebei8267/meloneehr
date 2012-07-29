@@ -125,7 +125,7 @@
 						</#list>
 						<td align="center">
 							// ？？？？？？？？？？？？？？？？？？？？？？
-							<a href="${r"${"}sc_ctx}/${classNameLower}/edit/{${classNameLower}.uuid}">编辑</a>
+							<a href="${r"${"}sc_ctx}/${classNameLower}/edit/${r"${"}${classNameLower}.uuid}">编辑</a>
 						</td>
 					</tr>
 					</c:forEach>
