@@ -64,7 +64,7 @@ public class ShopManager {
 		}
 
 		// 设置仓库信息
-		Store _dbStore = storeJpaDao.findById(shop.getId());
+		Store _dbStore = storeJpaDao.findById(shop.getStoreId());
 		shop.setStore(_dbStore);
 
 		shopJpaDao.save(shop);
@@ -97,7 +97,7 @@ public class ShopManager {
 		// 门店详细描述
 		_dbShop.setDescTxt(shop.getDescTxt());
 		// 仓库信息
-		Store _dbStore = storeJpaDao.findById(shop.getId());
+		Store _dbStore = storeJpaDao.findById(shop.getStoreId());
 		_dbShop.setStore(_dbStore);
 
 		shopJpaDao.save(_dbShop);

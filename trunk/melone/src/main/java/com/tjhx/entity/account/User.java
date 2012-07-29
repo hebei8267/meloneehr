@@ -217,7 +217,7 @@ public class User extends IdEntity {
 	 * 
 	 * @param shopId 用户所属门店编号
 	 */
-	protected void setShopId(String shopId) {
+	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
 

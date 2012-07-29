@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -182,6 +183,9 @@ public class Shop extends IdEntity {
 	 */
 	@Column(length = 16)
 	public String getStoreId() {
+		if (null != store) {
+			return store.getId();
+		}
 		return storeId;
 	}
 
@@ -190,8 +194,21 @@ public class Shop extends IdEntity {
 	 * 
 	 * @param storeId 仓库编号
 	 */
-	protected void setStoreId(String storeId) {
+	public void setStoreId(String storeId) {
 		this.storeId = storeId;
+	}
+
+	/**
+	 * 取得仓库名称
+	 * 
+	 * @return 仓库名称
+	 */
+	@Transient
+	public String getStoreName() {
+		if (null != store) {
+			return store.getName();
+		}
+		return null;
 	}
 
 }

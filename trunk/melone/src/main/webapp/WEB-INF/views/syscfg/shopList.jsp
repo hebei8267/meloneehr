@@ -11,8 +11,9 @@
 			$().ready(function() {
 				$("#listForm").validate({
 					rules: {
-						// ？？？？？？？？？？？？？？？？？？？？？？
-						// 添加表单效验
+						delBtn: {
+							requiredSelect: 'uuid'
+						}
 					}
 				});
 				
@@ -64,7 +65,6 @@
 		<page:applyDecorator name="menu" />
 		
 		<div class="grid_16 titleNav">
-			// ？？？？？？？？？？？？？？？？？？？？？？
 			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>门店</a></h2>
 		</div>
 		<div class="clear"></div>
@@ -91,9 +91,12 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						// ？？？？？？？？？？？？？？？？？？？？？？
-						<th width="150">仓库类型名称</th>
-						<th width="420">详细描述</th>
+						<th width="70">门店编号</th>
+						<th width="70">门店名称</th>
+						<th width="70">电话号码</th>
+						<th width="70">传真号码</th>
+						<th width="90">门店地址</th>
+						<th width="150">仓库信息</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
@@ -106,53 +109,28 @@
 						</tr>
 					</tfoot>
 					</c:if>
-					// ？？？？？？？？？？？？？？？？？？？？？？
 					<c:forEach items="${shopList}" var="shop">
 					<tr>
 						<td class="first">
 							<input type="checkbox" name="uuid" value="${shop.uuid}"></input>
 						</td>
 						<td>
-							uuid&nbsp;
+							${shop.id}&nbsp;
 						</td>
 						<td>
-							createDate&nbsp;
+							${shop.name}&nbsp;
 						</td>
 						<td>
-							createUserId&nbsp;
+							${shop.telNum}&nbsp;
 						</td>
 						<td>
-							updateDate&nbsp;
+							${shop.faxNum}&nbsp;
 						</td>
 						<td>
-							updateUserId&nbsp;
-						</td>
+							${shop.addr}&nbsp;
+						</td>						
 						<td>
-							version&nbsp;
-						</td>
-						<td>
-							addr&nbsp;
-						</td>
-						<td>
-							descTxt&nbsp;
-						</td>
-						<td>
-							faxNum&nbsp;
-						</td>
-						<td>
-							id&nbsp;
-						</td>
-						<td>
-							name&nbsp;
-						</td>
-						<td>
-							storeId&nbsp;
-						</td>
-						<td>
-							telNum&nbsp;
-						</td>
-						<td>
-							storeUuid&nbsp;
+							${shop.storeName}&nbsp;
 						</td>
 						<td align="center">
 							<a href="${sc_ctx}/syscfg/shop/edit/${shop.uuid}">编辑</a>
