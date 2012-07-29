@@ -113,7 +113,7 @@ public class StoreController extends BaseController {
 	/**
 	 * 新增/修改 仓库信息
 	 * 
-	 * @param store
+	 * @param store 仓库
 	 * @param model
 	 * @return
 	 * @throws IllegalAccessException
