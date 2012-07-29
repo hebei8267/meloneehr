@@ -120,7 +120,7 @@
 						</td>
 						<#list table.columns as column>
 						<td>
-							${column.columnNameLower}&nbsp;
+							${r"${"}${classNameLower}.${column.columnNameLower}}&nbsp;
 						</td>
 						</#list>
 						<td align="center">
