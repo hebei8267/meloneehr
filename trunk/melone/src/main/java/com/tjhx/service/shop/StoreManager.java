@@ -52,7 +52,7 @@ public class StoreManager {
 	/**
 	 * 添加新仓库信息
 	 * 
-	 * @param store Store信息
+	 * @param store 仓库信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewStore(Store store) {
@@ -70,9 +70,9 @@ public class StoreManager {
 	}
 
 	/**
-	 * 更新Store信息
+	 * 更新仓库信息
 	 * 
-	 * @param store Store信息
+	 * @param store 仓库信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
