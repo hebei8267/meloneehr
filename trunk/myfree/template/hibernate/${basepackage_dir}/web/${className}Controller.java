@@ -94,7 +94,7 @@ public class ${className}Controller extends BaseController {
 	}
 
 	/**
-	 * 新增/修改 ${table.tableAlias}
+	 * 新增/修改 ${table.tableAlias}信息
 	 * 
 	 * @param ${classNameLower}
 	 * @param model
