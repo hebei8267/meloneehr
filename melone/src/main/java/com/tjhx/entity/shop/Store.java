@@ -159,6 +159,9 @@ public class Store extends IdEntity {
 	 */
 	@Transient
 	public Integer getStoreTypeUuid() {
+		if (null != storeType) {
+			return storeType.getUuid();
+		}
 		return storeTypeUuid;
 	}
 
