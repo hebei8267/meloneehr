@@ -10,8 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.tjhx.web.aspect.ControllerAdvice;
 
 public class SecuritypFilter implements Filter {
+	private static Logger logger = LoggerFactory.getLogger(ControllerAdvice.class);
 
 	@Override
 	public void destroy() {
@@ -19,13 +24,14 @@ public class SecuritypFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest _request, ServletResponse _response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest _request, ServletResponse _response, FilterChain chain) throws IOException,
+			ServletException {
 		HttpServletRequest request = (HttpServletRequest) _request;
-		
-		//System.out.println(request.getContextPath());
-		System.out.println(request.getRequestURI());
+
+		logger.debug(request.getRequestURI());
+
 		chain.doFilter(request, _response);
-			
+
 	}
 
 	@Override
@@ -33,5 +39,4 @@ public class SecuritypFilter implements Filter {
 
 	}
 
-	
 }
