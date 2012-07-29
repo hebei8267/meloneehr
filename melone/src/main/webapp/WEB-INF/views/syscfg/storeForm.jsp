@@ -27,7 +27,6 @@
 							isPhone: true
 						},
 						addr: {
-							required: true,
 							maxlength: 255
 						},
 						descTxt: {
