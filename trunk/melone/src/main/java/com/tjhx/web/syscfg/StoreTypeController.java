@@ -24,7 +24,7 @@ public class StoreTypeController extends BaseController {
 	private StoreTypeManager storeTypeManager;
 
 	/**
-	 * 仓库类型列表展现
+	 * 取得仓库类型信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -39,7 +39,7 @@ public class StoreTypeController extends BaseController {
 	}
 
 	/**
-	 * 仓库类型编辑
+	 * 编辑仓库类型信息
 	 * 
 	 * @param model
 	 * @return
@@ -58,7 +58,7 @@ public class StoreTypeController extends BaseController {
 	}
 
 	/**
-	 * 删除仓库类型
+	 * 删除仓库类型信息
 	 * 
 	 * @param ids
 	 * @param model

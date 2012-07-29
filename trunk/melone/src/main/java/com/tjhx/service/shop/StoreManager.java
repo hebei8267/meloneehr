@@ -35,18 +35,8 @@ public class StoreManager {
 	 * @param uuid 仓库编号
 	 * @return 仓库信息
 	 */
-	public Store geStoreByUuid(Integer uuid) {
+	public Store getStoreByUuid(Integer uuid) {
 		return storeJpaDao.findOne(uuid);
-	}
-
-	/**
-	 * 根据名称取得仓库信息
-	 * 
-	 * @param name 仓库名称
-	 * @return 仓库信息
-	 */
-	public Store getStoreByName(String name) {
-		return storeJpaDao.findByName(name);
 	}
 
 	/**
@@ -66,7 +56,14 @@ public class StoreManager {
 	 */
 	@Transactional(readOnly = false)
 	public void addNewStore(Store store) {
-		// 仓库所属类型
+
+		Store _dbStore = storeJpaDao.findById(store.getId());
+		// 该仓库编号已存在!
+		if (null != _dbStore) {
+			throw new ServiceException("ERR_MSG_CFG_003");
+		}
+
+		// 设置仓库所属类型
 		StoreType _dbStoreType = storeTypeJpaDao.findOne(store.getStoreTypeUuid());
 		store.setStoreType(_dbStoreType);
 		storeJpaDao.save(store);

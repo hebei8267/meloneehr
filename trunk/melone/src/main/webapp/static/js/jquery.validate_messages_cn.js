@@ -23,6 +23,29 @@ jQuery.extend(jQuery.validator.messages, {
 		requiredSelect: "请选择至少一个操作对象"
 });
 
+// 列表删除，必选
 $.validator.methods.requiredSelect = function(value, element, param) {
 	return $("input[name='"+ param +"']:checked").length > 0;
 };
+
+//手机号码验证       
+jQuery.validator.addMethod("isMobile", function(value, element) {       
+	var length = value.length;   
+	var mobile = /^(\d{11})$/;
+	return this.optional(element) || (mobile.test(value));       
+}, "请输入正确的手机号码");       
+    
+// 电话号码验证       
+jQuery.validator.addMethod("isTel", function(value, element) {
+	//电话号码格式010-12345678
+	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;  
+	return this.optional(element) || (tel.test(value));       
+}, "请输入正确的电话号码");   
+  
+// 联系电话(手机/电话皆可)验证   
+jQuery.validator.addMethod("isPhone", function(value,element) {   
+	var length = value.length;
+	var mobile = /^(\d{11})$/;
+	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
+	return this.optional(element) || (tel.test(value) || (mobile.test(value)));   
+}, "请输入正确的电话号码");   
