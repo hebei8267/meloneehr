@@ -129,8 +129,15 @@ public class StoreController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
-				// 新增仓库初始化
-				return initStore_Action(model);
+
+				// 新增仓库初始化-清空重复仓库编号
+				store.setId(null);
+				model.addAttribute("store", store);
+
+				// 初始化仓库类型信息下拉菜单
+				initStoreTypeSelect(model);
+
+				return "syscfg/storeForm";
 			}
 		} else {// 修改操作
 			try {
