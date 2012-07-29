@@ -94,8 +94,8 @@
 						<th width="90">仓库编号</th>
 						<th width="90">仓库名称</th>
 						<th width="90">电话号码</th>
-						<th width="150">地址</th>
-						<th width="70" class="rounded-right">操作</th>
+						<th width="270">地址</th>
+						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
 				<tbody>

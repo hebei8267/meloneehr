@@ -91,8 +91,8 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						<th width="150">仓库类型名称</th>
-						<th width="420">详细描述</th>
+						<th width="90">仓库类型名称</th>
+						<th width="490">详细描述</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>

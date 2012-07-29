@@ -91,12 +91,12 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						<th width="70">门店编号</th>
-						<th width="70">门店名称</th>
-						<th width="70">电话号码</th>
-						<th width="70">传真号码</th>
-						<th width="90">门店地址</th>
-						<th width="150">仓库信息</th>
+						<th width="60">门店编号</th>
+						<th width="60">门店名称</th>
+						<th width="60">电话号码</th>
+						<th width="60">传真号码</th>
+						<th width="150">门店地址</th>
+						<th width="120">仓库信息</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
