@@ -57,6 +57,17 @@
 		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="${classNameLower}">
 			<form:hidden path="uuid"/>
 			<table>
+				<tr>
+					<td class="item_name" width="100px">???????编号:</td>
+					<td class="item">
+					<c:if test="${r"${"}empty ${classNameLower}.uuid}" >
+						<form:input path="id" class="text ui-widget-content ui-corner-all"/>
+					</c:if>
+					<c:if test="${r"${"}!empty ${classNameLower}.uuid}" >
+						&nbsp;${r"${"}${classNameLower}.id}
+					</c:if>
+					</td>
+				</tr>
 				<#list table.columns as column>
 				<tr>
 					<td class="item_name" width="100px">${column.remarks}:</td>

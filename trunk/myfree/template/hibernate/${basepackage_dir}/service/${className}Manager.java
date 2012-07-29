@@ -59,7 +59,7 @@ public class ${className}Manager {
 	public void addNew${className}(${className} ${classNameLower}) {
 		//----------------------------------------------------------------------------
 		// TODO 修改开始
-		${className} _db${className} = findByName(storeType.getName());
+		${className} _db${className} = findByName(${classNameLower}.getName());
 		// 该${table.tableAlias}已存在!
 		if (null != _db${className}) {
 			throw new ServiceException("?????????????????");
