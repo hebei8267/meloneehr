@@ -6,9 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
-<c:set var="ctx" value="\$\{pageContext.request.contextPath\}" />
-<c:set var="sc_ctx">\$\{ctx\}/sc</c:set>
-<c:set var="pop_sc_ctx">\$\{ctx\}/popsc</c:set>
+<c:set var="ctx" value="${r"${pageContext.request.contextPath}"}" />
+<c:set var="sc_ctx">${r"${"}ctx}/sc</c:set>
+<c:set var="pop_sc_ctx">${r"${"}ctx}/popsc</c:set>
 <html>
 	<head>
 		<script>		
@@ -23,11 +23,13 @@
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
-					$(location).attr('href', '\$\{sc_ctx\}/\$\{classNameLower\}/list');
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					$(location).attr('href', '${r"$"}{sc_ctx}/${classNameLower}/list');
 				});
 				
 				$("#saveBtn").click(function() {
-					$("#inputForm").attr("action", "\$\{sc_ctx\}/\$\{classNameLower\}/save");
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					$("#inputForm").attr("action", "${r"$"}{sc_ctx}/${classNameLower}/save");
 		        	$("#inputForm").submit();
 				});
 			});			
@@ -42,10 +44,10 @@
 		<div class="grid_16 titleNav">
 			// ？？？？？？？？？？？？？？？？？？？？？？
 			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711; 
-			<c:if test="\$\{empty ${classNameLower}.uuid\}" >
+			<c:if test="${r"$"}{empty ${classNameLower}.uuid}" >
 			新增
 			</c:if>
-			<c:if test="\$\{!empty ${classNameLower}.uuid\}" >
+			<c:if test="${r"$"}{!empty ${classNameLower}.uuid}" >
 			编辑
 			</c:if>
 			</h2>
