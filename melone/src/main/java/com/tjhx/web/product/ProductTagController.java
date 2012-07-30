@@ -1,5 +1,6 @@
 package com.tjhx.web.product;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -29,8 +30,22 @@ public class ProductTagController extends BaseController {
 	 * @param model
 	 * @return
 	 */
+	//TODO ?????????????
 	@RequestMapping(value = { "list", "" })
-	public String productTagList_Action(Model model) {
+	public String productTagList_Action(Model model,
+			@RequestParam(value = "__SESSION_ERR_MSG_LIST", required = false) String msg) {
+	
+		String str=null;
+		try {if(null!=msg){
+			str = new String(msg.getBytes("ISO8859_1"),"UTF-8");
+		}
+		
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("######################=" + msg);
+		System.out.println("######################=" + str);
 		List<ProductTag> productTagList = productTagManager.getAllProductTag();
 
 		model.addAttribute("productTagList", productTagList);

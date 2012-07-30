@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class ControllerAdvice {
 	public void inControllerLayer() {
 	}
 
-	@Around("com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()")
+	@Around(value = "com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()")
 	public Object insertMsgList(ProceedingJoinPoint callJoinPoint) throws Throwable {
 		// 连接点所在的目标对象
 		if (callJoinPoint.getTarget() instanceof BaseController) {
@@ -38,10 +39,17 @@ public class ControllerAdvice {
 		}
 		return callJoinPoint.proceed();
 	}
-
+//TODO ?????????????
 	@AfterThrowing(pointcut = "com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()", throwing = "ex")
 	public void throwException(JoinPoint joinPoint, ServiceException ex) {
 		logger.info(ex.getMessage(), ex);
 	}
 
+	@Before(value = "com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()")
+	public void aaa(JoinPoint joinPoint) {
+		Object[] args = joinPoint.getArgs();
+		for (int i = 0; i < args.length; i++) {
+			System.out.println("%%%%%%%%%%" + args[i]);
+		}
+	}
 }
