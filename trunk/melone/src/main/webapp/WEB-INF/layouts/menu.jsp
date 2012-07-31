@@ -17,7 +17,7 @@
 					<a href="#">产品相关</a>
 					<ul>
 						<li>
-							<a href="#">产品品牌</a>
+							<a href="${sc_ctx}/product/productBrand/list">产品品牌</a>
 						</li>
 						<li>
 							<a href="#">产品类型</a>

@@ -3,6 +3,8 @@ package com.tjhx.web.syscfg;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class StoreController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String storeList_Action(Model model) {
+	public String storeList_Action(Model model, HttpServletRequest request) {
 		List<Store> storeList = storeManager.getAllStore();
 
 		model.addAttribute("storeList", storeList);
@@ -49,7 +51,7 @@ public class StoreController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editStore_Action(@PathVariable("id") Integer id, Model model) {
+	public String editStore_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 
 		Store store = storeManager.getStoreByUuid(id);
 		if (null == store) {
@@ -73,7 +75,7 @@ public class StoreController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delStore_Action(@RequestParam("uuids") String ids, Model model) {
+	public String delStore_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			storeManager.delStoreByUuid(Integer.parseInt(idArray[i]));
@@ -89,7 +91,7 @@ public class StoreController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initStore_Action(Model model) {
+	public String initStore_Action(Model model, HttpServletRequest request) {
 		Store store = new Store();
 		model.addAttribute("store", store);
 
@@ -120,8 +122,8 @@ public class StoreController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveStore_Action(@ModelAttribute("store") Store store, Model model) throws IllegalAccessException,
-			InvocationTargetException {
+	public String saveStore_Action(@ModelAttribute("store") Store store, Model model, HttpServletRequest request)
+			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == store.getUuid()) {// 新增操作
 			try {

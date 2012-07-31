@@ -21,6 +21,48 @@ public class BaseController {
 	private Model _model;
 
 	/**
+	 * 添加提示消息
+	 * 
+	 * @param model 页面模型对象
+	 * @param msg 消息内容
+	 */
+	public void addTipMsgStr(Model model, String msg) {
+		if (null == tipMsgList) {
+			tipMsgList = new ArrayList<String>();
+		}
+		tipMsgList.add(msg);
+		this._model = model;
+	}
+
+	/**
+	 * 添加警告消息
+	 * 
+	 * @param model 页面模型对象
+	 * @param msg 消息内容
+	 */
+	public void addWarnMsgStr(Model model, String msg) {
+		if (null == warnMsgList) {
+			warnMsgList = new ArrayList<String>();
+		}
+		warnMsgList.add(msg);
+		this._model = model;
+	}
+
+	/**
+	 * 添加错误消息
+	 * 
+	 * @param model 页面模型对象
+	 * @param msg 消息内容
+	 */
+	public void addErrMsgStr(Model model, String msg) {
+		if (null == errMsgList) {
+			errMsgList = new ArrayList<String>();
+		}
+		errMsgList.add(msg);
+		this._model = model;
+	}
+
+	/**
 	 * 添加消息
 	 * 
 	 * @param model 页面模型对象

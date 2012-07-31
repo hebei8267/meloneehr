@@ -1,8 +1,9 @@
 package com.tjhx.web.product;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,22 +31,9 @@ public class ProductTagController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	//TODO ?????????????
 	@RequestMapping(value = { "list", "" })
-	public String productTagList_Action(Model model,
-			@RequestParam(value = "__SESSION_ERR_MSG_LIST", required = false) String msg) {
-	
-		String str=null;
-		try {if(null!=msg){
-			str = new String(msg.getBytes("ISO8859_1"),"UTF-8");
-		}
-		
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("######################=" + msg);
-		System.out.println("######################=" + str);
+	public String productTagList_Action(Model model, HttpServletRequest request) {
+
 		List<ProductTag> productTagList = productTagManager.getAllProductTag();
 
 		model.addAttribute("productTagList", productTagList);
@@ -60,7 +48,7 @@ public class ProductTagController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editProductTag_Action(@PathVariable("id") Integer id, Model model) {
+	public String editProductTag_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 
 		ProductTag productTag = productTagManager.getProductTagByUuid(id);
 		if (null == productTag) {
@@ -80,7 +68,7 @@ public class ProductTagController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delProductTag_Action(@RequestParam("uuids") String ids, Model model) {
+	public String delProductTag_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			productTagManager.delProductTagByUuid(Integer.parseInt(idArray[i]));
@@ -96,7 +84,7 @@ public class ProductTagController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initProductTag_Action(Model model) {
+	public String initProductTag_Action(Model model, HttpServletRequest request) {
 
 		ProductTag productTag = new ProductTag();
 		model.addAttribute("productTag", productTag);
@@ -114,8 +102,8 @@ public class ProductTagController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveProductTag_Action(@ModelAttribute("productTag") ProductTag productTag, Model model)
-			throws IllegalAccessException, InvocationTargetException {
+	public String saveProductTag_Action(@ModelAttribute("productTag") ProductTag productTag, Model model,
+			HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
 
 		if (null == productTag.getUuid()) {// 新增操作
 			productTagManager.addNewProductTag(productTag);
