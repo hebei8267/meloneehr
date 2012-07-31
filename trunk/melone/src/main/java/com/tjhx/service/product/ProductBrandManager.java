@@ -70,7 +70,7 @@ public class ProductBrandManager {
 		ProductBrand _dbProductBrand = productBrandJpaDao.findOne(productBrand.getUuid());
 		if (null == _dbProductBrand) {
 			// 产品品牌不存在!
-			throw new ServiceException("ERR_MSG_CFG_007");
+			throw new ServiceException("ERR_MSG_PDU_007");
 		}
 
 		_dbProductBrand.setName(productBrand.getName());
