@@ -24,11 +24,11 @@
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
-					$(location).attr('href', '${sc_ctx}/product/productBrand/list');
+					$(location).attr('href', '${sc_ctx}/product/productType/list');
 				});
 				
 				$("#saveBtn").click(function() {
-					$("#inputForm").attr("action", "${sc_ctx}/product/productBrand/save");
+					$("#inputForm").attr("action", "${sc_ctx}/product/productType/save");
 		        	$("#inputForm").submit();
 				});
 			});			
@@ -41,22 +41,22 @@
 		</page:applyDecorator>
 		
 		<div class="grid_16 titleNav">
-			<h2><a>配置管理</a>&#8711; <a>产品相关</a>&#8711; <a>产品品牌</a>&#8711;
-			<c:if test="${empty productBrand.uuid}" >
+			<h2><a>配置管理</a>&#8711; <a>产品相关</a>&#8711; <a>产品类型</a>&#8711;
+			<c:if test="${empty productType.uuid}" >
 			新增
 			</c:if>
-			<c:if test="${!empty productBrand.uuid}" >
+			<c:if test="${!empty productType.uuid}" >
 			编辑
 			</c:if>
 			</h2>
 		</div>
 		<div class="clear"></div>
 		
-		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="productBrand">
+		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="productType">
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">产品品牌名称:</td>
+					<td class="item_name" width="100px">产品类型名称:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
@@ -66,7 +66,7 @@
 					<td class="item">
 						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>
-				</tr>				
+				</tr>
 				<tr>
 					<td></td>
 					<td class="item">
