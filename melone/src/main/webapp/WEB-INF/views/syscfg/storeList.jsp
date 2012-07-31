@@ -102,7 +102,7 @@
 					<c:if test="${empty storeList}" >
 					<tfoot>
 						<tr>
-							<td colspan="3" class="rounded-foot-left"><em>无记录</em></td>
+							<td colspan="5" class="rounded-foot-left"><em>无记录</em></td>
 							<td class="rounded-foot-right"> &nbsp; </td>
 						</tr>
 					</tfoot>

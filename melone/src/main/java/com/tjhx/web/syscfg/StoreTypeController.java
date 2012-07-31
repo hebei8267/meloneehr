@@ -3,6 +3,8 @@ package com.tjhx.web.syscfg;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,7 @@ public class StoreTypeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String storeTypeList_Action(Model model) {
+	public String storeTypeList_Action(Model model, HttpServletRequest request) {
 		List<StoreType> storeTypeList = storeTypeManager.getAllStoreType();
 
 		model.addAttribute("storeTypeList", storeTypeList);
@@ -45,7 +47,7 @@ public class StoreTypeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editStoreType_Action(@PathVariable("id") Integer id, Model model) {
+	public String editStoreType_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 
 		StoreType storeType = storeTypeManager.getStoreTypeByUuid(id);
 		if (null == storeType) {
@@ -65,7 +67,7 @@ public class StoreTypeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delStoreType_Action(@RequestParam("uuids") String ids, Model model) {
+	public String delStoreType_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			storeTypeManager.delStoreTypeByUuid(Integer.parseInt(idArray[i]));
@@ -81,7 +83,7 @@ public class StoreTypeController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initStoreType_Action(Model model) {
+	public String initStoreType_Action(Model model, HttpServletRequest request) {
 		StoreType storeType = new StoreType();
 		model.addAttribute("storeType", storeType);
 
@@ -98,8 +100,8 @@ public class StoreTypeController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveStoreType_Action(@ModelAttribute("storeType") StoreType storeType, Model model)
-			throws IllegalAccessException, InvocationTargetException {
+	public String saveStoreType_Action(@ModelAttribute("storeType") StoreType storeType, Model model,
+			HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
 
 		if (null == storeType.getUuid()) {// 新增操作
 			storeTypeManager.addNewStoreType(storeType);
