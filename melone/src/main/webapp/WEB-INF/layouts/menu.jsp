@@ -20,7 +20,7 @@
 							<a href="${sc_ctx}/product/productBrand/list">产品品牌</a>
 						</li>
 						<li>
-							<a href="#">产品类型</a>
+							<a href="${sc_ctx}/product/productType/list">产品类型</a>
 						</li>
 						<li>
 							<a href="${sc_ctx}/product/productTag/list">产品标签</a>
