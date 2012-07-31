@@ -7,6 +7,8 @@ package ${basepackage}.web;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String ${classNameLower}List_Action(Model model) {
+	public String ${classNameLower}List_Action(Model model, HttpServletRequest request) {
 		List<${className}> ${classNameLower}List = ${classNameLower}Manager.getAll${className}();
 
 		model.addAttribute("${classNameLower}List", ${classNameLower}List);
@@ -49,7 +51,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String edit${className}_Action(@PathVariable("id") Integer id, Model model) {
+	public String edit${className}_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 
 		${className} ${classNameLower} = ${classNameLower}Manager.get${className}ByUuid(id);
 		if (null == ${classNameLower}) {
@@ -69,7 +71,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String del${className}_Action(@RequestParam("uuids") String ids, Model model) {
+	public String del${className}_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			${classNameLower}Manager.del${className}ByUuid(Integer.parseInt(idArray[i]));
@@ -85,7 +87,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String init${className}_Action(Model model) {
+	public String init${className}_Action(Model model, HttpServletRequest request) {
 		// TODO 修改点
 		${className} ${classNameLower} = new ${className}();
 		model.addAttribute("${classNameLower}", ${classNameLower});
@@ -103,7 +105,7 @@ public class ${className}Controller extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String save${className}_Action(@ModelAttribute("${classNameLower}") ${className} ${classNameLower}, Model model)
+	public String save${className}_Action(@ModelAttribute("${classNameLower}") ${className} ${classNameLower}, Model model, HttpServletRequest request)
 			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == ${classNameLower}.getUuid()) {// 新增操作
