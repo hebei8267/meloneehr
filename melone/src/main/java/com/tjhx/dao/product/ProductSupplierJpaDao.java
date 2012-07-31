@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.tjhx.entity.product.ProductSupplier;
 
 public interface ProductSupplierJpaDao extends PagingAndSortingRepository<ProductSupplier, Integer> {
-
+	public ProductSupplier findById(String id);
 }
