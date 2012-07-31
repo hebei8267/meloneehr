@@ -26,7 +26,7 @@
 							<a href="${sc_ctx}/product/productTag/list">产品标签</a>
 						</li>
 						<li>
-							<a href="#">供应商（产品）</a>
+							<a href="${sc_ctx}/product/productSupplier/list">供应商（产品）</a>
 						</li>
 					</ul>
 				</li>
