@@ -25,6 +25,7 @@ select {
 }
 
 textarea {
+	margin-top: 2px;
 	width: 400px;
 	max-width: 400px;
 	height: 150px;
