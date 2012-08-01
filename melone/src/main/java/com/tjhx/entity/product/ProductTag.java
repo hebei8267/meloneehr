@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 产品标签
+ * 商品标签
  */
 @Entity
 @Table(name = "T_PRODUCT_TAG")
@@ -17,15 +17,15 @@ public class ProductTag extends IdEntity {
 
 	private static final long serialVersionUID = 8979465325997835303L;
 
-	/** 产品标签名称-汉字 */
+	/** 商品标签名称-汉字 */
 	private String name;
-	/** 产品标签详细描述 */
+	/** 商品标签详细描述 */
 	private String descTxt;
 
 	/**
-	 * 取得产品标签名称-汉字
+	 * 取得商品标签名称-汉字
 	 * 
-	 * @return 产品标签名称-汉字
+	 * @return 商品标签名称-汉字
 	 */
 	@Column(nullable = false, length = 32)
 	public String getName() {
@@ -33,27 +33,27 @@ public class ProductTag extends IdEntity {
 	}
 
 	/**
-	 * 设置产品标签名称-汉字
+	 * 设置商品标签名称-汉字
 	 * 
-	 * @param name 产品标签名称-汉字
+	 * @param name 商品标签名称-汉字
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * 取得产品标签详细描述
+	 * 取得商品标签详细描述
 	 * 
-	 * @return 产品标签详细描述
+	 * @return 商品标签详细描述
 	 */
 	public String getDescTxt() {
 		return descTxt;
 	}
 
 	/**
-	 * 设置产品标签详细描述
+	 * 设置商品标签详细描述
 	 * 
-	 * @param descTxt 产品标签详细描述
+	 * @param descTxt 商品标签详细描述
 	 */
 	public void setDescTxt(String descTxt) {
 		this.descTxt = descTxt;

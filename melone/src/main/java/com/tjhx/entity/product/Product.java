@@ -12,7 +12,7 @@ import org.hibernate.annotations.NaturalId;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 产品
+ * 商品
  */
 @Entity
 @Table(name = "T_PRODUCT")
@@ -22,11 +22,11 @@ public class Product extends IdEntity {
 
 	private static final long serialVersionUID = 7536024990256617583L;
 
-	/** 产品编号 */
+	/** 商品编号 */
 	private String id;
-	/** 产品条形码 */
+	/** 商品条形码 */
 	private String barCode;
-	/** 产品名称-汉字 */
+	/** 商品名称-汉字 */
 	private String name;
 	/** 参考进价 */
 	private double refPrice;
@@ -36,21 +36,21 @@ public class Product extends IdEntity {
 	private double retailPrice;
 	/** 会员价 */
 	private double memberPrice;
-	/** 产品详细描述 */
+	/** 商品详细描述 */
 	private String descTxt;
-	/** 产品品牌 */
+	/** 商品品牌 */
 	private ProductBrand ProductBrand;
-	/** 产品类型 */
+	/** 商品类型 */
 	private ProductType ProductType;
-	/** 产品标签 */
+	/** 商品标签 */
 	private ProductTag ProductTag;
-	/** 产品供应商 */
+	/** 商品供应商 */
 	private ProductSupplier ProductSupplier;
 
 	/**
-	 * 取得产品编号
+	 * 取得商品编号
 	 * 
-	 * @return 产品编号
+	 * @return 商品编号
 	 */
 	@NaturalId
 	@Column(nullable = false, length = 16)
@@ -59,18 +59,18 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品编号
+	 * 设置商品编号
 	 * 
-	 * @param id 产品编号
+	 * @param id 商品编号
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * 取得产品条形码
+	 * 取得商品条形码
 	 * 
-	 * @return 产品条形码
+	 * @return 商品条形码
 	 */
 	@Column(length = 32)
 	public String getBarCode() {
@@ -78,18 +78,18 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品条形码
+	 * 设置商品条形码
 	 * 
-	 * @param barCode 产品条形码
+	 * @param barCode 商品条形码
 	 */
 	public void setBarCode(String barCode) {
 		this.barCode = barCode;
 	}
 
 	/**
-	 * 取得产品名称-汉字
+	 * 取得商品名称-汉字
 	 * 
-	 * @return 产品名称-汉字
+	 * @return 商品名称-汉字
 	 */
 	@Column(nullable = false, length = 32)
 	public String getName() {
@@ -97,9 +97,9 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品名称-汉字
+	 * 设置商品名称-汉字
 	 * 
-	 * @param name 产品名称-汉字
+	 * @param name 商品名称-汉字
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -178,27 +178,27 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 取得产品详细描述
+	 * 取得商品详细描述
 	 * 
-	 * @return 产品详细描述
+	 * @return 商品详细描述
 	 */
 	public String getDescTxt() {
 		return descTxt;
 	}
 
 	/**
-	 * 设置产品详细描述
+	 * 设置商品详细描述
 	 * 
-	 * @param descTxt 产品详细描述
+	 * @param descTxt 商品详细描述
 	 */
 	public void setDescTxt(String descTxt) {
 		this.descTxt = descTxt;
 	}
 
 	/**
-	 * 取得产品品牌
+	 * 取得商品品牌
 	 * 
-	 * @return 产品品牌
+	 * @return 商品品牌
 	 */
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "PRODUCT_BRAND_UUID")
@@ -207,18 +207,18 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品品牌
+	 * 设置商品品牌
 	 * 
-	 * @param ProductBrand 产品品牌
+	 * @param ProductBrand 商品品牌
 	 */
 	public void setProductBrand(ProductBrand ProductBrand) {
 		this.ProductBrand = ProductBrand;
 	}
 
 	/**
-	 * 取得产品类型
+	 * 取得商品类型
 	 * 
-	 * @return 产品类型
+	 * @return 商品类型
 	 */
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "PRODUCT_TYPE_UUID")
@@ -227,18 +227,18 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品类型
+	 * 设置商品类型
 	 * 
-	 * @param ProductType 产品类型
+	 * @param ProductType 商品类型
 	 */
 	public void setProductType(ProductType ProductType) {
 		this.ProductType = ProductType;
 	}
 
 	/**
-	 * 取得产品标签
+	 * 取得商品标签
 	 * 
-	 * @return 产品标签
+	 * @return 商品标签
 	 */
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "PRODUCT_TAG_UUID")
@@ -247,18 +247,18 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品标签
+	 * 设置商品标签
 	 * 
-	 * @param ProductTag 产品标签
+	 * @param ProductTag 商品标签
 	 */
 	public void setProductTag(ProductTag ProductTag) {
 		this.ProductTag = ProductTag;
 	}
 
 	/**
-	 * 取得产品供应商
+	 * 取得商品供应商
 	 * 
-	 * @return 产品供应商
+	 * @return 商品供应商
 	 */
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "PRODUCT_SUPPLIER_UUID")
@@ -267,9 +267,9 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 设置产品供应商
+	 * 设置商品供应商
 	 * 
-	 * @param ProductSupplier 产品供应商
+	 * @param ProductSupplier 商品供应商
 	 */
 	public void setProductSupplier(ProductSupplier ProductSupplier) {
 		this.ProductSupplier = ProductSupplier;

@@ -9,7 +9,7 @@ import org.hibernate.annotations.NaturalId;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 产品供应商
+ * 商品供应商
  */
 @Entity
 @Table(name = "T_PRODUCT_SUPPLIER")
