@@ -18,9 +18,9 @@ public class ProductTypeManager {
 	private ProductTypeJpaDao productTypeJpaDao;
 
 	/**
-	 * 取得所有产品类型信息
+	 * 取得所有商品类型信息
 	 * 
-	 * @return 产品类型信息列表
+	 * @return 商品类型信息列表
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ProductType> getAllProductType() {
@@ -28,9 +28,9 @@ public class ProductTypeManager {
 	}
 
 	/**
-	 * 根据编号取得产品类型信息
+	 * 根据编号取得商品类型信息
 	 * 
-	 * @param uuid 产品类型编号
+	 * @param uuid 商品类型编号
 	 * @return ProductType信息
 	 */
 	public ProductType getProductTypeByUuid(Integer uuid) {
@@ -38,9 +38,9 @@ public class ProductTypeManager {
 	}
 
 	/**
-	 * 删除产品类型信息
+	 * 删除商品类型信息
 	 * 
-	 * @param uuid 产品类型编号
+	 * @param uuid 商品类型编号
 	 */
 	@Transactional(readOnly = false)
 	public void delProductTypeByUuid(Integer uuid) {
@@ -48,9 +48,9 @@ public class ProductTypeManager {
 	}
 
 	/**
-	 * 添加新产品类型信息
+	 * 添加新商品类型信息
 	 * 
-	 * @param productType 产品类型信息
+	 * @param productType 商品类型信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewProductType(ProductType productType) {
@@ -58,9 +58,9 @@ public class ProductTypeManager {
 	}
 
 	/**
-	 * 更新产品类型信息
+	 * 更新商品类型信息
 	 * 
-	 * @param productType 产品类型信息
+	 * @param productType 商品类型信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -68,7 +68,7 @@ public class ProductTypeManager {
 	public void updateProductType(ProductType productType) throws IllegalAccessException, InvocationTargetException {
 		ProductType _dbProductType = productTypeJpaDao.findOne(productType.getUuid());
 		if (null == _dbProductType) {
-			// 产品类型不存在!
+			// 商品类型不存在!
 			throw new ServiceException("ERR_MSG_PDU_008");
 		}
 

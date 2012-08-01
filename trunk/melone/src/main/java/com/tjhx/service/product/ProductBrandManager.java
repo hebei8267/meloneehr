@@ -18,9 +18,9 @@ public class ProductBrandManager {
 	private ProductBrandJpaDao productBrandJpaDao;
 
 	/**
-	 * 取得所有产品品牌信息
+	 * 取得所有商品品牌信息
 	 * 
-	 * @return 产品品牌信息列表
+	 * @return 商品品牌信息列表
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ProductBrand> getAllProductBrand() {
@@ -28,19 +28,19 @@ public class ProductBrandManager {
 	}
 
 	/**
-	 * 根据编号取得产品品牌信息
+	 * 根据编号取得商品品牌信息
 	 * 
-	 * @param uuid 产品品牌编号
-	 * @return 产品品牌信息
+	 * @param uuid 商品品牌编号
+	 * @return 商品品牌信息
 	 */
 	public ProductBrand getProductBrandByUuid(Integer uuid) {
 		return productBrandJpaDao.findOne(uuid);
 	}
 
 	/**
-	 * 删除产品品牌信息
+	 * 删除商品品牌信息
 	 * 
-	 * @param uuid 产品品牌编号
+	 * @param uuid 商品品牌编号
 	 */
 	@Transactional(readOnly = false)
 	public void delProductBrandByUuid(Integer uuid) {
@@ -48,9 +48,9 @@ public class ProductBrandManager {
 	}
 
 	/**
-	 * 添加新产品品牌信息
+	 * 添加新商品品牌信息
 	 * 
-	 * @param productBrand 产品品牌信息
+	 * @param productBrand 商品品牌信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewProductBrand(ProductBrand productBrand) {
@@ -58,9 +58,9 @@ public class ProductBrandManager {
 	}
 
 	/**
-	 * 更新产品品牌信息
+	 * 更新商品品牌信息
 	 * 
-	 * @param productBrand 产品品牌信息
+	 * @param productBrand 商品品牌信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -69,7 +69,7 @@ public class ProductBrandManager {
 
 		ProductBrand _dbProductBrand = productBrandJpaDao.findOne(productBrand.getUuid());
 		if (null == _dbProductBrand) {
-			// 产品品牌不存在!
+			// 商品品牌不存在!
 			throw new ServiceException("ERR_MSG_PDU_007");
 		}
 

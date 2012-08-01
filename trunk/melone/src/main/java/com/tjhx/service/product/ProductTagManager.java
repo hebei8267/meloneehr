@@ -18,9 +18,9 @@ public class ProductTagManager {
 	private ProductTagJpaDao productTagJpaDao;
 
 	/**
-	 * 取得所有产品标签信息
+	 * 取得所有商品标签信息
 	 * 
-	 * @return 产品标签信息列表
+	 * @return 商品标签信息列表
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ProductTag> getAllProductTag() {
@@ -28,19 +28,19 @@ public class ProductTagManager {
 	}
 
 	/**
-	 * 根据编号取得产品标签信息
+	 * 根据编号取得商品标签信息
 	 * 
-	 * @param uuid 产品标签编号
-	 * @return 产品标签信息
+	 * @param uuid 商品标签编号
+	 * @return 商品标签信息
 	 */
 	public ProductTag getProductTagByUuid(Integer uuid) {
 		return productTagJpaDao.findOne(uuid);
 	}
 
 	/**
-	 * 删除产品标签信息
+	 * 删除商品标签信息
 	 * 
-	 * @param uuid 产品标签编号
+	 * @param uuid 商品标签编号
 	 */
 	@Transactional(readOnly = false)
 	public void delProductTagByUuid(Integer uuid) {
@@ -48,9 +48,9 @@ public class ProductTagManager {
 	}
 
 	/**
-	 * 添加新产品标签信息
+	 * 添加新商品标签信息
 	 * 
-	 * @param productTag 产品标签信息
+	 * @param productTag 商品标签信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewProductTag(ProductTag productTag) {
@@ -58,9 +58,9 @@ public class ProductTagManager {
 	}
 
 	/**
-	 * 更新产品标签信息
+	 * 更新商品标签信息
 	 * 
-	 * @param productTag 产品标签信息
+	 * @param productTag 商品标签信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -69,7 +69,7 @@ public class ProductTagManager {
 
 		ProductTag _dbProductTag = productTagJpaDao.findOne(productTag.getUuid());
 		if (null == _dbProductTag) {
-			// 产品标签不存在!
+			// 商品标签不存在!
 			throw new ServiceException("ERR_MSG_PDU_006");
 		}
 

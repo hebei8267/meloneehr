@@ -18,9 +18,9 @@ public class ProductSupplierManager {
 	private ProductSupplierJpaDao productSupplierJpaDao;
 
 	/**
-	 * 取得所有产品供应商信息
+	 * 取得所有商品供应商信息
 	 * 
-	 * @return 产品供应商信息列表
+	 * @return 商品供应商信息列表
 	 */
 	public List<ProductSupplier> getAllProductSupplier() {
 		return (List<ProductSupplier>) productSupplierJpaDao.findAll(new Sort(
@@ -28,19 +28,19 @@ public class ProductSupplierManager {
 	}
 
 	/**
-	 * 根据编号取得产品供应商信息
+	 * 根据编号取得商品供应商信息
 	 * 
-	 * @param uuid 产品供应商编号
-	 * @return 产品供应商信息
+	 * @param uuid 商品供应商编号
+	 * @return 商品供应商信息
 	 */
 	public ProductSupplier getProductSupplierByUuid(Integer uuid) {
 		return productSupplierJpaDao.findOne(uuid);
 	}
 
 	/**
-	 * 删除产品供应商信息
+	 * 删除商品供应商信息
 	 * 
-	 * @param uuid 产品供应商编号
+	 * @param uuid 商品供应商编号
 	 */
 	@Transactional(readOnly = false)
 	public void delProductSupplierByUuid(Integer uuid) {
@@ -48,14 +48,14 @@ public class ProductSupplierManager {
 	}
 
 	/**
-	 * 添加新产品供应商信息
+	 * 添加新商品供应商信息
 	 * 
-	 * @param productSupplier 产品供应商信息
+	 * @param productSupplier 商品供应商信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewProductSupplier(ProductSupplier productSupplier) {
 		ProductSupplier _dbProductSupplier = productSupplierJpaDao.findById(productSupplier.getId());
-		// 该产品供应商已存在!
+		// 该商品供应商已存在!
 		if (null != _dbProductSupplier) {
 			throw new ServiceException("ERR_MSG_PDU_009");
 		}
@@ -64,9 +64,9 @@ public class ProductSupplierManager {
 	}
 
 	/**
-	 * 更新产品供应商信息
+	 * 更新商品供应商信息
 	 * 
-	 * @param productSupplier 产品供应商信息
+	 * @param productSupplier 商品供应商信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -75,7 +75,7 @@ public class ProductSupplierManager {
 			InvocationTargetException {
 		ProductSupplier _dbProductSupplier = productSupplierJpaDao.findOne(productSupplier.getUuid());
 		if (null == _dbProductSupplier) {
-			// 产品供应商不存在!
+			// 商品供应商不存在!
 			throw new ServiceException("ERR_MSG_PDU_010");
 		}
 
