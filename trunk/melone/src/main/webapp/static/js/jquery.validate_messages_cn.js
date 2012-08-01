@@ -33,14 +33,14 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 	var length = value.length;   
 	var mobile = /^(\d{11})$/;
 	return this.optional(element) || (mobile.test(value));       
-}, "请输入正确的手机号码");       
+}, "请输入正确的手机号码");
     
 // 电话号码验证       
 jQuery.validator.addMethod("isTel", function(value, element) {
 	//电话号码格式010-12345678
 	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;  
 	return this.optional(element) || (tel.test(value));       
-}, "请输入正确的电话号码");   
+}, "请输入正确的电话号码");
   
 // 联系电话(手机/电话皆可)验证   
 jQuery.validator.addMethod("isPhone", function(value,element) {   
@@ -48,4 +48,23 @@ jQuery.validator.addMethod("isPhone", function(value,element) {
 	var mobile = /^(\d{11})$/;
 	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
 	return this.optional(element) || (tel.test(value) || (mobile.test(value)));   
-}, "请输入正确的电话号码");   
+}, "请输入正确的电话号码");
+
+//邮政编码验证 
+jQuery.validator.addMethod("zipCode", function(value, element) { 
+	var tel = /^[0-9]{6}$/; 
+	return this.optional(element) || (tel.test(value)); 
+}, "请输入正确的邮政编码");
+
+//IP地址验证 
+jQuery.validator.addMethod("ip", function(value, element) { 
+	var ip = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/; 
+	return this.optional(element) || (ip.test(value) && (RegExp.$1 < 256 && RegExp.$2 < 256 && RegExp.$3 < 256 && RegExp.$4 < 256)); 
+}, "请输入正确的IP地址");
+
+//字母和数字的验证 
+jQuery.validator.addMethod("chrNum", function(value, element) { 
+	var chrNum = /^([a-zA-Z0-9]+)$/; 
+	return this.optional(element) || (chrNum.test(value)); 
+}, "只能输入数字和字母(字符A-Z, a-z, 0-9)");
+
