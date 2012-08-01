@@ -45,7 +45,6 @@
 							maxlength: 32
 						},
 						bankAccount: {
-							chrNum: true,
 							maxlength: 32
 						},
 						descTxt: {
