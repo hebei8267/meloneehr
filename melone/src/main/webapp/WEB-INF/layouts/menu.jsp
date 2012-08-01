@@ -14,6 +14,17 @@
 			<a href="#">配置管理</a>
 			<ul>
 				<li>
+					<a href="#">安全相关</a>
+					<ul>
+						<li>
+							<a href="#">用户</a>
+						</li>
+						<li>
+							<a href="#">角色</a>
+						</li>
+					</ul>
+				</li>
+				<li>
 					<a href="#">商品相关</a>
 					<ul>
 						<li>
@@ -29,7 +40,7 @@
 							<a href="${sc_ctx}/product/productSupplier/list">供应商（商品）</a>
 						</li>
 						<li>
-							<a href="">商品</a>
+							<a href="#">商品</a>
 						</li>
 					</ul>
 				</li>
