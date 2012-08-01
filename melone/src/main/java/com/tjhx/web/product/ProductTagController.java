@@ -26,7 +26,7 @@ public class ProductTagController extends BaseController {
 	private ProductTagManager productTagManager;
 
 	/**
-	 * 取得产品标签信息列表
+	 * 取得商品标签信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -42,7 +42,7 @@ public class ProductTagController extends BaseController {
 	}
 
 	/**
-	 * 编辑产品标签信息
+	 * 编辑商品标签信息
 	 * 
 	 * @param model
 	 * @return
@@ -61,7 +61,7 @@ public class ProductTagController extends BaseController {
 	}
 
 	/**
-	 * 删除产品标签信息
+	 * 删除商品标签信息
 	 * 
 	 * @param ids
 	 * @param model
@@ -78,7 +78,7 @@ public class ProductTagController extends BaseController {
 	}
 
 	/**
-	 * 新增产品标签初始化
+	 * 新增商品标签初始化
 	 * 
 	 * @param model
 	 * @return
@@ -93,7 +93,7 @@ public class ProductTagController extends BaseController {
 	}
 
 	/**
-	 * 新增/修改 产品标签信息
+	 * 新增/修改 商品标签信息
 	 * 
 	 * @param productTag
 	 * @param model
