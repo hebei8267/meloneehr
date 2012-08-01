@@ -41,7 +41,7 @@
 		</page:applyDecorator>
 		
 		<div class="grid_16 titleNav">
-			<h2><a>配置管理</a>&#8711; <a>产品相关</a>&#8711; <a>产品类型</a>&#8711;
+			<h2><a>配置管理</a>&#8711; <a>商品相关</a>&#8711; <a>商品类型</a>&#8711;
 			<c:if test="${empty productType.uuid}" >
 			新增
 			</c:if>
@@ -56,7 +56,7 @@
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">产品类型名称:</td>
+					<td class="item_name" width="100px">商品类型名称:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
