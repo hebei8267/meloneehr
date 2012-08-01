@@ -65,7 +65,7 @@
 		<page:applyDecorator name="menu" />
 		
 		<div class="grid_16 titleNav">
-			<h2><a>配置管理</a>&#8711; <a>产品相关</a>&#8711; <a>产品标签</a></h2>
+			<h2><a>配置管理</a>&#8711; <a>商品相关</a>&#8711; <a>商品标签</a></h2>
 		</div>
 		<div class="clear"></div>
 		
@@ -91,7 +91,7 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						<th width="90">产品标签名称</th>
+						<th width="90">商品标签名称</th>
 						<th width="490">详细描述</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>

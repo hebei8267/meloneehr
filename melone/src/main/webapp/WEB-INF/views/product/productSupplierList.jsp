@@ -65,7 +65,7 @@
 		<page:applyDecorator name="menu" />
 		
 		<div class="grid_16 titleNav">
-			<h2><a>配置管理</a>&#8711; <a>产品相关</a>&#8711; <a>供应商（产品）</a></h2>
+			<h2><a>配置管理</a>&#8711; <a>商品相关</a>&#8711; <a>供应商（商品）</a></h2>
 		</div>
 		<div class="clear"></div>
 		
