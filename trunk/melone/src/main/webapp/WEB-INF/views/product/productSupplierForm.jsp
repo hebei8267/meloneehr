@@ -38,14 +38,14 @@
 						addr: {
 							maxlength: 255
 						},
-						//postCode: {
-							//required: true,
-							//maxlength: 255
-						//}
+						postCode: {
+							zipCode: true
+						},
 						bankName: {
 							maxlength: 32
 						},
 						bankAccount: {
+							chrNum: true,
 							maxlength: 32
 						},
 						descTxt: {
