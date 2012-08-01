@@ -14,19 +14,22 @@
 			<a href="#">配置管理</a>
 			<ul>
 				<li>
-					<a href="#">产品相关</a>
+					<a href="#">商品相关</a>
 					<ul>
 						<li>
-							<a href="${sc_ctx}/product/productBrand/list">产品品牌</a>
+							<a href="${sc_ctx}/product/productBrand/list">商品品牌</a>
 						</li>
 						<li>
-							<a href="${sc_ctx}/product/productType/list">产品类型</a>
+							<a href="${sc_ctx}/product/productType/list">商品类型</a>
 						</li>
 						<li>
-							<a href="${sc_ctx}/product/productTag/list">产品标签</a>
+							<a href="${sc_ctx}/product/productTag/list">商品标签</a>
 						</li>
 						<li>
-							<a href="${sc_ctx}/product/productSupplier/list">供应商（产品）</a>
+							<a href="${sc_ctx}/product/productSupplier/list">供应商（商品）</a>
+						</li>
+						<li>
+							<a href="">商品</a>
 						</li>
 					</ul>
 				</li>
