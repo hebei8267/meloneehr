@@ -26,7 +26,7 @@ public class ProductBrandController extends BaseController {
 	private ProductBrandManager productBrandManager;
 	
 	/**
-	 * 取得产品品牌信息列表
+	 * 取得商品品牌信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -41,7 +41,7 @@ public class ProductBrandController extends BaseController {
 	}
 	
 	/**
-	 * 编辑产品品牌信息
+	 * 编辑商品品牌信息
 	 * 
 	 * @param model
 	 * @return
@@ -60,7 +60,7 @@ public class ProductBrandController extends BaseController {
 	}
 
 	/**
-	 * 删除产品品牌信息
+	 * 删除商品品牌信息
 	 * 
 	 * @param ids
 	 * @param model
@@ -77,7 +77,7 @@ public class ProductBrandController extends BaseController {
 	}
 
 	/**
-	 * 新增产品品牌初始化
+	 * 新增商品品牌初始化
 	 * 
 	 * @param model
 	 * @return
@@ -92,7 +92,7 @@ public class ProductBrandController extends BaseController {
 	}
 
 	/**
-	 * 新增/修改 产品品牌信息
+	 * 新增/修改 商品品牌信息
 	 * 
 	 * @param productBrand
 	 * @param model

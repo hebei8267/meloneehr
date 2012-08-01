@@ -26,7 +26,7 @@ public class ProductSupplierController extends BaseController {
 	private ProductSupplierManager productSupplierManager;
 
 	/**
-	 * 取得产品供应商信息列表
+	 * 取得商品供应商信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -41,7 +41,7 @@ public class ProductSupplierController extends BaseController {
 	}
 
 	/**
-	 * 编辑产品供应商信息
+	 * 编辑商品供应商信息
 	 * 
 	 * @param model
 	 * @return
@@ -60,7 +60,7 @@ public class ProductSupplierController extends BaseController {
 	}
 
 	/**
-	 * 删除产品供应商信息
+	 * 删除商品供应商信息
 	 * 
 	 * @param ids
 	 * @param model
@@ -77,7 +77,7 @@ public class ProductSupplierController extends BaseController {
 	}
 
 	/**
-	 * 新增产品供应商初始化
+	 * 新增商品供应商初始化
 	 * 
 	 * @param model
 	 * @return
@@ -92,7 +92,7 @@ public class ProductSupplierController extends BaseController {
 	}
 
 	/**
-	 * 新增/修改 产品供应商信息
+	 * 新增/修改 商品供应商信息
 	 * 
 	 * @param productSupplier
 	 * @param model
