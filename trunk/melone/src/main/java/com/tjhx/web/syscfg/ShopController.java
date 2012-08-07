@@ -36,7 +36,12 @@ public class ShopController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String shopList_Action(Model model, HttpServletRequest request) {
+	public String shopList_Action(@RequestParam(required = false) Integer id,
+			@RequestParam(required = false) String name, @RequestParam(required = false) String addr, Model model,
+			HttpServletRequest request) {
+		Shop shop = new Shop();
+		model.addAttribute("shop", shop);
+
 		List<Shop> shopList = shopManager.getAllShop();
 
 		model.addAttribute("shopList", shopList);
