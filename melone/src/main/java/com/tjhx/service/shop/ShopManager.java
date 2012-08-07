@@ -28,7 +28,9 @@ public class ShopManager {
 	public List<Shop> getAllShop() {
 		return (List<Shop>) shopJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
-
+	public List<Shop> getShopList(Integer id,String name, String addr) {
+		
+	}
 	/**
 	 * 根据编号取得门店信息
 	 * 
