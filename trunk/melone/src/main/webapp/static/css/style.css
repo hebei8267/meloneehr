@@ -63,7 +63,7 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
     padding: 7px 0 7px 0;
     /*background: #335599 url(./images/bg.png) repeat-x 0 -110px;*/
     background: #B9C9FE;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
     
     border-radius:10px; /*some css3*/
     -moz-border-radius:10px;
