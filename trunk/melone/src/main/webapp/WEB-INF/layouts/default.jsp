@@ -23,6 +23,9 @@
 		<sitemesh:head />
 	</head>
 	<body>
+	<div id="__del-confirm" title="删除确认？" style="display:none;">
+		<p>确定要删除选择的记录信息吗？</p>
+	</div>
 	<div id="__frame_main">
 		<div id="__frame_content">
 			<%@ include file="/WEB-INF/layouts/infoList.jsp"%>
