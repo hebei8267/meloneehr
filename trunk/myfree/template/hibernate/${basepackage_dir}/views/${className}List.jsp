@@ -51,19 +51,36 @@
 				// 删除按钮点击
 				//--------------------------------------------------------------------
 				$("#delBtn").click(function() {
-					var uuids = "";
-					$.each($subCheckBox, function(index, _checkBox) {
-						if(_checkBox.checked){
-							uuids += _checkBox.value + ",";
+					if($("#listForm").valid()){
+						var uuids = "";
+						$.each($subCheckBox, function(index, _checkBox) {
+							if(_checkBox.checked){
+								uuids += _checkBox.value + ",";
+							}
+					    });
+						if(uuids.length > 0){
+							uuids = uuids.substring(0, uuids.length - 1);
 						}
-				    });
-					if(uuids.length > 0){
-						uuids = uuids.substring(0, uuids.length - 1);
+						
+						$("#__del-confirm").dialog({
+							resizable: false,
+							height:185,
+							modal: true,
+							buttons: {
+								"删除": function() {
+									$( this ).dialog( "close" );
+									
+									$("#uuids").val(uuids);
+									// ？？？？？？？？？？？？？？？？？？？？？？
+									$("#listForm").attr("action", "${r"${sc_ctx}"}/${classNameLower}/del");
+						        	$("#listForm").submit();
+								},
+								"关闭": function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
 					}
-					$("#uuids").val(uuids);
-					// ？？？？？？？？？？？？？？？？？？？？？？
-					$("#listForm").attr("action", "${r"${sc_ctx}"}/${classNameLower}/del");
-		        	$("#listForm").submit();
 				});
 			});
 		</script>
