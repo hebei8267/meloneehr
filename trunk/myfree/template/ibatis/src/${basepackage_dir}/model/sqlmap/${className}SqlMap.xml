@@ -37,61 +37,6 @@
 	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
-	
-	<!-- 新增对象 -->
-    <insert id="insert" parameterClass="${classNameLower}">
-    <![CDATA[
-        INSERT INTO
-        ${table.sqlName} (
-        <#list table.columns as column>
-        	${column.sqlName} <#if column_has_next>,</#if>
-        </#list>
-        ) VALUES (
-        <#list table.columns as column>
-        	#${column.columnNameLower}# <#if column_has_next>,</#if>
-        </#list>        
-        )
-    ]]>
-        <selectKey resultClass="java.lang.Long" type="pre" keyProperty="<#list table.columns as column><#if column.pk>${column.columnNameLower}</#if></#list>" >
-            SELECT  SEQ_${table.sqlName}.nextval AS ID FROM DUAL
-        </selectKey>
-    </insert>
-
-	<!-- 修改对象 -->
-    <update id="update" parameterClass="${classNameLower}">
-    <![CDATA[
-        UPDATE ${table.sqlName} SET
-	        <#list table.columns as column>
-	        <#if !column.pk>
-	        ${column.sqlName} = #${column.columnNameLower}# <#if column_has_next>,</#if>
-	        </#if>
-	        </#list>
-        WHERE 
-        	<#list table.compositeIdColumns as column>
-	        ${column.sqlName} = #${column.columnNameLower}# <#if column_has_next>,</#if>
-	        </#list>
-    ]]>
-    </update>
-
-	<!-- 删除对象 -->
-    <delete id="delete" parameterClass="map">
-    <![CDATA[
-        delete from ${table.sqlName}
-    ]]>
-		<include refid="dynamicWhere"/>
-    </delete>
-    
-    <!-- 根据主键取得对象 -->
-    <select id="getById" resultMap="${classNameLower}Result">
-	    select <include refid="commonColumns"/>
-	    <![CDATA[
-	        from ${table.sqlName} 
-	        where 
-				<#list table.compositeIdColumns as column>
-		        ${column.sqlName} = #${column.columnNameLower}# <#if column_has_next>,</#if>
-		        </#list>
-	    ]]>
-    </select>
 
 	<!-- 计算对象的数量 --> 
     <select id="count" resultClass="long">
