@@ -62,7 +62,7 @@
 	</bean>
 	<!-- 在指定扫描所有接口, 动态生成MyBatis Dao接口实现-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.tjhx.dao" />
+		<property name="basePackage" value="com.tjhx.dao.myBatis" />
 	</bean>
 
 
