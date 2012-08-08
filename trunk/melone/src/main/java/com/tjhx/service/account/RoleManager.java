@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tjhx.dao.account.RoleJpaDao;
+import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.entity.account.Permission;
 import com.tjhx.entity.account.Role;
 import com.tjhx.service.ServiceException;
