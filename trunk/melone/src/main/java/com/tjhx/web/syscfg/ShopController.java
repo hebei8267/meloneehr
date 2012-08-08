@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,16 +35,19 @@ public class ShopController extends BaseController {
 	 * 
 	 * @param model
 	 * @return
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String shopList_Action(@RequestParam(required = false) Integer id,
-			@RequestParam(required = false) String name, @RequestParam(required = false) String addr, Model model,
-			HttpServletRequest request) {
+	public String shopList_Action(Model model, HttpServletRequest request) throws IllegalAccessException,
+			InvocationTargetException {
+
 		Shop shop = new Shop();
+		// 取得Request中的查询参数
+		BeanUtils.populate(shop, request.getParameterMap());
+		List<Shop> shopList = shopManager.getShopList(shop);
+
 		model.addAttribute("shop", shop);
-
-		List<Shop> shopList = shopManager.getAllShop();
-
 		model.addAttribute("shopList", shopList);
 
 		return "syscfg/shopList";
