@@ -1,17 +1,17 @@
 <#include "/macro.include"/>
 <#include "/java_copyright.include">
-<#assign className = table.className>   
-<#assign classNameLower = className?uncap_first> 
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
-<c:set var="ctx" value="${r"${pageContext.request.contextPath}"}" />
+<c:set var="ctx" value="${r"${pageContext.request.contextPath}"}"/>
 <c:set var="sc_ctx">${r"${"}ctx}/sc</c:set>
 <c:set var="pop_sc_ctx">${r"${"}ctx}/popsc</c:set>
 <html>
 	<head>
-		<script>		
+		<script>
 			$().ready(function() {
 				$("#inputForm").validate({
 					rules: {
@@ -19,20 +19,20 @@
 						// 添加表单效验
 					}
 				});
-				
+
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
 					// ？？？？？？？？？？？？？？？？？？？？？？
 					$(location).attr('href', '${r"$"}{sc_ctx}/${classNameLower}/list');
 				});
-				
+
 				$("#saveBtn").click(function() {
 					// ？？？？？？？？？？？？？？？？？？？？？？
 					$("#inputForm").attr("action", "${r"$"}{sc_ctx}/${classNameLower}/save");
-		        	$("#inputForm").submit();
+					$("#inputForm").submit();
 				});
-			});			
+			});
 		</script>
 	</head>
 	<body>
@@ -40,20 +40,20 @@
 		<page:applyDecorator name="menu" >
 			 <page:param name="sysCfg">current</page:param>
 		</page:applyDecorator>
-		
+
 		<div class="grid_16 titleNav">
 			// ？？？？？？？？？？？？？？？？？？？？？？
-			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711; 
-			<c:if test="${r"$"}{empty ${classNameLower}.uuid}" >
+			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711;
+			<c:if test="${r"$"}{empty ${classNameLower}.uuid}">
 			新增
 			</c:if>
-			<c:if test="${r"$"}{!empty ${classNameLower}.uuid}" >
+			<c:if test="${r"$"}{!empty ${classNameLower}.uuid}">
 			编辑
 			</c:if>
 			</h2>
 		</div>
 		<div class="clear"></div>
-		
+
 		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="${classNameLower}">
 			<form:hidden path="uuid"/>
 			<table>
