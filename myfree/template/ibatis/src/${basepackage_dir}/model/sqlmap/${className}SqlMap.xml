@@ -4,11 +4,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="${basepackage}.dao.myBatis.${className}MyBatisDao">
+<mapper namespace="${basepackage}.dao.myBatis.${className}MyBatisDao">?????????
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="${classNameLower}ResultMap" type="${basepackage}.entity.${className}">
+	<resultMap id="Result_Map_${className}" type="${basepackage}.entity.${className}">?????????
 		<#list table.columns as column>
-        <result column="${column.sqlName}" property="${column.columnNameLower}" jdbcType=""/>
+        <result column="${column.sqlName}" property="${column.columnNameLower}" jdbcType="${column.sqlTypeName_Mybatis}"/>
 		</#list>
 	</resultMap>
 	
@@ -26,15 +26,14 @@
   		<where>
   		<#list table.columns as column>
   			<if test="${column.columnNameLower} != null and ${column.columnNameLower} !='' ">
-  			${column.sqlName} = #{${column.columnNameLower}}
+  			<#if column_index != 0>AND</#if> ${column.sqlName} = ${r"#{"}${column.columnNameLower}}
   			</if>
 	    </#list>
 	  	</where>
   	</sql>
   	
   	<!-- 取得${table.sqlName}信息(根据参数) -->
-	<select id="get${className}List" parameterType="${basepackage}.entity.${className}"
-		resultMap="${classNameLower}ResultMap">
+	<select id="get${className}List" parameterType="${basepackage}.entity.${className}"????????? resultMap="Result_Map_${className}">
 		select
 		<include refid="Base_Column_List" />
 		from t_shop
