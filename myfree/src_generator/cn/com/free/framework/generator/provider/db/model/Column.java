@@ -26,8 +26,8 @@ public class Column {
 	private final String _remarks;
 	private static Log _log = LogFactory.getLog(Column.class);
 
-	public Column(Table table, int sqlType, String sqlTypeName, String sqlName, int size, int decimalDigits, boolean isPk,
-			boolean isNullable, boolean isIndexed, boolean isUnique, String defaultValue, String remarks) {
+	public Column(Table table, int sqlType, String sqlTypeName, String sqlName, int size, int decimalDigits,
+			boolean isPk, boolean isNullable, boolean isIndexed, boolean isUnique, String defaultValue, String remarks) {
 		_table = table;
 		_sqlType = sqlType;
 		_sqlName = sqlName;
@@ -58,6 +58,10 @@ public class Column {
 
 	public int getDecimalDigits() {
 		return _decimalDigits;
+	}
+
+	public String getSqlTypeName_Mybatis() {
+		return JdbcType.getJdbcSqlTypeName(_sqlType);
 	}
 
 	public String getSqlTypeName() {
