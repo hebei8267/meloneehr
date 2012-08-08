@@ -8,8 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tjhx.dao.shop.StoreJpaDao;
-import com.tjhx.dao.shop.StoreTypeJpaDao;
+import com.tjhx.dao.jpa.shop.StoreJpaDao;
+import com.tjhx.dao.jpa.shop.StoreTypeJpaDao;
 import com.tjhx.entity.shop.Store;
 import com.tjhx.entity.shop.StoreType;
 import com.tjhx.service.ServiceException;

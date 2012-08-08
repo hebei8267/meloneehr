@@ -8,8 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tjhx.dao.shop.ShopJpaDao;
-import com.tjhx.dao.shop.StoreJpaDao;
+import com.tjhx.dao.jpa.shop.ShopJpaDao;
+import com.tjhx.dao.jpa.shop.StoreJpaDao;
+import com.tjhx.dao.myBatis.shop.ShopMyBatisDao;
 import com.tjhx.entity.shop.Shop;
 import com.tjhx.entity.shop.Store;
 import com.tjhx.service.ServiceException;
@@ -19,6 +20,7 @@ import com.tjhx.service.ServiceException;
 public class ShopManager {
 	private ShopJpaDao shopJpaDao;
 	private StoreJpaDao storeJpaDao;
+	private ShopMyBatisDao shopMyBatisDao;
 
 	/**
 	 * 取得所有门店信息
@@ -28,9 +30,17 @@ public class ShopManager {
 	public List<Shop> getAllShop() {
 		return (List<Shop>) shopJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
-	public List<Shop> getShopList(Integer id,String name, String addr) {
-		
+
+	/**
+	 * 取得门店信息(根据参数)
+	 * 
+	 * @param shop
+	 * @return
+	 */
+	public List<Shop> getShopList(Shop shop) {
+		return shopMyBatisDao.getShopList(shop);
 	}
+
 	/**
 	 * 根据编号取得门店信息
 	 * 
@@ -113,6 +123,11 @@ public class ShopManager {
 	@Autowired
 	public void setStoreJpaDao(StoreJpaDao storeJpaDao) {
 		this.storeJpaDao = storeJpaDao;
+	}
+
+	@Autowired
+	public void setShopMyBatisDao(ShopMyBatisDao shopMyBatisDao) {
+		this.shopMyBatisDao = shopMyBatisDao;
 	}
 
 }
