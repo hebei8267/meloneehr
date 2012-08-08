@@ -1,7 +1,7 @@
 <#include "/macro.include"/>
 <#include "/java_copyright.include">
-<#assign className = table.className>   
-<#assign classNameLower = className?uncap_first> 
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -22,7 +22,7 @@
 						}
 					}
 				});
-				
+
 				//--------------------------------------------------------------------
 				// 全选/全部选
 				//--------------------------------------------------------------------
@@ -33,11 +33,12 @@
 				$subCheckBox.click(function(){
 					$("#checkAll").attr("checked",$subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
 				});
-				
+
 				//--------------------------------------------------------------------
 				// 按钮CSS
 				//--------------------------------------------------------------------
-				$("#newBtn,#delBtn").button();
+				// ？？？？？？？？？？？？？？？？？？？？？？
+				$("#newBtn,#delBtn,#serchBtn").button();
 
 				//--------------------------------------------------------------------
 				// 新增按钮点击
@@ -46,7 +47,7 @@
 					// ？？？？？？？？？？？？？？？？？？？？？？
 					$(location).attr('href', '${r"${sc_ctx}"}/${classNameLower}/new');
 				});
-				
+
 				//--------------------------------------------------------------------
 				// 删除按钮点击
 				//--------------------------------------------------------------------
@@ -57,11 +58,11 @@
 							if(_checkBox.checked){
 								uuids += _checkBox.value + ",";
 							}
-					    });
+						});
 						if(uuids.length > 0){
 							uuids = uuids.substring(0, uuids.length - 1);
 						}
-						
+
 						$("#__del-confirm").dialog({
 							resizable: false,
 							height:185,
@@ -82,6 +83,14 @@
 						});
 					}
 				});
+				//--------------------------------------------------------------------
+				// 查询按钮点击
+				//--------------------------------------------------------------------
+				$("#serchBtn").click(function() {
+					// ？？？？？？？？？？？？？？？？？？？？？？
+					$("#serchForm").attr('action', '${sc_ctx}/${classNameLower}/list');
+					$("#serchForm").submit();
+				});
 			});
 		</script>
 	</head>
@@ -95,8 +104,39 @@
 		</div>
 		<div class="clear"></div>
 		
-		<form method="post" class="form cmxform" id="listForm">
 		
+		<form method="post" class="form cmxform" id="serchForm">
+		<%// ----------------------------------------------------------- %>
+		<%// 列表查询 %>
+		<%// ----------------------------------------------------------- %>
+		<div class="grid_12 suffix_4">
+			<table class="search_table">
+				<tr>
+					<td class="item_name" width="90px">门店编号:</td>
+					<td class="item" width="180px">
+						<input type="text" name="id" value="${shop.id}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td class="item_name" width="90px">门店名称:</td>
+					<td class="item" width="180px">
+						<input type="text" name="name" value="${shop.name}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name">门店地址:</td>
+					<td class="item">
+						<input type="text" name="addr" value="${shop.addr}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td colspan="2" align="right">
+						<input id="serchBtn" type="button" class="submit" value="查询"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="clear"></div>
+		</form>
+		
+		
+		<form method="post" class="form cmxform" id="listForm">
 		<%// ----------------------------------------------------------- %>
 		<%// 列表操作 %>
 		<%// ----------------------------------------------------------- %>
