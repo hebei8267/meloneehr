@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,22 +25,30 @@ import com.tjhx.web.BaseController;
 public class ProductBrandController extends BaseController {
 	@Autowired
 	private ProductBrandManager productBrandManager;
-	
+
 	/**
 	 * 取得商品品牌信息列表
 	 * 
 	 * @param model
 	 * @return
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String productBrandList_Action(Model model, HttpServletRequest request) {
-		List<ProductBrand> productBrandList = productBrandManager.getAllProductBrand();
+	public String productBrandList_Action(Model model, HttpServletRequest request) throws IllegalAccessException,
+			InvocationTargetException {
 
+		ProductBrand productBrand = new ProductBrand();
+		// 取得Request中的查询参数
+		BeanUtils.populate(productBrand, request.getParameterMap());
+		List<ProductBrand> productBrandList = productBrandManager.getProductBrandList(productBrand);
+
+		model.addAttribute("productBrand", productBrand);
 		model.addAttribute("productBrandList", productBrandList);
 
 		return "product/productBrandList";
 	}
-	
+
 	/**
 	 * 编辑商品品牌信息
 	 * 
@@ -84,10 +93,10 @@ public class ProductBrandController extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String initProductBrand_Action(Model model, HttpServletRequest request) {
-	
+
 		ProductBrand productBrand = new ProductBrand();
 		model.addAttribute("productBrand", productBrand);
-		
+
 		return "product/productBrandForm";
 	}
 
@@ -101,8 +110,8 @@ public class ProductBrandController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveProductBrand_Action(@ModelAttribute("productBrand") ProductBrand productBrand, Model model, HttpServletRequest request)
-			throws IllegalAccessException, InvocationTargetException {
+	public String saveProductBrand_Action(@ModelAttribute("productBrand") ProductBrand productBrand, Model model,
+			HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
 
 		if (null == productBrand.getUuid()) {// 新增操作
 			productBrandManager.addNewProductBrand(productBrand);
