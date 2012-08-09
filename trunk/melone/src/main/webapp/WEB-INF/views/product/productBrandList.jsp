@@ -78,6 +78,9 @@
 				// 查询按钮点击
 				//--------------------------------------------------------------------
 				$("#serchBtn").click(function() {
+					$("input[type='text']").each(function(i){
+  						this.value = $.trim(this.value);
+ 					});
 					$("#serchForm").attr('action', '${sc_ctx}/product/productBrand/list');
 					$("#serchForm").submit();
 				});
