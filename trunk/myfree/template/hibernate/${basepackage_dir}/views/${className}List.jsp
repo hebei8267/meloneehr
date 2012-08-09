@@ -88,7 +88,7 @@
 				//--------------------------------------------------------------------
 				$("#serchBtn").click(function() {
 					// ？？？？？？？？？？？？？？？？？？？？？？
-					$("#serchForm").attr('action', '${sc_ctx}/${classNameLower}/list');
+					$("#serchForm").attr("action", "${r"${sc_ctx}"}/${classNameLower}/list");
 					$("#serchForm").submit();
 				});
 			});
@@ -114,17 +114,20 @@
 				<tr>
 					<td class="item_name" width="90px">门店编号:</td>
 					<td class="item" width="180px">
-						<input type="text" name="id" value="${shop.id}" class="text ui-widget-content ui-corner-all"/>
+						//?????????????????????????????
+						<input type="text" name="id" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td class="item_name" width="90px">门店名称:</td>
 					<td class="item" width="180px">
-						<input type="text" name="name" value="${shop.name}" class="text ui-widget-content ui-corner-all"/>
+						//?????????????????????????????
+						<input type="text" name="name" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="item_name">门店地址:</td>
 					<td class="item">
-						<input type="text" name="addr" value="${shop.addr}" class="text ui-widget-content ui-corner-all"/>
+						//?????????????????????????????
+						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td colspan="2" align="right">
 						<input id="serchBtn" type="button" class="submit" value="查询"/>
