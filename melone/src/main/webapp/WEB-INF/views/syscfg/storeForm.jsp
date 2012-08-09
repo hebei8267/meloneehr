@@ -42,6 +42,9 @@
 				});
 				
 				$("#saveBtn").click(function() {
+					$("input[type='text'],textarea").each(function(i){
+  						this.value = $.trim(this.value);
+ 					});
 					$("#inputForm").attr("action", "${sc_ctx}/syscfg/store/save");
 		        	$("#inputForm").submit();
 				});
