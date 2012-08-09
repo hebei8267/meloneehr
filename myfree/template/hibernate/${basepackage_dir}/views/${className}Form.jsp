@@ -28,6 +28,9 @@
 				});
 
 				$("#saveBtn").click(function() {
+					$("input[type='text'],textarea").each(function(i){
+  						this.value = $.trim(this.value);
+ 					});
 					// ？？？？？？？？？？？？？？？？？？？？？？
 					$("#inputForm").attr("action", "${r"$"}{sc_ctx}/${classNameLower}/save");
 					$("#inputForm").submit();
