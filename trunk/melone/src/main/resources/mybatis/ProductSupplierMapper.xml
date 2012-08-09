@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.myBatis.product.ProductSupplierMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_ProductSupplier" type="com.tjhx.entity.product.ProductSupplier">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="addr" property="addr" jdbcType="VARCHAR"/>
+        <result column="bank_account" property="bankAccount" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="contact" property="contact" jdbcType="VARCHAR"/>
+        <result column="desc_txt" property="descTxt" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="fax_num" property="faxNum" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="post_code" property="postCode" jdbcType="VARCHAR"/>
+        <result column="tax_reg_num" property="taxRegNum" jdbcType="VARCHAR"/>
+        <result column="tel_num" property="telNum" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	uuid ,
+    	create_date ,
+    	create_user_id ,
+    	update_date ,
+    	update_user_id ,
+    	version ,
+    	addr ,
+    	bank_account ,
+    	bank_name ,
+    	contact ,
+    	desc_txt ,
+    	email ,
+    	fax_num ,
+    	id ,
+    	name ,
+    	post_code ,
+    	tax_reg_num ,
+    	tel_num 
+	]]>
+  	</sql>
+  	
+  	<!-- 查询条件 -->
+  	<sql id="Where_Clause" >
+  		<where>
+  			<if test="addr != null and addr !='' ">
+  			addr LIKE '%${addr}%'
+  			</if>
+  			<if test="id != null and id !='' ">
+  			AND id = #{id}
+  			</if>
+  			<if test="name != null and name !='' ">
+  			AND name LIKE '%${name}%'
+  			</if>
+  			<if test="telNum != null and telNum !='' ">
+  			AND tel_num LIKE '%${telNum}%'
+  			</if>
+	  	</where>
+  	</sql>
+  	
+  	<!-- 取得商品供应商信息(根据参数) -->
+	<select id="getProductSupplierList" parameterType="com.tjhx.entity.product.ProductSupplier" resultMap="Result_Map_ProductSupplier">
+		select
+		<include refid="Base_Column_List" />
+		from t_product_supplier
+		<include refid="Where_Clause" />
+	</select>
+</mapper>
