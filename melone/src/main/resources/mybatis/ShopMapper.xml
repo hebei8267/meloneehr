@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.myBatis.shop.ShopMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_Shop" type="com.tjhx.entity.shop.Shop">
+		<result column="uuid" property="uuid" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+		<result column="version" property="version" jdbcType="INTEGER" />
+		<result column="addr" property="addr" jdbcType="VARCHAR" />
+		<result column="desc_txt" property="descTxt" jdbcType="VARCHAR" />
+		<result column="fax_num" property="faxNum" jdbcType="VARCHAR" />
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="store_id" property="storeId" jdbcType="VARCHAR" />
+		<result column="tel_num" property="telNum" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List">
+	<![CDATA[
+    	uuid ,
+    	create_date ,
+    	create_user_id ,
+    	update_date ,
+    	update_user_id ,
+    	version ,
+    	addr ,
+    	desc_txt ,
+    	fax_num ,
+    	id ,
+    	name ,
+    	store_id ,
+    	tel_num 
+	]]>
+	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="Where_Clause">
+		<where>
+			<if test="addr != null and addr !='' ">
+				addr LIKE '%${addr}%'
+			</if>
+			<if test="descTxt != null and descTxt !='' ">
+				AND desc_txt LIKE '%${descTxt}%'
+			</if>
+			<if test="faxNum != null and faxNum !='' ">
+				AND fax_num = #{faxNum}
+			</if>
+			<if test="id != null and id !='' ">
+				AND id = #{id}
+			</if>
+			<if test="name != null and name !='' ">
+				AND name LIKE '%${name}%'
+			</if>
+			<if test="storeId != null and storeId !='' ">
+				AND store_id = #{storeId}
+			</if>
+			<if test="telNum != null and telNum !='' ">
+				AND tel_num = #{telNum}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 取得门店信息(根据参数) -->
+	<select id="getShopList" parameterType="com.tjhx.entity.shop.Shop"
+		resultMap="Result_Map_Shop">
+		select
+		<include refid="Base_Column_List" />
+		from t_shop
+		<include refid="Where_Clause" />
+	</select>
+</mapper>
