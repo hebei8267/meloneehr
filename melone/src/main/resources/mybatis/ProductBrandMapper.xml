@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.myBatis.product.ProductBrandMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_ProductBrand" type="com.tjhx.entity.product.ProductBrand">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="desc_txt" property="descTxt" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	uuid ,
+    	create_date ,
+    	create_user_id ,
+    	update_date ,
+    	update_user_id ,
+    	version ,
+    	desc_txt ,
+    	name 
+	]]>
+  	</sql>
+  	
+  	<!-- 查询条件 -->
+  	<sql id="Where_Clause" >
+  		<where>
+  			<if test="descTxt != null and descTxt !='' ">
+  			desc_txt LIKE '%${descTxt}%'
+  			</if>
+  			<if test="name != null and name !='' ">
+  			AND name LIKE '%${name}%'
+  			</if>
+	  	</where>
+  	</sql>
+  	
+  	<!-- 取得商品品牌信息(根据参数) -->
+	<select id="getProductBrandList" parameterType="com.tjhx.entity.product.ProductBrand"
+		resultMap="Result_Map_ProductBrand">
+		select
+		<include refid="Base_Column_List" />
+		from t_product_brand
+		<include refid="Where_Clause" />
+	</select>
+</mapper>
