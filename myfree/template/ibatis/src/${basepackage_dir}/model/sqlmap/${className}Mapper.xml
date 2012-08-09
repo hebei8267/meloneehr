@@ -36,7 +36,7 @@
 	<select id="get${className}List" parameterType="${basepackage}.entity.${className}"????????? resultMap="Result_Map_${className}">
 		select
 		<include refid="Base_Column_List" />
-		from t_shop
+		from ${table.sqlName}
 		<include refid="Where_Clause" />
 	</select>
 </mapper>
