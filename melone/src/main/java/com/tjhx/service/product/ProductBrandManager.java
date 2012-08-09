@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.jpa.product.ProductBrandJpaDao;
+import com.tjhx.dao.myBatis.product.ProductBrandMyBatisDao;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.service.ServiceException;
 
@@ -16,6 +17,7 @@ import com.tjhx.service.ServiceException;
 @Transactional(readOnly = true)
 public class ProductBrandManager {
 	private ProductBrandJpaDao productBrandJpaDao;
+	private ProductBrandMyBatisDao productBrandMyBatisDao;
 
 	/**
 	 * 取得所有商品品牌信息
@@ -25,6 +27,16 @@ public class ProductBrandManager {
 	@SuppressWarnings("unchecked")
 	public List<ProductBrand> getAllProductBrand() {
 		return (List<ProductBrand>) productBrandJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
+	 * 取得商品品牌信息(根据参数)
+	 * 
+	 * @param
+	 * @return
+	 */
+	public List<ProductBrand> getProductBrandList(ProductBrand productBrand) {
+		return productBrandMyBatisDao.getProductBrandList(productBrand);
 	}
 
 	/**
@@ -82,6 +94,11 @@ public class ProductBrandManager {
 	@Autowired
 	public void setProductBrandJpaDao(ProductBrandJpaDao productBrandJpaDao) {
 		this.productBrandJpaDao = productBrandJpaDao;
+	}
+
+	@Autowired
+	public void setProductBrandMyBatisDao(ProductBrandMyBatisDao productBrandMyBatisDao) {
+		this.productBrandMyBatisDao = productBrandMyBatisDao;
 	}
 
 }
