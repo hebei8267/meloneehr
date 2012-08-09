@@ -31,7 +31,7 @@
 				//--------------------------------------------------------------------
 				// 按钮CSS
 				//--------------------------------------------------------------------
-				$("#newBtn,#delBtn").button();
+				$("#newBtn,#delBtn,#serchBtn").button();
 
 				//--------------------------------------------------------------------
 				// 新增按钮点击
@@ -74,6 +74,13 @@
 						});
 					}
 				});
+				//--------------------------------------------------------------------
+				// 查询按钮点击
+				//--------------------------------------------------------------------
+				$("#serchBtn").click(function() {
+					$("#serchForm").attr('action', '${sc_ctx}/product/productBrand/list');
+					$("#serchForm").submit();
+				});
 			});
 		</script>
 	</head>
@@ -86,8 +93,29 @@
 		</div>
 		<div class="clear"></div>
 		
-		<form method="post" class="form cmxform" id="listForm">
 		
+		<form method="post" class="form cmxform" id="serchForm">
+		<%// ----------------------------------------------------------- %>
+		<%// 列表查询 %>
+		<%// ----------------------------------------------------------- %>
+		<div class="grid_8 suffix_8">
+			<table class="search_table">
+				<tr>
+					<td class="item_name" width="90px">品牌名称:</td>
+					<td class="item" width="180px">
+						<input type="text" name="name" value="${productBrand.name}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td class="item" width="90px" align="right">
+						<input id="serchBtn" type="button" class="submit" value="查询"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="clear"></div>
+		</form>
+		
+		
+		<form method="post" class="form cmxform" id="listForm">
 		<%// ----------------------------------------------------------- %>
 		<%// 列表操作 %>
 		<%// ----------------------------------------------------------- %>
@@ -108,7 +136,7 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						<th width="90">商品品牌名称</th>
+						<th width="90">品牌名称</th>
 						<th width="490">详细描述</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
