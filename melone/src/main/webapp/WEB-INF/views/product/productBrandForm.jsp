@@ -56,7 +56,7 @@
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">商品品牌名称:</td>
+					<td class="item_name" width="100px">品牌名称:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
