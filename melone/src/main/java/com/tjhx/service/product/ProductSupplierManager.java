@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.jpa.product.ProductSupplierJpaDao;
+import com.tjhx.dao.myBatis.product.ProductSupplierMyBatisDao;
 import com.tjhx.entity.product.ProductSupplier;
 import com.tjhx.service.ServiceException;
 
@@ -16,6 +17,7 @@ import com.tjhx.service.ServiceException;
 @Transactional(readOnly = true)
 public class ProductSupplierManager {
 	private ProductSupplierJpaDao productSupplierJpaDao;
+	private ProductSupplierMyBatisDao productSupplierMyBatisDao;
 
 	/**
 	 * 取得所有商品供应商信息
@@ -25,6 +27,16 @@ public class ProductSupplierManager {
 	public List<ProductSupplier> getAllProductSupplier() {
 		return (List<ProductSupplier>) productSupplierJpaDao.findAll(new Sort(
 				new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
+	 * 取得商品供应商信息(根据参数)
+	 * 
+	 * @param productSupplier
+	 * @return
+	 */
+	public List<ProductSupplier> getProductSupplierList(ProductSupplier productSupplier) {
+		return productSupplierMyBatisDao.getProductSupplierList(productSupplier);
 	}
 
 	/**
@@ -108,6 +120,11 @@ public class ProductSupplierManager {
 	@Autowired
 	public void setProductSupplierJpaDao(ProductSupplierJpaDao productSupplierJpaDao) {
 		this.productSupplierJpaDao = productSupplierJpaDao;
+	}
+
+	@Autowired
+	public void setProductSupplierMyBatisDao(ProductSupplierMyBatisDao productSupplierMyBatisDao) {
+		this.productSupplierMyBatisDao = productSupplierMyBatisDao;
 	}
 
 }

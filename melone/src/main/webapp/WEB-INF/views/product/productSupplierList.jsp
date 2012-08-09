@@ -31,7 +31,7 @@
 				//--------------------------------------------------------------------
 				// 按钮CSS
 				//--------------------------------------------------------------------
-				$("#newBtn,#delBtn").button();
+				$("#newBtn,#delBtn,#serchBtn").button();
 
 				//--------------------------------------------------------------------
 				// 新增按钮点击
@@ -74,6 +74,13 @@
 						});
 					}
 				});
+				//--------------------------------------------------------------------
+				// 查询按钮点击
+				//--------------------------------------------------------------------
+				$("#serchBtn").click(function() {
+					$("#serchForm").attr('action', '${sc_ctx}/product/productSupplier/list');
+					$("#serchForm").submit();
+				});
 			});
 		</script>
 	</head>
@@ -86,8 +93,43 @@
 		</div>
 		<div class="clear"></div>
 		
-		<form method="post" class="form cmxform" id="listForm">
 		
+		<form method="post" class="form cmxform" id="serchForm">
+		<%// ----------------------------------------------------------- %>
+		<%// 列表查询 %>
+		<%// ----------------------------------------------------------- %>
+		<div class="grid_13 suffix_3">
+			<table class="search_table">
+				<tr>
+					<td class="item_name" width="90px">供应商编号:</td>
+					<td class="item" width="180px">
+						<input type="text" name="id" value="${productSupplier.id}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td class="item_name" width="90px">供应商名称:</td>
+					<td class="item" width="180px">
+						<input type="text" name="name" value="${productSupplier.name}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name">电话号码:</td>
+					<td class="item">
+						<input type="text" name="telNum" value="${productSupplier.telNum}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td class="item_name">供应商地址:</td>
+					<td class="item">
+						<input type="text" name="addr" value="${productSupplier.addr}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td align="right">
+						<input id="serchBtn" type="button" class="submit" value="查询"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="clear"></div>
+		</form>
+		
+		
+		<form method="post" class="form cmxform" id="listForm">
 		<%// ----------------------------------------------------------- %>
 		<%// 列表操作 %>
 		<%// ----------------------------------------------------------- %>

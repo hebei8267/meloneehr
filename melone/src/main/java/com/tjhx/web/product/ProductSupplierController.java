@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,11 +31,18 @@ public class ProductSupplierController extends BaseController {
 	 * 
 	 * @param model
 	 * @return
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String productSupplierList_Action(Model model, HttpServletRequest request) {
-		List<ProductSupplier> productSupplierList = productSupplierManager.getAllProductSupplier();
+	public String productSupplierList_Action(Model model, HttpServletRequest request) throws IllegalAccessException,
+			InvocationTargetException {
+		ProductSupplier productSupplier = new ProductSupplier();
+		// 取得Request中的查询参数
+		BeanUtils.populate(productSupplier, request.getParameterMap());
+		List<ProductSupplier> productSupplierList = productSupplierManager.getProductSupplierList(productSupplier);
 
+		model.addAttribute("productSupplier", productSupplier);
 		model.addAttribute("productSupplierList", productSupplierList);
 
 		return "product/productSupplierList";
