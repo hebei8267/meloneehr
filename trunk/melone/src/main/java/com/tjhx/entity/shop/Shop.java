@@ -158,7 +158,7 @@ public class Shop extends IdEntity {
 	 * 
 	 * @return 仓库信息
 	 */
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "STORE_UUID")
 	public Store getStore() {
 		return store;
