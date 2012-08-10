@@ -20,7 +20,7 @@
 							<a href="#">用户</a>
 						</li>
 						<li>
-							<a href="#">角色</a>
+							<a href="${sc_ctx}/account/role/list">角色</a>
 						</li>
 					</ul>
 				</li>
