@@ -23,7 +23,7 @@ public class Function extends IdEntity {
 	private String funUrl;
 	/** 功能描述 */
 	private String descTxt;
-	/** 功能标记 */
+	/** 功能标记 0-菜单功能 */
 	private String funFlg;
 
 	/**
