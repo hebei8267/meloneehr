@@ -95,7 +95,7 @@
 
 
 	<!-- production/local development环境 -->
-	<beans profile="production,development">
+	<beans profile="production,development,test">
 		<context:property-placeholder
 			ignore-resource-not-found="true"
 			location="classpath*:/application.properties,
