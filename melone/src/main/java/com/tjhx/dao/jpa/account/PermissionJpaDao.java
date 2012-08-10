@@ -15,5 +15,5 @@ import com.tjhx.entity.account.Permission;
 
 public interface PermissionJpaDao extends CrudRepository<Permission, Integer> {
 	@Query("select perm from Permission perm left join perm.role role where role.roleName = :roleName")
-	public List<Permission> getPermissionByRoleName(@Param("roleName") String roleName);
+	public List<Permission> findPermissionByRoleName(@Param("roleName") String roleName);
 }

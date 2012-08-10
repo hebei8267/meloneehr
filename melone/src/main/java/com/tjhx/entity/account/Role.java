@@ -33,7 +33,7 @@ public class Role extends IdEntity {
 	/** 拥有权限信息集合 */
 	private Set<Permission> permissionSet = Sets.newHashSet();
 
-	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	// ##########################################################
 	/** 拥有资源菜单信息集合 */
 	private String[] funIds;
 	/** 非拥有资源菜单信息集合 */
