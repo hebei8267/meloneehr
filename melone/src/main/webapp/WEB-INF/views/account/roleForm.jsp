@@ -32,15 +32,22 @@
 					$("input[type='text'],textarea").each(function(i){
   						this.value = $.trim(this.value);
  					});
+					
+					// 保存选择资源菜单
+					var _funIdsItem = $("#funIds option");
+					for(var i = 0; i < _funIdsItem.length; i++) {
+						_funIdsItem[i].selected = true;
+					}
+					
 					$("#inputForm").attr("action", "${sc_ctx}/account/role/save");
 					$("#inputForm").submit();
 				});
 				
 				$("#lMove").click(function() {
-					moveShowItems('noPermissionIds', 'permissionIds');
+					moveShowItems('noFunIds', 'funIds');
 				});
 				$("#rMove").click(function() {
-					moveShowItems('permissionIds', 'noPermissionIds');
+					moveShowItems('funIds', 'noFunIds');
 				});
 			});
 			// 实现两个多选框的左右移动
@@ -102,25 +109,20 @@
 				<tr>
 					<td class="item_name" width="100px">权限管理:</td>
 					<td class="item">
-						<form:select path="noPermissionIds" multiple="true" class="text ui-widget-content ui-corner-all">
-							<form:option value="1" label="1"/>
-							<form:option value="2" label="2"/>
-							<form:option value="3" label="3"/>
-							<form:option value="4" label="4"/>
-							<form:option value="4" label="4"/>
-							<form:option value="4" label="4"/>
-							<form:option value="4" label="4"/>
-							<form:option value="4" label="4"/>
+						<form:select path="noFunIds" multiple="true" class="text ui-widget-content ui-corner-all" size="6">
+							<form:options items="${role.noFunList}" itemValue="uuid"  itemLabel="displayName"/>
 						</form:select>
 					</td>
 					<td width="120px" align="center">
 						<table>
-							<tr><td><input type="button" id="lMove" class="submit" value=">>" /></td></tr>
-							<tr><td><input type="button" id="rMove" class="submit" value="<<" /></td></tr>
+							<tr><td><input type="button" id="lMove" class="submit" value="->" /></td></tr>
+							<tr><td><input type="button" id="rMove" class="submit" value="<-" /></td></tr>
 						</table>
 					</td>
 					<td class="item">
-						<form:select path="permissionIds" multiple="true" class="text ui-widget-content ui-corner-all"></form:select>
+						<form:select path="funIds" multiple="true" class="text ui-widget-content ui-corner-all" size="6">
+							<form:options items="${role.funList}" itemValue="uuid" itemLabel="displayName"/>
+						</form:select>
 					</td>	
 				</tr>
 				<tr>
