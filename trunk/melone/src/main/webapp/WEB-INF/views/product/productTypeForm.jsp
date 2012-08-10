@@ -39,9 +39,7 @@
 	</head>
 	<body>
 		<%// 系统菜单  %>
-		<page:applyDecorator name="menu" >
-			 <page:param name="sysCfg">current</page:param>
-		</page:applyDecorator>
+		<page:applyDecorator name="menu" />
 		
 		<div class="grid_16 titleNav">
 			<h2><a>配置管理</a>&#8711; <a>商品相关</a>&#8711; <a>商品类型</a>&#8711;
