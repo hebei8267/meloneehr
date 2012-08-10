@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,12 +34,12 @@ public class RoleController extends BaseController {
 	 * @throws IllegalAccessException
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String roleList_Action(Model model, HttpServletRequest request) throws IllegalAccessException,
-			InvocationTargetException {
+	public String roleList_Action(@RequestParam(required = false, value = "name") String roleName, Model model,
+			HttpServletRequest request) {
 		Role role = new Role();
-		// 取得Request中的查询参数
-		BeanUtils.populate(role, request.getParameterMap());
-		List<Role> roleList = roleManager.getRoleList(role);
+
+		role.setName(roleName);
+		List<Role> roleList = roleManager.getRoleList(roleName);
 
 		model.addAttribute("role", role);
 		model.addAttribute("roleList", roleList);

@@ -2,6 +2,7 @@ package com.tjhx.service.account;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tjhx.dao.jpa.account.FunctionJpaDao;
 import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.dao.myBatis.account.PermissionMyBatisDao;
-import com.tjhx.dao.myBatis.account.RoleMyBatisDao;
 import com.tjhx.entity.account.Function;
 import com.tjhx.entity.account.Permission;
 import com.tjhx.entity.account.Role;
@@ -19,7 +19,6 @@ import com.tjhx.service.ServiceException;
 @Transactional(readOnly = true)
 public class RoleManager {
 	private RoleJpaDao roleJpaDao;
-	private RoleMyBatisDao roleMyBatisDao;
 	private FunctionJpaDao functionJpaDao;
 	private PermissionMyBatisDao permissionMyBatisDao;
 
@@ -38,8 +37,12 @@ public class RoleManager {
 	 * @param shop
 	 * @return
 	 */
-	public List<Role> getRoleList(Role role) {
-		return roleMyBatisDao.getRoleList(role);
+	public List<Role> getRoleList(String roleName) {
+		if (StringUtils.isBlank(roleName)) {
+			return (List<Role>) roleJpaDao.findAll();
+		} else {
+			return roleJpaDao.findByNameLike("%" + roleName + "%");
+		}
 	}
 
 	/**
@@ -122,11 +125,6 @@ public class RoleManager {
 	@Autowired
 	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
 		this.roleJpaDao = roleJpaDao;
-	}
-
-	@Autowired
-	public void setRoleMyBatisDao(RoleMyBatisDao roleMyBatisDao) {
-		this.roleMyBatisDao = roleMyBatisDao;
 	}
 
 	@Autowired
