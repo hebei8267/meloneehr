@@ -31,18 +31,22 @@ public class Role extends IdEntity {
 	/** 角色详细描述 */
 	private String descTxt;
 	/** 拥有权限信息集合 */
-	private String[] permissionIds;
-	/** 非拥有权限信息集合 */
-	private String[] noPermissionIds;
-	/** 权限信息集合 */
 	private Set<Permission> permissionSet = Sets.newHashSet();
+
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	/** 拥有资源菜单信息集合 */
+	private String[] funIds;
+	/** 非拥有资源菜单信息集合 */
+	private String[] noFunIds;
+	/** 全量功能资源信息集合 */
+	private List<Function> allFunList;
 
 	/**
 	 * 取得角色名称
 	 * 
 	 * @return 角色名称
 	 */
-	@Column(nullable = false, unique = true, length = 32)
+	@Column(nullable = false, length = 32)
 	public String getName() {
 		return name;
 	}
@@ -125,41 +129,81 @@ public class Role extends IdEntity {
 	}
 
 	/**
-	 * 取得拥有权限信息集合ID
+	 * 取得拥有资源菜单信息集合ID
 	 * 
-	 * @return 拥有权限集合ID
+	 * @return 拥有资源菜单集合ID
 	 */
 	@Transient
-	public String[] getPermissionIds() {
-		return permissionIds;
+	public String[] getFunIds() {
+		return funIds;
 	}
 
 	/**
-	 * 设置拥有权限信息集合ID
+	 * 设置拥有资源菜单信息集合ID
 	 * 
-	 * @param permissionSet 拥有权限信息集合ID
+	 * @param permissionSet 拥有资源菜单信息集合ID
 	 */
-	public void setPermissionIds(String[] permissionIds) {
-		this.permissionIds = permissionIds;
+	public void setFunIds(String[] funIds) {
+		this.funIds = funIds;
 	}
 
 	/**
-	 * 取得非拥有权限信息集合ID
+	 * 取得非拥有资源菜单信息集合ID
 	 * 
-	 * @return 非拥有权限信息集合ID
+	 * @return 非拥有资源菜单信息集合ID
 	 */
 	@Transient
-	public String[] getNoPermissionIds() {
-		return noPermissionIds;
+	public String[] getNoFunIds() {
+		return noFunIds;
 	}
 
 	/**
-	 * 设置非拥有权限信息集合ID
+	 * 设置非拥有资源菜单信息集合ID
 	 * 
-	 * @param noPermissionIds 非拥有权限信息集合ID
+	 * @param noPermissionIds 非拥有资源菜单信息集合ID
 	 */
-	public void setNoPermissionIds(String[] noPermissionIds) {
-		this.noPermissionIds = noPermissionIds;
+	public void setNoFunIds(String[] noFunIds) {
+		this.noFunIds = noFunIds;
+	}
+
+	/**
+	 * 取得该角色不包含的权限列表
+	 * 
+	 * @return
+	 */
+	@Transient
+	public List<Function> getNoFunList() {
+		if (null == permissionSet || permissionSet.size() == 0) {
+			return this.allFunList;
+		} else {
+			if (null != allFunList) {
+				List<Function> funList = Lists.newArrayList();
+				for (Permission permission : getPermissionSet()) {
+					funList.add(permission.getFunction());
+				}
+
+				this.allFunList.removeAll(funList);
+			}
+		}
+		return allFunList;
+	}
+
+	/**
+	 * 取得该角色包含的权限列表
+	 * 
+	 * @return
+	 */
+	@Transient
+	public List<Function> getFunList() {
+		List<Function> funList = Lists.newArrayList();
+		for (Permission permission : getPermissionSet()) {
+			funList.add(permission.getFunction());
+		}
+		return funList;
+	}
+
+	public void setAllFunList(List<Function> funList) {
+		this.allFunList = funList;
 	}
 
 }

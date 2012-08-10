@@ -1,15 +1,16 @@
 package com.tjhx.service.account;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tjhx.dao.jpa.account.FunctionJpaDao;
 import com.tjhx.dao.jpa.account.RoleJpaDao;
+import com.tjhx.dao.myBatis.account.PermissionMyBatisDao;
 import com.tjhx.dao.myBatis.account.RoleMyBatisDao;
+import com.tjhx.entity.account.Function;
 import com.tjhx.entity.account.Permission;
 import com.tjhx.entity.account.Role;
 import com.tjhx.service.ServiceException;
@@ -19,15 +20,16 @@ import com.tjhx.service.ServiceException;
 public class RoleManager {
 	private RoleJpaDao roleJpaDao;
 	private RoleMyBatisDao roleMyBatisDao;
+	private FunctionJpaDao functionJpaDao;
+	private PermissionMyBatisDao permissionMyBatisDao;
 
 	/**
-	 * 取得所有角色信息
+	 * 取得所有功能资源信息
 	 * 
-	 * @return 角色信息列表
+	 * @return 功能资源信息列表
 	 */
-	@SuppressWarnings("unchecked")
-	public List<Role> getAllRole() {
-		return (List<Role>) roleJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	public List<Function> getAllFunction() {
+		return (List<Function>) functionJpaDao.findAll();
 	}
 
 	/**
@@ -51,13 +53,13 @@ public class RoleManager {
 	}
 
 	/**
-	 * 取得角色信息
+	 * 删除角色信息
 	 * 
-	 * @param name 角色名称
-	 * @return 角色信息
+	 * @param uuid 角色编号
 	 */
-	public Role findByName(String name) {
-		return roleJpaDao.findByName(name);
+	@Transactional(readOnly = false)
+	public void delRoleByUuid(Integer uuid) {
+		roleJpaDao.delete(uuid);
 	}
 
 	/**
@@ -67,53 +69,53 @@ public class RoleManager {
 	 * @param permissionSet 资源访问权限集合
 	 */
 	@Transactional(readOnly = false)
-	public void updateRole(Role role, Set<Permission> permissionSet) {
+	public void updateRole(Role role) {
+		// 删除原有菜单资源
+		permissionMyBatisDao.delPermissionByRoleUuid(role.getUuid());
+
 		Role _role = roleJpaDao.findOne(role.getUuid());
 		if (null == _role) {
-			// TODO 角色不存在
-			throw new ServiceException();
+			// 角色不存在
+			throw new ServiceException("ERR_MSG_PDU_011");
 		}
-		role.setPermissionSet(permissionSet);
-		roleJpaDao.save(role);
+
+		// 添加新选中菜单资源
+		for (int i = 0; i < role.getFunIds().length; i++) {
+			Function _fun = functionJpaDao.findOne(Integer.valueOf(role.getFunIds()[i]));
+
+			Permission _per = new Permission();
+			_per.setRole(_role);
+			_per.setFunction(_fun);
+
+			_role.addPermission(_per);
+		}
+
+		// 角色名称
+		_role.setName(role.getName());
+		// 角色详细描述
+		_role.setDescTxt(role.getDescTxt());
+		roleJpaDao.save(_role);
 	}
 
 	/**
 	 * 添加新角色信息
 	 * 
 	 * @param role 角色信息
-	 * @param permissionSet 资源访问权限集合
+	 * @param funIds 资源编号集合
 	 */
 	@Transactional(readOnly = false)
-	public void saveNewRole(Role role, Set<Permission> permissionSet) {
-		Role _role = findByName(role.getName());
-		if (null != _role) {
-			// TODO 角色名称重复
-			throw new ServiceException();
+	public void addNewRole(Role role) {
+
+		for (int i = 0; i < role.getFunIds().length; i++) {
+			Function _fun = functionJpaDao.findOne(Integer.valueOf(role.getFunIds()[i]));
+
+			Permission _per = new Permission();
+			_per.setRole(role);
+			_per.setFunction(_fun);
+
+			role.addPermission(_per);
 		}
-		role.setPermissionSet(permissionSet);
 		roleJpaDao.save(role);
-	}
-
-	/**
-	 * 取得角色拥有的权限
-	 * 
-	 * @param roleName 角色名称
-	 * @return 权限列表
-	 */
-	public List<Permission> getPermissionByRoleName(String roleName) {
-		// TODO
-		return null;
-	}
-
-	/**
-	 * 取得角色未拥有的权限
-	 * 
-	 * @param roleName 角色名称
-	 * @return 权限列表
-	 */
-	public List<Permission> getNoPermissionByRoleName(String roleName) {
-		// TODO
-		return null;
 	}
 
 	@Autowired
@@ -124,6 +126,16 @@ public class RoleManager {
 	@Autowired
 	public void setRoleMyBatisDao(RoleMyBatisDao roleMyBatisDao) {
 		this.roleMyBatisDao = roleMyBatisDao;
+	}
+
+	@Autowired
+	public void setFunctionJpaDao(FunctionJpaDao functionJpaDao) {
+		this.functionJpaDao = functionJpaDao;
+	}
+
+	@Autowired
+	public void setPermissionMyBatisDao(PermissionMyBatisDao permissionMyBatisDao) {
+		this.permissionMyBatisDao = permissionMyBatisDao;
 	}
 
 }
