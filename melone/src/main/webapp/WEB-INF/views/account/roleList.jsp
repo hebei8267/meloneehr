@@ -163,8 +163,7 @@
 							${role.name}&nbsp;
 						</td>
 						<td>
-							// ？？？？？？？？？？？？？？？？？？？？？？
-							${role.descTxt}&nbsp;
+							${role.permissionNames}&nbsp;
 						</td>
 						<td align="center">
 							<a href="${sc_ctx}/account/role/edit/${role.uuid}">编辑</a>
