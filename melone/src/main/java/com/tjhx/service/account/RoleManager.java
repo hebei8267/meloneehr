@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.jpa.account.RoleJpaDao;
+import com.tjhx.dao.myBatis.account.RoleMyBatisDao;
 import com.tjhx.entity.account.Permission;
 import com.tjhx.entity.account.Role;
 import com.tjhx.service.ServiceException;
@@ -17,6 +18,7 @@ import com.tjhx.service.ServiceException;
 @Transactional(readOnly = true)
 public class RoleManager {
 	private RoleJpaDao roleJpaDao;
+	private RoleMyBatisDao roleMyBatisDao;
 
 	/**
 	 * 取得所有角色信息
@@ -26,6 +28,26 @@ public class RoleManager {
 	@SuppressWarnings("unchecked")
 	public List<Role> getAllRole() {
 		return (List<Role>) roleJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
+	 * 取得角色信息(根据参数)
+	 * 
+	 * @param shop
+	 * @return
+	 */
+	public List<Role> getRoleList(Role role) {
+		return roleMyBatisDao.getRoleList(role);
+	}
+
+	/**
+	 * 根据编号取得角色信息
+	 * 
+	 * @param uuid 角色编号
+	 * @return 角色信息
+	 */
+	public Role getRoleByUuid(Integer uuid) {
+		return roleJpaDao.findOne(uuid);
 	}
 
 	/**
@@ -98,4 +120,10 @@ public class RoleManager {
 	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
 		this.roleJpaDao = roleJpaDao;
 	}
+
+	@Autowired
+	public void setRoleMyBatisDao(RoleMyBatisDao roleMyBatisDao) {
+		this.roleMyBatisDao = roleMyBatisDao;
+	}
+
 }

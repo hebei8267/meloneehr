@@ -30,6 +30,10 @@ public class Role extends IdEntity {
 	private String name;
 	/** 角色详细描述 */
 	private String descTxt;
+	/** 拥有权限信息集合 */
+	private String[] permissionIds;
+	/** 非拥有权限信息集合 */
+	private String[] noPermissionIds;
 	/** 权限信息集合 */
 	private Set<Permission> permissionSet = Sets.newHashSet();
 
@@ -107,9 +111,9 @@ public class Role extends IdEntity {
 	}
 
 	/**
-	 * 取得权限集合名称(##,##,##)
+	 * 取得拥有权限集合名称(##,##,##)
 	 * 
-	 * @return 权限集合名称
+	 * @return 拥有权限集合名称
 	 */
 	@Transient
 	public String getPermissionNames() {
@@ -118,6 +122,44 @@ public class Role extends IdEntity {
 			permissionNameList.add(permission.getFunction().getDisplayName());
 		}
 		return StringUtils.join(permissionNameList, ",");
+	}
+
+	/**
+	 * 取得拥有权限信息集合ID
+	 * 
+	 * @return 拥有权限集合ID
+	 */
+	@Transient
+	public String[] getPermissionIds() {
+		return permissionIds;
+	}
+
+	/**
+	 * 设置拥有权限信息集合ID
+	 * 
+	 * @param permissionSet 拥有权限信息集合ID
+	 */
+	public void setPermissionIds(String[] permissionIds) {
+		this.permissionIds = permissionIds;
+	}
+
+	/**
+	 * 取得非拥有权限信息集合ID
+	 * 
+	 * @return 非拥有权限信息集合ID
+	 */
+	@Transient
+	public String[] getNoPermissionIds() {
+		return noPermissionIds;
+	}
+
+	/**
+	 * 设置非拥有权限信息集合ID
+	 * 
+	 * @param noPermissionIds 非拥有权限信息集合ID
+	 */
+	public void setNoPermissionIds(String[] noPermissionIds) {
+		this.noPermissionIds = noPermissionIds;
 	}
 
 }
