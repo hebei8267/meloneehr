@@ -94,6 +94,7 @@ public class RoleManager {
 		_role.setName(role.getName());
 		// 角色详细描述
 		_role.setDescTxt(role.getDescTxt());
+
 		roleJpaDao.save(_role);
 	}
 

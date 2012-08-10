@@ -137,7 +137,7 @@ public class Store extends IdEntity {
 	 * 
 	 * @return 仓库所属类型
 	 */
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "STORE_TYPE_UUID")
 	public StoreType getStoreType() {
 		return storeType;

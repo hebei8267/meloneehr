@@ -29,8 +29,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 功能资源
 	 */
-	// CascadeType.REFRESH级联刷新
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "FUN_UUID")
 	public Function getFunction() {
@@ -51,8 +50,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 角色
 	 */
-	// CascadeType.REFRESH级联刷新
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {

@@ -162,7 +162,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户关联角色
 	 */
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {
 		return role;
@@ -182,8 +182,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户所属门店
 	 */
-	// CascadeType.REFRESH级联刷新
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "SHOP_UUID")
 	public Shop getShop() {
