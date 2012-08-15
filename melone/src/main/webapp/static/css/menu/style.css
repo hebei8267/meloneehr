@@ -36,7 +36,7 @@
 #nav .current a, #nav li:hover > a {
     background:#7788aa url(./images/bg.png) repeat-x 0 -20px;
     color:#000;
-    border-top:1px solid #f8f8f8;
+    /*border-top:1px solid #f8f8f8;*/
 
     box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
     -moz-box-shadow:0 2px 2px rgba(0,0,0, .7);
