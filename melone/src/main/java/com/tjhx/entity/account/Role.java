@@ -90,7 +90,7 @@ public class Role extends IdEntity {
 	// CascadeType.REMOVE级联删除：对order对象删除也对items里的对象也会删除。对应EntityManager的remove方法
 	// FetchType.LAZY表示懒加载。对于xxxtoMany时即获得多的一方fetch的默认值是FetchType.LAZY懒加载。对于xxxtoOne时即获得一的一方fetch的默认值是FetchType.EAGER立即加载
 	// mappedBy表示关系统被维护端，它的值是关系维护端维护关系的属性
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "role")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
 	// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public Set<Permission> getPermissionSet() {
 		return permissionSet;
@@ -111,7 +111,10 @@ public class Role extends IdEntity {
 	 * @param permission 权限信息
 	 */
 	public void addPermission(Permission permission) {
-		permissionSet.add(permission);
+		if (!permissionSet.contains(permission)) {
+			permissionSet.add(permission);
+		}
+
 	}
 
 	/**

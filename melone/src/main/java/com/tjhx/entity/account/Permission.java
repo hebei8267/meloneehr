@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import com.tjhx.entity.IdEntity;
 
 /**
@@ -29,7 +31,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 功能资源
 	 */
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "FUN_UUID")
 	public Function getFunction() {
@@ -64,6 +66,16 @@ public class Permission extends IdEntity {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Permission)) {
+			return false;
+		}
+		Permission rhs = (Permission) obj;
+		return new EqualsBuilder().append(this.function.getUuid(), rhs.function.getUuid())
+				.append(this.role.getUuid(), rhs.role.getUuid()).isEquals();
 	}
 
 }
