@@ -77,6 +77,7 @@ public class RoleManager {
 		permissionMyBatisDao.delPermissionByRoleUuid(role.getUuid());
 
 		Role _role = roleJpaDao.findOne(role.getUuid());
+
 		if (null == _role) {
 			// 角色不存在
 			throw new ServiceException("ERR_MSG_PDU_011");
