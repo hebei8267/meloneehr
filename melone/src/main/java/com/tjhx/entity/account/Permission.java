@@ -1,6 +1,5 @@
 package com.tjhx.entity.account;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -52,7 +51,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 角色
 	 */
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {
