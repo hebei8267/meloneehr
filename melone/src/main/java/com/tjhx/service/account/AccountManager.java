@@ -40,6 +40,16 @@ public class AccountManager {
 	}
 
 	/**
+	 * 删除用户信息
+	 * 
+	 * @param uuid User编号
+	 */
+	@Transactional(readOnly = false)
+	public void delUserByUuid(Integer uuid) {
+		userJpaDao.delete(uuid);
+	}
+
+	/**
 	 * 更新用户信息
 	 * 
 	 * @param user 用户信息
