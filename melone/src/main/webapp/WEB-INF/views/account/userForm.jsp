@@ -11,24 +11,45 @@
 			$().ready(function() {
 				$("#inputForm").validate({
 					rules: {
-						// ？？？？？？？？？？？？？？？？？？？？？？
 						// 添加表单效验
+						loginName: {
+							required: true,
+							maxlength: 32
+						},
+						passWord: {
+							minlength: 6,
+							maxlength: 16
+						},
+						passWord2: {
+							equalTo: "#passWord"
+						},
+						name: {
+							required: true,
+							maxlength: 32
+						},
+						roleUuid: "required",
+						shopId: "required",
+						descTxt: {
+							maxlength: 255
+						}
 					}
 				});
-
+				<%// 新增用户时需效验【用户密码】必输入%>
+				<c:if test="${empty user.uuid}">
+				$("#passWord").rules("add",{required : true});
+				</c:if>
+				
 				$("#saveBtn,#cancelBtn").button();
 				
 				$("#cancelBtn").click(function() {
-					// ？？？？？？？？？？？？？？？？？？？？？？
-					$(location).attr('href', '${sc_ctx}/user/list');
+					$(location).attr('href', '${sc_ctx}/account/user/list');
 				});
 
 				$("#saveBtn").click(function() {
 					$("input[type='text'],textarea").each(function(i){
   						this.value = $.trim(this.value);
  					});
-					// ？？？？？？？？？？？？？？？？？？？？？？
-					$("#inputForm").attr("action", "${sc_ctx}/user/save");
+					$("#inputForm").attr("action", "${sc_ctx}/account/user/save");
 					$("#inputForm").submit();
 				});
 			});
@@ -39,8 +60,7 @@
 		<page:applyDecorator name="menu" />
 
 		<div class="grid_16 titleNav">
-			// ？？？？？？？？？？？？？？？？？？？？？？
-			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a>&#8711;
+			<h2><a>配置管理</a>&#8711; <a>安全相关</a>&#8711; <a>用户</a>&#8711;
 			<c:if test="${empty user.uuid}">
 			新增
 			</c:if>
@@ -55,81 +75,57 @@
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="uuid" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="createDate" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="createUserId" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="updateDate" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="updateUserId" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="version" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="descTxt" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="email" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
-					<td class="item">
-						<form:input path="firstLoginFlg" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">:</td>
+					<td class="item_name" width="100px">登录名称:</td>
 					<td class="item">
 						<form:input path="loginName" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">:</td>
+					<td class="item_name" width="100px">登录密码:</td>
+					<td class="item">
+						<input id="passWord" name="passWord" class="text ui-widget-content ui-corner-all" type="password" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">确认密码:</td>
+					<td class="item">
+						<input id="passWord2" name="passWord2" class="text ui-widget-content ui-corner-all" type="password" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">用户姓名:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">:</td>
+					<td class="item_name" width="100px">角色:</td>
 					<td class="item">
-						<form:input path="passWord" class="text ui-widget-content ui-corner-all"/>
+						<form:select path="roleUuid" class="text ui-widget-content ui-corner-all">
+							<form:option value="" label="请选择......"/>
+							<form:options items="${roleList}" itemValue="uuid"  itemLabel="name"/>
+						</form:select>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">:</td>
+					<td class="item_name" width="100px">门店:</td>
 					<td class="item">
-						<form:input path="shopId" class="text ui-widget-content ui-corner-all"/>
+						<form:select path="shopId" class="text ui-widget-content ui-corner-all">
+							<form:option value="" label="请选择......"/>
+							<form:options items="${shopList}" itemValue="id"  itemLabel="name"/>
+						</form:select>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">Email地址:</td>
+					<td class="item">
+						<form:input path="email" class="text ui-widget-content ui-corner-all"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">详细描述:</td>
+					<td class="item">
+						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>

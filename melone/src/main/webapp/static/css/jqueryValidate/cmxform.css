@@ -13,4 +13,5 @@ div.error { display: none; }
 input.checkbox { border: none }
 /*input:focus { border: 1px dotted black; }*/
 input.error { border: 1px dotted red; }
+select.error { border: 1px dotted red; }
 form.cmxform .gray * { color: gray; }

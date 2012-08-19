@@ -7,9 +7,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.dao.jpa.account.UserJpaDao;
+import com.tjhx.dao.jpa.shop.ShopJpaDao;
 import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
+import com.tjhx.entity.shop.Shop;
 import com.tjhx.service.ServiceException;
 
 /**
@@ -19,6 +22,8 @@ import com.tjhx.service.ServiceException;
 @Transactional(readOnly = true)
 public class AccountManager {
 	private UserJpaDao userJpaDao;
+	private ShopJpaDao shopJpaDao;
+	private RoleJpaDao roleJpaDao;
 
 	/**
 	 * 取得所有用户信息
@@ -70,21 +75,36 @@ public class AccountManager {
 	 * 添加新用户信息
 	 * 
 	 * @param user 用户信息
-	 * @param role 角色名称
 	 */
 	@Transactional(readOnly = false)
-	public void saveNewUser(User user, Role role) {
-		User _user = findByLoginName(user.getLoginName());
-		if (null != _user) {
-			// TODO 用户登录名重复
-			throw new ServiceException();
+	public void addNewUser(User user) {
+
+		User _dbUser = findByLoginName(user.getLoginName());
+		// 该用户已存在!
+		if (null != _dbUser) {
+			throw new ServiceException("ERR_MSG_ACC_012");
 		}
-		user.setRole(role);
+
+		Role _dbRole = roleJpaDao.findOne(user.getRoleUuid());
+		user.setRole(_dbRole);
+		Shop _dbShop = shopJpaDao.findById(user.getShopId());
+		user.setShop(_dbShop);
+
 		userJpaDao.save(user);
 	}
 
 	@Autowired
 	public void setUserJpaDao(UserJpaDao userJpaDao) {
 		this.userJpaDao = userJpaDao;
+	}
+
+	@Autowired
+	public void setShopJpaDao(ShopJpaDao shopJpaDao) {
+		this.shopJpaDao = shopJpaDao;
+	}
+
+	@Autowired
+	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
+		this.roleJpaDao = roleJpaDao;
 	}
 }

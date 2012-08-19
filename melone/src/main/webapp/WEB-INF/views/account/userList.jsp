@@ -198,9 +198,6 @@
 						<td>
 							${user.roleUuid}&nbsp;
 						</td>
-						<td>
-							${user.shopUuid}&nbsp;
-						</td>
 						<td align="center">
 							<a href="${sc_ctx}/account/user/edit/${user.uuid}">编辑</a>
 						</td>
