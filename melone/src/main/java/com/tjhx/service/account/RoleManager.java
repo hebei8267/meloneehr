@@ -89,7 +89,7 @@ public class RoleManager {
 
 		if (null == _role) {
 			// 角色不存在
-			throw new ServiceException("ERR_MSG_ACC_011");
+			throw new ServiceException("ERR_MSG_ACC_002");
 		}
 
 		// 添加新选中菜单资源

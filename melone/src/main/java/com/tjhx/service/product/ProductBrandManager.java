@@ -82,7 +82,7 @@ public class ProductBrandManager {
 		ProductBrand _dbProductBrand = productBrandJpaDao.findOne(productBrand.getUuid());
 		if (null == _dbProductBrand) {
 			// 商品品牌不存在!
-			throw new ServiceException("ERR_MSG_PDU_007");
+			throw new ServiceException("ERR_MSG_PDU_002");
 		}
 
 		_dbProductBrand.setName(productBrand.getName());

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -138,6 +139,29 @@ public class AccountController extends BaseController {
 	}
 
 	/**
+	 * 编辑用户信息
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "user/edit/{id}")
+	public String editUser_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+
+		User user = accountManager.getUserByUuid(id);
+		if (null == user) {
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/user/list";
+		} else {
+			model.addAttribute("user", user);
+
+			// 初始化[角色信息]/[门店信息]下拉菜单
+			initUserSelect(model);
+
+			return "account/userForm";
+		}
+
+	}
+
+	/**
 	 * 新增/修改 用户信息
 	 * 
 	 * @param user
@@ -167,12 +191,12 @@ public class AccountController extends BaseController {
 				return "account/userForm";
 			}
 		} else {// 修改操作
-			// try {
-			// accountManager.updateUser(user);
-			// } catch (ServiceException ex) {
-			// // 添加错误消息
-			// addInfoMsg(model, ex.getMessage());
-			// }
+			try {
+				accountManager.updateUser(user);
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+			}
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/account/user/list";

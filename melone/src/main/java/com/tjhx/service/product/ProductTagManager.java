@@ -70,7 +70,7 @@ public class ProductTagManager {
 		ProductTag _dbProductTag = productTagJpaDao.findOne(productTag.getUuid());
 		if (null == _dbProductTag) {
 			// 商品标签不存在!
-			throw new ServiceException("ERR_MSG_PDU_006");
+			throw new ServiceException("ERR_MSG_PDU_001");
 		}
 
 		_dbProductTag.setName(productTag.getName());
