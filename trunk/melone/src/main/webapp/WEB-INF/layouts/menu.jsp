@@ -17,7 +17,7 @@
 					<a href="#">安全相关</a>
 					<ul>
 						<li>
-							<a href="#">用户</a>
+							<a href="${sc_ctx}/account/user/list">用户</a>
 						</li>
 						<li>
 							<a href="${sc_ctx}/account/role/list">角色</a>

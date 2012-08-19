@@ -1,5 +1,8 @@
 package com.tjhx.web.account;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +61,51 @@ public class AccountController extends BaseController {
 		}
 		return false;
 	}
-	// User u=new User();
-	// u.setLoginName("sa");
-	// u.setPassWord("sasasa");
-	// u.setName("sa");
-	// u.setFirstLoginFlg(false);
-	// accountManager.saveNewUser(u, null);
+
+	/**
+	 * 取得用户信息列表
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = { "user/list", "user" })
+	public String userList_Action(Model model, HttpServletRequest request) {
+		List<User> userList = accountManager.getAllUser();
+
+		model.addAttribute("userList", userList);
+
+		return "account/userList";
+	}
+
+	/**
+	 * 删除用户信息
+	 * 
+	 * @param ids
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "user/del")
+	public String delUser_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
+		String[] idArray = ids.split(",");
+		for (int i = 0; i < idArray.length; i++) {
+			accountManager.delUserByUuid(Integer.parseInt(idArray[i]));
+		}
+
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/account/user/list";
+	}
+
+	/**
+	 * 新增用户初始化
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "user/new")
+	public String initUser_Action(Model model, HttpServletRequest request) {
+
+		User user = new User();
+		model.addAttribute("user", user);
+
+		return "account/userForm";
+	}
 }
