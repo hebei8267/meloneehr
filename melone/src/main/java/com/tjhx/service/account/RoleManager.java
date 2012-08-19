@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.jpa.account.FunctionJpaDao;
-import com.tjhx.dao.jpa.account.PermissionJpaDao;
 import com.tjhx.dao.jpa.account.RoleJpaDao;
+import com.tjhx.dao.myBatis.account.PermissionMyBatisDao;
 import com.tjhx.entity.account.Function;
 import com.tjhx.entity.account.Permission;
 import com.tjhx.entity.account.Role;
@@ -20,7 +20,7 @@ import com.tjhx.service.ServiceException;
 public class RoleManager {
 	private RoleJpaDao roleJpaDao;
 	private FunctionJpaDao functionJpaDao;
-	private PermissionJpaDao permissionJpaDao;
+	private PermissionMyBatisDao permissionMyBatisDao;
 
 	/**
 	 * 取得所有功能资源信息
@@ -73,6 +73,8 @@ public class RoleManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateRole(Role role) {
+		// 删除原有菜单资源
+		permissionMyBatisDao.delPermissionByRoleUuid(role.getUuid());
 
 		Role _role = roleJpaDao.findOne(role.getUuid());
 
@@ -80,10 +82,6 @@ public class RoleManager {
 			// 角色不存在
 			throw new ServiceException("ERR_MSG_PDU_011");
 		}
-
-		// 删除原有菜单资源
-		permissionJpaDao.delete(_role.getPermissionSet());// 执行SQL
-		_role.delAllPermission();// 断开关联
 
 		// 添加新选中菜单资源
 		for (int i = 0; i < role.getFunIds().length; i++) {
@@ -136,8 +134,7 @@ public class RoleManager {
 	}
 
 	@Autowired
-	public void setPermissionJpaDao(PermissionJpaDao permissionJpaDao) {
-		this.permissionJpaDao = permissionJpaDao;
+	public void setPermissionMyBatisDao(PermissionMyBatisDao permissionMyBatisDao) {
+		this.permissionMyBatisDao = permissionMyBatisDao;
 	}
-
 }
