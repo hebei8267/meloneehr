@@ -69,7 +69,7 @@ public class ProductTypeManager {
 		ProductType _dbProductType = productTypeJpaDao.findOne(productType.getUuid());
 		if (null == _dbProductType) {
 			// 商品类型不存在!
-			throw new ServiceException("ERR_MSG_PDU_008");
+			throw new ServiceException("ERR_MSG_PDU_003");
 		}
 
 		_dbProductType.setName(productType.getName());

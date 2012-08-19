@@ -69,7 +69,7 @@ public class ProductSupplierManager {
 		ProductSupplier _dbProductSupplier = productSupplierJpaDao.findById(productSupplier.getId());
 		// 该商品供应商已存在!
 		if (null != _dbProductSupplier) {
-			throw new ServiceException("ERR_MSG_PDU_009");
+			throw new ServiceException("ERR_MSG_PDU_004");
 		}
 
 		productSupplierJpaDao.save(productSupplier);
@@ -88,7 +88,7 @@ public class ProductSupplierManager {
 		ProductSupplier _dbProductSupplier = productSupplierJpaDao.findOne(productSupplier.getUuid());
 		if (null == _dbProductSupplier) {
 			// 商品供应商不存在!
-			throw new ServiceException("ERR_MSG_PDU_010");
+			throw new ServiceException("ERR_MSG_PDU_005");
 		}
 
 		// 供应商名称-汉字

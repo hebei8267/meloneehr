@@ -77,7 +77,12 @@
 				<tr>
 					<td class="item_name" width="100px">登录名称:</td>
 					<td class="item">
+					<c:if test="${empty user.uuid}" >
 						<form:input path="loginName" class="text ui-widget-content ui-corner-all"/>
+					</c:if>
+					<c:if test="${!empty user.uuid}" >
+						&nbsp;${user.loginName}
+					</c:if>
 					</td>
 				</tr>
 				<tr>

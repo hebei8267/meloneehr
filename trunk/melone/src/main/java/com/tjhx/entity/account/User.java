@@ -232,7 +232,15 @@ public class User extends IdEntity {
 	 */
 	@Transient
 	public Integer getRoleUuid() {
-		return roleUuid;
+		if (null != roleUuid) {
+			return roleUuid;
+		}
+
+		if (null != this.getRole()) {
+			return this.getRole().getUuid();
+		}
+
+		return null;
 	}
 
 	/**
