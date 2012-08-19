@@ -8,12 +8,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
+import com.tjhx.entity.shop.Shop;
 import com.tjhx.globals.Constants;
+import com.tjhx.service.ServiceException;
 import com.tjhx.service.account.AccountManager;
+import com.tjhx.service.account.RoleManager;
+import com.tjhx.service.shop.ShopManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -21,6 +27,10 @@ import com.tjhx.web.BaseController;
 public class AccountController extends BaseController {
 	@Autowired
 	private AccountManager accountManager;
+	@Autowired
+	private RoleManager roleManager;
+	@Autowired
+	private ShopManager shopManager;
 
 	/**
 	 * 用户登录
@@ -106,6 +116,65 @@ public class AccountController extends BaseController {
 		User user = new User();
 		model.addAttribute("user", user);
 
+		// 初始化[角色信息]/[门店信息]下拉菜单
+		initUserSelect(model);
+
 		return "account/userForm";
+	}
+
+	/**
+	 * 初始化[角色信息]/[门店信息]下拉菜单
+	 * 
+	 * @param model
+	 */
+	private void initUserSelect(Model model) {
+		// 取得角色信息
+		List<Role> roleList = roleManager.getAllRole();
+		model.addAttribute("roleList", roleList);
+
+		// 取得所有门店信息
+		List<Shop> shopList = shopManager.getAllShop();
+		model.addAttribute("shopList", shopList);
+	}
+
+	/**
+	 * 新增/修改 用户信息
+	 * 
+	 * @param user
+	 * @param model
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
+	@RequestMapping(value = "user/save")
+	public String saveUser_Action(@ModelAttribute("user") User user, Model model, HttpServletRequest request) {
+
+		if (null == user.getUuid()) {// 新增操作
+
+			try {
+				accountManager.addNewUser(user);
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+
+				// 新增用户初始化-清空登录名称
+				user.setLoginName(null);
+				model.addAttribute("user", user);
+
+				// 初始化[角色信息]/[门店信息]下拉菜单
+				initUserSelect(model);
+
+				return "account/userForm";
+			}
+		} else {// 修改操作
+			// try {
+			// accountManager.updateUser(user);
+			// } catch (ServiceException ex) {
+			// // 添加错误消息
+			// addInfoMsg(model, ex.getMessage());
+			// }
+		}
+
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/account/user/list";
 	}
 }

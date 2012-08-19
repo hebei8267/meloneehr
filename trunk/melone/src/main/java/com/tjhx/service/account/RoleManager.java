@@ -32,9 +32,18 @@ public class RoleManager {
 	}
 
 	/**
+	 * 取得角色信息
+	 * 
+	 * @return 角色信息列表
+	 */
+	public List<Role> getAllRole() {
+		return (List<Role>) roleJpaDao.findAll();
+	}
+
+	/**
 	 * 取得角色信息(根据参数)
 	 * 
-	 * @param shop
+	 * @param roleName
 	 * @return
 	 */
 	public List<Role> getRoleList(String roleName) {
@@ -80,7 +89,7 @@ public class RoleManager {
 
 		if (null == _role) {
 			// 角色不存在
-			throw new ServiceException("ERR_MSG_PDU_011");
+			throw new ServiceException("ERR_MSG_ACC_011");
 		}
 
 		// 添加新选中菜单资源

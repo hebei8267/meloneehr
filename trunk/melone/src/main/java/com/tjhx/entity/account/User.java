@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.NaturalId;
 
 import com.tjhx.entity.IdEntity;
@@ -35,13 +37,16 @@ public class User extends IdEntity {
 	/** 用户详细描述 */
 	private String descTxt;
 	/** 第一次登录标记 */
-	private boolean firstLoginFlg;
+	private boolean firstLoginFlg = true;
 	/** 用户关联角色 */
 	private Role role;
 	/** 用户所属门店 */
 	private Shop shop;
 	/** 用户所属门店编号 */
 	private String shopId;
+	// ----------------------------------
+	/** 用户关联角色对象唯一标识 */
+	private Integer roleUuid;
 
 	/**
 	 * 取得登录名称
@@ -218,6 +223,25 @@ public class User extends IdEntity {
 	 */
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
+	}
+
+	/**
+	 * 取得用户关联角色对象唯一标识
+	 * 
+	 * @return 用户关联角色对象唯一标识
+	 */
+	@Transient
+	public Integer getRoleUuid() {
+		return roleUuid;
+	}
+
+	/**
+	 * 设置用户关联角色对象唯一标识
+	 * 
+	 * @param roleUuid 用户关联角色对象唯一标识
+	 */
+	public void setRoleUuid(Integer roleUuid) {
+		this.roleUuid = roleUuid;
 	}
 
 }
