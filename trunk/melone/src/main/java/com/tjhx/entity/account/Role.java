@@ -118,19 +118,6 @@ public class Role extends IdEntity {
 	}
 
 	/**
-	 * 删除权限信息--断开关联
-	 * 
-	 * @param permission 权限信息
-	 */
-	public void delAllPermission() {
-		for (Permission permission : permissionSet) {
-			permission.setRole(null);
-			permission.setFunction(null);
-		}
-		permissionSet.clear();
-	}
-
-	/**
 	 * 取得拥有权限集合名称(##,##,##)
 	 * 
 	 * @return 拥有权限集合名称
