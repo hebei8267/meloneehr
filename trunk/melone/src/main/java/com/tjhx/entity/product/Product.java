@@ -200,7 +200,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品品牌
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_BRAND_UUID")
 	public ProductBrand getProductBrand() {
 		return ProductBrand;
@@ -220,7 +220,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品类型
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_TYPE_UUID")
 	public ProductType getProductType() {
 		return ProductType;
@@ -240,7 +240,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品标签
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_TAG_UUID")
 	public ProductTag getProductTag() {
 		return ProductTag;
@@ -260,7 +260,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品供应商
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_SUPPLIER_UUID")
 	public ProductSupplier getProductSupplier() {
 		return ProductSupplier;

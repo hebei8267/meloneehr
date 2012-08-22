@@ -58,7 +58,7 @@
 
 						$("#__del-confirm").dialog({
 							resizable: false,
-							height:185,
+							height: 190,
 							modal: true,
 							buttons: {
 								"删除": function() {
