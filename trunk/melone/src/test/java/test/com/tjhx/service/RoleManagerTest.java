@@ -18,11 +18,18 @@ public class RoleManagerTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void initFunction() {
+		Function f9 = new Function();
+		f9.setDisplayName("用户");
+		f9.setFunUrl("account/user/list");
+		f9.setFunFlg("0");
+		functionJpaDao.save(f9);
+
 		Function f1 = new Function();
 		f1.setDisplayName("角色");
 		f1.setFunUrl("account/role/list");
 		f1.setFunFlg("0");
 		functionJpaDao.save(f1);
+
 		// ------------------------------------------------------
 		Function f2 = new Function();
 		f2.setDisplayName("商品品牌");

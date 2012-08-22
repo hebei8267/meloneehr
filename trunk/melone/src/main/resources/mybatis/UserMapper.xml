@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.myBatis.account.UserMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_User" type="com.tjhx.entity.account.User">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="desc_txt" property="descTxt" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="first_login_flg" property="firstLoginFlg" jdbcType="BIT"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="VARCHAR"/>
+        <result column="tel_num" property="telNum" jdbcType="VARCHAR"/>
+        
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	u.uuid ,
+    	u.create_date ,
+    	u.create_user_id ,
+    	u.update_date ,
+    	u.update_user_id ,
+    	u.version ,
+    	u.desc_txt ,
+    	u.email ,
+    	u.first_login_flg ,
+    	u.login_name ,
+    	u.name ,
+    	u.pass_word ,
+    	u.shop_id ,
+    	u.tel_num ,
+    	u.role_uuid ,
+    	u.shop_uuid ,
+    	shop.name AS shop_name ,
+		role.name AS role_name
+	]]>
+  	</sql>
+  	
+  	<!-- 查询条件 -->
+  	<sql id="Where_Clause" >
+  		<where>
+  			<if test="loginName != null and loginName !='' ">
+  			u.login_name LIKE '%${loginName}%'
+  			</if>
+  			<if test="name != null and name !='' ">
+  			AND u.name LIKE '%${name}%'
+  			</if>
+  			<if test="telNum != null and telNum !='' ">
+  			AND u.tel_num = #{telNum}
+  			</if>
+  			<if test="shopName != null and shopName !='' ">
+  			AND shop.name LIKE '%${shopName}%'
+  			</if>
+  			<if test="roleName != null and roleName !='' ">
+  			AND role.name LIKE '%${roleName}%'
+  			</if>
+  			<if test="true">
+  			AND u.shop_uuid = shop.uuid
+  			</if>
+  			<if test="true">
+  			AND u.role_uuid = role.uuid
+  			</if>
+	  	</where>
+  	</sql>
+  	
+  	<!-- 取得t_user信息(根据参数) -->
+	<select id="getUserList" parameterType="com.tjhx.entity.account.User" resultMap="Result_Map_User">
+		select
+		<include refid="Base_Column_List" />
+		from t_user u, t_shop shop, t_role role
+		<include refid="Where_Clause" />
+	</select>
+</mapper>

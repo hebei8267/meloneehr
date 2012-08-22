@@ -40,6 +40,7 @@ public class ProductSupplierController extends BaseController {
 		ProductSupplier productSupplier = new ProductSupplier();
 		// 取得Request中的查询参数
 		BeanUtils.populate(productSupplier, request.getParameterMap());
+		// 取得商品供应商信息(根据参数)
 		List<ProductSupplier> productSupplierList = productSupplierManager.getProductSupplierList(productSupplier);
 
 		model.addAttribute("productSupplier", productSupplier);
