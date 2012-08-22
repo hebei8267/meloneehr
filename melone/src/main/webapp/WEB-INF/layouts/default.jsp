@@ -29,7 +29,7 @@
 	</head>
 	<body>
 	<div id="__del-confirm" title="删除确认？" style="display:none;">
-		<p>确定要删除选择的记录信息吗？</p>
+		<p>确定要删除选择的信息项吗？</p>
 	</div>
 	<div id="__frame_main">
 		<div id="__frame_content">

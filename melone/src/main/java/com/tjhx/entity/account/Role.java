@@ -84,10 +84,10 @@ public class Role extends IdEntity {
 	 * @return 权限信息集合
 	 */
 	// cascade表示级联操作
-	// CascadeType.MERGE级联更新：若items属性修改了那么order对象保存时同时修改items里的对象。对应EntityManager的merge方法
-	// CascadeType.PERSIST级联刷新：获取order对象里也同时也重新获取最新的items时的对象。对应EntityManager的refresh(object)方法有效。即会重新查询数据库里的最新数据
-	// CascadeType.REFRESH级联保存：对order对象保存时也对items里的对象也会保存。对应EntityManager的presist方法
-	// CascadeType.REMOVE级联删除：对order对象删除也对items里的对象也会删除。对应EntityManager的remove方法
+	// CascadeType.PERSIST级联保存
+	// CascadeType.MERGE级联更新
+	// CascadeType.REMOVE级联删除
+	// CascadeType.REFRESH级联刷新
 	// FetchType.LAZY表示懒加载。对于xxxtoMany时即获得多的一方fetch的默认值是FetchType.LAZY懒加载。对于xxxtoOne时即获得一的一方fetch的默认值是FetchType.EAGER立即加载
 	// mappedBy表示关系统被维护端，它的值是关系维护端维护关系的属性
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
