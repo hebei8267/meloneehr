@@ -26,22 +26,22 @@
 	<!-- 查询结果字段 -->
 	<sql id="Base_Column_List" >
 	<![CDATA[
-    	u.uuid ,
-    	u.create_date ,
-    	u.create_user_id ,
-    	u.update_date ,
-    	u.update_user_id ,
-    	u.version ,
-    	u.desc_txt ,
-    	u.email ,
-    	u.first_login_flg ,
-    	u.login_name ,
-    	u.name ,
-    	u.pass_word ,
-    	u.shop_id ,
-    	u.tel_num ,
-    	u.role_uuid ,
-    	u.shop_uuid ,
+    	user.uuid ,
+    	user.create_date ,
+    	user.create_user_id ,
+    	user.update_date ,
+    	user.update_user_id ,
+    	user.version ,
+    	user.desc_txt ,
+    	user.email ,
+    	user.first_login_flg ,
+    	user.login_name ,
+    	user.name ,
+    	user.pass_word ,
+    	user.shop_id ,
+    	user.tel_num ,
+    	user.role_uuid ,
+    	user.shop_uuid ,
     	shop.name AS shop_name ,
 		role.name AS role_name
 	]]>
@@ -51,13 +51,13 @@
   	<sql id="Where_Clause" >
   		<where>
   			<if test="loginName != null and loginName !='' ">
-  			u.login_name LIKE '%${loginName}%'
+  			user.login_name LIKE '%${loginName}%'
   			</if>
   			<if test="name != null and name !='' ">
-  			AND u.name LIKE '%${name}%'
+  			AND user.name LIKE '%${name}%'
   			</if>
   			<if test="telNum != null and telNum !='' ">
-  			AND u.tel_num = #{telNum}
+  			AND user.tel_num = #{telNum}
   			</if>
   			<if test="shopName != null and shopName !='' ">
   			AND shop.name LIKE '%${shopName}%'
@@ -66,10 +66,10 @@
   			AND role.name LIKE '%${roleName}%'
   			</if>
   			<if test="true">
-  			AND u.shop_uuid = shop.uuid
+  			AND user.shop_uuid = shop.uuid
   			</if>
   			<if test="true">
-  			AND u.role_uuid = role.uuid
+  			AND user.role_uuid = role.uuid
   			</if>
 	  	</where>
   	</sql>
@@ -78,7 +78,7 @@
 	<select id="getUserList" parameterType="com.tjhx.entity.account.User" resultMap="Result_Map_User">
 		select
 		<include refid="Base_Column_List" />
-		from t_user u, t_shop shop, t_role role
+		from t_user user, t_shop shop, t_role role
 		<include refid="Where_Clause" />
 	</select>
 </mapper>
