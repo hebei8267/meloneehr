@@ -102,27 +102,34 @@
 		<%// ----------------------------------------------------------- %>
 		<%// 列表查询 %>
 		<%// ----------------------------------------------------------- %>
-		<div class="grid_12 suffix_4">
+		<div class="grid_13 suffix_3">
 			<table class="search_table">
 				<tr>
-					<td class="item_name" width="90px">门店编号:</td>
+					<td class="item_name" width="90px">登录名称:</td>
 					<td class="item" width="180px">
-						//?????????????????????????????
-						<input type="text" name="id" value="" class="text ui-widget-content ui-corner-all"/>
-					</td>
-					<td class="item_name" width="90px">门店名称:</td>
-					<td class="item" width="180px">
-						//?????????????????????????????
-						<input type="text" name="name" value="" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="loginName" value="${user.loginName}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name">门店地址:</td>
-					<td class="item">
-						//?????????????????????????????
-						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
+					<td class="item_name" width="90px">用户姓名:</td>
+					<td class="item" width="180px">
+						<input type="text" name="name" value="${user.name}" class="text ui-widget-content ui-corner-all"/>
 					</td>
-					<td colspan="2" align="right">
+					<td class="item_name" width="90px">联系电话:</td>
+					<td class="item" width="180px">
+						<input type="text" name="telNum" value="${user.telNum}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="item_name">门店名称:</td>
+					<td class="item">
+						<input type="text" name="shopName" value="${user.shopName}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td class="item_name">角色名称:</td>
+					<td class="item">
+						<input type="text" name="roleName" value="${user.roleName}" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td align="right">
 						<input id="serchBtn" type="button" class="submit" value="查询"/>
 					</td>
 				</tr>
@@ -153,9 +160,11 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						// ？？？？？？？？？？？？？？？？？？？？？？
-						<th width="150">仓库类型名称</th>
-						<th width="420">详细描述</th>
+						<th width="120">登录名称</th>
+						<th width="90">用户姓名</th>
+						<th width="90">联系电话</th>
+						<th width="90">门店</th>
+						<th width="90">角色</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
@@ -163,25 +172,15 @@
 					<c:if test="${empty userList}" >
 					<tfoot>
 						<tr>
-							<td colspan="3" class="rounded-foot-left"><em>无记录</em></td>
+							<td colspan="6" class="rounded-foot-left"><em>无记录</em></td>
 							<td class="rounded-foot-right"> &nbsp; </td>
 						</tr>
 					</tfoot>
 					</c:if>
-					// ？？？？？？？？？？？？？？？？？？？？？？
 					<c:forEach items="${userList}" var="user">
 					<tr>
 						<td class="first">
 							<input type="checkbox" name="uuid" value="${user.uuid}"></input>
-						</td>
-						<td>
-							${user.descTxt}&nbsp;
-						</td>
-						<td>
-							${user.email}&nbsp;
-						</td>
-						<td>
-							${user.firstLoginFlg}&nbsp;
 						</td>
 						<td>
 							${user.loginName}&nbsp;
@@ -190,13 +189,13 @@
 							${user.name}&nbsp;
 						</td>
 						<td>
-							${user.passWord}&nbsp;
+							${user.telNum}&nbsp;
 						</td>
 						<td>
-							${user.shopId}&nbsp;
+							${user.shopName}&nbsp;
 						</td>
 						<td>
-							${user.roleUuid}&nbsp;
+							${user.roleName}&nbsp;
 						</td>
 						<td align="center">
 							<a href="${sc_ctx}/account/user/edit/${user.uuid}">编辑</a>

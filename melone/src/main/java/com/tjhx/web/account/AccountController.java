@@ -1,10 +1,12 @@
 package com.tjhx.web.account;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,11 +80,20 @@ public class AccountController extends BaseController {
 	 * 
 	 * @param model
 	 * @return
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
 	@RequestMapping(value = { "user/list", "user" })
-	public String userList_Action(Model model, HttpServletRequest request) {
-		List<User> userList = accountManager.getAllUser();
+	public String userList_Action(Model model, HttpServletRequest request) throws IllegalAccessException,
+			InvocationTargetException {
 
+		User user = new User();
+		// 取得Request中的查询参数
+		BeanUtils.populate(user, request.getParameterMap());
+		// 取得用户信息(根据参数)
+		List<User> userList = accountManager.getUserList(user);
+
+		model.addAttribute("user", user);
 		model.addAttribute("userList", userList);
 
 		return "account/userList";

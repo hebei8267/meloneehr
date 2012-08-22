@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.dao.jpa.account.UserJpaDao;
 import com.tjhx.dao.jpa.shop.ShopJpaDao;
+import com.tjhx.dao.myBatis.account.UserMyBatisDao;
 import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
 import com.tjhx.entity.shop.Shop;
@@ -25,6 +26,7 @@ public class AccountManager {
 	private UserJpaDao userJpaDao;
 	private ShopJpaDao shopJpaDao;
 	private RoleJpaDao roleJpaDao;
+	private UserMyBatisDao userMyBatisDao;
 
 	/**
 	 * 取得所有用户信息
@@ -33,6 +35,15 @@ public class AccountManager {
 	 */
 	public List<User> getAllUser() {
 		return (List<User>) userJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
+	 * 取得用户信息(根据参数)
+	 * 
+	 * @return 用户信息列表
+	 */
+	public List<User> getUserList(User user) {
+		return userMyBatisDao.getUserList(user);
 	}
 
 	/**
@@ -86,6 +97,8 @@ public class AccountManager {
 
 		// 用户姓名
 		_user.setName(user.getName());
+		// 联系电话
+		_user.setTelNum(user.getTelNum());
 		// 角色
 		Role _dbRole = roleJpaDao.findOne(user.getRoleUuid());
 		_user.setRole(_dbRole);
@@ -136,4 +149,10 @@ public class AccountManager {
 	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
 		this.roleJpaDao = roleJpaDao;
 	}
+
+	@Autowired
+	public void setUserMyBatisDao(UserMyBatisDao userMyBatisDao) {
+		this.userMyBatisDao = userMyBatisDao;
+	}
+
 }

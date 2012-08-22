@@ -27,6 +27,9 @@
 							required: true,
 							maxlength: 32
 						},
+						telNum: {
+							isPhone: true
+						},
 						roleUuid: "required",
 						shopId: "required",
 						descTxt: {
@@ -104,12 +107,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">角色:</td>
+					<td class="item_name" width="100px">联系电话:</td>
 					<td class="item">
-						<form:select path="roleUuid" class="text ui-widget-content ui-corner-all">
-							<form:option value="" label="请选择......"/>
-							<form:options items="${roleList}" itemValue="uuid"  itemLabel="name"/>
-						</form:select>
+						<form:input path="telNum" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
@@ -121,6 +121,15 @@
 						</form:select>
 					</td>
 				</tr>
+				<tr>
+					<td class="item_name" width="100px">角色:</td>
+					<td class="item">
+						<form:select path="roleUuid" class="text ui-widget-content ui-corner-all">
+							<form:option value="" label="请选择......"/>
+							<form:options items="${roleList}" itemValue="uuid"  itemLabel="name"/>
+						</form:select>
+					</td>
+				</tr>				
 				<tr>
 					<td class="item_name" width="100px">Email地址:</td>
 					<td class="item">

@@ -32,6 +32,8 @@ public class User extends IdEntity {
 	private String passWord;
 	/** 用户名称-汉字 */
 	private String name;
+	/** 电话号码 */
+	private String telNum;
 	/** 用户Email */
 	private String email;
 	/** 用户详细描述 */
@@ -47,6 +49,10 @@ public class User extends IdEntity {
 	// ----------------------------------
 	/** 用户关联角色对象唯一标识 */
 	private Integer roleUuid;
+	/** 用户所属门店名称---mybatis查询用 */
+	private String shopName;
+	/** 用户关联角色名称---mybatis查询用 */
+	private String roleName;
 
 	/**
 	 * 取得登录名称
@@ -104,6 +110,25 @@ public class User extends IdEntity {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * 取得电话号码
+	 * 
+	 * @return 电话号码
+	 */
+	@Column(length = 32)
+	public String getTelNum() {
+		return telNum;
+	}
+
+	/**
+	 * 设置电话号码
+	 * 
+	 * @param telNum 电话号码
+	 */
+	public void setTelNum(String telNum) {
+		this.telNum = telNum;
 	}
 
 	/**
@@ -250,6 +275,44 @@ public class User extends IdEntity {
 	 */
 	public void setRoleUuid(Integer roleUuid) {
 		this.roleUuid = roleUuid;
+	}
+
+	/**
+	 * 取得用户所属门店名称---mybatis查询用
+	 * 
+	 * @return 用户所属门店名称
+	 */
+	@Transient
+	public String getShopName() {
+		return shopName;
+	}
+
+	/**
+	 * 设置用户所属门店名称---mybatis查询用
+	 * 
+	 * @param shopName 用户所属门店名称
+	 */
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	/**
+	 * 取得用户关联角色名称---mybatis查询用
+	 * 
+	 * @return 用户关联角色名称
+	 */
+	@Transient
+	public String getRoleName() {
+		return roleName;
+	}
+
+	/**
+	 * 设置用户关联角色名称---mybatis查询用
+	 * 
+	 * @param roleName 用户关联角色名称
+	 */
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 }
