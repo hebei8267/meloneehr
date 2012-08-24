@@ -40,7 +40,7 @@
 							<a href="${sc_ctx}/product/productSupplier/list">供应商（商品）</a>
 						</li>
 						<li>
-							<a href="#">商品</a>
+							<a href="${sc_ctx}/product/list">商品</a>
 						</li>
 					</ul>
 				</li>
