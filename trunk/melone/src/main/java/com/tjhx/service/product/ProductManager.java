@@ -71,14 +71,14 @@ public class ProductManager {
 		}
 
 		// 商品类型
-		if (StringUtils.isNotBlank(product.getProductTypeUuid())) {
-			ProductType _dbProductType = productTypeJpaDao.findOne(Integer.parseInt(product.getProductTypeUuid()));
+		if (null != product.getProductTypeUuid()) {
+			ProductType _dbProductType = productTypeJpaDao.findOne(product.getProductTypeUuid());
 			product.setProductType(_dbProductType);
 		}
 
 		// 商品品牌
-		if (StringUtils.isNotBlank(product.getProductBrandUuid())) {
-			ProductBrand _dbProductBrand = productBrandJpaDao.findOne(Integer.parseInt(product.getProductBrandUuid()));
+		if (null != product.getProductBrandUuid()) {
+			ProductBrand _dbProductBrand = productBrandJpaDao.findOne(product.getProductBrandUuid());
 			product.setProductBrand(_dbProductBrand);
 		}
 
@@ -100,18 +100,51 @@ public class ProductManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateProduct(Product product) throws IllegalAccessException, InvocationTargetException {
-		// ----------------------------------------------------------------------------
-		// TODO 修改开始
+
 		Product _dbProduct = productJpaDao.findOne(product.getUuid());
 		if (null == _dbProduct) {
-			// Product不存在!
-			throw new ServiceException("?????????????????");
+			// 商品不存在!
+			throw new ServiceException("ERR_MSG_PDU_007");
 		}
 
+		// 商品条形码
+		_dbProduct.setBarCode(product.getBarCode());
+		// 商品名称-汉字
 		_dbProduct.setName(product.getName());
+		// 批发价
+		_dbProduct.setWholeSalePrice(product.getWholeSalePrice());
+		// 零售价
+		_dbProduct.setRetailPrice(product.getRetailPrice());
+		// 会员价
+		_dbProduct.setMemberPrice(product.getMemberPrice());
+		// 商品详细描述
 		_dbProduct.setDescTxt(product.getDescTxt());
 
-		// ----------------------------------------------------------------------------
+		// 商品类型
+		if (null != product.getProductTypeUuid()
+				&& (null == _dbProduct.getProductType() || !_dbProduct.getProductType().getUuid()
+						.equals(product.getProductTypeUuid()))) {
+
+			ProductType _dbProductType = productTypeJpaDao.findOne(product.getProductTypeUuid());
+			_dbProduct.setProductType(_dbProductType);
+		}
+
+		// 商品品牌
+		if (null != product.getProductBrandUuid()
+				&& (null == _dbProduct.getProductBrand() || !_dbProduct.getProductBrand().getUuid()
+						.equals(product.getProductBrandUuid()))) {
+			ProductBrand _dbProductBrand = productBrandJpaDao.findOne(product.getProductBrandUuid());
+			_dbProduct.setProductBrand(_dbProductBrand);
+		}
+
+		// 商品供应商
+		if (StringUtils.isNotBlank(product.getProductSupplierId())
+				&& (null == _dbProduct.getProductSupplier() || !_dbProduct.getProductSupplier().getId()
+						.equals(product.getProductSupplierId()))) {
+			ProductSupplier _dbProductSupplier = productSupplierJpaDao.findById(product.getProductSupplierId());
+			_dbProduct.setProductSupplier(_dbProductSupplier);
+		}
+
 		productJpaDao.save(_dbProduct);
 	}
 

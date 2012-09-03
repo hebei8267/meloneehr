@@ -69,6 +69,10 @@ public class ProductController extends BaseController {
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/product/list";
 		} else {
 			model.addAttribute("product", product);
+
+			// 初始化下拉菜单
+			initSelectMenu(model);
+
 			return "product/productForm";
 		}
 
@@ -143,7 +147,21 @@ public class ProductController extends BaseController {
 			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == product.getUuid()) {// 新增操作
-			productManager.addNewProduct(product);
+			try {
+				productManager.addNewProduct(product);
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+
+				// 新增商品初始化-清空重复商品编号
+				product.setId(null);
+				model.addAttribute("product", product);
+
+				// 初始化下拉菜单
+				initSelectMenu(model);
+
+				return "product/productForm";
+			}
 		} else {// 修改操作
 			try {
 				productManager.updateProduct(product);
