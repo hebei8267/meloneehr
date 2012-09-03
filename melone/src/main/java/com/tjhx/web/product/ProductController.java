@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.product.Product;
+import com.tjhx.entity.product.ProductBrand;
+import com.tjhx.entity.product.ProductSupplier;
+import com.tjhx.entity.product.ProductType;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.product.ProductBrandManager;
 import com.tjhx.service.product.ProductManager;
+import com.tjhx.service.product.ProductSupplierManager;
+import com.tjhx.service.product.ProductTagManager;
+import com.tjhx.service.product.ProductTypeManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -24,6 +31,14 @@ import com.tjhx.web.BaseController;
 public class ProductController extends BaseController {
 	@Autowired
 	private ProductManager productManager;
+	@Autowired
+	private ProductBrandManager productBrandManager;
+	@Autowired
+	private ProductTypeManager productTypeManager;
+	@Autowired
+	private ProductSupplierManager productSupplierManager;
+	@Autowired
+	private ProductTagManager productTagManager;
 
 	/**
 	 * 取得商品信息列表
@@ -84,11 +99,34 @@ public class ProductController extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String initProduct_Action(Model model, HttpServletRequest request) {
-		// TODO 修改点
+
 		Product product = new Product();
 		model.addAttribute("product", product);
 
+		// 初始化下拉菜单
+		initSelectMenu(model);
+
 		return "product/productForm";
+	}
+
+	/**
+	 * 初始化下拉菜单
+	 * 
+	 * @param model
+	 */
+	private void initSelectMenu(Model model) {
+		// 商品类型
+		List<ProductType> productTypeList = productTypeManager.getAllProductType();
+		model.addAttribute("productTypeList", productTypeList);
+
+		// 商品品牌
+		List<ProductBrand> productBrandList = productBrandManager.getAllProductBrand();
+		model.addAttribute("productBrandList", productBrandList);
+
+		// 商品供应商
+		List<ProductSupplier> productSupplierList = productSupplierManager.getAllProductSupplier();
+		model.addAttribute("productSupplierList", productSupplierList);
+
 	}
 
 	/**

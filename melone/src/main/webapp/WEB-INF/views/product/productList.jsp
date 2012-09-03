@@ -98,8 +98,7 @@
 		<page:applyDecorator name="menu" />
 		
 		<div class="grid_16 titleNav">
-			// ？？？？？？？？？？？？？？？？？？？？？？
-			<h2><a>配置管理</a>&#8711; <a>门店相关</a>&#8711; <a>仓库类型</a></h2>
+			<h2><a>配置管理</a>&#8711; <a>商品相关</a>&#8711; <a>商品</a></h2>
 		</div>
 		<div class="clear"></div>
 		
@@ -222,18 +221,7 @@
 						<td>
 							${product.wholeSalePrice}&nbsp;
 						</td>
-						<td>
-							${product.productBrandUuid}&nbsp;
-						</td>
-						<td>
-							${product.productSupplierUuid}&nbsp;
-						</td>
-						<td>
-							${product.productTagUuid}&nbsp;
-						</td>
-						<td>
-							${product.productTypeUuid}&nbsp;
-						</td>
+						
 						<td align="center">
 							// ？？？？？？？？？？？？？？？？？？？？？？
 							<a href="${sc_ctx}/product/edit/${product.uuid}">编辑</a>

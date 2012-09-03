@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -42,10 +43,15 @@ public class Product extends IdEntity {
 	private ProductBrand ProductBrand;
 	/** 商品类型 */
 	private ProductType ProductType;
-	/** 商品标签 */
-	private ProductTag ProductTag;
 	/** 商品供应商 */
 	private ProductSupplier ProductSupplier;
+	// -------------------------------------------------
+	/** 商品品牌uuid */
+	private String productBrandUuid;
+	/** 商品类型uuid */
+	private String productTypeUuid;
+	/** 商品供应商ID */
+	private String productSupplierId;
 
 	/**
 	 * 取得商品编号
@@ -236,26 +242,6 @@ public class Product extends IdEntity {
 	}
 
 	/**
-	 * 取得商品标签
-	 * 
-	 * @return 商品标签
-	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PRODUCT_TAG_UUID")
-	public ProductTag getProductTag() {
-		return ProductTag;
-	}
-
-	/**
-	 * 设置商品标签
-	 * 
-	 * @param ProductTag 商品标签
-	 */
-	public void setProductTag(ProductTag ProductTag) {
-		this.ProductTag = ProductTag;
-	}
-
-	/**
 	 * 取得商品供应商
 	 * 
 	 * @return 商品供应商
@@ -273,6 +259,63 @@ public class Product extends IdEntity {
 	 */
 	public void setProductSupplier(ProductSupplier ProductSupplier) {
 		this.ProductSupplier = ProductSupplier;
+	}
+
+	/**
+	 * 取得商品品牌uuid
+	 * 
+	 * @return 商品品牌uuid
+	 */
+	@Transient
+	public String getProductBrandUuid() {
+		return productBrandUuid;
+	}
+
+	/**
+	 * 设置商品品牌uuid
+	 * 
+	 * @param productBrandUuid 商品品牌uuid
+	 */
+	public void setProductBrandUuid(String productBrandUuid) {
+		this.productBrandUuid = productBrandUuid;
+	}
+
+	/**
+	 * 取得商品类型uuid
+	 * 
+	 * @return 商品类型uuid
+	 */
+	@Transient
+	public String getProductTypeUuid() {
+		return productTypeUuid;
+	}
+
+	/**
+	 * 设置商品类型uuid
+	 * 
+	 * @param productTypeUuid 商品类型uuid
+	 */
+	public void setProductTypeUuid(String productTypeUuid) {
+		this.productTypeUuid = productTypeUuid;
+	}
+
+	/**
+	 * 取得商品供应商ID
+	 * 
+	 * @return 商品供应商ID
+	 */
+	@Transient
+	public String getProductSupplierId() {
+		return productSupplierId;
+	}
+
+	/**
+	 * 设置商品供应商ID
+	 * 
+	 * @param productSupplierId 商品供应商ID
+	 */
+	public void setProductSupplierId(String productSupplierId) {
+		this.productSupplierId = productSupplierId;
 	}
 
 }
