@@ -13,6 +13,7 @@ import com.tjhx.dao.jpa.product.ProductBrandJpaDao;
 import com.tjhx.dao.jpa.product.ProductJpaDao;
 import com.tjhx.dao.jpa.product.ProductSupplierJpaDao;
 import com.tjhx.dao.jpa.product.ProductTypeJpaDao;
+import com.tjhx.dao.myBatis.product.ProductMyBatisDao;
 import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.entity.product.ProductSupplier;
@@ -26,6 +27,7 @@ public class ProductManager {
 	private ProductTypeJpaDao productTypeJpaDao;
 	private ProductBrandJpaDao productBrandJpaDao;
 	private ProductSupplierJpaDao productSupplierJpaDao;
+	private ProductMyBatisDao productMyBatisDao;
 
 	/**
 	 * 取得所有商品信息
@@ -34,6 +36,16 @@ public class ProductManager {
 	 */
 	public List<Product> getAllProduct() {
 		return (List<Product>) productJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
+	 * 取得商品信息(根据参数)
+	 * 
+	 * @param product
+	 * @return
+	 */
+	public List<Product> getProductList(Product product) {
+		return productMyBatisDao.getProductList(product);
 	}
 
 	/**
@@ -166,6 +178,11 @@ public class ProductManager {
 	@Autowired
 	public void setProductSupplierJpaDao(ProductSupplierJpaDao productSupplierJpaDao) {
 		this.productSupplierJpaDao = productSupplierJpaDao;
+	}
+
+	@Autowired
+	public void setProductMyBatisDao(ProductMyBatisDao productMyBatisDao) {
+		this.productMyBatisDao = productMyBatisDao;
 	}
 
 }
