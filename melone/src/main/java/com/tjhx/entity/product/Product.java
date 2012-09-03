@@ -52,6 +52,10 @@ public class Product extends IdEntity {
 	private Integer productTypeUuid;
 	/** 商品供应商ID */
 	private String productSupplierId;
+	/** 商品品牌名称-汉字 */
+	private String productBrandName;
+	/** 商品供应商名称-汉字 */
+	private String productSupplierName;
 
 	/**
 	 * 取得商品编号
@@ -327,4 +331,41 @@ public class Product extends IdEntity {
 		this.productSupplierId = productSupplierId;
 	}
 
+	/**
+	 * 取得商品品牌名称-汉字
+	 * 
+	 * @return 商品品牌名称-汉字
+	 */
+	@Transient
+	public String getProductBrandName() {
+		return productBrandName;
+	}
+
+	/**
+	 * 设置商品品牌名称-汉字
+	 * 
+	 * @param productBrandName 商品品牌名称-汉字
+	 */
+	public void setProductBrandName(String productBrandName) {
+		this.productBrandName = productBrandName;
+	}
+
+	/**
+	 * 取得商品供应商名称-汉字
+	 * 
+	 * @return 商品供应商名称-汉字
+	 */
+	@Transient
+	public String getProductSupplierName() {
+		return productSupplierName;
+	}
+
+	/**
+	 * 设置商品供应商名称-汉字
+	 * 
+	 * @param productSupplierName 商品供应商名称-汉字
+	 */
+	public void setProductSupplierName(String productSupplierName) {
+		this.productSupplierName = productSupplierName;
+	}
 }

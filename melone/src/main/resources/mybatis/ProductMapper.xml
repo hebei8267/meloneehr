@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.myBatis.product.ProductMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_Product" type="com.tjhx.entity.product.Product">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
+        <result column="desc_txt" property="descTxt" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="member_price" property="memberPrice" jdbcType="DOUBLE"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="ref_price" property="refPrice" jdbcType="DOUBLE"/>
+        <result column="retail_price" property="retailPrice" jdbcType="DOUBLE"/>
+        <result column="whole_sale_price" property="wholeSalePrice" jdbcType="DOUBLE"/>
+        
+        <result column="product_brand_name" property="productBrandName" jdbcType="VARCHAR"/>
+        <result column="product_supplier_name" property="productSupplierName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	product.uuid ,
+    	product.create_date ,
+    	product.create_user_id ,
+    	product.update_date ,
+    	product.update_user_id ,
+    	product.version ,
+    	product.bar_code ,
+    	product.desc_txt ,
+    	product.id ,
+    	product.member_price ,
+    	product.name ,
+    	product.ref_price ,
+    	product.retail_price ,
+    	product.whole_sale_price ,
+    	productBrand.name product_brand_name , 
+    	productSupplier.name product_supplier_name
+	]]>
+  	</sql>
+  	
+  	<!-- 查询条件 -->
+  	<sql id="Where_Clause" >
+  		<where>
+  			<if test="id != null and id !='' ">
+  			product.id = #{id}
+  			</if>
+  			<if test="name != null and name !='' ">
+  			AND product.name LIKE '%${name}%'
+  			</if>
+  			<if test="productBrandName != null and productBrandName !='' ">
+  			AND productBrand.name LIKE '%${productBrandName}%'
+  			</if>
+  			<if test="productSupplierName != null and productSupplierName !='' ">
+  			AND productSupplier.name LIKE '%${productSupplierName}%'
+  			</if>
+  			<if test="true">
+  			AND product.product_brand_uuid = productBrand.uuid
+  			</if>
+  			<if test="true">
+  			AND product.product_supplier_uuid = productSupplier.uuid
+  			</if>
+	  	</where>
+  	</sql>
+  	
+  	<!-- 取得t_product信息(根据参数) -->
+	<select id="getProductList" parameterType="com.tjhx.entity.product.Product" resultMap="Result_Map_Product">
+		select
+		<include refid="Base_Column_List" />
+		from t_product product, t_product_brand productBrand, t_product_supplier productSupplier
+		<include refid="Where_Clause" />
+	</select>
+</mapper>

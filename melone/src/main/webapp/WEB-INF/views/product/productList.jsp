@@ -107,21 +107,21 @@
 				<tr>
 					<td class="item_name" width="90px">商品编号:</td>
 					<td class="item" width="180px">
-						<input type="text" name="id" value="" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="id" value="${product.id}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td class="item_name" width="90px">商品名称:</td>
 					<td class="item" width="180px">
-						<input type="text" name="name" value="" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="name" value="${product.name}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="item_name">商品品牌:</td>
 					<td class="item">
-						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="productBrandName" value="${product.productBrandName}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td class="item_name">商品供应商:</td>
 					<td class="item">
-						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="productSupplierName" value="${product.productSupplierName}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td align="right">
 						<input id="serchBtn" type="button" class="submit" value="查询"/>
@@ -184,10 +184,10 @@
 							${product.name}&nbsp;
 						</td>
 						<td>
-							${product.productBrand.name}&nbsp;
+							${product.productBrandName}&nbsp;
 						</td>
 						<td>
-							${product.productSupplier.name}&nbsp;
+							${product.productSupplierName}&nbsp;
 						</td>
 						<td>
 							${product.refPrice}&nbsp;
