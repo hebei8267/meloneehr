@@ -40,16 +40,16 @@ public class Product extends IdEntity {
 	/** 商品详细描述 */
 	private String descTxt;
 	/** 商品品牌 */
-	private ProductBrand ProductBrand;
+	private ProductBrand productBrand;
 	/** 商品类型 */
-	private ProductType ProductType;
+	private ProductType productType;
 	/** 商品供应商 */
-	private ProductSupplier ProductSupplier;
+	private ProductSupplier productSupplier;
 	// -------------------------------------------------
 	/** 商品品牌uuid */
-	private String productBrandUuid;
+	private Integer productBrandUuid;
 	/** 商品类型uuid */
-	private String productTypeUuid;
+	private Integer productTypeUuid;
 	/** 商品供应商ID */
 	private String productSupplierId;
 
@@ -209,16 +209,16 @@ public class Product extends IdEntity {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_BRAND_UUID")
 	public ProductBrand getProductBrand() {
-		return ProductBrand;
+		return productBrand;
 	}
 
 	/**
 	 * 设置商品品牌
 	 * 
-	 * @param ProductBrand 商品品牌
+	 * @param productBrand 商品品牌
 	 */
-	public void setProductBrand(ProductBrand ProductBrand) {
-		this.ProductBrand = ProductBrand;
+	public void setProductBrand(ProductBrand productBrand) {
+		this.productBrand = productBrand;
 	}
 
 	/**
@@ -229,16 +229,16 @@ public class Product extends IdEntity {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_TYPE_UUID")
 	public ProductType getProductType() {
-		return ProductType;
+		return productType;
 	}
 
 	/**
 	 * 设置商品类型
 	 * 
-	 * @param ProductType 商品类型
+	 * @param productType 商品类型
 	 */
-	public void setProductType(ProductType ProductType) {
-		this.ProductType = ProductType;
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 
 	/**
@@ -249,16 +249,16 @@ public class Product extends IdEntity {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_SUPPLIER_UUID")
 	public ProductSupplier getProductSupplier() {
-		return ProductSupplier;
+		return productSupplier;
 	}
 
 	/**
 	 * 设置商品供应商
 	 * 
-	 * @param ProductSupplier 商品供应商
+	 * @param productSupplier 商品供应商
 	 */
-	public void setProductSupplier(ProductSupplier ProductSupplier) {
-		this.ProductSupplier = ProductSupplier;
+	public void setProductSupplier(ProductSupplier productSupplier) {
+		this.productSupplier = productSupplier;
 	}
 
 	/**
@@ -267,7 +267,10 @@ public class Product extends IdEntity {
 	 * @return 商品品牌uuid
 	 */
 	@Transient
-	public String getProductBrandUuid() {
+	public Integer getProductBrandUuid() {
+		if (null != productBrand) {
+			productBrandUuid = productBrand.getUuid();
+		}
 		return productBrandUuid;
 	}
 
@@ -276,7 +279,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @param productBrandUuid 商品品牌uuid
 	 */
-	public void setProductBrandUuid(String productBrandUuid) {
+	public void setProductBrandUuid(Integer productBrandUuid) {
 		this.productBrandUuid = productBrandUuid;
 	}
 
@@ -286,7 +289,10 @@ public class Product extends IdEntity {
 	 * @return 商品类型uuid
 	 */
 	@Transient
-	public String getProductTypeUuid() {
+	public Integer getProductTypeUuid() {
+		if (null != productType) {
+			productTypeUuid = productType.getUuid();
+		}
 		return productTypeUuid;
 	}
 
@@ -295,7 +301,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @param productTypeUuid 商品类型uuid
 	 */
-	public void setProductTypeUuid(String productTypeUuid) {
+	public void setProductTypeUuid(Integer productTypeUuid) {
 		this.productTypeUuid = productTypeUuid;
 	}
 
@@ -306,6 +312,9 @@ public class Product extends IdEntity {
 	 */
 	@Transient
 	public String getProductSupplierId() {
+		if (null != productSupplier) {
+			productSupplierId = productSupplier.getId();
+		}
 		return productSupplierId;
 	}
 

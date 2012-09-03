@@ -11,7 +11,6 @@
 			$().ready(function() {
 				$("#listForm").validate({
 					rules: {
-						// ？？？？？？？？？？？？？？？？？？？？？？
 						// 添加表单效验
 						delBtn: {
 							requiredSelect: 'uuid'
@@ -33,14 +32,12 @@
 				//--------------------------------------------------------------------
 				// 按钮CSS
 				//--------------------------------------------------------------------
-				// ？？？？？？？？？？？？？？？？？？？？？？
 				$("#newBtn,#delBtn,#serchBtn").button();
 
 				//--------------------------------------------------------------------
 				// 新增按钮点击
 				//--------------------------------------------------------------------
 				$("#newBtn").click(function() {
-					// ？？？？？？？？？？？？？？？？？？？？？？
 					$(location).attr('href', '${sc_ctx}/product/new');
 				});
 
@@ -68,7 +65,6 @@
 									$( this ).dialog( "close" );
 									
 									$("#uuids").val(uuids);
-									// ？？？？？？？？？？？？？？？？？？？？？？
 									$("#listForm").attr("action", "${sc_ctx}/product/del");
 						        	$("#listForm").submit();
 								},
@@ -86,7 +82,6 @@
 					$("input[type='text']").each(function(i){
   						this.value = $.trim(this.value);
  					});
-					// ？？？？？？？？？？？？？？？？？？？？？？
 					$("#serchForm").attr("action", "${sc_ctx}/product/list");
 					$("#serchForm").submit();
 				});
@@ -107,27 +102,28 @@
 		<%// ----------------------------------------------------------- %>
 		<%// 列表查询 %>
 		<%// ----------------------------------------------------------- %>
-		<div class="grid_12 suffix_4">
+		<div class="grid_13 suffix_3">
 			<table class="search_table">
 				<tr>
-					<td class="item_name" width="90px">门店编号:</td>
+					<td class="item_name" width="90px">商品编号:</td>
 					<td class="item" width="180px">
-						//?????????????????????????????
 						<input type="text" name="id" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
-					<td class="item_name" width="90px">门店名称:</td>
+					<td class="item_name" width="90px">商品名称:</td>
 					<td class="item" width="180px">
-						//?????????????????????????????
 						<input type="text" name="name" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name">门店地址:</td>
+					<td class="item_name">商品品牌:</td>
 					<td class="item">
-						//?????????????????????????????
 						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
 					</td>
-					<td colspan="2" align="right">
+					<td class="item_name">商品供应商:</td>
+					<td class="item">
+						<input type="text" name="addr" value="" class="text ui-widget-content ui-corner-all"/>
+					</td>
+					<td align="right">
 						<input id="serchBtn" type="button" class="submit" value="查询"/>
 					</td>
 				</tr>
@@ -158,9 +154,12 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						// ？？？？？？？？？？？？？？？？？？？？？？
-						<th width="150">仓库类型名称</th>
-						<th width="420">详细描述</th>
+						<th width="90">商品编号</th>
+						<th width="90">商品名称</th>
+						<th width="90">商品品牌</th>
+						<th width="90">商品供应商</th>
+						<th width="90">参考进价</th>
+						<th width="90">零售价</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
@@ -168,49 +167,27 @@
 					<c:if test="${empty productList}" >
 					<tfoot>
 						<tr>
-							<td colspan="3" class="rounded-foot-left"><em>无记录</em></td>
+							<td colspan="7" class="rounded-foot-left"><em>无记录</em></td>
 							<td class="rounded-foot-right"> &nbsp; </td>
 						</tr>
 					</tfoot>
 					</c:if>
-					// ？？？？？？？？？？？？？？？？？？？？？？
 					<c:forEach items="${productList}" var="product">
 					<tr>
 						<td class="first">
 							<input type="checkbox" name="uuid" value="${product.uuid}"></input>
 						</td>
 						<td>
-							${product.uuid}&nbsp;
-						</td>
-						<td>
-							${product.createDate}&nbsp;
-						</td>
-						<td>
-							${product.createUserId}&nbsp;
-						</td>
-						<td>
-							${product.updateDate}&nbsp;
-						</td>
-						<td>
-							${product.updateUserId}&nbsp;
-						</td>
-						<td>
-							${product.version}&nbsp;
-						</td>
-						<td>
-							${product.barCode}&nbsp;
-						</td>
-						<td>
-							${product.descTxt}&nbsp;
-						</td>
-						<td>
 							${product.id}&nbsp;
 						</td>
 						<td>
-							${product.memberPrice}&nbsp;
+							${product.name}&nbsp;
 						</td>
 						<td>
-							${product.name}&nbsp;
+							${product.productBrand.name}&nbsp;
+						</td>
+						<td>
+							${product.productSupplier.name}&nbsp;
 						</td>
 						<td>
 							${product.refPrice}&nbsp;
@@ -218,12 +195,7 @@
 						<td>
 							${product.retailPrice}&nbsp;
 						</td>
-						<td>
-							${product.wholeSalePrice}&nbsp;
-						</td>
-						
 						<td align="center">
-							// ？？？？？？？？？？？？？？？？？？？？？？
 							<a href="${sc_ctx}/product/edit/${product.uuid}">编辑</a>
 						</td>
 					</tr>
