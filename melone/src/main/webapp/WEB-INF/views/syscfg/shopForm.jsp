@@ -39,7 +39,7 @@
 					}
 				});
 				
-				$("#saveBtn,#cancelBtn").button();
+				$("#saveBtn,#cancelBtn,#lMove,#rMove").button();
 				
 				$("#cancelBtn").click(function() {
 					$(location).attr('href', '${sc_ctx}/syscfg/shop/list');
@@ -51,6 +51,13 @@
  					});
 					$("#inputForm").attr("action", "${sc_ctx}/syscfg/shop/save");
 		        	$("#inputForm").submit();
+				});
+				
+				$("#lMove").click(function() {
+					moveShowItems('noStoreIds', 'storeIds');
+				});
+				$("#rMove").click(function() {
+					moveShowItems('storeIds', 'noStoreIds');
 				});
 			});			
 		</script>
@@ -92,13 +99,29 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">仓库信息:</td>
+					<td></td>
+					<td>仓库</td>
+					<td></td>
+					<td>已关联仓库</td>
+				</tr>
+				<tr>
+					<td class="item_name" width="100px">仓库关联:</td>
 					<td class="item">
-						<form:select path="storeId" class="text ui-widget-content ui-corner-all">
-							<form:option value="" label="请选择......"/>
-							<form:options items="${storeList}" itemValue="id"  itemLabel="name"/>
+						<form:select path="noStoreIds" multiple="true" class="text ui-widget-content ui-corner-all" size="6">
+							<form:options items="${shop.noStoreList}" itemValue="uuid"  itemLabel="name"/>
 						</form:select>
 					</td>
+					<td width="120px" align="center">
+						<table>
+							<tr><td><input type="button" id="lMove" class="submit" value="->" /></td></tr>
+							<tr><td><input type="button" id="rMove" class="submit" value="<-" /></td></tr>
+						</table>
+					</td>
+					<td class="item">
+						<form:select path="storeIds" multiple="true" class="text ui-widget-content ui-corner-all" size="6">
+							<form:options items="${shop.storeList}" itemValue="uuid" itemLabel="name"/>
+						</form:select>
+					</td>	
 				</tr>
 				<tr>
 					<td class="item_name" width="100px">电话号码:</td>
@@ -120,7 +143,7 @@
 				</tr>
 				<tr>
 					<td class="item_name" width="100px">详细描述:</td>
-					<td class="item">
+					<td class="item" colspan="3">
 						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>

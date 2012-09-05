@@ -4,6 +4,57 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>CSS Menu Maker Installation Instructions</title>
 		<link type="text/css" href="../css/menu/style.css" rel="stylesheet"/>
+		<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+		<script>
+		js跨域访问
+		
+		$.ajax({
+			type : "get",
+			async:false,
+			url : "http://172.29.226.102:8080/fzsb/login/loginsys.action?userName=test01&password=123456&t="+Math.random(),
+			dataType : "jsonp",
+			jsonp: "callbackFunc",//服务端用于接收callback调用的function名的参数
+			jsonpCallback:"success_jsonpCallback",//callback的function名称
+			
+			error:function(){
+				alert('fail');
+			}
+		});
+		function success_jsonpCallback(data){
+			//alert(data.result);
+			
+			window.document.location.href="http://172.29.226.102:8080/fzsb/sysmanage/mainPanel.action";
+		}
+		
+		
+		</script>
+		
+		<java>
+		
+		public String loginsys(){
+		String res = "0";
+		if(userName!= null && !"".equals(userName) && password!= null && !"".equals(password)){
+			userName = userName.trim();
+			Map p = new HashMap();
+			p.put("name", userName);
+			p.put("password", Encrypt.DataEncrypt(password).trim());
+			res= loginService.loginCheck(p,request);
+		}
+		String func = request.getParameter("callbackFunc");
+		response.setContentType("text/xml;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
+		String str = func + "({result:" + ("1".equals(res)?"true":"false") + "})";
+		try {
+			response.getWriter().println(str);
+			response.getWriter().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
+		
+		</java>
 	</head>
 	<body>
 		<h2>Your Menu</h2>
