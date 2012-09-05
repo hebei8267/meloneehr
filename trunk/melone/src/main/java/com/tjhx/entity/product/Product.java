@@ -23,9 +23,7 @@ public class Product extends IdEntity {
 
 	private static final long serialVersionUID = 7536024990256617583L;
 
-	/** 商品编号 */
-	private String id;
-	/** 商品条形码 */
+	/** 商品编号/条形码 */
 	private String barCode;
 	/** 商品名称-汉字 */
 	private String name;
@@ -58,39 +56,20 @@ public class Product extends IdEntity {
 	private String productSupplierName;
 
 	/**
-	 * 取得商品编号
+	 * 取得商品编号/条形码
 	 * 
-	 * @return 商品编号
+	 * @return 商品编号/条形码
 	 */
 	@NaturalId
-	@Column(nullable = false, length = 16)
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * 设置商品编号
-	 * 
-	 * @param id 商品编号
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * 取得商品条形码
-	 * 
-	 * @return 商品条形码
-	 */
-	@Column(length = 32)
+	@Column(length = 16)
 	public String getBarCode() {
 		return barCode;
 	}
 
 	/**
-	 * 设置商品条形码
+	 * 设置商品编号/条形码
 	 * 
-	 * @param barCode 商品条形码
+	 * @param barCode 商品编号/条形码
 	 */
 	public void setBarCode(String barCode) {
 		this.barCode = barCode;
