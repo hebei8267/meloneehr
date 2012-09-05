@@ -12,7 +12,6 @@
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
         <result column="desc_txt" property="descTxt" jdbcType="VARCHAR"/>
-        <result column="id" property="id" jdbcType="VARCHAR"/>
         <result column="member_price" property="memberPrice" jdbcType="DOUBLE"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="ref_price" property="refPrice" jdbcType="DOUBLE"/>
@@ -34,7 +33,6 @@
     	product.version ,
     	product.bar_code ,
     	product.desc_txt ,
-    	product.id ,
     	product.member_price ,
     	product.name ,
     	product.ref_price ,
@@ -48,8 +46,8 @@
   	<!-- 查询条件 -->
   	<sql id="Where_Clause" >
   		<where>
-  			<if test="id != null and id !='' ">
-  			product.id = #{id}
+  			<if test="barCode != null and barCode !='' ">
+  			product.bar_code LIKE '%${barCode}%'
   			</if>
   			<if test="name != null and name !='' ">
   			AND product.name LIKE '%${name}%'

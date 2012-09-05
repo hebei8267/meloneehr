@@ -15,7 +15,6 @@
 		<result column="fax_num" property="faxNum" jdbcType="VARCHAR" />
 		<result column="id" property="id" jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="store_id" property="storeId" jdbcType="VARCHAR" />
 		<result column="tel_num" property="telNum" jdbcType="VARCHAR" />
 	</resultMap>
 
@@ -33,7 +32,6 @@
     	fax_num ,
     	id ,
     	name ,
-    	store_id ,
     	tel_num 
 	]]>
 	</sql>
@@ -41,26 +39,14 @@
 	<!-- 查询条件 -->
 	<sql id="Where_Clause">
 		<where>
-			<if test="addr != null and addr !='' ">
-				addr LIKE '%${addr}%'
-			</if>
-			<if test="descTxt != null and descTxt !='' ">
-				AND desc_txt LIKE '%${descTxt}%'
-			</if>
-			<if test="faxNum != null and faxNum !='' ">
-				AND fax_num = #{faxNum}
-			</if>
 			<if test="id != null and id !='' ">
-				AND id = #{id}
+				id = #{id}
 			</if>
 			<if test="name != null and name !='' ">
 				AND name LIKE '%${name}%'
 			</if>
-			<if test="storeId != null and storeId !='' ">
-				AND store_id = #{storeId}
-			</if>
-			<if test="telNum != null and telNum !='' ">
-				AND tel_num = #{telNum}
+			<if test="addr != null and addr !='' ">
+				AND addr LIKE '%${addr}%'
 			</if>
 		</where>
 	</sql>
@@ -73,4 +59,11 @@
 		from t_shop
 		<include refid="Where_Clause" />
 	</select>
+	
+	<!-- 删除原有已关联仓库 -->
+	<update id="delStoreByShopUuid" parameterType="int">
+	<![CDATA[
+		update t_store set shop_uuid = null where shop_uuid = #{shopUuid}
+	]]> 
+	</update>
 </mapper>

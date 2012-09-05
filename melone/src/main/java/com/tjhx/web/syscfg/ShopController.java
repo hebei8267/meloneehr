@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.shop.Shop;
-import com.tjhx.entity.shop.Store;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.shop.ShopManager;
@@ -69,7 +68,7 @@ public class ShopController extends BaseController {
 			model.addAttribute("shop", shop);
 
 			// 初始化仓库信息下拉菜单
-			initStoreSelect(model);
+			shop.setAllStoreList(storeManager.getAllStore());
 
 			return "syscfg/shopForm";
 		}
@@ -106,20 +105,9 @@ public class ShopController extends BaseController {
 		model.addAttribute("shop", shop);
 
 		// 初始化仓库信息下拉菜单
-		initStoreSelect(model);
+		shop.setAllStoreList(storeManager.getAllStore());
 
 		return "syscfg/shopForm";
-	}
-
-	/**
-	 * 初始化仓库信息下拉菜单
-	 * 
-	 * @param model
-	 */
-	private void initStoreSelect(Model model) {
-		List<Store> storeList = storeManager.getAllStore();
-
-		model.addAttribute("storeList", storeList);
 	}
 
 	/**
@@ -147,7 +135,7 @@ public class ShopController extends BaseController {
 				model.addAttribute("shop", shop);
 
 				// 初始化仓库信息下拉菜单
-				initStoreSelect(model);
+				shop.setAllStoreList(storeManager.getAllStore());
 
 				return "syscfg/shopForm";
 			}
