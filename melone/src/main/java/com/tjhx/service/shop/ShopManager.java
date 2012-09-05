@@ -76,8 +76,13 @@ public class ShopManager {
 		}
 
 		// 设置仓库信息
-		Store _dbStore = storeJpaDao.findById(shop.getStoreId());
-		shop.setStore(_dbStore);
+		for (int i = 0; i < shop.getStoreIds().length; i++) {
+			Store _dbStore = storeJpaDao.findOne(Integer.valueOf(shop.getStoreIds()[i]));
+
+			_dbStore.setShop(shop);
+
+			shop.addStore(_dbStore);
+		}
 
 		shopJpaDao.save(shop);
 	}
@@ -91,6 +96,8 @@ public class ShopManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateShop(Shop shop) throws IllegalAccessException, InvocationTargetException {
+		// 删除原有已关联仓库
+		shopMyBatisDao.delStoreByShopUuid(shop.getUuid());
 
 		Shop _dbShop = shopJpaDao.findOne(shop.getUuid());
 		if (null == _dbShop) {
@@ -109,8 +116,13 @@ public class ShopManager {
 		// 门店详细描述
 		_dbShop.setDescTxt(shop.getDescTxt());
 		// 仓库信息
-		Store _dbStore = storeJpaDao.findById(shop.getStoreId());
-		_dbShop.setStore(_dbStore);
+		for (int i = 0; i < shop.getStoreIds().length; i++) {
+			Store _dbStore = storeJpaDao.findOne(Integer.valueOf(shop.getStoreIds()[i]));
+
+			_dbStore.setShop(_dbShop);
+
+			shop.addStore(_dbStore);
+		}
 
 		shopJpaDao.save(_dbShop);
 	}

@@ -76,7 +76,7 @@ public class ProductManager {
 	@Transactional(readOnly = false)
 	public void addNewProduct(Product product) {
 
-		Product _dbProduct = productJpaDao.findById(product.getId());
+		Product _dbProduct = productJpaDao.findByBarCode(product.getBarCode());
 		// 该商品编号已存在
 		if (null != _dbProduct) {
 			throw new ServiceException("ERR_MSG_PDU_006");
@@ -119,8 +119,6 @@ public class ProductManager {
 			throw new ServiceException("ERR_MSG_PDU_007");
 		}
 
-		// 商品条形码
-		_dbProduct.setBarCode(product.getBarCode());
 		// 商品名称-汉字
 		_dbProduct.setName(product.getName());
 		// 批发价

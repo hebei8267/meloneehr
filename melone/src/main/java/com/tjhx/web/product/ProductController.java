@@ -162,7 +162,7 @@ public class ProductController extends BaseController {
 				addInfoMsg(model, ex.getMessage());
 
 				// 新增商品初始化-清空重复商品编号
-				product.setId(null);
+				product.setBarCode(null);
 				model.addAttribute("product", product);
 
 				// 初始化下拉菜单
