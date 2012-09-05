@@ -7,14 +7,7 @@ import java.io.OutputStreamWriter;
 import com.p6spy.engine.logging.appender.FileLogger;
 
 /**
- * [类名]<br>
- * ログ出力クラス<br>
- * <br>
- * [功能概要]<br>
- * タイマーログ機能を提供するクラスを提供します。<br>
- * <br>
- * [变更历史]<br>
- * 2011/09/09 ver1.00 新規作成 <br>
+ * p6spy日志自定义输出
  * 
  * @author
  * @version 1.00
