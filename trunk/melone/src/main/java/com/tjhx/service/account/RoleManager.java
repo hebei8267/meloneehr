@@ -82,7 +82,7 @@ public class RoleManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateRole(Role role) {
-		// 删除原有菜单资源
+		// 删除原有拥有菜单资源
 		permissionMyBatisDao.delPermissionByRoleUuid(role.getUuid());
 
 		Role _role = roleJpaDao.findOne(role.getUuid());
