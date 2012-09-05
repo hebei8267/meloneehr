@@ -3,7 +3,9 @@ package com.tjhx.entity.shop;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,6 +39,8 @@ public class Store extends IdEntity {
 	private StoreType storeType;
 	/** 仓库所属类型对象唯一标识 */
 	private Integer storeTypeUuid;
+	/** 门店 */
+	private Shop shop;
 
 	/**
 	 * 取得仓库编号
@@ -150,6 +154,27 @@ public class Store extends IdEntity {
 	 */
 	public void setStoreType(StoreType storeType) {
 		this.storeType = storeType;
+	}
+
+	/**
+	 * 取得门店
+	 * 
+	 * @return 门店
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn表示外键的列
+	@JoinColumn(name = "SHOP_UUID")
+	public Shop getShop() {
+		return shop;
+	}
+
+	/**
+	 * 设置门店
+	 * 
+	 * @param shop 门店
+	 */
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
 	/**

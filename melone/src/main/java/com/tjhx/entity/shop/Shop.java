@@ -1,15 +1,21 @@
 package com.tjhx.entity.shop;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.NaturalId;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.tjhx.entity.IdEntity;
 
 /**
@@ -35,10 +41,16 @@ public class Shop extends IdEntity {
 	private String faxNum;
 	/** 门店详细描述 */
 	private String descTxt;
-	/** 仓库信息 */
-	private Store store;
-	/** 仓库编号 */
-	private String storeId;
+	/** 仓库信息集合 */
+	private Set<Store> storeSet = Sets.newHashSet();
+
+	// ##########################################################
+	/** 关联仓库信息集合 */
+	private String[] storeIds;
+	/** 非关联仓库信息集合 */
+	private String[] noStoreIds;
+	/** 全量仓库信息集合 */
+	private List<Store> allStoreList;
 
 	/**
 	 * 取得门店编号
@@ -154,48 +166,22 @@ public class Shop extends IdEntity {
 	}
 
 	/**
-	 * 取得仓库信息
+	 * 取得仓库信息集合
 	 * 
-	 * @return 仓库信息
+	 * @return 仓库信息集合
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "STORE_UUID")
-	public Store getStore() {
-		return store;
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "shop")
+	public Set<Store> getStoreSet() {
+		return storeSet;
 	}
 
 	/**
-	 * 设置仓库信息
+	 * 设置仓库信息集合
 	 * 
-	 * @param store 仓库信息
+	 * @param storeSet 仓库信息集合
 	 */
-	public void setStore(Store store) {
-		if (null != store) {
-			setStoreId(store.getId());
-		}
-		this.store = store;
-	}
-
-	/**
-	 * 取得仓库编号
-	 * 
-	 * @return 仓库编号
-	 */
-	@Column(length = 16)
-	public String getStoreId() {
-		if (null != store) {
-			return store.getId();
-		}
-		return storeId;
-	}
-
-	/**
-	 * 设置仓库编号
-	 * 
-	 * @param storeId 仓库编号
-	 */
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public void setStoreSet(Set<Store> storeSet) {
+		this.storeSet = storeSet;
 	}
 
 	/**
@@ -205,10 +191,101 @@ public class Shop extends IdEntity {
 	 */
 	@Transient
 	public String getStoreName() {
-		if (null != store) {
-			return store.getName();
+		List<String> storeNameList = Lists.newArrayList();
+
+		for (Store store : getStoreSet()) {
+			storeNameList.add(store.getName());
 		}
-		return null;
+		return StringUtils.join(storeNameList, ",");
+	}
+
+	/**
+	 * 取得关联仓库信息集合
+	 * 
+	 * @return 关联仓库信息集合
+	 */
+	@Transient
+	public String[] getStoreIds() {
+		return storeIds;
+	}
+
+	/**
+	 * 设置关联仓库信息集合
+	 * 
+	 * @param storeIds 关联仓库信息集合
+	 */
+	public void setStoreIds(String[] storeIds) {
+		this.storeIds = storeIds;
+	}
+
+	/**
+	 * 取得非关联仓库信息集合
+	 * 
+	 * @return 非关联仓库信息集合
+	 */
+	@Transient
+	public String[] getNoStoreIds() {
+		return noStoreIds;
+	}
+
+	/**
+	 * 设置非关联仓库信息集合
+	 * 
+	 * @param noStoreIds 非关联仓库信息集合
+	 */
+	public void setNoStoreIds(String[] noStoreIds) {
+		this.noStoreIds = noStoreIds;
+	}
+
+	/**
+	 * 取得该门店未关联的仓库信息列表
+	 * 
+	 * @return
+	 */
+	@Transient
+	public List<Store> getNoStoreList() {
+		if (null == storeSet || storeSet.size() == 0) {
+			return this.allStoreList;
+		} else {
+			if (null != allStoreList) {
+				List<Store> storeList = Lists.newArrayList();
+				for (Store store : getStoreSet()) {
+					storeList.add(store);
+				}
+
+				this.allStoreList.removeAll(storeList);
+			}
+		}
+		return allStoreList;
+	}
+
+	/**
+	 * 取得该门店关联的仓库信息列表
+	 * 
+	 * @return
+	 */
+	@Transient
+	public List<Store> getStoreList() {
+		List<Store> storeList = Lists.newArrayList();
+		for (Store store : getStoreSet()) {
+			storeList.add(store);
+		}
+		return storeList;
+	}
+
+	public void setAllStoreList(List<Store> allStoreList) {
+		this.allStoreList = allStoreList;
+	}
+
+	/**
+	 * 添加仓库
+	 * 
+	 * @param store 仓库信息
+	 */
+	public void addStore(Store store) {
+		if (!storeSet.contains(store)) {
+			storeSet.add(store);
+		}
 	}
 
 }
