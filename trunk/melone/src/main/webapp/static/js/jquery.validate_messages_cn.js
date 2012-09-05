@@ -63,7 +63,7 @@ jQuery.validator.addMethod("ip", function(value, element) {
 }, "请输入正确的IP地址");
 
 //字母和数字的验证 
-jQuery.validator.addMethod("chrNum", function(value, element) { 
+jQuery.validator.addMethod("alNum", function(value, element) { 
 	var chrNum = /^([a-zA-Z0-9]+)$/; 
 	return this.optional(element) || (chrNum.test(value)); 
 }, "只能输入数字和字母(字符A-Z, a-z, 0-9)");

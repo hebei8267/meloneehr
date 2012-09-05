@@ -3,7 +3,7 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.tjhx.dao.myBatis.account.PermissionMyBatisDao">
 	
-  	<!-- 取得t_role_fun_perm信息(根据参数) -->
+  	<!-- 删除原有拥有菜单资源(根据参数) -->
 	<delete id="delPermissionByRoleUuid" parameterType="int">
 	<![CDATA[
 		delete from t_role_fun_perm where role_uuid = #{roleUuid}
