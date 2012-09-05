@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="${ctx}/static/js/jquery.validate.js"></script>
 		<script type="text/javascript" src="${ctx}/static/js/jquery.validate_messages_cn.js"></script>
 		<script type="text/javascript" src="${ctx}/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+		<script type="text/javascript" src="${ctx}/static/js/myScript.js"></script>
 
 		<sitemesh:head />
 		<script type="text/javascript">

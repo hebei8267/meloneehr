@@ -11,13 +11,10 @@
 			$().ready(function() {
 				$("#inputForm").validate({
 					rules: {
-						id: {
-							required: true,
-							maxlength: 16
-						},
 						barCode: {
 							required: true,
-							maxlength: 32
+							alNum: true,
+							maxlength: 16
 						},
 						name: {
 							required: true,
@@ -84,30 +81,24 @@
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
-					<td class="item_name" width="100px">商品编号:</td>
+					<td class="item_name" width="120px">商品编号/条形码:</td>
 					<td class="item">
 					<c:if test="${empty product.uuid}" >
-						<form:input path="id" class="text ui-widget-content ui-corner-all"/>
+						<form:input path="barCode" class="text ui-widget-content ui-corner-all"/>
 					</c:if>
 					<c:if test="${!empty product.uuid}" >
-						&nbsp;${product.id}
+						&nbsp;${product.barCode}
 					</c:if>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">条形码:</td>
-					<td class="item">
-						<form:input path="barCode" class="text ui-widget-content ui-corner-all"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="item_name" width="100px">商品名称:</td>
+					<td class="item_name">商品名称:</td>
 					<td class="item">
 						<form:input path="name" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">参考进价:</td>
+					<td class="item_name">参考进价:</td>
 					<td class="item">
 						<c:if test="${empty product.refPrice}" >
 						&nbsp;无
@@ -118,28 +109,28 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">零售价:</td>
+					<td class="item_name">零售价:</td>
 					<td class="item">
 						<form:input path="retailPrice" class="text ui-widget-content ui-corner-all"/>
 						&nbsp;元
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">会员价:</td>
+					<td class="item_name">会员价:</td>
 					<td class="item">
 						<form:input path="memberPrice" class="text ui-widget-content ui-corner-all"/>
 						&nbsp;元
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">批发价:</td>
+					<td class="item_name">批发价:</td>
 					<td class="item">
 						<form:input path="wholeSalePrice" class="text ui-widget-content ui-corner-all"/>
 						&nbsp;元
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">商品类型:</td>
+					<td class="item_name">商品类型:</td>
 					<td class="item">
 						<form:select path="productTypeUuid" class="text ui-widget-content ui-corner-all">
 							<form:option value="" label="请选择......"/>
@@ -148,7 +139,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">商品品牌:</td>
+					<td class="item_name">商品品牌:</td>
 					<td class="item">
 						<form:select path="productBrandUuid" class="text ui-widget-content ui-corner-all">
 							<form:option value="" label="请选择......"/>
@@ -157,7 +148,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">商品供应商:</td>
+					<td class="item_name">商品供应商:</td>
 					<td class="item">
 						<form:select path="productSupplierId" class="text ui-widget-content ui-corner-all">
 							<form:option value="" label="请选择......"/>
@@ -166,7 +157,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="item_name" width="100px">详细描述:</td>
+					<td class="item_name">详细描述:</td>
 					<td class="item">
 						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>

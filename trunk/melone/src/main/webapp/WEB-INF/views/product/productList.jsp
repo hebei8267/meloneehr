@@ -107,7 +107,7 @@
 				<tr>
 					<td class="item_name" width="90px">商品编号:</td>
 					<td class="item" width="180px">
-						<input type="text" name="id" value="${product.id}" class="text ui-widget-content ui-corner-all"/>
+						<input type="text" name="barCode" value="${product.barCode}" class="text ui-widget-content ui-corner-all"/>
 					</td>
 					<td class="item_name" width="90px">商品名称:</td>
 					<td class="item" width="180px">
@@ -154,7 +154,7 @@
 						<th class="rounded-left" width="25">
 							<input id="checkAll" type="checkbox"></input>
 						</th>
-						<th width="90">商品编号</th>
+						<th width="90">商品编号/条形码</th>
 						<th width="90">商品名称</th>
 						<th width="90">商品品牌</th>
 						<th width="90">商品供应商</th>
@@ -178,7 +178,7 @@
 							<input type="checkbox" name="uuid" value="${product.uuid}"></input>
 						</td>
 						<td>
-							${product.id}&nbsp;
+							${product.barCode}&nbsp;
 						</td>
 						<td>
 							${product.name}&nbsp;
