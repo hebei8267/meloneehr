@@ -106,7 +106,7 @@ public class Role extends IdEntity {
 	}
 
 	/**
-	 * 添加permission
+	 * 添加权限
 	 * 
 	 * @param permission 权限信息
 	 */
