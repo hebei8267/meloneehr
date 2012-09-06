@@ -30,7 +30,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 功能资源
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "FUN_UUID")
 	public Function getFunction() {
@@ -51,7 +51,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 角色
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {

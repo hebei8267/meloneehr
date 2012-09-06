@@ -192,7 +192,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户关联角色
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {
 		return role;
@@ -212,7 +212,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户所属门店
 	 */
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "SHOP_UUID")
 	public Shop getShop() {

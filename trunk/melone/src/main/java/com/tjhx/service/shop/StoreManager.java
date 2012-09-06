@@ -30,6 +30,15 @@ public class StoreManager {
 	}
 
 	/**
+	 * 取得所有未与门店关联的仓库信息
+	 * 
+	 * @return 仓库信息列表
+	 */
+	public List<Store> getAllNoRefStore() {
+		return (List<Store>) storeJpaDao.findByShopIsNull(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	}
+
+	/**
 	 * 根据编号取得仓库信息
 	 * 
 	 * @param uuid 仓库编号

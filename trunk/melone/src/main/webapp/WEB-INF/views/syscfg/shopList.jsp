@@ -151,10 +151,9 @@
 						</th>
 						<th width="60">门店编号</th>
 						<th width="60">门店名称</th>
-						<th width="60">电话号码</th>
-						<th width="60">传真号码</th>
-						<th width="150">门店地址</th>
-						<th width="120">仓库信息</th>
+						<th width="90">电话号码</th>
+						<th width="90">传真号码</th>
+						<th width="220">门店地址</th>
 						<th width="90" class="rounded-right">操作</th>
 					</tr>
 				</thead>
@@ -186,9 +185,6 @@
 						</td>
 						<td>
 							${shop.addr}&nbsp;
-						</td>						
-						<td>
-							${shop.storeName}&nbsp;
 						</td>
 						<td align="center">
 							<a href="${sc_ctx}/syscfg/shop/edit/${shop.uuid}">编辑</a>

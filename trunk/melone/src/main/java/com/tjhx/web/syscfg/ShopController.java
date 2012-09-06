@@ -68,7 +68,7 @@ public class ShopController extends BaseController {
 			model.addAttribute("shop", shop);
 
 			// 初始化仓库信息下拉菜单
-			shop.setAllStoreList(storeManager.getAllStore());
+			shop.setAllStoreList(storeManager.getAllNoRefStore());
 
 			return "syscfg/shopForm";
 		}
@@ -105,7 +105,7 @@ public class ShopController extends BaseController {
 		model.addAttribute("shop", shop);
 
 		// 初始化仓库信息下拉菜单
-		shop.setAllStoreList(storeManager.getAllStore());
+		shop.setAllStoreList(storeManager.getAllNoRefStore());
 
 		return "syscfg/shopForm";
 	}
@@ -135,7 +135,7 @@ public class ShopController extends BaseController {
 				model.addAttribute("shop", shop);
 
 				// 初始化仓库信息下拉菜单
-				shop.setAllStoreList(storeManager.getAllStore());
+				shop.setAllStoreList(storeManager.getAllNoRefStore());
 
 				return "syscfg/shopForm";
 			}
