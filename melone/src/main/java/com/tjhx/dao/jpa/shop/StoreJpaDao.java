@@ -1,5 +1,8 @@
 package com.tjhx.dao.jpa.shop;
 
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.tjhx.entity.shop.Store;
@@ -11,4 +14,11 @@ import com.tjhx.entity.shop.Store;
 
 public interface StoreJpaDao extends PagingAndSortingRepository<Store, Integer> {
 	public Store findById(String id);
+
+	/**
+	 * 取得所有未与门店关联的仓库信息
+	 * 
+	 * @return
+	 */
+	public List<Store> findByShopIsNull(Sort sort);
 }

@@ -141,7 +141,7 @@ public class Store extends IdEntity {
 	 * 
 	 * @return 仓库所属类型
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "STORE_TYPE_UUID")
 	public StoreType getStoreType() {
 		return storeType;
@@ -161,7 +161,7 @@ public class Store extends IdEntity {
 	 * 
 	 * @return 门店
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "SHOP_UUID")
 	public Shop getShop() {

@@ -19,7 +19,7 @@
 							required: true,
 							maxlength: 32
 						},
-						storeId: {
+						storeIds: {
 							required: true
 						},
 						telNum: {
@@ -49,6 +49,13 @@
 					$("input[type='text'],textarea").each(function(i){
   						this.value = $.trim(this.value);
  					});
+					
+					// 保存选择仓库
+					var _storeIdsItem = $("#storeIds option");
+					for(var i = 0; i < _storeIdsItem.length; i++) {
+						_storeIdsItem[i].selected = true;
+					}
+					
 					$("#inputForm").attr("action", "${sc_ctx}/syscfg/shop/save");
 		        	$("#inputForm").submit();
 				});

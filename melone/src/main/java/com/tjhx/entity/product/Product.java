@@ -3,6 +3,7 @@ package com.tjhx.entity.product;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -189,7 +190,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品品牌
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_BRAND_UUID")
 	public ProductBrand getProductBrand() {
 		return productBrand;
@@ -209,7 +210,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品类型
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_TYPE_UUID")
 	public ProductType getProductType() {
 		return productType;
@@ -229,7 +230,7 @@ public class Product extends IdEntity {
 	 * 
 	 * @return 商品供应商
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_SUPPLIER_UUID")
 	public ProductSupplier getProductSupplier() {
 		return productSupplier;
