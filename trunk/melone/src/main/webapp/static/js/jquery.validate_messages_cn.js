@@ -68,3 +68,9 @@ jQuery.validator.addMethod("alNum", function(value, element) {
 	return this.optional(element) || (chrNum.test(value)); 
 }, "只能输入数字和字母(字符A-Z, a-z, 0-9)");
 
+//图片格式的验证 
+jQuery.validator.addMethod("img", function(value, element) { 
+	var chrNum = "png|jpe?g|gif";
+	return this.optional(element) || value.match(new RegExp(".(" + chrNum + ")$", "i"));
+}, "请选择合法后缀名的图片(png|jpe|jpeg|gif)");
+
