@@ -1,5 +1,8 @@
 package com.tjhx.web.account;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
@@ -187,6 +192,26 @@ public class AccountController extends BaseController {
 		if (null == user.getUuid()) {// 新增操作
 
 			try {
+				// 转型为MultipartHttpRequest：
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				// 获得文件
+				MultipartFile file = multipartRequest.getFile("imgFile");
+				// 获得文件名
+				String filename = file.getOriginalFilename();
+				// 获得输入流
+				try {
+					InputStream input = file.getInputStream();
+					// 写入文件
+//TODO ?????????????????
+					// 或者
+					File source = new File("c:\123.jpeg");
+					file.transferTo(source);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// ////////////////
 				accountManager.addNewUser(user);
 			} catch (ServiceException ex) {
 				// 添加错误消息
