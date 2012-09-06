@@ -11,20 +11,17 @@
 		$.ajax({
 			type : "get",
 			async:false,
-			url : "http://172.29.226.102:8080/fzsb/login/loginsys.action?userName=test01&password=123456&t="+Math.random(),
+			url : "http://172.29.226.134:8080/fzsb/login/loginsys.action?userName=test01&password=123456&t="+Math.random(),
 			dataType : "jsonp",
-			jsonp: "callbackFunc",//服务端用于接收callback调用的function名的参数
-			jsonpCallback:"success_jsonpCallback",//callback的function名称
-			
-			error:function(){
-				alert('fail');
+			jsonp: "callbackFunc",//服务端用于接收callback调用的function名的参数			
+			success:function(data){
+				if(data.result){
+					window.document.location.href="http://172.29.226.134:8080/fzsb/sysmanage/mainPanel.action";
+				}else{
+					alert("认证失败！");
+				}
 			}
 		});
-		function success_jsonpCallback(data){
-			//alert(data.result);
-			
-			window.document.location.href="http://172.29.226.102:8080/fzsb/sysmanage/mainPanel.action";
-		}
 		
 		
 		</script>
