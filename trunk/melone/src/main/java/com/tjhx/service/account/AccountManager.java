@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.dao.jpa.account.UserJpaDao;
@@ -16,6 +17,7 @@ import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
 import com.tjhx.entity.shop.Shop;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.io.FileManager;
 
 /**
  * 账户相关管理类
@@ -27,6 +29,7 @@ public class AccountManager {
 	private ShopJpaDao shopJpaDao;
 	private RoleJpaDao roleJpaDao;
 	private UserMyBatisDao userMyBatisDao;
+	private FileManager fileManager;
 
 	/**
 	 * 取得所有用户信息
@@ -80,10 +83,10 @@ public class AccountManager {
 	 * 更新用户信息
 	 * 
 	 * @param user 用户信息
-	 * @param role 角色名称
+	 * @param imgFile 上传文件信息
 	 */
 	@Transactional(readOnly = false)
-	public void updateUser(User user) {
+	public void updateUser(User user, MultipartFile imgFile) {
 		User _user = userJpaDao.findOne(user.getUuid());
 		if (null == _user) {
 			// 用户不存在
@@ -109,16 +112,21 @@ public class AccountManager {
 		_user.setEmail(user.getEmail());
 		// 详细描述
 		_user.setDescTxt(user.getDescTxt());
+		// 保存用户信息
 		userJpaDao.save(_user);
+
+		// 保存用户上传的文件
+		fileManager.saveUploadFile(imgFile, user.getPhotoName());
 	}
 
 	/**
 	 * 添加新用户信息
 	 * 
 	 * @param user 用户信息
+	 * @param imgFile 上传文件信息
 	 */
 	@Transactional(readOnly = false)
-	public void addNewUser(User user) {
+	public void addNewUser(User user, MultipartFile imgFile) {
 
 		User _dbUser = findByLoginName(user.getLoginName());
 		// 该用户已存在!
@@ -132,7 +140,18 @@ public class AccountManager {
 		Shop _dbShop = shopJpaDao.findById(user.getShopId());
 		user.setShop(_dbShop);
 
+		// 用户上传相片名称
+		if (StringUtils.isNotBlank(user.getLoginName())) {
+			String _suffix = imgFile.getOriginalFilename().substring(imgFile.getOriginalFilename().lastIndexOf("."),
+					imgFile.getOriginalFilename().length());
+			String _photoName = user.getLoginName() + _suffix;
+
+			user.setPhotoName(_photoName);
+		}
+		// 保存用户信息
 		userJpaDao.save(user);
+		// 保存用户上传的文件
+		fileManager.saveUploadFile(imgFile, user.getPhotoName());
 	}
 
 	@Autowired
@@ -153,6 +172,11 @@ public class AccountManager {
 	@Autowired
 	public void setUserMyBatisDao(UserMyBatisDao userMyBatisDao) {
 		this.userMyBatisDao = userMyBatisDao;
+	}
+
+	@Autowired
+	public void setFileManager(FileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 
 }
