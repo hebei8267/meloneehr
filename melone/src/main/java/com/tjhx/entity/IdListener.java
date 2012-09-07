@@ -26,7 +26,7 @@ public class IdListener {
 
 		// 如果对象是IdEntity子类,添加审计信息.
 		// String loginName = SpringSecurityUtils.getCurrentUserName();
-		// TODO hebei
+		// TODO ?????????
 		String loginName = null;
 		if (null == loginName || StringUtils.isBlank(loginName)) {
 			loginName = "1";

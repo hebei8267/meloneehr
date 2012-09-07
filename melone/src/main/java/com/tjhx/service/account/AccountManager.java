@@ -16,6 +16,7 @@ import com.tjhx.dao.myBatis.account.UserMyBatisDao;
 import com.tjhx.entity.account.Role;
 import com.tjhx.entity.account.User;
 import com.tjhx.entity.shop.Shop;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.io.FileManager;
 
@@ -30,6 +31,7 @@ public class AccountManager {
 	private RoleJpaDao roleJpaDao;
 	private UserMyBatisDao userMyBatisDao;
 	private FileManager fileManager;
+	private SysConfig sysConfig;
 
 	/**
 	 * 取得所有用户信息
@@ -116,7 +118,7 @@ public class AccountManager {
 		userJpaDao.save(_user);
 
 		// 保存用户上传的文件
-		fileManager.saveUploadFile(imgFile, user.getPhotoName());
+		fileManager.saveUploadFile(imgFile, sysConfig.getUserPhotoPath(), _user.getPhotoName());
 	}
 
 	/**
@@ -151,7 +153,8 @@ public class AccountManager {
 		// 保存用户信息
 		userJpaDao.save(user);
 		// 保存用户上传的文件
-		fileManager.saveUploadFile(imgFile, user.getPhotoName());
+
+		fileManager.saveUploadFile(imgFile, sysConfig.getUserPhotoPath(), user.getPhotoName());
 	}
 
 	@Autowired
@@ -177,6 +180,11 @@ public class AccountManager {
 	@Autowired
 	public void setFileManager(FileManager fileManager) {
 		this.fileManager = fileManager;
+	}
+
+	@Autowired
+	public void setSysConfig(SysConfig sysConfig) {
+		this.sysConfig = sysConfig;
 	}
 
 }

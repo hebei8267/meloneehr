@@ -93,6 +93,11 @@
 		</property>
 	</bean>
 
+	<!-- 系统配置信息Bean -->
+	<bean id="sysConfig" class="com.tjhx.globals.SysConfig">
+		<!-- 系统配置信息Bean -->
+		<property name="userPhotoPath" value="${photo.user}" />
+	</bean>
 
 	<!-- production/local development环境 -->
 	<beans profile="production,development,test">
