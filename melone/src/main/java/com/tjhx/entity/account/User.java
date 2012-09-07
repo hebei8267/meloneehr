@@ -46,6 +46,8 @@ public class User extends IdEntity {
 	private Shop shop;
 	/** 用户所属门店编号 */
 	private String shopId;
+	/** 用户上传相片名称 */
+	private String photoName;
 	// ----------------------------------
 	/** 用户关联角色对象唯一标识 */
 	private Integer roleUuid;
@@ -248,6 +250,25 @@ public class User extends IdEntity {
 	 */
 	public void setShopId(String shopId) {
 		this.shopId = shopId;
+	}
+
+	/**
+	 * 取得用户上传相片名称
+	 * 
+	 * @return 用户上传相片名称
+	 */
+	@Column(length = 32)
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	/**
+	 * 设置用户上传相片名称
+	 * 
+	 * @param photoName 用户上传相片名称
+	 */
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 
 	/**

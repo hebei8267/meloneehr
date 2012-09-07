@@ -1,8 +1,5 @@
 package com.tjhx.web.account;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -195,24 +192,9 @@ public class AccountController extends BaseController {
 				// 转型为MultipartHttpRequest：
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				// 获得文件
-				MultipartFile file = multipartRequest.getFile("imgFile");
-				// 获得文件名
-				String filename = file.getOriginalFilename();
-				// 获得输入流
-				try {
-					InputStream input = file.getInputStream();
-					// 写入文件
-//TODO ?????????????????
-					// 或者
-					File source = new File("c:\123.jpeg");
-					file.transferTo(source);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				MultipartFile imgFile = multipartRequest.getFile("imgFile");
 
-				// ////////////////
-				accountManager.addNewUser(user);
+				accountManager.addNewUser(user, imgFile);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
@@ -228,7 +210,12 @@ public class AccountController extends BaseController {
 			}
 		} else {// 修改操作
 			try {
-				accountManager.updateUser(user);
+				// 转型为MultipartHttpRequest：
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				// 获得文件
+				MultipartFile imgFile = multipartRequest.getFile("imgFile");
+
+				accountManager.updateUser(user, imgFile);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
@@ -237,4 +224,5 @@ public class AccountController extends BaseController {
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/account/user/list";
 	}
+
 }
