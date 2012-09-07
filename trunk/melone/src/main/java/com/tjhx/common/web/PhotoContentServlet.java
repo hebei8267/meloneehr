@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springside.modules.utils.SpringContextHolder;
 import org.springside.modules.web.Servlets;
 
-import com.tjhx.globals.Constants;
+import com.tjhx.globals.SysConfig;
 
 /**
  * 读取用户相片Servlet配置(禁止浏览器缓存)
@@ -29,17 +28,11 @@ public class PhotoContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 2697800680742328748L;
 	private MimetypesFileTypeMap mimetypesFileTypeMap;
 
-	@SuppressWarnings("unused")
-	private ApplicationContext applicationContext;
-
 	/**
 	 * 初始化.
 	 */
 	@Override
 	public void init() throws ServletException {
-		// 保存applicationContext以备后用
-		applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-
 		// 初始化mimeTypes, 默认缺少css的定义,添加之.
 		mimetypesFileTypeMap = new MimetypesFileTypeMap();
 		mimetypesFileTypeMap.addMimeTypes("text/css css");
@@ -53,7 +46,6 @@ public class PhotoContentServlet extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "contentPath parameter is required.");
 			return;
 		}
-		contentPath = Constants.WEB_INF_PATH + contentPath;
 
 		// 获取请求内容的基本信息.
 		ContentInfo contentInfo = getContentInfo(contentPath);
@@ -81,7 +73,10 @@ public class PhotoContentServlet extends HttpServlet {
 	protected ContentInfo getContentInfo(String contentPath) {
 		ContentInfo contentInfo = new ContentInfo();
 
-		String realFilePath = getServletContext().getRealPath(contentPath);
+		// 系统配置信息Bean
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		String realFilePath = sysConfig.getUserPhotoPath() + contentPath;
+
 		File file = new File(realFilePath);
 
 		contentInfo.file = file;
