@@ -1,7 +1,6 @@
 package com.tjhx.service.io;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,14 +13,15 @@ public class FileManager {
 	/**
 	 * 保存用户上传的文件
 	 * 
-	 * @throws IOException
-	 * @throws IllegalStateException
+	 * @param imgFile
+	 * @param fileName 文件路径
+	 * @param fileName 文件名
 	 */
-	public void saveUploadFile(MultipartFile imgFile, String fileName) {
+	public void saveUploadFile(MultipartFile imgFile, String filePath, String fileName) {
 		if (null == imgFile.getOriginalFilename()) {
 			return;
 		}
-		File file = this.clearFile(fileName);
+		File file = this.clearFile(filePath, fileName);
 		try {
 			imgFile.transferTo(file);
 		} catch (Exception e) {
@@ -33,12 +33,12 @@ public class FileManager {
 	/**
 	 * 清理文件(指定的文件名如果存在,则删除)
 	 * 
-	 * @param fileName
+	 * @param fileName 文件路径
+	 * @param fileName 文件名
 	 * @return
 	 */
-	private File clearFile(String fileName) {
-		// TODO ？？？？？
-		File file = new File("c:/" + fileName);
+	private File clearFile(String filePath, String fileName) {
+		File file = new File(filePath + fileName);
 		if (file.exists()) {
 			file.delete();
 		}

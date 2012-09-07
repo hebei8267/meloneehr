@@ -54,7 +54,7 @@ public class AccountController extends BaseController {
 		// 校验用户信息
 		if (checkUserInfo(user, loginName, passWd)) {
 			session.setAttribute(Constants.SESSION_USER_INFO, user);
-			// TODO hebei
+			// TODO ????????????
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/syscfg/storeType/list";
 		} else {
 			addInfoMsg(model, "ERR_MSG_ACC_001");
