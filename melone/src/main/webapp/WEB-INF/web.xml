@@ -110,16 +110,7 @@
 		<servlet-name>PhotoContentServlet</servlet-name>
 		<url-pattern>/photoServlet</url-pattern>
 	</servlet-mapping>
-	
-	<!-- 静态资源Servlet配置(开启gzip) -->
-	<servlet>
-		<servlet-name>StaticContentServlet</servlet-name>
-		<servlet-class>com.tjhx.common.web.StaticContentServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>StaticContentServlet</servlet-name>
-		<url-pattern>/staticServlet</url-pattern>
-	</servlet-mapping>
+
 
 	<!-- session 超时时间(单位：分钟),使用MemcachedSessionFilter时无效 -->
 	<session-config>
