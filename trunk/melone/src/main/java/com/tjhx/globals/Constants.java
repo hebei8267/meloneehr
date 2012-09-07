@@ -21,7 +21,4 @@ public class Constants {
 	/** 用户信息 */
 	public static final String SESSION_USER_INFO = "__SESSION_USER_INFO";
 
-	// ----------------------------------------------------------------
-	/** WEB-INF文件夹路径 */
-	public static final String WEB_INF_PATH = "WEB-INF/";
 }
