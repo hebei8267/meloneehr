@@ -1,5 +1,10 @@
 package com.tjhx.globals;
 
+/**
+ * 系统配置信息Bean
+ * 
+ * @author
+ */
 public class SysConfig {
 	/** 用户照片存储路径 */
 	public String userPhotoPath;
