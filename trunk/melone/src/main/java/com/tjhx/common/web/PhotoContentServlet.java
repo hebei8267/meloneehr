@@ -62,8 +62,11 @@ public class PhotoContentServlet extends HttpServlet {
 		// 构造OutputStream
 		OutputStream output = response.getOutputStream();
 
-		// 高效读取文件内容并输出,然后关闭input file
-		FileUtils.copyFile(contentInfo.file, output);
+		if (contentInfo.file.exists()) {
+			// 高效读取文件内容并输出,然后关闭input file
+			FileUtils.copyFile(contentInfo.file, output);
+		}
+
 		output.flush();
 	}
 
