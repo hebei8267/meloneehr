@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.tjhx.common.utils.FileUtils;
 import com.tjhx.dao.jpa.product.ProductBrandJpaDao;
 import com.tjhx.dao.jpa.product.ProductJpaDao;
 import com.tjhx.dao.jpa.product.ProductSupplierJpaDao;
@@ -18,7 +20,9 @@ import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.entity.product.ProductSupplier;
 import com.tjhx.entity.product.ProductType;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.io.FileManager;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,6 +32,8 @@ public class ProductManager {
 	private ProductBrandJpaDao productBrandJpaDao;
 	private ProductSupplierJpaDao productSupplierJpaDao;
 	private ProductMyBatisDao productMyBatisDao;
+	private FileManager fileManager;
+	private SysConfig sysConfig;
 
 	/**
 	 * 取得所有商品信息
@@ -72,9 +78,10 @@ public class ProductManager {
 	 * 添加新商品信息
 	 * 
 	 * @param product 商品信息
+	 * @param imgFile 上传文件信息
 	 */
 	@Transactional(readOnly = false)
-	public void addNewProduct(Product product) {
+	public void addNewProduct(Product product, MultipartFile imgFile) {
 
 		Product _dbProduct = productJpaDao.findByBarCode(product.getBarCode());
 		// 该商品编号已存在
@@ -100,7 +107,18 @@ public class ProductManager {
 			product.setProductSupplier(_dbProductSupplier);
 		}
 
+		// 上传商品相片名称
+		if (StringUtils.isNotBlank(product.getBarCode())) {
+			String _suffix = FileUtils.getSuffix(imgFile.getOriginalFilename());
+			String _photoName = product.getBarCode() + _suffix;
+
+			product.setPhotoName(_photoName);
+		}
+
 		productJpaDao.save(product);
+
+		// 保存用户上传相片
+		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), product.getPhotoName());
 	}
 
 	/**
@@ -111,7 +129,7 @@ public class ProductManager {
 	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void updateProduct(Product product) throws IllegalAccessException, InvocationTargetException {
+	public void updateProduct(Product product, MultipartFile imgFile) {
 
 		Product _dbProduct = productJpaDao.findOne(product.getUuid());
 		if (null == _dbProduct) {
@@ -156,6 +174,9 @@ public class ProductManager {
 		}
 
 		productJpaDao.save(_dbProduct);
+
+		// 保存用户上传相片
+		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), _dbProduct.getPhotoName());
 	}
 
 	@Autowired
@@ -181,6 +202,16 @@ public class ProductManager {
 	@Autowired
 	public void setProductMyBatisDao(ProductMyBatisDao productMyBatisDao) {
 		this.productMyBatisDao = productMyBatisDao;
+	}
+
+	@Autowired
+	public void setFileManager(FileManager fileManager) {
+		this.fileManager = fileManager;
+	}
+
+	@Autowired
+	public void setSysConfig(SysConfig sysConfig) {
+		this.sysConfig = sysConfig;
 	}
 
 }

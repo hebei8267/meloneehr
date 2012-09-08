@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springside.modules.utils.SpringContextHolder;
 import org.springside.modules.web.Servlets;
 
+import com.tjhx.globals.Constants;
 import com.tjhx.globals.SysConfig;
 
 /**
@@ -40,15 +41,31 @@ public class PhotoContentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 取得参数
-		String contentPath = request.getParameter("contentPath");
-		if (StringUtils.isBlank(contentPath)) {
+		// 取得参数-照片名称
+		String photoName = request.getParameter("photoName");
+		if (StringUtils.isBlank(photoName)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "contentPath parameter is required.");
 			return;
 		}
+		// 取得参数-用户照片类型
+		String fileType = request.getParameter("type");
 
 		// 获取请求内容的基本信息.
-		ContentInfo contentInfo = getContentInfo(contentPath);
+		ContentInfo contentInfo = getContentInfo(photoName, fileType);
+
+		// // 根据Etag或ModifiedSince Header判断客户端的缓存文件是否有效, 如仍有效则设置返回码为304,直接返回.
+		// if (!Servlets.checkIfModifiedSince(request, response,
+		// contentInfo.lastModified)
+		// || !Servlets.checkIfNoneMatchEtag(request, response,
+		// contentInfo.etag)) {
+		// return;
+		// }
+		//
+		// // 设置Etag/过期时间
+		// Servlets.setExpiresHeader(response, Servlets.ONE_YEAR_SECONDS);
+		// Servlets.setLastModifiedHeader(response, contentInfo.lastModified);
+		// Servlets.setEtag(response, contentInfo.etag);
+
 		// 设置MIME类型
 		response.setContentType(contentInfo.mimeType);
 
@@ -73,17 +90,23 @@ public class PhotoContentServlet extends HttpServlet {
 	/**
 	 * 创建Content基本信息.
 	 */
-	protected ContentInfo getContentInfo(String contentPath) {
+	protected ContentInfo getContentInfo(String photoName, String fileType) {
 		ContentInfo contentInfo = new ContentInfo();
 
 		// 系统配置信息Bean
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		String realFilePath = sysConfig.getUserPhotoPath() + contentPath;
+
+		String realFilePath;
+		if (StringUtils.isNotBlank(fileType) && Constants.PHOTO_TYPE_USER.equals(fileType)) {
+			realFilePath = sysConfig.getUserPhotoPath() + photoName;
+		} else {
+			realFilePath = sysConfig.getProductPhotoPath() + photoName;
+		}
 
 		File file = new File(realFilePath);
 
 		contentInfo.file = file;
-		contentInfo.contentPath = contentPath;
+		contentInfo.contentPath = photoName;
 		contentInfo.fileName = file.getName();
 		contentInfo.length = (int) file.length();
 

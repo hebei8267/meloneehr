@@ -44,6 +44,8 @@ public class Product extends IdEntity {
 	private ProductType productType;
 	/** 商品供应商 */
 	private ProductSupplier productSupplier;
+	/** 上传商品相片名称 */
+	private String photoName;
 	// -------------------------------------------------
 	/** 商品品牌uuid */
 	private Integer productBrandUuid;
@@ -234,6 +236,25 @@ public class Product extends IdEntity {
 	@JoinColumn(name = "PRODUCT_SUPPLIER_UUID")
 	public ProductSupplier getProductSupplier() {
 		return productSupplier;
+	}
+
+	/**
+	 * 取得上传商品相片名称
+	 * 
+	 * @return 上传商品相片名称
+	 */
+	@Column(length = 32)
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	/**
+	 * 设置上传商品相片名称
+	 * 
+	 * @param photoName 上传商品相片名称
+	 */
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 
 	/**

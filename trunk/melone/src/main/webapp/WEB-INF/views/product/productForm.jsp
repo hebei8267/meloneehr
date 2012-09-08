@@ -58,6 +58,28 @@
 					$("#inputForm").attr("action", "${sc_ctx}/product/save");
 					$("#inputForm").submit();
 				});
+				
+				// 文件预览
+				$("#imgFile").change(function() {
+					var file = this.files[0];
+					var maxWidth = 150;
+					var maxHeight = 200;
+					
+					$("#img").onload = function() {
+						var rect = _clacImgZoomParam(maxWidth, maxHeight, img.offsetWidth, img.offsetHeight);
+						img.width = rect.width;
+						img.height = rect.height;
+						img.style.marginLeft = rect.left + 'px';
+						img.style.marginTop = rect.top + 'px';
+					}
+					
+					var reader = new FileReader();
+					reader.onload = function(evt) {
+						$("#img").attr("src", evt.target.result);
+					}
+					
+					reader.readAsDataURL(file);
+				});
 			});
 		</script>
 	</head>
@@ -77,7 +99,7 @@
 		</div>
 		<div class="clear"></div>
 
-		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="product">
+		<form:form method="POST" class="form cmxform" id="inputForm" modelAttribute="product" enctype="multipart/form-data">
 			<form:hidden path="uuid"/>
 			<table>
 				<tr>
@@ -89,6 +111,16 @@
 					<c:if test="${!empty product.uuid}" >
 						&nbsp;${product.barCode}
 					</c:if>
+					</td>
+					<td align="center" rowspan="7" style="padding-left: 40px;vertical-align: top;">
+						<table>
+							<tr>
+								<td><img id="img" height="200px" width="150px" style="border: 1px;" src="${ctx}/photoServlet?photoName=${product.photoName}"/></td>
+							</tr>
+							<tr><%// 图像文件上传 %>
+                    			<td colspan="3">上传照片:&nbsp;<input id="imgFile" name="imgFile" type="file" size="1"/></td>
+                			</tr>
+						</table>
 					</td>
 				</tr>
 				<tr>
@@ -158,7 +190,7 @@
 				</tr>
 				<tr>
 					<td class="item_name">详细描述:</td>
-					<td class="item">
+					<td class="item" colspan="2">
 						<form:textarea path="descTxt" class="text ui-widget-content ui-corner-all"/>
 					</td>
 				</tr>

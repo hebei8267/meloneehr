@@ -21,4 +21,10 @@ public class Constants {
 	/** 用户信息 */
 	public static final String SESSION_USER_INFO = "__SESSION_USER_INFO";
 
+	// ------------------------------------------------------------------
+	// 上传文件分类
+	// ------------------------------------------------------------------
+	/** 用户照片类型 */
+	public static final String PHOTO_TYPE_USER = "userPhoto";
+
 }
