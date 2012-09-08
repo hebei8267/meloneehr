@@ -46,7 +46,7 @@ public class User extends IdEntity {
 	private Shop shop;
 	/** 用户所属门店编号 */
 	private String shopId;
-	/** 用户上传相片名称 */
+	/** 上传用户相片名称 */
 	private String photoName;
 	// ----------------------------------
 	/** 用户关联角色对象唯一标识 */
@@ -253,9 +253,9 @@ public class User extends IdEntity {
 	}
 
 	/**
-	 * 取得用户上传相片名称
+	 * 取得上传用户相片名称
 	 * 
-	 * @return 用户上传相片名称
+	 * @return 上传用户相片名称
 	 */
 	@Column(length = 32)
 	public String getPhotoName() {
@@ -263,9 +263,9 @@ public class User extends IdEntity {
 	}
 
 	/**
-	 * 设置用户上传相片名称
+	 * 设置上传用户相片名称
 	 * 
-	 * @param photoName 用户上传相片名称
+	 * @param photoName 上传用户相片名称
 	 */
 	public void setPhotoName(String photoName) {
 		this.photoName = photoName;

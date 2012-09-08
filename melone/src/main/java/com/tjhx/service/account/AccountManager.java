@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tjhx.common.utils.FileUtils;
 import com.tjhx.dao.jpa.account.RoleJpaDao;
 import com.tjhx.dao.jpa.account.UserJpaDao;
 import com.tjhx.dao.jpa.shop.ShopJpaDao;
@@ -117,7 +118,7 @@ public class AccountManager {
 		// 保存用户信息
 		userJpaDao.save(_user);
 
-		// 保存用户上传的文件
+		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getUserPhotoPath(), _user.getPhotoName());
 	}
 
@@ -144,16 +145,15 @@ public class AccountManager {
 
 		// 用户上传相片名称
 		if (StringUtils.isNotBlank(user.getLoginName())) {
-			String _suffix = imgFile.getOriginalFilename().substring(imgFile.getOriginalFilename().lastIndexOf("."),
-					imgFile.getOriginalFilename().length());
+			String _suffix = FileUtils.getSuffix(imgFile.getOriginalFilename());
 			String _photoName = user.getLoginName() + _suffix;
 
 			user.setPhotoName(_photoName);
 		}
 		// 保存用户信息
 		userJpaDao.save(user);
-		// 保存用户上传的文件
 
+		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getUserPhotoPath(), user.getPhotoName());
 	}
 

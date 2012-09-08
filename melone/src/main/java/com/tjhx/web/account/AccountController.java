@@ -189,10 +189,7 @@ public class AccountController extends BaseController {
 		if (null == user.getUuid()) {// 新增操作
 
 			try {
-				// 转型为MultipartHttpRequest：
-				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-				// 获得文件
-				MultipartFile imgFile = multipartRequest.getFile("imgFile");
+				MultipartFile imgFile = getMultipartFile(request);
 
 				accountManager.addNewUser(user, imgFile);
 			} catch (ServiceException ex) {
@@ -210,10 +207,7 @@ public class AccountController extends BaseController {
 			}
 		} else {// 修改操作
 			try {
-				// 转型为MultipartHttpRequest：
-				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-				// 获得文件
-				MultipartFile imgFile = multipartRequest.getFile("imgFile");
+				MultipartFile imgFile = getMultipartFile(request);
 
 				accountManager.updateUser(user, imgFile);
 			} catch (ServiceException ex) {
@@ -223,6 +217,15 @@ public class AccountController extends BaseController {
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/account/user/list";
+	}
+
+	private MultipartFile getMultipartFile(HttpServletRequest request) {
+		// 转型为MultipartHttpRequest：
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		// 获得文件
+		MultipartFile imgFile = multipartRequest.getFile("imgFile");
+
+		return imgFile;
 	}
 
 }

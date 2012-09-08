@@ -113,10 +113,10 @@
 						&nbsp;${user.loginName}
 					</c:if>
 					</td>
-					<td align="center" rowspan="7" style="padding-left: 40px;">
+					<td align="center" rowspan="7" style="padding-left: 40px;vertical-align: top;">
 						<table>
 							<tr>
-								<td><img id="img" height="200px" width="150px" style="border: 1px;" src="${ctx}/photoServlet?contentPath=${user.photoName}"/></td>
+								<td><img id="img" height="200px" width="150px" style="border: 1px;" src="${ctx}/photoServlet?photoName=${user.photoName}&type=userPhoto"/></td>
 							</tr>
 							<tr><%// 图像文件上传 %>
                     			<td colspan="3">上传照片:&nbsp;<input id="imgFile" name="imgFile" type="file" size="1"/></td>

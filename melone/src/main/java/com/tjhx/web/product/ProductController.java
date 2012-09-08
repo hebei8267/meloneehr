@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
@@ -156,7 +158,9 @@ public class ProductController extends BaseController {
 
 		if (null == product.getUuid()) {// 新增操作
 			try {
-				productManager.addNewProduct(product);
+				MultipartFile imgFile = getMultipartFile(request);
+
+				productManager.addNewProduct(product, imgFile);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
@@ -172,7 +176,9 @@ public class ProductController extends BaseController {
 			}
 		} else {// 修改操作
 			try {
-				productManager.updateProduct(product);
+				MultipartFile imgFile = getMultipartFile(request);
+
+				productManager.updateProduct(product, imgFile);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
@@ -180,5 +186,14 @@ public class ProductController extends BaseController {
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/product/list";
+	}
+
+	private MultipartFile getMultipartFile(HttpServletRequest request) {
+		// 转型为MultipartHttpRequest：
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		// 获得文件
+		MultipartFile imgFile = multipartRequest.getFile("imgFile");
+
+		return imgFile;
 	}
 }
