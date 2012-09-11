@@ -50,6 +50,10 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
 	margin-bottom: 4px;
 }
 
+.btn_text {
+   font-size: 50px;
+}
+
 .forget_link:hover {
 	cursor:pointer;
 	text-decoration: underline;
