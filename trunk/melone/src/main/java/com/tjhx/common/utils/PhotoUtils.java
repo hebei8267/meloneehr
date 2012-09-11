@@ -1,6 +1,9 @@
 package com.tjhx.common.utils;
 
 import javax.imageio.ImageIO;
+
+import com.tjhx.globals.Constants;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -109,7 +112,7 @@ public class PhotoUtils {
 	 * @throws Exception
 	 */
 	public static void imageResize(String fromFileStr, String saveToFileStr) throws IOException {
-		imageResize(fromFileStr, saveToFileStr, 150, 200);
+		imageResize(fromFileStr, saveToFileStr, Constants.PHOTO_IMG_WIDTH, Constants.PHOTO_IMG_HEIGHT);
 	}
 
 	/**
@@ -120,7 +123,7 @@ public class PhotoUtils {
 	 * @throws Exception
 	 */
 	public static void imageResize(File fromFile, File saveToFile) throws IOException {
-		imageResize(fromFile, saveToFile, 150, 200);
+		imageResize(fromFile, saveToFile, Constants.PHOTO_IMG_WIDTH, Constants.PHOTO_IMG_HEIGHT);
 	}
 
 	public static void main(String argv[]) {

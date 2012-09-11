@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%@ page import="com.tjhx.globals.Constants" %>
+
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="sc_ctx">${ctx}/sc</c:set>
 <c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
@@ -62,8 +64,8 @@
 				// 文件预览
 				$("#imgFile").change(function() {
 					var file = this.files[0];
-					var maxWidth = 150;
-					var maxHeight = 200;
+					var maxWidth = <%=Constants.PHOTO_IMG_WIDTH %>;
+					var maxHeight = <%=Constants.PHOTO_IMG_HEIGHT %>;
 					
 					$("#img").onload = function() {
 						var rect = _clacImgZoomParam(maxWidth, maxHeight, img.offsetWidth, img.offsetHeight);
@@ -115,7 +117,7 @@
 					<td align="center" rowspan="7" style="padding-left: 40px;vertical-align: top;">
 						<table>
 							<tr>
-								<td><img id="img" height="200px" width="150px" style="border: 1px;" src="${ctx}/photoServlet?photoName=${product.photoName}"/></td>
+								<td><img id="img" height="<%=Constants.PHOTO_IMG_HEIGHT %>px" width="<%=Constants.PHOTO_IMG_WIDTH %>px" style="border: 1px;" src="${ctx}/photoServlet?photoName=${product.photoName}"/></td>
 							</tr>
 							<tr><%// 图像文件上传 %>
                     			<td colspan="3">上传照片:&nbsp;<input id="imgFile" name="imgFile" type="file" size="1"/></td>

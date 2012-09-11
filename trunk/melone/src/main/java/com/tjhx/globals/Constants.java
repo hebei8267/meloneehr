@@ -26,5 +26,9 @@ public class Constants {
 	// ------------------------------------------------------------------
 	/** 用户照片类型 */
 	public static final String PHOTO_TYPE_USER = "userPhoto";
+	/** 照片显示高度 */
+	public static final int PHOTO_IMG_HEIGHT = 200;
+	/** 照片显示宽度 */
+	public static final int PHOTO_IMG_WIDTH = 150;
 
 }
