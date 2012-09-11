@@ -10,6 +10,65 @@
 		<script>
 		$().ready(function() {
 			$("#btn1,#btn2,#btn3,#btn4,#btn5,#btn6,#btn7,#btn8,#btn9,#btn0,#btnDel,#btnEnter").button();
+			
+			$("#btn1").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 1);
+			});
+			
+			$("#btn2").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 2);
+			});
+			
+			$("#btn3").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 3);
+			});
+			
+			$("#btn4").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 4);
+			});
+			
+			$("#btn5").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 5);
+			});
+			
+			$("#btn6").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 6);
+			});
+			
+			$("#btn7").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 7);
+			});
+			
+			$("#btn8").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 8);
+			});
+			
+			$("#btn9").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 9);
+			});
+			
+			$("#btn0").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode + 0);
+			});
+			
+			$("#btnDel").click(function() {
+				var _inputBarCode = $("#_inputBarCode").val();
+				$("#_inputBarCode").val(_inputBarCode.substring(0, _inputBarCode.length - 1));
+			});
+			
+			$("#btnEnter").click(function() {
+				// ????????????????????????????????????????????????????????????????
+			});
 		});	
 		</script>
 	</head>
@@ -19,10 +78,14 @@
 				<td>
 					<table>
 						<tr>
-							<td><input type="text" class="text ui-widget-content ui-corner-all" style="width: 230px;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
+							<td class="item_name">货号/条形码:</td>
+							<td><input type="text" id="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
 						<tr>
-							<td>
+							<td colspan="2">货品信息</td>
+						</tr>
+						<tr>
+							<td colspan="2">
 								<table>
 									<tr>
 										<td><button id="btn1" type="button"><span class="btn_text">1</span></button></td>
@@ -49,8 +112,14 @@
 						</tr>
 					</table>
 				</td>
-				<td>&nbsp;</td>
-				<td>222</td>
+				<td width="10px">&nbsp;</td>
+				<td>
+					<table>
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
 	</body>
