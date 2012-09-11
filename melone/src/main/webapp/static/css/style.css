@@ -5,7 +5,7 @@ body,html { font:15px/150% Tahoma,Verdana,STHeiTi,simsun,sans-serif; height:99.3
 	min-height: 99.3%;
 }
 #__frame_content {
-	padding-bottom: 30px;/* ²»ÖÁ±»footer¸Ç×¡ */
+	padding-bottom: 30px;/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½footerï¿½ï¿½×¡ */
 }
 #__frame_footer {
 	position: absolute;
@@ -51,7 +51,8 @@ input:hover, textarea:hover, input:focus, textarea:focus, select:hover, select:f
 }
 
 .btn_text {
-   font-size: 50px;
+   font-size: 55px;
+   padding: 11px;
 }
 
 .forget_link:hover {
