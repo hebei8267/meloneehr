@@ -29,6 +29,9 @@
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
+#rounded-corner td.center {
+	text-align: center;
+}
 #rounded-corner td.first, #rounded-corner_t td.first {
 	border-left: 0px;
 }
