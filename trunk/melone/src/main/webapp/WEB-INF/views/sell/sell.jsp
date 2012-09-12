@@ -7,6 +7,7 @@
 <c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
 <html>
 	<head>
+		<script type="text/javascript" src="${ctx}/static/js/jquery.tablescroll.js"></script>
 		<script>
 		function btn1_click() {
 			var _inputBarCode = $("#_inputBarCode").val();
@@ -260,6 +261,8 @@
 			$("#btnEnter").click(function() {
 				// ????????????????????????????????????????????????????????????????
 			});
+			//------------------------------
+			$('#rounded-corner').tableScroll({height:392});
 		});	
 		</script>
 	</head>
@@ -273,9 +276,9 @@
 							<td class="item_name">货号/条形码:</td>
 							<td><input type="text" id="_inputBarCode" name="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;text-align:right;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
-						<tr>
+					<!-- 	<tr>
 							<td colspan="2">货品信息</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td colspan="2">
 								<table>
@@ -304,12 +307,162 @@
 						</tr>
 					</table>
 				</td>
-				<td width="10px">&nbsp;</td>
-				<td>
-					<table>
-						<tr>
-							<td></td>
-						</tr>
+				<td valign="top" style="padding-top: 6px;">
+					<table id="rounded-corner">
+						<thead>
+							<tr>
+								<th class="rounded-left" width="30">序号</th>
+								<th width="155">名称</th>
+								<th width="55">单价</th>
+								<th width="180">数量</th>
+								<th width="80">价格</th>
+								<th width="30" class="rounded-right">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>数量</td>
+								<td>123456.99</td>
+								<td></td>
+							</tr>
+						</tbody>
 					</table>
 				</td>
 			</tr>
