@@ -21,12 +21,13 @@
 		<script type="text/javascript" src="${ctx}/static/js/jquery-ui-1.8.21.custom.min.js"></script>
 		<script type="text/javascript" src="${ctx}/static/js/myScript.js"></script>
 
-		<sitemesh:head />
 		<script type="text/javascript">
         $(function () {
 	        $('input:text:first').focus();
     	});
     	</script>
+    	
+    	<sitemesh:head />
 	</head>
 	<body>
 	<div id="__del-confirm" title="删除确认？" style="display:none;">
