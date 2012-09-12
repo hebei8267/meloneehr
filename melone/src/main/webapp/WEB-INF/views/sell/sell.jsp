@@ -312,11 +312,11 @@
 						<thead>
 							<tr>
 								<th class="rounded-left" width="30">序号</th>
-								<th width="155">名称</th>
-								<th width="55">单价</th>
-								<th width="180">数量</th>
+								<th width="230">名称</th>
+								<th width="60">单价</th>
+								<th width="100">数量</th>
 								<th width="80">价格</th>
-								<th width="30" class="rounded-right">操作</th>
+								<th width="40" class="rounded-right">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -324,143 +324,477 @@
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr>
+							
 							<tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr><tr>
 								<td class="first">999</td>
 								<td>一二三四五六七八九十</td>
 								<td>1234.99</td>
-								<td>数量</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
 								<td>123456.99</td>
-								<td></td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr><tr>
+								<td class="first">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td class="center">
+									<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+									<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+									<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
 							</tr>
 						</tbody>
 					</table>
