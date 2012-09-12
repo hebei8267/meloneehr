@@ -1,4 +1,4 @@
-#rounded-corner {
+#rounded-corner, #rounded-corner_t {
 	text-align: left;
 	border-collapse: collapse;
 	
@@ -6,20 +6,20 @@
 	table-layout: fixed;
 }
 
-#rounded-corner thead th.rounded-left {
+#rounded-corner thead th.rounded-left, #rounded-corner_t thead th.rounded-left  {
 	background: #b9c9fe url('./images/left.png') left -1px no-repeat;
 }
-#rounded-corner thead th.rounded-right {
+#rounded-corner thead th.rounded-right, #rounded-corner_t thead th.rounded-right {
 	background: #b9c9fe url('./images/right.png') right -1px no-repeat;
 }
-#rounded-corner th {
+#rounded-corner th, #rounded-corner_t th {
 	padding: 8px;
 	font-weight: normal;
 	color: #039;
 	background: #b9c9fe;
 	text-align: center;
 }
-#rounded-corner td {
+#rounded-corner td, #rounded-corner_t td {
 	padding: 8px;
 	background: #e8edff;
 	border-top: 1px solid #fff;
@@ -29,15 +29,15 @@
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
-#rounded-corner td.first {
+#rounded-corner td.first, #rounded-corner_t td.first {
 	border-left: 0px;
 }
-#rounded-corner tfoot td.rounded-foot-left {
+#rounded-corner tfoot td.rounded-foot-left, #rounded-corner_t tfoot td.rounded-foot-left {
 	background: #e8edff url('./images/botleft.png') left bottom no-repeat;
 }
-#rounded-corner tfoot td.rounded-foot-right {
+#rounded-corner tfoot td.rounded-foot-right, #rounded-corner_t tfoot td.rounded-foot-right {
 	background: #e8edff url('./images/botright.png') right bottom no-repeat;
 }
-#rounded-corner tbody tr:hover td {
+#rounded-corner tbody tr:hover td, #rounded-corner_t tbody tr:hover td {
 	background: #d0dafd;
 }
