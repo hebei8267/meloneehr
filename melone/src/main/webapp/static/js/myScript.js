@@ -23,7 +23,7 @@ function moveShowItems(srcObjId, discObjId) {
 	}
 }
 
-//文件预览位置计算
+// 文件预览位置计算
 function _clacImgZoomParam(maxWidth, maxHeight, width, height) {
 	var param = {
 		top : 0,
@@ -48,3 +48,4 @@ function _clacImgZoomParam(maxWidth, maxHeight, width, height) {
 	param.top = Math.round((maxHeight - param.height) / 2);
 	return param;
 }
+

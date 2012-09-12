@@ -8,64 +8,255 @@
 <html>
 	<head>
 		<script>
+		function btn1_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 1);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn2_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 2);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn3_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 3);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn4_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 4);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn5_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 5);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn6_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 6);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn7_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 7);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn8_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 8);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn9_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 9);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btn0_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			$("#_inputBarCode").val(_inputBarCode + 0);
+			
+			$("#_inputBarCode").focus();
+			$("#_inputBarCode").blur();
+		}
+		function btnDel_click() {
+			var _inputBarCode = $("#_inputBarCode").val();
+			if(_inputBarCode.length > 0){
+				$("#_inputBarCode").val(_inputBarCode.substring(0, _inputBarCode.length - 1));
+				
+				$("#_inputBarCode").focus();
+				$("#_inputBarCode").blur();
+			}			
+		}
+		
 		$().ready(function() {
+			$("#inputForm").validate({
+				rules: {
+					_inputBarCode: {
+						alNum: true,
+						maxlength: 16
+					}
+				}
+			});
+			<%// 取消默认焦点选中%>
+			$("input:text:first").blur();
+			
 			$("#btn1,#btn2,#btn3,#btn4,#btn5,#btn6,#btn7,#btn8,#btn9,#btn0,#btnDel,#btnEnter").button();
 			
+			//------------------------------
+			var btn1ClickView;
 			$("#btn1").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 1);
+				btn1_click();
 			});
-			
+			$("#btn1").mousedown(function() {
+				btn1ClickView = window.setInterval("btn1_click()", 200);
+			});
+			$("#btn1").mouseup(function() {
+				window.clearInterval(btn1ClickView);
+			});
+			$("#btn1").mouseleave(function() {
+				window.clearInterval(btn1ClickView);
+			});
+			//------------------------------
+			var btn2ClickView;
 			$("#btn2").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 2);
+				btn2_click();
 			});
-			
+			$("#btn2").mousedown(function() {
+				btn2ClickView = window.setInterval("btn2_click()", 200);
+			});
+			$("#btn2").mouseup(function() {
+				window.clearInterval(btn2ClickView);
+			});
+			$("#btn2").mouseleave(function() {
+				window.clearInterval(btn2ClickView);
+			});
+			//------------------------------
+			var btn3ClickView;
 			$("#btn3").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 3);
+				btn3_click();
 			});
-			
+			$("#btn3").mousedown(function() {
+				btn3ClickView = window.setInterval("btn3_click()", 200);
+			});
+			$("#btn3").mouseup(function() {
+				window.clearInterval(btn3ClickView);
+			});
+			$("#btn3").mouseleave(function() {
+				window.clearInterval(btn3ClickView);
+			});
+			//------------------------------
+			var btn4ClickView;
 			$("#btn4").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 4);
+				btn4_click();
 			});
-			
+			$("#btn4").mousedown(function() {
+				btn4ClickView = window.setInterval("btn4_click()", 200);
+			});
+			$("#btn4").mouseup(function() {
+				window.clearInterval(btn4ClickView);
+			});
+			$("#btn4").mouseleave(function() {
+				window.clearInterval(btn4ClickView);
+			});
+			//------------------------------
+			var btn5ClickView;
 			$("#btn5").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 5);
+				btn5_click();
 			});
-			
+			$("#btn5").mousedown(function() {
+				btn5ClickView = window.setInterval("btn5_click()", 200);
+			});
+			$("#btn5").mouseup(function() {
+				window.clearInterval(btn5ClickView);
+			});
+			$("#btn5").mouseleave(function() {
+				window.clearInterval(btn5ClickView);
+			});
+			//------------------------------
+			var btn6ClickView;
 			$("#btn6").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 6);
+				btn6_click();
 			});
-			
+			$("#btn6").mousedown(function() {
+				btn6ClickView = window.setInterval("btn6_click()", 200);
+			});
+			$("#btn6").mouseup(function() {
+				window.clearInterval(btn6ClickView);
+			});
+			$("#btn6").mouseleave(function() {
+				window.clearInterval(btn6ClickView);
+			});
+			//------------------------------
+			var btn7ClickView;
 			$("#btn7").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 7);
+				btn7_click();
 			});
-			
+			$("#btn7").mousedown(function() {
+				btn7ClickView = window.setInterval("btn7_click()", 200);
+			});
+			$("#btn7").mouseup(function() {
+				window.clearInterval(btn7ClickView);
+			});
+			$("#btn7").mouseleave(function() {
+				window.clearInterval(btn7ClickView);
+			});
+			//------------------------------
+			var btn8ClickView;
 			$("#btn8").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 8);
+				btn8_click();
 			});
-			
+			$("#btn8").mousedown(function() {
+				btn8ClickView = window.setInterval("btn8_click()", 200);
+			});
+			$("#btn8").mouseup(function() {
+				window.clearInterval(btn8ClickView);
+			});
+			$("#btn8").mouseleave(function() {
+				window.clearInterval(btn8ClickView);
+			});
+			//------------------------------
+			var btn9ClickView;
 			$("#btn9").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 9);
+				btn9_click();
 			});
-			
+			$("#btn9").mousedown(function() {
+				btn9ClickView = window.setInterval("btn9_click()", 200);
+			});
+			$("#btn9").mouseup(function() {
+				window.clearInterval(btn9ClickView);
+			});
+			$("#btn9").mouseleave(function() {
+				window.clearInterval(btn9ClickView);
+			});
+			//------------------------------
+			var btn0ClickView;
 			$("#btn0").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode + 0);
+				btn0_click();
 			});
-			
+			$("#btn0").mousedown(function() {
+				btn0ClickView = window.setInterval("btn0_click()", 200);
+			});
+			$("#btn0").mouseup(function() {
+				window.clearInterval(btn0ClickView);
+			});
+			$("#btn0").mouseleave(function() {
+				window.clearInterval(btn0ClickView);
+			});
+			//------------------------------
+			var btnDelClickView;
 			$("#btnDel").click(function() {
-				var _inputBarCode = $("#_inputBarCode").val();
-				$("#_inputBarCode").val(_inputBarCode.substring(0, _inputBarCode.length - 1));
+				btnDel_click();
 			});
-			
+			$("#btnDel").mousedown(function() {
+				btnDelClickView = window.setInterval("btnDel_click()", 200);
+			});
+			$("#btnDel").mouseup(function() {
+				window.clearInterval(btnDelClickView);
+			});
+			$("#btnDel").mouseleave(function() {
+				window.clearInterval(btnDelClickView);
+			});
+			//------------------------------
 			$("#btnEnter").click(function() {
 				// ????????????????????????????????????????????????????????????????
 			});
@@ -73,13 +264,14 @@
 		</script>
 	</head>
 	<body>
+		<form:form method="POST" class="form cmxform" id="inputForm" >
 		<table>
 			<tr>
 				<td>
 					<table>
 						<tr>
 							<td class="item_name">货号/条形码:</td>
-							<td><input type="text" id="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
+							<td><input type="text" id="_inputBarCode" name="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;text-align:right;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
 						<tr>
 							<td colspan="2">货品信息</td>
@@ -122,5 +314,6 @@
 				</td>
 			</tr>
 		</table>
+		</form:form>
 	</body>
 </html>
