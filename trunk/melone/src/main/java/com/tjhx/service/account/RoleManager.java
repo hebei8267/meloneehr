@@ -32,8 +32,9 @@ public class RoleManager {
 	 * 
 	 * @return 功能资源信息列表
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Function> getAllFunction() {
-		return (List<Function>) functionJpaDao.findAll();
+		return ((List<Function>) functionJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid"))));
 	}
 
 	/**

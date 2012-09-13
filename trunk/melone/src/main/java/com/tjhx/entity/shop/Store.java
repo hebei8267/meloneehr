@@ -161,7 +161,7 @@ public class Store extends IdEntity {
 	 * 
 	 * @return 门店
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "SHOP_UUID")
 	public Shop getShop() {
