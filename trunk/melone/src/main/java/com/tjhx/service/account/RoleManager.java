@@ -2,8 +2,9 @@ package com.tjhx.service.account;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,11 @@ import com.tjhx.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class RoleManager {
+	@Resource
 	private RoleJpaDao roleJpaDao;
+	@Resource
 	private FunctionJpaDao functionJpaDao;
+	@Resource
 	private PermissionMyBatisDao permissionMyBatisDao;
 
 	/**
@@ -130,20 +134,5 @@ public class RoleManager {
 			role.addPermission(_per);
 		}
 		roleJpaDao.save(role);
-	}
-
-	@Autowired
-	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
-		this.roleJpaDao = roleJpaDao;
-	}
-
-	@Autowired
-	public void setFunctionJpaDao(FunctionJpaDao functionJpaDao) {
-		this.functionJpaDao = functionJpaDao;
-	}
-
-	@Autowired
-	public void setPermissionMyBatisDao(PermissionMyBatisDao permissionMyBatisDao) {
-		this.permissionMyBatisDao = permissionMyBatisDao;
 	}
 }

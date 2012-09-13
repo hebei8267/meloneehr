@@ -3,7 +3,8 @@ package com.tjhx.service.product;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,9 @@ import com.tjhx.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class ProductSupplierManager {
+	@Resource
 	private ProductSupplierJpaDao productSupplierJpaDao;
+	@Resource
 	private ProductSupplierMyBatisDao productSupplierMyBatisDao;
 
 	/**
@@ -115,16 +118,6 @@ public class ProductSupplierManager {
 		_dbProductSupplier.setBankAccount(productSupplier.getBankAccount());
 
 		productSupplierJpaDao.save(_dbProductSupplier);
-	}
-
-	@Autowired
-	public void setProductSupplierJpaDao(ProductSupplierJpaDao productSupplierJpaDao) {
-		this.productSupplierJpaDao = productSupplierJpaDao;
-	}
-
-	@Autowired
-	public void setProductSupplierMyBatisDao(ProductSupplierMyBatisDao productSupplierMyBatisDao) {
-		this.productSupplierMyBatisDao = productSupplierMyBatisDao;
 	}
 
 }

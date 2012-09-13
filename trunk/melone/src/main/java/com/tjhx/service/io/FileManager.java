@@ -1,6 +1,7 @@
 package com.tjhx.service.io;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tjhx.common.utils.FileUtils;
 import com.tjhx.common.utils.PhotoUtils;
-import com.tjhx.service.ServiceException;
 
 @Service
 public class FileManager {
@@ -20,9 +20,12 @@ public class FileManager {
 	 * @param imgFile
 	 * @param fileName 文件路径
 	 * @param fileName 文件名
+	 * @throws IllegalStateException
+	 * @throws IOException
 	 */
-	public void saveUploadFile(MultipartFile imgFile, String filePath, String fileName) {
-		if (null == imgFile.getOriginalFilename()) {
+	public void saveUploadFile(MultipartFile imgFile, String filePath, String fileName) throws IllegalStateException,
+			IOException {
+		if (0 == imgFile.getSize() || null == imgFile.getOriginalFilename()) {
 			return;
 		}
 
@@ -32,13 +35,9 @@ public class FileManager {
 		File _file = this.delFile(filePath, _getSourceFileName(fileName));
 		File file = this.delFile(filePath, fileName);
 
-		try {
-			imgFile.transferTo(_file);
-			// 等比例缩放图片
-			PhotoUtils.imageResize(_file, file);
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		}
+		imgFile.transferTo(_file);
+		// 等比例缩放图片
+		PhotoUtils.imageResize(_file, file);
 
 	}
 
