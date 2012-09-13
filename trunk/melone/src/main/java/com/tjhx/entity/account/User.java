@@ -214,7 +214,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户所属门店
 	 */
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "SHOP_UUID")
 	public Shop getShop() {
