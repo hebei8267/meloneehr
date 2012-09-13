@@ -3,10 +3,10 @@ package com.tjhx.web.product;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,15 +32,15 @@ import com.tjhx.web.BaseController;
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController extends BaseController {
-	@Autowired
+	@Resource
 	private ProductManager productManager;
-	@Autowired
+	@Resource
 	private ProductBrandManager productBrandManager;
-	@Autowired
+	@Resource
 	private ProductTypeManager productTypeManager;
-	@Autowired
+	@Resource
 	private ProductSupplierManager productSupplierManager;
-	@Autowired
+	@Resource
 	private ProductTagManager productTagManager;
 
 	/**
@@ -173,6 +173,8 @@ public class ProductController extends BaseController {
 				initSelectMenu(model);
 
 				return "product/productForm";
+			} catch (Exception e) {
+				throw new ServiceException(e);
 			}
 		} else {// 修改操作
 			try {
@@ -182,6 +184,8 @@ public class ProductController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+			} catch (Exception e) {
+				throw new ServiceException(e);
 			}
 		}
 

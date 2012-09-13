@@ -3,11 +3,11 @@ package com.tjhx.web.account;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,11 +30,11 @@ import com.tjhx.web.BaseController;
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController extends BaseController {
-	@Autowired
+	@Resource
 	private AccountManager accountManager;
-	@Autowired
+	@Resource
 	private RoleManager roleManager;
-	@Autowired
+	@Resource
 	private ShopManager shopManager;
 
 	/**
@@ -204,6 +204,8 @@ public class AccountController extends BaseController {
 				initUserSelect(model);
 
 				return "account/userForm";
+			} catch (Exception e) {
+				throw new ServiceException(e);
 			}
 		} else {// 修改操作
 			try {
@@ -213,6 +215,8 @@ public class AccountController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+			} catch (Exception e) {
+				throw new ServiceException(e);
 			}
 		}
 

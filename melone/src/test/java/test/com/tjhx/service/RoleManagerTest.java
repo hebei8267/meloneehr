@@ -1,7 +1,8 @@
 package test.com.tjhx.service;
 
+import javax.annotation.Resource;
+
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -14,6 +15,7 @@ import com.tjhx.entity.account.Function;
 @ContextConfiguration(locations = { "classpath*:/applicationContext.xml" })
 @TransactionConfiguration(transactionManager = "defaultTransactionManager")
 public class RoleManagerTest extends SpringTransactionalTestCase {
+	@Resource
 	private FunctionJpaDao functionJpaDao;
 
 	@Test
@@ -73,11 +75,6 @@ public class RoleManagerTest extends SpringTransactionalTestCase {
 		f8.setFunFlg("0");
 		functionJpaDao.save(f8);
 
-	}
-
-	@Autowired
-	public void setFunctionJpaDao(FunctionJpaDao functionJpaDao) {
-		this.functionJpaDao = functionJpaDao;
 	}
 
 }
