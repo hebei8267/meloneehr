@@ -1,7 +1,6 @@
 package com.tjhx.entity.account;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,7 +29,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 功能资源
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "FUN_UUID")
 	public Function getFunction() {
@@ -51,7 +50,7 @@ public class Permission extends IdEntity {
 	 * 
 	 * @return 角色
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	// @JoinColumn表示外键的列
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {

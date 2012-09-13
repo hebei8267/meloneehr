@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 /**
  * 统一定义id的entity基类.
  * 
@@ -104,10 +102,5 @@ public abstract class IdEntity implements Serializable {
 
 	public IdEntity() {
 
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,8 +41,9 @@ public class RoleManager {
 	 * 
 	 * @return 角色信息列表
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Role> getAllRole() {
-		return (List<Role>) roleJpaDao.findAll();
+		return ((List<Role>) roleJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid"))));
 	}
 
 	/**

@@ -27,7 +27,7 @@ public class DBResultLogger extends FileLogger {
 		if ("resultset".equals(category)) {
 			return;
 		}
-		String logEntry = "[" + now + "]" + category + "-->" + sql + "\r\n";
+		String logEntry = "[" + now + "]" + category + "-->\n" + sql + "\n";
 
 		OutputStreamWriter filewriter = null;
 		try {
