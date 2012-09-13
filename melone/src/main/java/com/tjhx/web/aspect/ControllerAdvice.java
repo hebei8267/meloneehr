@@ -87,7 +87,7 @@ public class ControllerAdvice {
 	}
 
 	@AfterThrowing(pointcut = "com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()", throwing = "ex")
-	public void throwException(JoinPoint joinPoint, Exception ex) {
+	public void throwException(JoinPoint joinPoint, Throwable ex) {
 		logger.info(ex.getMessage(), ex);
 	}
 
