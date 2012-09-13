@@ -7,9 +7,9 @@ package ${basepackage}.web;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +26,7 @@ import ${basepackage}.web.BaseController;
 @Controller
 @RequestMapping(value = "/${classNameLower}")
 public class ${className}Controller extends BaseController {
-	@Autowired
+	@Resource
 	private ${className}Manager ${classNameLower}Manager;
 	
 	/**
