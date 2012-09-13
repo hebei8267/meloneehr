@@ -7,7 +7,8 @@ package ${basepackage}.service;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import ${basepackage}.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class ${className}Manager {
+	@Resource
 	private ${className}JpaDao ${classNameLower}JpaDao;
 	
 	/**
@@ -91,10 +93,4 @@ public class ${className}Manager {
 		//----------------------------------------------------------------------------
 		${classNameLower}JpaDao.save(_db${className});
 	}
-	
-	@Autowired
-	public void set${className}JpaDao(${className}JpaDao ${classNameLower}JpaDao) {
-		this.${classNameLower}JpaDao = ${classNameLower}JpaDao;
-	}
-
 }
