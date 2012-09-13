@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 
 import com.tjhx.globals.Constants;
-import com.tjhx.service.ServiceException;
 import com.tjhx.web.BaseController;
 
 /**
@@ -88,7 +87,7 @@ public class ControllerAdvice {
 	}
 
 	@AfterThrowing(pointcut = "com.tjhx.web.aspect.ControllerAdvice.inControllerLayer()", throwing = "ex")
-	public void throwException(JoinPoint joinPoint, ServiceException ex) {
+	public void throwException(JoinPoint joinPoint, Exception ex) {
 		logger.info(ex.getMessage(), ex);
 	}
 

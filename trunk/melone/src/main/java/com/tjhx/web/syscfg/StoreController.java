@@ -3,9 +3,9 @@ package com.tjhx.web.syscfg;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,9 +24,9 @@ import com.tjhx.web.BaseController;
 @Controller
 @RequestMapping(value = "/syscfg/store")
 public class StoreController extends BaseController {
-	@Autowired
+	@Resource
 	private StoreManager storeManager;
-	@Autowired
+	@Resource
 	private StoreTypeManager storeTypeManager;
 
 	/**
