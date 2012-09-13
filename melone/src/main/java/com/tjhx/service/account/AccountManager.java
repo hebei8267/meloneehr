@@ -1,9 +1,11 @@
 package com.tjhx.service.account;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +29,17 @@ import com.tjhx.service.io.FileManager;
 @Service
 @Transactional(readOnly = true)
 public class AccountManager {
+	@Resource
 	private UserJpaDao userJpaDao;
+	@Resource
 	private ShopJpaDao shopJpaDao;
+	@Resource
 	private RoleJpaDao roleJpaDao;
+	@Resource
 	private UserMyBatisDao userMyBatisDao;
+	@Resource
 	private FileManager fileManager;
+	@Resource
 	private SysConfig sysConfig;
 
 	/**
@@ -87,9 +95,11 @@ public class AccountManager {
 	 * 
 	 * @param user 用户信息
 	 * @param imgFile 上传文件信息
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@Transactional(readOnly = false)
-	public void updateUser(User user, MultipartFile imgFile) {
+	public void updateUser(User user, MultipartFile imgFile) throws IllegalStateException, IOException {
 		User _user = userJpaDao.findOne(user.getUuid());
 		if (null == _user) {
 			// 用户不存在
@@ -127,9 +137,11 @@ public class AccountManager {
 	 * 
 	 * @param user 用户信息
 	 * @param imgFile 上传文件信息
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@Transactional(readOnly = false)
-	public void addNewUser(User user, MultipartFile imgFile) {
+	public void addNewUser(User user, MultipartFile imgFile) throws IllegalStateException, IOException {
 
 		User _dbUser = findByLoginName(user.getLoginName());
 		// 该用户已存在!
@@ -155,36 +167,6 @@ public class AccountManager {
 
 		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getUserPhotoPath(), user.getPhotoName());
-	}
-
-	@Autowired
-	public void setUserJpaDao(UserJpaDao userJpaDao) {
-		this.userJpaDao = userJpaDao;
-	}
-
-	@Autowired
-	public void setShopJpaDao(ShopJpaDao shopJpaDao) {
-		this.shopJpaDao = shopJpaDao;
-	}
-
-	@Autowired
-	public void setRoleJpaDao(RoleJpaDao roleJpaDao) {
-		this.roleJpaDao = roleJpaDao;
-	}
-
-	@Autowired
-	public void setUserMyBatisDao(UserMyBatisDao userMyBatisDao) {
-		this.userMyBatisDao = userMyBatisDao;
-	}
-
-	@Autowired
-	public void setFileManager(FileManager fileManager) {
-		this.fileManager = fileManager;
-	}
-
-	@Autowired
-	public void setSysConfig(SysConfig sysConfig) {
-		this.sysConfig = sysConfig;
 	}
 
 }

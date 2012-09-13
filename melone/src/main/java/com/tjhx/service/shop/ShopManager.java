@@ -3,7 +3,8 @@ package com.tjhx.service.shop;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,11 @@ import com.tjhx.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class ShopManager {
+	@Resource
 	private ShopJpaDao shopJpaDao;
+	@Resource
 	private StoreJpaDao storeJpaDao;
+	@Resource
 	private ShopMyBatisDao shopMyBatisDao;
 
 	/**
@@ -125,21 +129,6 @@ public class ShopManager {
 		}
 
 		shopJpaDao.save(_dbShop);
-	}
-
-	@Autowired
-	public void setShopJpaDao(ShopJpaDao shopJpaDao) {
-		this.shopJpaDao = shopJpaDao;
-	}
-
-	@Autowired
-	public void setStoreJpaDao(StoreJpaDao storeJpaDao) {
-		this.storeJpaDao = storeJpaDao;
-	}
-
-	@Autowired
-	public void setShopMyBatisDao(ShopMyBatisDao shopMyBatisDao) {
-		this.shopMyBatisDao = shopMyBatisDao;
 	}
 
 }

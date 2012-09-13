@@ -3,7 +3,8 @@ package com.tjhx.service.shop;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import com.tjhx.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class StoreTypeManager {
+	@Resource
 	private StoreTypeJpaDao storeTypeJpaDao;
 
 	/**
@@ -90,10 +92,4 @@ public class StoreTypeManager {
 
 		storeTypeJpaDao.save(_dbStoreType);
 	}
-
-	@Autowired
-	public void setStoreTypeJpaDao(StoreTypeJpaDao storeTypeJpaDao) {
-		this.storeTypeJpaDao = storeTypeJpaDao;
-	}
-
 }

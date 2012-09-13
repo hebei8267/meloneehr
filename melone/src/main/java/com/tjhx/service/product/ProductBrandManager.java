@@ -3,7 +3,8 @@ package com.tjhx.service.product;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,9 @@ import com.tjhx.service.ServiceException;
 @Service
 @Transactional(readOnly = true)
 public class ProductBrandManager {
+	@Resource
 	private ProductBrandJpaDao productBrandJpaDao;
+	@Resource
 	private ProductBrandMyBatisDao productBrandMyBatisDao;
 
 	/**
@@ -89,16 +92,6 @@ public class ProductBrandManager {
 		_dbProductBrand.setDescTxt(productBrand.getDescTxt());
 
 		productBrandJpaDao.save(_dbProductBrand);
-	}
-
-	@Autowired
-	public void setProductBrandJpaDao(ProductBrandJpaDao productBrandJpaDao) {
-		this.productBrandJpaDao = productBrandJpaDao;
-	}
-
-	@Autowired
-	public void setProductBrandMyBatisDao(ProductBrandMyBatisDao productBrandMyBatisDao) {
-		this.productBrandMyBatisDao = productBrandMyBatisDao;
 	}
 
 }
