@@ -1,0 +1,98 @@
+<!doctype html>
+<meta charset="UTF-8">
+<title>HTML5测试</title>
+<body>
+	<p>代码片段
+	<br>测试
+	<form>
+		<table>
+		<tr><td>
+			<input name="name" autofocus placeholder="请输入姓名" list="namelist" autocomplete="on"/>
+			<datalist id="namelist" style="display:none">
+				<option value="张三">张三</option>
+				<option value="李四">李四</option>
+			</datalist>
+		</td></tr>
+		<tr><td>
+			<input type="date" />
+		</td></tr>
+		<tr><td>
+			<input type="email" />
+		</td></tr>
+		<tr><td>
+			<input type="url" />
+		</td></tr>
+		<tr><td>
+			<input type="range" value='5'/>
+		</td></tr>
+		<tr><td>
+			<input type="number" value='5'/>
+		</td></tr>
+		<tr><td>
+			<input type="color" value="#ffee00"/>
+		</td></tr>
+		<tr><td>
+			<input id="file" type="file"  multiple="true">
+		</td></tr>
+		<tr><td>
+			<progress id="p" max=100 value=0><span>0</span>%</progress>
+			<script>
+				var i=0;
+				function update(){
+					i+=10;				
+					
+					if(i == 110){
+						clearInterval(time);
+					}else{
+						var p = document.getElementById('p');
+						p.value=i;
+						p.getElementsByTagName('span')[0].textContent = i;
+					}
+				}
+				//var time=setInterval(update, 1000)
+				
+				function a(){
+					var file = document.getElementById('file').files[0];
+					var reader = new FileReader();
+					reader.readAsText(file, 'utf-8');
+					reader.onload = function(p){
+						//document.getElementById('reslut').innerHTML = this.result;
+					};
+					reader.onprogress = function(e){
+						var percent = e.loaded/e.total*100;
+						var p = document.getElementById('p');
+						p.value=percent;
+						p.getElementsByTagName('span')[0].textContent = percent;
+					};
+					reader.onloadend = function(e){
+						
+					}
+				}
+			</script>
+		</td></tr>
+		<tr><td>
+			<input type="button" value="点击" onClick="a();">
+		</td></tr>
+		<tr><td>
+			<meter value="50" min="0" max="100">50/100</meter>
+			<div id="reslut"></div>
+		</td></tr>
+	</form>
+	<br>
+	<nav>
+		<ul>
+			<li><a href="/">主页</a></li>
+			<li><a href="/dev">开发内容</a></li>
+		</ul>
+	</nav>
+	<article>
+		<header>
+			<h1>苹果</h1>
+			<p>发表日期：<time pubdate datetime="2012/07/18">2012/07/18</time>
+			</p>
+		</header>
+		<p><b>苹果</b>植物类水果，多次花果..</p>
+		
+		
+	</article>
+</body>
