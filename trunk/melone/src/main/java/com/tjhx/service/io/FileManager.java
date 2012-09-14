@@ -1,7 +1,10 @@
 package com.tjhx.service.io;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tjhx.common.utils.FileUtils;
 import com.tjhx.common.utils.PhotoUtils;
+import com.tjhx.globals.Constants;
 
 @Service
 public class FileManager {
@@ -57,12 +61,38 @@ public class FileManager {
 	 * @return
 	 */
 	private File delFile(String filePath, String fileName) {
-		File _file = new File(filePath + fileName);
+		return delFile(filePath + fileName);
+	}
+
+	/**
+	 * 清理文件(指定的文件名如果存在,则删除)
+	 * 
+	 * @param fileFullPath 文件全路径
+	 * @return
+	 */
+	private File delFile(String fileFullPath) {
+		File _file = new File(fileFullPath);
 		if (_file.exists()) {
 			_file.delete();
 		}
 
 		return _file;
+	}
+
+	/**
+	 * 将指定内容写入文件中
+	 * 
+	 * @param fileFullPath 文件全路径
+	 * @param fileContent 文件内容
+	 * @throws IOException
+	 */
+	public void writeFile(String fileFullPath, String fileContent) throws IOException {
+
+		FileOutputStream writerStream = new FileOutputStream(fileFullPath);
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(writerStream, Constants.CHARSET_UTF_8));
+
+		out.write(fileContent);
+		out.close();
 	}
 
 }

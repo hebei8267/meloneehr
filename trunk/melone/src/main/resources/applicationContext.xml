@@ -99,6 +99,8 @@
 		<property name="userPhotoPath" value="${photo.user}" />
 		<!-- 商品照片存储路径 -->
 		<property name="productPhotoPath" value="${photo.product}" />
+		<!-- 商品Json Js文件存储路径 -->
+		<property name="productJsonJsFilePath" value="${product.json.file.path}" />
 	</bean>
 
 	<!-- production/local development环境 -->
