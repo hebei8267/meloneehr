@@ -48,4 +48,27 @@ public class SysConfig {
 	public void setProductPhotoPath(String productPhotoPath) {
 		this.productPhotoPath = productPhotoPath;
 	}
+
+	// --------------------------------------------------------------------------
+	/** 商品Json Js文件存储路径 */
+	private String productJsonJsFilePath;
+
+	/**
+	 * 取得商品Json Js文件存储路径
+	 * 
+	 * @return 商品Json Js文件存储路径
+	 */
+	public String getProductJsonJsFilePath() {
+		return productJsonJsFilePath;
+	}
+
+	/**
+	 * 设置商品Json Js文件存储路径
+	 * 
+	 * @param productJsonJsFilePath 商品Json Js文件存储路径
+	 */
+	public void setProductJsonJsFilePath(String productJsonJsFilePath) {
+		this.productJsonJsFilePath = productJsonJsFilePath;
+	}
+
 }

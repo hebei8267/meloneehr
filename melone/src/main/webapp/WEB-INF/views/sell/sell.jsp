@@ -94,10 +94,7 @@
 										 '	<td width="30" class="first center">'+ (_len+1) +'</td>' +
 										 '	<td width="230">'+ item.name +'</td>' +
 										 '	<td width="60">'+ item.price +'</td>' +
-										 '	<td width="100" class="center">' +
-										 '		<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">' +
-										 '		<input type="text" value="'+ item.quantity +'" style="width: 20px;" class="text ui-widget-content ui-corner-all" />' +
-										 '		<img width="18px" height="18px" src="${ctx}/static/img/add.ico">' +
+										 '	<td width="100">' + item.quantity +
 										 '	</td>' +
 										 '	<td width="80">123456.99</td>' +
 										 '	<td width="35" class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>' +
@@ -299,9 +296,25 @@
 							<td class="item_name">货号/条形码:</td>
 							<td><input type="text" id="_inputBarCode" name="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;text-align:right;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
-					<!-- 	<tr>
-							<td colspan="2">货品信息</td>
-						</tr> -->
+						<tr>
+							<td colspan="2" height="120px;">
+								<table border="1px">
+									<tr>
+										<td rowspan="2">一二三四五六七八九十</td>
+										<td>单价:</td>
+										<td>1234.99</td>
+									</tr>
+									<tr>
+										<td>数量:</td>
+										<td class="center">
+											<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
+											<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
+											<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
 						<tr>
 							<td colspan="2">
 								<table>
@@ -335,15 +348,24 @@
 						<thead>
 							<tr>
 								<th class="rounded-left" width="30">序号</th>
-								<th width="230">名称</th>
+								<th width="270">名称</th>
 								<th width="60">单价</th>
-								<th width="100">数量</th>
-								<th width="80">价格</th>
+								<th width="40">数量</th>
+								<th width="100">价格</th>
 								<th width="40" class="rounded-right">操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							
+					<!-- 		<tr>
+								<td class="first center">999</td>
+								<td>一二三四五六七八九十</td>
+								<td>1234.99</td>
+								<td>
+									12
+								</td>
+								<td>123456.99</td>
+								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
+							</tr> -->
 							
 							
 						</tbody>

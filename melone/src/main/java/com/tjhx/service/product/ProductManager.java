@@ -2,22 +2,28 @@ package com.tjhx.service.product;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.tjhx.common.utils.FileUtils;
+import com.tjhx.common.utils.JsonUtils;
 import com.tjhx.dao.jpa.product.ProductBrandJpaDao;
 import com.tjhx.dao.jpa.product.ProductJpaDao;
 import com.tjhx.dao.jpa.product.ProductSupplierJpaDao;
 import com.tjhx.dao.jpa.product.ProductTypeJpaDao;
 import com.tjhx.dao.myBatis.product.ProductMyBatisDao;
+import com.tjhx.dto.ProductDTO;
 import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.entity.product.ProductSupplier;
@@ -90,9 +96,12 @@ public class ProductManager {
 	 * @param imgFile 上传文件信息
 	 * @throws IOException
 	 * @throws IllegalStateException
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void addNewProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException {
+	public void addNewProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException,
+			IllegalAccessException, InvocationTargetException {
 
 		Product _dbProduct = productJpaDao.findByBarCode(product.getBarCode());
 		// 该商品编号已存在
@@ -130,6 +139,36 @@ public class ProductManager {
 
 		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), product.getPhotoName());
+
+		// 产生productJson.js文件
+		createProductJsonFile();
+	}
+
+	/**
+	 * 产生productJson.js文件
+	 * 
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	public void createProductJsonFile() throws IllegalAccessException, InvocationTargetException,
+			JsonGenerationException, JsonMappingException, IOException {
+		List<Product> _plist = (List<Product>) productJpaDao.findAll();
+
+		List<ProductDTO> _pdtolist = new ArrayList<ProductDTO>();
+		for (Product product : _plist) {
+			ProductDTO _pdto = new ProductDTO();
+			BeanUtils.copyProperties(_pdto, product);
+
+			_pdtolist.add(_pdto);
+		}
+
+		StringBuffer _pJsonStr = new StringBuffer();
+		_pJsonStr.append("var products = ").append(JsonUtils.convertValue(_pdtolist));
+		// 产生productJson.js文件
+		fileManager.writeFile(sysConfig.getProductJsonJsFilePath(), _pJsonStr.toString());
 	}
 
 	/**
@@ -142,7 +181,8 @@ public class ProductManager {
 	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void updateProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException {
+	public void updateProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException,
+			IllegalAccessException, InvocationTargetException {
 
 		Product _dbProduct = productJpaDao.findOne(product.getUuid());
 		if (null == _dbProduct) {
@@ -190,6 +230,9 @@ public class ProductManager {
 
 		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), _dbProduct.getPhotoName());
+
+		// 产生productJson.js文件
+		createProductJsonFile();
 	}
 
 }
