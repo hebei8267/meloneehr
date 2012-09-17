@@ -18,12 +18,14 @@
 			if(num > 0) {
 				var _len = $("#rounded-corner tr").length;
 		        $("#rounded-corner").append('<tr>' +
-											 '	<td width="30" class="first center">'+ (_len+1) +'</td>' +
+		        							 '  <input type="hidden" name="barCode" value="' + item.barCode + '" />' +
+		        							 '  <input type="hidden" name="num" value="' + num + '" />' +
+											 '	<td width="30" class="first center _index">'+ (_len+1) +'</td>' +
 											 '	<td width="270">'+ item.name +'</td>' +
 											 '	<td width="60" class="right">'+ item.retailPrice +'</td>' +
 											 '	<td width="40" class="right">' + num +'</td>' +
 											 '	<td width="100" class="right">' + (item.retailPrice*num) + '</td>' +
-											 '	<td width="35" class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico" style="cursor: pointer;" /></td>' +
+											 '	<td width="35" class="center"><img class="itemDelBtn" width="18px" height="18px" src="${ctx}/static/img/delete.ico" style="cursor: pointer;" /></td>' +
 											 '</tr>');
 		        $('#rounded-corner').tableScroll({height:400});
 			}
@@ -32,9 +34,6 @@
 		    $('#_inputBarCode').val('');
 		    $('#_inputBarCode').focus();
 		}
-		var deltr = function delOrderItem() {
-			
-		}
 		function drawProductDetail(product) {
 			$("#_productName").text(product.name);
 			$("#_productPrice").text(product.memberPrice);
@@ -42,12 +41,26 @@
 			$("#img").attr("src", "${ctx}/photoServlet?photoName=" + product.photoName);
 		}
 		$().ready(function() {
+			<%// 购买产品对象句柄%>
 			var _selProduct = null;
+			<%// 购买商品项删除%>
+			$(".itemDelBtn").live("click", function(){
+				$(this).parent("td").parent("tr").remove();
+				
+				var _index = 1;
+				<%// 重绘制购买商品项的序号%>
+				$("._index").each(function(){
+					 $(this).text(_index++);
+				});
+				
+				$('#_inputBarCode').val('');
+			    $('#_inputBarCode').focus();
+			});
 			<%// 减少商品数量%>
 			$("#_productMinusBtn").click(function() {numMinus();});
 			$("#_productNum").keydown(function(event) {
 				var _charCode = event.charCode ? event.charCode : event.keyCode;
-				if(_charCode == 37 || _charCode == 40) {// 37-方向键左 40-方向键下
+				if(_charCode == 37 || _charCode == 40) {<%// 37-方向键左 40-方向键下%>
 					numMinus();
 					return false;
 				}
@@ -57,7 +70,7 @@
 			$("#_productPlusBtn").click(function() {numPlus();});
 			$("#_productNum").keydown(function(event) {
 				var _charCode = event.charCode ? event.charCode : event.keyCode;
-				if(_charCode == 38 || _charCode == 39) {// 38-方向键上 39-方向键右
+				if(_charCode == 38 || _charCode == 39) {<%// 38-方向键上 39-方向键右%>
 					numPlus();
 					return false;
 				}
