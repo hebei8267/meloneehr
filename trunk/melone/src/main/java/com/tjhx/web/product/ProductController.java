@@ -1,5 +1,6 @@
 package com.tjhx.web.product;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.entity.product.ProductSupplier;
@@ -151,10 +154,14 @@ public class ProductController extends BaseController {
 	 * @return
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonGenerationException
 	 */
 	@RequestMapping(value = "save")
 	public String saveProduct_Action(@ModelAttribute("product") Product product, Model model, HttpServletRequest request)
-			throws IllegalAccessException, InvocationTargetException {
+			throws IllegalAccessException, InvocationTargetException, JsonGenerationException, JsonMappingException,
+			IOException {
 
 		if (null == product.getUuid()) {// 新增操作
 			try {
@@ -188,6 +195,9 @@ public class ProductController extends BaseController {
 				throw new ServiceException(e);
 			}
 		}
+
+		// 产生productJson.js文件
+		productManager.createProductJsonFile();
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/product/list";
 	}
