@@ -96,12 +96,9 @@ public class ProductManager {
 	 * @param imgFile 上传文件信息
 	 * @throws IOException
 	 * @throws IllegalStateException
-	 * @throws InvocationTargetException
-	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void addNewProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException,
-			IllegalAccessException, InvocationTargetException {
+	public void addNewProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException {
 
 		Product _dbProduct = productJpaDao.findByBarCode(product.getBarCode());
 		// 该商品编号已存在
@@ -140,8 +137,6 @@ public class ProductManager {
 		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), product.getPhotoName());
 
-		// 产生productJson.js文件
-		createProductJsonFile();
 	}
 
 	/**
@@ -166,7 +161,7 @@ public class ProductManager {
 		}
 
 		StringBuffer _pJsonStr = new StringBuffer();
-		_pJsonStr.append("var products = ").append(JsonUtils.convertValue(_pdtolist));
+		_pJsonStr.append("var _products = ").append(JsonUtils.convertValue(_pdtolist));
 		// 产生productJson.js文件
 		fileManager.writeFile(sysConfig.getProductJsonJsFilePath(), _pJsonStr.toString());
 	}
@@ -177,12 +172,9 @@ public class ProductManager {
 	 * @param product 商品信息
 	 * @throws IOException
 	 * @throws IllegalStateException
-	 * @throws InvocationTargetException
-	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void updateProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException,
-			IllegalAccessException, InvocationTargetException {
+	public void updateProduct(Product product, MultipartFile imgFile) throws IllegalStateException, IOException {
 
 		Product _dbProduct = productJpaDao.findOne(product.getUuid());
 		if (null == _dbProduct) {
@@ -231,8 +223,6 @@ public class ProductManager {
 		// 保存用户上传相片
 		fileManager.saveUploadFile(imgFile, sysConfig.getProductPhotoPath(), _dbProduct.getPhotoName());
 
-		// 产生productJson.js文件
-		createProductJsonFile();
 	}
 
 }

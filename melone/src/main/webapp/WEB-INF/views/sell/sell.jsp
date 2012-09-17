@@ -2,115 +2,101 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%@ page import="com.tjhx.globals.Constants" %>
+
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">${ctx}/sc</c:set>
 <c:set var="pop_sc_ctx">${ctx}/popsc</c:set>
 <html>
 	<head>
 		<script type="text/javascript" src="${ctx}/static/js/jquery.tablescroll.js"></script>
+		<script type="text/javascript" src="${ctx}/static/js/product.json.js"></script>
+		<script type="text/javascript" src="${ctx}/static/js/sell.js"></script>
 		<script>
-		function btn1_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 1);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn2_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 2);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn3_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 3);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn4_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 4);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn5_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 5);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn6_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 6);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn7_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 7);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn8_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 8);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn9_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 9);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btn0_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			$("#_inputBarCode").val(_inputBarCode + 0);
-			
-			$("#_inputBarCode").focus();
-			$("#_inputBarCode").blur();
-		}
-		function btnDel_click() {
-			var _inputBarCode = $("#_inputBarCode").val();
-			if(_inputBarCode.length > 0){
-				$("#_inputBarCode").val(_inputBarCode.substring(0, _inputBarCode.length - 1));
-				
-				$("#_inputBarCode").focus();
-				$("#_inputBarCode").blur();
-			}			
-		}
-		function addOrderItem(item) {
-			 var _len = $("#rounded-corner tr").length;
-	         $("#rounded-corner").append('<tr>' +
-										 '	<td width="30" class="first center">'+ (_len+1) +'</td>' +
-										 '	<td width="230">'+ item.name +'</td>' +
-										 '	<td width="60">'+ item.price +'</td>' +
-										 '	<td width="100">' + item.quantity +
-										 '	</td>' +
-										 '	<td width="80">123456.99</td>' +
-										 '	<td width="35" class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>' +
-										 '</tr>');
-	         $('#rounded-corner').tableScroll({height:400});
+		<%// 绘制商品列表%>
+		function addOrderItem(item, num) {
+			if(num > 0) {
+				var _len = $("#rounded-corner tr").length;
+		        $("#rounded-corner").append('<tr>' +
+											 '	<td width="30" class="first center">'+ (_len+1) +'</td>' +
+											 '	<td width="270">'+ item.name +'</td>' +
+											 '	<td width="60" class="right">'+ item.retailPrice +'</td>' +
+											 '	<td width="40" class="right">' + num +'</td>' +
+											 '	<td width="100" class="right">' + (item.retailPrice*num) + '</td>' +
+											 '	<td width="35" class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico" style="cursor: pointer;" /></td>' +
+											 '</tr>');
+		        $('#rounded-corner').tableScroll({height:400});
+			}
+		    
+		    $('#_productDetail').hide();
+		    $('#_inputBarCode').val('');
+		    $('#_inputBarCode').focus();
 		}
 		var deltr = function delOrderItem() {
 			
 		}
+		function drawProductDetail(product) {
+			$("#_productName").text(product.name);
+			$("#_productPrice").text(product.memberPrice);
+			$("#_productNum").val(1);
+			$("#img").attr("src", "${ctx}/photoServlet?photoName=" + product.photoName);
+		}
 		$().ready(function() {
-			$("#btn99999").click(function() {
-				addOrderItem({name:'123',price:98.65,quantity:123});
+			var _selProduct = null;
+			<%// 减少商品数量%>
+			$("#_productMinusBtn").click(function() {numMinus();});
+			$("#_productNum").keydown(function(event) {
+				var _charCode = event.charCode ? event.charCode : event.keyCode;
+				if(_charCode == 37 || _charCode == 40) {// 37-方向键左 40-方向键下
+					numMinus();
+					return false;
+				}
+				return true;
 			});
-		
+			<%// 增加商品数量%>
+			$("#_productPlusBtn").click(function() {numPlus();});
+			$("#_productNum").keydown(function(event) {
+				var _charCode = event.charCode ? event.charCode : event.keyCode;
+				if(_charCode == 38 || _charCode == 39) {// 38-方向键上 39-方向键右
+					numPlus();
+					return false;
+				}
+				return true;
+			});
+			//------------------------------
+			<%// 商品数量屏蔽非数字%>
+			$("#_productNum").keypress(function(event) {
+				var _charCode = event.charCode ? event.charCode : event.keyCode;
+				if(_charCode < 48 || _charCode > 57) {
+			        return false;
+			    } else {
+			    	var _productNum = $("#_productNum").val();
+			    	if(_productNum.length > 3){
+			    		return false;
+			    	}
+			        return true;
+			    }
+			});
+			<%// 商品数量输入框回车事件%>
+			$('#_productNum').bind('keyup', function(event){
+				if (event.keyCode=="13"){<%// 回车处理程序%>
+					addOrderItem(_selProduct, $('#_productNum').val());
+				}
+			});
+			//------------------------------
+			<%// 条形码输入框回车事件%>
+			$('#_inputBarCode').bind('keyup', function(event){
+				if (event.keyCode=="13"){<%// 回车处理程序%>
+					_selProduct = _processProductDetailTable();<%// 绘制商品细节%>
+				} else {
+					_selProduct = null;
+				}
+			});
+			//------------------------------
+			<%// 列表滚动%>
 			$('#rounded-corner').tableScroll({height:400});
-			
+			//------------------------------
+			<%// 表单效验%>
 			$("#inputForm").validate({
 				rules: {
 					_inputBarCode: {
@@ -119,171 +105,81 @@
 					}
 				}
 			});
-			<%// 取消默认焦点选中%>
-			$("input:text:first").blur();
-			
+			//------------------------------
 			$("#btn1,#btn2,#btn3,#btn4,#btn5,#btn6,#btn7,#btn8,#btn9,#btn0,#btnDel,#btnEnter").button();
-			
 			//------------------------------
 			var btn1ClickView;
-			$("#btn1").click(function() {
-				btn1_click();
-			});
-			$("#btn1").mousedown(function() {
-				btn1ClickView = window.setInterval("btn1_click()", 200);
-			});
-			$("#btn1").mouseup(function() {
-				window.clearInterval(btn1ClickView);
-			});
-			$("#btn1").mouseleave(function() {
-				window.clearInterval(btn1ClickView);
-			});
+			$("#btn1").click(function() {btn1_click();});
+			$("#btn1").mousedown(function() {btn1ClickView = window.setInterval("btn1_click()", 200);});
+			$("#btn1").mouseup(function() {window.clearInterval(btn1ClickView);});
+			$("#btn1").mouseleave(function() {window.clearInterval(btn1ClickView);});
 			//------------------------------
 			var btn2ClickView;
-			$("#btn2").click(function() {
-				btn2_click();
-			});
-			$("#btn2").mousedown(function() {
-				btn2ClickView = window.setInterval("btn2_click()", 200);
-			});
-			$("#btn2").mouseup(function() {
-				window.clearInterval(btn2ClickView);
-			});
-			$("#btn2").mouseleave(function() {
-				window.clearInterval(btn2ClickView);
-			});
+			$("#btn2").click(function() {btn2_click();});
+			$("#btn2").mousedown(function() {btn2ClickView = window.setInterval("btn2_click()", 200);});
+			$("#btn2").mouseup(function() {window.clearInterval(btn2ClickView);});
+			$("#btn2").mouseleave(function() {window.clearInterval(btn2ClickView);});
 			//------------------------------
 			var btn3ClickView;
-			$("#btn3").click(function() {
-				btn3_click();
-			});
-			$("#btn3").mousedown(function() {
-				btn3ClickView = window.setInterval("btn3_click()", 200);
-			});
-			$("#btn3").mouseup(function() {
-				window.clearInterval(btn3ClickView);
-			});
-			$("#btn3").mouseleave(function() {
-				window.clearInterval(btn3ClickView);
-			});
+			$("#btn3").click(function() {btn3_click();});
+			$("#btn3").mousedown(function() {btn3ClickView = window.setInterval("btn3_click()", 200);});
+			$("#btn3").mouseup(function() {window.clearInterval(btn3ClickView);});
+			$("#btn3").mouseleave(function() {window.clearInterval(btn3ClickView);});
 			//------------------------------
 			var btn4ClickView;
-			$("#btn4").click(function() {
-				btn4_click();
-			});
-			$("#btn4").mousedown(function() {
-				btn4ClickView = window.setInterval("btn4_click()", 200);
-			});
-			$("#btn4").mouseup(function() {
-				window.clearInterval(btn4ClickView);
-			});
-			$("#btn4").mouseleave(function() {
-				window.clearInterval(btn4ClickView);
-			});
+			$("#btn4").click(function() {btn4_click();});
+			$("#btn4").mousedown(function() {btn4ClickView = window.setInterval("btn4_click()", 200);});
+			$("#btn4").mouseup(function() {window.clearInterval(btn4ClickView);});
+			$("#btn4").mouseleave(function() {window.clearInterval(btn4ClickView);});
 			//------------------------------
 			var btn5ClickView;
-			$("#btn5").click(function() {
-				btn5_click();
-			});
-			$("#btn5").mousedown(function() {
-				btn5ClickView = window.setInterval("btn5_click()", 200);
-			});
-			$("#btn5").mouseup(function() {
-				window.clearInterval(btn5ClickView);
-			});
-			$("#btn5").mouseleave(function() {
-				window.clearInterval(btn5ClickView);
-			});
+			$("#btn5").click(function() {btn5_click();});
+			$("#btn5").mousedown(function() {btn5ClickView = window.setInterval("btn5_click()", 200);});
+			$("#btn5").mouseup(function() {window.clearInterval(btn5ClickView);});
+			$("#btn5").mouseleave(function() {window.clearInterval(btn5ClickView);});
 			//------------------------------
 			var btn6ClickView;
-			$("#btn6").click(function() {
-				btn6_click();
-			});
-			$("#btn6").mousedown(function() {
-				btn6ClickView = window.setInterval("btn6_click()", 200);
-			});
-			$("#btn6").mouseup(function() {
-				window.clearInterval(btn6ClickView);
-			});
-			$("#btn6").mouseleave(function() {
-				window.clearInterval(btn6ClickView);
-			});
+			$("#btn6").click(function() {btn6_click();});
+			$("#btn6").mousedown(function() {btn6ClickView = window.setInterval("btn6_click()", 200);});
+			$("#btn6").mouseup(function() {window.clearInterval(btn6ClickView);});
+			$("#btn6").mouseleave(function() {window.clearInterval(btn6ClickView);});
 			//------------------------------
 			var btn7ClickView;
-			$("#btn7").click(function() {
-				btn7_click();
+			$("#btn7").click(function() {btn7_click();});
+			$("#btn7").mousedown(function() {btn7ClickView = window.setInterval("btn7_click()", 200);});
+			$("#btn7").mouseup(function() {window.clearInterval(btn7ClickView);
 			});
-			$("#btn7").mousedown(function() {
-				btn7ClickView = window.setInterval("btn7_click()", 200);
-			});
-			$("#btn7").mouseup(function() {
-				window.clearInterval(btn7ClickView);
-			});
-			$("#btn7").mouseleave(function() {
-				window.clearInterval(btn7ClickView);
-			});
+			$("#btn7").mouseleave(function() {window.clearInterval(btn7ClickView);});
 			//------------------------------
 			var btn8ClickView;
-			$("#btn8").click(function() {
-				btn8_click();
-			});
-			$("#btn8").mousedown(function() {
-				btn8ClickView = window.setInterval("btn8_click()", 200);
-			});
-			$("#btn8").mouseup(function() {
-				window.clearInterval(btn8ClickView);
-			});
-			$("#btn8").mouseleave(function() {
-				window.clearInterval(btn8ClickView);
-			});
+			$("#btn8").click(function() {btn8_click();});
+			$("#btn8").mousedown(function() {btn8ClickView = window.setInterval("btn8_click()", 200);});
+			$("#btn8").mouseup(function() {window.clearInterval(btn8ClickView);});
+			$("#btn8").mouseleave(function() {window.clearInterval(btn8ClickView);});
 			//------------------------------
 			var btn9ClickView;
-			$("#btn9").click(function() {
-				btn9_click();
-			});
-			$("#btn9").mousedown(function() {
-				btn9ClickView = window.setInterval("btn9_click()", 200);
-			});
-			$("#btn9").mouseup(function() {
-				window.clearInterval(btn9ClickView);
-			});
-			$("#btn9").mouseleave(function() {
-				window.clearInterval(btn9ClickView);
-			});
+			$("#btn9").click(function() {btn9_click();});
+			$("#btn9").mousedown(function() {btn9ClickView = window.setInterval("btn9_click()", 200);});
+			$("#btn9").mouseup(function() {window.clearInterval(btn9ClickView);});
+			$("#btn9").mouseleave(function() {window.clearInterval(btn9ClickView);});
 			//------------------------------
 			var btn0ClickView;
-			$("#btn0").click(function() {
-				btn0_click();
-			});
-			$("#btn0").mousedown(function() {
-				btn0ClickView = window.setInterval("btn0_click()", 200);
-			});
-			$("#btn0").mouseup(function() {
-				window.clearInterval(btn0ClickView);
-			});
-			$("#btn0").mouseleave(function() {
-				window.clearInterval(btn0ClickView);
-			});
+			$("#btn0").click(function() {btn0_click();});
+			$("#btn0").mousedown(function() {btn0ClickView = window.setInterval("btn0_click()", 200);});
+			$("#btn0").mouseup(function() {window.clearInterval(btn0ClickView);});
+			$("#btn0").mouseleave(function() {window.clearInterval(btn0ClickView);});
 			//------------------------------
 			var btnDelClickView;
-			$("#btnDel").click(function() {
-				btnDel_click();
-			});
-			$("#btnDel").mousedown(function() {
-				btnDelClickView = window.setInterval("btnDel_click()", 200);
-			});
-			$("#btnDel").mouseup(function() {
-				window.clearInterval(btnDelClickView);
-			});
-			$("#btnDel").mouseleave(function() {
-				window.clearInterval(btnDelClickView);
-			});
+			$("#btnDel").click(function() {btnDel_click();});
+			$("#btnDel").mousedown(function() {btnDelClickView = window.setInterval("btnDel_click()", 200);});
+			$("#btnDel").mouseup(function() {window.clearInterval(btnDelClickView);});
+			$("#btnDel").mouseleave(function() {window.clearInterval(btnDelClickView);});
 			//------------------------------
 			$("#btnEnter").click(function() {
-				// ????????????????????????????????????????????????????????????????
+				_processProductDetailTable();<%// 绘制商品细节%>
 			});
 			//------------------------------
-		});	
+		});
 		</script>
 	</head>
 	<body>
@@ -297,19 +193,23 @@
 							<td><input type="text" id="_inputBarCode" name="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;text-align:right;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
 						<tr>
-							<td colspan="2" height="120px;">
-								<table border="1px">
+							<td colspan="2">
+								<table id="_productDetail" style="display: none;">
 									<tr>
-										<td rowspan="2">一二三四五六七八九十</td>
-										<td>单价:</td>
-										<td>1234.99</td>
+										<td rowspan="3"><img id="img" height="<%=Constants.PHOTO_IMG_HEIGHT/2 %>px" width="<%=Constants.PHOTO_IMG_WIDTH/2 %>px" style="border: 1px;" /></td>
+										<td>名称:</td>
+										<td id="_productName"></td>
 									</tr>
-									<tr>
+									<tr valign="top">
+										<td>单价:</td>
+										<td id="_productPrice"></td>
+									</tr>
+									<tr valign="top">
 										<td>数量:</td>
 										<td class="center">
-											<img width="18px" height="18px" src="${ctx}/static/img/minus.ico">
-											<input type="text" style="width: 20px;" class="text ui-widget-content ui-corner-all" />
-											<img width="18px" height="18px" src="${ctx}/static/img/add.ico">
+											<img id="_productMinusBtn" width="18px" height="18px" src="${ctx}/static/img/minus.ico" style="cursor: pointer;" />
+											<input id="_productNum" type="text" style="width: 30px;" class="text ui-widget-content ui-corner-all" />
+											<img id="_productPlusBtn" width="18px" height="18px" src="${ctx}/static/img/add.ico" style="cursor: pointer;" />
 										</td>
 									</tr>
 								</table>
@@ -356,24 +256,11 @@
 							</tr>
 						</thead>
 						<tbody>
-					<!-- 		<tr>
-								<td class="first center">999</td>
-								<td>一二三四五六七八九十</td>
-								<td>1234.99</td>
-								<td>
-									12
-								</td>
-								<td>123456.99</td>
-								<td class="center"><img width="18px" height="18px" src="${ctx}/static/img/delete.ico"></td>
-							</tr> -->
-							
-							
 						</tbody>
 					</table>
 				</td>
 			</tr>
 		</table>
 		</form:form>
-		<button id="btn99999" type="button"><span class="btn_text">999999</span></button>
 	</body>
 </html>
