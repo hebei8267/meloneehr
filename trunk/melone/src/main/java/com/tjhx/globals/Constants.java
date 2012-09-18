@@ -36,5 +36,14 @@ public class Constants {
 	public static final int PHOTO_IMG_HEIGHT = 200;
 	/** 照片显示宽度 */
 	public static final int PHOTO_IMG_WIDTH = 150;
+	// ------------------------------------------------------------------
+	// 销售类型
+	// ------------------------------------------------------------------
+	/** 销售类型-零售 */
+	public static final String SELL_TYPE_1 = "1";
+	/** 销售类型-会员 */
+	public static final String SELL_TYPE_2 = "2";
+	/** 销售类型-批发 */
+	public static final String SELL_TYPE_3 = "3";
 
 }
