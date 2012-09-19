@@ -44,6 +44,6 @@ public class Constants {
 	/** 销售类型-会员 */
 	public static final String SELL_TYPE_2 = "2";
 	/** 销售类型-批发 */
-	public static final String SELL_TYPE_3 = "3";
+	public static final String SELL_TYPE_4 = "4";
 
 }

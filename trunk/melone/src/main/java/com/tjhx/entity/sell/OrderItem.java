@@ -42,7 +42,7 @@ public class OrderItem extends IdEntity {
 	 * @return 购物单流水号
 	 */
 	@NaturalId
-	@Column(length = 16)
+	@Column(length = 36)
 	public String getOrderSerial() {
 		return orderSerial;
 	}
