@@ -9,7 +9,9 @@ import com.tjhx.entity.product.ProductBrand;
 //CrudRepository<T, ID>----自动为域对象创建增删改查方法
 //PagingAndSortingRepository<T, ID>----在 CrudRepository 基础上新增了两个与分页有关的方法
 //JpaRepository<T, ID>----JpaRepository 是继承自 PagingAndSortingRepository 的针对 JPA 技术提供的接口，它在父接口的基础上，提供了其他一些方法，比如 flush()，saveAndFlush()，deleteInBatch() 等
-
+/**
+ * 商品品牌JpaDao
+ */
 public interface ProductBrandJpaDao extends CrudRepository<ProductBrand, Integer> {
 	@SuppressWarnings("rawtypes")
 	public Iterable findAll(Sort sort);
