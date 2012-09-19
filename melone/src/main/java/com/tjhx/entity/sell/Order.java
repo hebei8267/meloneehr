@@ -31,8 +31,10 @@ public class Order extends IdEntity {
 	private Integer itemNum;
 	/** 销售额 */
 	private double sales;
-	/** 销售类型 1(零售-默认) 2(会员) 3(批发) */
+	/** 销售类型 1(零售-默认) 2(会员) 4(批发) */
 	private String sellType = Constants.SELL_TYPE_1;
+	/** 交易日期YYYYMMDD */
+	private String transDate;
 	/** 购物单-子项集合 */
 	private List<OrderItem> itemList = Lists.newArrayList();
 
@@ -42,7 +44,7 @@ public class Order extends IdEntity {
 	 * @return 购物单流水号
 	 */
 	@NaturalId
-	@Column(length = 16)
+	@Column(length = 36)
 	public String getOrderSerial() {
 		return orderSerial;
 	}
@@ -93,9 +95,9 @@ public class Order extends IdEntity {
 	}
 
 	/**
-	 * 取得销售类型 1(零售) 2(会员) 3(批发)
+	 * 取得销售类型 1(零售) 2(会员) 4(批发)
 	 * 
-	 * @return 销售类型 1(零售-默认) 2(会员) 3(批发)
+	 * @return 销售类型 1(零售-默认) 2(会员) 4(批发)
 	 */
 	@Column(length = 1)
 	public String getSellType() {
@@ -103,12 +105,31 @@ public class Order extends IdEntity {
 	}
 
 	/**
-	 * 设置销售类型 1(零售) 2(会员) 3(批发)
+	 * 设置销售类型 1(零售) 2(会员) 4(批发)
 	 * 
-	 * @param sellType 销售类型 1(零售-默认) 2(会员) 3(批发)
+	 * @param sellType 销售类型 1(零售-默认) 2(会员) 4(批发)
 	 */
 	public void setSellType(String sellType) {
 		this.sellType = sellType;
+	}
+
+	/**
+	 * 取得交易日期YYYYMMDD
+	 * 
+	 * @return 交易日期YYYYMMDD
+	 */
+	@Column(length = 8)
+	public String getTransDate() {
+		return transDate;
+	}
+
+	/**
+	 * 设置交易日期YYYYMMDD
+	 * 
+	 * @param transDate 交易日期YYYYMMDD
+	 */
+	public void setTransDate(String transDate) {
+		this.transDate = transDate;
 	}
 
 	/**
@@ -130,4 +151,19 @@ public class Order extends IdEntity {
 		this.itemList = itemList;
 	}
 
+	/**
+	 * 添加购物单-子项
+	 * 
+	 * @param item 购物单-子项
+	 */
+	public void addItem(OrderItem orderItem) {
+		if (null == orderItem) {
+			return;
+		}
+
+		orderItem.setOrder(this);
+		orderItem.set_index(itemList.size() + 1);
+
+		itemList.add(orderItem);
+	}
 }
