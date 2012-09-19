@@ -19,7 +19,7 @@
 				var _len = $("#rounded-corner tr").length;
 		        $("#rounded-corner").append('<tr>' +
 		        							 '  <input type="hidden" name="barCode" value="' + item.barCode + '" />' +
-		        							 '  <input type="hidden" name="num" value="' + num + '" />' +
+		        							 '  <input type="hidden" name="amount" value="' + num + '" />' +
 											 '	<td width="30" class="first center _index">'+ (_len+1) +'</td>' +
 											 '	<td width="270">'+ item.name +'</td>' +
 											 '	<td width="60" class="right">'+ item.retailPrice +'</td>' +
@@ -206,7 +206,7 @@
 							<td><input type="text" id="_inputBarCode" name="_inputBarCode" class="text ui-widget-content ui-corner-all" style="width: 170px;text-align:right;" speech="speech" x-webkit-speech="x-webkit-speech" x-webkit-grammar="builtin:translate"/></td>
 						</tr>
 						<tr>
-							<td colspan="2">
+							<td colspan="2" height="110px">
 								<table id="_productDetail" style="display: none;">
 									<tr>
 										<td rowspan="3"><img id="img" height="<%=Constants.PHOTO_IMG_HEIGHT/2 %>px" width="<%=Constants.PHOTO_IMG_WIDTH/2 %>px" style="border: 1px;" /></td>
