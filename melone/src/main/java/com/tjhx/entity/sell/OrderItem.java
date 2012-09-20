@@ -31,8 +31,10 @@ public class OrderItem extends IdEntity {
 	private double price;
 	/** 折扣(0.01~1.0[默认]) */
 	private double discount = 1;
-	/** 售价=商品价格(原始)*折扣 */
-	// private double SellPrice;
+	/** 商品数量 */
+	private int amount;
+	/** 售价=商品价格(原始)*折扣*商品数量 */
+	//private double SellPrice;
 	/** 购物单 */
 	private Order order;
 
@@ -118,7 +120,7 @@ public class OrderItem extends IdEntity {
 	 * @return 售价
 	 */
 	public double getSellPrice() {
-		return price * discount;
+		return price * discount * amount;
 	}
 
 	/**
@@ -146,6 +148,24 @@ public class OrderItem extends IdEntity {
 	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;
+	}
+
+	/**
+	 * 取得商品数量
+	 * 
+	 * @return 商品数量
+	 */
+	public int getAmount() {
+		return amount;
+	}
+
+	/**
+	 * 设置商品数量
+	 * 
+	 * @param amount 商品数量
+	 */
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	/**
