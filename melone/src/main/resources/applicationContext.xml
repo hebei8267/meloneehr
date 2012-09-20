@@ -95,10 +95,8 @@
 
 	<!-- 系统配置信息Bean -->
 	<bean id="sysConfig" class="com.tjhx.globals.SysConfig">
-		<!-- 用户照片存储路径 -->
-		<property name="userPhotoPath" value="${photo.user}" />
-		<!-- 商品照片存储路径 -->
-		<property name="productPhotoPath" value="${photo.product}" />
+		<!-- 照片存储ROOT路径 -->
+		<property name="photoRootPath" value="${photo.root}" />
 		<!-- 商品Json Js文件存储路径 -->
 		<property name="productJsonJsFilePath" value="${product.json.file.path}" />
 	</bean>
