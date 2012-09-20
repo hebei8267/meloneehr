@@ -24,6 +24,7 @@
 							maxlength: 16
 						},
 						telNum: {
+							isPhone: true,
 							required: true,
 							maxlength: 32
 						},

@@ -43,6 +43,9 @@
 						},
 						descTxt: {
 							maxlength: 255
+						},
+						imgFile: {
+							required: true
 						}
 					}
 				});

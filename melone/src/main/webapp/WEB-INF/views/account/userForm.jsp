@@ -38,7 +38,7 @@
 							maxlength: 255
 						},
 						imgFile: {
-							img: true
+							required: true
 						}
 					}
 				});
