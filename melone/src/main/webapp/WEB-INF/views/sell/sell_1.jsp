@@ -38,7 +38,7 @@
 			$("#_productName").text(product.name);
 			$("#_productPrice").text(product.memberPrice);
 			$("#_productNum").val(1);
-			$("#img").attr("src", "${ctx}/photoServlet?photoName=" + product.photoName);
+			$("#img").attr("src", "${ctx}/static/img/product/" + product.photoName);
 		}
 		$().ready(function() {
 			<%// 付款-结账%>
