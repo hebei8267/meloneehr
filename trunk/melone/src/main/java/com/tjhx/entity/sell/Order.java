@@ -160,10 +160,29 @@ public class Order extends IdEntity {
 		if (null == orderItem) {
 			return;
 		}
-
+		// 设置购物单(关联)
 		orderItem.setOrder(this);
+		// 设置购物单-子项(序列)
 		orderItem.set_index(itemList.size() + 1);
-
+		// 添加购物单-子项(关联)
 		itemList.add(orderItem);
+		// 设置购物单-子项(数量)
+		setItemNum(itemList.size());
+	}
+
+	/**
+	 * 计算累计销售额
+	 * 
+	 * @return 计算结果
+	 */
+	public void calSales() {
+		if (null == itemList || itemList.size() == 0) {
+			return;
+		}
+		double _sales = 0.0;
+		for (OrderItem orderItem : itemList) {
+			_sales += orderItem.getSellPrice();
+		}
+		sales = _sales;
 	}
 }

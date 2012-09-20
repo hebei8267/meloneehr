@@ -4,7 +4,7 @@ public class PaymentDTO {
 	/** 购买商品条形码数组 */
 	private String[] barCode;
 	/** 购买商品数量数组 */
-	private Integer[] amount;
+	private int[] amount;
 
 	/**
 	 * 取得购买商品条形码数组
@@ -29,7 +29,7 @@ public class PaymentDTO {
 	 * 
 	 * @return 购买商品数量数组
 	 */
-	public Integer[] getAmount() {
+	public int[] getAmount() {
 		return amount;
 	}
 
@@ -38,7 +38,7 @@ public class PaymentDTO {
 	 * 
 	 * @param amount 购买商品数量数组
 	 */
-	public void setAmount(Integer[] amount) {
+	public void setAmount(int[] amount) {
 		this.amount = amount;
 	}
 

@@ -2,6 +2,7 @@ package com.tjhx.web.sell;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.tjhx.dto.PaymentDTO;
+import com.tjhx.service.sell.SellManager;
 import com.tjhx.web.BaseController;
 
 @Controller
 @RequestMapping(value = "/sell")
 public class SellController extends BaseController {
+	@Resource
+	private SellManager sellManager;
 
 	/**
 	 * 销售页面初始化(含输入键盘)
@@ -24,13 +28,15 @@ public class SellController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "sell1")
+	@RequestMapping
 	public String initSell_Action(Model model, HttpServletRequest request) {
 
 		return "sell/sell_1";
 	}
 
 	/**
+	 * 付款-结账
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
@@ -45,11 +51,11 @@ public class SellController extends BaseController {
 		PaymentDTO payment = new PaymentDTO();
 		// 取得Request中的查询参数
 		BeanUtils.populate(payment, request.getParameterMap());
-		
-		
 
+		String orderSerial = sellManager.payment(payment);
+		// TODO ?????????????
 		JsonMapper mapper = new JsonMapper();
-		return mapper.toJson(null);
+		return mapper.toJson(orderSerial);
 	}
 
 }

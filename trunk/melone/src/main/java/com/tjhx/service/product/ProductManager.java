@@ -3,16 +3,21 @@ package com.tjhx.service.product;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -28,6 +33,7 @@ import com.tjhx.entity.product.Product;
 import com.tjhx.entity.product.ProductBrand;
 import com.tjhx.entity.product.ProductSupplier;
 import com.tjhx.entity.product.ProductType;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.io.FileManager;
@@ -35,6 +41,8 @@ import com.tjhx.service.io.FileManager;
 @Service
 @Transactional(readOnly = true)
 public class ProductManager {
+	private static Logger logger = LoggerFactory.getLogger(ProductManager.class);
+
 	@Resource
 	private ProductJpaDao productJpaDao;
 	@Resource
@@ -49,6 +57,8 @@ public class ProductManager {
 	private FileManager fileManager;
 	@Resource
 	private SysConfig sysConfig;
+	@Resource
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有商品信息
@@ -77,6 +87,48 @@ public class ProductManager {
 	 */
 	public Product getProductByUuid(Integer uuid) {
 		return productJpaDao.findOne(uuid);
+	}
+
+	/**
+	 * 取得商品信息从Memcached缓存中
+	 * 
+	 * @param barCode 商品编号/条形码
+	 * @return
+	 */
+	public Product getProductFromMemcached(String barCode) {
+
+		Map<String, Product> _productMap = spyMemcachedClient.get(MemcachedObjectType.PRODUCT_MAP.getObjKey());
+		if (null == _productMap) {
+			// 从数据库中取出全量商品信息(Map格式)
+			_productMap = getProductMap();
+			// 将商品信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.PRODUCT_MAP.getObjKey(),
+					MemcachedObjectType.PRODUCT_MAP.getExpiredTime(), _productMap);
+
+			logger.debug("商品信息不在 memcached中,从数据库中取出并放入memcached");
+
+		} else {
+			logger.debug("从memcached中取出商品信息");
+		}
+
+		Product _resultProduct = _productMap.get(barCode);
+
+		return _resultProduct;
+	}
+
+	/**
+	 * 数据库中取出全量商品信息(Map格式)
+	 * 
+	 * @return 全量商品信息(Map格式)
+	 */
+	private Map<String, Product> getProductMap() {
+		List<Product> _productList = productMyBatisDao.getProductList(null);
+
+		Map<String, Product> _productMap = new HashMap<String, Product>();
+		for (Product _product : _productList) {
+			_productMap.put(_product.getBarCode(), _product);
+		}
+		return _productMap;
 	}
 
 	/**
