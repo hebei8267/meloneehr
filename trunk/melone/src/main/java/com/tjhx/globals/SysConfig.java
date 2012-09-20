@@ -6,8 +6,26 @@ package com.tjhx.globals;
  * @author
  */
 public class SysConfig {
-	/** 用户照片存储路径 */
-	private String userPhotoPath;
+	/** 照片存储ROOT路径 */
+	private String photoRootPath;
+
+	/**
+	 * 取得照片存储ROOT路径
+	 * 
+	 * @return 照片存储ROOT路径
+	 */
+	public String getPhotoRootPath() {
+		return photoRootPath;
+	}
+
+	/**
+	 * 设置照片存储ROOT路径
+	 * 
+	 * @param photoRootPath 照片存储ROOT路径
+	 */
+	public void setPhotoRootPath(String photoRootPath) {
+		this.photoRootPath = photoRootPath;
+	}
 
 	/**
 	 * 取得用户照片存储路径
@@ -15,21 +33,8 @@ public class SysConfig {
 	 * @return 用户照片存储路径
 	 */
 	public String getUserPhotoPath() {
-		return userPhotoPath;
+		return getPhotoRootPath() + "user/";
 	}
-
-	/**
-	 * 设置用户照片存储路径
-	 * 
-	 * @param userPhotoPath 用户照片存储路径
-	 */
-	public void setUserPhotoPath(String userPhotoPath) {
-		this.userPhotoPath = userPhotoPath;
-	}
-
-	// --------------------------------------------------------------------------
-	/** 商品照片存储路径 */
-	private String productPhotoPath;
 
 	/**
 	 * 取得商品照片存储路径
@@ -37,18 +42,11 @@ public class SysConfig {
 	 * @return 商品照片存储路径
 	 */
 	public String getProductPhotoPath() {
-		return productPhotoPath;
+		return getPhotoRootPath() + "product/";
 	}
 
-	/**
-	 * 设置商品照片存储路径
-	 * 
-	 * @param productPhotoPath 商品照片存储路径
-	 */
-	public void setProductPhotoPath(String productPhotoPath) {
-		this.productPhotoPath = productPhotoPath;
-	}
-
+	// --------------------------------------------------------------------------
+	//
 	// --------------------------------------------------------------------------
 	/** 商品Json Js文件存储路径 */
 	private String productJsonJsFilePath;
