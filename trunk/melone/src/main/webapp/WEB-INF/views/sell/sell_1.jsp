@@ -14,17 +14,17 @@
 		<script type="text/javascript" src="${ctx}/static/js/sell.js"></script>
 		<script>
 		<%// 绘制商品列表%>
-		function addOrderItem(item, num) {
-			if(num > 0) {
+		function addOrderItem(item, amount) {
+			if(amount > 0) {
 				var _len = $("#rounded-corner tr").length;
 		        $("#rounded-corner").append('<tr>' +
 		        							 '  <input type="hidden" name="barCode" value="' + item.barCode + '" />' +
-		        							 '  <input type="hidden" name="amount" value="' + num + '" />' +
+		        							 '  <input type="hidden" name="amount" value="' + amount + '" />' +
 											 '	<td width="30" class="first center _index">'+ (_len+1) +'</td>' +
 											 '	<td width="270">'+ item.name +'</td>' +
 											 '	<td width="60" class="right">'+ item.retailPrice +'</td>' +
-											 '	<td width="40" class="right">' + num +'</td>' +
-											 '	<td width="100" class="right">' + (item.retailPrice*num) + '</td>' +
+											 '	<td width="40" class="right">' + amount +'</td>' +
+											 '	<td width="100" class="right">' + (item.retailPrice*amount) + '</td>' +
 											 '	<td width="35" class="center"><img class="itemDelBtn" width="18px" height="18px" src="${ctx}/static/img/delete.ico" style="cursor: pointer;" /></td>' +
 											 '</tr>');
 		        $('#rounded-corner').tableScroll({height:400});
@@ -41,6 +41,18 @@
 			$("#img").attr("src", "${ctx}/photoServlet?photoName=" + product.photoName);
 		}
 		$().ready(function() {
+			<%// 付款-结账%>
+			$("#aaaa").click(function() {
+				$.ajax({
+					type : "post",
+					url: "${sc_ctx}/sell/payment",
+					data: $("#inputForm").serialize(),
+					success:function(data){
+						alert(data)
+					}
+				});
+			});
+		
 			<%// 购买产品对象句柄%>
 			var _selProduct = null;
 			<%// 购买商品项删除%>
@@ -196,7 +208,7 @@
 		</script>
 	</head>
 	<body>
-		<form:form method="POST" class="form cmxform" id="inputForm" >
+		<form:form method="POST" class="form cmxform" id="inputForm" ><button id="aaaa" type="button"><span class="btn_text">提交</span></button>
 		<table>
 			<tr>
 				<td>
