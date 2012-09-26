@@ -31,7 +31,7 @@ public class SellController extends BaseController {
 	@RequestMapping
 	public String initSell_Action(Model model, HttpServletRequest request) {
 
-		return "sell/sell_1";
+		return "sell/sell";
 	}
 
 	/**
