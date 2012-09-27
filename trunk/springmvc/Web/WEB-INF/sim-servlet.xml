@@ -6,13 +6,22 @@
       
 	<!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->  
 	<context:component-scan base-package="com.sofmit.sim.wr.web"/>  
-       
+       <context:component-scan base-package="uploadify"/>
 	<!--  
 			This bean configures the 'prefix' and 'suffix' properties of   
 			InternalResourceViewResolver, which resolves logical view names   
 			returned by Controllers. For example, a logical view name of "vets"   
 			will be mapped to "/WEB-INF/jsp/vets.jsp".  
 		-->  
+		
+		<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为1MB -->
+		<property name="maxUploadSize">
+			<value>1048576</value>
+		</property>
+	</bean>
+	
 	<bean  
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"  
 		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />  

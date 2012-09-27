@@ -41,6 +41,6 @@
 
 	<servlet-mapping>
 		<servlet-name>sim</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 </web-app>
