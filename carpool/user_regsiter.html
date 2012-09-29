@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CarPool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/mystyle.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>
+                        <h1>注册??账户</h1>
+                        <small>如果您已拥有??账户，则可<a>在此登录</a></small>
+                    </legend>
+                    <div class="control-group">
+                        <label class="control-label" for="phone">手机号码：</label>
+                        <div class="controls">
+                            <input type="text" class="input-medium" name="phone" id="phone">
+                            <button class="btn">获取验证码</button>
+                            <span class="help-block">支持移动、联通、电信手机号码</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputcode">验证码：</label>
+                        <div class="controls">
+                            <input type="text" class="input-small" name="inputcode" id="inputcode">
+                            <span class="help-block">请输入手机收到的验证码。如果一段时间没有收到，请重新获取</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">设置密码：</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" name="password" id="password">
+                            <span class="help-block">密码长度为6~16位字符，由数字和字母组成</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="repassword">确认密码：</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" name="repassword" id="repassword">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-large btn-primary">立即注册</button>
+                            <span class="help-block">点击“立即注册”，即表示您同意并愿意遵守??<a>用户协议</a>和<a>隐私政策</a></span>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <script src="js/jquery-1.7.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>

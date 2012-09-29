@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CarPool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/mystyle.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form class="form-horizontal" id="inputForm">
+                <fieldset>
+                    <legend>
+                        <h1>欢迎登录??账户</h1>
+                    </legend>
+                    <div class="control-group">
+                        <label class="control-label" for="phone">账户：</label>
+                        <div class="controls">
+                            <input type="text" class="input-medium" name="phone" id="phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">密码：</label>
+                        <div class="controls">
+                            <input type="text" class="input-medium" name="password" id="password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-large btn-primary">登录</button>&nbsp;&nbsp;&nbsp; <span class="help-inline"><a>忘记密码?</a></span>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <small>您还不是??会员吗?</small>
+                <br/>
+                <small>现在免费注册成为??用户,不出家门就能享受更多的优惠哦!</small>
+                <button class="btn">用户注册</button>
+
+            </form>
+        </div>
+
+        <script src="js/jquery-1.7.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.validate-1.10.0.min.js"></script>
+        <script src="js/jquery.validate_cn.js"></script>
+        <script>
+            $("#inputForm").validate({
+                rules : {
+                    phone : {
+                        required : true,
+                        isMobile : true
+                    },
+                    password : {
+                        required : true,
+                        minlength : 6
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
