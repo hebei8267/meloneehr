@@ -7,16 +7,25 @@
 
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/mystyle.css" rel="stylesheet">
     </head>
     <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <p class="navbar-text pull-left">
+                        您好，欢迎来到####网！
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="inputForm">
                 <fieldset>
                     <legend>
                         <h1>注册??账户</h1>
-                        <small>如果您已拥有??账户，则可<a>在此登录</a></small>
+                        <small>如果您已拥有??账户，则可<a class="cursor-hand">在此登录</a></small>
                     </legend>
                     <div class="control-group">
                         <label class="control-label" for="phone">手机号码：</label>
@@ -49,14 +58,62 @@
                     <div class="control-group">
                         <div class="controls">
                             <button class="btn btn-large btn-primary">立即注册</button>
-                            <span class="help-block">点击“立即注册”，即表示您同意并愿意遵守??<a>用户协议</a>和<a>隐私政策</a></span>
+                            <span class="help-block">点击『立即注册』，即表示您同意并愿意遵守??<a class="cursor-hand">用户协议</a>和<a class="cursor-hand">隐私政策</a>。</span>
                         </div>
                     </div>
                 </fieldset>
+
             </form>
         </div>
 
+        <footer class="footer">
+            <div class="container">
+                <p style="text-align:center">
+                    <a href="#" class="shier">人才招聘</a>
+                    <span>|</span>
+                    <a href="#" class="shier">关于出租车拼车信息网</a>
+                    <span>|</span>
+                    <a href="#" class="shier">隐私政策</a>
+                    <span>|</span>
+                    <a href="#" class="shier">联系我们</a>
+                    <span>|</span>
+                    <a href="#" class="shier">帮助中心</a>
+                    <span>|</span>
+                    <a href="#" class="shier">商务合作</a>
+                    <span>|</span>
+                    <a href="#" class="shier" target="_blank">营业执照</a>
+                </p>
+                <p style="text-align:center"></p>
+                <p class="ziti" style="text-align:center">
+                    Copyright © ###网 2012, All Rights Reserved.&nbsp; <a href="#" target="_blank">沪ICP备#####</a>
+                </p>
+            </div>
+        </footer>
+
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.validate-1.10.0.min.js"></script>
+        <script src="js/jquery.validate_cn.js"></script>
+        <script>
+            $("#inputForm").validate({
+                rules : {
+                    phone : {
+                        required : true,
+                        isMobile : true
+                    },
+                    inputcode : {
+                        required : true
+                    },
+                    password : {
+                        required : true,
+                        minlength : 6,
+                        maxlength : 16
+                    },
+                    repassword : {
+                        equalTo : "#password"
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
