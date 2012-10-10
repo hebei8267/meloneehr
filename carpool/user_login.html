@@ -7,10 +7,19 @@
 
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/mystyle.css" rel="stylesheet">
     </head>
     <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <p class="navbar-text pull-left">
+                        您好，欢迎来到####网！
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <form class="form-horizontal" id="inputForm">
                 <fieldset>
@@ -31,19 +40,44 @@
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <button class="btn btn-large btn-primary">登录</button>&nbsp;&nbsp;&nbsp; <span class="help-inline"><a>忘记密码?</a></span>
+                            <button class="btn btn-large btn-primary">登录</button>&nbsp;&nbsp;&nbsp; <span class="help-inline"><a class="cursor-hand">忘记密码？</a></span>
                         </div>
                     </div>
-
                 </fieldset>
-
-                <small>您还不是??会员吗?</small>
-                <br/>
-                <small>现在免费注册成为??用户,不出家门就能享受更多的优惠哦!</small>
-                <button class="btn">用户注册</button>
-
             </form>
+
+            <div class="alert alert-info">
+                <small>您还不是##会员吗？</small>
+                <br/>
+                <small>现在免费注册成为##用户，轻松享受出租车接送服务哦！</small>
+                <a class="btn" href="user_regsiter.html">用户注册</a>
+            </div>
+
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p style="text-align:center">
+                    <a href="#" class="shier">人才招聘</a>
+                    <span>|</span>
+                    <a href="#" class="shier">关于##网</a>
+                    <span>|</span>
+                    <a href="#" class="shier">隐私政策</a>
+                    <span>|</span>
+                    <a href="#" class="shier">联系我们</a>
+                    <span>|</span>
+                    <a href="#" class="shier">帮助中心</a>
+                    <span>|</span>
+                    <a href="#" class="shier">商务合作</a>
+                    <span>|</span>
+                    <a href="#" class="shier" target="_blank">营业执照</a>
+                </p>
+                <p style="text-align:center"></p>
+                <p class="ziti" style="text-align:center">
+                    Copyright © ###网 2012, All Rights Reserved.&nbsp; <a href="#" target="_blank">沪ICP备#####</a>
+                </p>
+            </div>
+        </footer>
 
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -58,7 +92,8 @@
                     },
                     password : {
                         required : true,
-                        minlength : 6
+                        minlength : 6,
+                        maxlength : 16
                     }
                 }
             });

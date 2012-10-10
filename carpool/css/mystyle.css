@@ -17,3 +17,16 @@ input:focus {
 input.error {
     border: 1px dotted red;
 }
+/* 自定义属性 */
+a.cursor-hand {
+    cursor: pointer;
+}
+.footer {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #c2c2c2;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
