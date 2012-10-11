@@ -30,3 +30,32 @@ a.cursor-hand {
     -moz-border-radius: 6px;
     border-radius: 6px;
 }
+/* Special grid styles
+ -------------------------------------------------- */
+.show-grid {
+
+}
+.show-grid [class*="span"] {
+    background-color: #eee;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    min-height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.show-grid [class*="span"]:hover {
+    background: #ddd;
+}
+.show-grid .show-grid {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.show-grid .show-grid [class*="span"] {
+    background-color: #ccc;
+}
+.show-grid [class*="span"] button {
+    margin-bottom: 15px;
+}
