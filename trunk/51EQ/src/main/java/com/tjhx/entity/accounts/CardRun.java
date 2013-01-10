@@ -1,5 +1,7 @@
 package com.tjhx.entity.accounts;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -23,18 +25,20 @@ public class CardRun extends IdEntity {
 	private String orgId;
 	/** 刷卡汇总日期 */
 	private String optDate;
+	/** 刷卡汇总日期-显示 */
+	private String optDateShow;
 	/** 刷卡汇总日期-年 */
 	private String optDateY;
 	/** 刷卡汇总日期-月 */
 	private String optDateM;
 	/** 单据统计 */
-	private Double recordStatisAmt;
+	private BigDecimal recordStatisAmt;
 	/** 电脑统计（百威） */
-	private Double bwStatisAmt;
+	private BigDecimal bwStatisAmt;
 	/** 刷卡笔数 */
 	private Integer optNum;
 	/** 盈亏金额 */
-	private Double profitAmt;
+	private BigDecimal profitAmt;
 	/** 凭证号 */
 	private String certNo;
 	/** 备注（盈亏原因） */
@@ -81,6 +85,25 @@ public class CardRun extends IdEntity {
 	}
 
 	/**
+	 * 取得刷卡汇总日期-显示
+	 * 
+	 * @return optDateShow 刷卡汇总日期-显示
+	 */
+	@Column(name = "OPT_DATE_SHOW", length = 10)
+	public String getOptDateShow() {
+		return optDateShow;
+	}
+
+	/**
+	 * 设置刷卡汇总日期-显示
+	 * 
+	 * @param optDateShow 刷卡汇总日期-显示
+	 */
+	public void setOptDateShow(String optDateShow) {
+		this.optDateShow = optDateShow;
+	}
+
+	/**
 	 * 取得刷卡汇总日期-年
 	 * 
 	 * @return optDateY 刷卡汇总日期-年
@@ -124,7 +147,7 @@ public class CardRun extends IdEntity {
 	 * @return recordStatisAmt 单据统计
 	 */
 	@Column(name = "RECORD_STATIS_AMT")
-	public Double getRecordStatisAmt() {
+	public BigDecimal getRecordStatisAmt() {
 		return recordStatisAmt;
 	}
 
@@ -133,7 +156,7 @@ public class CardRun extends IdEntity {
 	 * 
 	 * @param recordStatisAmt 单据统计
 	 */
-	public void setRecordStatisAmt(Double recordStatisAmt) {
+	public void setRecordStatisAmt(BigDecimal recordStatisAmt) {
 		this.recordStatisAmt = recordStatisAmt;
 	}
 
@@ -143,7 +166,7 @@ public class CardRun extends IdEntity {
 	 * @return bwStatisAmt 电脑统计（百威）
 	 */
 	@Column(name = "BW_STATIS_AMT")
-	public Double getBwStatisAmt() {
+	public BigDecimal getBwStatisAmt() {
 		return bwStatisAmt;
 	}
 
@@ -152,7 +175,7 @@ public class CardRun extends IdEntity {
 	 * 
 	 * @param bwStatisAmt 电脑统计（百威）
 	 */
-	public void setBwStatisAmt(Double bwStatisAmt) {
+	public void setBwStatisAmt(BigDecimal bwStatisAmt) {
 		this.bwStatisAmt = bwStatisAmt;
 	}
 
@@ -181,7 +204,7 @@ public class CardRun extends IdEntity {
 	 * @return profitAmt 盈亏金额
 	 */
 	@Column(name = "PROFIT_AMT")
-	public Double getProfitAmt() {
+	public BigDecimal getProfitAmt() {
 		return profitAmt;
 	}
 
@@ -190,7 +213,7 @@ public class CardRun extends IdEntity {
 	 * 
 	 * @param profitAmt 盈亏金额
 	 */
-	public void setProfitAmt(Double profitAmt) {
+	public void setProfitAmt(BigDecimal profitAmt) {
 		this.profitAmt = profitAmt;
 	}
 

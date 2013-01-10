@@ -1,5 +1,6 @@
 package com.tjhx.common.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,5 +35,24 @@ public class DateUtils {
 		Date date = getCurrentDate();
 		simpleDateFormat.applyPattern(formatDate);
 		return simpleDateFormat.format(date);
+	}
+
+	/**
+	 * 转换日历格式
+	 * 
+	 * @param date
+	 * @param fromFormat
+	 * @param toformat
+	 * @return
+	 */
+	public static String transDateFormat(String date, String fromFormat, String toformat) {
+		simpleDateFormat.applyPattern(fromFormat);
+		try {
+			Date _d = simpleDateFormat.parse(date);
+			simpleDateFormat.applyPattern(toformat);
+			return simpleDateFormat.format(_d);
+		} catch (ParseException e) {
+			return "";
+		}
 	}
 }

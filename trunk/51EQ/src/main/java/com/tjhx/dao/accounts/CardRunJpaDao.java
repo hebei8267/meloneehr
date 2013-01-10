@@ -9,4 +9,6 @@ public interface CardRunJpaDao extends CrudRepository<CardRun, Integer> {
 
 	@SuppressWarnings("rawtypes")
 	public Iterable findAll(Sort sort);
+
+	public CardRun findByOrgIdAndOptDate(String orgId, String optDate);
 }

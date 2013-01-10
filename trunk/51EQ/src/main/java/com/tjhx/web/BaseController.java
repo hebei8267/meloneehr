@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.MessageSource;
 import org.springframework.ui.Model;
 import org.springside.modules.utils.SpringContextHolder;
 
+import com.tjhx.entity.member.User;
 import com.tjhx.globals.Constants;
 
 public class BaseController {
@@ -137,6 +140,14 @@ public class BaseController {
 				_model.addAttribute(Constants.SESSION_ERR_MSG_LIST, errMsgList);
 			}
 		}
+	}
+
+	protected User getUserInfo(HttpSession session) {
+		return (User) session.getAttribute(Constants.SESSION_USER_INFO);
+	}
+
+	protected void saveUserInfo(HttpSession session, User user) {
+		session.setAttribute(Constants.SESSION_USER_INFO, user);
 	}
 
 }
