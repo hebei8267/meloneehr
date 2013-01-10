@@ -9,8 +9,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.CardRunJpaDao;
 import com.tjhx.entity.accounts.CardRun;
+import com.tjhx.entity.member.User;
+import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,7 +28,7 @@ public class CardRunManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CardRun> getAllCardRun() {
-		return (List<CardRun>) cardRunJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+		return (List<CardRun>) cardRunJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
 	}
 
 	/**
@@ -54,16 +57,28 @@ public class CardRunManager {
 	 * @param cardRun 刷卡流水信息
 	 */
 	@Transactional(readOnly = false)
-	public void addNewCardRun(CardRun cardRun) {
-		// //----------------------------------------------------------------------------
-		// // TODO 修改开始
-		// CardRun _dbCardRun = findByName(cardRun.getName());
-		// // 该刷卡流水已存在!
-		// if (null != _dbCardRun) {
-		// throw new ServiceException("?????????????????");
-		// }
-		// //----------------------------------------------------------------------------
-		// cardRunJpaDao.save(cardRun);
+	public void addNewCardRun(CardRun cardRun, User user) {
+
+		String _date = DateUtils.transDateFormat(cardRun.getOptDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+
+		CardRun _dbCardRun = cardRunJpaDao.findByOrgIdAndOptDate(user.getOrganization().getId(), _date);
+		// 该刷卡流水已存在!
+		if (null != _dbCardRun) {
+			throw new ServiceException("ERR_MSG_CARD_RUN_001");
+		}
+
+		// 机构编号
+		cardRun.setOrgId(user.getOrganization().getId());
+		// 刷卡汇总日期
+		cardRun.setOptDate(_date);
+		// 刷卡汇总日期-年
+		cardRun.setOptDateY(DateUtils.transDateFormat(_date, "yyyyMMdd", "yyyy"));
+		// 刷卡汇总日期-月
+		cardRun.setOptDateM(DateUtils.transDateFormat(_date, "yyyyMMdd", "MM"));
+		// 盈亏金额=单据统计-电脑统计
+		cardRun.setProfitAmt(cardRun.getRecordStatisAmt().subtract(cardRun.getBwStatisAmt()));
+		
+		cardRunJpaDao.save(cardRun);
 	}
 
 	/**
