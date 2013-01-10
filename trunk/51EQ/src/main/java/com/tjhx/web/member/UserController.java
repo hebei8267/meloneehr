@@ -50,7 +50,7 @@ public class UserController extends BaseController {
 
 		// 校验用户信息
 		if (checkUserInfo(user, loginName, passWord)) {
-			session.setAttribute(Constants.SESSION_USER_INFO, user);
+			saveUserInfo(session, user);
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/member/myspace";
 		} else {
 			addInfoMsg(model, "ERR_MSG_LOGIN_001");

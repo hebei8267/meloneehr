@@ -60,22 +60,22 @@
                                 <c:forEach items="${cardRunList}" var="cardRun">
                                     <tr>
                                         <td>
-                                            2012-11-11
+                                            ${cardRun.optDateShow}
                                         </td>
                                         <td>
-                                            1792.2
+                                            ${cardRun.recordStatisAmt}
                                         </td>
                                         <td>
-                                            1792.2
+                                            ${cardRun.bwStatisAmt}
                                         </td>
                                         <td>
-                                            17
+                                            ${cardRun.optNum}
                                         </td>
                                         <td>
-                                            000176-000194
+                                            ${cardRun.certNo}
                                         </td>
                                         <td>
-                                            &nbsp;
+                                            ${cardRun.descTxt}
                                         </td>
                                         <td>
                                             &nbsp;
