@@ -30,6 +30,9 @@
             label.error {
 				margin-bottom: 15px;
 			}
+			label {
+  				display: block;
+			}
         </style>
     </head>
     <body>

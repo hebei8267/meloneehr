@@ -44,7 +44,12 @@ jQuery.validator.addMethod("length6", function(value, element) {
 
 //金额验证
 jQuery.validator.addMethod("money", function(value, element) {
-	return this.optional(element) || /^(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
+	return this.optional(element) || /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(value);
+}, "请输入正确的金额");
+
+//大于零的整数验证
+jQuery.validator.addMethod("digits1", function(value, element) {
+	return this.optional(element) || /^([1-9]{1}\d*)?$/.test(value);
 }, "请输入合法的数字");
 
 
