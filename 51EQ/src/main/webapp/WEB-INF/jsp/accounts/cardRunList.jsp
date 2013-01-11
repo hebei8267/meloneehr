@@ -6,24 +6,86 @@
 <c:set var="sc_ctx">${ctx}/sc</c:set>
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+    	<script>
+			$().ready(function() {
+				//-----------------------------------
+				// 表单效验
+				//-----------------------------------
+				$("#listForm").validate({
+					rules: {
+						delBtn : {
+							requiredSelect : 'uuid'
+						}
+					}
+				});
+				//-----------------------------------
+				// 全选/全部选
+				//-----------------------------------
+				$("#checkAll").click(function() {
+					$('input[name="uuid"]').attr("checked",this.checked);
+				});
+				var $subCheckBox = $("input[name='uuid']");
+				$subCheckBox.click(function(){
+					$("#checkAll").attr("checked",$subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
+				});
+				
+				//-----------------------------------
+				// 删除按钮点击
+				//-----------------------------------
+				$("#delBtn").click(function() {
+					if($("#listForm").valid()){
+						$('#__del_confirm').modal({
+			                backdrop : true,
+			                keyboard : true,
+			                show : true
+			            });
+					}
+				});
+			});
+			//-----------------------------------
+			// 删除
+			//-----------------------------------
+			function _del_confirm(){
+				var $subCheckBox = $("input[name='uuid']");
+				var uuids = "";
+				$.each($subCheckBox, function(index, _checkBox) {
+					if(_checkBox.checked){
+						uuids += _checkBox.value + ",";
+					}
+			    });
+				if(uuids.length > 0){
+					uuids = uuids.substring(0, uuids.length - 1);
+				}
+				
+				$("#uuids").val(uuids);
+				$("#listForm").attr("action", "${sc_ctx}/cardRun/del");
+	        	$("#listForm").submit();
+			}	
+		</script>
+    </head>
     <body>
         <%// 系统菜单  %>
         <page:applyDecorator name="menu" />
 
         <div class="container">
-            <form class="form-horizontal" >
+            <form method="post" class="form-horizontal" id="listForm">
                 <div class="row">
                     <div class="span12">
                         <legend>
                             <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 刷卡情况</h3>
                         </legend>
                         <a href="${sc_ctx}/cardRun/new" class="btn btn-primary">新 增</a>
+                        <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删 除"/>
                     </div>
                     <div class="span12" style="margin-top: 10px;">
+                    	<input type="hidden" name="uuids" id="uuids"/>
                         <table class="table table-striped table-bordered table-condensed mytable">
                             <thead>
                                 <tr>
+                                	<th width="15">
+										<input id="checkAll" type="checkbox" />
+									</th>
                                     <th width="10%">
                                         日期
                                     </th>
@@ -42,7 +104,7 @@
                                     <th>
                                         备注(盈亏原因)
                                     </th>
-                                    <th width="13%">
+                                    <th width="60">
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -59,6 +121,9 @@
                                 </c:if>
                                 <c:forEach items="${cardRunList}" var="cardRun">
                                     <tr>
+                                    	<td>
+                                    		<input type="checkbox" name="uuid" value="${cardRun.uuid}"></input>
+                                    	</td>
                                         <td>
                                             ${cardRun.optDateShow}
                                         </td>
@@ -78,7 +143,7 @@
                                             ${cardRun.descTxt}
                                         </td>
                                         <td>
-                                            &nbsp;
+                                        	<input type="button" class="btn btn-warning" value="修 改" />
                                         </td>
                                     </tr>
                                 </c:forEach>

@@ -28,7 +28,7 @@ input[type="text"], input[type="password"] {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
-.mytable  td {
+.mytable td {
     height: 28px;
     vertical-align: middle;
 }

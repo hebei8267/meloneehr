@@ -19,7 +19,8 @@
 					rules: {
 						optDateShow: {
 							required: true,
-							date: true
+							date: true,
+							datelessThan : $("#_tomorrow_date").val()
 						},
 						recordStatisAmt: {
 							required: true,
@@ -73,7 +74,7 @@
                         </h3>
                     </legend>
                 </div>
-
+				<input type="hidden" id="_tomorrow_date" value="<%=com.tjhx.common.utils.DateUtils.getNextTimeFormatDate(1, "yyyy-MM-dd")%>">
                 <div class="span12" style="margin-top: 10px;">
                     <form:form method="POST" class="form-horizontal" id="inputForm" modelAttribute="cardRun">
 						<form:hidden path="uuid"/>

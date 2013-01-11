@@ -19,28 +19,35 @@ jQuery.extend(jQuery.validator.messages, {
     rangelength : jQuery.validator.format("输入长度必须介于 {0} 和 {1} 之间的字符串"),
     range : jQuery.validator.format("输入值必须介于 {0} 和 {1} 之间的值"),
     max : jQuery.validator.format("输入值不能大于 {0} "),
-    min : jQuery.validator.format("输入值不能小于 {0} "),
-    requiredSelect : "请选择至少一个操作对象"
+    min : jQuery.validator.format("输入值不能小于 {0} ")
 });
 
-//手机号码验证
-jQuery.validator.addMethod("isMobile", function(value, element) {
-    var length = value.length;
-    var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-    return this.optional(element) || (length == 11 && mobile.test(value));
-}, "请正确填写您的手机号码");
+// 列表删除,必选
+jQuery.validator.addMethod("requiredSelect", function(value, element, param) {
+	 return $("input[name='"+ param +"']:checked").length > 0;
+}, "请选择至少一个操作对象");
 
-//固定长度效验验证
-jQuery.validator.addMethod("length4", function(value, element) {
-    var length = value.length;
-    return (length == 4);
-}, "请输入长度为 4 的字符串");
-
-//固定长度效验验证
-jQuery.validator.addMethod("length6", function(value, element) {
-    var length = value.length;
-    return (length == 6);
-}, "请输入长度为 6 的字符串");
+//手机号码验证       
+jQuery.validator.addMethod("isMobile", function(value, element) {       
+	var length = value.length;   
+	var mobile = /^(\d{11})$/;
+	return this.optional(element) || (mobile.test(value));       
+}, "请输入正确的手机号码");
+    
+// 电话号码验证       
+jQuery.validator.addMethod("isTel", function(value, element) {
+	//电话号码格式010-12345678
+	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;  
+	return this.optional(element) || (tel.test(value));       
+}, "请输入正确的电话号码");
+  
+// 联系电话(手机/电话皆可)验证   
+jQuery.validator.addMethod("isPhone", function(value,element) {   
+	var length = value.length;
+	var mobile = /^(\d{11})$/;
+	var tel = /^(\d{3,4}-?)?\d{7,9}$/g;
+	return this.optional(element) || (tel.test(value) || (mobile.test(value)));   
+}, "请输入正确的电话号码");
 
 //金额验证
 jQuery.validator.addMethod("money", function(value, element) {
@@ -52,4 +59,6 @@ jQuery.validator.addMethod("digits1", function(value, element) {
 	return this.optional(element) || /^([1-9]{1}\d*)?$/.test(value);
 }, "请输入合法的数字");
 
-
+jQuery.validator.addMethod("datelessThan", function(value, element, params) {
+    return value < params;
+}, '输入日期必须早于 {0}');
