@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tjhx.entity.accounts.CardRun;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
-import com.tjhx.service.accounts.CardRunManager;
 import com.tjhx.service.accounts.CardRunManager;
 import com.tjhx.web.BaseController;
 
@@ -33,7 +32,7 @@ public class CardRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String cardRunList_Action(Model model, HttpServletRequest request) {
+	public String cardRunList_Action(Model model) {
 		List<CardRun> cardRunList = cardRunManager.getAllCardRun();
 
 		model.addAttribute("cardRunList", cardRunList);
@@ -48,7 +47,10 @@ public class CardRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initCardRun_Action(Model model, HttpServletRequest request) {
+	public String initCardRun_Action(Model model) {
+		CardRun cardRun = new CardRun();
+		model.addAttribute("cardRun", cardRun);
+
 		return "accounts/cardRunForm";
 	}
 
@@ -59,7 +61,7 @@ public class CardRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editCardRun_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+	public String editCardRun_Action(@PathVariable("id") Integer id, Model model) {
 
 		CardRun cardRun = cardRunManager.getCardRunByUuid(id);
 		if (null == cardRun) {
@@ -79,7 +81,7 @@ public class CardRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delCardRun_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
+	public String delCardRun_Action(@RequestParam("uuids") String ids, Model model) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			cardRunManager.delCardRunByUuid(Integer.parseInt(idArray[i]));
@@ -98,20 +100,26 @@ public class CardRunController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveCardRun_Action(@ModelAttribute("cardRun") CardRun cardRun, Model model,
-			HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+	public String saveCardRun_Action(@ModelAttribute("cardRun") CardRun cardRun, Model model, HttpSession session)
+			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == cardRun.getUuid()) {// 新增操作
-			cardRunManager.addNewCardRun(cardRun);
+			try {
+				cardRunManager.addNewCardRun(cardRun, getUserInfo(session));
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+				return "accounts/cardRunForm";
+			}
 		} else {// 修改操作
 			try {
 				cardRunManager.updateCardRun(cardRun);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+				return "accounts/cardRunForm";
 			}
 		}
-
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/cardRun/list";
 	}
 }

@@ -2,6 +2,7 @@ package com.tjhx.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
@@ -35,6 +36,15 @@ public class DateUtils {
 		Date date = getCurrentDate();
 		simpleDateFormat.applyPattern(formatDate);
 		return simpleDateFormat.format(date);
+	}
+
+	public static synchronized String getNextTimeFormatDate(int addDay, String formatDate) {
+		Calendar cal = Calendar.getInstance();
+		Date date = getCurrentDate();
+		cal.setTime(date);
+		cal.add(Calendar.DATE, addDay);
+		simpleDateFormat.applyPattern(formatDate);
+		return simpleDateFormat.format(cal.getTime());
 	}
 
 	/**
