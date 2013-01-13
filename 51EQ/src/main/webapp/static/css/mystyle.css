@@ -32,6 +32,9 @@ input[type="text"], input[type="password"] {
     height: 28px;
     vertical-align: middle;
 }
+.right_text {
+	text-align: right;
+}
 /************************ µ¯³öÐÅÏ¢¿ò ************************/
 .__model37 {
 	font-size: 22px;

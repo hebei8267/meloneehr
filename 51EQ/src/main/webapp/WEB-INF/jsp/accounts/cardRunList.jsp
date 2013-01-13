@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%@ page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">${ctx}/sc</c:set>
 <!DOCTYPE html>
@@ -75,8 +76,15 @@
                         <legend>
                             <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 刷卡情况</h3>
                         </legend>
-                        <a href="${sc_ctx}/cardRun/new" class="btn btn-primary">新增</a>
+                    </div>
+                    <div class="span10">
+                    	<a href="${sc_ctx}/cardRun/new" class="btn btn-primary">新增</a>
                         <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
+                    </div>
+                    <div class="span2 right_text">
+                    	<%String nowM = DateUtils.getCurrentMonth(); %>
+                    	<%String lastM= DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>
+                    	<a href="${sc_ctx}/cardRun/list/<%=nowM %>"><%=nowM %></a> | <a href="${sc_ctx}/cardRun/list/<%=lastM %>"><%=lastM %></a>
                     </div>
                     <div class="span12" style="margin-top: 10px;">
                     	<input type="hidden" name="uuids" id="uuids"/>
@@ -122,7 +130,9 @@
                                 <c:forEach items="${cardRunList}" var="cardRun">
                                     <tr>
                                     	<td>
+                                    		<c:if test="${cardRun.editFlg == 'true' }">
                                     		<input type="checkbox" name="uuid" value="${cardRun.uuid}"></input>
+                                    		</c:if>
                                     	</td>
                                         <td>
                                             ${cardRun.optDateShow}
