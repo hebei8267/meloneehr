@@ -27,6 +27,15 @@ public class DateUtils {
 	}
 
 	/**
+	 * 取得当前时间
+	 * 
+	 * @return 当前日期（String yyyy-MM）
+	 */
+	public static String getCurrentMonth() {
+		return getCurFormatDate("yyyy-MM");
+	}
+
+	/**
 	 * 取得当前时间的特定表示格式的字符串
 	 * 
 	 * @param style 时间格式（如：yyyy/MM/dd hh:mm:ss）
@@ -42,15 +51,31 @@ public class DateUtils {
 	 * 取得指定天数后的日期（以当前时间为准）
 	 * 
 	 * @param addDay
-	 * @param formatDate
+	 * @param style
 	 * @return
 	 */
-	public static synchronized String getNextTimeFormatDate(int addDay, String date) {
+	public static synchronized String getNextDateFormatDate(int addDay, String style) {
 		Calendar cal = Calendar.getInstance();
 		Date _date = getCurrentDate();
 		cal.setTime(_date);
 		cal.add(Calendar.DATE, addDay);
-		simpleDateFormat.applyPattern(date);
+		simpleDateFormat.applyPattern(style);
+		return simpleDateFormat.format(cal.getTime());
+	}
+
+	/**
+	 * 取得指定天数后的日期（以当前时间为准）
+	 * 
+	 * @param addMonth
+	 * @param style
+	 * @return
+	 */
+	public static synchronized String getNextMonthFormatDate(int addMonth, String style) {
+		Calendar cal = Calendar.getInstance();
+		Date _date = getCurrentDate();
+		cal.setTime(_date);
+		cal.add(Calendar.MONTH, addMonth);
+		simpleDateFormat.applyPattern(style);
 		return simpleDateFormat.format(cal.getTime());
 	}
 

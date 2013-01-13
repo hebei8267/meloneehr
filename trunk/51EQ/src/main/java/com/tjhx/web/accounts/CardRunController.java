@@ -36,8 +36,18 @@ public class CardRunController extends BaseController {
 	 */
 	@RequestMapping(value = { "list", "" })
 	public String cardRunList_Action(Model model, HttpSession session) throws ParseException {
-		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId(getUserInfo(session),
+		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId1(getUserInfo(session),
 				DateUtils.getCurrentDateShortStr());
+
+		model.addAttribute("cardRunList", cardRunList);
+
+		return "accounts/cardRunList";
+	}
+
+	@RequestMapping(value = { "list/{date}" })
+	public String cardRunList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
+			throws ParseException {
+		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId2(getUserInfo(session), date);
 
 		model.addAttribute("cardRunList", cardRunList);
 

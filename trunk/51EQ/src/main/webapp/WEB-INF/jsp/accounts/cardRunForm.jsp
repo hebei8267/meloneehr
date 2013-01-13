@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
+<%@ page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">
     ${ctx}/sc
@@ -74,7 +75,7 @@
                         </h3>
                     </legend>
                 </div>
-				<input type="hidden" id="_tomorrow_date" value="<%=com.tjhx.common.utils.DateUtils.getNextTimeFormatDate(1, "yyyy-MM-dd")%>">
+				<input type="hidden" id="_tomorrow_date" value="<%=DateUtils.getNextDateFormatDate(1, "yyyy-MM-dd")%>">
                 <div class="span12" style="margin-top: 10px;">
                     <form:form method="POST" class="form-horizontal" id="inputForm" modelAttribute="cardRun">
 						<form:hidden path="uuid"/>

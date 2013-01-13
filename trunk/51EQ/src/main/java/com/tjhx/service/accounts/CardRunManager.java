@@ -40,11 +40,32 @@ public class CardRunManager {
 	 * @return
 	 * @throws ParseException
 	 */
-	@SuppressWarnings("unchecked")
-	public List<CardRun> getAllCardRunByOrgId(User user, String currentDateShortStr) throws ParseException {
+	public List<CardRun> getAllCardRunByOrgId1(User user, String currentDateShortStr) throws ParseException {
 		String optDateY = DateUtils.transDateFormat(currentDateShortStr, "yyyyMMdd", "yyyy");
 
 		String optDateM = DateUtils.transDateFormat(currentDateShortStr, "yyyyMMdd", "MM");
+
+		return getAllCardRunByOrgId(user, optDateY, optDateM);
+	}
+
+	/**
+	 * 取得刷卡流水信息
+	 * 
+	 * @param user
+	 * @param currentDateShortStr
+	 * @return
+	 * @throws ParseException
+	 */
+	public List<CardRun> getAllCardRunByOrgId2(User user, String currentDateShortStr) throws ParseException {
+		String optDateY = DateUtils.transDateFormat(currentDateShortStr, "yyyy-MM", "yyyy");
+
+		String optDateM = DateUtils.transDateFormat(currentDateShortStr, "yyyy-MM", "MM");
+
+		return getAllCardRunByOrgId(user, optDateY, optDateM);
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<CardRun> getAllCardRunByOrgId(User user, String optDateY, String optDateM) throws ParseException {
 
 		List<CardRun> _list = (List<CardRun>) cardRunJpaDao.findByOrgIdAndOptDateYAndOptDateM(user.getOrganization()
 				.getId(), optDateY, optDateM, new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
