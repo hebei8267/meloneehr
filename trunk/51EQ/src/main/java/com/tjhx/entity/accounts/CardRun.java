@@ -1,14 +1,18 @@
 package com.tjhx.entity.accounts;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.IdEntity;
+import com.tjhx.globals.Constants;
 
 /**
  * 刷卡流水
@@ -43,6 +47,9 @@ public class CardRun extends IdEntity {
 	private String certNo;
 	/** 备注（盈亏原因） */
 	private String descTxt;
+	// ############################################################################################
+	/** 可编辑标记 */
+	private Boolean editFlg = false;
 
 	/**
 	 * 取得机构编号
@@ -255,4 +262,36 @@ public class CardRun extends IdEntity {
 		this.descTxt = descTxt;
 	}
 
+	// ############################################################################################
+
+	/**
+	 * 取得可编辑标记
+	 * 
+	 * @return editFlg 可编辑标记
+	 */
+	@Transient
+	public Boolean getEditFlg() {
+		return editFlg;
+	}
+
+	/**
+	 * 设置可编辑标记
+	 * 
+	 * @param editFlg 可编辑标记
+	 */
+	public void setEditFlg(Boolean editFlg) {
+		this.editFlg = editFlg;
+	}
+
+	public void autoSetEditFlg() throws ParseException {
+		String nowDate = DateUtils.getCurrentDateShortStr();
+		if (null == optDate) {
+			return;
+		}
+		Long _day = DateUtils.getDateSpanDay(optDate, nowDate);
+		_day = Math.abs(_day);
+		if (_day <= Constants.EDITABLE_DAY) {
+			editFlg = true;
+		}
+	}
 }

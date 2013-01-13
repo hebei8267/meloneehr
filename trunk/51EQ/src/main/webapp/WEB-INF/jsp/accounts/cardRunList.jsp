@@ -75,8 +75,8 @@
                         <legend>
                             <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 刷卡情况</h3>
                         </legend>
-                        <a href="${sc_ctx}/cardRun/new" class="btn btn-primary">新 增</a>
-                        <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删 除"/>
+                        <a href="${sc_ctx}/cardRun/new" class="btn btn-primary">新增</a>
+                        <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
                     </div>
                     <div class="span12" style="margin-top: 10px;">
                     	<input type="hidden" name="uuids" id="uuids"/>
@@ -104,7 +104,7 @@
                                     <th>
                                         备注(盈亏原因)
                                     </th>
-                                    <th width="60">
+                                    <th width="55">
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -143,7 +143,9 @@
                                             ${cardRun.descTxt}
                                         </td>
                                         <td>
-                                        	<input type="button" class="btn btn-warning" value="修 改" />
+                                        	<c:if test="${cardRun.editFlg == 'true' }">
+                                        	<a href="${sc_ctx}/cardRun/edit/${cardRun.uuid}" class="btn btn-warning"/>修改</a>
+                                        	</c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

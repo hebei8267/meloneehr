@@ -1,7 +1,8 @@
 package com.tjhx.globals;
 
 public class Constants {
-
+	// ------------------------------------------------------------------
+	public static final int EDITABLE_DAY = 3;
 	// ------------------------------------------------------------------
 	/** 统一的charset定义 */
 	public static final String CHARSET_UTF_8 = "UTF-8";

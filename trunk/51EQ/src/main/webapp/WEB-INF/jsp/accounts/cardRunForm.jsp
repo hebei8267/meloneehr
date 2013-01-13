@@ -116,8 +116,8 @@
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <button id="saveBtn" class="btn btn-large btn-primary" type="submit">保 存</button>
-                                &nbsp;<a href="${sc_ctx}/cardRun" class="btn btn-large">返 回</a>
+                                <button id="saveBtn" class="btn btn-large btn-primary" type="submit">保存</button>
+                                &nbsp;<a href="${sc_ctx}/cardRun" class="btn btn-large">返回</a>
                             </div>
                         </div>
                     </form:form>

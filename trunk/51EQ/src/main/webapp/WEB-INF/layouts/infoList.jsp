@@ -51,7 +51,7 @@
         </center>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">关 闭</a>
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
     </div>
 </div>
 
@@ -66,7 +66,7 @@
         </center>
     </div>
     <div class="modal-footer">
-    	<input type="button" class="btn btn-primary" id="__del_confirm_Btn" value="确 定">
-        <a href="#" class="btn" data-dismiss="modal">关 闭</a>
+    	<input type="button" class="btn btn-primary" id="__del_confirm_Btn" value="确定">
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
     </div>
 </div>

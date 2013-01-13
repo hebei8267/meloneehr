@@ -41,7 +41,7 @@
                 <h2>用户登录</h2>
                 <input type="text" class="input-block-level" name="loginName" id="loginName" placeholder="User ID">
                 <input type="password" class="input-block-level" name="passWord" id="passWord" placeholder="Password">
-                <input type="submit" value="登 录" id="loginBtn" class="btn btn-large btn-primary"/>
+                <input type="submit" value="登录" id="loginBtn" class="btn btn-large btn-primary"/>
             </form>
         </div>
         <script>

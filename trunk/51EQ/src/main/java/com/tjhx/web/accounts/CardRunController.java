@@ -1,6 +1,7 @@
 package com.tjhx.web.accounts;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.CardRun;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
@@ -30,10 +32,12 @@ public class CardRunController extends BaseController {
 	 * 
 	 * @param model
 	 * @return
+	 * @throws ParseException
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String cardRunList_Action(Model model) {
-		List<CardRun> cardRunList = cardRunManager.getAllCardRun();
+	public String cardRunList_Action(Model model, HttpSession session) throws ParseException {
+		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId(getUserInfo(session),
+				DateUtils.getCurrentDateShortStr());
 
 		model.addAttribute("cardRunList", cardRunList);
 
@@ -68,7 +72,7 @@ public class CardRunController extends BaseController {
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/cardRun/list";
 		} else {
 			model.addAttribute("cardRun", cardRun);
-			return "cardRunForm";
+			return "accounts/cardRunForm";
 		}
 
 	}
@@ -113,7 +117,7 @@ public class CardRunController extends BaseController {
 			}
 		} else {// 修改操作
 			try {
-				cardRunManager.updateCardRun(cardRun);
+				cardRunManager.updateCardRun(cardRun, getUserInfo(session));
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
