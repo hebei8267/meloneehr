@@ -38,8 +38,10 @@ public class CardRunController extends BaseController {
 	public String cardRunList_Action(Model model, HttpSession session) throws ParseException {
 		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId1(getUserInfo(session),
 				DateUtils.getCurrentDateShortStr());
-
 		model.addAttribute("cardRunList", cardRunList);
+
+		CardRun totalCardRun = cardRunManager.calTotal(cardRunList);
+		model.addAttribute("totalCardRun", totalCardRun);
 
 		return "accounts/cardRunList";
 	}
@@ -48,8 +50,10 @@ public class CardRunController extends BaseController {
 	public String cardRunList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
 			throws ParseException {
 		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId2(getUserInfo(session), date);
-
 		model.addAttribute("cardRunList", cardRunList);
+
+		CardRun totalCardRun = cardRunManager.calTotal(cardRunList);
+		model.addAttribute("totalCardRun", totalCardRun);
 
 		return "accounts/cardRunList";
 	}
