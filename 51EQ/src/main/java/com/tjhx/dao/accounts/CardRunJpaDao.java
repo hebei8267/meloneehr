@@ -16,7 +16,7 @@ public interface CardRunJpaDao extends CrudRepository<CardRun, Integer> {
 
 	@SuppressWarnings("rawtypes")
 	@Query("select c from CardRun c where c.orgId = :orgId and c.optDateY = :optDateY and c.optDateM = :optDateM")
-	public Iterable findByOrgIdAndOptDateYAndOptDateM(@Param("orgId") String orgId, @Param("optDateY") String optDateY,
+	public Iterable findByOrgId_OptDateY_OptDateM(@Param("orgId") String orgId, @Param("optDateY") String optDateY,
 			@Param("optDateM") String optDateM, Sort sort);
 
 }

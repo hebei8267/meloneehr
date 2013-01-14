@@ -36,8 +36,8 @@ public class CardRunController extends BaseController {
 	 */
 	@RequestMapping(value = { "list", "" })
 	public String cardRunList_Action(Model model, HttpSession session) throws ParseException {
-		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId1(getUserInfo(session),
-				DateUtils.getCurrentDateShortStr());
+		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId_1(getUserInfo(session).getOrganization()
+				.getId(), DateUtils.getCurrentDateShortStr());
 		model.addAttribute("cardRunList", cardRunList);
 
 		CardRun totalCardRun = cardRunManager.calTotal(cardRunList);
@@ -45,11 +45,18 @@ public class CardRunController extends BaseController {
 
 		return "accounts/cardRunList";
 	}
-
+	/**
+	 * 取得刷卡情况信息列表
+	 * 
+	 * @param model
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = { "list/{date}" })
 	public String cardRunList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
 			throws ParseException {
-		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId2(getUserInfo(session), date);
+		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId_2(getUserInfo(session).getOrganization()
+				.getId(), date);
 		model.addAttribute("cardRunList", cardRunList);
 
 		CardRun totalCardRun = cardRunManager.calTotal(cardRunList);
