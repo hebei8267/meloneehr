@@ -23,29 +23,48 @@ public class CardRunManager {
 	private CardRunJpaDao cardRunJpaDao;
 
 	/**
-	 * 取得所有刷卡流水信息
+	 * 取得刷卡流水信息
 	 * 
-	 * @return 刷卡流水信息列表
+	 * @param orgId
+	 * @param currentDate(yyyyMMdd)
+	 * @return
+	 * @throws ParseException
 	 */
-	@SuppressWarnings("unchecked")
-	public List<CardRun> getAllCardRunByOrgId() {
-		return (List<CardRun>) cardRunJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
+	public List<CardRun> getAllCardRunByOrgId_1(String orgId, String currentDate) throws ParseException {
+		String optDateY = DateUtils.transDateFormat(currentDate, "yyyyMMdd", "yyyy");
+
+		String optDateM = DateUtils.transDateFormat(currentDate, "yyyyMMdd", "MM");
+
+		return getAllCardRunByOrgId(orgId, optDateY, optDateM);
 	}
 
 	/**
 	 * 取得刷卡流水信息
 	 * 
-	 * @param user
-	 * @param currentDateShortStr
+	 * @param orgId
+	 * @param currentDate(yyyy-MM)
 	 * @return
 	 * @throws ParseException
 	 */
-	public List<CardRun> getAllCardRunByOrgId1(User user, String currentDateShortStr) throws ParseException {
-		String optDateY = DateUtils.transDateFormat(currentDateShortStr, "yyyyMMdd", "yyyy");
+	public List<CardRun> getAllCardRunByOrgId_2(String orgId, String currentDate) throws ParseException {
+		String optDateY = DateUtils.transDateFormat(currentDate, "yyyy-MM", "yyyy");
 
-		String optDateM = DateUtils.transDateFormat(currentDateShortStr, "yyyyMMdd", "MM");
+		String optDateM = DateUtils.transDateFormat(currentDate, "yyyy-MM", "MM");
 
-		return getAllCardRunByOrgId(user, optDateY, optDateM);
+		return getAllCardRunByOrgId(orgId, optDateY, optDateM);
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<CardRun> getAllCardRunByOrgId(String orgId, String optDateY, String optDateM) throws ParseException {
+
+		List<CardRun> _list = (List<CardRun>) cardRunJpaDao.findByOrgId_OptDateY_OptDateM(orgId, optDateY, optDateM,
+				new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
+
+		for (CardRun cardRun : _list) {
+			cardRun.autoSetEditFlg();
+		}
+
+		return _list;
 	}
 
 	/**
@@ -65,35 +84,6 @@ public class CardRunManager {
 			_cardRun.setOptNum(_cardRun.getOptNum() + cardRun.getOptNum());
 		}
 		return _cardRun;
-	}
-
-	/**
-	 * 取得刷卡流水信息
-	 * 
-	 * @param user
-	 * @param currentDateShortStr
-	 * @return
-	 * @throws ParseException
-	 */
-	public List<CardRun> getAllCardRunByOrgId2(User user, String currentDateShortStr) throws ParseException {
-		String optDateY = DateUtils.transDateFormat(currentDateShortStr, "yyyy-MM", "yyyy");
-
-		String optDateM = DateUtils.transDateFormat(currentDateShortStr, "yyyy-MM", "MM");
-
-		return getAllCardRunByOrgId(user, optDateY, optDateM);
-	}
-
-	@SuppressWarnings("unchecked")
-	private List<CardRun> getAllCardRunByOrgId(User user, String optDateY, String optDateM) throws ParseException {
-
-		List<CardRun> _list = (List<CardRun>) cardRunJpaDao.findByOrgIdAndOptDateYAndOptDateM(user.getOrganization()
-				.getId(), optDateY, optDateM, new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
-
-		for (CardRun cardRun : _list) {
-			cardRun.autoSetEditFlg();
-		}
-
-		return _list;
 	}
 
 	/**
