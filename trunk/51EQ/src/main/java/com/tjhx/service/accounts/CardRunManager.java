@@ -49,6 +49,25 @@ public class CardRunManager {
 	}
 
 	/**
+	 * 合计计算
+	 * 
+	 * @param cardRunList
+	 * @return
+	 */
+	public CardRun calTotal(List<CardRun> cardRunList) {
+		CardRun _cardRun = new CardRun();
+		for (CardRun cardRun : cardRunList) {
+			// 单据统计
+			_cardRun.setRecordStatisAmt(_cardRun.getRecordStatisAmt().add(cardRun.getRecordStatisAmt()));
+			// 电脑统计
+			_cardRun.setBwStatisAmt(_cardRun.getBwStatisAmt().add(cardRun.getBwStatisAmt()));
+			// 刷卡笔数
+			_cardRun.setOptNum(_cardRun.getOptNum() + cardRun.getOptNum());
+		}
+		return _cardRun;
+	}
+
+	/**
 	 * 取得刷卡流水信息
 	 * 
 	 * @param user

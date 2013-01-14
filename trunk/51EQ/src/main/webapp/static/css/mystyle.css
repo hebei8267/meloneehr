@@ -32,6 +32,9 @@ input[type="text"], input[type="password"] {
     height: 28px;
     vertical-align: middle;
 }
+.mytable tbody tr td.center, .mytable thead  tr th.center {
+	text-align: center;
+}
 .right_text {
 	text-align: right;
 }

@@ -36,13 +36,13 @@ public class CardRun extends IdEntity {
 	/** 刷卡汇总日期-月 */
 	private String optDateM;
 	/** 单据统计 */
-	private BigDecimal recordStatisAmt;
+	private BigDecimal recordStatisAmt = new BigDecimal("0");
 	/** 电脑统计（百威） */
-	private BigDecimal bwStatisAmt;
+	private BigDecimal bwStatisAmt = new BigDecimal("0");
 	/** 刷卡笔数 */
-	private Integer optNum;
+	private Integer optNum = 0;
 	/** 盈亏金额 */
-	private BigDecimal profitAmt;
+	private BigDecimal profitAmt = new BigDecimal("0");
 	/** 凭证号 */
 	private String certNo;
 	/** 备注（盈亏原因） */
