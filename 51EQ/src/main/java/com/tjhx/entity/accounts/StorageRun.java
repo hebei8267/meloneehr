@@ -419,7 +419,7 @@ public class StorageRun extends IdEntity {
 
 		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
 		_day = Math.abs(_day);
-		if (_day <= Constants.EDITABLE_DAY) {
+		if (_day <= Constants.EDITABLE_DAY && !auditFlg) {
 			editFlg = true;
 		}
 	}

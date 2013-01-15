@@ -160,8 +160,6 @@ public class CardRunManager {
 			throw new ServiceException("ERR_MSG_CARD_RUN_001");
 		}
 
-		// 机构编号
-		_dbCardRun.setOrgId(user.getOrganization().getId());
 		// 刷卡汇总日期
 		_dbCardRun.setOptDate(_date);
 		// 刷卡汇总日期-年

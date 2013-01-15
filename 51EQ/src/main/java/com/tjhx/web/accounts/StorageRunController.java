@@ -117,6 +117,7 @@ public class StorageRunController extends BaseController {
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/list";
 		} else {
 			model.addAttribute("storageRun", storageRun);
+			initSupplierList(model);
 			return "accounts/storageRunForm";
 		}
 
@@ -158,13 +159,21 @@ public class StorageRunController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initSupplierList(model);
+
+				return "accounts/storageRunForm";
 			}
 		} else {// 修改操作
 			try {
-				storageRunManager.updateStorageRun(storageRun);
+				storageRunManager.updateStorageRun(storageRun, getUserInfo(session));
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initSupplierList(model);
+
+				return "accounts/storageRunForm";
 			}
 		}
 
