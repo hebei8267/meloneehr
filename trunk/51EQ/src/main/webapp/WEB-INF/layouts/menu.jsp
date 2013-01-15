@@ -23,7 +23,7 @@
                         <a href="./cash1.html">现金情况</a>
                     </li>
                     <li>
-                        <a href="./store1.html">入货情况</a>
+                        <a href="${sc_ctx}/storageRun">入货情况</a>
                     </li>
                 </ul>
             </div>

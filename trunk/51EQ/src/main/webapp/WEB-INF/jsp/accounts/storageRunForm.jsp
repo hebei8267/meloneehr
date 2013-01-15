@@ -8,7 +8,62 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script></script>
+        <script>
+	        $(function() {
+	        	$('#recordDateShow').datepicker({
+					format : 'yyyy-mm-dd'
+				});
+	        	$('#intoDateShow').datepicker({
+					format : 'yyyy-mm-dd'
+				});
+	        	
+	        	$("#inputForm").validate({
+					rules: {
+						recordNo: {
+							required: true,
+							maxlength: 32
+						},
+						supplierBwId: {
+							required: true
+						},
+						recordDateShow: {
+							required: true,
+							date: true,
+							datelessThan : $("#_tomorrow_date").val()
+						},
+						intoDateShow: {
+							required: true,
+							date: true,
+							datelessThan : $("#_tomorrow_date").val()
+						},
+						recordAmt: {
+							required: true,
+							money: true
+						},
+						optAmt: {
+							required: true,
+							money: true
+						},
+						optPerName: {
+							required: true,
+							maxlength: 32
+						},
+						descTxt: {
+							maxlength: 255
+						}
+					}
+				});
+	        	
+	        	$("#saveBtn").click(function() {
+					$("input[type='text'],textarea").each(function(i){
+						this.value = $.trim(this.value);
+					});
+
+					$("#inputForm").attr("action", "${sc_ctx}/storageRun/save");
+					$("#inputForm").submit();
+				});
+	        });
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -32,9 +87,15 @@
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storageRun">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
+                            <label class="control-label">入货单号 :</label>
+                            <div class="controls">
+                                <form:input	path="recordNo" />
+                            </div>
+                        </div>
+                        <div class="control-group">
                             <label class="control-label">供应商编号 :</label>
                             <div class="controls">
-                                <form:input	path="supplierBwId" />
+                            	<form:select path="supplierBwId" items="${supplier}"/>
                             </div>
                         </div>
                         <div class="control-group">
@@ -47,12 +108,6 @@
                             <label class="control-label">入货日期 :</label>
                             <div class="controls">
                                 <form:input	path="intoDateShow" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">入货单号 :</label>
-                            <div class="controls">
-                                <form:input	path="recordNo" />
                             </div>
                         </div>
                         <div class="control-group">
