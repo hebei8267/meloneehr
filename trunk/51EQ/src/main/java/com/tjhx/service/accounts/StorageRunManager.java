@@ -12,13 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.StorageRunJpaDao;
+import com.tjhx.dao.info.SupplierJpaDao;
 import com.tjhx.entity.accounts.StorageRun;
+import com.tjhx.entity.info.Supplier;
+import com.tjhx.entity.member.User;
+import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class StorageRunManager {
 	@Resource
 	private StorageRunJpaDao storageRunJpaDao;
+	@Resource
+	private SupplierJpaDao supplierJpaDao;
 
 	/**
 	 * 取得所有货物入库流水信息
@@ -92,18 +98,36 @@ public class StorageRunManager {
 	 * @param storageRun 货物入库流水信息
 	 */
 	@Transactional(readOnly = false)
-	public void addNewStorageRun(StorageRun storageRun) {
-		// //
-		// ----------------------------------------------------------------------------
-		// // TODO 修改开始
-		// StorageRun _dbStorageRun = findByName(storageRun.getName());
-		// // 该货物入库流水已存在!
-		// if (null != _dbStorageRun) {
-		// throw new ServiceException("?????????????????");
-		// }
-		// //
-		// ----------------------------------------------------------------------------
-		// storageRunJpaDao.save(storageRun);
+	public void addNewStorageRun(StorageRun storageRun, User user) {
+
+		StorageRun _dbStorageRun = storageRunJpaDao.findByOrgIdAndRecordNo(user.getOrganization().getId(),
+				storageRun.getRecordNo());
+		// 该货物入库流水已存在!
+		if (null != _dbStorageRun) {
+			throw new ServiceException("ERR_MSG_STORAGE_RUN_001");
+		}
+
+		// 机构编号
+		storageRun.setOrgId(user.getOrganization().getId());
+		// 供应商
+		Supplier supplier = supplierJpaDao.findBySupplierBwId(storageRun.getSupplierBwId());
+		storageRun.setSupplier(supplier);
+		// 开单日期
+		String recordDate = DateUtils.transDateFormat(storageRun.getRecordDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		storageRun.setRecordDate(recordDate);
+		// 开单日期-年
+		storageRun.setRecordDateY(DateUtils.transDateFormat(recordDate, "yyyyMMdd", "yyyy"));
+		// 开单日期-月
+		storageRun.setRecordDateM(DateUtils.transDateFormat(recordDate, "yyyyMMdd", "MM"));
+		// 入货日期
+		String intoDate = DateUtils.transDateFormat(storageRun.getIntoDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		storageRun.setIntoDate(intoDate);
+		// 入货日期-年
+		storageRun.setIntoDateY(DateUtils.transDateFormat(intoDate, "yyyyMMdd", "yyyy"));
+		// 入货日期-月
+		storageRun.setIntoDateM(DateUtils.transDateFormat(intoDate, "yyyyMMdd", "MM"));
+
+		storageRunJpaDao.save(storageRun);
 	}
 
 	/**

@@ -16,4 +16,6 @@ public interface StorageRunJpaDao extends CrudRepository<StorageRun, Integer> {
 	@Query("select s from StorageRun s where s.orgId = :orgId and s.recordDateY = :recordDateY and s.recordDateM = :recordDateM")
 	public Iterable findByOrgId_RecordDateY_RecordDateM(@Param("orgId") String orgId,
 			@Param("recordDateY") String recordDateY, @Param("recordDateM") String recordDateM, Sort sort);
+
+	public StorageRun findByOrgIdAndRecordNo(String orgId, String recordNo);
 }

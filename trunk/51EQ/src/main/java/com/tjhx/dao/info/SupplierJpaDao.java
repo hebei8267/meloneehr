@@ -17,4 +17,12 @@ public interface SupplierJpaDao extends CrudRepository<Supplier, Integer> {
 	 * @return 货品供应商信息
 	 */
 	public Supplier findByName(String name);
+
+	/**
+	 * 取得货品供应商信息
+	 * 
+	 * @param BwId 供应商编号-百威
+	 * @return 货品供应商信息
+	 */
+	public Supplier findBySupplierBwId(String BwId);
 }

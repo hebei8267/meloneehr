@@ -27,17 +27,17 @@ public abstract class IdEntity implements Serializable {
 	private static final long serialVersionUID = -4108066747601937361L;
 
 	/** 对象唯一标识 */
-	private Integer uuid;
+	protected Integer uuid;
 	/** 对象创建时间（Timestamp） */
-	private Date createDate;
+	protected Date createDate;
 	/** Create_User_ID */
-	private String createUserId;
+	protected String createUserId;
 	/** 对象更新时间（Timestamp） */
-	private Date updateDate;
+	protected Date updateDate;
 	/** Update_User_ID */
-	private String updateUserId;
+	protected String updateUserId;
 	/** Hibernate_Version */
-	private Integer version;
+	protected Integer version;
 
 	@Id
 	@Column(name = "UUID", nullable = true)
