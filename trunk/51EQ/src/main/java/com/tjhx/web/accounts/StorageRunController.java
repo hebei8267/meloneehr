@@ -47,6 +47,9 @@ public class StorageRunController extends BaseController {
 
 		model.addAttribute("storageRunList", storageRunList);
 
+		StorageRun totalStorageRun = storageRunManager.calTotal(storageRunList);
+		model.addAttribute("totalStorageRun", totalStorageRun);
+
 		return "accounts/storageRunList";
 	}
 
@@ -57,13 +60,16 @@ public class StorageRunController extends BaseController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = { "list/{date}" })
+	@RequestMapping(value = "list/{date}")
 	public String storageRunList_Action(@PathVariable("date") String date, Model model, HttpSession session)
 			throws ParseException {
 		List<StorageRun> storageRunList = storageRunManager.getAllStorageRunByOrgId_2(getUserInfo(session)
 				.getOrganization().getId(), date);
 
 		model.addAttribute("storageRunList", storageRunList);
+
+		StorageRun totalStorageRun = storageRunManager.calTotal(storageRunList);
+		model.addAttribute("totalStorageRun", totalStorageRun);
 
 		return "accounts/storageRunList";
 	}
@@ -178,5 +184,69 @@ public class StorageRunController extends BaseController {
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/list";
+	}
+
+	// ---------------------------------------------------------------------------------------------
+	// 审核
+	// ---------------------------------------------------------------------------------------------
+	/**
+	 * 取得货物入库流水信息列表(审核)
+	 * 
+	 * @param model
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "auditList")
+	public String storageRunAuditList_Action(Model model, HttpSession session) throws ParseException {
+		List<StorageRun> storageRunList = storageRunManager.getAllStorageRunByOrgId_1(getUserInfo(session)
+				.getOrganization().getId(), DateUtils.getCurrentDateShortStr());
+
+		model.addAttribute("storageRunList", storageRunList);
+
+		StorageRun totalStorageRun = storageRunManager.calTotal(storageRunList);
+		model.addAttribute("totalStorageRun", totalStorageRun);
+
+		return "accounts/storageRunAuditList";
+	}
+
+	/**
+	 * 取得货物入库流水信息列表
+	 * 
+	 * @param model
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "auditList/{date}")
+	public String storageRunAuditList_Action(@PathVariable("date") String date, Model model, HttpSession session)
+			throws ParseException {
+		List<StorageRun> storageRunList = storageRunManager.getAllStorageRunByOrgId_2(getUserInfo(session)
+				.getOrganization().getId(), date);
+
+		model.addAttribute("storageRunList", storageRunList);
+
+		StorageRun totalStorageRun = storageRunManager.calTotal(storageRunList);
+		model.addAttribute("totalStorageRun", totalStorageRun);
+
+		return "accounts/storageRunAuditList";
+	}
+
+	/**
+	 * 审核货物入库流水信息
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "audit/{id}")
+	public String auditStorageRun_Action(@PathVariable("id") Integer id, Model model) {
+
+		StorageRun storageRun = storageRunManager.getStorageRunByUuid(id);
+		if (null == storageRun) {
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/list";
+		} else {
+			model.addAttribute("storageRun", storageRun);
+			initSupplierList(model);
+			return "accounts/storageRunAuditForm";
+		}
+
 	}
 }

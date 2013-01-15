@@ -45,6 +45,7 @@ public class CardRunController extends BaseController {
 
 		return "accounts/cardRunList";
 	}
+
 	/**
 	 * 取得刷卡情况信息列表
 	 * 
