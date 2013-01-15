@@ -413,11 +413,11 @@ public class StorageRun extends IdEntity {
 	}
 
 	public void autoSetEditFlg() throws ParseException {
-		String nowDate = DateUtils.getCurrentDateShortStr();
-		if (null == recordDate) {
+		if (null == createDate) {
 			return;
 		}
-		Long _day = DateUtils.getDateSpanDay(recordDate, nowDate);
+
+		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
 		_day = Math.abs(_day);
 		if (_day <= Constants.EDITABLE_DAY) {
 			editFlg = true;

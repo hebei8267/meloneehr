@@ -2,10 +2,11 @@ package com.tjhx.web.accounts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.StorageRun;
+import com.tjhx.entity.info.Supplier;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.accounts.StorageRunManager;
+import com.tjhx.service.info.SupplierManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -27,6 +30,8 @@ import com.tjhx.web.BaseController;
 public class StorageRunController extends BaseController {
 	@Resource
 	private StorageRunManager storageRunManager;
+	@Resource
+	private SupplierManager supplierManager;
 
 	/**
 	 * 取得货物入库流水信息列表
@@ -70,12 +75,32 @@ public class StorageRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initStorageRun_Action(Model model, HttpServletRequest request) {
+	public String initStorageRun_Action(Model model) {
 
 		StorageRun storageRun = new StorageRun();
 		model.addAttribute("storageRun", storageRun);
 
+		initSupplierList(model);
+
 		return "accounts/storageRunForm";
+	}
+
+	/**
+	 * 初始化供应商列表
+	 * 
+	 * @param model
+	 */
+	private void initSupplierList(Model model) {
+
+		List<Supplier> _list = supplierManager.getAllGoodsSupplier();
+
+		Map<String, String> supplier = new LinkedHashMap<String, String>();
+		supplier.put("", "");
+
+		for (Supplier _supplier : _list) {
+			supplier.put(_supplier.getSupplierBwId(), _supplier.getSupplierBwId());
+		}
+		model.addAttribute("supplier", supplier);
 	}
 
 	/**
@@ -85,7 +110,7 @@ public class StorageRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editStorageRun_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+	public String editStorageRun_Action(@PathVariable("id") Integer id, Model model) {
 
 		StorageRun storageRun = storageRunManager.getStorageRunByUuid(id);
 		if (null == storageRun) {
@@ -105,7 +130,7 @@ public class StorageRunController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delStorageRun_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
+	public String delStorageRun_Action(@RequestParam("uuids") String ids, Model model) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			storageRunManager.delStorageRunByUuid(Integer.parseInt(idArray[i]));
@@ -125,10 +150,15 @@ public class StorageRunController extends BaseController {
 	 */
 	@RequestMapping(value = "save")
 	public String saveStorageRun_Action(@ModelAttribute("storageRun") StorageRun storageRun, Model model,
-			HttpServletRequest request) throws IllegalAccessException, InvocationTargetException {
+			HttpSession session) throws IllegalAccessException, InvocationTargetException {
 
 		if (null == storageRun.getUuid()) {// 新增操作
-			storageRunManager.addNewStorageRun(storageRun);
+			try {
+				storageRunManager.addNewStorageRun(storageRun, getUserInfo(session));
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+			}
 		} else {// 修改操作
 			try {
 				storageRunManager.updateStorageRun(storageRun);

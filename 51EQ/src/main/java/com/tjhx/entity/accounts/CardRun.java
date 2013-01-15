@@ -284,11 +284,12 @@ public class CardRun extends IdEntity {
 	}
 
 	public void autoSetEditFlg() throws ParseException {
-		String nowDate = DateUtils.getCurrentDateShortStr();
-		if (null == optDate) {
+
+		if (null == createDate) {
 			return;
 		}
-		Long _day = DateUtils.getDateSpanDay(optDate, nowDate);
+
+		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
 		_day = Math.abs(_day);
 		if (_day <= Constants.EDITABLE_DAY) {
 			editFlg = true;
