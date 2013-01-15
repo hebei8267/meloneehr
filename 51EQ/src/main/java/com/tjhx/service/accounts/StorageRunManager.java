@@ -58,6 +58,23 @@ public class StorageRunManager {
 		return getAllStorageRunByOrgId(orgId, recordDateY, recordDateM);
 	}
 
+	/**
+	 * 合计计算
+	 * 
+	 * @param cardRunList
+	 * @return
+	 */
+	public StorageRun calTotal(List<StorageRun> storageRunList) {
+		StorageRun _storageRun = new StorageRun();
+		for (StorageRun storageRun : storageRunList) {
+			// 开单金额
+			_storageRun.setRecordAmt(_storageRun.getRecordAmt().add(storageRun.getRecordAmt()));
+			// 入库金额
+			_storageRun.setOptAmt(_storageRun.getOptAmt().add(storageRun.getOptAmt()));
+		}
+		return _storageRun;
+	}
+
 	@SuppressWarnings("unchecked")
 	private List<StorageRun> getAllStorageRunByOrgId(String orgId, String recordDateY, String recordDateM)
 			throws ParseException {
