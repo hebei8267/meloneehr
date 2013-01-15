@@ -138,22 +138,54 @@ public class StorageRunManager {
 	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void updateStorageRun(StorageRun storageRun) throws IllegalAccessException, InvocationTargetException {
-		// //
-		// ----------------------------------------------------------------------------
-		// // TODO 修改开始
-		// StorageRun _dbStorageRun =
-		// storageRunJpaDao.findOne(storageRun.getUuid());
-		// if (null == _dbStorageRun) {
-		// // 货物入库流水不存在!
-		// throw new ServiceException("?????????????????");
-		// }
-		//
-		// _dbStorageRun.setName(storageRun.getName());
-		// _dbStorageRun.setDescTxt(storageRun.getDescTxt());
-		//
-		// //
-		// ----------------------------------------------------------------------------
-		// storageRunJpaDao.save(_dbStorageRun);
+	public void updateStorageRun(StorageRun storageRun, User user) throws IllegalAccessException,
+			InvocationTargetException {
+
+		StorageRun _dbStorageRun = storageRunJpaDao.findOne(storageRun.getUuid());
+		if (null == _dbStorageRun) {
+			// 货物入库流水不存在!
+			throw new ServiceException("ERR_MSG_STORAGE_RUN_002");
+		}
+
+		StorageRun _tmp_dbStorageRun = storageRunJpaDao.findByOrgIdAndRecordNo(user.getOrganization().getId(),
+				storageRun.getRecordNo());
+		// 该货物入库流水已存在!
+		if (null != _tmp_dbStorageRun && !_tmp_dbStorageRun.getUuid().equals(_dbStorageRun.getUuid())) {
+			throw new ServiceException("ERR_MSG_STORAGE_RUN_001");
+		}
+
+		// 供应商
+		Supplier supplier = supplierJpaDao.findBySupplierBwId(storageRun.getSupplierBwId());
+		_dbStorageRun.setSupplier(supplier);
+		// 供应商编号-百威
+		_dbStorageRun.setSupplierBwId(storageRun.getSupplierBwId());
+		// 开单日期
+		String recordDate = DateUtils.transDateFormat(storageRun.getRecordDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		_dbStorageRun.setRecordDate(recordDate);
+		// 开单日期-显示
+		_dbStorageRun.setRecordDateShow(storageRun.getRecordDateShow());
+		// 开单日期-年
+		_dbStorageRun.setRecordDateY(DateUtils.transDateFormat(recordDate, "yyyyMMdd", "yyyy"));
+		// 开单日期-月
+		_dbStorageRun.setRecordDateM(DateUtils.transDateFormat(recordDate, "yyyyMMdd", "MM"));
+		// 入货日期
+		String intoDate = DateUtils.transDateFormat(storageRun.getIntoDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		_dbStorageRun.setIntoDate(intoDate);
+		// 入货日期-显示
+		_dbStorageRun.setIntoDateShow(storageRun.getIntoDateShow());
+		// 入货日期-年
+		_dbStorageRun.setIntoDateY(DateUtils.transDateFormat(intoDate, "yyyyMMdd", "yyyy"));
+		// 入货日期-月
+		_dbStorageRun.setIntoDateM(DateUtils.transDateFormat(intoDate, "yyyyMMdd", "MM"));
+		// 开单金额
+		_dbStorageRun.setRecordAmt(storageRun.getRecordAmt());
+		// 入库金额
+		_dbStorageRun.setOptAmt(storageRun.getOptAmt());
+		// 入库人名称
+		_dbStorageRun.setOptPerName(storageRun.getOptPerName());
+		// 备注
+		_dbStorageRun.setDescTxt(storageRun.getDescTxt());
+
+		storageRunJpaDao.save(_dbStorageRun);
 	}
 }
