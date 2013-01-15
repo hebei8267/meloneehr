@@ -31,9 +31,6 @@
                         <table class="table	table-striped table-bordered table-condensed mytable">
                             <thead>
                                 <tr>
-                                    <th	width="25" class="center">
-                                        <input id="checkAll" type="checkbox" />
-                                    </th>
                                     <th>
                                         入货单号
                                     </th>
@@ -72,12 +69,6 @@
                                 </c:if>
                                 <c:forEach items="${storageRunList}" var="storageRun">
                                     <tr>
-                                        <td	class="center">
-                                            <c:if test="${storageRun.editFlg == 'true'	}">
-                                                <input type="checkbox" name="uuid" value="${storageRun.uuid}">
-                                                </input>
-                                            </c:if>
-                                        </td>
                                         <td>
                                             ${storageRun.recordNo}
                                         </td>
@@ -108,7 +99,7 @@
                                 </c:forEach>
                                 <c:if test="${!empty storageRunList}" >
                                     <tr>
-                                        <td	colspan="5">
+                                        <td	colspan="4">
                                             合计:
                                         </td>
                                         <td>

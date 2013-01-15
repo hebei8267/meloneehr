@@ -44,6 +44,15 @@ select{
 .right_text {
 	text-align: right;
 }
+.left-control-label {
+	float: left;
+	text-align: left;
+	padding-top: 5px;
+	padding-left: 10px;
+	font-weight: bold;
+	color: #CC3300;
+	font-size: 20px;
+}
 /************************ µ¯³öÐÅÏ¢¿ò ************************/
 .__model37 {
 	font-size: 22px;

@@ -164,7 +164,7 @@
                                         </td>
                                         <td>
                                             <c:if test="${storageRun.auditFlg == 'true'}">
-												审核
+												已审核
                                             </c:if>
                                         </td>
                                         <td>
