@@ -231,7 +231,7 @@ public class StorageRunController extends BaseController {
 	}
 
 	/**
-	 * 审核货物入库流水信息
+	 * 初始化审核货物入库流水信息
 	 * 
 	 * @param model
 	 * @return
@@ -241,12 +241,28 @@ public class StorageRunController extends BaseController {
 
 		StorageRun storageRun = storageRunManager.getStorageRunByUuid(id);
 		if (null == storageRun) {
-			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/list";
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/auditList";
 		} else {
 			model.addAttribute("storageRun", storageRun);
+
 			initSupplierList(model);
+
 			return "accounts/storageRunAuditForm";
 		}
 
+	}
+
+	/**
+	 * 货物入库流水信息-审核确认
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "auditConfirm/{id}")
+	public String auditConfirmStorageRun_Action(@PathVariable("id") Integer storageRunUuid, Model model) {
+
+		storageRunManager.auditConfirmStorageRun(storageRunUuid);
+
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storageRun/auditList";
 	}
 }

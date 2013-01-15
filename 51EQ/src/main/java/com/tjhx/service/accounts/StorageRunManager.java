@@ -205,4 +205,22 @@ public class StorageRunManager {
 
 		storageRunJpaDao.save(_dbStorageRun);
 	}
+
+	/**
+	 * 货物入库流水信息-审核确认
+	 * 
+	 * @param storageRun
+	 */
+	@Transactional(readOnly = false)
+	public void auditConfirmStorageRun(Integer storageRunUuid) {
+		StorageRun _dbStorageRun = storageRunJpaDao.findOne(storageRunUuid);
+		if (null == _dbStorageRun) {
+			// 货物入库流水不存在!
+			throw new ServiceException("ERR_MSG_STORAGE_RUN_002");
+		}
+
+		_dbStorageRun.setAuditFlg(true);
+
+		storageRunJpaDao.save(_dbStorageRun);
+	}
 }
