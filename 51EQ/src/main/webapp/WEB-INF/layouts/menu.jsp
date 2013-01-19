@@ -22,7 +22,7 @@
                         <a href="${sc_ctx}/member/logout">用户退出</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">刷卡情况<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">刷卡信息<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="${sc_ctx}/cardRun">信息录入</a>
@@ -30,10 +30,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="./cash1.html">现金情况</a>
+                        <a href="${sc_ctx}/cashRun">销售信息</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">入货情况<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">入货信息<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="${sc_ctx}/storageRun">信息录入</a>

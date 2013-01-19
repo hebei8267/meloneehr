@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入货情况</h3>
+                            <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入货信息</h3>
                         </legend>
                     </div>
                     <div class="offset10 span2 right_text">

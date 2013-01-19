@@ -64,7 +64,7 @@
 			<div class="row">
 				<div class="span12">
 					<legend>
-						<h3>${sessionScope.__SESSION_USER_INFO.orgName}店 刷卡情况
+						<h3>${sessionScope.__SESSION_USER_INFO.orgName}店 刷卡信息
 						<c:if test="${empty	cardRun.uuid}">
 							新增
 						</c:if>
