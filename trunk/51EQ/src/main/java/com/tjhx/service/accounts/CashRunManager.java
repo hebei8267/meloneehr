@@ -1,6 +1,7 @@
 package com.tjhx.service.accounts;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -130,5 +131,15 @@ public class CashRunManager {
 		//
 		// //----------------------------------------------------------------------------
 		// cashRunJpaDao.save(_dbCashRun);
+	}
+
+	/**
+	 * 计算班前余额
+	 * 
+	 * @param dateStr(yyyyMMdd)
+	 * @return
+	 */
+	public BigDecimal calInitAmt(String orgId, String dateStr) {
+		return cashRunJpaDao.calInitAmt(orgId, dateStr);
 	}
 }
