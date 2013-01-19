@@ -9,7 +9,7 @@ import org.springside.modules.test.spring.SpringTransactionalTestCase;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.service.info.SupplierManager;
 
-public class GoodsSupplierManagerTest extends SpringTransactionalTestCase {
+public class SupplierManagerTest extends SpringTransactionalTestCase {
 
 	@Resource
 	private SupplierManager goodsSupplierManager;

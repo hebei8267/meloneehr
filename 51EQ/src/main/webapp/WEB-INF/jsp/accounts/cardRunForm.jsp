@@ -4,9 +4,7 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">
-	${ctx}/sc
-</c:set>
+<c:set var="sc_ctx">${ctx}/sc</c:set>
 <!DOCTYPE html>
 <html>
 	<head>
