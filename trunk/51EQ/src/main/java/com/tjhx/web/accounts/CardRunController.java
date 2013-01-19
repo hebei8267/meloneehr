@@ -53,7 +53,7 @@ public class CardRunController extends BaseController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = { "list/{date}" })
+	@RequestMapping(value = "list/{date}")
 	public String cardRunList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
 			throws ParseException {
 		List<CardRun> cardRunList = cardRunManager.getAllCardRunByOrgId_2(getUserInfo(session).getOrganization()
