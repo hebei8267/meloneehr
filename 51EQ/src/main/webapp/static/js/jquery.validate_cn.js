@@ -22,6 +22,12 @@ jQuery.extend(jQuery.validator.messages, {
     min : jQuery.validator.format("输入值不能小于 {0} ")
 });
 
+//固定长度效验验证
+jQuery.validator.addMethod("length11", function(value, element) {
+    var length = value.length;
+    return (length == 11);
+}, "请输入长度为 11 的字符串");
+
 // 列表删除,必选
 jQuery.validator.addMethod("requiredSelect", function(value, element, param) {
 	 return $("input[name='"+ param +"']:checked").length > 0;

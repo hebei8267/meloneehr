@@ -28,14 +28,14 @@
             <div class="row">
                 <div class="span12">
                     <legend>
-                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入货信息 审核</h3>
+                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息 审核</h3>
                     </legend>
                 </div>
                 <div class="span12"	style="margin-top: 10px;">
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storageRun">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
-                           <label class="control-label">入货单号 :</label>
+                           <label class="control-label">入库单号 :</label>
                            <label class="left-control-label">${storageRun.recordNo}</label>
                         </div>
                         <div class="control-group">
@@ -47,7 +47,7 @@
                             <label class="left-control-label">${storageRun.recordDateShow}</label>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">入货日期 :</label>
+                            <label class="control-label">入库日期 :</label>
                             <label class="left-control-label">${storageRun.intoDateShow}</label>
                         </div>
                         <div class="control-group">
@@ -84,7 +84,7 @@
 		    </div>
 		    <div class="modal-body">
 		        <center>
-		        	<p class="error">审核通过该笔入货流水信息吗？</p>
+		        	<p class="error">审核通过该笔入库流水信息吗？</p>
 		        </center>
 		    </div>
 		    <div class="modal-footer">

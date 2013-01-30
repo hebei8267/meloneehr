@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入货信息</h3>
+                            <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息</h3>
                         </legend>
                     </div>
                     <div class="offset10 span2 right_text">
@@ -32,7 +32,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        入货单号
+                                        入库单号
                                     </th>
                                     <th>
                                         供应商编号
@@ -41,7 +41,7 @@
                                         开单日期
                                     </th>
                                     <th>
-                                        入货日期
+                                        入库日期
                                     </th>
                                     <th>
                                         开单金额

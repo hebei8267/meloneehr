@@ -21,15 +21,15 @@ import com.tjhx.globals.Constants;
  * 货物入库流水
  */
 @Entity
-@Table(name = "T_STORAGE_RUN")
+@Table(name = "T_STORE_RUN")
 // 默认的缓存策略.
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class StorageRun extends IdEntity {
+public class StoreRun extends IdEntity {
 
 	private static final long serialVersionUID = -5665981916597548958L;
 	/** 机构编号 */
 	private String orgId;
-	/** 入货单号 */
+	/** 入库单号 */
 	private String recordNo;
 	/** 供应商 */
 	private Supplier supplier;
@@ -43,14 +43,24 @@ public class StorageRun extends IdEntity {
 	private String recordDateY;
 	/** 开单日期-月 */
 	private String recordDateM;
-	/** 入货日期 */
+	/** 入库日期 */
 	private String intoDate;
-	/** 入货日期-显示 */
+	/** 入库日期-显示 */
 	private String intoDateShow;
-	/** 入货日期-年 */
+	/** 入库日期-年 */
 	private String intoDateY;
-	/** 入货日期-月 */
+	/** 入库日期-月 */
 	private String intoDateM;
+	/** 统筹日期 */
+	private String planDate;
+	/** 统筹日期-显示 */
+	private String planDateShow;
+	/** 统筹日期-年 */
+	private String planDateY;
+	/** 统筹日期-月 */
+	private String planDateM;
+	/** 入库类型 */
+	private String storeType;
 	/** 开单金额 */
 	private BigDecimal recordAmt = new BigDecimal("0");
 	/** 入库金额 */
@@ -86,9 +96,9 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 取得入货单号
+	 * 取得入库单号
 	 * 
-	 * @return recordNo 入货单号
+	 * @return recordNo 入库单号
 	 */
 	@NaturalId
 	@Column(name = "RECORD_NO", length = 32)
@@ -97,9 +107,9 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 设置入货单号
+	 * 设置入库单号
 	 * 
-	 * @param recordNo 入货单号
+	 * @param recordNo 入库单号
 	 */
 	public void setRecordNo(String recordNo) {
 		this.recordNo = recordNo;
@@ -221,9 +231,9 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 取得入货日期
+	 * 取得入库日期
 	 * 
-	 * @return intoDate 入货日期
+	 * @return intoDate 入库日期
 	 */
 	@Column(name = "INTO_DATE", length = 8)
 	public String getIntoDate() {
@@ -231,18 +241,18 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 设置入货日期
+	 * 设置入库日期
 	 * 
-	 * @param intoDate 入货日期
+	 * @param intoDate 入库日期
 	 */
 	public void setIntoDate(String intoDate) {
 		this.intoDate = intoDate;
 	}
 
 	/**
-	 * 取得入货日期-显示
+	 * 取得入库日期-显示
 	 * 
-	 * @return intoDateShow 入货日期-显示
+	 * @return intoDateShow 入库日期-显示
 	 */
 	@Column(name = "INTO_DATE_SHOW", length = 10)
 	public String getIntoDateShow() {
@@ -250,18 +260,18 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 设置入货日期-显示
+	 * 设置入库日期-显示
 	 * 
-	 * @param intoDateShow 入货日期-显示
+	 * @param intoDateShow 入库日期-显示
 	 */
 	public void setIntoDateShow(String intoDateShow) {
 		this.intoDateShow = intoDateShow;
 	}
 
 	/**
-	 * 取得入货日期-年
+	 * 取得入库日期-年
 	 * 
-	 * @return intoDateY 入货日期-年
+	 * @return intoDateY 入库日期-年
 	 */
 	@Column(name = "INTO_DATE_Y", length = 4)
 	public String getIntoDateY() {
@@ -269,18 +279,18 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 设置入货日期-年
+	 * 设置入库日期-年
 	 * 
-	 * @param intoDateY 入货日期-年
+	 * @param intoDateY 入库日期-年
 	 */
 	public void setIntoDateY(String intoDateY) {
 		this.intoDateY = intoDateY;
 	}
 
 	/**
-	 * 取得入货日期-月
+	 * 取得入库日期-月
 	 * 
-	 * @return intoDateM 入货日期-月
+	 * @return intoDateM 入库日期-月
 	 */
 	@Column(name = "INTO_DATE_M", length = 2)
 	public String getIntoDateM() {
@@ -288,9 +298,9 @@ public class StorageRun extends IdEntity {
 	}
 
 	/**
-	 * 设置入货日期-月
+	 * 设置入库日期-月
 	 * 
-	 * @param intoDateM 入货日期-月
+	 * @param intoDateM 入库日期-月
 	 */
 	public void setIntoDateM(String intoDateM) {
 		this.intoDateM = intoDateM;
@@ -391,6 +401,99 @@ public class StorageRun extends IdEntity {
 		this.descTxt = descTxt;
 	}
 
+	/**
+	 * 取得统筹日期
+	 * 
+	 * @return planDate 统筹日期
+	 */
+	@Column(length = 8)
+	public String getPlanDate() {
+		return planDate;
+	}
+
+	/**
+	 * 设置统筹日期
+	 * 
+	 * @param planDate 统筹日期
+	 */
+	public void setPlanDate(String planDate) {
+		this.planDate = planDate;
+	}
+
+	/**
+	 * 取得统筹日期-显示
+	 * 
+	 * @return planDateShow 统筹日期-显示
+	 */
+	@Column(length = 10)
+	public String getPlanDateShow() {
+		return planDateShow;
+	}
+
+	/**
+	 * 设置统筹日期-显示
+	 * 
+	 * @param planDateShow 统筹日期-显示
+	 */
+	public void setPlanDateShow(String planDateShow) {
+		this.planDateShow = planDateShow;
+	}
+
+	/**
+	 * 取得统筹日期-年
+	 * 
+	 * @return planDateY 统筹日期-年
+	 */
+	@Column(name = "PLAN_DATE_Y", length = 4)
+	public String getPlanDateY() {
+		return planDateY;
+	}
+
+	/**
+	 * 设置统筹日期-年
+	 * 
+	 * @param planDateY 统筹日期-年
+	 */
+	public void setPlanDateY(String planDateY) {
+		this.planDateY = planDateY;
+	}
+
+	/**
+	 * 取得统筹日期-月
+	 * 
+	 * @return planDateM 统筹日期-月
+	 */
+	@Column(name = "PLAN_DATE_M", length = 2)
+	public String getPlanDateM() {
+		return planDateM;
+	}
+
+	/**
+	 * 设置统筹日期-月
+	 * 
+	 * @param planDateM 统筹日期-月
+	 */
+	public void setPlanDateM(String planDateM) {
+		this.planDateM = planDateM;
+	}
+	/**
+	 * 取得入库类型
+	 * 
+	 * @return storeType 入库类型
+	 */
+	@Column( length = 1)
+	public String getStoreType() {
+		return storeType;
+	}
+
+	/**
+	 * 设置入库类型
+	 * 
+	 * @param storeType 入库类型
+	 */
+	public void setStoreType(String storeType) {
+		this.storeType = storeType;
+	}
 	// ############################################################################################
 
 	/**
@@ -423,4 +526,6 @@ public class StorageRun extends IdEntity {
 			editFlg = true;
 		}
 	}
+
+	
 }

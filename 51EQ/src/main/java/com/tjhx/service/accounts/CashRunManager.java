@@ -12,15 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.common.utils.DateUtils;
+import com.tjhx.dao.accounts.CashDailyJpaDao;
 import com.tjhx.dao.accounts.CashRunJpaDao;
 import com.tjhx.entity.accounts.CashRun;
 import com.tjhx.entity.member.User;
+import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class CashRunManager {
 	@Resource
 	private CashRunJpaDao cashRunJpaDao;
+
+	@Resource
+	private CashDailyJpaDao cashDailyJpaDao;
 
 	/**
 	 * 取得所有现金流水信息
@@ -63,7 +68,7 @@ public class CashRunManager {
 	@SuppressWarnings("unchecked")
 	private List<CashRun> getAllCashRunByOrgId(String orgId, String optDateY, String optDateM) throws ParseException {
 		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.findByOrgId_OptDateY_OptDateM(orgId, optDateY, optDateM,
-				new Sort(new Sort.Order(Sort.Direction.DESC, "optDate")));
+				new Sort(new Sort.Order(Sort.Direction.DESC, "createDate")));
 
 		for (CashRun cashRun : _list) {
 			cashRun.autoSetEditFlg();
@@ -99,15 +104,42 @@ public class CashRunManager {
 	 */
 	@Transactional(readOnly = false)
 	public void addNewCashRun(CashRun cashRun, User user) {
-		// //----------------------------------------------------------------------------
-		// // TODO 修改开始
-		// CashRun _dbCashRun = findByName(cashRun.getName());
-		// // 该现金流水已存在!
-		// if (null != _dbCashRun) {
-		// throw new ServiceException("?????????????????");
-		// }
-		// //----------------------------------------------------------------------------
-		// cashRunJpaDao.save(cashRun);
+		String _date = DateUtils.transDateFormat(cashRun.getOptDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+
+		CashRun _dbCashRun = cashRunJpaDao.findByOrgId_OptDate_JobType(user.getOrganization().getId(), _date,
+				cashRun.getJobType());
+		// 该现金流水已存在!
+		if (null != _dbCashRun) {
+			throw new ServiceException("ERR_MSG_CASH_RUN_001");
+		}
+
+		// 机构编号
+		cashRun.setOrgId(user.getOrganization().getId());
+		// 日期
+		cashRun.setOptDate(_date);
+		// 日期-年
+		cashRun.setOptDateY(DateUtils.transDateFormat(_date, "yyyyMMdd", "yyyy"));
+		// 日期-月
+		cashRun.setOptDateM(DateUtils.transDateFormat(_date, "yyyyMMdd", "MM"));
+		// 班前余额 TODO
+		//cashRun.setInitAmt(getInitAmt(user.getOrganization().getId(), _date));
+		// 留存金额-交班时=实际现金-存款银行 TODO
+		//cashRun.setRetainedAmt(cashRun.getCashAmt().subtract(cashRun.getDepositAmt()));
+
+		cashRunJpaDao.save(cashRun);
+	}
+
+	@SuppressWarnings("unchecked")
+	public BigDecimal getInitAmt(String orgId, String optDate) {
+		// 取本日前班次余额（现金）信息
+		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, new Sort(
+				new Sort.Order(Sort.Direction.DESC, "createDate")));
+
+		if (null != _list && _list.size() > 0) {// 返回本日前班次余额（现金）信息
+			return ((CashRun) _list.get(0)).getRetainedAmt();
+		} else {// 返回昨日日结余额（现金）信息
+			return cashDailyJpaDao.findByOrgId_OptDate(orgId, optDate).getRetainedAmt();
+		}
 	}
 
 	/**
@@ -132,6 +164,43 @@ public class CashRunManager {
 		//
 		// //----------------------------------------------------------------------------
 		// cashRunJpaDao.save(_dbCashRun);
+		
+//		// 机构编号 
+//				orgId;
+//				// 日期 
+//				optDate;
+//				// 日期-显示 
+//				optDateShow;
+//				// 日期-年 
+//				optDateY;
+//				// 日期-月 
+//				optDateM;
+//				// 上班类型(1早班、2晚班、4全天班) 
+//				jobType;
+//				// 班前余额 
+//				initAmt ;
+//				// 当前销售 
+//				saleAmt ;
+//				// 实际现金-交班时 
+//				cashAmt ;
+//				// 刷卡金额-单据统计 
+//				cardAmt ;
+//				// 刷卡金额-电脑统计 
+//				cardAmtBw ;
+//				// 刷卡笔数 
+//				cardNum = 0;
+//				// 存款金额 
+//				depositAmt ;
+//				// 存款人 
+//				depositor;
+//				// 存款银行（选择） 
+//				bankId;
+//				// 卡号（选择） 
+//				bankCardNo;
+//				// 留存金额-交班时 
+//				retainedAmt ;
+//				// 备注 
+//				descTxt;
 	}
 
 	/**
