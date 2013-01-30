@@ -16,14 +16,20 @@
 	        	$('#intoDateShow').datepicker({
 					format : 'yyyy-mm-dd'
 				});
+	        	$('#planDateShow').datepicker({
+					format : 'yyyy-mm-dd'
+				});
 	        	
 	        	$("#inputForm").validate({
 					rules: {
 						recordNo: {
 							required: true,
-							maxlength: 32
+							length11: true
 						},
 						supplierBwId: {
+							required: true
+						},
+						storeType: {
 							required: true
 						},
 						recordDateShow: {
@@ -32,6 +38,11 @@
 							datelessThan : $("#_tomorrow_date").val()
 						},
 						intoDateShow: {
+							required: true,
+							date: true,
+							datelessThan : $("#_tomorrow_date").val()
+						},
+						planDateShow: {
 							required: true,
 							date: true,
 							datelessThan : $("#_tomorrow_date").val()
@@ -59,7 +70,7 @@
 						this.value = $.trim(this.value);
 					});
 
-					$("#inputForm").attr("action", "${sc_ctx}/storageRun/save");
+					$("#inputForm").attr("action", "${sc_ctx}/storeRun/save");
 					$("#inputForm").submit();
 				});
 	        });
@@ -73,29 +84,35 @@
             <div class="row">
                 <div class="span12">
                     <legend>
-                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入货信息
-                        <c:if test="${empty	storageRun.uuid}">
+                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息
+                        <c:if test="${empty	storeRun.uuid}">
                             新增
                         </c:if>
-                        <c:if test="${!empty storageRun.uuid}">
+                        <c:if test="${!empty storeRun.uuid}">
                             编辑
                         </c:if></h3>
                     </legend>
                 </div>
                 <input type="hidden" id="_tomorrow_date" value="<%=DateUtils.getNextDateFormatDate(1, "yyyy-MM-dd")%>">
                 <div class="span12"	style="margin-top: 10px;">
-                    <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storageRun">
+                    <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storeRun">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
-                            <label class="control-label">入货单号 :</label>
+                            <label class="control-label">入库单号 :</label>
                             <div class="controls">
                                 <form:input	path="recordNo" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">供应商编号 :</label>
+                            <label class="control-label">供应商 :</label>
                             <div class="controls">
                             	<form:select path="supplierBwId" items="${supplier}"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">入库类型 :</label>
+                            <div class="controls">
+                            	<form:select path="storeType" items="${storeTypeList}"/>
                             </div>
                         </div>
                         <div class="control-group">
@@ -105,9 +122,15 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">入货日期 :</label>
+                            <label class="control-label">入库日期 :</label>
                             <div class="controls">
                                 <form:input	path="intoDateShow" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">统筹日期 :</label>
+                            <div class="controls">
+                                <form:input	path="planDateShow" />
                             </div>
                         </div>
                         <div class="control-group">
@@ -137,7 +160,7 @@
                         <div class="control-group">
                             <div class="controls">
                                 <button	id="saveBtn" class="btn	btn-large btn-primary" type="submit">保存</button>
-                                &nbsp;<a href="${sc_ctx}/storageRun" class="btn btn-large">返回</a>
+                                &nbsp;<a href="${sc_ctx}/storeRun" class="btn btn-large">返回</a>
                             </div>
                         </div>
                     </form:form>

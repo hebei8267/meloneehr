@@ -138,6 +138,7 @@ public class CashRunController extends BaseController {
 
 		initJobTypeList(model);
 		initBankCodeList(model);
+		//cashRunManager.getInitAmt(orgId, optDate);
 
 		return "accounts/cashRunForm";
 	}
