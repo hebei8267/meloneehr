@@ -33,12 +33,13 @@
 					
 					if("" != $('#optDateShow').val()){
 						$.post("${sc_ctx}/cashRun/calInitAmt", {"optDateShow":$('#optDateShow').val()}, function(result){
-							$('#_initAmt_label').html(result);
+							$('#_initAmt_label').html(result + " 元");
 							$('#initAmt').val(result);
 							calRetainedAmt();
 						});
 					}
 				});
+				
 				$('#bankId').change(function(){
 					if(oldBankIdVal == $('#bankId').val()){
 						return;
@@ -89,6 +90,9 @@
 						cardNum: {
 							required: true,
 							digits: true
+						},
+						cardCertNo: {
+							maxlength: 32
 						},
 						depositAmt: {
 							required: true,
@@ -167,6 +171,7 @@
 							</c:if>
 							<c:if test="${!empty cashRun.uuid}">
 								<label class="left-control-label">${cashRun.optDateShow}</label>
+								<form:hidden path="optDateShow"/>
 							</c:if>
 						</div>
 						<div class="control-group">
@@ -223,6 +228,12 @@
 							<label class="control-label">刷卡笔数 :</label>
 							<div class="controls">
 								<form:input	path="cardNum" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">凭证号 :</label>
+							<div class="controls">
+								<form:input	path="cardCertNo" />
 							</div>
 						</div>
 						<div class="control-group">

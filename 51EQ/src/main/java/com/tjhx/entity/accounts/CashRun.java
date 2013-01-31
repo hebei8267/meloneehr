@@ -1,18 +1,14 @@
 package com.tjhx.entity.accounts;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.IdEntity;
-import com.tjhx.globals.Constants;
 
 /**
  * 现金流水
@@ -47,6 +43,8 @@ public class CashRun extends IdEntity {
 	private BigDecimal cardAmt = new BigDecimal("0");
 	/** 刷卡金额-电脑统计 */
 	private BigDecimal cardAmtBw = new BigDecimal("0");
+	/** 刷卡-凭证号 */
+	private String cardCertNo;
 	/** 刷卡笔数 */
 	private Integer cardNum = 0;
 	/** 存款金额 */
@@ -61,9 +59,8 @@ public class CashRun extends IdEntity {
 	private BigDecimal retainedAmt = new BigDecimal("0");
 	/** 备注 */
 	private String descTxt;
-	// ############################################################################################
-	/** 可编辑标记 */
-	private Boolean editFlg = false;
+	/** 日结标记 */
+	private Boolean dailyFlg = false;
 
 	/**
 	 * 取得机构编号
@@ -400,37 +397,41 @@ public class CashRun extends IdEntity {
 		this.descTxt = descTxt;
 	}
 
-	// ############################################################################################
-
 	/**
-	 * 取得可编辑标记
+	 * 取得日结标记
 	 * 
-	 * @return editFlg 可编辑标记
+	 * @return dailyFlg 日结标记
 	 */
-	@Transient
-	public Boolean getEditFlg() {
-		return editFlg;
+	public Boolean getDailyFlg() {
+		return dailyFlg;
 	}
 
 	/**
-	 * 设置可编辑标记
+	 * 设置日结标记
 	 * 
-	 * @param editFlg 可编辑标记
+	 * @param dailyFlg 日结标记
 	 */
-	public void setEditFlg(Boolean editFlg) {
-		this.editFlg = editFlg;
+	public void setDailyFlg(Boolean dailyFlg) {
+		this.dailyFlg = dailyFlg;
 	}
 
-	public void autoSetEditFlg() throws ParseException {
-
-		if (null == createDate) {
-			return;
-		}
-
-		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
-		_day = Math.abs(_day);
-		if (_day <= Constants.EDITABLE_DAY) {
-			editFlg = true;
-		}
+	/**
+	 * 取得刷卡-凭证号
+	 * 
+	 * @return cardCertNo 刷卡-凭证号
+	 */
+	@Column(length = 32)
+	public String getCardCertNo() {
+		return cardCertNo;
 	}
+
+	/**
+	 * 设置刷卡-凭证号
+	 * 
+	 * @param cardCertNo 刷卡-凭证号
+	 */
+	public void setCardCertNo(String cardCertNo) {
+		this.cardCertNo = cardCertNo;
+	}
+
 }

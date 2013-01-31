@@ -83,6 +83,9 @@ public class CashRunController extends BaseController {
 
 		model.addAttribute("cashRunList", cashRunList);
 
+		CashRun totalCashRun = cashRunManager.calTotal(cashRunList);
+		model.addAttribute("totalCashRun", totalCashRun);
+
 		return "accounts/cashRunList";
 	}
 
@@ -100,6 +103,9 @@ public class CashRunController extends BaseController {
 				.getId(), date);
 
 		model.addAttribute("cashRunList", cashRunList);
+
+		CashRun totalCashRun = cashRunManager.calTotal(cashRunList);
+		model.addAttribute("totalCashRun", totalCashRun);
 
 		return "accounts/cashRunList";
 	}
@@ -142,7 +148,7 @@ public class CashRunController extends BaseController {
 		Map<String, String> bankCardList = new LinkedHashMap<String, String>();
 		bankCardList.put("", "");
 		for (BankCard _bankCard : _list) {
-			bankCardList.put(_bankCard.getBankCardNo(), _bankCard.getBankCardNo());
+			bankCardList.put(_bankCard.getUuid().toString(), _bankCard.getBankCardNo());
 		}
 		model.addAttribute("bankCardList", bankCardList);
 	}
@@ -236,6 +242,9 @@ public class CashRunController extends BaseController {
 
 				initJobTypeList(model);
 				initBankCodeList(model);
+				if (StringUtils.isNotBlank(cashRun.getBankId())) {
+					initBankCardList(model, cashRun.getBankId());
+				}
 
 				return "accounts/cashRunForm";
 			}
@@ -248,6 +257,9 @@ public class CashRunController extends BaseController {
 
 				initJobTypeList(model);
 				initBankCodeList(model);
+				if (StringUtils.isNotBlank(cashRun.getBankId())) {
+					initBankCardList(model, cashRun.getBankId());
+				}
 
 				return "accounts/cashRunForm";
 			}

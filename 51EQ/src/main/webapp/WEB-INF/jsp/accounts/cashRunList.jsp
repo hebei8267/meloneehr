@@ -142,7 +142,7 @@
 								<c:forEach items="${cashRunList}" var="cashRun">
 									<tr>
 										<td	class="center">
-											<c:if test="${cashRun.editFlg == 'true'	}">
+											<c:if test="${cashRun.dailyFlg == 'false'	}">
 												<input type="checkbox" name="uuid" value="${cashRun.uuid}">
 												</input>
 											</c:if>
@@ -186,10 +186,40 @@
                                             ${cashRun.retainedAmt}
                                         </td>
                                         <td>
+                                        <c:if test="${cashRun.dailyFlg == 'false'	}">
                                         	<a href="${sc_ctx}/cashRun/edit/${cashRun.uuid}" class="btn btn-warning"/>修改</a>
+                                        </c:if>
                                         </td>
 									</tr>
 								</c:forEach>
+								<c:if test="${!empty cashRunList}" >
+                                    <tr>
+                                        <td	colspan="3">
+                                            合计:
+                                        </td>
+                                        <td>
+                                            ${totalCashRun.initAmt}
+                                        </td>
+                                        <td>
+                                            ${totalCashRun.saleAmt}
+                                        </td>
+                                        <td>
+                                            ${totalCashRun.cashAmt}
+                                        </td>
+                                        <td>
+                                            ${totalCashRun.cardAmt}
+                                        </td>
+                                        <td>
+                                            ${totalCashRun.cardAmtBw}
+                                        </td>
+                                        <td colspan="2">
+                                            ${totalCashRun.depositAmt}
+                                        </td>
+                                        <td colspan="2">
+                                            ${totalCashRun.retainedAmt}
+                                        </td>
+                                    </tr>
+                                </c:if>
 							</tbody>
 						</table>
 					</div>

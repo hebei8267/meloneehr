@@ -23,9 +23,10 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
  * 
  * @author calvin
  */
-@ActiveProfiles("test")
+@ActiveProfiles("development")
 @DirtiesContext
-@ContextConfiguration(locations = { "classpath*:/applicationContext.xml" })
+@ContextConfiguration(locations = { "classpath:/applicationContext.xml"
+			,"classpath:/applicationContext-memcached.xml" })
 @TransactionConfiguration(transactionManager = "defaultTransactionManager")
 public abstract class SpringTransactionalTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 	protected DataSource dataSource;

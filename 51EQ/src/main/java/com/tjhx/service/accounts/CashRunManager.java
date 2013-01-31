@@ -72,10 +72,6 @@ public class CashRunManager {
 				.findByOrgId_OptDateY_OptDateM(orgId, optDateY, optDateM, new Sort(new Sort.Order(Sort.Direction.DESC,
 						"optDate"), new Sort.Order(Sort.Direction.DESC, "jobType")));
 
-		for (CashRun cashRun : _list) {
-			cashRun.autoSetEditFlg();
-		}
-
 		return _list;
 	}
 
@@ -202,6 +198,8 @@ public class CashRunManager {
 		_dbCashRun.setCardAmtBw(cashRun.getCardAmtBw());
 		// 刷卡笔数
 		_dbCashRun.setCardNum(cashRun.getCardNum());
+		// 刷卡-凭证号
+		_dbCashRun.setCardCertNo(cashRun.getCardCertNo());
 		// 存款金额
 		_dbCashRun.setDepositAmt(cashRun.getDepositAmt());
 		// 存款人
@@ -216,6 +214,35 @@ public class CashRunManager {
 		_dbCashRun.setDescTxt(cashRun.getDescTxt());
 
 		cashRunJpaDao.save(_dbCashRun);
+	}
+
+	/**
+	 * 合计计算
+	 * 
+	 * @param cashRunList
+	 * @return
+	 */
+	public CashRun calTotal(List<CashRun> cashRunList) {
+		CashRun _cashRun = new CashRun();
+		for (CashRun cashRun : cashRunList) {
+
+			// 班前余额
+			_cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
+			// 当前销售
+			_cashRun.setSaleAmt(_cashRun.getSaleAmt().add(cashRun.getSaleAmt()));
+			// 实际现金
+			_cashRun.setCashAmt(_cashRun.getCashAmt().add(cashRun.getCashAmt()));
+			// 刷卡金额(单据)
+			_cashRun.setCardAmt(_cashRun.getCardAmt().add(cashRun.getCardAmt()));
+			// 刷卡金额(百威)
+			_cashRun.setCardAmtBw(_cashRun.getCardAmtBw().add(cashRun.getCardAmtBw()));
+			// 存款金额
+			_cashRun.setDepositAmt(_cashRun.getDepositAmt().add(cashRun.getDepositAmt()));
+			// 留存金额
+			_cashRun.setRetainedAmt(_cashRun.getRetainedAmt().add(cashRun.getRetainedAmt()));
+
+		}
+		return _cashRun;
 	}
 
 }
