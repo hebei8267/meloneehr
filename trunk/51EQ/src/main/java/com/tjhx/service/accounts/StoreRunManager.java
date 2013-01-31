@@ -2,7 +2,9 @@ package com.tjhx.service.accounts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,7 @@ import com.tjhx.entity.accounts.StoreRun;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.entity.member.User;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.info.SupplierManager;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,6 +28,8 @@ public class StoreRunManager {
 	private StoreRunJpaDao storeRunJpaDao;
 	@Resource
 	private SupplierJpaDao supplierJpaDao;
+	@Resource
+	private SupplierManager supplierManager;
 
 	/**
 	 * 取得所有货物入库流水信息
@@ -82,11 +87,31 @@ public class StoreRunManager {
 		List<StoreRun> _list = (List<StoreRun>) storeRunJpaDao.findByOrgId_RecordDateY_RecordDateM(orgId, recordDateY,
 				recordDateM, new Sort(new Sort.Order(Sort.Direction.DESC, "recordDate")));
 
+		// 取得供应商信息(Map格式)
+		Map<String, Supplier> _supplierMap = getSupplierInfo();
+
 		for (StoreRun storeRun : _list) {
 			storeRun.autoSetEditFlg();
+			storeRun.setSupplierName(_supplierMap.get(storeRun.getSupplierBwId()).getName());
 		}
 
 		return _list;
+	}
+
+	/**
+	 * 取得供应商信息(Map格式)
+	 * 
+	 * @return 供应商信息
+	 */
+	private Map<String, Supplier> getSupplierInfo() {
+		List<Supplier> _supplierList = supplierManager.getAllSupplier();
+
+		Map<String, Supplier> _supplierMap = new HashMap<String, Supplier>();
+		for (Supplier _supplier : _supplierList) {
+			_supplierMap.put(_supplier.getSupplierBwId(), _supplier);
+		}
+
+		return _supplierMap;
 	}
 
 	/**

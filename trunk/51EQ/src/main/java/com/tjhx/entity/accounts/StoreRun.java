@@ -35,6 +35,8 @@ public class StoreRun extends IdEntity {
 	private Supplier supplier;
 	/** 供应商编号-百威 */
 	private String supplierBwId;
+	/** 供应商名称 */
+	private String supplierName;
 	/** 开单日期 */
 	private String recordDate;
 	/** 开单日期-显示 */
@@ -476,12 +478,13 @@ public class StoreRun extends IdEntity {
 	public void setPlanDateM(String planDateM) {
 		this.planDateM = planDateM;
 	}
+
 	/**
 	 * 取得入库类型
 	 * 
 	 * @return storeType 入库类型
 	 */
-	@Column( length = 1)
+	@Column(length = 1)
 	public String getStoreType() {
 		return storeType;
 	}
@@ -494,6 +497,7 @@ public class StoreRun extends IdEntity {
 	public void setStoreType(String storeType) {
 		this.storeType = storeType;
 	}
+
 	// ############################################################################################
 
 	/**
@@ -527,5 +531,23 @@ public class StoreRun extends IdEntity {
 		}
 	}
 
-	
+	/**
+	 * 取得供应商名称
+	 * 
+	 * @return supplierName 供应商名称
+	 */
+	@Transient
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	/**
+	 * 设置供应商名称
+	 * 
+	 * @param supplierName 供应商名称
+	 */
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
 }
