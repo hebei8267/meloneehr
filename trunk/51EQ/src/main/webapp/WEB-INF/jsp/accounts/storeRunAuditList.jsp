@@ -21,10 +21,10 @@
                             <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息</h3>
                         </legend>
                     </div>
-                    <div class="offset10 span2 right_text">
+                    <div class="offset9 span3 right_text">
                         <%String nowM =	DateUtils.getCurrentMonth(); %>
-                        <%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>
-                        <a href="${sc_ctx}/storageRun/auditList/<%=nowM	%>"><%=nowM	%></a> | <a	href="${sc_ctx}/storageRun/auditList/<%=lastM %>"><%=lastM %></a>
+                        <%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>(开单日期)
+                        <a href="${sc_ctx}/storeRunAudit/list/<%=nowM	%>"><%=nowM	%></a> | <a	href="${sc_ctx}/storeRunAudit/list/<%=lastM %>"><%=lastM %></a>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <input type="hidden" name="uuids" id="uuids"/>
@@ -35,13 +35,19 @@
                                         入库单号
                                     </th>
                                     <th>
-                                        供应商编号
+                                        供应商
+                                    </th>
+                                    <th>
+                                        入库类型
                                     </th>
                                     <th>
                                         开单日期
                                     </th>
                                     <th>
                                         入库日期
+                                    </th>
+                                    <th>
+                                        统筹日期
                                     </th>
                                     <th>
                                         开单金额
@@ -58,55 +64,69 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${empty	storageRunList}" >
+                                <c:if test="${empty	storeRunList}" >
                                     <tfoot>
                                         <tr>
-                                            <td	colspan="7"	class="rounded-foot-left">
+                                            <td	colspan="10"	class="rounded-foot-left">
                                                 无记录信息
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </c:if>
-                                <c:forEach items="${storageRunList}" var="storageRun">
+                                <c:forEach items="${storeRunList}" var="storeRun">
                                     <tr>
                                         <td>
-                                            ${storageRun.recordNo}
+                                            ${storeRun.recordNo}
                                         </td>
                                         <td>
-                                            ${storageRun.supplierBwId}
+                                            ${storeRun.supplierName}
                                         </td>
                                         <td>
-                                            ${storageRun.recordDateShow}
+                                        	<c:if test="${storeRun.storeType == 'A'}">
+												挂账采购
+                                            </c:if>
+                                            <c:if test="${storeRun.storeType == 'B'}">
+												现结采购
+                                            </c:if>
+                                            <c:if test="${storeRun.storeType == 'C'}">
+												货商补欠
+                                            </c:if>
                                         </td>
                                         <td>
-                                            ${storageRun.intoDateShow}
+                                            ${storeRun.recordDateShow}
                                         </td>
                                         <td>
-                                            ${storageRun.recordAmt}
+                                            ${storeRun.intoDateShow}
                                         </td>
                                         <td>
-                                            ${storageRun.optAmt}
+                                            ${storeRun.planDateShow}
                                         </td>
                                         <td>
-                                            ${storageRun.optPerName}
+                                            ${storeRun.recordAmt}
                                         </td>
                                         <td>
-                                            <c:if test="${storageRun.auditFlg == 'false'}">
-												<a href="${sc_ctx}/storageRun/audit/${storageRun.uuid}" class="btn btn-warning"/>审核</a>
+                                            ${storeRun.optAmt}
+                                        </td>
+                                        <td>
+                                            ${storeRun.optPerName}
+                                        </td>
+                                        <td>
+                                            <c:if test="${storeRun.auditFlg == 'false'}">
+												<a href="${sc_ctx}/storeRunAudit/confirmInit/${storeRun.uuid}" class="btn btn-warning"/>审核</a>
                                             </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <c:if test="${!empty storageRunList}" >
+                                <c:if test="${!empty storeRunList}" >
                                     <tr>
-                                        <td	colspan="4">
+                                        <td	colspan="6">
                                             合计:
                                         </td>
                                         <td>
-                                            ${totalStorageRun.recordAmt}
+                                            ${totalStoreRun.recordAmt}
                                         </td>
                                         <td>
-                                            ${totalStorageRun.optAmt}
+                                            ${totalStoreRun.optAmt}
                                         </td>
                                         <td	colspan="2"></td>
                                     </tr>

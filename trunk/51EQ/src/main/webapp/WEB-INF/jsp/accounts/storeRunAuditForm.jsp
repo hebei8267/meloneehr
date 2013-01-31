@@ -11,7 +11,7 @@
     	<script>
     	$(function() {
     		$("#saveBtn").click(function() {
-    			$('#__storageRun_confirm').modal({
+    			$('#__storeRun_confirm').modal({
 					backdrop : true,
 					keyboard : true,
 					show : true
@@ -32,44 +32,62 @@
                     </legend>
                 </div>
                 <div class="span12"	style="margin-top: 10px;">
-                    <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storageRun">
+                    <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storeRun">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
                            <label class="control-label">入库单号 :</label>
-                           <label class="left-control-label">${storageRun.recordNo}</label>
+                           <label class="left-control-label">${storeRun.recordNo}</label>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">供应商编号 :</label>
-                            <label class="left-control-label">${storageRun.supplierBwId}</label>
+                            <label class="control-label">供应商 :</label>
+                            <label class="left-control-label">${storeRun.supplierName}</label>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">入库类型 :</label>
+                            <label class="left-control-label">
+                            	<c:if test="${storeRun.storeType == 'A'}">
+									挂账采购
+                                </c:if>
+                                <c:if test="${storeRun.storeType == 'B'}">
+									现结采购
+                                </c:if>
+                                <c:if test="${storeRun.storeType == 'C'}">
+									货商补欠
+                                </c:if>
+                            </label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">开单日期 :</label>
-                            <label class="left-control-label">${storageRun.recordDateShow}</label>
+                            <label class="left-control-label">${storeRun.recordDateShow}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库日期 :</label>
-                            <label class="left-control-label">${storageRun.intoDateShow}</label>
+                            <label class="left-control-label">${storeRun.intoDateShow}</label>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">统筹日期 :</label>
+                            <label class="left-control-label">${storeRun.planDateShow}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">开单金额	:</label>
-                            <label class="left-control-label">${storageRun.recordAmt}</label>
+                            <label class="left-control-label">${storeRun.recordAmt}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库金额	:</label>
-                            <label class="left-control-label">${storageRun.optAmt}</label>
+                            <label class="left-control-label">${storeRun.optAmt}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库人	:</label>
-                            <label class="left-control-label">${storageRun.optPerName}</label>
+                            <label class="left-control-label">${storeRun.optPerName}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">备注 :</label>
-                            <label class="left-control-label">${storageRun.descTxt}</label>
+                            <label class="left-control-label">${storeRun.descTxt}</label>
                         </div>
                         <div class="control-group">
                             <div class="controls">
                                 <button	id="saveBtn" class="btn	btn-large btn-primary" type="button">审核</button>
-                                &nbsp;<a href="${sc_ctx}/storageRun/auditList" class="btn btn-large">返回</a>
+                                &nbsp;<a href="${sc_ctx}/storeRunAudit" class="btn btn-large">返回</a>
                             </div>
                         </div>
                     </form:form>
@@ -77,7 +95,7 @@
             </div>
         </div>
         
-        <div class="modal hide fade  __model37" id="__storageRun_confirm">
+        <div class="modal hide fade  __model37" id="__storeRun_confirm">
 		    <div class="modal-header">
 		        <a class="close" data-dismiss="modal">×</a>
 		        <h4>系统消息</h4>
@@ -88,7 +106,7 @@
 		        </center>
 		    </div>
 		    <div class="modal-footer">
-		    	<a href="${sc_ctx}/storageRun/auditConfirm/${storageRun.uuid}" class="btn btn-primary">确定</a>
+		    	<a href="${sc_ctx}/storeRunAudit/confirm/${storeRun.uuid}" class="btn btn-primary">确定</a>
 		        <a href="#" class="btn" data-dismiss="modal">关闭</a>
 		    </div>
 		</div>
