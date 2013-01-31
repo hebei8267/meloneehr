@@ -5,22 +5,26 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.info.BankCardJpaDao;
-import com.tjhx.dao.info.BankJpaDao;
 import com.tjhx.entity.info.BankCard;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class BankCardManager {
+	private static Logger logger = LoggerFactory.getLogger(BankCardManager.class);
 	@Resource
 	private BankCardJpaDao bankCardJpaDao;
 	@Resource
-	private BankJpaDao bankJpaDao;
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有银行卡信息
@@ -29,8 +33,22 @@ public class BankCardManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<BankCard> getAllBankCard(String bankId) {
-		return (List<BankCard>) bankCardJpaDao.findByBankId(bankId, new Sort(new Sort.Order(Sort.Direction.ASC,
-				"uuid")));
+
+		List<BankCard> _bankCardList = spyMemcachedClient.get(MemcachedObjectType.BANK_CARD_LIST.getObjKey() + bankId);
+
+		if (null == _bankCardList) {
+			// 从数据库中取出全量供应商信息(List格式)
+			_bankCardList = (List<BankCard>) bankCardJpaDao.findByBankId(bankId, new Sort(new Sort.Order(
+					Sort.Direction.ASC, "uuid")));
+			// 将供应商信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.BANK_CARD_LIST.getObjKey() + bankId,
+					MemcachedObjectType.BANK_CARD_LIST.getExpiredTime(), _bankCardList);
+
+			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
+		} else {
+			logger.debug("从memcached中取出供应商信息");
+		}
+		return _bankCardList;
 	}
 
 	/**

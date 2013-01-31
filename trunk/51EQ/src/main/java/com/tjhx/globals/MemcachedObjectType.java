@@ -4,8 +4,13 @@ package com.tjhx.globals;
  * 统一定义Memcached中存储的各种对象Key和超时时间.
  */
 public enum MemcachedObjectType {
-	/** 产品列表 */
-	SUPPLIER_MAP("Supplier_Map", 60 * 60 * 24);// 24小时
+	/** 供应商列表 */
+	SUPPLIER_LIST("Supplier_List", 60 * 60 * 24), // 24小时
+	/** 银行列表 */
+	BANK_LIST("Bank_List", 60 * 60 * 24),
+	/** 银行卡列表 */
+	BANK_CARD_LIST("Bank_Card_List", 60 * 60 * 24)// 24小时
+	;
 
 	/** Memcached对象Key */
 	private String objKey;

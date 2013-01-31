@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -54,8 +55,9 @@ public class CashRunController extends BaseController {
 	public String calInitAmt_Action(HttpServletRequest request, HttpSession session)
 			throws ServletRequestBindingException {
 		String optDateShow = ServletRequestUtils.getStringParameter(request, "optDateShow");
+		String optDate = DateUtils.transDateFormat(optDateShow, "yyyy-MM-dd", "yyyyMMdd");
 
-		BigDecimal initAmt = cashRunManager.calInitAmt(getUserInfo(session).getOrganization().getId(), optDateShow);
+		BigDecimal initAmt = cashRunManager.getInitAmt(getUserInfo(session).getOrganization().getId(), optDate);
 		return (initAmt == null ? "0" : initAmt.toString());
 	}
 
@@ -92,9 +94,10 @@ public class CashRunController extends BaseController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(value = "list/{date}")
-	public String cashRunList_Date_Action(Model model, HttpSession session) throws ParseException {
+	public String cashRunList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
+			throws ParseException {
 		List<CashRun> cashRunList = cashRunManager.getAllCashRunByOrgId_2(getUserInfo(session).getOrganization()
-				.getId(), DateUtils.getCurrentDateShortStr());
+				.getId(), date);
 
 		model.addAttribute("cashRunList", cashRunList);
 
@@ -119,9 +122,29 @@ public class CashRunController extends BaseController {
 			initJobTypeList(model);
 			initBankCodeList(model);
 
+			if (StringUtils.isNotBlank(cashRun.getBankId())) {
+				initBankCardList(model, cashRun.getBankId());
+			}
+
 			return "accounts/cashRunForm";
 		}
 
+	}
+
+	/**
+	 * 初始化银行卡列表
+	 * 
+	 * @param model
+	 */
+	private void initBankCardList(Model model, String bankId) {
+		List<BankCard> _list = bankCardManager.getAllBankCard(bankId);
+
+		Map<String, String> bankCardList = new LinkedHashMap<String, String>();
+		bankCardList.put("", "");
+		for (BankCard _bankCard : _list) {
+			bankCardList.put(_bankCard.getBankCardNo(), _bankCard.getBankCardNo());
+		}
+		model.addAttribute("bankCardList", bankCardList);
 	}
 
 	/**
@@ -138,7 +161,6 @@ public class CashRunController extends BaseController {
 
 		initJobTypeList(model);
 		initBankCodeList(model);
-		//cashRunManager.getInitAmt(orgId, optDate);
 
 		return "accounts/cashRunForm";
 	}
@@ -211,6 +233,10 @@ public class CashRunController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initJobTypeList(model);
+				initBankCodeList(model);
+
 				return "accounts/cashRunForm";
 			}
 		} else {// 修改操作
@@ -219,6 +245,10 @@ public class CashRunController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initJobTypeList(model);
+				initBankCodeList(model);
+
 				return "accounts/cashRunForm";
 			}
 		}

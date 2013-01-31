@@ -77,13 +77,13 @@
 							<h3>${sessionScope.__SESSION_USER_INFO.orgName}店 销售信息</h3>
 						</legend>
 					</div>
-					<div class="span10">
+					<div class="span9">
 						<a href="${sc_ctx}/cashRun/new"	class="btn btn-primary">新增</a>
 						<input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
 					</div>
-					<div class="span2 right_text">
+					<div class="span3 right_text">
 						<%String nowM =	DateUtils.getCurrentMonth(); %>
-						<%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>
+						<%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>(销售日期)
 						<a href="${sc_ctx}/cashRun/list/<%=nowM	%>"><%=nowM	%></a> | <a	href="${sc_ctx}/cashRun/list/<%=lastM %>"><%=lastM %></a>
 					</div>
 					<div class="span12"	style="margin-top: 10px;">
@@ -143,10 +143,51 @@
 									<tr>
 										<td	class="center">
 											<c:if test="${cashRun.editFlg == 'true'	}">
-												<input type="checkbox" name="uuid" value="${cardRun.uuid}">
+												<input type="checkbox" name="uuid" value="${cashRun.uuid}">
 												</input>
 											</c:if>
 										</td>
+										<td>
+                                            ${cashRun.optDateShow}
+                                        </td>
+                                        <td>
+                                            <c:if test="${cashRun.jobType == 1}">
+												早班
+                                            </c:if>
+                                            <c:if test="${cashRun.jobType == 2}">
+												晚班
+                                            </c:if>
+                                            <c:if test="${cashRun.jobType == 4}">
+												全天班
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            ${cashRun.initAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.saleAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.cashAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.cardAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.cardAmtBw}
+                                        </td>
+                                        <td>
+                                            ${cashRun.depositAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.depositor}
+                                        </td>
+                                        <td>
+                                            ${cashRun.retainedAmt}
+                                        </td>
+                                        <td>
+                                        	<a href="${sc_ctx}/cashRun/edit/${cashRun.uuid}" class="btn btn-warning"/>修改</a>
+                                        </td>
 									</tr>
 								</c:forEach>
 							</tbody>

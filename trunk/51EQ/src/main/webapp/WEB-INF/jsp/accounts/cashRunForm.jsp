@@ -35,6 +35,7 @@
 						$.post("${sc_ctx}/cashRun/calInitAmt", {"optDateShow":$('#optDateShow').val()}, function(result){
 							$('#_initAmt_label').html(result);
 							$('#initAmt').val(result);
+							calRetainedAmt();
 						});
 					}
 				});
@@ -117,7 +118,22 @@
 					$("#inputForm").attr("action", "${sc_ctx}/cashRun/save");
 					$("#inputForm").submit();
 				});
+				
+				$("#cashAmt").change(function() {
+					calRetainedAmt();
+				});
+				
+				$("#depositAmt").change(function() {
+					calRetainedAmt();
+				});
 			});
+			// 留存金额 = 班前余额+实际现金-存款金额
+			function calRetainedAmt(){
+				var _result = new Number($("#initAmt").val()) + new Number($("#cashAmt").val()) - new Number($("#depositAmt").val());
+				
+				$("#_retainedAmt_label").html(_result + " 元");
+				$("#retainedAmt").val(_result);
+			}
 		</script>
 	</head>
 	<body>
@@ -144,43 +160,63 @@
 						<form:hidden path="uuid"/>
 						<div class="control-group">
 							<label class="control-label">日期 :</label>
+							<c:if test="${empty	cashRun.uuid}">
 							<div class="controls">
 								<form:input	path="optDateShow" />
 							</div>
+							</c:if>
+							<c:if test="${!empty cashRun.uuid}">
+								<label class="left-control-label">${cashRun.optDateShow}</label>
+							</c:if>
 						</div>
 						<div class="control-group">
 							<label class="control-label">上班类型 :</label>
+							<c:if test="${empty	cashRun.uuid}">
 							<div class="controls">
 								<form:select path="jobType" items="${jobTypeList}"/>
 							</div>
+							</c:if>
+							<c:if test="${!empty cashRun.uuid}">
+								<label class="left-control-label">
+								<c:if test="${cashRun.jobType == 1}">
+									早班
+                            	</c:if>
+                          		<c:if test="${cashRun.jobType == 2}">
+									晚班
+                           		</c:if>
+                            	<c:if test="${cashRun.jobType == 4}">
+									全天班
+                         		</c:if>
+								</label>
+							</c:if>
 						</div>
 						<div class="control-group">
 							<label class="control-label">班前余额 :</label>
-							<label class="left-control-label" id="_initAmt_label">${cashRun.initAmt}</label>
+							<label class="left-control-label" id="_initAmt_label">${cashRun.initAmt} 元</label>
 							<form:hidden path="initAmt"/>
 						</div>
 						<div class="control-group">
 							<label class="control-label">当前销售 :</label>
 							<div class="controls">
-								<form:input	path="saleAmt" />
+								<form:input	path="saleAmt" /> 元
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">实际现金 :</label>
 							<div class="controls">
-								<form:input	path="cashAmt" />
+								<form:input	path="cashAmt" /> 元
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">刷卡金额(单据) :</label>
 							<div class="controls">
-								<form:input	path="cardAmt" />
+								<form:input	path="cardAmt" /> 元
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">刷卡金额(百威) :</label>
 							<div class="controls">
-								<form:input	path="cardAmtBw" />
+								<form:input	path="cardAmtBw" /> 元
 							</div>
 						</div>
 						<div class="control-group">
@@ -192,7 +228,7 @@
 						<div class="control-group">
 							<label class="control-label">存款金额 :</label>
 							<div class="controls">
-								<form:input	path="depositAmt" />
+								<form:input	path="depositAmt" /> 元
 							</div>
 						</div>
 						<div class="control-group">
@@ -210,12 +246,13 @@
 						<div class="control-group">
 							<label class="control-label">卡号 :</label>
 							<div class="controls">
-								<form:select path="bankCardNo"/>
+								<form:select path="bankCardNo" items="${bankCardList}"/>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">留存金额 :</label>
-							<label class="left-control-label">${cashRun.retainedAmt}</label>
+							<label class="left-control-label" id="_retainedAmt_label">${cashRun.retainedAmt} 元</label>
+							<form:hidden path="retainedAmt"/>
 						</div>
 						<div class="control-group">
 							<label class="control-label">备注 :</label>
