@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -122,7 +123,7 @@ public class StoreRun extends IdEntity {
 	 * 
 	 * @return supplier 供应商
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SUPPLIER_H_ID")
 	public Supplier getSupplier() {
 		return supplier;
