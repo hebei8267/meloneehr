@@ -39,7 +39,7 @@
                                 <a href="${sc_ctx}/storeRun">信息录入</a>
                             </li>
                             <li>
-                                <a href="${sc_ctx}/storageRun/auditList">信息审核</a>
+                                <a href="${sc_ctx}/storeRunAudit">信息审核</a>
                             </li>
                         </ul>
                     </li>

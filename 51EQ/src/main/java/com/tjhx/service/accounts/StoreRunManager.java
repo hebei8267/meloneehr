@@ -121,7 +121,12 @@ public class StoreRunManager {
 	 * @return 货物入库流水信息
 	 */
 	public StoreRun getStoreRunByUuid(Integer uuid) {
-		return storeRunJpaDao.findOne(uuid);
+		StoreRun storeRun = storeRunJpaDao.findOne(uuid);
+
+		// 取得供应商信息(Map格式)
+		Map<String, Supplier> _supplierMap = getSupplierInfo();
+		storeRun.setSupplierName(_supplierMap.get(storeRun.getSupplierBwId()).getName());
+		return storeRun;
 	}
 
 	/**
