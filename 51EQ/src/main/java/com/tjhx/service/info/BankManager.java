@@ -5,19 +5,26 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.info.BankJpaDao;
 import com.tjhx.entity.info.Bank;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class BankManager {
+	private static Logger logger = LoggerFactory.getLogger(BankManager.class);
 	@Resource
 	private BankJpaDao bankJpaDao;
+	@Resource
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有银行信息
@@ -26,7 +33,22 @@ public class BankManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Bank> getAllBank() {
-		return (List<Bank>) bankJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+		List<Bank> _bankList = spyMemcachedClient.get(MemcachedObjectType.BANK_LIST.getObjKey());
+
+		if (null == _bankList) {
+			// 从数据库中取出全量银行信息(List格式)
+			_bankList = (List<Bank>) bankJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+			// 将银行信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.BANK_LIST.getObjKey(),
+					MemcachedObjectType.BANK_LIST.getExpiredTime(), _bankList);
+
+			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
+		} else {
+			logger.debug("从memcached中取出供应商信息");
+		}
+		
+		return _bankList;
+
 	}
 
 	/**

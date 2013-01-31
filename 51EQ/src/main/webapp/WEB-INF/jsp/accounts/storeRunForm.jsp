@@ -99,9 +99,14 @@
                         <form:hidden path="uuid"/>
                         <div class="control-group">
                             <label class="control-label">入库单号 :</label>
-                            <div class="controls">
+                            <c:if test="${empty	storeRun.uuid}">
+	                        <div class="controls">
                                 <form:input	path="recordNo" />
                             </div>
+	                        </c:if>
+	                        <c:if test="${!empty storeRun.uuid}">
+	                            <label class="left-control-label">${storeRun.recordNo}</label>
+	                        </c:if>
                         </div>
                         <div class="control-group">
                             <label class="control-label">供应商 :</label>
@@ -136,13 +141,13 @@
                         <div class="control-group">
                             <label class="control-label">开单金额	:</label>
                             <div class="controls">
-                                <form:input	path="recordAmt" />
+                                <form:input	path="recordAmt" /> 元
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库金额	:</label>
                             <div class="controls">
-                                <form:input	path="optAmt" />
+                                <form:input	path="optAmt" /> 元
                             </div>
                         </div>
                         <div class="control-group">

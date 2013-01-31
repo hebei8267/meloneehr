@@ -70,11 +70,11 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label">开单金额	:</label>
-                            <label class="left-control-label">${storeRun.recordAmt}</label>
+                            <label class="left-control-label">${storeRun.recordAmt} 元</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库金额	:</label>
-                            <label class="left-control-label">${storeRun.optAmt}</label>
+                            <label class="left-control-label">${storeRun.optAmt} 元</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库人	:</label>

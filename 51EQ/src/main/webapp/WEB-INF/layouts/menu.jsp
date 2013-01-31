@@ -21,16 +21,16 @@
                     <li>
                         <a href="${sc_ctx}/member/logout">用户退出</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">刷卡信息<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                    <li>
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">销售信息<b class="caret"></b></a>
+                    	<ul class="dropdown-menu">
                             <li>
-                                <a href="${sc_ctx}/cardRun">信息录入</a>
+                                <a href="${sc_ctx}/cashRun">信息录入</a>
+                            </li>
+                            <li>
+                                <a href="#">销售日结</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="${sc_ctx}/cashRun">销售信息</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">入库信息<b class="caret"></b></a>

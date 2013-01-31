@@ -33,15 +33,15 @@ public class SupplierManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Supplier> getAllSupplier() {
-		List<Supplier> _supplierList = spyMemcachedClient.get(MemcachedObjectType.SUPPLIER_MAP.getObjKey());
+		List<Supplier> _supplierList = spyMemcachedClient.get(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 
 		if (null == _supplierList) {
-			// 从数据库中取出全量供应商信息(Map格式)
+			// 从数据库中取出全量供应商信息(List格式)
 			_supplierList = (List<Supplier>) supplierJpaDao
 					.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 			// 将供应商信息Map保存到memcached
-			spyMemcachedClient.set(MemcachedObjectType.SUPPLIER_MAP.getObjKey(),
-					MemcachedObjectType.SUPPLIER_MAP.getExpiredTime(), _supplierList);
+			spyMemcachedClient.set(MemcachedObjectType.SUPPLIER_LIST.getObjKey(),
+					MemcachedObjectType.SUPPLIER_LIST.getExpiredTime(), _supplierList);
 
 			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
 		} else {
