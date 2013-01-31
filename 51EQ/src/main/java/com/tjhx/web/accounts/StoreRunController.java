@@ -113,12 +113,12 @@ public class StoreRunController extends BaseController {
 	 */
 	private void initSupplierList(Model model) {
 
-		List<Supplier> _list = supplierManager.getAllGoodsSupplier();
+		List<Supplier> _supplierList = supplierManager.getAllSupplier();
 
 		Map<String, String> supplier = new LinkedHashMap<String, String>();
 		supplier.put("", "");
 
-		for (Supplier _supplier : _list) {
+		for (Supplier _supplier : _supplierList) {
 			supplier.put(_supplier.getSupplierBwId(), _supplier.getName());
 		}
 		model.addAttribute("supplier", supplier);
