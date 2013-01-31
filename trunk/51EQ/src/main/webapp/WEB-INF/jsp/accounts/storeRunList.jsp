@@ -151,7 +151,7 @@
                                             ${storeRun.recordNo}
                                         </td>
                                         <td>
-                                            ${storeRun.supplierBwId}
+                                            ${storeRun.supplierName}
                                         </td>
                                         <td>
                                         	<c:if test="${storeRun.storeType == 'A'}">

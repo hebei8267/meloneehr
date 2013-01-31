@@ -12,7 +12,7 @@ import com.tjhx.service.info.SupplierManager;
 public class SupplierManagerTest extends SpringTransactionalTestCase {
 
 	@Resource
-	private SupplierManager goodsSupplierManager;
+	private SupplierManager supplierManager;
 
 	@Test
 	@Rollback(false)
@@ -20,11 +20,11 @@ public class SupplierManagerTest extends SpringTransactionalTestCase {
 		Supplier supplier = new Supplier();
 		supplier.setName("供应商1");
 		supplier.setSupplierBwId("001");
-		goodsSupplierManager.addNewGoodsSupplier(supplier);
+		supplierManager.addNewSupplier(supplier);
 
 		Supplier supplier1 = new Supplier();
 		supplier1.setName("供应商2");
 		supplier1.setSupplierBwId("002");
-		goodsSupplierManager.addNewGoodsSupplier(supplier1);
+		supplierManager.addNewSupplier(supplier1);
 	}
 }

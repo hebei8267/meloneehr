@@ -12,8 +12,8 @@
 			update				加载hibernate自动更新数据库结构
 			-->
             <property name="hibernate.hbm2ddl.auto" value="false" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.format_sql" value="false" />
     	<!-- 	<property name="hibernate.cache.use_second_level_cache" value="true" />
             <property name="hibernate.cache.use_structured_entries" value ="true" />
             <property name="hibernate.cache.use_query_cache" value="true" />

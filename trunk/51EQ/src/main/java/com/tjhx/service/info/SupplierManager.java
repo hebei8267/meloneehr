@@ -5,19 +5,26 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.info.SupplierJpaDao;
 import com.tjhx.entity.info.Supplier;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class SupplierManager {
+	private static Logger logger = LoggerFactory.getLogger(SupplierManager.class);
 	@Resource
 	private SupplierJpaDao supplierJpaDao;
+	@Resource
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有货品供应商信息
@@ -25,8 +32,22 @@ public class SupplierManager {
 	 * @return 货品供应商信息列表
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Supplier> getAllGoodsSupplier() {
-		return (List<Supplier>) supplierJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+	public List<Supplier> getAllSupplier() {
+		List<Supplier> _supplierList = spyMemcachedClient.get(MemcachedObjectType.SUPPLIER_MAP.getObjKey());
+
+		if (null == _supplierList) {
+			// 从数据库中取出全量供应商信息(Map格式)
+			_supplierList = (List<Supplier>) supplierJpaDao
+					.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+			// 将供应商信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.SUPPLIER_MAP.getObjKey(),
+					MemcachedObjectType.SUPPLIER_MAP.getExpiredTime(), _supplierList);
+
+			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
+		} else {
+			logger.debug("从memcached中取出供应商信息");
+		}
+		return _supplierList;
 	}
 
 	/**
@@ -35,7 +56,7 @@ public class SupplierManager {
 	 * @param uuid 货品供应商编号
 	 * @return 货品供应商信息
 	 */
-	public Supplier getGoodsSupplierByUuid(Integer uuid) {
+	public Supplier getSupplierByUuid(Integer uuid) {
 		return supplierJpaDao.findOne(uuid);
 	}
 
@@ -55,46 +76,45 @@ public class SupplierManager {
 	 * @param uuid 货品供应商编号
 	 */
 	@Transactional(readOnly = false)
-	public void delGoodsSupplierByUuid(Integer uuid) {
+	public void delSupplierByUuid(Integer uuid) {
 		supplierJpaDao.delete(uuid);
 	}
 
 	/**
 	 * 添加新货品供应商信息
 	 * 
-	 * @param goodsSupplier 货品供应商信息
+	 * @param supplier 货品供应商信息
 	 */
 	@Transactional(readOnly = false)
-	public void addNewGoodsSupplier(Supplier goodsSupplier) {
-		Supplier _dbGoodsSupplier = findByName(goodsSupplier.getName());
+	public void addNewSupplier(Supplier supplier) {
+		Supplier _dbSupplier = findByName(supplier.getName());
 		// 该货品供应商已存在!
-		if (null != _dbGoodsSupplier) {
+		if (null != _dbSupplier) {
 			throw new ServiceException("ERR_MSG_SUP_001");
 		}
-		supplierJpaDao.save(goodsSupplier);
+		supplierJpaDao.save(supplier);
 	}
 
 	/**
 	 * 更新货品供应商信息
 	 * 
-	 * @param goodsSupplier 货品供应商信息
+	 * @param supplier 货品供应商信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
 	@Transactional(readOnly = false)
-	public void updateGoodsSupplier(Supplier goodsSupplier) throws IllegalAccessException,
-			InvocationTargetException {
+	public void updateSupplier(Supplier supplier) throws IllegalAccessException, InvocationTargetException {
 		// ----------------------------------------------------------------------------
 		// TODO 修改开始
-		Supplier _dbGoodsSupplier = supplierJpaDao.findOne(goodsSupplier.getUuid());
-		if (null == _dbGoodsSupplier) {
+		Supplier _dbSupplier = supplierJpaDao.findOne(supplier.getUuid());
+		if (null == _dbSupplier) {
 			// 货品供应商不存在!
 			throw new ServiceException("ERR_MSG_USER_002");
 		}
 
-		_dbGoodsSupplier.setName(goodsSupplier.getName());
+		_dbSupplier.setName(supplier.getName());
 
 		// ----------------------------------------------------------------------------
-		supplierJpaDao.save(_dbGoodsSupplier);
+		supplierJpaDao.save(_dbSupplier);
 	}
 }
