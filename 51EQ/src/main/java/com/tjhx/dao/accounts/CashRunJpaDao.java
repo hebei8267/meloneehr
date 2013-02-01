@@ -33,8 +33,13 @@ public interface CashRunJpaDao extends CrudRepository<CashRun, Integer> {
 
 	@Query("select count(c) from CashRun c where c.orgId = :orgId and c.optDate = :optDate and c.jobType = 4)")
 	public Long checkJobType_Morning(@Param("orgId") String orgId, @Param("optDate") String optDate);
-	
+
 	@SuppressWarnings("rawtypes")
 	@Query("select c from CashRun c where c.orgId = :orgId and c.dailyFlg = 'false'")
 	public Iterable getAllNotCashDailyByOrgId(@Param("orgId") String orgId, Sort sort);
+
+	@SuppressWarnings("rawtypes")
+	@Query("select c from CashRun c where c.orgId = :orgId and c.optDate = :optDate and c.dailyFlg = 'false'")
+	public Iterable getNotCashDailyByOrgId_OptDate(@Param("orgId") String orgId, @Param("optDate") String optDate,
+			Sort sort);
 }

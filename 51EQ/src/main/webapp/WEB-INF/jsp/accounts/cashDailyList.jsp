@@ -87,7 +87,7 @@
 										<td>${noCashDaily.depositAmt}</td>
 										<td>${noCashDaily.retainedAmt}</td>
 										<td><a href="${sc_ctx}/cashRun/" class="btn btn-warning" target="_blank"/>查看</a></td>
-										<td><a href="#"	class="btn btn-danger">日结</a></td>
+										<td><a href="${sc_ctx}/cashDaily/confirm/${noCashDaily.optDate}"	class="btn btn-danger">日结</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

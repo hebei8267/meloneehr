@@ -49,11 +49,12 @@ public class CashRunController extends BaseController {
 	 * 
 	 * @return
 	 * @throws ServletRequestBindingException
+	 * @throws ParseException
 	 */
 	@ResponseBody
 	@RequestMapping(value = "calInitAmt")
 	public String calInitAmt_Action(HttpServletRequest request, HttpSession session)
-			throws ServletRequestBindingException {
+			throws ServletRequestBindingException, ParseException {
 		String optDateShow = ServletRequestUtils.getStringParameter(request, "optDateShow");
 		String optDate = DateUtils.transDateFormat(optDateShow, "yyyy-MM-dd", "yyyyMMdd");
 
