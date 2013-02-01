@@ -51,7 +51,7 @@
 						$.post("${sc_ctx}/cashRun/getBankCardNoList", {"bankId":$('#bankId').val()}, function(result){
 							var optionstring = "<option value=''></option>";
 							$.each(result, function(index, item){
-								optionstring += "<option value=\""+ item.uuid +"\" >"+ item.bankCardNo +"</option>";
+								optionstring += "<option value=\""+ item.bankCardNo +"\" >"+ item.bankCardNo +"</option>";
 							});
 							
 							jQuery("#bankCardNo").html(optionstring);

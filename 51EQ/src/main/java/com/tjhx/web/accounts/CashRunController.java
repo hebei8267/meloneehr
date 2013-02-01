@@ -149,7 +149,7 @@ public class CashRunController extends BaseController {
 		Map<String, String> bankCardList = new LinkedHashMap<String, String>();
 		bankCardList.put("", "");
 		for (BankCard _bankCard : _list) {
-			bankCardList.put(_bankCard.getUuid().toString(), _bankCard.getBankCardNo());
+			bankCardList.put(_bankCard.getBankCardNo(), _bankCard.getBankCardNo());
 		}
 		model.addAttribute("bankCardList", bankCardList);
 	}

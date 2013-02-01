@@ -85,7 +85,7 @@
 						</div>
 						<div class="control-group">
 							<label class="control-label">存款银行 :</label>
-							<label class="left-control-label">${cashRun1.bankId}</label>
+							<label class="left-control-label">${cashRun1.bankName}</label>
 						</div>
 						<div class="control-group">
 							<label class="control-label">卡号 :</label>
@@ -165,7 +165,7 @@
 						</div>
 						<div class="control-group">
 							<label class="control-label">存款银行 :</label>
-							<label class="left-control-label">${cashRun2.bankId}</label>
+							<label class="left-control-label">${cashRun2.bankName}</label>
 						</div>
 						<div class="control-group">
 							<label class="control-label">卡号 :</label>
