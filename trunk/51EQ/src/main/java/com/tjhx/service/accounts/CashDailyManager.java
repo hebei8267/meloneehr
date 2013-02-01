@@ -173,4 +173,17 @@ public class CashDailyManager {
 		// 生成销售日结信息
 		cashDailyJpaDao.save(_cashDaily);
 	}
+
+	/**
+	 * 日结销售流水明细查看
+	 * 
+	 * @param optDate
+	 * @param orgId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CashRun> cashDailyDetail(String optDate, String orgId) {
+		return (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, new Sort(new Sort.Order(
+				Sort.Direction.ASC, "jobType")));
+	}
 }

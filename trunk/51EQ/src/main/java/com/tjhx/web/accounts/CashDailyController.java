@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.CashDaily;
+import com.tjhx.entity.accounts.CashRun;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.accounts.CashDailyManager;
 import com.tjhx.web.BaseController;
@@ -76,5 +77,23 @@ public class CashDailyController extends BaseController {
 		cashDailyManager.cashDailyConfirm(optDate, getUserInfo(session).getOrganization().getId());
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/cashDaily";
+	}
+
+	/**
+	 * 日结销售流水明细查看
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "detail/{date}")
+	public String cashDailyDetail_Action(@PathVariable("date") String optDate, Model model, HttpSession session) {
+		List<CashRun> _list = cashDailyManager.cashDailyDetail(optDate, getUserInfo(session).getOrganization().getId());
+
+		if (null != _list && _list.size() > 0) {
+			model.addAttribute("cashRun1", _list.get(0));
+		}
+		if (null != _list && _list.size() > 1) {
+			model.addAttribute("cashRun2", _list.get(1));
+		}
+		return "accounts/cashDailyForm";
 	}
 }
