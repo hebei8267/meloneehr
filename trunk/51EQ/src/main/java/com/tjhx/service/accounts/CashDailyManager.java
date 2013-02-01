@@ -45,7 +45,8 @@ public class CashDailyManager {
 				_noCashDailyList.add(_tmpCashDaily);
 
 				// 日期
-				_tmpCashDaily.setOptDateShow(DateUtils.transDateFormat(cashRun.getOptDate(), "yyyyMMdd", "yyyy-MM-dd"));
+				_tmpCashDaily.setOptDate(cashRun.getOptDate());
+				_tmpCashDaily.setOptDateShow(cashRun.getOptDateShow());
 				// 昨日余额
 				_tmpCashDaily.setInitAmt(cashRun.getInitAmt());
 
@@ -117,4 +118,59 @@ public class CashDailyManager {
 		return _list;
 	}
 
+	/**
+	 * 销售流水日结
+	 * 
+	 * @param optDate
+	 * @param orgId
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = false)
+	public void cashDailyConfirm(String optDate, String orgId) {
+		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.getNotCashDailyByOrgId_OptDate(orgId, optDate, new Sort(
+				new Sort.Order(Sort.Direction.ASC, "jobType")));
+
+		CashDaily _cashDaily = null;
+		boolean firstFlg = true;
+		for (CashRun cashRun : _list) {
+			if (firstFlg) {
+				firstFlg = false;
+				_cashDaily = new CashDaily();
+
+				// 机构编号
+				_cashDaily.setOrgId(orgId);
+				// 日期
+				_cashDaily.setOptDate(cashRun.getOptDate());
+				// 日期-显示
+				_cashDaily.setOptDateShow(cashRun.getOptDateShow());
+				// 日期-年
+				_cashDaily.setOptDateY(cashRun.getOptDateY());
+				// 日期-月
+				_cashDaily.setOptDateM(cashRun.getOptDateM());
+				// 昨日余额
+				_cashDaily.setInitAmt(cashRun.getInitAmt());
+
+			}
+			// 当日销售（合计）
+			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashRun.getSaleAmt()));
+			// 实际现金-当日（合计）
+			_cashDaily.setCashAmt(_cashDaily.getCashAmt().add(cashRun.getCashAmt()));
+			// 刷卡金额-单据统计-当日（合计）
+			_cashDaily.setCardAmt(_cashDaily.getCardAmt().add(cashRun.getCardAmt()));
+			// 刷卡金额-电脑统计-当日（合计）
+			_cashDaily.setCardAmtBw(_cashDaily.getCardAmtBw().add(cashRun.getCardAmtBw()));
+			// 刷卡笔数-当日（合计）
+			_cashDaily.setCardNum(_cashDaily.getCardNum() + cashRun.getCardNum());
+			// 存款金额-当日（合计）
+			_cashDaily.setDepositAmt(_cashDaily.getDepositAmt().add(cashRun.getDepositAmt()));
+			// 留存金额-当日
+			_cashDaily.setRetainedAmt(cashRun.getRetainedAmt());
+
+			// 修改销售流水标记
+			cashRun.setDailyFlg(true);
+			cashRunJpaDao.save(cashRun);
+		}
+		// 生成销售日结信息
+		cashDailyJpaDao.save(_cashDaily);
+	}
 }

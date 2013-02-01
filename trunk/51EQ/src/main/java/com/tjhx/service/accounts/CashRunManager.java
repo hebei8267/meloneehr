@@ -152,9 +152,10 @@ public class CashRunManager {
 	 * @param orgId
 	 * @param optDate
 	 * @return
+	 * @throws ParseException
 	 */
 	@SuppressWarnings("unchecked")
-	public BigDecimal getInitAmt(String orgId, String optDate) {
+	public BigDecimal getInitAmt(String orgId, String optDate) throws ParseException {
 		// 取本日前班次余额（销售）信息
 		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, new Sort(
 				new Sort.Order(Sort.Direction.DESC, "optDate")));
@@ -162,7 +163,8 @@ public class CashRunManager {
 		if (null != _list && _list.size() > 0) {// 返回本日前班次余额（销售）信息
 			return ((CashRun) _list.get(0)).getRetainedAmt();
 		} else {// 返回昨日日结余额（销售）信息
-			CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(orgId, optDate);
+			CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(orgId,
+					DateUtils.getNextDateFormatDate(optDate, -1, "yyyyMMdd"));
 			if (null == cashDaily) {
 				return new BigDecimal("0");
 			}

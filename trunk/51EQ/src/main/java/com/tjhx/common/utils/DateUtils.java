@@ -64,6 +64,24 @@ public class DateUtils {
 	}
 
 	/**
+	 * 取得指定天数后的日期（以指定时间为准）
+	 * 
+	 * @param addDay
+	 * @param style
+	 * @return
+	 * @throws ParseException
+	 */
+	public static synchronized String getNextDateFormatDate(String date, int addDay, String style)
+			throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		Date _date = stringToDate(date, style);
+		cal.setTime(_date);
+		cal.add(Calendar.DATE, addDay);
+		simpleDateFormat.applyPattern(style);
+		return simpleDateFormat.format(cal.getTime());
+	}
+
+	/**
 	 * 取得指定天数后的日期（以当前时间为准）
 	 * 
 	 * @param addMonth
