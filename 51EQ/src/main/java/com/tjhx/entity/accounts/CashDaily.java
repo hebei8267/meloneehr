@@ -11,7 +11,7 @@ import org.hibernate.annotations.NaturalId;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 现金流水日结
+ * 销售流水日结
  */
 @Entity
 @Table(name = "T_CASH_DAILY")

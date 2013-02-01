@@ -29,12 +29,12 @@ public class CashRunManager {
 	private CashDailyJpaDao cashDailyJpaDao;
 
 	/**
-	 * 取得所有现金流水信息
+	 * 取得所有销售流水信息
 	 * 
 	 * @param orgId
 	 * @param currentDate(yyyyMMdd)
 	 * 
-	 * @return 现金流水信息列表
+	 * @return 销售流水信息列表
 	 * @throws ParseException
 	 */
 	public List<CashRun> getAllCashRunByOrgId_1(String orgId, String currentDate) throws ParseException {
@@ -45,17 +45,17 @@ public class CashRunManager {
 	}
 
 	/**
-	 * 取得所有现金流水信息
+	 * 取得所有销售流水信息
 	 * 
 	 * @param orgId
-	 * @param currentDate(yyyy-MM)
-	 * @return 现金流水信息列表
+	 * @param optDate(yyyy-MM)
+	 * @return 销售流水信息列表
 	 * @throws ParseException
 	 */
-	public List<CashRun> getAllCashRunByOrgId_2(String orgId, String currentDate) throws ParseException {
-		String optDateY = DateUtils.transDateFormat(currentDate, "yyyy-MM", "yyyy");
+	public List<CashRun> getAllCashRunByOrgId_2(String orgId, String optDate) throws ParseException {
+		String optDateY = DateUtils.transDateFormat(optDate, "yyyy-MM", "yyyy");
 
-		String optDateM = DateUtils.transDateFormat(currentDate, "yyyy-MM", "MM");
+		String optDateM = DateUtils.transDateFormat(optDate, "yyyy-MM", "MM");
 		return getAllCashRunByOrgId(orgId, optDateY, optDateM);
 	}
 
@@ -76,19 +76,19 @@ public class CashRunManager {
 	}
 
 	/**
-	 * 根据编号取得现金流水信息
+	 * 根据编号取得销售流水信息
 	 * 
-	 * @param uuid 现金流水编号
-	 * @return 现金流水信息
+	 * @param uuid 销售流水编号
+	 * @return 销售流水信息
 	 */
 	public CashRun getCashRunByUuid(Integer uuid) {
 		return cashRunJpaDao.findOne(uuid);
 	}
 
 	/**
-	 * 删除现金流水信息
+	 * 删除销售流水信息
 	 * 
-	 * @param uuid 现金流水编号
+	 * @param uuid 销售流水编号
 	 */
 	@Transactional(readOnly = false)
 	public void delCashRunByUuid(Integer uuid) {
@@ -117,16 +117,16 @@ public class CashRunManager {
 
 		CashRun _dbCashRun = cashRunJpaDao.findByOrgId_OptDate_JobType(user.getOrganization().getId(), _date,
 				cashRun.getJobType());
-		// 该现金流水已存在!
+		// 该销售流水已存在!
 		if (null != _dbCashRun) {
 			throw new ServiceException("ERR_MSG_CASH_RUN_001");
 		}
 	}
 
 	/**
-	 * 添加新现金流水信息
+	 * 添加新销售流水信息
 	 * 
-	 * @param cashRun 现金流水信息
+	 * @param cashRun 销售流水信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewCashRun(CashRun cashRun, User user) {
@@ -155,13 +155,13 @@ public class CashRunManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public BigDecimal getInitAmt(String orgId, String optDate) {
-		// 取本日前班次余额（现金）信息
+		// 取本日前班次余额（销售）信息
 		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, new Sort(
 				new Sort.Order(Sort.Direction.DESC, "optDate")));
 
-		if (null != _list && _list.size() > 0) {// 返回本日前班次余额（现金）信息
+		if (null != _list && _list.size() > 0) {// 返回本日前班次余额（销售）信息
 			return ((CashRun) _list.get(0)).getRetainedAmt();
-		} else {// 返回昨日日结余额（现金）信息
+		} else {// 返回昨日日结余额（销售）信息
 			CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(orgId, optDate);
 			if (null == cashDaily) {
 				return new BigDecimal("0");
@@ -171,9 +171,9 @@ public class CashRunManager {
 	}
 
 	/**
-	 * 更新现金流水信息
+	 * 更新销售流水信息
 	 * 
-	 * @param cashRun 现金流水信息
+	 * @param cashRun 销售流水信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -182,7 +182,7 @@ public class CashRunManager {
 
 		CashRun _dbCashRun = cashRunJpaDao.findOne(cashRun.getUuid());
 		if (null == _dbCashRun) {
-			// 现金流水不存在!
+			// 销售流水不存在!
 			throw new ServiceException("ERR_MSG_CASH_RUN_002");
 		}
 

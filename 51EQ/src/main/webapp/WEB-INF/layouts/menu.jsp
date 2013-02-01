@@ -21,14 +21,14 @@
                     <li>
                         <a href="${sc_ctx}/member/logout">用户退出</a>
                     </li>
-                    <li>
+                    <li class="dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">销售信息<b class="caret"></b></a>
                     	<ul class="dropdown-menu">
                             <li>
-                                <a href="${sc_ctx}/cashRun">信息录入</a>
+                                <a href="${sc_ctx}/cashRun">录入</a>
                             </li>
                             <li>
-                                <a href="#">销售日结</a>
+                                <a href="${sc_ctx}/cashDaily">日结</a>
                             </li>
                         </ul>
                     </li>
@@ -36,10 +36,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">入库信息<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="${sc_ctx}/storeRun">信息录入</a>
+                                <a href="${sc_ctx}/storeRun">录入</a>
                             </li>
                             <li>
-                                <a href="${sc_ctx}/storeRunAudit">信息审核</a>
+                                <a href="${sc_ctx}/storeRunAudit">审核</a>
                             </li>
                         </ul>
                     </li>
