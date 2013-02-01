@@ -101,7 +101,7 @@
 										<td>${noCashDaily.cardNum}</td>
 										<td>${noCashDaily.depositAmt}</td>
 										<td>${noCashDaily.retainedAmt}</td>
-										<td><a href="${sc_ctx}/cashRun/" class="btn btn-warning" target="_blank"/>查看</a></td>
+										<td><a href="${sc_ctx}/cashDaily/detail/${noCashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a></td>
 										<td><a href="javascript:cashDailyBtn('${noCashDaily.optDate}')" id="cashDailyBtn"	class="btn btn-danger">日结</a></td>
 									</tr>
 								</c:forEach>
