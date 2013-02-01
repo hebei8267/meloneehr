@@ -46,9 +46,26 @@ public class BankManager {
 		} else {
 			logger.debug("从memcached中取出供应商信息");
 		}
-		
+
 		return _bankList;
 
+	}
+
+	/**
+	 * 取得银行名称
+	 * 
+	 * @param bankId
+	 * @return
+	 */
+	public String getBankName(String bankId) {
+		List<Bank> _bankList = getAllBank();
+		for (Bank bank : _bankList) {
+			if (bankId.equals(bank.getBankId())) {
+				return bank.getName();
+
+			}
+		}
+		return "";
 	}
 
 	/**

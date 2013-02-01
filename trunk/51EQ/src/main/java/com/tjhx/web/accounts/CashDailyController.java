@@ -16,6 +16,7 @@ import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.accounts.CashDailyManager;
+import com.tjhx.service.info.BankManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -23,6 +24,8 @@ import com.tjhx.web.BaseController;
 public class CashDailyController extends BaseController {
 	@Resource
 	private CashDailyManager cashDailyManager;
+	@Resource
+	private BankManager bankManager;
 
 	/**
 	 * 取得销售流水日结信息列表
@@ -89,10 +92,14 @@ public class CashDailyController extends BaseController {
 		List<CashRun> _list = cashDailyManager.cashDailyDetail(optDate, getUserInfo(session).getOrganization().getId());
 
 		if (null != _list && _list.size() > 0) {
-			model.addAttribute("cashRun1", _list.get(0));
+			CashRun cashRun1 = _list.get(0);
+			cashRun1.setBankName(bankManager.getBankName(cashRun1.getBankId()));
+			model.addAttribute("cashRun1", cashRun1);
 		}
 		if (null != _list && _list.size() > 1) {
-			model.addAttribute("cashRun2", _list.get(1));
+			CashRun cashRun2 = _list.get(1);
+			cashRun2.setBankName(bankManager.getBankName(cashRun2.getBankId()));
+			model.addAttribute("cashRun2", cashRun2);
 		}
 		return "accounts/cashDailyForm";
 	}

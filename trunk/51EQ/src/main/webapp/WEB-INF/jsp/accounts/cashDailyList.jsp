@@ -149,13 +149,16 @@
 									<th>
 										留存金额
 									</th>
+									<th width="55">
+										明细
+									</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:if test="${empty	cashDailyList}" >
 									<tfoot>
 										<tr>
-											<td	colspan="9" class="rounded-foot-left">
+											<td	colspan="10" class="rounded-foot-left">
 												无记录信息
 											</td>
 										</tr>
@@ -172,6 +175,7 @@
 										<td>${cashDaily.cardNum}</td>
 										<td>${cashDaily.depositAmt}</td>
 										<td>${cashDaily.retainedAmt}</td>
+										<td><a href="${sc_ctx}/cashDaily/detail/${cashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

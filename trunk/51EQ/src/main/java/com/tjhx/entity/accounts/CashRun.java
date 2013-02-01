@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -61,6 +62,8 @@ public class CashRun extends IdEntity {
 	private String descTxt;
 	/** 日结标记 */
 	private Boolean dailyFlg = false;
+	/** 存款银行名称 */
+	private String bankName;
 
 	/**
 	 * 取得机构编号
@@ -432,6 +435,25 @@ public class CashRun extends IdEntity {
 	 */
 	public void setCardCertNo(String cardCertNo) {
 		this.cardCertNo = cardCertNo;
+	}
+
+	/**
+	 * 取得存款银行名称
+	 * 
+	 * @return bankName 存款银行名称
+	 */
+	@Transient
+	public String getBankName() {
+		return bankName;
+	}
+
+	/**
+	 * 设置存款银行名称
+	 * 
+	 * @param bankName 存款银行名称
+	 */
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 }
