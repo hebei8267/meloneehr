@@ -92,6 +92,7 @@
 							digits: true
 						},
 						cardCertNo: {
+							myRequired: "#cardAmt",
 							maxlength: 32
 						},
 						depositAmt: {

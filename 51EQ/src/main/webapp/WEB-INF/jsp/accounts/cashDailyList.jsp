@@ -9,12 +9,27 @@
 <html>
 	<head>
 		<script>
+		function cashDailyBtn(optDate){
+			$('#__cashDaily_confirm').modal({
+				backdrop : true,
+				keyboard : true,
+				show : true
+			});
+			$('#dailyOptDate').val(optDate);
+			
+		}
+		$(function() {
+    		$("#confirmBtn").click(function() {
+    			$("#listForm").attr("action", "${sc_ctx}/cashDaily/confirm/"+$('#dailyOptDate').val());
+				$("#listForm").submit();
+			});
+    	});
 		</script>
 	</head>
 	<body>
 		<%// 系统菜单  %>
 		<page:applyDecorator name="menu" />
-		
+		<input type="hidden" id="dailyOptDate">
 		<div class="container">
 			<form method="post"	class="form-horizontal"	id="listForm">
 				<div class="row">
@@ -87,7 +102,7 @@
 										<td>${noCashDaily.depositAmt}</td>
 										<td>${noCashDaily.retainedAmt}</td>
 										<td><a href="${sc_ctx}/cashRun/" class="btn btn-warning" target="_blank"/>查看</a></td>
-										<td><a href="${sc_ctx}/cashDaily/confirm/${noCashDaily.optDate}"	class="btn btn-danger">日结</a></td>
+										<td><a href="javascript:cashDailyBtn('${noCashDaily.optDate}')" id="cashDailyBtn"	class="btn btn-danger">日结</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -164,6 +179,22 @@
 					</div>
 				</div>
 			</form>
+		</div>
+		
+		<div class="modal hide fade  __model37" id="__cashDaily_confirm">
+		    <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h4>系统消息</h4>
+		    </div>
+		    <div class="modal-body">
+		        <center>
+		        	<p class="error">日结该笔销售流水信息吗？</p>
+		        </center>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#" id="confirmBtn" class="btn btn-primary">确定</a>
+		        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+		    </div>
 		</div>
 	</body>
 </html>

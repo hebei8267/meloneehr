@@ -96,7 +96,11 @@ public class CashRunManager {
 	}
 
 	private void checkNewCashRun(CashRun cashRun, User user, String _date) {
-
+		// 是否已日结
+		CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(user.getOrganization().getId(), _date);
+		if (null != cashDaily) {
+			throw new ServiceException("ERR_MSG_CASH_RUN_006");
+		}
 		if (4 == cashRun.getJobType()) {// 4全天班-》当天早晚班出现
 			Long result = cashRunJpaDao.checkJobType_AllDay(user.getOrganization().getId(), _date);
 			if (result > 0) {
