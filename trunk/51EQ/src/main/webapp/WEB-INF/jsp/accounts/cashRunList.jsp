@@ -194,11 +194,8 @@
 								</c:forEach>
 								<c:if test="${!empty cashRunList}" >
                                     <tr>
-                                        <td	colspan="3">
+                                        <td	colspan="4">
                                             合计:
-                                        </td>
-                                        <td>
-                                            ${totalCashRun.initAmt}
                                         </td>
                                         <td>
                                             ${totalCashRun.saleAmt}
@@ -212,11 +209,8 @@
                                         <td>
                                             ${totalCashRun.cardAmtBw}
                                         </td>
-                                        <td colspan="2">
+                                        <td colspan="4">
                                             ${totalCashRun.depositAmt}
-                                        </td>
-                                        <td colspan="2">
-                                            ${totalCashRun.retainedAmt}
                                         </td>
                                     </tr>
                                 </c:if>

@@ -70,7 +70,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 取得CashRun信息列表
+	 * 取得销售流水信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -90,7 +90,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 取得CashRun信息列表
+	 * 取得销售流水信息列表
 	 * 
 	 * @param model
 	 * @return
@@ -111,7 +111,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 编辑CashRun信息
+	 * 编辑销售流水信息
 	 * 
 	 * @param model
 	 * @return
@@ -154,7 +154,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 新增CashRun初始化
+	 * 新增销售流水初始化
 	 * 
 	 * @param model
 	 * @return
@@ -204,7 +204,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 删除CashRun信息
+	 * 删除销售流水信息
 	 * 
 	 * @param ids
 	 * @param model
@@ -221,7 +221,7 @@ public class CashRunController extends BaseController {
 	}
 
 	/**
-	 * 新增/修改 CashRun信息
+	 * 新增/修改 销售流水信息
 	 * 
 	 * @param cashRun
 	 * @param model

@@ -53,6 +53,11 @@ select{
 	color: #CC3300;
 	font-size: 20px;
 }
+.cash_daily {
+	border-bottom: 3px solid #F89406;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
 /************************ µ¯³öÐÅÏ¢¿ò ************************/
 .__model37 {
 	font-size: 22px;
