@@ -90,16 +90,16 @@
                                         <input id="checkAll" type="checkbox" />
                                     </th>
                                     <th>
+                                        用户帐号
+                                    </th>
+                                    <th>
                                         用户名称
                                     </th>
                                     <th>
-                                        名称
+                                        用户角色
                                     </th>
                                     <th>
-                                        角色
-                                    </th>
-                                    <th>
-                                    所属机构
+                                        所属机构
                                     </th>
                                     <th	width="55">
                                         &nbsp;
