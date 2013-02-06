@@ -22,6 +22,23 @@
                         <a href="${sc_ctx}/member/logout">用户退出</a>
                     </li>
                     <li class="dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<b class="caret"></b></a>
+                    	<ul class="dropdown-menu">
+                            <li>
+                                <a href="#">银行卡管理</a>
+                            </li>
+                            <li>
+                                <a href="#">供应商管理</a>
+                            </li>
+                            <li>
+                                <a href="${sc_ctx}/organization">机构管理</a>
+                            </li>
+                            <li>
+                                <a href="#">用户管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">销售信息<b class="caret"></b></a>
                     	<ul class="dropdown-menu">
                             <li>
