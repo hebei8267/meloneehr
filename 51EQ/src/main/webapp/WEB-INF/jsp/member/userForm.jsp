@@ -12,13 +12,22 @@
 	        $(function() {	        	
 	        	$("#inputForm").validate({
 					rules: {
-						bwId: {
+						loginName: {
 							required: true,
-							maxlength: 16
+							maxlength: 32
 						},
 						name: {
 							required: true,
 							maxlength: 32
+						},
+						roleUuid: {
+							required: true
+						},
+						orgUuid: {
+							required: true
+						},
+						descTxt: {
+							maxlength: 255
 						}
 					}
 				});
@@ -55,27 +64,45 @@
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="user">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
-                            <label class="control-label">用户名称 :</label>
+                            <label class="control-label">用户帐号 :</label>
+                            <c:if test="${empty	user.uuid}">
                             <div class="controls">
                             	<form:input	path="loginName" />
                             </div>
+                        	</c:if>
+                        	<c:if test="${!empty user.uuid}">
+                            	<label class="left-control-label">${user.loginName}</label>
+                        	</c:if>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">名称 :</label>
+                            <label class="control-label">用户名称 :</label>
                             <div class="controls">
                             	<form:input	path="name" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">角色 :</label>
+                            <label class="control-label">用户角色 :</label>
                             <div class="controls">
-                            	<form:select path="role.uuid" items="${roleList}"/>
+                            	<form:select path="roleUuid" items="${roleList}" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">所属机构 :</label>
                             <div class="controls">
-                            	<form:select path="organization.uuid" items="${orgList}"/>
+                            	<form:select path="orgUuid" items="${orgList}" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">备注 :</label>
+                            <div class="controls">
+                                <form:textarea path="descTxt" class="input-xlarge" rows="4"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                        	<div class="controls">
+                        	<c:if test="${!empty user.uuid}">
+                            	<form:checkbox path="initPwdFlg"/> <label style="font-weight: bold;color: #CC3300">初始化密码</label>
+                            </c:if>
                             </div>
                         </div>
                         <div class="control-group">
