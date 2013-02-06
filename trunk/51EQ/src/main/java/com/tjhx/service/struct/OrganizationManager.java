@@ -5,19 +5,27 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.struct.OrganizationJpaDao;
 import com.tjhx.entity.struct.Organization;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class OrganizationManager {
+	private static Logger logger = LoggerFactory.getLogger(OrganizationManager.class);
+
 	@Resource
 	private OrganizationJpaDao orgJpaDao;
+	@Resource
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有机构信息
@@ -26,7 +34,21 @@ public class OrganizationManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Organization> getAllOrganization() {
-		return (List<Organization>) orgJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+
+		List<Organization> _orgList = spyMemcachedClient.get(MemcachedObjectType.ORG_LIST.getObjKey());
+
+		if (null == _orgList) {
+			// 从数据库中取出全量机构信息(List格式)
+			_orgList = (List<Organization>) orgJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+			// 将机构信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.ORG_LIST.getObjKey(),
+					MemcachedObjectType.ORG_LIST.getExpiredTime(), _orgList);
+
+			logger.debug("机构信息不在 memcached中,从数据库中取出并放入memcached");
+		} else {
+			logger.debug("从memcached中取出机构信息");
+		}
+		return _orgList;
 	}
 
 	/**
@@ -46,6 +68,8 @@ public class OrganizationManager {
 	 */
 	@Transactional(readOnly = false)
 	public void delOrganizationByUuid(Integer uuid) {
+		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
+
 		orgJpaDao.delete(uuid);
 	}
 
@@ -69,6 +93,8 @@ public class OrganizationManager {
 		org.setId(rootOrg.getId() + org.getBwId());
 
 		orgJpaDao.save(org);
+
+		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
 	}
 
 	/**
@@ -89,5 +115,7 @@ public class OrganizationManager {
 		_dbOrganization.setName(org.getName());
 
 		orgJpaDao.save(_dbOrganization);
+
+		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
 	}
 }
