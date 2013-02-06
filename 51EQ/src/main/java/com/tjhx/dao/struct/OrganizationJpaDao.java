@@ -13,8 +13,7 @@ public interface OrganizationJpaDao extends CrudRepository<Organization, Integer
 	/**
 	 * 取得机构信息
 	 * 
-	 * @param name 名称
 	 * @return 机构信息
 	 */
-	public Organization findByName(String name);
+	public Organization findByBwId(String bwId);
 }
