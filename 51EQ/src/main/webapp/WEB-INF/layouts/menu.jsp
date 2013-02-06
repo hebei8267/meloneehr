@@ -24,17 +24,17 @@
                     <li class="dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<b class="caret"></b></a>
                     	<ul class="dropdown-menu">
-                            <li>
-                                <a href="#">银行卡管理</a>
+                    		<li>
+                                <a href="${sc_ctx}/user">用户管理</a>
+                            </li>
+                    		<li>
+                                <a href="${sc_ctx}/organization">机构管理</a>
                             </li>
                             <li>
                                 <a href="#">供应商管理</a>
                             </li>
                             <li>
-                                <a href="${sc_ctx}/organization">机构管理</a>
-                            </li>
-                            <li>
-                                <a href="#">用户管理</a>
+                                <a href="#">银行卡管理</a>
                             </li>
                         </ul>
                     </li>
