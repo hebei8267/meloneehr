@@ -9,8 +9,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tjhx.dao.member.RoleJpaDao;
 import com.tjhx.dao.member.UserJpaDao;
+import com.tjhx.dao.struct.OrganizationJpaDao;
+import com.tjhx.entity.member.Role;
 import com.tjhx.entity.member.User;
+import com.tjhx.entity.struct.Organization;
+import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 
 @Service
@@ -18,6 +23,10 @@ import com.tjhx.service.ServiceException;
 public class UserManager {
 	@Resource
 	private UserJpaDao userJpaDao;
+	@Resource
+	private RoleJpaDao roleJpaDao;
+	@Resource
+	private OrganizationJpaDao orgJpaDao;
 
 	/**
 	 * 取得所有User信息
@@ -63,6 +72,13 @@ public class UserManager {
 			throw new ServiceException("ERR_MSG_USER_001");
 		}
 
+		user.setPassWord(Constants.DEFAULT_PWD);
+
+		Organization org = orgJpaDao.findOne(Integer.parseInt(user.getOrgUuid()));
+		user.setOrganization(org);
+		Role role = roleJpaDao.findOne(Integer.parseInt(user.getRoleUuid()));
+		user.setRole(role);
+
 		userJpaDao.save(user);
 	}
 
@@ -85,18 +101,27 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateUser(User user) throws IllegalAccessException, InvocationTargetException {
-		// ----------------------------------------------------------------------------
-		// TODO 修改开始
+
 		User _dbUser = userJpaDao.findOne(user.getUuid());
 		if (null == _dbUser) {
 			// User不存在!
 			throw new ServiceException("ERR_MSG_USER_002");
 		}
-
+		// 用户名称
 		_dbUser.setName(user.getName());
 		_dbUser.setDescTxt(user.getDescTxt());
 
-		// ----------------------------------------------------------------------------
+		if (user.isInitPwdFlg()) {// 初始化密码-默认值
+			_dbUser.setPassWord(Constants.DEFAULT_PWD);
+		}
+
+		// 所属机构
+		Organization org = orgJpaDao.findOne(Integer.parseInt(user.getOrgUuid()));
+		_dbUser.setOrganization(org);
+		// 用户角色
+		Role role = roleJpaDao.findOne(Integer.parseInt(user.getRoleUuid()));
+		_dbUser.setRole(role);
+
 		userJpaDao.save(_dbUser);
 	}
 }

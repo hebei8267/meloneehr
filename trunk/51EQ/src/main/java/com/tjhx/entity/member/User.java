@@ -49,6 +49,12 @@ public class User extends IdEntity {
 	private String orgName;
 	/** 用户关联部门名称 */
 	private String depName;
+	/** 角色编号 */
+	private String roleUuid;
+	/** 机构编号 */
+	private String orgUuid;
+	/** 初始化默认密码标记 */
+	private boolean initPwdFlg;
 
 	/**
 	 * 取得登录名称
@@ -267,6 +273,69 @@ public class User extends IdEntity {
 	 */
 	public void setDepName(String depName) {
 		this.depName = depName;
+	}
+
+	/**
+	 * 取得角色编号
+	 * 
+	 * @return roleUuid 角色编号
+	 */
+	@Transient
+	public String getRoleUuid() {
+		if (null != role) {
+			roleUuid = role.getUuid().toString();
+		}
+		return roleUuid;
+	}
+
+	/**
+	 * 设置角色编号
+	 * 
+	 * @param roleUuid 角色编号
+	 */
+	public void setRoleUuid(String roleUuid) {
+		this.roleUuid = roleUuid;
+	}
+
+	/**
+	 * 取得机构编号
+	 * 
+	 * @return orgUuid 机构编号
+	 */
+	@Transient
+	public String getOrgUuid() {
+		if (null != organization) {
+			orgUuid = organization.getUuid().toString();
+		}
+		return orgUuid;
+	}
+
+	/**
+	 * 设置机构编号
+	 * 
+	 * @param orgUuid 机构编号
+	 */
+	public void setOrgUuid(String orgUuid) {
+		this.orgUuid = orgUuid;
+	}
+
+	/**
+	 * 取得初始化默认密码标记
+	 * 
+	 * @return initPwdFlg 初始化默认密码标记
+	 */
+	@Transient
+	public boolean isInitPwdFlg() {
+		return initPwdFlg;
+	}
+
+	/**
+	 * 设置初始化默认密码标记
+	 * 
+	 * @param initPwdFlg 初始化默认密码标记
+	 */
+	public void setInitPwdFlg(boolean initPwdFlg) {
+		this.initPwdFlg = initPwdFlg;
 	}
 
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,7 +40,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = { "list", "" })
-	public String userList_Action(Model model, HttpServletRequest request) {
+	public String userList_Action(Model model) {
 		List<User> userList = userManager.getAllUser();
 
 		model.addAttribute("userList", userList);
@@ -57,7 +55,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "edit/{id}")
-	public String editUser_Action(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+	public String editUser_Action(@PathVariable("id") Integer id, Model model) {
 
 		User user = userManager.getUserByUuid(id);
 		if (null == user) {
@@ -81,7 +79,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "del")
-	public String delUser_Action(@RequestParam("uuids") String ids, Model model, HttpServletRequest request) {
+	public String delUser_Action(@RequestParam("uuids") String ids, Model model) {
 		String[] idArray = ids.split(",");
 		for (int i = 0; i < idArray.length; i++) {
 			userManager.delUserByUuid(Integer.parseInt(idArray[i]));
@@ -97,7 +95,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "new")
-	public String initUser_Action(Model model, HttpServletRequest request) {
+	public String initUser_Action(Model model) {
 
 		User user = new User();
 		model.addAttribute("user", user);
@@ -142,17 +140,33 @@ public class UserController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveUser_Action(@ModelAttribute("user") User user, Model model, HttpServletRequest request)
-			throws IllegalAccessException, InvocationTargetException {
+	public String saveUser_Action(@ModelAttribute("user") User user, Model model) throws IllegalAccessException,
+			InvocationTargetException {
 
-		if (null == user.getUuid()) {// 新增操作
-			userManager.addNewUser(user);
+		if (null == user.getUuid()) {
+			// 新增操作
+			try {
+				userManager.addNewUser(user);
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+
+				initOrgList(model);
+				initRoleList(model);
+
+				return "member/userForm";
+			}
 		} else {// 修改操作
 			try {
 				userManager.updateUser(user);
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initOrgList(model);
+				initRoleList(model);
+
+				return "member/userForm";
 			}
 		}
 
