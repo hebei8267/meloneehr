@@ -29,9 +29,9 @@ public class UserManager {
 	private OrganizationJpaDao orgJpaDao;
 
 	/**
-	 * 取得所有User信息
+	 * 取得所有用户信息
 	 * 
-	 * @return User信息列表
+	 * @return 用户信息列表
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUser() {
@@ -39,19 +39,19 @@ public class UserManager {
 	}
 
 	/**
-	 * 根据编号取得User信息
+	 * 根据编号取得用户信息
 	 * 
-	 * @param uuid User编号
-	 * @return User信息
+	 * @param uuid 用户编号
+	 * @return 用户信息
 	 */
 	public User getUserByUuid(Integer uuid) {
 		return userJpaDao.findOne(uuid);
 	}
 
 	/**
-	 * 删除User信息
+	 * 删除用户信息
 	 * 
-	 * @param uuid User编号
+	 * @param uuid 用户编号
 	 */
 	@Transactional(readOnly = false)
 	public void delUserByUuid(Integer uuid) {
@@ -59,15 +59,15 @@ public class UserManager {
 	}
 
 	/**
-	 * 添加新User信息
+	 * 添加新用户信息
 	 * 
-	 * @param user User信息
+	 * @param user 用户信息
 	 */
 	@Transactional(readOnly = false)
 	public void addNewUser(User user) {
 
 		User _dbUser = findByLoginName(user.getName());
-		// 该User已存在!
+		// 该用户已存在!
 		if (null != _dbUser) {
 			throw new ServiceException("ERR_MSG_USER_001");
 		}
@@ -93,9 +93,9 @@ public class UserManager {
 	}
 
 	/**
-	 * 更新User信息
+	 * 更新用户信息
 	 * 
-	 * @param user User信息
+	 * @param user 用户信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
@@ -104,7 +104,7 @@ public class UserManager {
 
 		User _dbUser = userJpaDao.findOne(user.getUuid());
 		if (null == _dbUser) {
-			// User不存在!
+			// 用户不存在!
 			throw new ServiceException("ERR_MSG_USER_002");
 		}
 		// 用户名称

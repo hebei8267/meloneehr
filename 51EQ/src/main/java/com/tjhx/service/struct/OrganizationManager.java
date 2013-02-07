@@ -14,6 +14,7 @@ import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.struct.OrganizationJpaDao;
 import com.tjhx.entity.struct.Organization;
+import com.tjhx.globals.Constants;
 import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
@@ -86,11 +87,15 @@ public class OrganizationManager {
 			throw new ServiceException("ERR_MSG_ORG_001");
 		}
 
-		Organization rootOrg = orgJpaDao.findOne(1);
+		if (Constants.ROOT_ORG_BW_ID.equals(org.getBwId())) {
+			org.setId(Constants.ROOT_ORG_ID);
+		} else {
+			Organization rootOrg = orgJpaDao.findOne(1);
+			org.setParentOrg(rootOrg);
+			rootOrg.addSubOrg(org);
+			org.setId(rootOrg.getId() + org.getBwId());
 
-		org.setParentOrg(rootOrg);
-		rootOrg.addSubOrg(org);
-		org.setId(rootOrg.getId() + org.getBwId());
+		}
 
 		orgJpaDao.save(org);
 

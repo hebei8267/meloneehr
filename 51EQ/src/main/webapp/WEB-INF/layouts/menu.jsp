@@ -31,10 +31,10 @@
                                 <a href="${sc_ctx}/organization">机构管理</a>
                             </li>
                             <li>
-                                <a href="#">供应商管理</a>
+                                <a href="${sc_ctx}/supplier">供应商管理</a>
                             </li>
                             <li>
-                                <a href="#">银行卡管理</a>
+                                <a href="${sc_ctx}/bankCard">银行卡管理</a>
                             </li>
                         </ul>
                     </li>

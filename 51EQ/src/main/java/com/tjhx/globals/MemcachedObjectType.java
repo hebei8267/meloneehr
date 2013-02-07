@@ -8,8 +8,8 @@ public enum MemcachedObjectType {
 	SUPPLIER_LIST("Supplier_List", 60 * 60 * 24), // 24小时
 	/** 银行列表 */
 	BANK_LIST("Bank_List", 60 * 60 * 24),
-	/** 银行卡列表 */
-	BANK_CARD_LIST("Bank_Card_List", 60 * 60 * 24), // 24小时
+	/** 银行卡Map */
+	BANK_CARD_MAP("Bank_Card_Map", 60 * 60 * 24), // 24小时
 	/** 机构列表 */
 	ORG_LIST("Org_List", 60 * 60 * 24), // 24小时
 	/** 角色列表 */

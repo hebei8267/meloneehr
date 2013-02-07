@@ -1,7 +1,9 @@
 package com.tjhx.service.info;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.info.BankCardJpaDao;
+import com.tjhx.entity.info.Bank;
 import com.tjhx.entity.info.BankCard;
 import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
@@ -24,6 +27,8 @@ public class BankCardManager {
 	@Resource
 	private BankCardJpaDao bankCardJpaDao;
 	@Resource
+	private BankManager bankManager;
+	@Resource
 	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
@@ -34,20 +39,40 @@ public class BankCardManager {
 	@SuppressWarnings("unchecked")
 	public List<BankCard> getAllBankCard(String bankId) {
 
-		List<BankCard> _bankCardList = spyMemcachedClient.get(MemcachedObjectType.BANK_CARD_LIST.getObjKey() + bankId);
+		Map<String, List<BankCard>> _bankCardMap = spyMemcachedClient
+				.get(MemcachedObjectType.BANK_CARD_MAP.getObjKey());
+		if (null == _bankCardMap) {
+			_bankCardMap = new HashMap<String, List<BankCard>>();
+		}
+
+		List<BankCard> _bankCardList = _bankCardMap.get(bankId);
 
 		if (null == _bankCardList) {
-			// 从数据库中取出全量供应商信息(List格式)
+			// 从数据库中取出全量银行卡信息(List格式)
 			_bankCardList = (List<BankCard>) bankCardJpaDao.findByBankId(bankId, new Sort(new Sort.Order(
 					Sort.Direction.ASC, "uuid")));
-			// 将供应商信息Map保存到memcached
-			spyMemcachedClient.set(MemcachedObjectType.BANK_CARD_LIST.getObjKey() + bankId,
-					MemcachedObjectType.BANK_CARD_LIST.getExpiredTime(), _bankCardList);
+			_bankCardMap.put(bankId, _bankCardList);
 
-			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
+			// 将银行卡信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.BANK_CARD_MAP.getObjKey(),
+					MemcachedObjectType.BANK_CARD_MAP.getExpiredTime(), _bankCardMap);
+
+			logger.debug("银行卡信息不在 memcached中,从数据库中取出并放入memcached");
 		} else {
-			logger.debug("从memcached中取出供应商信息");
+			logger.debug("从memcached中取出银行卡信息");
 		}
+		return _bankCardList;
+	}
+
+	/**
+	 * 取得所有银行卡信息
+	 * 
+	 * @return 银行卡信息列表
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BankCard> getAllBankCard() {
+		List<BankCard> _bankCardList = (List<BankCard>) bankCardJpaDao.findAll(new Sort(new Sort.Order(
+				Sort.Direction.ASC, "uuid")));
 		return _bankCardList;
 	}
 
@@ -69,6 +94,8 @@ public class BankCardManager {
 	@Transactional(readOnly = false)
 	public void delBankCardByUuid(Integer uuid) {
 		bankCardJpaDao.delete(uuid);
+
+		spyMemcachedClient.delete(MemcachedObjectType.BANK_CARD_MAP.getObjKey());
 	}
 
 	/**
@@ -83,7 +110,13 @@ public class BankCardManager {
 		if (null != _dbBankCard) {
 			throw new ServiceException("ERR_MSG_BANK_CARD_001");
 		}
+
+		Bank bank = bankManager.getBank(bankCard.getBankId());
+		bankCard.setBank(bank);
+
 		bankCardJpaDao.save(bankCard);
+
+		spyMemcachedClient.delete(MemcachedObjectType.BANK_CARD_MAP.getObjKey());
 	}
 
 	/**
@@ -102,8 +135,15 @@ public class BankCardManager {
 			throw new ServiceException("ERR_MSG_BANK_CARD_002");
 		}
 
+		BankCard _dbBankCard2 = bankCardJpaDao.findByBankCardNo(bankCard.getBankCardNo());
+		if (_dbBankCard.getUuid() != _dbBankCard2.getUuid()) {
+			throw new ServiceException("ERR_MSG_BANK_CARD_001");
+		}
+
 		_dbBankCard.setBankCardNo(bankCard.getBankCardNo());
 
 		bankCardJpaDao.save(_dbBankCard);
+
+		spyMemcachedClient.delete(MemcachedObjectType.BANK_CARD_MAP.getObjKey());
 	}
 }
