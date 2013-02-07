@@ -42,9 +42,9 @@ public class BankManager {
 			spyMemcachedClient.set(MemcachedObjectType.BANK_LIST.getObjKey(),
 					MemcachedObjectType.BANK_LIST.getExpiredTime(), _bankList);
 
-			logger.debug("供应商信息不在 memcached中,从数据库中取出并放入memcached");
+			logger.debug("银行信息不在 memcached中,从数据库中取出并放入memcached");
 		} else {
-			logger.debug("从memcached中取出供应商信息");
+			logger.debug("从memcached中取出银行信息");
 		}
 
 		return _bankList;

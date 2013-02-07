@@ -1,8 +1,13 @@
 package com.tjhx.entity.info;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -22,10 +27,12 @@ public class Supplier extends IdEntity {
 	private String supplierBwId;
 	/** 供应商名称 */
 	private String name;
-	/** 付款方式 */
+	/** 付款方式 1-现款商户 2-月结商户 4-不定 */
 	private String payType;
 	/** 所在区域 */
 	private Region region;
+	/** 所在区域编码 */
+	private String regionCode;
 	/** 拼音码 */
 	private String pyCode;
 
@@ -35,7 +42,7 @@ public class Supplier extends IdEntity {
 	 * @return supplierBwId 供应商编号-百威
 	 */
 	@NaturalId
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = 16)
 	public String getSupplierBwId() {
 		return supplierBwId;
 	}
@@ -73,6 +80,7 @@ public class Supplier extends IdEntity {
 	 * 
 	 * @return payType 付款方式
 	 */
+	@Column(length = 1)
 	public String getPayType() {
 		return payType;
 	}
@@ -91,6 +99,8 @@ public class Supplier extends IdEntity {
 	 * 
 	 * @return region 所在区域
 	 */
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "REGION_UUID")
 	public Region getRegion() {
 		return region;
 	}
@@ -109,6 +119,7 @@ public class Supplier extends IdEntity {
 	 * 
 	 * @return pyCode 拼音码
 	 */
+	@Column(length = 16)
 	public String getPyCode() {
 		return pyCode;
 	}
@@ -120,6 +131,28 @@ public class Supplier extends IdEntity {
 	 */
 	public void setPyCode(String pyCode) {
 		this.pyCode = pyCode;
+	}
+
+	/**
+	 * 取得所在区域编码
+	 * 
+	 * @return regionCode 所在区域编码
+	 */
+	@Transient
+	public String getRegionCode() {
+		if (null != region) {
+			return region.getCode();
+		}
+		return regionCode;
+	}
+
+	/**
+	 * 设置所在区域编码
+	 * 
+	 * @param regionCode 所在区域编码
+	 */
+	public void setRegionCode(String regionCode) {
+		this.regionCode = regionCode;
 	}
 
 }

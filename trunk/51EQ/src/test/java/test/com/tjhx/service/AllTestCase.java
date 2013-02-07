@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 import test.com.tjhx.service.info.BankCardManagerTest;
 import test.com.tjhx.service.info.BankManagerTest;
+import test.com.tjhx.service.info.RegionManagerTest;
 import test.com.tjhx.service.info.SupplierManagerTest;
 import test.com.tjhx.service.member.RoleManagerTest;
 import test.com.tjhx.service.member.UserManagerTest;
@@ -16,7 +17,8 @@ import test.com.tjhx.service.struct.OrganizationManagerTest;
 	UserManagerTest.class,
 	BankManagerTest.class,
 	BankCardManagerTest.class,
-	RoleManagerTest.class
+	RoleManagerTest.class,
+	RegionManagerTest.class
                     })
 public class AllTestCase {
 
