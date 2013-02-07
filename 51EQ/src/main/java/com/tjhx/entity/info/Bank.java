@@ -46,6 +46,7 @@ public class Bank extends IdEntity {
 	 * 
 	 * @return name 银行名称
 	 */
+	@Column(length = 32)
 	public String getName() {
 		return name;
 	}

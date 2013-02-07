@@ -13,7 +13,9 @@ public enum MemcachedObjectType {
 	/** 机构列表 */
 	ORG_LIST("Org_List", 60 * 60 * 24), // 24小时
 	/** 角色列表 */
-	ROLE_LIST("Role_List", 60 * 60 * 24)// 24小时
+	ROLE_LIST("Role_List", 60 * 60 * 24), // 24小时
+	/** 区域列表 */
+	REGION_LIST("Region_List", 60 * 60 * 24)// 24小时
 	;
 
 	/** Memcached对象Key */

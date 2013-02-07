@@ -78,7 +78,7 @@
                         </legend>
                     </div>
                     <div class="span12">
-                        <a href="${sc_ctx}/supplier/new"	class="btn btn-primary">新增</a>
+                        <a href="${sc_ctx}/supplier/new" class="btn btn-primary">新增</a>
                         <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
@@ -107,7 +107,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${empty	userList}" >
+                                <c:if test="${empty	supplierList}" >
                                     <tfoot>
                                         <tr>
                                             <td	colspan="6" class="rounded-foot-left">
@@ -116,27 +116,33 @@
                                         </tr>
                                     </tfoot>
                                 </c:if>
-                                <c:forEach items="${userList}" var="user">
+                                <c:forEach items="${supplierList}" var="supplier">
                                     <tr>
                                         <td	class="center">
-                                        <c:if test="${user.uuid != 1}">
-                                        	<input type="checkbox" name="uuid" value="${user.uuid}"></input>
-                        				</c:if>
+                                        	<input type="checkbox" name="uuid" value="${supplier.uuid}"></input>
                                         </td>
                                         <td>
-                                            ${user.loginName}
+                                            ${supplier.supplierBwId}
                                         </td>
                                         <td>
-                                            ${user.name}
+                                            ${supplier.name}
                                         </td>
                                         <td>
-                                            ${user.role.name}
+                                            <c:if test="${supplier.payType == '1'}">
+												现款商户
+                                            </c:if>
+                                            <c:if test="${supplier.payType == '2'}">
+												月结商户
+                                            </c:if>
+                                            <c:if test="${supplier.payType == '4'}">
+												不定
+                                            </c:if>
                                         </td>
                                         <td>
-                                            ${user.organization.name}
+                                            ${supplier.region.name}
                                         </td>
                                         <td>
-                                       		<a href="${sc_ctx}/supplier/edit/${user.uuid}" class="btn btn-warning"/>修改</a>
+                                       		<a href="${sc_ctx}/supplier/edit/${supplier.uuid}" class="btn btn-warning"/>修改</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

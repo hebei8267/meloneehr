@@ -1,7 +1,9 @@
 package com.tjhx.web.info;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tjhx.entity.info.Region;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.info.RegionManager;
 import com.tjhx.service.info.SupplierManager;
 import com.tjhx.web.BaseController;
 
@@ -24,6 +28,8 @@ import com.tjhx.web.BaseController;
 public class SupplierController extends BaseController {
 	@Resource
 	private SupplierManager supplierManager;
+	@Resource
+	private RegionManager regionManager;
 
 	/**
 	 * 取得Supplier信息列表
@@ -33,7 +39,7 @@ public class SupplierController extends BaseController {
 	 */
 	@RequestMapping(value = { "list", "" })
 	public String supplierList_Action(Model model, HttpServletRequest request) {
-		List<Supplier> supplierList = supplierManager.getAllSupplier();
+		List<Supplier> supplierList = supplierManager.getAllSupplier_DB();
 
 		model.addAttribute("supplierList", supplierList);
 
@@ -54,6 +60,10 @@ public class SupplierController extends BaseController {
 			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/supplier/list";
 		} else {
 			model.addAttribute("supplier", supplier);
+
+			initPayTypeList(model);
+			initRegionList(model);
+
 			return "info/supplierForm";
 		}
 
@@ -84,11 +94,37 @@ public class SupplierController extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String initSupplier_Action(Model model, HttpServletRequest request) {
-		// TODO 修改点
+
 		Supplier supplier = new Supplier();
 		model.addAttribute("supplier", supplier);
 
+		initPayTypeList(model);
+		initRegionList(model);
+
 		return "info/supplierForm";
+	}
+
+	private void initPayTypeList(Model model) {
+		Map<String, String> payTypeList = new LinkedHashMap<String, String>();
+		payTypeList.put("", "");
+		payTypeList.put("1", "现款商户");
+		payTypeList.put("2", "月结商户");
+		payTypeList.put("4", "不定");
+
+		model.addAttribute("payTypeList", payTypeList);
+	}
+
+	private void initRegionList(Model model) {
+		List<Region> _regionList = regionManager.getAllRegion();
+
+		Map<String, String> regionList = new LinkedHashMap<String, String>();
+		regionList.put("", "");
+		for (Region _region : _regionList) {
+			regionList.put(_region.getCode(), _region.getName());
+		}
+
+		model.addAttribute("regionList", regionList);
+
 	}
 
 	/**
@@ -110,6 +146,11 @@ public class SupplierController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initPayTypeList(model);
+				initRegionList(model);
+
+				return "info/supplierForm";
 			}
 		} else {// 修改操作
 			try {
@@ -117,6 +158,11 @@ public class SupplierController extends BaseController {
 			} catch (ServiceException ex) {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
+
+				initPayTypeList(model);
+				initRegionList(model);
+
+				return "info/supplierForm";
 			}
 		}
 

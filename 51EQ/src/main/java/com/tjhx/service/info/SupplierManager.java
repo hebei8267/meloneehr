@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
+import com.tjhx.dao.info.RegionJpaDao;
 import com.tjhx.dao.info.SupplierJpaDao;
+import com.tjhx.entity.info.Region;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
@@ -23,6 +25,8 @@ public class SupplierManager {
 	private static Logger logger = LoggerFactory.getLogger(SupplierManager.class);
 	@Resource
 	private SupplierJpaDao supplierJpaDao;
+	@Resource
+	private RegionJpaDao regionJpaDao;
 	@Resource
 	private SpyMemcachedClient spyMemcachedClient;
 
@@ -48,6 +52,17 @@ public class SupplierManager {
 			logger.debug("从memcached中取出供应商信息");
 		}
 		return _supplierList;
+	}
+
+	/**
+	 * 取得所有货品供应商信息
+	 * 
+	 * @return 货品供应商信息列表
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Supplier> getAllSupplier_DB() {
+
+		return (List<Supplier>) supplierJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
 
 	/**
@@ -94,6 +109,10 @@ public class SupplierManager {
 		if (null != _dbSupplier) {
 			throw new ServiceException("ERR_MSG_SUP_001");
 		}
+
+		Region region = regionJpaDao.findByCode(supplier.getRegionCode());
+		supplier.setRegion(region);
+
 		supplierJpaDao.save(supplier);
 
 		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
@@ -108,17 +127,20 @@ public class SupplierManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateSupplier(Supplier supplier) throws IllegalAccessException, InvocationTargetException {
-		// ----------------------------------------------------------------------------
-		// TODO 修改开始
+
 		Supplier _dbSupplier = supplierJpaDao.findOne(supplier.getUuid());
 		if (null == _dbSupplier) {
 			// 货品供应商不存在!
 			throw new ServiceException("ERR_MSG_USER_002");
 		}
-
+		// 供应商名称
 		_dbSupplier.setName(supplier.getName());
+		// 付款方式
+		_dbSupplier.setPayType(supplier.getPayType());
+		// 所在区域
+		Region region = regionJpaDao.findByCode(supplier.getRegionCode());
+		_dbSupplier.setRegion(region);
 
-		// ----------------------------------------------------------------------------
 		supplierJpaDao.save(_dbSupplier);
 
 		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
