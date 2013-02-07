@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.CashDailyJpaDao;
@@ -17,6 +18,7 @@ import com.tjhx.dao.accounts.CashRunJpaDao;
 import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
 import com.tjhx.entity.member.User;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
 
 @Service
@@ -57,6 +59,23 @@ public class CashRunManager {
 
 		String optDateM = DateUtils.transDateFormat(optDate, "yyyy-MM", "MM");
 		return getAllCashRunByOrgId(orgId, optDateY, optDateM);
+	}
+
+	/**
+	 * 效验昨天是否已做日结
+	 * 
+	 * @param orgId
+	 * @throws ParseException
+	 */
+	public void cashDailyCheck(String orgId) throws ParseException {
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		if (sysConfig.getCashDailyModel()) {// 昨天是否已做日结效验
+			CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(orgId,
+					DateUtils.getNextDateFormatDate(DateUtils.getCurFormatDate("yyyyMMdd"), -1, "yyyyMMdd"));
+			if (null == cashDaily) {
+				throw new ServiceException("ERR_MSG_CASH_RUN_007");
+			}
+		}
 	}
 
 	/**
