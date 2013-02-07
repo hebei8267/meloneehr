@@ -31,5 +31,9 @@ public class Constants {
 	// ------------------------------------------------------------------
 	/** 初始化密码-默认值 */
 	public static final String DEFAULT_PWD = "123456";
+	/** 总部机构编号-百威 */
+	public static final String ROOT_ORG_BW_ID = "00D";
+	/** 总部机构编号 */
+	public static final String ROOT_ORG_ID = "000";
 
 }

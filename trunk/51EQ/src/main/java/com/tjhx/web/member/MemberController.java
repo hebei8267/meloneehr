@@ -68,9 +68,8 @@ public class MemberController extends BaseController {
 	 */
 	private boolean checkUserInfo(User user, String loginName, String passWord) {
 		if (null != user) {
-			// 初始化机构与部门信息
+			// 初始化机构信息
 			user.getOrgName();
-			user.getDepName();
 
 			return user.getLoginName().equals(loginName) && user.getPassWord().equals(passWord);
 		}

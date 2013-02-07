@@ -5,14 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
 import com.tjhx.entity.IdEntity;
-import com.tjhx.entity.struct.Department;
 import com.tjhx.entity.struct.Organization;
 
 /**
@@ -40,15 +39,11 @@ public class User extends IdEntity {
 	private Role role;
 	/** 用户关联机构 */
 	private Organization organization;
-	/** 用户关联部门 */
-	private Department department;
 	/** 上传用户相片名称 */
 	private String photoName;
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
-	/** 用户关联部门名称 */
-	private String depName;
 	/** 角色编号 */
 	private String roleUuid;
 	/** 机构编号 */
@@ -156,7 +151,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 用户关联角色
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ROLE_UUID")
 	public Role getRole() {
 		return role;
@@ -195,7 +190,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return organization 用户关联机构
 	 */
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORG_UUID")
 	public Organization getOrganization() {
 		return organization;
@@ -208,26 +203,6 @@ public class User extends IdEntity {
 	 */
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
-	}
-
-	/**
-	 * 取得用户关联部门
-	 * 
-	 * @return department 用户关联部门
-	 */
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEP_UUID")
-	public Department getDepartment() {
-		return department;
-	}
-
-	/**
-	 * 设置用户关联部门
-	 * 
-	 * @param department 用户关联部门
-	 */
-	public void setDepartment(Department department) {
-		this.department = department;
 	}
 
 	// ############################################################################################
@@ -251,28 +226,6 @@ public class User extends IdEntity {
 	 */
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
-	}
-
-	/**
-	 * 取得用户关联部门名称
-	 * 
-	 * @return depName 用户关联部门名称
-	 */
-	@Transient
-	public String getDepName() {
-		if (null != department) {
-			return department.getName();
-		}
-		return depName;
-	}
-
-	/**
-	 * 设置用户关联部门名称
-	 * 
-	 * @param depName 用户关联部门名称
-	 */
-	public void setDepName(String depName) {
-		this.depName = depName;
 	}
 
 	/**

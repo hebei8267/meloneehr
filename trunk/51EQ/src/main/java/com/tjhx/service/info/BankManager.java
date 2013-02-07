@@ -38,7 +38,7 @@ public class BankManager {
 		if (null == _bankList) {
 			// 从数据库中取出全量银行信息(List格式)
 			_bankList = (List<Bank>) bankJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
-			// 将银行信息Map保存到memcached
+			// 将银行信息List保存到memcached
 			spyMemcachedClient.set(MemcachedObjectType.BANK_LIST.getObjKey(),
 					MemcachedObjectType.BANK_LIST.getExpiredTime(), _bankList);
 
@@ -49,6 +49,16 @@ public class BankManager {
 
 		return _bankList;
 
+	}
+
+	/**
+	 * 取得银行
+	 * 
+	 * @param bankId
+	 * @return
+	 */
+	public Bank getBank(String bankId) {
+		return bankJpaDao.findByBankId(bankId);
 	}
 
 	/**

@@ -78,6 +78,8 @@ public class SupplierManager {
 	@Transactional(readOnly = false)
 	public void delSupplierByUuid(Integer uuid) {
 		supplierJpaDao.delete(uuid);
+
+		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 	}
 
 	/**
@@ -93,6 +95,8 @@ public class SupplierManager {
 			throw new ServiceException("ERR_MSG_SUP_001");
 		}
 		supplierJpaDao.save(supplier);
+
+		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 	}
 
 	/**
@@ -116,5 +120,7 @@ public class SupplierManager {
 
 		// ----------------------------------------------------------------------------
 		supplierJpaDao.save(_dbSupplier);
+
+		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 	}
 }
