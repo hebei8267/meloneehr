@@ -14,12 +14,15 @@
             	<span class="icon-bar"></span>
             </a>
             <p class="navbar-text pull-left">
-                ${sessionScope.__SESSION_USER_INFO.name}&nbsp;您好，欢迎来到####网！
+               [${sessionScope.__SESSION_USER_INFO.orgName}]&nbsp;${sessionScope.__SESSION_USER_INFO.name}&nbsp;您好，欢迎来到####网！
             </p>
             <div class="nav-collapse">
                 <ul class="nav pull-right">
                     <li>
                         <a href="${sc_ctx}/member/logout">用户退出</a>
+                    </li>
+                    <li>
+                        <a href="${sc_ctx}/member/initModPwd">密码修改</a>
                     </li>
                     <li class="dropdown">
                     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<b class="caret"></b></a>
@@ -57,6 +60,20 @@
                             </li>
                             <li>
                                 <a href="${sc_ctx}/storeRunAudit">审核</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">报表<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">入库单</a>
+                            </li>
+                            <li>
+                                <a href="#">刷卡流水</a>
+                            </li>
+                            <li>
+                                <a href="#">销售流水</a>
                             </li>
                         </ul>
                     </li>

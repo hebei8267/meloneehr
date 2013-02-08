@@ -76,7 +76,7 @@ public class User extends IdEntity {
 	 * 
 	 * @return 登录密码
 	 */
-	@Column(nullable = false, length = 16)
+	@Column(nullable = false, length = 32)
 	public String getPassWord() {
 		return passWord;
 	}
