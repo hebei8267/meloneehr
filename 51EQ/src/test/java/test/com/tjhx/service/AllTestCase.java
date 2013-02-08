@@ -7,18 +7,26 @@ import test.com.tjhx.service.info.BankCardManagerTest;
 import test.com.tjhx.service.info.BankManagerTest;
 import test.com.tjhx.service.info.RegionManagerTest;
 import test.com.tjhx.service.info.SupplierManagerTest;
+import test.com.tjhx.service.member.FunctionManagerTest;
+import test.com.tjhx.service.member.PermissionManagerTest;
 import test.com.tjhx.service.member.RoleManagerTest;
 import test.com.tjhx.service.member.UserManagerTest;
 import test.com.tjhx.service.struct.OrganizationManagerTest;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { SupplierManagerTest.class,
+@Suite.SuiteClasses( { 
+	SupplierManagerTest.class,
 	OrganizationManagerTest.class,
-	UserManagerTest.class,
-	BankManagerTest.class,
-	BankCardManagerTest.class,
 	RoleManagerTest.class,
-	RegionManagerTest.class
+	UserManagerTest.class,
+	
+	RegionManagerTest.class,
+	FunctionManagerTest.class,
+	PermissionManagerTest.class,
+	
+	// ??????????????
+	BankManagerTest.class,
+	BankCardManagerTest.class
                     })
 public class AllTestCase {
 
