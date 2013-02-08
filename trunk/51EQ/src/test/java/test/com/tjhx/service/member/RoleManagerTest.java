@@ -17,7 +17,7 @@ public class RoleManagerTest extends SpringTransactionalTestCase {
 	@Rollback(false)
 	public void saveNewRole1() {
 		Role role = new Role();
-		role.setName("系统管理员");
+		role.setName("管理员");
 		roleManager.addNewRole(role);
 	}
 
@@ -25,7 +25,7 @@ public class RoleManagerTest extends SpringTransactionalTestCase {
 	@Rollback(false)
 	public void saveNewRole2() {
 		Role role = new Role();
-		role.setName("总部管理人员");
+		role.setName("总部人员");
 		roleManager.addNewRole(role);
 	}
 

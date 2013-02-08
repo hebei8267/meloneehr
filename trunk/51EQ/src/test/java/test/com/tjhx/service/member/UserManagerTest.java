@@ -20,13 +20,12 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 	@Rollback(false)
 	public void saveNewUser() {
 		User user = new User();
-		user.setLoginName("test");
-		user.setPassWord("testtest");
-		user.setName("123");
+		user.setLoginName("admin");
+		user.setName("系统管理员");
 
 		user.setOrgUuid("1");
 		user.setRoleUuid("1");
-		
+
 		userManager.addNewUser(user);
 	}
 
