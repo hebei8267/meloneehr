@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="span12">
 						<legend>
-							<h3>${sessionScope.__SESSION_USER_INFO.orgName}店 日结信息</h3>
+							<h3>${sessionScope.__SESSION_USER_INFO.orgName} 日结信息</h3>
 						</legend>
 					</div>
 					<div class="span12">

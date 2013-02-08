@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="span12">
                     <legend>
-                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息 审核</h3>
+                        <h3>${sessionScope.__SESSION_USER_INFO.orgName} 入库信息 审核</h3>
                     </legend>
                 </div>
                 <div class="span12"	style="margin-top: 10px;">

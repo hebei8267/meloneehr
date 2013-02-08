@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="span12">
                     <legend>
-                        <h3>${sessionScope.__SESSION_USER_INFO.orgName}店 入库信息
+                        <h3>${sessionScope.__SESSION_USER_INFO.orgName} 入库信息
                         <c:if test="${empty	storeRun.uuid}">
                             新增
                         </c:if>
