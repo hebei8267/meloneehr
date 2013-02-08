@@ -10,8 +10,10 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tjhx.common.utils.Encrypter;
 import com.tjhx.entity.member.User;
 import com.tjhx.globals.Constants;
+import com.tjhx.service.ServiceException;
 import com.tjhx.service.member.UserManager;
 import com.tjhx.web.BaseController;
 
@@ -51,11 +53,51 @@ public class MemberController extends BaseController {
 		// 校验用户信息
 		if (checkUserInfo(user, loginName, passWord)) {
 			saveUserInfo(session, user);
-			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/member/myspace";
+
+			if (user.getFirstLoginFlg()) {// 第一次登录,修改默认密码
+				return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/member/initModPwd";
+			} else {
+				return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/member/myspace";
+			}
 		} else {
 			addInfoMsg(model, "ERR_MSG_LOGIN_001");
 			return null;
 		}
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "modPwd")
+	public String modPwd_Action(HttpServletRequest request, Model model, HttpSession session)
+			throws ServletRequestBindingException {
+		Integer userUuid = ServletRequestUtils.getIntParameter(request, "uuid");
+		String oldPassWord = ServletRequestUtils.getStringParameter(request, "oldPassWord");
+		String newPassWord = ServletRequestUtils.getStringParameter(request, "newPassWord");
+		try {
+			User user = userManager.modUserPwd(userUuid, oldPassWord, newPassWord);
+
+			saveUserInfo(session, user);
+		} catch (ServiceException ex) {
+			// 添加错误消息
+			addInfoMsg(model, ex.getMessage());
+
+			return "member/modPwd";
+		}
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/member/myspace";
+	}
+
+	/**
+	 * 修改密码初始化
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "initModPwd")
+	public String initModPwd_Action() {
+		return "member/modPwd";
 	}
 
 	/**
@@ -68,10 +110,7 @@ public class MemberController extends BaseController {
 	 */
 	private boolean checkUserInfo(User user, String loginName, String passWord) {
 		if (null != user) {
-			// 初始化机构信息
-			user.getOrgName();
-
-			return user.getLoginName().equals(loginName) && user.getPassWord().equals(passWord);
+			return user.getLoginName().equals(loginName) && Encrypter.decrypt(user.getPassWord()).equals(passWord);
 		}
 		return false;
 	}

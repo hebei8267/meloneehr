@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tjhx.common.utils.Encrypter;
 import com.tjhx.dao.member.RoleJpaDao;
 import com.tjhx.dao.member.UserJpaDao;
 import com.tjhx.dao.struct.OrganizationJpaDao;
@@ -72,7 +73,8 @@ public class UserManager {
 			throw new ServiceException("ERR_MSG_USER_001");
 		}
 
-		user.setPassWord(Constants.DEFAULT_PWD);
+		// 密码加密
+		user.setPassWord(Encrypter.encrypt(Constants.DEFAULT_PWD));
 
 		Organization org = orgJpaDao.findOne(Integer.parseInt(user.getOrgUuid()));
 		user.setOrganization(org);
@@ -90,6 +92,35 @@ public class UserManager {
 	 */
 	public User findByLoginName(String loginName) {
 		return userJpaDao.findByLoginName(loginName);
+	}
+
+	/**
+	 * 修改用户密码
+	 * 
+	 * @param userUuid
+	 * @param oldPassWord
+	 * @param newPassWord
+	 */
+	@Transactional(readOnly = false)
+	public User modUserPwd(Integer userUuid, String oldPassWord, String newPassWord) {
+		User _dbUser = userJpaDao.findOne(userUuid);
+		if (null == _dbUser) {
+			// 用户不存在!
+			throw new ServiceException("ERR_MSG_USER_002");
+		}
+
+		if (!Encrypter.decrypt(_dbUser.getPassWord()).equals(oldPassWord)) {
+			// 原始密码不正确!
+			throw new ServiceException("ERR_MSG_USER_003");
+		}
+
+		_dbUser.setPassWord(Encrypter.encrypt(newPassWord));
+
+		_dbUser.setFirstLoginFlg(false);
+
+		userJpaDao.save(_dbUser);
+
+		return _dbUser;
 	}
 
 	/**
@@ -112,7 +143,7 @@ public class UserManager {
 		_dbUser.setDescTxt(user.getDescTxt());
 
 		if (user.isInitPwdFlg()) {// 初始化密码-默认值
-			_dbUser.setPassWord(Constants.DEFAULT_PWD);
+			_dbUser.setPassWord(Encrypter.encrypt(Constants.DEFAULT_PWD));
 		}
 
 		// 所属机构
