@@ -11,4 +11,6 @@ public interface RegionJpaDao extends CrudRepository<Region, Integer> {
 	public Iterable findAll(Sort sort);
 
 	public Region findByCode(String regionCode);
+
+	public Region findByName(String regionName);
 }

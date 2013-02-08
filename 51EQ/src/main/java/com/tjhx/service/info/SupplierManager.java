@@ -42,7 +42,7 @@ public class SupplierManager {
 		if (null == _supplierList) {
 			// 从数据库中取出全量供应商信息(List格式)
 			_supplierList = (List<Supplier>) supplierJpaDao
-					.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+					.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "name")));
 			// 将供应商信息Map保存到memcached
 			spyMemcachedClient.set(MemcachedObjectType.SUPPLIER_LIST.getObjKey(),
 					MemcachedObjectType.SUPPLIER_LIST.getExpiredTime(), _supplierList);
