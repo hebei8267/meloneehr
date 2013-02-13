@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tjhx.entity.info.Bank;
 import com.tjhx.entity.info.BankCard;
+import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.info.BankCardManager;
 import com.tjhx.service.info.BankManager;
+import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -27,9 +29,10 @@ import com.tjhx.web.BaseController;
 public class BankCardController extends BaseController {
 	@Resource
 	private BankCardManager bankCardManager;
-
 	@Resource
 	private BankManager bankManager;
+	@Resource
+	private OrganizationManager orgManager;
 
 	/**
 	 * 取得银行卡信息列表
@@ -58,6 +61,18 @@ public class BankCardController extends BaseController {
 		model.addAttribute("bankList", bankList);
 	}
 
+	private void initOrgList(Model model) {
+		List<Organization> _orgList = orgManager.getAllOrganization();
+
+		Map<String, String> orgList = new LinkedHashMap<String, String>();
+		orgList.put("", "");
+		for (Organization _org : _orgList) {
+			orgList.put(_org.getId(), _org.getName());
+		}
+
+		model.addAttribute("orgList", orgList);
+	}
+
 	/**
 	 * 编辑银行卡信息
 	 * 
@@ -74,6 +89,7 @@ public class BankCardController extends BaseController {
 			model.addAttribute("bankCard", bankCard);
 
 			initBankList(model);
+			initOrgList(model);
 
 			return "info/bankCardForm";
 		}
@@ -110,6 +126,7 @@ public class BankCardController extends BaseController {
 		model.addAttribute("bankCard", bankCard);
 
 		initBankList(model);
+		initOrgList(model);
 
 		return "info/bankCardForm";
 	}
@@ -135,6 +152,7 @@ public class BankCardController extends BaseController {
 				addInfoMsg(model, ex.getMessage());
 
 				initBankList(model);
+				initOrgList(model);
 
 				return "info/bankCardForm";
 			}
@@ -146,6 +164,7 @@ public class BankCardController extends BaseController {
 				addInfoMsg(model, ex.getMessage());
 
 				initBankList(model);
+				initOrgList(model);
 
 				return "info/bankCardForm";
 			}

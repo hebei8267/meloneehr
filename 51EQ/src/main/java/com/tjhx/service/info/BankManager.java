@@ -62,23 +62,6 @@ public class BankManager {
 	}
 
 	/**
-	 * 取得银行名称
-	 * 
-	 * @param bankId
-	 * @return
-	 */
-	public String getBankName(String bankId) {
-		List<Bank> _bankList = getAllBank();
-		for (Bank bank : _bankList) {
-			if (bankId.equals(bank.getBankId())) {
-				return bank.getName();
-
-			}
-		}
-		return "";
-	}
-
-	/**
 	 * 根据编号取得银行信息
 	 * 
 	 * @param uuid 银行编号

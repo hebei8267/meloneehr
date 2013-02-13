@@ -84,11 +84,7 @@
 							<label class="left-control-label">${cashRun1.depositor}</label>
 						</div>
 						<div class="control-group">
-							<label class="control-label">存款银行 :</label>
-							<label class="left-control-label">${cashRun1.bankName}</label>
-						</div>
-						<div class="control-group">
-							<label class="control-label">卡号 :</label>
+							<label class="control-label">存款银行卡号 :</label>
 							<label class="left-control-label">${cashRun1.bankCardNo}</label>
 						</div>
 						<div class="control-group">
@@ -164,11 +160,7 @@
 							<label class="left-control-label">${cashRun2.depositor}</label>
 						</div>
 						<div class="control-group">
-							<label class="control-label">存款银行 :</label>
-							<label class="left-control-label">${cashRun2.bankName}</label>
-						</div>
-						<div class="control-group">
-							<label class="control-label">卡号 :</label>
+							<label class="control-label">存款银行卡号 :</label>
 							<label class="left-control-label">${cashRun2.bankCardNo}</label>
 						</div>
 						<div class="control-group">

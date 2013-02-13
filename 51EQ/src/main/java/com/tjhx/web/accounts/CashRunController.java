@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -21,17 +20,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springside.modules.mapper.JsonMapper;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.CashRun;
-import com.tjhx.entity.info.Bank;
 import com.tjhx.entity.info.BankCard;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.accounts.CashRunManager;
 import com.tjhx.service.info.BankCardManager;
-import com.tjhx.service.info.BankManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -39,8 +35,6 @@ import com.tjhx.web.BaseController;
 public class CashRunController extends BaseController {
 	@Resource
 	private CashRunManager cashRunManager;
-	@Resource
-	private BankManager bankManager;
 	@Resource
 	private BankCardManager bankCardManager;
 
@@ -62,12 +56,30 @@ public class CashRunController extends BaseController {
 		return (initAmt == null ? "0" : initAmt.toString());
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "getBankCardNoList")
-	public String getBankCardNoList_Action(HttpServletRequest request) throws ServletRequestBindingException {
-		String bankId = ServletRequestUtils.getStringParameter(request, "bankId");
-		List<BankCard> _list = bankCardManager.getAllBankCard(bankId);
-		return new JsonMapper().toJson(_list);
+	// @ResponseBody
+	// @RequestMapping(value = "getBankCardNoList")
+	// public String getBankCardNoList_Action(HttpServletRequest request) throws
+	// ServletRequestBindingException {
+	// String bankId = ServletRequestUtils.getStringParameter(request,
+	// "bankId");
+	// List<BankCard> _list = bankCardManager.getAllBankCard(bankId);
+	// return new JsonMapper().toJson(_list);
+	// }
+
+	/**
+	 * 初始化银行卡列表
+	 * 
+	 * @param model
+	 */
+	private void initBankCardList(Model model, String orgId) {
+		List<BankCard> _list = bankCardManager.getAllBankCard(orgId);
+
+		Map<String, String> bankCardList = new LinkedHashMap<String, String>();
+		bankCardList.put("", "");
+		for (BankCard _bankCard : _list) {
+			bankCardList.put(_bankCard.getBankCardNo(), _bankCard.getBankCardNo());
+		}
+		model.addAttribute("bankCardList", bankCardList);
 	}
 
 	/**
@@ -127,31 +139,11 @@ public class CashRunController extends BaseController {
 			model.addAttribute("cashRun", cashRun);
 
 			initJobTypeList(model);
-			initBankCodeList(model);
-
-			if (StringUtils.isNotBlank(cashRun.getBankId())) {
-				initBankCardList(model, cashRun.getBankId());
-			}
+			initBankCardList(model, getUserInfo(session).getOrganization().getId());
 
 			return "accounts/cashRunForm";
 		}
 
-	}
-
-	/**
-	 * 初始化银行卡列表
-	 * 
-	 * @param model
-	 */
-	private void initBankCardList(Model model, String bankId) {
-		List<BankCard> _list = bankCardManager.getAllBankCard(bankId);
-
-		Map<String, String> bankCardList = new LinkedHashMap<String, String>();
-		bankCardList.put("", "");
-		for (BankCard _bankCard : _list) {
-			bankCardList.put(_bankCard.getBankCardNo(), _bankCard.getBankCardNo());
-		}
-		model.addAttribute("bankCardList", bankCardList);
 	}
 
 	/**
@@ -175,7 +167,7 @@ public class CashRunController extends BaseController {
 		model.addAttribute("cashRun", cashRun);
 
 		initJobTypeList(model);
-		initBankCodeList(model);
+		initBankCardList(model, getUserInfo(session).getOrganization().getId());
 
 		return "accounts/cashRunForm";
 	}
@@ -194,22 +186,6 @@ public class CashRunController extends BaseController {
 		jobTypeList.put("4", "全天班");
 
 		model.addAttribute("jobTypeList", jobTypeList);
-	}
-
-	/**
-	 * 初始化银行列表
-	 * 
-	 * @param model
-	 */
-	private void initBankCodeList(Model model) {
-		List<Bank> _list = bankManager.getAllBank();
-
-		Map<String, String> bankList = new LinkedHashMap<String, String>();
-		bankList.put("", "");
-		for (Bank _bank : _list) {
-			bankList.put(_bank.getBankId(), _bank.getName());
-		}
-		model.addAttribute("bankList", bankList);
 	}
 
 	/**
@@ -250,10 +226,7 @@ public class CashRunController extends BaseController {
 				addInfoMsg(model, ex.getMessage());
 
 				initJobTypeList(model);
-				initBankCodeList(model);
-				if (StringUtils.isNotBlank(cashRun.getBankId())) {
-					initBankCardList(model, cashRun.getBankId());
-				}
+				initBankCardList(model, getUserInfo(session).getOrganization().getId());
 
 				return "accounts/cashRunForm";
 			}
@@ -265,10 +238,7 @@ public class CashRunController extends BaseController {
 				addInfoMsg(model, ex.getMessage());
 
 				initJobTypeList(model);
-				initBankCodeList(model);
-				if (StringUtils.isNotBlank(cashRun.getBankId())) {
-					initBankCardList(model, cashRun.getBankId());
-				}
+				initBankCardList(model, getUserInfo(session).getOrganization().getId());
 
 				return "accounts/cashRunForm";
 			}
