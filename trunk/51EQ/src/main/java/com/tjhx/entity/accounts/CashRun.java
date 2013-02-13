@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -52,8 +51,6 @@ public class CashRun extends IdEntity {
 	private BigDecimal depositAmt = new BigDecimal("0");
 	/** 存款人 */
 	private String depositor;
-	/** 存款银行（选择） */
-	private String bankId;
 	/** 卡号（选择） */
 	private String bankCardNo;
 	/** 留存金额-交班时 */
@@ -62,8 +59,6 @@ public class CashRun extends IdEntity {
 	private String descTxt;
 	/** 日结标记 */
 	private Boolean dailyFlg = false;
-	/** 存款银行名称 */
-	private String bankName;
 
 	/**
 	 * 取得机构编号
@@ -327,25 +322,6 @@ public class CashRun extends IdEntity {
 	}
 
 	/**
-	 * 取得存款银行（选择）
-	 * 
-	 * @return bankId 存款银行（选择）
-	 */
-	@Column(length = 16)
-	public String getBankId() {
-		return bankId;
-	}
-
-	/**
-	 * 设置存款银行（选择）
-	 * 
-	 * @param bankId 存款银行（选择）
-	 */
-	public void setBankId(String bankId) {
-		this.bankId = bankId;
-	}
-
-	/**
 	 * 取得卡号（选择）
 	 * 
 	 * @return bankCardNo 卡号（选择）
@@ -435,25 +411,6 @@ public class CashRun extends IdEntity {
 	 */
 	public void setCardCertNo(String cardCertNo) {
 		this.cardCertNo = cardCertNo;
-	}
-
-	/**
-	 * 取得存款银行名称
-	 * 
-	 * @return bankName 存款银行名称
-	 */
-	@Transient
-	public String getBankName() {
-		return bankName;
-	}
-
-	/**
-	 * 设置存款银行名称
-	 * 
-	 * @param bankName 存款银行名称
-	 */
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
 	}
 
 }

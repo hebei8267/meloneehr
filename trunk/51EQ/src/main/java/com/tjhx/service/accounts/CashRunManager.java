@@ -229,8 +229,6 @@ public class CashRunManager {
 		_dbCashRun.setDepositAmt(cashRun.getDepositAmt());
 		// 存款人
 		_dbCashRun.setDepositor(cashRun.getDepositor());
-		// 存款银行（选择）
-		_dbCashRun.setBankId(cashRun.getBankId());
 		// 卡号（选择）
 		_dbCashRun.setBankCardNo(cashRun.getBankCardNo());
 		// 留存金额-交班时

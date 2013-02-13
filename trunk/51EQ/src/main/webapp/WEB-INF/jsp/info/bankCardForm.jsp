@@ -18,6 +18,9 @@
 						bankCardNo: {
 							required: true,
 							maxlength: 32
+						},
+						orgId: {
+							required: true
 						}
 					}
 				});
@@ -68,6 +71,12 @@
                             <label class="control-label">银行帐号 :</label>
                             <div class="controls">
                             	<form:input	path="bankCardNo" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">适用机构 :</label>
+                            <div class="controls">
+                            	<form:select path="orgId" items="${orgList}" />
                             </div>
                         </div>
                         <div class="control-group">

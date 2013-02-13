@@ -93,12 +93,10 @@ public class CashDailyController extends BaseController {
 
 		if (null != _list && _list.size() > 0) {
 			CashRun cashRun1 = _list.get(0);
-			cashRun1.setBankName(bankManager.getBankName(cashRun1.getBankId()));
 			model.addAttribute("cashRun1", cashRun1);
 		}
 		if (null != _list && _list.size() > 1) {
 			CashRun cashRun2 = _list.get(1);
-			cashRun2.setBankName(bankManager.getBankName(cashRun2.getBankId()));
 			model.addAttribute("cashRun2", cashRun2);
 		}
 		return "accounts/cashDailyForm";

@@ -14,6 +14,6 @@ public interface BankCardJpaDao extends CrudRepository<BankCard, Integer> {
 	public BankCard findByBankCardNo(String bankCardNo);
 
 	@SuppressWarnings("rawtypes")
-	@Query("select b from BankCard b where b.bankId = ?1") 
-	public Iterable findByBankId(String bankId, Sort sort);
+	@Query("select b from BankCard b where b.orgId = ?1") 
+	public Iterable findByOrgId(String orgId, Sort sort);
 }

@@ -40,27 +40,6 @@
 					}
 				});
 				
-				$('#bankId').change(function(){
-					if(oldBankIdVal == $('#bankId').val()){
-						return;
-					}
-					
-					oldBankIdVal = $('#bankId').val();
-					
-					if("" != $('#bankId').val()){
-						$.post("${sc_ctx}/cashRun/getBankCardNoList", {"bankId":$('#bankId').val()}, function(result){
-							var optionstring = "<option value=''></option>";
-							$.each(result, function(index, item){
-								optionstring += "<option value=\""+ item.bankCardNo +"\" >"+ item.bankCardNo +"</option>";
-							});
-							
-							jQuery("#bankCardNo").html(optionstring);
-						},"json");
-					} else {
-						jQuery("#bankCardNo").html("");
-					}
-			    });
-				
 				$("#inputForm").validate({
 					rules: {
 						optDateShow: {
@@ -250,13 +229,7 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">存款银行 :</label>
-							<div class="controls">
-								<form:select path="bankId" items="${bankList}"/>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">卡号 :</label>
+							<label class="control-label">存款银行卡号 :</label>
 							<div class="controls">
 								<form:select path="bankCardNo" items="${bankCardList}"/>
 							</div>

@@ -37,7 +37,7 @@ public class BankCardManager {
 	 * @return 银行卡信息列表
 	 */
 	@SuppressWarnings("unchecked")
-	public List<BankCard> getAllBankCard(String bankId) {
+	public List<BankCard> getAllBankCard(String orgId) {
 
 		Map<String, List<BankCard>> _bankCardMap = spyMemcachedClient
 				.get(MemcachedObjectType.BANK_CARD_MAP.getObjKey());
@@ -45,13 +45,13 @@ public class BankCardManager {
 			_bankCardMap = new HashMap<String, List<BankCard>>();
 		}
 
-		List<BankCard> _bankCardList = _bankCardMap.get(bankId);
+		List<BankCard> _bankCardList = _bankCardMap.get(orgId);
 
 		if (null == _bankCardList) {
 			// 从数据库中取出全量银行卡信息(List格式)
-			_bankCardList = (List<BankCard>) bankCardJpaDao.findByBankId(bankId, new Sort(new Sort.Order(
+			_bankCardList = (List<BankCard>) bankCardJpaDao.findByOrgId(orgId, new Sort(new Sort.Order(
 					Sort.Direction.ASC, "uuid")));
-			_bankCardMap.put(bankId, _bankCardList);
+			_bankCardMap.put(orgId, _bankCardList);
 
 			// 将银行卡信息Map保存到memcached
 			spyMemcachedClient.set(MemcachedObjectType.BANK_CARD_MAP.getObjKey(),
@@ -141,6 +141,7 @@ public class BankCardManager {
 		}
 
 		_dbBankCard.setBankCardNo(bankCard.getBankCardNo());
+		_dbBankCard.setOrgId(bankCard.getOrgId());
 
 		bankCardJpaDao.save(_dbBankCard);
 

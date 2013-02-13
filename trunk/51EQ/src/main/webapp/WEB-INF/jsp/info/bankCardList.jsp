@@ -98,6 +98,9 @@
                                     <th>
                                         银行帐号
                                     </th>
+                                    <th>
+                                        适用机构
+                                    </th>
                                     <th	width="55">
                                         &nbsp;
                                     </th>
@@ -107,7 +110,7 @@
                                 <c:if test="${empty	bankCardList}" >
                                     <tfoot>
                                         <tr>
-                                            <td	colspan="5" class="rounded-foot-left">
+                                            <td	colspan="6" class="rounded-foot-left">
                                                 无记录信息
                                             </td>
                                         </tr>
@@ -126,6 +129,9 @@
                                         </td>
                                         <td>
                                             ${bankCard.bankCardNo}
+                                        </td>
+                                        <td>
+                                            ${bankCard.orgId}
                                         </td>
                                         <td>
                                        		<a href="${sc_ctx}/bankCard/edit/${bankCard.uuid}" class="btn btn-warning"/>修改</a>

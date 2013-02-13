@@ -21,12 +21,33 @@ public class BankCard extends IdEntity {
 
 	private static final long serialVersionUID = 1270130153158385933L;
 
+	/** 机构编号 */
+	private String orgId;
 	/** 银行卡号码 */
 	private String bankCardNo;
 	/** 银行 */
 	private Bank bank;
 	/** 银行编号 */
 	private String bankId;
+
+	/**
+	 * 取得机构编号
+	 * 
+	 * @return orgId 机构编号
+	 */
+	@Column(length = 32)
+	public String getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * 设置机构编号
+	 * 
+	 * @param orgId 机构编号
+	 */
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
 
 	/**
 	 * 取得银行卡号码
