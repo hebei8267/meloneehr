@@ -149,6 +149,8 @@ public class BaseController {
 	protected void saveUserInfo(HttpSession session, User user) {
 		// 初始化机构信息
 		user.getOrgName();
+		// 初始化角色权限
+		user.getRole().initPermIdList();
 
 		session.setAttribute(Constants.SESSION_USER_INFO, user);
 	}
