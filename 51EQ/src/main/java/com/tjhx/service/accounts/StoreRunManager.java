@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.StoreRunJpaDao;
+import com.tjhx.dao.accounts.StoreRunMyBatisDao;
 import com.tjhx.dao.info.SupplierJpaDao;
 import com.tjhx.entity.accounts.StoreRun;
 import com.tjhx.entity.info.Supplier;
@@ -26,6 +27,8 @@ import com.tjhx.service.info.SupplierManager;
 public class StoreRunManager {
 	@Resource
 	private StoreRunJpaDao storeRunJpaDao;
+	@Resource
+	private StoreRunMyBatisDao storeRunMyBatisDao;
 	@Resource
 	private SupplierJpaDao supplierJpaDao;
 	@Resource
@@ -269,5 +272,15 @@ public class StoreRunManager {
 		_dbStoreRun.setAuditFlg(true);
 
 		storeRunJpaDao.save(_dbStoreRun);
+	}
+
+	/**
+	 * 取得货物入库流水信息列表
+	 * 
+	 * @param storeRun
+	 * @return
+	 */
+	public List<StoreRun> searchReportList(StoreRun storeRun) {
+		return storeRunMyBatisDao.getStoreRunList(storeRun);
 	}
 }

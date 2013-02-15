@@ -96,13 +96,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">报表<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">入库单</a>
+                                <a href="${sc_ctx}/storeReport">入库信息</a>
                             </li>
                             <li>
                                 <a href="#">刷卡流水</a>
                             </li>
                             <li>
-                                <a href="#">销售流水</a>
+                                <a href="${sc_ctx}/cashReport">销售流水</a>
                             </li>
                         </ul>
                     </li>

@@ -77,6 +77,8 @@ public class StoreRun extends IdEntity {
 	// ############################################################################################
 	/** 可编辑标记 */
 	private Boolean editFlg = false;
+	/** 机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -549,6 +551,25 @@ public class StoreRun extends IdEntity {
 	 */
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
+	}
+
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 
 }
