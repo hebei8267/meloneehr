@@ -50,8 +50,12 @@ select{
 	padding-top: 5px;
 	padding-left: 24px;
 	font-weight: bold;
-	color: #CC3300;
+	color: #04C;
 	font-size: 20px;
+}
+.warn_text {
+	color: #CC3300;
+	font-weight: bold;
 }
 .cash_daily {
 	border-bottom: 3px solid #F89406;

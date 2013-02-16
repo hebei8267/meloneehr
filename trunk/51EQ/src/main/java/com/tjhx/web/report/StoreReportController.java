@@ -83,6 +83,8 @@ public class StoreReportController extends BaseController {
 
 		List<StoreRun> _storeRunList = storeRunManager.searchReportList(_storeRun);
 		model.addAttribute("storeRunList", _storeRunList);
+		StoreRun totalStoreRun = storeRunManager.calTotal(_storeRunList);
+		model.addAttribute("totalStoreRun", totalStoreRun);
 
 		initOrgList(model);
 
@@ -103,19 +105,19 @@ public class StoreReportController extends BaseController {
 
 		model.addAttribute("orgList", orgList);
 	}
-	
+
 	@RequestMapping(value = "detail/{recordNo}")
-	public String storeReportView_Action(@PathVariable("recordNo") String recordNo,Model model){
+	public String storeReportView_Action(@PathVariable("recordNo") String recordNo, Model model) {
 		StoreRun _storeRun = new StoreRun();
 		if (StringUtils.isNotBlank(recordNo)) {
 			_storeRun.setRecordNo(recordNo);
 		}
 
 		List<StoreRun> _storeRunList = storeRunManager.searchReportList(_storeRun);
-		if(null!=_storeRunList&&_storeRunList.size()>0){
+		if (null != _storeRunList && _storeRunList.size() > 0) {
 			model.addAttribute("storeRun", _storeRunList.get(0));
 		}
-		
+
 		return "report/storeDetailReport";
 	}
 }
