@@ -4,21 +4,23 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
-    	<script>
-    	$(function() {
-    		$("#saveBtn").click(function() {
-    			$('#__storeRun_confirm').modal({
-					backdrop : true,
-					keyboard : true,
-					show : true
-				});
-			});
-    	});
-    	</script>
+        <script>
+            $(function() {
+                $("#saveBtn").click(function() {
+                    $('#__storeRun_confirm').modal({
+                        backdrop : true,
+                        keyboard : true,
+                        show : true
+                    });
+                });
+            });
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -35,8 +37,8 @@
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="storeRun">
                         <form:hidden path="uuid"/>
                         <div class="control-group">
-                           <label class="control-label">入库单号 :</label>
-                           <label class="left-control-label">${storeRun.recordNo}</label>
+                            <label class="control-label">入库单号 :</label>
+                            <label class="left-control-label">${storeRun.recordNo}</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">供应商 :</label>
@@ -45,16 +47,15 @@
                         <div class="control-group">
                             <label class="control-label">入库类型 :</label>
                             <label class="left-control-label">
-                            	<c:if test="${storeRun.storeType == 'A'}">
-									挂账采购
+                                <c:if test="${storeRun.storeType == 'A'}">
+                                    挂账采购
                                 </c:if>
                                 <c:if test="${storeRun.storeType == 'B'}">
-									现结采购
+                                    现结采购
                                 </c:if>
                                 <c:if test="${storeRun.storeType == 'C'}">
-									货商补欠
-                                </c:if>
-                            </label>
+                                    货商补欠
+                                </c:if> </label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">开单日期 :</label>
@@ -94,21 +95,23 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="modal hide fade  __model37" id="__storeRun_confirm">
-		    <div class="modal-header">
-		        <a class="close" data-dismiss="modal">×</a>
-		        <h4>系统消息</h4>
-		    </div>
-		    <div class="modal-body">
-		        <center>
-		        	<p class="error">审核通过该笔入库流水信息吗？</p>
-		        </center>
-		    </div>
-		    <div class="modal-footer">
-		    	<a href="${sc_ctx}/storeRunAudit/confirm/${storeRun.uuid}" class="btn btn-primary">确定</a>
-		        <a href="#" class="btn" data-dismiss="modal">关闭</a>
-		    </div>
-		</div>
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h4>系统消息</h4>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <p class="error">
+                        审核通过该笔入库流水信息吗？
+                    </p>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <a href="${sc_ctx}/storeRunAudit/confirm/${storeRun.uuid}" class="btn btn-primary">确定</a>
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </div>
     </body>
 </html>

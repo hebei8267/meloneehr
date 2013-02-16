@@ -4,11 +4,12 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
-    <head>
-    </head>
+    <head></head>
     <body>
         <%// 系统菜单  %>
         <page:applyDecorator name="menu" />
@@ -64,15 +65,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${empty	storeRunList}" >
-                                    <tfoot>
-                                        <tr>
-                                            <td	colspan="10"	class="rounded-foot-left">
-                                                无记录信息
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </c:if>
                                 <c:forEach items="${storeRunList}" var="storeRun">
                                     <tr>
                                         <td>
@@ -82,14 +74,14 @@
                                             ${storeRun.supplierName}
                                         </td>
                                         <td>
-                                        	<c:if test="${storeRun.storeType == 'A'}">
-												挂账采购
+                                            <c:if test="${storeRun.storeType == 'A'}">
+                                                挂账采购
                                             </c:if>
                                             <c:if test="${storeRun.storeType == 'B'}">
-												现结采购
+                                                现结采购
                                             </c:if>
                                             <c:if test="${storeRun.storeType == 'C'}">
-												货商补欠
+                                                货商补欠
                                             </c:if>
                                         </td>
                                         <td>
@@ -112,7 +104,7 @@
                                         </td>
                                         <td>
                                             <c:if test="${storeRun.auditFlg == 'false'}">
-												<a href="${sc_ctx}/storeRunAudit/confirmInit/${storeRun.uuid}" class="btn btn-warning"/>审核</a>
+                                                <a href="${sc_ctx}/storeRunAudit/confirmInit/${storeRun.uuid}" class="btn btn-warning"/>审核</a>
                                             </c:if>
                                         </td>
                                     </tr>
@@ -132,6 +124,15 @@
                                     </tr>
                                 </c:if>
                             </tbody>
+                            <c:if test="${empty	storeRunList}" >
+                                <tfoot>
+                                    <tr>
+                                        <td	colspan="10"	class="rounded-foot-left">
+                                            无记录信息
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </c:if>
                         </table>
                     </div>
                 </div>

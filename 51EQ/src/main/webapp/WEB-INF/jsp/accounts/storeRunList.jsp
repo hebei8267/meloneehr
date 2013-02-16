@@ -4,66 +4,68 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
         <script>
-			$().ready(function() {
-				//-----------------------------------
-				// 表单效验
-				//-----------------------------------
-				$("#listForm").validate({
-					rules: {
-						delBtn : {
-							requiredSelect : 'uuid'
-						}
-					}
-				});
-				//-----------------------------------
-				// 全选/全部选
-				//-----------------------------------
-				$("#checkAll").click(function()	{
-					$('input[name="uuid"]').attr("checked",this.checked);
-				});
-				var	$subCheckBox = $("input[name='uuid']");
-				$subCheckBox.click(function(){
-					$("#checkAll").attr("checked",$subCheckBox.length == $("input[name='uuid']:checked").length	? true : false);
-				});
-				
-				//-----------------------------------
-				// 删除按钮点击
-				//-----------------------------------
-				$("#delBtn").click(function() {
-					if($("#listForm").valid()){
-						$('#__del_confirm').modal({
-							backdrop : true,
-							keyboard : true,
-							show : true
-						});
-					}
-				});
-			});
-			//-----------------------------------
-			// 删除
-			//-----------------------------------
-			function _del_confirm(){
-				var	$subCheckBox = $("input[name='uuid']");
-				var	uuids =	"";
-				$.each($subCheckBox, function(index, _checkBox)	{
-					if(_checkBox.checked){
-						uuids += _checkBox.value + ",";
-					}
-				});
-				if(uuids.length	> 0){
-					uuids =	uuids.substring(0, uuids.length	- 1);
-				}
-				
-				$("#uuids").val(uuids);
-				$("#listForm").attr("action", "${sc_ctx}/storeRun/del");
-				$("#listForm").submit();
-			}	
-		</script>
+            $().ready(function() {
+                //-----------------------------------
+                // 表单效验
+                //-----------------------------------
+                $("#listForm").validate({
+                    rules : {
+                        delBtn : {
+                            requiredSelect : 'uuid'
+                        }
+                    }
+                });
+                //-----------------------------------
+                // 全选/全部选
+                //-----------------------------------
+                $("#checkAll").click(function() {
+                    $('input[name="uuid"]').attr("checked", this.checked);
+                });
+                var $subCheckBox = $("input[name='uuid']");
+                $subCheckBox.click(function() {
+                    $("#checkAll").attr("checked", $subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
+                });
+
+                //-----------------------------------
+                // 删除按钮点击
+                //-----------------------------------
+                $("#delBtn").click(function() {
+                    if ($("#listForm").valid()) {
+                        $('#__del_confirm').modal({
+                            backdrop : true,
+                            keyboard : true,
+                            show : true
+                        });
+                    }
+                });
+            });
+            //-----------------------------------
+            // 删除
+            //-----------------------------------
+            function _del_confirm() {
+                var $subCheckBox = $("input[name='uuid']");
+                var uuids = "";
+                $.each($subCheckBox, function(index, _checkBox) {
+                    if (_checkBox.checked) {
+                        uuids += _checkBox.value + ",";
+                    }
+                });
+                if (uuids.length > 0) {
+                    uuids = uuids.substring(0, uuids.length - 1);
+                }
+
+                $("#uuids").val(uuids);
+                $("#listForm").attr("action", "${sc_ctx}/storeRun/del");
+                $("#listForm").submit();
+            }
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -130,15 +132,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:if test="${empty	storeRunList}" >
-                                    <tfoot>
-                                        <tr>
-                                            <td	colspan="12" class="rounded-foot-left">
-                                                无记录信息
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </c:if>
                                 <c:forEach items="${storeRunList}" var="storeRun">
                                     <tr>
                                         <td	class="center">
@@ -154,14 +147,14 @@
                                             ${storeRun.supplierName}
                                         </td>
                                         <td>
-                                        	<c:if test="${storeRun.storeType == 'A'}">
-												挂账采购
+                                            <c:if test="${storeRun.storeType == 'A'}">
+                                                挂账采购
                                             </c:if>
                                             <c:if test="${storeRun.storeType == 'B'}">
-												现结采购
+                                                现结采购
                                             </c:if>
                                             <c:if test="${storeRun.storeType == 'C'}">
-												货商补欠
+                                                货商补欠
                                             </c:if>
                                         </td>
                                         <td>
@@ -184,7 +177,7 @@
                                         </td>
                                         <td>
                                             <c:if test="${storeRun.auditFlg == 'true'}">
-												已审核
+                                                已审核
                                             </c:if>
                                         </td>
                                         <td>
@@ -209,6 +202,15 @@
                                     </tr>
                                 </c:if>
                             </tbody>
+                            <c:if test="${empty	storeRunList}" >
+                                <tfoot>
+                                    <tr>
+                                        <td	colspan="12" class="rounded-foot-left">
+                                            无记录信息
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </c:if>
                         </table>
                     </div>
                 </div>

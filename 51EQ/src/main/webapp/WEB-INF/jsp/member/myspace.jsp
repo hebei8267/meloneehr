@@ -3,15 +3,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
-    <head>
-    </head>
+    <head></head>
     <body>
         <%// 系统菜单  %>
-		<page:applyDecorator name="menu" />
-		
-		????????????
+        <page:applyDecorator name="menu" />
+
+        ????????????
     </body>
 </html>

@@ -4,36 +4,38 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
         <script>
-	        $(function() {	        	
-	        	$("#inputForm").validate({
-					rules: {
-						bankId: {
-							required: true
-						},
-						bankCardNo: {
-							required: true,
-							maxlength: 32
-						},
-						orgId: {
-							required: true
-						}
-					}
-				});
-	        	
-	        	$("#saveBtn").click(function() {
-					$("input[type='text'],textarea").each(function(i){
-						this.value = $.trim(this.value);
-					});
+            $(function() {
+                $("#inputForm").validate({
+                    rules : {
+                        bankId : {
+                            required : true
+                        },
+                        bankCardNo : {
+                            required : true,
+                            maxlength : 32
+                        },
+                        orgId : {
+                            required : true
+                        }
+                    }
+                });
 
-					$("#inputForm").attr("action", "${sc_ctx}/bankCard/save");
-					$("#inputForm").submit();
-				});
-	        });
+                $("#saveBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#inputForm").attr("action", "${sc_ctx}/bankCard/save");
+                    $("#inputForm").submit();
+                });
+            });
         </script>
     </head>
     <body>
@@ -59,24 +61,24 @@
                         <div class="control-group">
                             <label class="control-label">银行 :</label>
                             <c:if test="${empty	bankCard.uuid}">
-                            <div class="controls">
-                            	<form:select path="bankId" items="${bankList}" />
-                            </div>
-                        	</c:if>
-                        	<c:if test="${!empty bankCard.uuid}">
-                            	<label class="left-control-label">${bankCard.bank.name}</label>
-                        	</c:if>
+                                <div class="controls">
+                                    <form:select path="bankId" items="${bankList}" />
+                                </div>
+                            </c:if>
+                            <c:if test="${!empty bankCard.uuid}">
+                                <label class="left-control-label">${bankCard.bank.name}</label>
+                            </c:if>
                         </div>
                         <div class="control-group">
                             <label class="control-label">银行帐号 :</label>
                             <div class="controls">
-                            	<form:input	path="bankCardNo" />
+                                <form:input	path="bankCardNo" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">适用机构 :</label>
                             <div class="controls">
-                            	<form:select path="orgId" items="${orgList}" />
+                                <form:select path="orgId" items="${orgList}" />
                             </div>
                         </div>
                         <div class="control-group">

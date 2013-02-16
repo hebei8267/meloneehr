@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.tjhx.globals.Constants" %>
 <script>
-	$().ready(function() {       
-		$("#__del_confirm_Btn").click(function() {
-           	$('#__del_confirm').modal('hide');
-           	_del_confirm();
-		});
-	});
+    $().ready(function() {
+        $("#__del_confirm_Btn").click(function() {
+            $('#__del_confirm').modal('hide');
+            _del_confirm();
+        });
+    }); 
 </script>
 <c:if test="${!empty __SESSION_TIP_MSG_LIST || !empty __SESSION_WARN_MSG_LIST || !empty __SESSION_ERR_MSG_LIST}" >
     <script>
@@ -62,11 +62,13 @@
     </div>
     <div class="modal-body">
         <center>
-        	<p class="error">确定要删除选择的信息项吗？</p>
+            <p class="error">
+                确定要删除选择的信息项吗？
+            </p>
         </center>
     </div>
     <div class="modal-footer">
-    	<input type="button" class="btn btn-primary" id="__del_confirm_Btn" value="确定">
+        <input type="button" class="btn btn-primary" id="__del_confirm_Btn" value="确定">
         <a href="#" class="btn" data-dismiss="modal">关闭</a>
     </div>
 </div>
