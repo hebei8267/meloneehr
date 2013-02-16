@@ -96,7 +96,7 @@
                                         入库人
                                     </th>
                                     <th>
-                                        店长审核
+                                        审核
                                     </th>
                                     <th	width="55">
                                         &nbsp;
@@ -136,10 +136,22 @@
                               		${storeRun.planDateShow}
                               		</td>
                               		<td>
+                              		<c:if test="${storeRun.recordAmt != storeRun.optAmt}">
+                              		<span class="warn_text">
+                              		</c:if>
                               		${storeRun.recordAmt}
+                              		<c:if test="${storeRun.recordAmt != storeRun.optAmt}">
+                              		</span>
+                              		</c:if>
                               		</td>
                               		<td>
+                              		<c:if test="${storeRun.recordAmt != storeRun.optAmt}">
+                              		<span class="warn_text">
+                              		</c:if>
                               		${storeRun.optAmt}
+                              		<c:if test="${storeRun.recordAmt != storeRun.optAmt}">
+                              		</span>
+                              		</c:if>
                               		</td>
                               		<td>
                               		${storeRun.optPerName}
@@ -153,10 +165,24 @@
                                   	  	</c:if>
                              		</td>
                              		<td>
-                             		<a href="${sc_ctx}/storeReport/detail/${storeRun.recordNo}" class="btn btn-warning"/>详细</a>
+                             		<a href="${sc_ctx}/storeReport/detail/${storeRun.recordNo}" target="_blank" class="btn btn-warning"/>详细</a>
                              		</td>
                             	</tr>
-                            </c:forEach>	
+                            </c:forEach>
+                            <c:if test="${!empty storeRunList}" >
+                        		<tr>
+                              		<td	colspan="7">
+                                            合计:
+                                	</td>
+                               		<td>
+                                  		${totalStoreRun.recordAmt}
+                                 	</td>
+                                  	<td>
+                              			${totalStoreRun.optAmt}
+                                	</td>
+                                 	<td	colspan="3"></td>
+                            	</tr>
+                            </c:if>
                             </tbody>
                             <c:if test="${empty	storeRunList}" >
                      		<tfoot>
