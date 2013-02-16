@@ -4,34 +4,36 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
         <script>
-	        $(function() {	        	
-	        	$("#inputForm").validate({
-					rules: {
-						bwId: {
-							required: true,
-							maxlength: 16
-						},
-						name: {
-							required: true,
-							maxlength: 32
-						}
-					}
-				});
-	        	
-	        	$("#saveBtn").click(function() {
-					$("input[type='text'],textarea").each(function(i){
-						this.value = $.trim(this.value);
-					});
+            $(function() {
+                $("#inputForm").validate({
+                    rules : {
+                        bwId : {
+                            required : true,
+                            maxlength : 16
+                        },
+                        name : {
+                            required : true,
+                            maxlength : 32
+                        }
+                    }
+                });
 
-					$("#inputForm").attr("action", "${sc_ctx}/organization/save");
-					$("#inputForm").submit();
-				});
-	        });
+                $("#saveBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#inputForm").attr("action", "${sc_ctx}/organization/save");
+                    $("#inputForm").submit();
+                });
+            });
         </script>
     </head>
     <body>
@@ -55,26 +57,26 @@
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="org">
                         <form:hidden path="uuid"/>
                         <c:if test="${org.uuid != 1}">
-                        <div class="control-group">
-                            <label class="control-label">父层机构 :</label>
-                            <label class="left-control-label">${rootOrg.name}</label>
-                        </div>
+                            <div class="control-group">
+                                <label class="control-label">父层机构 :</label>
+                                <label class="left-control-label">${rootOrg.name}</label>
+                            </div>
                         </c:if>
                         <div class="control-group">
                             <label class="control-label">机构编号 :</label>
                             <c:if test="${empty	org.uuid}">
-	                        <div class="controls">
-                                <form:input	path="bwId" />
-                            </div>
-	                        </c:if>
-	                        <c:if test="${!empty org.uuid}">
-	                            <label class="left-control-label">${org.bwId}</label>
-	                        </c:if>
+                                <div class="controls">
+                                    <form:input	path="bwId" />
+                                </div>
+                            </c:if>
+                            <c:if test="${!empty org.uuid}">
+                                <label class="left-control-label">${org.bwId}</label>
+                            </c:if>
                         </div>
                         <div class="control-group">
                             <label class="control-label">机构名称 :</label>
                             <div class="controls">
-                            	<form:input	path="name" />
+                                <form:input	path="name" />
                             </div>
                         </div>
                         <div class="control-group">

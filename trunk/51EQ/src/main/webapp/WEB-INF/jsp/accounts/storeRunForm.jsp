@@ -4,76 +4,78 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
         <script>
-	        $(function() {
-	        	$('#recordDateShow').datepicker({
-					format : 'yyyy-mm-dd'
-				});
-	        	$('#intoDateShow').datepicker({
-					format : 'yyyy-mm-dd'
-				});
-	        	$('#planDateShow').datepicker({
-					format : 'yyyy-mm-dd'
-				});
-	        	
-	        	$("#inputForm").validate({
-					rules: {
-						recordNo: {
-							required: true,
-							length11: true
-						},
-						supplierBwId: {
-							required: true
-						},
-						storeType: {
-							required: true
-						},
-						recordDateShow: {
-							required: true,
-							date: true,
-							datelessThan : $("#_tomorrow_date").val()
-						},
-						intoDateShow: {
-							required: true,
-							date: true,
-							datelessThan : $("#_tomorrow_date").val()
-						},
-						planDateShow: {
-							required: true,
-							date: true,
-							datelessThan : $("#_tomorrow_date").val()
-						},
-						recordAmt: {
-							required: true,
-							money: true
-						},
-						optAmt: {
-							required: true,
-							money: true
-						},
-						optPerName: {
-							required: true,
-							maxlength: 32
-						},
-						descTxt: {
-							maxlength: 255
-						}
-					}
-				});
-	        	
-	        	$("#saveBtn").click(function() {
-					$("input[type='text'],textarea").each(function(i){
-						this.value = $.trim(this.value);
-					});
+            $(function() {
+                $('#recordDateShow').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
+                $('#intoDateShow').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
+                $('#planDateShow').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
 
-					$("#inputForm").attr("action", "${sc_ctx}/storeRun/save");
-					$("#inputForm").submit();
-				});
-	        });
+                $("#inputForm").validate({
+                    rules : {
+                        recordNo : {
+                            required : true,
+                            length11 : true
+                        },
+                        supplierBwId : {
+                            required : true
+                        },
+                        storeType : {
+                            required : true
+                        },
+                        recordDateShow : {
+                            required : true,
+                            date : true,
+                            datelessThan : $("#_tomorrow_date").val()
+                        },
+                        intoDateShow : {
+                            required : true,
+                            date : true,
+                            datelessThan : $("#_tomorrow_date").val()
+                        },
+                        planDateShow : {
+                            required : true,
+                            date : true,
+                            datelessThan : $("#_tomorrow_date").val()
+                        },
+                        recordAmt : {
+                            required : true,
+                            money : true
+                        },
+                        optAmt : {
+                            required : true,
+                            money : true
+                        },
+                        optPerName : {
+                            required : true,
+                            maxlength : 32
+                        },
+                        descTxt : {
+                            maxlength : 255
+                        }
+                    }
+                });
+
+                $("#saveBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#inputForm").attr("action", "${sc_ctx}/storeRun/save");
+                    $("#inputForm").submit();
+                });
+            });
         </script>
     </head>
     <body>
@@ -100,24 +102,24 @@
                         <div class="control-group">
                             <label class="control-label">入库单号 :</label>
                             <c:if test="${empty	storeRun.uuid}">
-	                        <div class="controls">
-                                <form:input	path="recordNo" />
-                            </div>
-	                        </c:if>
-	                        <c:if test="${!empty storeRun.uuid}">
-	                            <label class="left-control-label">${storeRun.recordNo}</label>
-	                        </c:if>
+                                <div class="controls">
+                                    <form:input	path="recordNo" />
+                                </div>
+                            </c:if>
+                            <c:if test="${!empty storeRun.uuid}">
+                                <label class="left-control-label">${storeRun.recordNo}</label>
+                            </c:if>
                         </div>
                         <div class="control-group">
                             <label class="control-label">供应商 :</label>
                             <div class="controls">
-                            	<form:select path="supplierBwId" items="${supplier}"/>
+                                <form:select path="supplierBwId" items="${supplier}"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库类型 :</label>
                             <div class="controls">
-                            	<form:select path="storeType" items="${storeTypeList}"/>
+                                <form:select path="storeType" items="${storeTypeList}"/>
                             </div>
                         </div>
                         <div class="control-group">
@@ -141,13 +143,15 @@
                         <div class="control-group">
                             <label class="control-label">开单金额	:</label>
                             <div class="controls">
-                                <form:input	path="recordAmt" /> 元
+                                <form:input	path="recordAmt" />
+                                元
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库金额	:</label>
                             <div class="controls">
-                                <form:input	path="optAmt" /> 元
+                                <form:input	path="optAmt" />
+                                元
                             </div>
                         </div>
                         <div class="control-group">

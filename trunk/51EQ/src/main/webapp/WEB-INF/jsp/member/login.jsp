@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,11 +30,11 @@
                 margin-bottom: 20px;
             }
             label.error {
-				margin-bottom: 15px;
-			}
-			label {
-  				display: block;
-			}
+                margin-bottom: 15px;
+            }
+            label {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -46,19 +48,19 @@
         </div>
         <script>
             $(function() {
-            	$("#inputForm").validate({
-					rules: {
-						loginName: "required",
-						passWord: {
-							required: true,
-							minlength: 6
-						}
-					}
-				});
-            	$("#loginBtn").click(function() {
-					$("#inputForm").attr("action", "${sc_ctx}/member/login");
-		        	$("#inputForm").submit();
-				});
+                $("#inputForm").validate({
+                    rules : {
+                        loginName : "required",
+                        passWord : {
+                            required : true,
+                            minlength : 6
+                        }
+                    }
+                });
+                $("#loginBtn").click(function() {
+                    $("#inputForm").attr("action", "${sc_ctx}/member/login");
+                    $("#inputForm").submit();
+                });
             });
         </script>
     </body>

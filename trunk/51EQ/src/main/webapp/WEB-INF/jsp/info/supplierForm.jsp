@@ -4,40 +4,42 @@
 <%@	taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page"%>
 <%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"	/>
-<c:set var="sc_ctx">${ctx}/sc</c:set>
+<c:set var="sc_ctx">
+    ${ctx}/sc
+</c:set>
 <!DOCTYPE html>
 <html>
     <head>
         <script>
-	        $(function() {	        	
-	        	$("#inputForm").validate({
-					rules: {
-						supplierBwId: {
-							required: true,
-							maxlength: 16
-						},
-						name: {
-							required: true,
-							maxlength: 32
-						},
-						payType: {
-							required: true
-						},
-						regionCode: {
-							required: true
-						}
-					}
-				});
-	        	
-	        	$("#saveBtn").click(function() {
-					$("input[type='text'],textarea").each(function(i){
-						this.value = $.trim(this.value);
-					});
+            $(function() {
+                $("#inputForm").validate({
+                    rules : {
+                        supplierBwId : {
+                            required : true,
+                            maxlength : 16
+                        },
+                        name : {
+                            required : true,
+                            maxlength : 32
+                        },
+                        payType : {
+                            required : true
+                        },
+                        regionCode : {
+                            required : true
+                        }
+                    }
+                });
 
-					$("#inputForm").attr("action", "${sc_ctx}/supplier/save");
-					$("#inputForm").submit();
-				});
-	        });
+                $("#saveBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#inputForm").attr("action", "${sc_ctx}/supplier/save");
+                    $("#inputForm").submit();
+                });
+            });
         </script>
     </head>
     <body>
@@ -63,30 +65,30 @@
                         <div class="control-group">
                             <label class="control-label">供应商编号 :</label>
                             <c:if test="${empty	supplier.uuid}">
-                            <div class="controls">
-                            	<form:input	path="supplierBwId" />
-                            </div>
-                        	</c:if>
-                        	<c:if test="${!empty supplier.uuid}">
-                            	<label class="left-control-label">${supplier.supplierBwId}</label>
-                        	</c:if>
+                                <div class="controls">
+                                    <form:input	path="supplierBwId" />
+                                </div>
+                            </c:if>
+                            <c:if test="${!empty supplier.uuid}">
+                                <label class="left-control-label">${supplier.supplierBwId}</label>
+                            </c:if>
                         </div>
                         <div class="control-group">
                             <label class="control-label">供应商名称 :</label>
                             <div class="controls">
-                            	<form:input	path="name" />
+                                <form:input	path="name" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">付款方式 :</label>
                             <div class="controls">
-                            	<form:select path="payType" items="${payTypeList}" />
+                                <form:select path="payType" items="${payTypeList}" />
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">所在区域 :</label>
                             <div class="controls">
-                            	<form:select path="regionCode" items="${regionList}" />
+                                <form:select path="regionCode" items="${regionList}" />
                             </div>
                         </div>
                         <div class="control-group">
