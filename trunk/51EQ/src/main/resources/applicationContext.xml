@@ -98,6 +98,8 @@
 	<bean id="sysConfig" class="com.tjhx.globals.SysConfig">
 		<!-- 日结模式是否开启 -->
 		<property name="cashDailyModel" value="${cash.daily.model}" />
+		
+		<property name="defaultRetainedAmt" value="${cash.daily.default_retained_amt}" />
 	</bean>
 	
 	

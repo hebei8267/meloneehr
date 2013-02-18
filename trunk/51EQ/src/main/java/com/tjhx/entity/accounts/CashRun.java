@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -59,6 +60,9 @@ public class CashRun extends IdEntity {
 	private String descTxt;
 	/** 日结标记 */
 	private Boolean dailyFlg = false;
+	// ############################################################################################
+	/** 机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -413,4 +417,22 @@ public class CashRun extends IdEntity {
 		this.cardCertNo = cardCertNo;
 	}
 
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
 }

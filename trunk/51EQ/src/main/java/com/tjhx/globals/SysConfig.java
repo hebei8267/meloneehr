@@ -1,7 +1,11 @@
 package com.tjhx.globals;
 
+import java.math.BigDecimal;
+
 public class SysConfig {
-	private boolean cashDailyModel=true;
+	private boolean cashDailyModel = true;
+
+	private BigDecimal defaultRetainedAmt;
 
 	/**
 	 * 取得cashDailyModel
@@ -19,6 +23,24 @@ public class SysConfig {
 	 */
 	public void setCashDailyModel(boolean cashDailyModel) {
 		this.cashDailyModel = cashDailyModel;
+	}
+
+	/**
+	 * 取得defaultRetainedAmt
+	 * 
+	 * @return defaultRetainedAmt defaultRetainedAmt
+	 */
+	public BigDecimal getDefaultRetainedAmt() {
+		return defaultRetainedAmt;
+	}
+
+	/**
+	 * 设置defaultRetainedAmt
+	 * 
+	 * @param defaultRetainedAmt defaultRetainedAmt
+	 */
+	public void setDefaultRetainedAmt(BigDecimal defaultRetainedAmt) {
+		this.defaultRetainedAmt = defaultRetainedAmt;
 	}
 
 }

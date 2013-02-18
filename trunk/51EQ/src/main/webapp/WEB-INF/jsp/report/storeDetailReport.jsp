@@ -65,7 +65,7 @@
                                 </c:if> ${storeRun.recordAmt}
                                 <c:if test="${storeRun.recordAmt != storeRun.optAmt}">
                                     </span>
-                                </c:if> 元 </label>
+                                </c:if> 元</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库金额	:</label>
@@ -75,7 +75,7 @@
                                 </c:if> ${storeRun.optAmt}
                                 <c:if test="${storeRun.recordAmt != storeRun.optAmt}">
                                     </span>
-                                </c:if> 元 </label>
+                                </c:if> 元</label>
                         </div>
                         <div class="control-group">
                             <label class="control-label">入库人	:</label>

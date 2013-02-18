@@ -54,7 +54,11 @@ select{
 	font-size: 20px;
 }
 .warn_text {
-	color: #CC3300;
+	color: #F89406;
+	font-weight: bold;
+}
+.warn2_text {
+	color: #FF6633;
 	font-weight: bold;
 }
 .cash_daily {
