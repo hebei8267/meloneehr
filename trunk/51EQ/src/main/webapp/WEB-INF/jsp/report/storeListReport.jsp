@@ -12,6 +12,14 @@
     <head>
         <script>
             $(function() {
+            	$("#listForm").validate({
+                    rules : {
+                    	orgId : {
+                    		required : true
+                        }
+                    }
+                });
+            	
                 $('#recordDateShow').datepicker({
                     format : 'yyyy-mm',
                     viewMode : 1,
