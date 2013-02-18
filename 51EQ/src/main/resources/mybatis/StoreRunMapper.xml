@@ -97,5 +97,6 @@
 		<include refid="Base_Column_List" />
 		from t_store_run store, t_supplier supplier, t_organization org
 		<include refid="Where_Clause" />
+		order by store.into_date , store.create_date desc
 	</select>
 </mapper>

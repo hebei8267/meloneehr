@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.CashDailyJpaDao;
+import com.tjhx.dao.accounts.CashDailyMyBatisDao;
 import com.tjhx.dao.accounts.CashRunJpaDao;
+import com.tjhx.dao.accounts.CashRunMyBatisDao;
 import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
 
@@ -22,7 +24,11 @@ public class CashDailyManager {
 	@Resource
 	private CashRunJpaDao cashRunJpaDao;
 	@Resource
+	private CashRunMyBatisDao cashRunMyBatisDao;
+	@Resource
 	private CashDailyJpaDao cashDailyJpaDao;
+	@Resource
+	private CashDailyMyBatisDao cashDailyMyBatisDao;
 
 	/**
 	 * 取得未日结销售流水日结信息
@@ -185,5 +191,25 @@ public class CashDailyManager {
 	public List<CashRun> cashDailyDetail(String optDate, String orgId) {
 		return (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, new Sort(new Sort.Order(
 				Sort.Direction.ASC, "jobType")));
+	}
+
+	/**
+	 * 日结销售流水明细查看
+	 * 
+	 * @param cashRun
+	 * @return
+	 */
+	public List<CashRun> cashDailyDetail(CashRun cashRun) {
+		return cashRunMyBatisDao.getCashRunList(cashRun);
+	}
+
+	/**
+	 * 取得销售流水日结信息
+	 * 
+	 * @param cashDaily
+	 * @return
+	 */
+	public List<CashDaily> searchReportList(CashDaily cashDaily) {
+		return cashDailyMyBatisDao.getCashDailyList(cashDaily);
 	}
 }

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -46,6 +47,9 @@ public class CashDaily extends IdEntity {
 	private BigDecimal depositAmt = new BigDecimal("0");
 	/** 留存金额-当日 */
 	private BigDecimal retainedAmt = new BigDecimal("0");
+	// ############################################################################################
+	/** 机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -286,6 +290,25 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setRetainedAmt(BigDecimal retainedAmt) {
 		this.retainedAmt = retainedAmt;
+	}
+
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 
 }

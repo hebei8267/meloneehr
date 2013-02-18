@@ -1,9 +1,7 @@
 package com.tjhx.web.report;
 
 import java.text.ParseException;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.StoreRun;
-import com.tjhx.entity.struct.Organization;
-import com.tjhx.globals.Constants;
 import com.tjhx.service.accounts.StoreRunManager;
 import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
@@ -43,7 +39,7 @@ public class StoreReportController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String storeReportList_Action(Model model) throws ServletRequestBindingException {
 
-		initOrgList(model);
+		ReportUtils.initOrgList(orgManager, model);
 
 		return "report/storeListReport";
 	}
@@ -86,24 +82,9 @@ public class StoreReportController extends BaseController {
 		StoreRun totalStoreRun = storeRunManager.calTotal(_storeRunList);
 		model.addAttribute("totalStoreRun", totalStoreRun);
 
-		initOrgList(model);
+		ReportUtils.initOrgList(orgManager, model);
 
 		return "report/storeListReport";
-	}
-
-	private void initOrgList(Model model) {
-		List<Organization> _orgList = orgManager.getAllOrganization();
-
-		Map<String, String> orgList = new LinkedHashMap<String, String>();
-
-		orgList.put("", "");
-		for (Organization _org : _orgList) {
-			if (!Constants.ROOT_ORG_ID.equals(_org.getId())) {
-				orgList.put(_org.getId(), _org.getName());
-			}
-		}
-
-		model.addAttribute("orgList", orgList);
 	}
 
 	@RequestMapping(value = "detail/{recordNo}")
