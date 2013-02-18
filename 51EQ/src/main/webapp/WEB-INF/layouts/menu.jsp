@@ -97,7 +97,7 @@
                                 <a href="${sc_ctx}/storeReport">入库信息</a>
                             </li>
                             <li>
-                                <a href="#">刷卡信息</a>
+                                <a href="${sc_ctx}/cardReport">刷卡信息</a>
                             </li>
                             <li>
                                 <a href="${sc_ctx}/cashReport">销售信息</a>
