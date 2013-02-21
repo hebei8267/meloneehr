@@ -90,20 +90,28 @@
                         </li>
                     </c:if>
 
+					<c:if test="${_permIdList.contains('9') || _permIdList.contains('10') || _permIdList.contains('11')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">报表<b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                        	<c:if test="${_permIdList.contains('9')}">
                             <li>
                                 <a href="${sc_ctx}/storeReport">入库信息</a>
                             </li>
+                            </c:if>
+                            <c:if test="${_permIdList.contains('10')}">
                             <li>
                                 <a href="${sc_ctx}/cardReport">刷卡信息</a>
                             </li>
+                            </c:if>
+                            <c:if test="${_permIdList.contains('11')}">
                             <li>
                                 <a href="${sc_ctx}/cashReport">销售信息</a>
                             </li>
+                            </c:if>
                         </ul>
                     </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
