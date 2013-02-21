@@ -1,5 +1,8 @@
 package com.tjhx.entity.member;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.NaturalId;
 
@@ -37,13 +42,8 @@ public class Role extends IdEntity {
 	// ##########################################################
 	/** 拥有资源菜单ID信息集合 */
 	private List<String> permIdList = Lists.newArrayList();
-
-	// /** 拥有资源菜单信息集合 */
-	// private String[] funIds;
-	// /** 非拥有资源菜单信息集合 */
-	// private String[] noFunIds;
-	// /** 全量功能资源信息集合 */
-	// private List<Function> allFunList;
+	/** 非拥有资源菜单信息集合 */
+	private List<Function> noPermList;
 
 	/**
 	 * 取得角色名称
@@ -136,10 +136,16 @@ public class Role extends IdEntity {
 		return StringUtils.join(permissionNameList, ",");
 	}
 
-	public void initPermIdList() {
+	@SuppressWarnings("unchecked")
+	public void initPermIdList(List<Function> allFunList) {
+		List<Function> _funList = Lists.newArrayList();
 		for (Permission permission : getPermissionSet()) {
 			permIdList.add(permission.getFunction().getUuid().toString());
+			_funList.add(permission.getFunction());
 		}
+
+		noPermList = (List<Function>) CollectionUtils.subtract(allFunList, _funList);
+
 	}
 
 	/**
@@ -161,82 +167,49 @@ public class Role extends IdEntity {
 		this.permIdList = permIdList;
 	}
 
-	// /**
-	// * 取得拥有资源菜单信息集合ID
-	// *
-	// * @return 拥有资源菜单集合ID
-	// */
-	// @Transient
-	// public String[] getFunIds() {
-	// return funIds;
-	// }
-	//
-	// /**
-	// * 设置拥有资源菜单信息集合ID
-	// *
-	// * @param permissionSet 拥有资源菜单信息集合ID
-	// */
-	// public void setFunIds(String[] funIds) {
-	// this.funIds = funIds;
-	// }
-	//
-	// /**
-	// * 取得非拥有资源菜单信息集合ID
-	// *
-	// * @return 非拥有资源菜单信息集合ID
-	// */
-	// @Transient
-	// public String[] getNoFunIds() {
-	// return noFunIds;
-	// }
-	//
-	// /**
-	// * 设置非拥有资源菜单信息集合ID
-	// *
-	// * @param noPermissionIds 非拥有资源菜单信息集合ID
-	// */
-	// public void setNoFunIds(String[] noFunIds) {
-	// this.noFunIds = noFunIds;
-	// }
-	//
-	// /**
-	// * 取得该角色不包含的权限列表
-	// *
-	// * @return
-	// */
-	// @Transient
-	// public List<Function> getNoFunList() {
-	// if (null == permissionSet || permissionSet.size() == 0) {
-	// return this.allFunList;
-	// } else {
-	// if (null != allFunList) {
-	// List<Function> funList = Lists.newArrayList();
-	// for (Permission permission : getPermissionSet()) {
-	// funList.add(permission.getFunction());
-	// }
-	//
-	// this.allFunList.removeAll(funList);
-	// }
-	// }
-	// return allFunList;
-	// }
-	//
-	// /**
-	// * 取得该角色包含的权限列表
-	// *
-	// * @return
-	// */
-	// @Transient
-	// public List<Function> getFunList() {
-	// List<Function> funList = Lists.newArrayList();
-	// for (Permission permission : getPermissionSet()) {
-	// funList.add(permission.getFunction());
-	// }
-	// return funList;
-	// }
-	//
-	// public void setAllFunList(List<Function> funList) {
-	// this.allFunList = funList;
-	// }
+	/**
+	 * 取得非拥有资源菜单信息集合
+	 * 
+	 * @return noPermList 非拥有资源菜单信息集合
+	 */
+	@Transient
+	public List<Function> getNoPermList() {
+		return noPermList;
+	}
 
+	/**
+	 * 设置非拥有资源菜单信息集合
+	 * 
+	 * @param noPermList 非拥有资源菜单信息集合
+	 */
+	public void setNoPermList(List<Function> noPermList) {
+		this.noPermList = noPermList;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		String[] arrayA = new String[] { "1", "2", "3", "3", "4", "5" };
+		String[] arrayB = new String[] { "3", "4", "5", "6", "7" };
+		List<String> a = Arrays.asList(arrayA);
+		List<String> b = Arrays.asList(arrayB);
+		// 并集
+		Collection<String> union = CollectionUtils.union(a, b);
+		// 交集
+		Collection<String> intersection = CollectionUtils.intersection(a, b);
+		// 交集的补集
+		Collection<String> disjunction = CollectionUtils.disjunction(a, b);
+		// 集合相减
+		Collection<String> subtract = CollectionUtils.subtract(a, b);
+		Collections.sort((List<String>) union);
+		Collections.sort((List<String>) intersection);
+		Collections.sort((List<String>) disjunction);
+		Collections.sort((List<String>) subtract);
+		System.out.println("A: " + ArrayUtils.toString(a.toArray()));
+		System.out.println("B: " + ArrayUtils.toString(b.toArray()));
+		System.out.println("--------------------------------------------");
+		System.out.println("Union(A, B): " + ArrayUtils.toString(union.toArray()));
+		System.out.println("Intersection(A, B): " + ArrayUtils.toString(intersection.toArray()));
+		System.out.println("Disjunction(A, B): " + ArrayUtils.toString(disjunction.toArray()));
+		System.out.println("Subtract(A, B): " + ArrayUtils.toString(subtract.toArray()));
+	}
 }

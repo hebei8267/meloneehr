@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.MessageSource;
@@ -12,8 +13,11 @@ import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.entity.member.User;
 import com.tjhx.globals.Constants;
+import com.tjhx.service.member.FunctionManager;
 
 public class BaseController {
+	@Resource
+	private FunctionManager functionManager;
 
 	/** 提示消息 */
 	private List<String> tipMsgList;
@@ -150,9 +154,8 @@ public class BaseController {
 		// 初始化机构信息
 		user.getOrgName();
 		// 初始化角色权限
-		user.getRole().initPermIdList();
+		user.getRole().initPermIdList(functionManager.getAllFunction());
 
 		session.setAttribute(Constants.SESSION_USER_INFO, user);
 	}
-
 }

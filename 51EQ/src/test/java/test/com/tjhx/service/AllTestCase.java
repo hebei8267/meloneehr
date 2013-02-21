@@ -15,12 +15,12 @@ import test.com.tjhx.service.struct.OrganizationManagerTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { 
+	RegionManagerTest.class,
 	SupplierManagerTest.class,
 	OrganizationManagerTest.class,
 	RoleManagerTest.class,
 	UserManagerTest.class,
 	
-	RegionManagerTest.class,
 	FunctionManagerTest.class,
 	PermissionManagerTest.class,
 	
