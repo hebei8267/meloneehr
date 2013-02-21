@@ -1,4 +1,4 @@
-package com.tjhx.service;
+package com.tjhx.service.member;
 
 import java.util.List;
 

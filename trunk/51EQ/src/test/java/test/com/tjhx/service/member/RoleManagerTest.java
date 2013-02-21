@@ -7,7 +7,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springside.modules.test.spring.SpringTransactionalTestCase;
 
 import com.tjhx.entity.member.Role;
-import com.tjhx.service.RoleManager;
+import com.tjhx.service.member.RoleManager;
 
 public class RoleManagerTest extends SpringTransactionalTestCase {
 	@Resource
