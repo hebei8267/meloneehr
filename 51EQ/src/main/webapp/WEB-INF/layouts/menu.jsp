@@ -14,7 +14,7 @@
         <div class="container ">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
             <p class="navbar-text pull-left">
-                [${sessionScope.__SESSION_USER_INFO.orgName}]&nbsp;${sessionScope.__SESSION_USER_INFO.name}&nbsp;您好，欢迎来到EQ+！
+                [${sessionScope.__SESSION_USER_INFO.orgName}]&nbsp;${sessionScope.__SESSION_USER_INFO.name}&nbsp;您好，欢迎来到 EQ+！
             </p>
 
             <c:set var="_permIdList" value="${sessionScope.__SESSION_USER_INFO.role.permIdList }"></c:set>
