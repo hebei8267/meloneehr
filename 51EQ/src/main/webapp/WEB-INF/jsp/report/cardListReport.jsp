@@ -114,6 +114,20 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                <c:if test="${!empty cashDailyList}" >
+                                    <tr>
+                                        <td	colspan="2">
+                                            合计:
+                                        </td>
+                                        <td>
+                                            ${totalCashDaily.cardAmt}
+                                        </td>
+                                        <td>
+                                            ${totalCashDaily.cardAmtBw}
+                                        </td>
+                                        <td	colspan="2"></td>
+                                    </tr>
+                                </c:if>
                             </tbody>
                             <c:if test="${empty	cashDailyList}" >
                                 <tfoot>
