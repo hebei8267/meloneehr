@@ -25,5 +25,11 @@ public class RegionManagerTest extends SpringTransactionalTestCase {
 		region2.setName("广州");
 		region2.setCode("020");
 		regionJpaDao.save(region2);
+		
+		
+		Region region3 = new Region();
+		region3.setName("北京");
+		region3.setCode("010");
+		regionJpaDao.save(region3);
 	}
 }

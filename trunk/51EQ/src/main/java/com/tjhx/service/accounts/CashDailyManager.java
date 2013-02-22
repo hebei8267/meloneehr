@@ -212,4 +212,29 @@ public class CashDailyManager {
 	public List<CashDaily> searchReportList(CashDaily cashDaily) {
 		return cashDailyMyBatisDao.getCashDailyList(cashDaily);
 	}
+
+	/**
+	 * 合计计算
+	 * 
+	 * @param cashDailyList
+	 * @return
+	 */
+	public CashDaily calTotal(List<CashDaily> cashDailyList) {
+		CashDaily _cashDaily = new CashDaily();
+		for (CashDaily cashDaily : cashDailyList) {
+
+			// 当日销售
+			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashDaily.getSaleAmt()));
+			// 实际现金
+			_cashDaily.setCashAmt(_cashDaily.getCashAmt().add(cashDaily.getCashAmt()));
+			// 刷卡金额(单据)
+			_cashDaily.setCardAmt(_cashDaily.getCardAmt().add(cashDaily.getCardAmt()));
+			// 刷卡金额(百威)
+			_cashDaily.setCardAmtBw(_cashDaily.getCardAmtBw().add(cashDaily.getCardAmtBw()));
+			// 存款金额
+			_cashDaily.setDepositAmt(_cashDaily.getDepositAmt().add(cashDaily.getDepositAmt()));
+
+		}
+		return _cashDaily;
+	}
 }
