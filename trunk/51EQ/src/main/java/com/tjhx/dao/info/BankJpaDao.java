@@ -11,4 +11,6 @@ public interface BankJpaDao extends CrudRepository<Bank, Integer> {
 	public Iterable findAll(Sort sort);
 
 	public Bank findByBankId(String bankId);
+	
+	public Bank findByName(String name);
 }

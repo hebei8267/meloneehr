@@ -62,6 +62,16 @@ public class BankManager {
 	}
 
 	/**
+	 * 取得银行
+	 * 
+	 * @param bankName
+	 * @return
+	 */
+	public Bank getBankByName(String bankName) {
+		return bankJpaDao.findByName(bankName);
+	}
+
+	/**
 	 * 根据编号取得银行信息
 	 * 
 	 * @param uuid 银行编号
