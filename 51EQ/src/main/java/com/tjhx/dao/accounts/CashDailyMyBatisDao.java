@@ -8,4 +8,6 @@ public interface CashDailyMyBatisDao {
 
 	public List<CashDaily> getCashDailyList(CashDaily cashDaily);
 
+	public List<CashDaily> getCashDailyListByAllOrg(CashDaily cashDaily);
+
 }
