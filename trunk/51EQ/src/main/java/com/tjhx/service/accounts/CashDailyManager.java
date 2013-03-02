@@ -237,4 +237,17 @@ public class CashDailyManager {
 		}
 		return _cashDaily;
 	}
+
+	/**
+	 * 取得销售流水日结信息(全机构)
+	 * 
+	 * @param currentDate(yyyy-MM-dd)
+	 * @return
+	 * @throws ParseException
+	 */
+	public List<CashDaily> getCashDailyListByAllOrg(String dailyDate) throws ParseException {
+		CashDaily _cashDaily = new CashDaily();
+		_cashDaily.setOptDateShow(dailyDate);
+		return cashDailyMyBatisDao.getCashDailyListByAllOrg(_cashDaily);
+	}
 }
