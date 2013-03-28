@@ -18,7 +18,7 @@
             </p>
 
             <c:set var="_permIdList" value="${sessionScope.__SESSION_USER_INFO.role.permIdList }"></c:set>
-            <div class="nav-collapse">
+            <div class="nav-collapse" style="height: auto;">
                 <ul class="nav pull-right">
                     <li>
                         <a href="${sc_ctx}/member/logout">用户退出</a>
