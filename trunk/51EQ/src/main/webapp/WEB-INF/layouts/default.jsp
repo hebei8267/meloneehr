@@ -15,7 +15,6 @@
         <link type="text/css" href="${ctx}/static/css/bootstrap-responsive.css" rel="stylesheet">
         <link type="text/css" href="${ctx}/static/css/datepicker.css" rel="stylesheet">
         <link type="text/css" href="${ctx}/static/css/mystyle.css" rel="stylesheet">
-		<link rel="shortcut icon" type="image/x-icon" href="http://www.iswweb.com/images/favicon.ico" media="screen" />
 		
         <script src="${ctx}/static/js/jquery-1.7.2.min.js"></script>
         <script src="${ctx}/static/js/bootstrap.js"></script>
