@@ -523,13 +523,14 @@ public class StoreRun extends IdEntity {
 	}
 
 	public void autoSetEditFlg() throws ParseException {
-		if (null == createDate) {
-			return;
-		}
-
-		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
-		_day = Math.abs(_day);
-		if (_day <= Constants.EDITABLE_DAY && !auditFlg) {
+//		if (null == createDate) {
+//			return;
+//		}
+//
+//		Long _day = DateUtils.getDateSpanDay(createDate, DateUtils.getCurrentDate());
+//		_day = Math.abs(_day);
+//		if (_day <= Constants.EDITABLE_DAY && !auditFlg) {
+		if (!auditFlg) {
 			editFlg = true;
 		}
 	}
