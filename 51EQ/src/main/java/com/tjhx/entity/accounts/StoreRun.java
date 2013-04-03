@@ -13,10 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.IdEntity;
 import com.tjhx.entity.info.Supplier;
-import com.tjhx.globals.Constants;
 
 /**
  * 货物入库流水
