@@ -171,8 +171,4 @@ public class StoreRunController extends BaseController {
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/storeRun/list";
 	}
 
-	// ---------------------------------------------------------------------------------------------
-	// 审核
-	// ---------------------------------------------------------------------------------------------
-
 }
