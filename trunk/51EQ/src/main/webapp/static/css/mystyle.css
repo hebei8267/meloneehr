@@ -79,6 +79,16 @@ select{
 .__model37 .error {
 	color: #B94A48;
 }
+.control-group .checkbox {
+	padding-left: 10px;
+}
+.control-group .checkbox input[type="checkbox"] {
+	margin-left: 20px;
+	float: left;
+	width: 20px;
+	padding-top: 5px;
+	text-align: right;
+}
 /************************ jquery.validate ************************/
 label.error {
 	color: red;
@@ -87,5 +97,11 @@ div.error {
 	display: none;
 }
 input.error {
+	border: 1px dotted red;
+}
+textarea.error {
+	border: 1px dotted red;
+}
+select.error {
 	border: 1px dotted red;
 }
