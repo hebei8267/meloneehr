@@ -117,6 +117,24 @@
                         </ul>
                     </li>
                     </c:if>
+                    
+                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') }">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">日常事务<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        	<c:if test="${_permIdList.contains('13')}">
+                            <li>
+                                <a href="${sc_ctx}/invoiceApply">发票申请</a>
+                            </li>
+                            </c:if>
+                            <c:if test="${_permIdList.contains('14')}">
+                            <li>
+                                <a href="${sc_ctx}/invoiceDraw">发票开具</a>
+                            </li>
+                            </c:if>
+                        </ul>
+                    </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
