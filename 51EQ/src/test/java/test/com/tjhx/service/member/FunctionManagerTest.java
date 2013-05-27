@@ -159,4 +159,29 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 
 		functionJpaDao.save(fun);
 	}
+
+	// -------------------------------------------------------------
+	@Test
+	@Rollback(false)
+	public void saveNewFun13() {
+		Function fun = new Function();
+		// 功能显示名称
+		fun.setDisplayName("发票信息-申请");
+		// 功能URL */
+		fun.setFunUrl("invoiceApply");
+
+		functionJpaDao.save(fun);
+	}
+
+	@Test
+	@Rollback(false)
+	public void saveNewFun14() {
+		Function fun = new Function();
+		// 功能显示名称
+		fun.setDisplayName("发票信息-开票");
+		// 功能URL */
+		fun.setFunUrl("invoiceDraw");
+
+		functionJpaDao.save(fun);
+	}
 }
