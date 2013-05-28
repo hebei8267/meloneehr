@@ -162,10 +162,15 @@
                                                 是
                                             </c:if>
                                         </td>
-                                        <td></td>
+                                        <td>
+                                        	${invoiceApply.invoiceNum}
+                                        </td>
                                         <td>
                                             <c:if test="${invoiceApply.invoiceStatus == '1'	}">
                                                 <a href="${sc_ctx}/invoiceApply/edit/${invoiceApply.uuid}" class="btn btn-warning"/>修改</a>
+                                            </c:if>
+                                            <c:if test="${invoiceApply.invoiceStatus == '2'	}">
+                                                <a href="${sc_ctx}/invoiceApply/view/${invoiceApply.uuid}" class="btn btn-primary"/>查看</a>
                                             </c:if>
                                         </td>
                             		</tr>

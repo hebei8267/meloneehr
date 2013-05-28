@@ -101,7 +101,6 @@ public class InvoiceApplyManager {
 		// 是否邮寄客户 1-需要 0-不需要
 		_invoice.setNeedPost(invoice.getNeedPost());
 		if ("0".equals(invoice.getNeedPost())) {
-
 			_invoice.setCustomerName(null);// 客户姓名
 			_invoice.setCustomerTel(null);// 客服电话
 			_invoice.setCustomerAdd(null);// 客户地址
@@ -112,7 +111,6 @@ public class InvoiceApplyManager {
 		}
 
 		invoiceJpaDao.save(_invoice);
-
 	}
 
 }
