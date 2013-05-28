@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.tjhx.entity.IdEntity;
 
@@ -57,6 +58,9 @@ public class Invoice extends IdEntity {
 	private String descTxt;
 	/** 发票状态 1-申请 2-已处理 */
 	private String invoiceStatus;
+	// ############################################################################################
+	/** 机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -120,7 +124,7 @@ public class Invoice extends IdEntity {
 	 * 
 	 * @return appDateY 申请日期-年
 	 */
-	@Column(length = 4)
+	@Column(name = "APP_DATE_Y", length = 4)
 	public String getAppDateY() {
 		return appDateY;
 	}
@@ -139,7 +143,7 @@ public class Invoice extends IdEntity {
 	 * 
 	 * @return appDateM 申请日期-月
 	 */
-	@Column(length = 2)
+	@Column(name = "APP_DATE_M", length = 2)
 	public String getAppDateM() {
 		return appDateM;
 	}
@@ -415,4 +419,22 @@ public class Invoice extends IdEntity {
 		this.invoiceStatus = invoiceStatus;
 	}
 
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
 }

@@ -22,6 +22,7 @@ import com.tjhx.entity.receipt.Invoice;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.receipt.InvoiceApplyManager;
+import com.tjhx.service.receipt.InvoiceDrawManager;
 import com.tjhx.web.BaseController;
 
 @Controller
@@ -29,6 +30,8 @@ import com.tjhx.web.BaseController;
 public class InvoiceApplyController extends BaseController {
 	@Resource
 	private InvoiceApplyManager invoiceApplyManager;
+	@Resource
+	private InvoiceDrawManager invoiceDrawManager;
 
 	@RequestMapping(value = { "list", "" })
 	public String invoiceApplyList_Action(Model model, HttpSession session) throws ServletRequestBindingException {
@@ -107,6 +110,13 @@ public class InvoiceApplyController extends BaseController {
 
 	}
 
+	@RequestMapping(value = "view/{id}")
+	public String viewInvoiceApply_Action(@PathVariable("id") Integer id, Model model) {
+		Invoice invoice = invoiceDrawManager.getInvoiceByUuid_MyBatis(id);
+		model.addAttribute("invoice", invoice);
+		return "invoice/invoiceViewForm";
+	}
+
 	/**
 	 * 删除未开具的发票
 	 * 
@@ -135,7 +145,7 @@ public class InvoiceApplyController extends BaseController {
 	 * @throws InvocationTargetException
 	 */
 	@RequestMapping(value = "save")
-	public String saveInvoiceApply_Action(@ModelAttribute("storeRun") Invoice invoice, Model model, HttpSession session)
+	public String saveInvoiceApply_Action(@ModelAttribute("invoice") Invoice invoice, Model model, HttpSession session)
 			throws IllegalAccessException, InvocationTargetException {
 
 		if (null == invoice.getUuid()) {// 新增操作

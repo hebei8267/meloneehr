@@ -123,7 +123,7 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">送达日期	:</label>
+                            <label class="control-label">送达期限	:</label>
                             <div class="controls">
                                 <form:input	path="serviceDateShow" />
                             </div>

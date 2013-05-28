@@ -24,7 +24,7 @@
 
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$(':input:text:first').focus();
+			//$(':input:text:first').focus();
 		
 			$(document).keydown(function(event) {
 				if (event.keyCode == 13) {

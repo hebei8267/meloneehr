@@ -9,7 +9,26 @@
 </c:set>
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+    	<script>
+            $(function() {            	
+                $('#appDateShow').datepicker({
+                    format : 'yyyy-mm',
+                    viewMode : 1,
+                    minViewMode : 1
+                });
+
+                $("#searchBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#listForm").attr("action", "${sc_ctx}/invoiceDraw/search");
+                    $("#listForm").submit();
+                });
+            });
+        </script>
+    </head>
     <body>
         <%// 系统菜单  %>
         <page:applyDecorator name="menu" />
@@ -24,15 +43,24 @@
                     </div>
                     <div class="span3">
                         <label class="control-label">申请机构 :</label>
-                        <input id="recordDateShow" name="recordDateShow" type="text" class="input-medium" value="${recordDateShow }"/>
+                        <select name="orgId" class="input-medium">
+                            <c:forEach items="${orgList}" var="org">
+                                <c:if test="${org.key == orgId}">
+                                    <option value="${org.key }" selected>${org.value }</option>
+                                </c:if>
+                                <c:if test="${org.key != orgId}">
+                                    <option value="${org.key }">${org.value }</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
                     </div>
                     <div class="span3">
                         <label class="control-label">申请时间 :</label>
-                        <input id="recordDateShow" name="recordDateShow" type="text" class="input-medium" value="${recordDateShow }"/>
+                        <input id="appDateShow" name="appDateShow" type="text" class="input-medium" value="${appDateShow }"/>
                     </div>
                     <div class="span6">
                         <label class="control-label">发票号 :</label>
-                        <input id="recordDateShow" name="recordDateShow" type="text" class="input-medium" value="${recordDateShow }"/>
+                        <input id="invoiceNum" name="invoiceNum" type="text" class="input-medium" value="${invoiceNum }"/>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
@@ -69,6 +97,55 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	<c:forEach items="${invoiceDrawList}" var="invoiceDraw">
+                            		<tr>
+                            			<td>
+                                            ${invoiceDraw.orgName}
+                                        </td>
+                                        <td>
+                                            ${invoiceDraw.appDateShow}
+                                        </td>
+                                        <td>
+                                            ${invoiceDraw.appName}
+                                        </td>
+                                        <td>
+                                        	<c:if test="${invoiceDraw.invoiceType == 1}">
+                                                机打
+                                            </c:if>
+                                            <c:if test="${invoiceDraw.invoiceType == 2}">
+                                                手写
+                                            </c:if>
+                                            <c:if test="${invoiceDraw.invoiceType == 4}">
+                                                其他
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            ${invoiceDraw.title}
+                                        </td>
+                                        <td>
+                                            ${invoiceDraw.amt}
+                                        </td>
+                                        <td class="center">
+                                        	<c:if test="${invoiceDraw.needPost == 0}">
+                                                否
+                                            </c:if>
+                                            <c:if test="${invoiceDraw.needPost == 1}">
+                                                是
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                        	${invoiceDraw.invoiceNum}
+                                        </td>
+                                        <td>
+                                            <c:if test="${invoiceDraw.invoiceStatus == '1'	}">
+                                                <a href="${sc_ctx}/invoiceDraw/drawInit/${invoiceDraw.uuid}" class="btn btn-warning"/>开票</a>
+                                            </c:if>
+                                            <c:if test="${invoiceDraw.invoiceStatus == '2'	}">
+                                                <a href="${sc_ctx}/invoiceDraw/drawInit/${invoiceDraw.uuid}" class="btn btn-primary"/>查看</a>
+                                            </c:if>
+                                        </td>
+                            		</tr>
+                            	</c:forEach>
                             </tbody>
                             <c:if test="${empty	invoiceDrawList}" >
                                 <tfoot>
