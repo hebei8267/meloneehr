@@ -38,7 +38,7 @@ public class Invoice extends IdEntity {
 	/** 发票内容 */
 	private String content;
 	/** 发票金额 */
-	private BigDecimal amt = new BigDecimal("0");;
+	private BigDecimal amt = new BigDecimal("0");
 	/** 送达日期 */
 	private String serviceDateShow;
 	/** 是否邮寄客户 1-需要 0-不需要 */
