@@ -76,12 +76,17 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 发票信息</h3>
+                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 发票申请信息</h3>
                         </legend>
                     </div>
                     <div class="span9">
                         <a href="${sc_ctx}/invoiceApply/new"	class="btn btn-primary">申请</a>
                         <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
+                    </div>
+                    <div class="span3 right_text">
+                        <%String nowM =	DateUtils.getCurrentMonth(); %>
+                        <%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>(申请日期)
+                        <a href="${sc_ctx}/invoiceApply/list/<%=nowM	%>"><%=nowM	%></a> | <a	href="${sc_ctx}/invoiceApply/list/<%=lastM %>"><%=lastM %></a>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <input type="hidden" name="uuids" id="uuids"/>

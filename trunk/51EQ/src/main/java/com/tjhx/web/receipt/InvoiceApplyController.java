@@ -1,6 +1,7 @@
 package com.tjhx.web.receipt;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.receipt.Invoice;
 import com.tjhx.globals.Constants;
+import com.tjhx.service.ServiceException;
 import com.tjhx.service.receipt.InvoiceApplyManager;
 import com.tjhx.web.BaseController;
 
@@ -31,8 +33,19 @@ public class InvoiceApplyController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String invoiceApplyList_Action(Model model, HttpSession session) throws ServletRequestBindingException {
 
-		List<Invoice> invoiceApplyList = invoiceApplyManager.getInvoiceApplyList(getUserInfo(session).getOrganization()
-				.getId(), DateUtils.getCurrentDateShortStr());
+		List<Invoice> invoiceApplyList = invoiceApplyManager.getInvoiceApplyList_1(getUserInfo(session)
+				.getOrganization().getId(), DateUtils.getCurrentDateShortStr());
+
+		model.addAttribute("invoiceApplyList", invoiceApplyList);
+
+		return "invoice/invoiceApplyList";
+	}
+
+	@RequestMapping(value = "list/{date}")
+	public String invoiceApplyList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
+			throws ParseException {
+		List<Invoice> invoiceApplyList = invoiceApplyManager.getInvoiceApplyList_2(getUserInfo(session)
+				.getOrganization().getId(), date);
 
 		model.addAttribute("invoiceApplyList", invoiceApplyList);
 
@@ -128,17 +141,16 @@ public class InvoiceApplyController extends BaseController {
 		if (null == invoice.getUuid()) {// 新增操作
 			invoiceApplyManager.addNewInvoiceApply(invoice, getUserInfo(session));
 		} else {// 修改操作
-			// try {
-			// storeRunManager.updateStoreRun(storeRun, getUserInfo(session));
-			// } catch (ServiceException ex) {
-			// // 添加错误消息
-			// addInfoMsg(model, ex.getMessage());
-			//
-			// StoreRunUtils.initSupplierList(model, supplierManager);
-			// StoreRunUtils.initStoreTypeList(model);
-			//
-			// return "accounts/storeRunForm";
-			// }
+			try {
+				invoiceApplyManager.updateInvoiceApply(invoice, getUserInfo(session));
+			} catch (ServiceException ex) {
+				// 添加错误消息
+				addInfoMsg(model, ex.getMessage());
+
+				initInvoiceTypeList(model);
+
+				return "invoice/invoiceApplyForm";
+			}
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/invoiceApply/list";
