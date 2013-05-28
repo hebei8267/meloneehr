@@ -41,8 +41,8 @@
         <div class="container">
             <form class="form-signin" id="inputForm" method="post">
                 <h2>用户登录</h2>
-                <input type="text" class="input-block-level" name="loginName" id="loginName" placeholder="User ID" value="0220">
-                <input type="password" class="input-block-level" name="passWord" id="passWord" placeholder="Password" value="123456">
+                <input type="text" class="input-block-level" name="loginName" id="loginName" placeholder="User ID" value="">
+                <input type="password" class="input-block-level" name="passWord" id="passWord" placeholder="Password" value="">
                 <input type="submit" value="登录" id="loginBtn" class="btn btn-large btn-primary"/>
             </form>
         </div>
