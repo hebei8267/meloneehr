@@ -7,6 +7,9 @@ public class SysConfig {
 
 	private BigDecimal defaultRetainedAmt;
 
+	private String reqBillSupplierTemplatePath;
+	private String reqBillSupplierOutputPath;
+
 	/**
 	 * 取得cashDailyModel
 	 * 
@@ -41,6 +44,42 @@ public class SysConfig {
 	 */
 	public void setDefaultRetainedAmt(BigDecimal defaultRetainedAmt) {
 		this.defaultRetainedAmt = defaultRetainedAmt;
+	}
+
+	/**
+	 * 取得reqBillSupplierTemplatePath
+	 * 
+	 * @return reqBillSupplierTemplatePath reqBillSupplierTemplatePath
+	 */
+	public String getReqBillSupplierTemplatePath() {
+		return reqBillSupplierTemplatePath;
+	}
+
+	/**
+	 * 设置reqBillSupplierTemplatePath
+	 * 
+	 * @param reqBillSupplierTemplatePath reqBillSupplierTemplatePath
+	 */
+	public void setReqBillSupplierTemplatePath(String reqBillSupplierTemplatePath) {
+		this.reqBillSupplierTemplatePath = reqBillSupplierTemplatePath;
+	}
+
+	/**
+	 * 取得reqBillSupplierOutputPath
+	 * 
+	 * @return reqBillSupplierOutputPath reqBillSupplierOutputPath
+	 */
+	public String getReqBillSupplierOutputPath() {
+		return reqBillSupplierOutputPath;
+	}
+
+	/**
+	 * 设置reqBillSupplierOutputPath
+	 * 
+	 * @param reqBillSupplierOutputPath reqBillSupplierOutputPath
+	 */
+	public void setReqBillSupplierOutputPath(String reqBillSupplierOutputPath) {
+		this.reqBillSupplierOutputPath = reqBillSupplierOutputPath;
 	}
 
 }
