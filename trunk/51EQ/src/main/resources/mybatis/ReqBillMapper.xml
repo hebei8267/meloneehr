@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.order.ReqBillMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_ReqBill" type="com.tjhx.entity.order.ReqBill">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="app_num" property="appNum" jdbcType="INTEGER"/>
+        <result column="barcode" property="barcode" jdbcType="VARCHAR"/>
+        <result column="batch_id" property="batchId" jdbcType="VARCHAR"/>
+        <result column="_index" property="index" jdbcType="INTEGER"/>
+        <result column="inventory_num" property="inventoryNum" jdbcType="INTEGER"/>
+        <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="product_no" property="productNo" jdbcType="VARCHAR"/>
+        <result column="ref_price" property="refPrice" jdbcType="DECIMAL"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap id="Result_Map_Supplier" type="com.tjhx.entity.info.Supplier">
+        <result column="supplier_name" property="name" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	uuid ,
+    	create_date ,
+    	create_user_id ,
+    	update_date ,
+    	update_user_id ,
+    	version ,
+    	app_num ,
+    	barcode ,
+    	batch_id ,
+    	_index ,
+    	inventory_num ,
+    	org_id ,
+    	product_name ,
+    	product_no ,
+    	ref_price ,
+    	remarks ,
+    	supplier_name 
+	]]>
+  	</sql>
+  	
+  	<!-- 查询条件 -->
+  	<sql id="Where_Clause" >
+  		<where>
+  			<if test="batchId != null and batchId !='' ">
+  			batch_id = #{batchId}
+  			</if>
+  			<if test="orgId != null and orgId !='' ">
+  			AND org_id = #{orgId}
+  			</if>
+  			<if test="supplierName != null and supplierName !='' ">
+  			AND supplier_name = #{supplierName}
+  			</if>
+	  	</where>
+  	</sql>
+
+	<!-- 取得t_req_bill信息(根据参数) -->
+	<delete id="delReqBillByBatchId" parameterType="string">
+		delete from t_req_bill where batch_id = #{batchId}
+	</delete>
+	
+	<!-- 根据批次号取得供应商信息 -->
+	<select id="getSupplierListByBatchId" parameterType="string" resultMap="Result_Map_Supplier">
+		select supplier_name from t_req_bill where batch_id = #{batchId} group by supplier_name
+	</select>
+	
+	<!-- 根据批次号取得供应商信息 -->
+	<select id="getReqBillList" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
+		select
+		<include refid="Base_Column_List" />
+		from t_req_bill
+		<include refid="Where_Clause" />
+		order by org_id
+	</select>
+	
+	<select id="getOrgListBySupplier" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
+		select DISTINCT org_id
+		from t_req_bill
+		<include refid="Where_Clause" />
+		order by org_id
+	</select>
+	
+</mapper>
