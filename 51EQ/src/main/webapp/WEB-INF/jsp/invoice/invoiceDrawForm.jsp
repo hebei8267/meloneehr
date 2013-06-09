@@ -107,7 +107,7 @@
                             <label class="left-control-label"><span class="warn_text">${invoice.customerName}</span></label>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">客服电话 :</label>
+                            <label class="control-label">客户电话 :</label>
                             <label class="left-control-label"><span class="warn_text">${invoice.customerTel}</span></label>
                         </div>
                         <div class="control-group">

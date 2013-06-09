@@ -143,7 +143,7 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">客服电话	:</label>
+                            <label class="control-label">客户电话	:</label>
                             <div class="controls">
                                 <form:input	path="customerTel" />
                             </div>
