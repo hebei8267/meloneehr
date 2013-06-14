@@ -106,6 +106,8 @@ public class ReqBillManager {
 			reqBill.setBatchId(batchId);
 			reqBill.setOrgId(orgId);
 			reqBill.setIndex(_index);
+
+			reqBill.setSupplierName(reqBill.getSupplierName().replaceAll("/", "_"));
 			_index++;
 
 			reqBillJpaDao.save(reqBill);
