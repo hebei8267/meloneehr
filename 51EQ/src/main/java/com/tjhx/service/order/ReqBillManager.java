@@ -40,7 +40,31 @@ public class ReqBillManager {
 
 	private final static String XML_CONFIG_READ_REQ_BILL = "/excel/Req_Bill_Org_Read_CFG.xml";
 	private final static String XML_CONFIG_WRITE_REQ_BILL = "/excel/Req_Bill_Supplier_Template.xls";
+	private final static String XML_CONFIG_WRITE_REQ_BILL_EQ = "/excel/Req_Bill_EQ_Template.xls";
 
+	public void writeReqBillFileToHeadOffice(String batchId, String supplierName, List<ReqBill> list)
+			throws ParsePropertyException, InvalidFormatException, IOException {
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		Map<String, List<ReqBill>> map = new HashMap<String, List<ReqBill>>();
+		map.put("reqBillList", list);
+
+		// 自动建立文件夹
+		FileUtils.mkdir(sysConfig.getReqBillSupplierOutputPath() + batchId + "/");
+
+		XLSTransformer transformer = new XLSTransformer();
+		transformer.transformXLS(sysConfig.getReqBillSupplierTemplatePath() + XML_CONFIG_WRITE_REQ_BILL_EQ, map,
+				sysConfig.getReqBillSupplierOutputPath() + batchId + "/EQ_" + batchId + ".xls");
+	}
+
+	/**
+	 * @param batchId
+	 * @param supplierName
+	 * @param list
+	 * @throws ParsePropertyException
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
 	public void writeReqBillFileToSupplier(String batchId, String supplierName, List<ReqBill> list)
 			throws ParsePropertyException, InvalidFormatException, IOException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
@@ -53,7 +77,7 @@ public class ReqBillManager {
 
 		XLSTransformer transformer = new XLSTransformer();
 		transformer.transformXLS(sysConfig.getReqBillSupplierTemplatePath() + XML_CONFIG_WRITE_REQ_BILL, map,
-				sysConfig.getReqBillSupplierOutputPath() + batchId + "/" + supplierName + ".xls");
+				sysConfig.getReqBillSupplierOutputPath() + batchId + "/" + supplierName + "_" + batchId + ".xls");
 	}
 
 	/**
