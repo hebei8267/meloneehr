@@ -103,6 +103,7 @@
 		<!-- 要货单 -->
 		<property name="reqBillSupplierTemplatePath" value="${reqBill.supplier.template.path}" />
 		<property name="reqBillSupplierOutputPath" value="${reqBill.supplier.output.path}" />
+		<property name="reqBillSupplierInputPath" value="${reqBill.supplier.input.path}" />
 	</bean>
 	
 	
