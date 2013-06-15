@@ -132,6 +132,9 @@
                                 <a href="${sc_ctx}/invoiceDraw">发票开具</a>
                             </li>
                             </c:if>
+                            <li>
+                                <a href="${sc_ctx}/reqBill">门店要货单</a>
+                            </li>
                         </ul>
                     </li>
                     </c:if>
