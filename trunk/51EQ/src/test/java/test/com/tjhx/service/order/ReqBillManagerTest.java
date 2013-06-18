@@ -1,5 +1,6 @@
 package test.com.tjhx.service.order;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,13 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springside.modules.test.spring.SpringTransactionalTestCase;
+import org.springside.modules.utils.SpringContextHolder;
 import org.xml.sax.SAXException;
 
 import com.tjhx.dao.order.ReqBillMyBatisDao;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.entity.order.ReqBill;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.order.ReqBillManager;
 
 public class ReqBillManagerTest extends SpringTransactionalTestCase {
@@ -224,6 +227,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			reqBill.setSupplierName(supplier.getName());
 			List<ReqBill> list = reqBillMyBatisDao.getReqBillList(reqBill);
 			reqBillManager.writeReqBillFileToSupplier(batchId, supplier.getName(), list);
+
 			for (ReqBill reqBill2 : list) {
 				_index++;
 				System.out.print(reqBill2.getOrgId() + "\t");
@@ -236,4 +240,54 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@全部数据行" + _index);
 	}
 
+	// 生产供应商文件
+	@Test
+	public void output3() throws FileNotFoundException, IOException {
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		List<Supplier> supList = reqBillMyBatisDao.getSupplierListByBatchId(batchId);
+		for (Supplier supplier : supList) {
+			ReqBill reqBill = new ReqBill();
+			reqBill.setBatchId(batchId);
+			reqBill.setSupplierName(supplier.getName());
+			List<ReqBill> list = reqBillMyBatisDao.getReqBillList(reqBill);
+
+			reqBillManager.writeReqBillImageFileToSupplier(sysConfig.getReqBillSupplierOutputPath() + batchId + "/EQ_"
+					+ batchId + ".xls", getImagePathList(sysConfig.getProductImgPath(), list));
+		}
+	}
+
+	private static List<String> getImagePathList(String productImgPath, List<ReqBill> list) {
+		List<String> imagePathList = new ArrayList<String>();
+		for (ReqBill reqBill : list) {
+			imagePathList.add(productImgPath + reqBill.getProductNo());
+		}
+		return imagePathList;
+	}
+	
+	
+//	CREATE TABLE
+//    t_req_bill
+//    (
+//        uuid INT NOT NULL AUTO_INCREMENT,
+//        create_date DATETIME NOT NULL,
+//        create_user_id VARCHAR(32) NOT NULL,
+//        update_date DATETIME NOT NULL,
+//        update_user_id VARCHAR(32) NOT NULL,
+//        version INT NOT NULL,
+//        app_num INT,
+//        barcode VARCHAR(16),
+//        batch_id VARCHAR(16) NOT NULL,
+//        _index INT NOT NULL,
+//        inventory_num INT,
+//        org_id VARCHAR(32) NOT NULL,
+//        product_name VARCHAR(64),
+//        product_no VARCHAR(16),
+//        ref_price DECIMAL(19,2),
+//        remarks VARCHAR(255),
+//        supplier_name VARCHAR(32),
+//        PRIMARY KEY (uuid),
+//        CONSTRAINT batch_id UNIQUE (batch_id, _index, org_id)
+//    )
+//    ENGINE=InnoDB DEFAULT CHARSET=utf8
 }

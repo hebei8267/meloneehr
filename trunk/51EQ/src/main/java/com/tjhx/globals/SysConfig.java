@@ -10,6 +10,7 @@ public class SysConfig {
 	private String reqBillSupplierTemplatePath;
 	private String reqBillSupplierOutputPath;
 	private String reqBillSupplierInputPath;
+	private String productImgPath;
 
 	/**
 	 * 取得cashDailyModel
@@ -99,6 +100,24 @@ public class SysConfig {
 	 */
 	public void setReqBillSupplierInputPath(String reqBillSupplierInputPath) {
 		this.reqBillSupplierInputPath = reqBillSupplierInputPath;
+	}
+
+	/**
+	 * 取得productImgPath
+	 * 
+	 * @return productImgPath productImgPath
+	 */
+	public String getProductImgPath() {
+		return productImgPath;
+	}
+
+	/**
+	 * 设置productImgPath
+	 * 
+	 * @param productImgPath productImgPath
+	 */
+	public void setProductImgPath(String productImgPath) {
+		this.productImgPath = productImgPath;
 	}
 
 }

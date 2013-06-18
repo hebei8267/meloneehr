@@ -104,6 +104,8 @@
 		<property name="reqBillSupplierTemplatePath" value="${reqBill.supplier.template.path}" />
 		<property name="reqBillSupplierOutputPath" value="${reqBill.supplier.output.path}" />
 		<property name="reqBillSupplierInputPath" value="${reqBill.supplier.input.path}" />
+		<!-- 货品图片路径 -->
+		<property name="productImgPath" value="${product.img.path}" />
 	</bean>
 	
 	

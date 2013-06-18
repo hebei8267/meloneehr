@@ -65,28 +65,28 @@
 	  	</where>
   	</sql>
 
-	<!-- 取得t_req_bill信息(根据参数) -->
+	<!-- 取得t_req_bill_tmp信息(根据参数) -->
 	<delete id="delReqBillByBatchId" parameterType="string">
-		delete from t_req_bill where batch_id = #{batchId}
+		delete from t_req_bill_tmp where batch_id = #{batchId}
 	</delete>
 	
 	<!-- 根据批次号取得供应商信息 -->
 	<select id="getSupplierListByBatchId" parameterType="string" resultMap="Result_Map_Supplier">
-		select supplier_name from t_req_bill where batch_id = #{batchId} group by supplier_name
+		select supplier_name from t_req_bill_tmp where batch_id = #{batchId} group by supplier_name
 	</select>
 	
 	<!-- 根据批次号取得供应商信息 -->
 	<select id="getReqBillList" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
 		select
 		<include refid="Base_Column_List" />
-		from t_req_bill
+		from t_req_bill_tmp
 		<include refid="Where_Clause" />
 		order by org_id
 	</select>
 	
 	<select id="getOrgListBySupplier" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
 		select DISTINCT org_id
-		from t_req_bill
+		from t_req_bill_tmp
 		<include refid="Where_Clause" />
 		order by org_id
 	</select>
