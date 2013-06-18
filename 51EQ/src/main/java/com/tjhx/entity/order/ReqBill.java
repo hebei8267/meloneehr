@@ -14,7 +14,7 @@ import com.tjhx.entity.IdEntity;
  * 门店要货单
  */
 @Entity
-@Table(name = "T_REQ_BILL")
+@Table(name = "T_REQ_BILL_TMP")
 // 默认的缓存策略.
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReqBill extends IdEntity {

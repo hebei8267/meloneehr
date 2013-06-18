@@ -1,7 +1,12 @@
 package com.tjhx.service.order;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -10,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
 import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.reader.ReaderBuilder;
@@ -17,7 +23,12 @@ import net.sf.jxls.reader.XLSReadStatus;
 import net.sf.jxls.reader.XLSReader;
 import net.sf.jxls.transformer.XLSTransformer;
 
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFPatriarch;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
@@ -42,6 +53,14 @@ public class ReqBillManager {
 	private final static String XML_CONFIG_WRITE_REQ_BILL = "/excel/Req_Bill_Supplier_Template.xls";
 	private final static String XML_CONFIG_WRITE_REQ_BILL_EQ = "/excel/Req_Bill_EQ_Template.xls";
 
+	/**
+	 * @param batchId
+	 * @param supplierName
+	 * @param list
+	 * @throws ParsePropertyException
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
 	public void writeReqBillFileToHeadOffice(String batchId, String supplierName, List<ReqBill> list)
 			throws ParsePropertyException, InvalidFormatException, IOException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
@@ -78,6 +97,45 @@ public class ReqBillManager {
 		XLSTransformer transformer = new XLSTransformer();
 		transformer.transformXLS(sysConfig.getReqBillSupplierTemplatePath() + XML_CONFIG_WRITE_REQ_BILL, map,
 				sysConfig.getReqBillSupplierOutputPath() + batchId + "/" + supplierName + "_" + batchId + ".xls");
+	}
+
+	/**
+	 * 插入图片
+	 * 
+	 * @param filePath
+	 * @param imagePathList
+	 * @param list
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void writeReqBillImageFileToSupplier(String filePath, List<String> imagePathList)
+			throws FileNotFoundException, IOException {
+		File xlsFile = new File(filePath);
+		if (!xlsFile.exists()) {// excel文件不存在
+			return;
+		}
+		// 声明一个工作薄
+		HSSFWorkbook wb = new HSSFWorkbook(new POIFSFileSystem(new FileInputStream(xlsFile)));
+		// 生成一个表格
+		HSSFSheet sheet = wb.getSheetAt(0);
+		// 声明一个画图的顶级管理器
+		HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
+
+		// 填充图片
+		int _index = 1;
+		for (String imagePath : imagePathList) {
+			_index++;
+			File imgFile = new File(imagePath);
+			if (!imgFile.exists()) {// image文件不存在
+				continue;
+			}
+			_insertImage(wb, patriarch, _getImageData(ImageIO.read(imgFile)), _index, 8);
+		}
+
+		FileOutputStream fout = new FileOutputStream(filePath);
+		// 输出到文件
+		wb.write(fout);
+		fout.close();
 	}
 
 	/**
@@ -135,6 +193,35 @@ public class ReqBillManager {
 			_index++;
 
 			reqBillJpaDao.save(reqBill);
+		}
+	}
+
+	// 自定义的方法,插入某个图片到指定索引的位置
+	private static void _insertImage(HSSFWorkbook wb, HSSFPatriarch pa, byte[] data, int row, int column) {
+		// 单元格为标,以左上为起点,想右移,范围0-1023 dx1 must be between 0 and 1023
+		int x1 = 0;
+		// 单元格为标,以左上为起点,想下移,范围0-255 dy1 must be between 0 and 255
+		int y1 = 0;
+		// 单元格为标,以右上为起点,想左移,范围0-1023 dx1 must be between 0 and 1023
+		int x2 = 1023;
+		// 单元格为标,以右下为起点,想上移,范围0-1023 dy1 must be between 0 and 255
+		int y2 = 255;
+		HSSFClientAnchor anchor = new HSSFClientAnchor(x1, y1, x2, y2, (short) column, row, (short) column, row);
+
+		anchor.setAnchorType(3);
+		pa.createPicture(anchor, wb.addPicture(data, HSSFWorkbook.PICTURE_TYPE_JPEG));
+	}
+
+	// 从图片里面得到字节数组
+	private static byte[] _getImageData(BufferedImage bi) {
+		try {
+			// 转化成PNG
+			ByteArrayOutputStream bout = new ByteArrayOutputStream();
+			ImageIO.write(bi, "PNG", bout);
+			return bout.toByteArray();
+		} catch (Exception exe) {
+			exe.printStackTrace();
+			return null;
 		}
 	}
 
