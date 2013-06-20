@@ -36,7 +36,7 @@ public class UserManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUser() {
-		return (List<User>) userJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+		return (List<User>) userJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "loginName")));
 	}
 
 	/**
