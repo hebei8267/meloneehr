@@ -35,18 +35,20 @@ public class CashDaily extends IdEntity {
 	private BigDecimal initAmt = new BigDecimal("0");
 	/** 当日销售（合计） */
 	private BigDecimal saleAmt = new BigDecimal("0");
-	/** 实际现金-当日（合计） */
-	private BigDecimal cashAmt = new BigDecimal("0");
 	/** 刷卡金额-单据统计-当日（合计） */
 	private BigDecimal cardAmt = new BigDecimal("0");
 	/** 刷卡金额-电脑统计-当日（合计） */
 	private BigDecimal cardAmtBw = new BigDecimal("0");
+	/** 销售现金-当日（合计） */
+	private BigDecimal saleCashAmt = new BigDecimal("0");
 	/** 刷卡笔数-当日（合计） */
 	private Integer cardNum = 0;
 	/** 存款金额-当日（合计） */
 	private BigDecimal depositAmt = new BigDecimal("0");
 	/** 留存金额-当日 */
 	private BigDecimal retainedAmt = new BigDecimal("0");
+	/** 现金盈亏（调节） */
+	private BigDecimal adjustAmt = new BigDecimal("0");
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
@@ -185,24 +187,6 @@ public class CashDaily extends IdEntity {
 	}
 
 	/**
-	 * 取得实际现金-当日（合计）
-	 * 
-	 * @return cashAmt 实际现金-当日（合计）
-	 */
-	public BigDecimal getCashAmt() {
-		return cashAmt;
-	}
-
-	/**
-	 * 设置实际现金-当日（合计）
-	 * 
-	 * @param cashAmt 实际现金-当日（合计）
-	 */
-	public void setCashAmt(BigDecimal cashAmt) {
-		this.cashAmt = cashAmt;
-	}
-
-	/**
 	 * 取得刷卡金额-单据统计-当日（合计）
 	 * 
 	 * @return cardAmt 刷卡金额-单据统计-当日（合计）
@@ -309,6 +293,42 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	/**
+	 * 取得现金盈亏（调节）
+	 * 
+	 * @return adjustAmt 现金盈亏（调节）
+	 */
+	public BigDecimal getAdjustAmt() {
+		return adjustAmt;
+	}
+
+	/**
+	 * 设置现金盈亏（调节）
+	 * 
+	 * @param adjustAmt 现金盈亏（调节）
+	 */
+	public void setAdjustAmt(BigDecimal adjustAmt) {
+		this.adjustAmt = adjustAmt;
+	}
+
+	/**
+	 * 取得销售现金-当日（合计）
+	 * 
+	 * @return saleCashAmt 销售现金-当日（合计）
+	 */
+	public BigDecimal getSaleCashAmt() {
+		return saleCashAmt;
+	}
+
+	/**
+	 * 设置销售现金-当日（合计）
+	 * 
+	 * @param saleCashAmt 销售现金-当日（合计）
+	 */
+	public void setSaleCashAmt(BigDecimal saleCashAmt) {
+		this.saleCashAmt = saleCashAmt;
 	}
 
 }

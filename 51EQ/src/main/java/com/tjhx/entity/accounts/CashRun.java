@@ -36,9 +36,13 @@ public class CashRun extends IdEntity {
 	private Integer jobType;
 	/** 班前余额 */
 	private BigDecimal initAmt = new BigDecimal("0");
-	/** 当前销售 */
+	/** 当前销售-合计（外销收现+刷卡金额-现金盈亏 ） */
 	private BigDecimal saleAmt = new BigDecimal("0");
-	/** 实际现金-交班时 */
+	/** 销售现金-交班时 */
+	private BigDecimal saleCashAmt = new BigDecimal("0");
+	/** 账面应有现金 */
+	private BigDecimal carryingCashAmt = new BigDecimal("0");
+	/** 实际销售现金-交班时 */
 	private BigDecimal cashAmt = new BigDecimal("0");
 	/** 刷卡金额-单据统计 */
 	private BigDecimal cardAmt = new BigDecimal("0");
@@ -60,6 +64,8 @@ public class CashRun extends IdEntity {
 	private String descTxt;
 	/** 日结标记 */
 	private Boolean dailyFlg = false;
+	/** 现金盈亏（调节） */
+	private BigDecimal adjustAmt = new BigDecimal("0");
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
@@ -217,18 +223,18 @@ public class CashRun extends IdEntity {
 	}
 
 	/**
-	 * 取得实际现金-交班时
+	 * 取得实际销售现金-交班时
 	 * 
-	 * @return cashAmt 实际现金-交班时
+	 * @return cashAmt 实际销售现金-交班时
 	 */
 	public BigDecimal getCashAmt() {
 		return cashAmt;
 	}
 
 	/**
-	 * 设置实际现金-交班时
+	 * 设置实际销售现金-交班时
 	 * 
-	 * @param cashAmt 实际现金-交班时
+	 * @param cashAmt 实际销售现金-交班时
 	 */
 	public void setCashAmt(BigDecimal cashAmt) {
 		this.cashAmt = cashAmt;
@@ -434,5 +440,59 @@ public class CashRun extends IdEntity {
 	 */
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	/**
+	 * 取得现金盈亏（调节）
+	 * 
+	 * @return adjustAmt 现金盈亏（调节）
+	 */
+	public BigDecimal getAdjustAmt() {
+		return adjustAmt;
+	}
+
+	/**
+	 * 设置现金盈亏（调节）
+	 * 
+	 * @param adjustAmt 现金盈亏（调节）
+	 */
+	public void setAdjustAmt(BigDecimal adjustAmt) {
+		this.adjustAmt = adjustAmt;
+	}
+
+	/**
+	 * 取得销售现金-交班时
+	 * 
+	 * @return saleCashAmt 销售现金-交班时
+	 */
+	public BigDecimal getSaleCashAmt() {
+		return saleCashAmt;
+	}
+
+	/**
+	 * 设置销售现金-交班时
+	 * 
+	 * @param saleCashAmt 销售现金-交班时
+	 */
+	public void setSaleCashAmt(BigDecimal saleCashAmt) {
+		this.saleCashAmt = saleCashAmt;
+	}
+
+	/**
+	 * 取得账面应有现金
+	 * 
+	 * @return carryingCashAmt 账面应有现金
+	 */
+	public BigDecimal getCarryingCashAmt() {
+		return carryingCashAmt;
+	}
+
+	/**
+	 * 设置账面应有现金
+	 * 
+	 * @param carryingCashAmt 账面应有现金
+	 */
+	public void setCarryingCashAmt(BigDecimal carryingCashAmt) {
+		this.carryingCashAmt = carryingCashAmt;
 	}
 }
