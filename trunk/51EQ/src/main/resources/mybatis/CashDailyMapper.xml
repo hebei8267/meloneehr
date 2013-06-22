@@ -10,10 +10,10 @@
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="adjust_amt" property="adjustAmt" jdbcType="DECIMAL"/>
         <result column="card_amt" property="cardAmt" jdbcType="DECIMAL"/>
         <result column="card_amt_bw" property="cardAmtBw" jdbcType="DECIMAL"/>
         <result column="card_num" property="cardNum" jdbcType="INTEGER"/>
-        <result column="cash_amt" property="cashAmt" jdbcType="DECIMAL"/>
         <result column="deposit_amt" property="depositAmt" jdbcType="DECIMAL"/>
         <result column="init_amt" property="initAmt" jdbcType="DECIMAL"/>
         <result column="opt_date" property="optDate" jdbcType="VARCHAR"/>
@@ -23,7 +23,9 @@
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="retained_amt" property="retainedAmt" jdbcType="DECIMAL"/>
         <result column="sale_amt" property="saleAmt" jdbcType="DECIMAL"/>
-        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="sale_cash_amt" property="saleCashAmt" jdbcType="DECIMAL"/>
+        
+         <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 查询结果字段 -->
@@ -35,10 +37,10 @@
     	cash.update_date ,
     	cash.update_user_id ,
     	cash.version ,
+    	cash.adjust_amt ,
     	cash.card_amt ,
     	cash.card_amt_bw ,
     	cash.card_num ,
-    	cash.cash_amt ,
     	cash.deposit_amt ,
     	cash.init_amt ,
     	cash.opt_date ,
@@ -48,6 +50,7 @@
     	cash.org_id ,
     	cash.retained_amt ,
     	cash.sale_amt ,
+    	cash.sale_cash_amt ,
     	org.org_name AS orgName
 	]]>
   	</sql>
@@ -74,7 +77,7 @@
 		<include refid="Base_Column_List" />
 		from t_cash_daily cash, t_organization org
 		<include refid="Where_Clause" />
-		order by cash.opt_date_show desc
+		order by cash.opt_date_show desc, cash.org_id 
 	</select>
 	
 	<!-- 取得销售流水日结信息(全机构) -->
@@ -89,9 +92,9 @@
     	cash.card_amt ,
     	cash.card_amt_bw ,
     	cash.card_num ,
-    	cash.cash_amt ,
     	cash.deposit_amt ,
     	cash.init_amt ,
+    	cash.sale_cash_amt ,
     	cash.opt_date ,
     	cash.opt_date_m ,
     	#{optDateShow} AS opt_date_show ,

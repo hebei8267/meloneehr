@@ -10,11 +10,13 @@
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="adjust_amt" property="adjustAmt" jdbcType="DECIMAL"/>
         <result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR"/>
         <result column="card_amt" property="cardAmt" jdbcType="DECIMAL"/>
         <result column="card_amt_bw" property="cardAmtBw" jdbcType="DECIMAL"/>
         <result column="card_cert_no" property="cardCertNo" jdbcType="VARCHAR"/>
         <result column="card_num" property="cardNum" jdbcType="INTEGER"/>
+        <result column="carrying_cash_amt" property="carryingCashAmt" jdbcType="DECIMAL"/>
         <result column="cash_amt" property="cashAmt" jdbcType="DECIMAL"/>
         <result column="daily_flg" property="dailyFlg" jdbcType="BIT"/>
         <result column="deposit_amt" property="depositAmt" jdbcType="DECIMAL"/>
@@ -29,23 +31,26 @@
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="retained_amt" property="retainedAmt" jdbcType="DECIMAL"/>
         <result column="sale_amt" property="saleAmt" jdbcType="DECIMAL"/>
+        <result column="sale_cash_amt" property="saleCashAmt" jdbcType="DECIMAL"/>
         <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 查询结果字段 -->
 	<sql id="Base_Column_List" >
 	<![CDATA[
-    	cash.uuid ,
+		cash.uuid ,
     	cash.create_date ,
     	cash.create_user_id ,
     	cash.update_date ,
     	cash.update_user_id ,
     	cash.version ,
+    	cash.adjust_amt ,
     	cash.bank_card_no ,
     	cash.card_amt ,
     	cash.card_amt_bw ,
     	cash.card_cert_no ,
     	cash.card_num ,
+    	cash.carrying_cash_amt ,
     	cash.cash_amt ,
     	cash.daily_flg ,
     	cash.deposit_amt ,
@@ -60,6 +65,7 @@
     	cash.org_id ,
     	cash.retained_amt ,
     	cash.sale_amt ,
+    	cash.sale_cash_amt ,
     	org.org_name AS orgName
 	]]>
   	</sql>
