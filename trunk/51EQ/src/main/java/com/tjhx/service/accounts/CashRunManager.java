@@ -236,6 +236,14 @@ public class CashRunManager {
 		// 备注
 		_dbCashRun.setDescTxt(cashRun.getDescTxt());
 
+		// -------------------------------2013-6-21
+		// 现金盈亏（调节）
+		_dbCashRun.setAdjustAmt(cashRun.getAdjustAmt());
+		// 账面应有现金
+		_dbCashRun.setCarryingCashAmt(cashRun.getCarryingCashAmt());
+		// /销售现金-交班时
+		_dbCashRun.setSaleCashAmt(cashRun.getSaleCashAmt());
+
 		cashRunJpaDao.save(_dbCashRun);
 	}
 
@@ -249,21 +257,25 @@ public class CashRunManager {
 		CashRun _cashRun = new CashRun();
 		for (CashRun cashRun : cashRunList) {
 
-			// 班前余额
-			_cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
+			// 现金盈亏
+			_cashRun.setAdjustAmt(_cashRun.getAdjustAmt().add(cashRun.getAdjustAmt()));
+			// 销售收现
+			_cashRun.setSaleCashAmt(_cashRun.getSaleCashAmt().add(cashRun.getSaleCashAmt()));
 			// 当前销售
 			_cashRun.setSaleAmt(_cashRun.getSaleAmt().add(cashRun.getSaleAmt()));
-			// 实际现金
-			_cashRun.setCashAmt(_cashRun.getCashAmt().add(cashRun.getCashAmt()));
 			// 刷卡金额(单据)
 			_cashRun.setCardAmt(_cashRun.getCardAmt().add(cashRun.getCardAmt()));
-			// 刷卡金额(百威)
-			_cashRun.setCardAmtBw(_cashRun.getCardAmtBw().add(cashRun.getCardAmtBw()));
 			// 存款金额
 			_cashRun.setDepositAmt(_cashRun.getDepositAmt().add(cashRun.getDepositAmt()));
-			// 留存金额
-			_cashRun.setRetainedAmt(_cashRun.getRetainedAmt().add(cashRun.getRetainedAmt()));
 
+//			// 班前余额
+//			_cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
+//			// 实际现金
+//			_cashRun.setCashAmt(_cashRun.getCashAmt().add(cashRun.getCashAmt()));
+//			// 刷卡金额(百威)
+//			_cashRun.setCardAmtBw(_cashRun.getCardAmtBw().add(cashRun.getCardAmtBw()));
+//			// 留存金额
+//			_cashRun.setRetainedAmt(_cashRun.getRetainedAmt().add(cashRun.getRetainedAmt()));
 		}
 		return _cashRun;
 	}

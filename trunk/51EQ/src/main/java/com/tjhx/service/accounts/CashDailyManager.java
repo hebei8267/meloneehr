@@ -57,20 +57,28 @@ public class CashDailyManager {
 				_tmpCashDaily.setInitAmt(cashRun.getInitAmt());
 
 			}
-			// 当日销售（合计）
-			_tmpCashDaily.setSaleAmt(_tmpCashDaily.getSaleAmt().add(cashRun.getSaleAmt()));
-			// 实际现金-当日（合计）
-			_tmpCashDaily.setCashAmt(_tmpCashDaily.getCashAmt().add(cashRun.getCashAmt()));
+
+			// 现金盈亏（合计）
+			_tmpCashDaily.setAdjustAmt(_tmpCashDaily.getAdjustAmt().add(cashRun.getAdjustAmt()));
+			// 销售收现（合计）
+			_tmpCashDaily.setSaleCashAmt(_tmpCashDaily.getSaleCashAmt().add(cashRun.getSaleCashAmt()));
 			// 刷卡金额-单据统计-当日（合计）
 			_tmpCashDaily.setCardAmt(_tmpCashDaily.getCardAmt().add(cashRun.getCardAmt()));
-			// 刷卡金额-电脑统计-当日（合计）
-			_tmpCashDaily.setCardAmtBw(_tmpCashDaily.getCardAmtBw().add(cashRun.getCardAmtBw()));
-			// 刷卡笔数-当日（合计）
-			_tmpCashDaily.setCardNum(_tmpCashDaily.getCardNum() + cashRun.getCardNum());
 			// 存款金额-当日（合计）
 			_tmpCashDaily.setDepositAmt(_tmpCashDaily.getDepositAmt().add(cashRun.getDepositAmt()));
 			// 留存金额-当日
 			_tmpCashDaily.setRetainedAmt(cashRun.getRetainedAmt());
+			// 当日销售（合计）
+			_tmpCashDaily.setSaleAmt(_tmpCashDaily.getSaleAmt().add(cashRun.getSaleAmt()));
+
+			// 实际现金-当日（合计）
+			// _tmpCashDaily.setCashAmt(_tmpCashDaily.getCashAmt().add(cashRun.getCashAmt()));
+			// 刷卡金额-电脑统计-当日（合计）
+			// _tmpCashDaily.setCardAmtBw(_tmpCashDaily.getCardAmtBw().add(cashRun.getCardAmtBw()));
+			// 刷卡笔数-当日（合计）
+			// _tmpCashDaily.setCardNum(_tmpCashDaily.getCardNum() +
+			// cashRun.getCardNum());
+
 		}
 		return _noCashDailyList;
 	}
@@ -159,8 +167,7 @@ public class CashDailyManager {
 			}
 			// 当日销售（合计）
 			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashRun.getSaleAmt()));
-			// 实际现金-当日（合计）
-			_cashDaily.setCashAmt(_cashDaily.getCashAmt().add(cashRun.getCashAmt()));
+
 			// 刷卡金额-单据统计-当日（合计）
 			_cashDaily.setCardAmt(_cashDaily.getCardAmt().add(cashRun.getCardAmt()));
 			// 刷卡金额-电脑统计-当日（合计）
@@ -171,7 +178,10 @@ public class CashDailyManager {
 			_cashDaily.setDepositAmt(_cashDaily.getDepositAmt().add(cashRun.getDepositAmt()));
 			// 留存金额-当日
 			_cashDaily.setRetainedAmt(cashRun.getRetainedAmt());
-
+			// 销售现金-当日（合计）
+			_cashDaily.setSaleCashAmt(_cashDaily.getSaleCashAmt().add(cashRun.getSaleCashAmt()));
+			// 现金盈亏（调节）
+			_cashDaily.setAdjustAmt(_cashDaily.getAdjustAmt().add(cashRun.getAdjustAmt()));
 			// 修改销售流水标记
 			cashRun.setDailyFlg(true);
 			cashRunJpaDao.save(cashRun);
@@ -222,17 +232,18 @@ public class CashDailyManager {
 	public CashDaily calTotal(List<CashDaily> cashDailyList) {
 		CashDaily _cashDaily = new CashDaily();
 		for (CashDaily cashDaily : cashDailyList) {
-
-			// 当日销售
-			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashDaily.getSaleAmt()));
-			// 实际现金
-			_cashDaily.setCashAmt(_cashDaily.getCashAmt().add(cashDaily.getCashAmt()));
+			// 现金盈亏（调节）
+			_cashDaily.setAdjustAmt(_cashDaily.getAdjustAmt().add(cashDaily.getAdjustAmt()));
+			// 销售现金-当日（合计）
+			_cashDaily.setSaleCashAmt(_cashDaily.getSaleCashAmt().add(cashDaily.getSaleCashAmt()));
 			// 刷卡金额(单据)
 			_cashDaily.setCardAmt(_cashDaily.getCardAmt().add(cashDaily.getCardAmt()));
-			// 刷卡金额(百威)
-			_cashDaily.setCardAmtBw(_cashDaily.getCardAmtBw().add(cashDaily.getCardAmtBw()));
+			// 刷卡笔数
+			_cashDaily.setCardNum(_cashDaily.getCardNum() + cashDaily.getCardNum());
 			// 存款金额
 			_cashDaily.setDepositAmt(_cashDaily.getDepositAmt().add(cashDaily.getDepositAmt()));
+			// 当日销售
+			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashDaily.getSaleAmt()));
 
 		}
 		return _cashDaily;
