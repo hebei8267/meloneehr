@@ -17,7 +17,7 @@
             $(function() {
             	$("#listForm").validate({
                     rules : {
-                    	orgId : {
+                    	optDateShow : {
                     		required : true
                         }
                     }
@@ -53,6 +53,11 @@
                         </legend>
                     </div>
                     <div class="span3">
+                        <label class="control-label">销售日期 :</label>
+                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
+                        
+                    </div>
+                    <div class="span9">
                         <label class="control-label">机构 :</label>
                         <select name="orgId" class="input-medium">
                             <c:forEach items="${orgList}" var="org">
@@ -64,10 +69,6 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                    </div>
-                    <div class="span9">
-                        <label class="control-label">销售日期 :</label>
-                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
@@ -84,16 +85,13 @@
                                         昨日余额
                                     </th>
                                     <th>
-                                        当日销售
+                                        现金盈亏
                                     </th>
                                     <th>
-                                        实际现金
+                                        当日收现
                                     </th>
                                     <th>
-                                        刷卡金额(单据)
-                                    </th>
-                                    <th>
-                                        刷卡金额(百威)
+                                        刷卡金额(单)
                                     </th>
                                     <th>
                                         刷卡笔数
@@ -103,6 +101,9 @@
                                     </th>
                                     <th>
                                         留存金额
+                                    </th>
+                                    <th>
+                                        当日销售额
                                     </th>
                                     <th	width="55">
                                         &nbsp;
@@ -122,16 +123,13 @@
                                         	${cashDaily.initAmt}
                                         </td>
                                         <td>
-                                        	${cashDaily.saleAmt}
+                                        	${cashDaily.adjustAmt}
                                         </td>
                                         <td>
-                                        	${cashDaily.cashAmt}
+                                        	${cashDaily.saleCashAmt}
                                         </td>
                                         <td <c:if test="${cashDaily.cardAmt != cashDaily.cardAmtBw}">style="background-color:#F89406;color:#FFFFFF"</c:if>>
                                         	${cashDaily.cardAmt}
-                                        </td>
-                                        <td <c:if test="${cashDaily.cardAmt != cashDaily.cardAmtBw}">style="background-color:#F89406;color:#FFFFFF"</c:if>>
-                                        	${cashDaily.cardAmtBw}
                                         </td>
                                         <td>
                                         	${cashDaily.cardNum}
@@ -141,6 +139,9 @@
                                         </td>
                                         <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
                                         	${cashDaily.retainedAmt}
+                                        </td>
+                                        <td>
+                                        	${cashDaily.saleAmt}
                                         </td>
                                         <td>
                                             <a href="${sc_ctx}/cashReport/detail/${cashDaily.optDate}/${cashDaily.orgId}" target="_blank" class="btn btn-warning"/>详细</a>
@@ -153,21 +154,24 @@
                                             合计:
                                         </td>
                                         <td>
-                                            ${totalCashDaily.saleAmt}
+                                            ${totalCashDaily.adjustAmt}
                                         </td>
                                         <td>
-                                            ${totalCashDaily.cashAmt}
+                                            ${totalCashDaily.saleCashAmt}
                                         </td>
                                         <td>
                                             ${totalCashDaily.cardAmt}
                                         </td>
                                         <td>
-                                            ${totalCashDaily.cardAmtBw}
-                                        </td>
-                                        <td>
+                                            ${totalCashDaily.cardNum}
                                         </td>
                                         <td>
                                             ${totalCashDaily.depositAmt}
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            ${totalCashDaily.saleAmt}
                                         </td>
                                         <td	colspan="2"></td>
                                     </tr>

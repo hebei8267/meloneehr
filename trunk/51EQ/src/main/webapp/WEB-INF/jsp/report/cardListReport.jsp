@@ -14,7 +14,7 @@
             $(function() {
             	$("#listForm").validate({
                     rules : {
-                    	orgId : {
+                    	optDateShow : {
                     		required : true
                         }
                     }
@@ -50,6 +50,10 @@
                         </legend>
                     </div>
                     <div class="span3">
+                        <label class="control-label">销售日期 :</label>
+                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
+                    </div>
+                    <div class="span9">
                         <label class="control-label">机构 :</label>
                         <select name="orgId" class="input-medium">
                             <c:forEach items="${orgList}" var="org">
@@ -61,10 +65,6 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                    </div>
-                    <div class="span9">
-                        <label class="control-label">销售日期 :</label>
-                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">

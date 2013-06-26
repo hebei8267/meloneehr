@@ -54,9 +54,8 @@
                         jobType : {
                             required : true
                         },
-                        saleAmt : {
-                            required : true,
-                            money : true
+                        saleCashAmt : {
+                            required : true
                         },
                         cashAmt : {
                             required : true,
@@ -108,19 +107,51 @@
                 });
 
                 $("#cashAmt").change(function() {
+                	adjustAmt();
+                	saleAmt();
                     calRetainedAmt();
                 });
-
+                $("#cardAmt").change(function() {
+                	saleAmt();
+                });
                 $("#depositAmt").change(function() {
                     calRetainedAmt();
                 });
+                $("#saleCashAmt").change(function() {
+                	carryingCashAmt();
+                	
+                	adjustAmt();
+                });
             });
-            // 留存金额 = 班前余额+实际现金-存款金额
+            
+         	// 账面应有现金 = 班前余额+外销收现
+            function carryingCashAmt() {
+                var _result = numAdd($("#initAmt").val(), $("#saleCashAmt").val());
+
+                $("#_carryingCashAmt").html(_result + " 元");
+                $("#carryingCashAmt").val(_result);
+            }
+         	// 现金盈亏 = 实点现金-账面应有现金
+            function adjustAmt() {
+                var _result =  numSub($("#cashAmt").val(), $("#carryingCashAmt").val());
+
+                $("#_adjustAmt").html(_result + " 元");
+                $("#adjustAmt").val(_result);
+            }
+            // 留存金额 = 实点现金-存款金额
             function calRetainedAmt() {
-                var _result = new Number($("#initAmt").val()) + new Number($("#cashAmt").val()) - new Number($("#depositAmt").val());
+                var _result = numSub($("#cashAmt").val(), $("#depositAmt").val());
 
                 $("#_retainedAmt_label").html(_result + " 元");
                 $("#retainedAmt").val(_result);
+            }
+            //当班销售金额 = 实点现金 + 刷卡金额(单据) - 班前余额
+            function saleAmt() {
+            	var _result = numAdd($("#cashAmt").val(), $("#cardAmt").val());
+            	_result = numSub(_result, $("#initAmt").val());
+
+                $("#_saleAmt").html(_result + " 元");
+                $("#saleAmt").val(_result);
             }
         </script>
     </head>
@@ -183,18 +214,28 @@
                             <form:hidden path="initAmt"/>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">当前销售 :</label>
+                            <label class="control-label">销售收现 :</label>
                             <div class="controls">
-                                <form:input	path="saleAmt" />
+                                <form:input	path="saleCashAmt" />
                                 元
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">实际现金 :</label>
+                            <label class="control-label">账面应有现金 :</label>
+                            <label class="left-control-label" id="_carryingCashAmt">${cashRun.carryingCashAmt} 元</label>
+                            <form:hidden path="carryingCashAmt"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">实点现金 :</label>
                             <div class="controls">
                                 <form:input	path="cashAmt" />
                                 元
                             </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">现金盈亏 :</label>
+                            <label class="left-control-label" id="_adjustAmt" style="color:#FF6633">${cashRun.adjustAmt} 元</label>
+                            <form:hidden path="adjustAmt"/>
                         </div>
                         <div class="control-group">
                             <label class="control-label">刷卡金额(单据) :</label>
@@ -245,6 +286,11 @@
                             <label class="control-label">留存金额 :</label>
                             <label class="left-control-label" id="_retainedAmt_label">${cashRun.retainedAmt} 元</label>
                             <form:hidden path="retainedAmt"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">当班销售金额 :</label>
+                            <label class="left-control-label" id="_saleAmt">${cashRun.saleAmt} 元</label>
+                            <form:hidden path="saleAmt"/>
                         </div>
                         <div class="control-group">
                             <label class="control-label">备注 :</label>

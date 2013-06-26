@@ -16,7 +16,7 @@ public class ReportUtils {
 
 		Map<String, String> orgList = new LinkedHashMap<String, String>();
 
-		orgList.put("", "");
+		orgList.put("", "全机构");
 		for (Organization _org : _orgList) {
 			if (!Constants.ROOT_ORG_ID.equals(_org.getId())) {
 				orgList.put(_org.getId(), _org.getName());

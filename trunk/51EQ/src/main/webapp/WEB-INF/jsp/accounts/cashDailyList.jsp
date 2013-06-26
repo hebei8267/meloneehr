@@ -55,25 +55,22 @@
                                         昨日余额
                                     </th>
                                     <th>
-                                        当日销售
+                                        现金盈亏
                                     </th>
                                     <th>
-                                        实际现金
+                                        当日收现
                                     </th>
                                     <th>
-                                        刷卡金额(单据)
-                                    </th>
-                                    <th>
-                                        刷卡金额(百威)
-                                    </th>
-                                    <th>
-                                        刷卡笔数
+                                        刷卡金额(单)
                                     </th>
                                     <th>
                                         存款金额
                                     </th>
                                     <th>
                                         留存金额
+                                    </th>
+                                    <th>
+                                        当日销售额
                                     </th>
                                     <th width="55">
                                         明细
@@ -93,25 +90,22 @@
                                             ${noCashDaily.initAmt}
                                         </td>
                                         <td>
-                                            ${noCashDaily.saleAmt}
+                                            ${noCashDaily.adjustAmt}
                                         </td>
                                         <td>
-                                            ${noCashDaily.cashAmt}
+                                            ${noCashDaily.saleCashAmt}
                                         </td>
                                         <td>
                                             ${noCashDaily.cardAmt}
-                                        </td>
-                                        <td>
-                                            ${noCashDaily.cardAmtBw}
-                                        </td>
-                                        <td>
-                                            ${noCashDaily.cardNum}
                                         </td>
                                         <td>
                                             ${noCashDaily.depositAmt}
                                         </td>
                                         <td>
                                             ${noCashDaily.retainedAmt}
+                                        </td>
+                                        <td>
+                                            ${noCashDaily.saleAmt}
                                         </td>
                                         <td><a href="${sc_ctx}/cashDaily/detail/${noCashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
                                         </td>
@@ -124,7 +118,7 @@
                             <c:if test="${empty	noCashDailyList}" >
                                 <tfoot>
                                     <tr>
-                                        <td	colspan="11" class="rounded-foot-left">
+                                        <td	colspan="10" class="rounded-foot-left">
                                             无记录信息
                                         </td>
                                     </tr>
@@ -152,25 +146,22 @@
                                         昨日余额
                                     </th>
                                     <th>
-                                        当日销售
+                                        现金盈亏
                                     </th>
                                     <th>
-                                        实际现金
+                                        当日收现
                                     </th>
                                     <th>
-                                        刷卡金额(单据)
-                                    </th>
-                                    <th>
-                                        刷卡金额(百威)
-                                    </th>
-                                    <th>
-                                        刷卡笔数
+                                        刷卡金额(单)
                                     </th>
                                     <th>
                                         存款金额
                                     </th>
                                     <th>
                                         留存金额
+                                    </th>
+                                    <th>
+                                        当日销售额
                                     </th>
                                     <th width="55">
                                         明细
@@ -181,7 +172,7 @@
                                 <c:if test="${empty	cashDailyList}" >
                                     <tfoot>
                                         <tr>
-                                            <td	colspan="10" class="rounded-foot-left">
+                                            <td	colspan="9" class="rounded-foot-left">
                                                 无记录信息
                                             </td>
                                         </tr>
@@ -196,25 +187,22 @@
                                             ${cashDaily.initAmt}
                                         </td>
                                         <td>
-                                            ${cashDaily.saleAmt}
+                                            ${cashDaily.adjustAmt}
                                         </td>
                                         <td>
-                                            ${cashDaily.cashAmt}
+                                            ${cashDaily.saleCashAmt}
                                         </td>
                                         <td>
                                             ${cashDaily.cardAmt}
-                                        </td>
-                                        <td>
-                                            ${cashDaily.cardAmtBw}
-                                        </td>
-                                        <td>
-                                            ${cashDaily.cardNum}
                                         </td>
                                         <td>
                                             ${cashDaily.depositAmt}
                                         </td>
                                         <td>
                                             ${cashDaily.retainedAmt}
+                                        </td>
+                                        <td>
+                                            ${cashDaily.saleAmt}
                                         </td>
                                         <td><a href="${sc_ctx}/cashDaily/detail/${cashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
                                         </td>
