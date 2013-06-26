@@ -66,22 +66,22 @@
                                         日结日期
                                     </th>
                                     <th>
-                                        头天余额
+                                        头日余额
                                     </th>
                                     <th>
-                                        实际现金
+                                        当日收现
                                     </th>
                                     <th>
-                                        刷卡金额(单据)
-                                    </th>
-                                    <th>
-                                        刷卡金额(百威)
+                                        刷卡金额(单)
                                     </th>
                                     <th>
                                         存款金额
                                     </th>
                                     <th>
                                         留存金额
+                                    </th>
+                                    <th>
+                                        当日销售额
                                     </th>
                                 </tr>
                             </thead>
@@ -101,22 +101,22 @@
                                         </c:if>
                                         <c:if test="${!empty cashDaily.optDate}" >
                                         <td>
-                                            ${cashDaily.saleAmt}
+                                            ${cashDaily.initAmt}
                                         </td>
                                         <td>
-                                            ${cashDaily.cashAmt}
+                                            ${cashDaily.saleCashAmt}
                                         </td>
-                                        <td <c:if test="${cashDaily.cardAmt != cashDaily.cardAmtBw}">style="background-color:#F89406;color:#FFFFFF"</c:if>>
+                                        <td>
                                             ${cashDaily.cardAmt}
-                                        </td>
-                                        <td <c:if test="${cashDaily.cardAmt != cashDaily.cardAmtBw}">style="background-color:#F89406;color:#FFFFFF"</c:if>>
-                                            ${cashDaily.cardAmtBw}
                                         </td>
                                         <td>
                                             ${cashDaily.depositAmt}
                                         </td>
                                         <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
                                             ${cashDaily.retainedAmt}
+                                        </td>
+                                        <td>
+                                            ${cashDaily.saleAmt}
                                         </td>
                                         </c:if>
                                     </tr>

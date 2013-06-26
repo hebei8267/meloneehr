@@ -106,25 +106,27 @@
                                         班前余额
                                     </th>
                                     <th>
-                                        当前销售
+                                        实点现金
                                     </th>
                                     <th>
-                                        实际现金
+                                        现金盈亏
                                     </th>
                                     <th>
-                                        刷卡金额(单据)
+                                        销售收现
                                     </th>
+                                    
                                     <th>
-                                        刷卡金额(百威)
+                                        刷卡金额(单)
                                     </th>
+                                    
                                     <th>
                                         存款金额
                                     </th>
                                     <th>
-                                        存款人
+                                        留存金额
                                     </th>
                                     <th>
-                                        留存金额
+                                        当班销售额
                                     </th>
                                     <th	width="55">
                                         &nbsp;
@@ -158,25 +160,26 @@
                                             ${cashRun.initAmt}
                                         </td>
                                         <td>
-                                            ${cashRun.saleAmt}
+                                            ${cashRun.cashAmt}
                                         </td>
                                         <td>
-                                            ${cashRun.cashAmt}
+                                            ${cashRun.adjustAmt}
+                                        </td>
+                                        <td>
+                                            ${cashRun.saleCashAmt}
                                         </td>
                                         <td>
                                             ${cashRun.cardAmt}
                                         </td>
-                                        <td>
-                                            ${cashRun.cardAmtBw}
-                                        </td>
+                                        
                                         <td>
                                             ${cashRun.depositAmt}
                                         </td>
                                         <td>
-                                            ${cashRun.depositor}
+                                            ${cashRun.retainedAmt}
                                         </td>
                                         <td>
-                                            ${cashRun.retainedAmt}
+                                            ${cashRun.saleAmt}
                                         </td>
                                         <td>
                                             <c:if test="${cashRun.dailyFlg == 'false'	}">
@@ -187,24 +190,25 @@
                                 </c:forEach>
                                 <c:if test="${!empty cashRunList}" >
                                     <tr>
-                                        <td	colspan="4">
+                                        <td	colspan="5">
                                             合计:
                                         </td>
                                         <td>
-                                            ${totalCashRun.saleAmt}
+                                            ${totalCashRun.adjustAmt}
                                         </td>
                                         <td>
-                                            ${totalCashRun.cashAmt}
+                                            ${totalCashRun.saleCashAmt}
                                         </td>
                                         <td>
                                             ${totalCashRun.cardAmt}
                                         </td>
                                         <td>
-                                            ${totalCashRun.cardAmtBw}
-                                        </td>
-                                        <td colspan="4">
                                             ${totalCashRun.depositAmt}
                                         </td>
+                                        <td></td>
+                                        <td colspan="2">
+                                            ${totalCashRun.saleAmt}
+                                        </td>                                        
                                     </tr>
                                 </c:if>
                             </tbody>

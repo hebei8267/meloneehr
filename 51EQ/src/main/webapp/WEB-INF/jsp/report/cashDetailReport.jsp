@@ -56,13 +56,22 @@
                                 <label class="left-control-label">${cashRun1.initAmt} 元</label>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">当前销售 :</label>
-                                <label class="left-control-label">${cashRun1.saleAmt} 元</label>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">实际现金 :</label>
-                                <label class="left-control-label">${cashRun1.cashAmt} 元</label>
-                            </div>
+	                            <label class="control-label">销售收现 :</label>
+	                            <label class="left-control-label">${cashRun1.saleCashAmt} 元</label>
+	                        </div>
+	                        <div class="control-group">
+                            	<label class="control-label">账面应有现金 :</label>
+                            	<label class="left-control-label">${cashRun1.carryingCashAmt} 元</label>
+                            	<form:hidden path="carryingCashAmt"/>
+                        	</div>
+                        	<div class="control-group">
+	                            <label class="control-label">实点现金 :</label>
+	                            <label class="left-control-label">${cashRun1.cashAmt} 元</label>
+                        	</div>
+                        	<div class="control-group">
+	                            <label class="control-label">现金盈亏 :</label>
+	                            <label class="left-control-label">${cashRun1.adjustAmt} 元</label>
+	                        </div>
                             <div class="control-group">
                                 <label class="control-label">刷卡金额(单据) :</label>
                                 <label class="left-control-label">
@@ -117,6 +126,10 @@
                                 </label>
                             </div>
                             <div class="control-group">
+	                            <label class="control-label">当班销售金额 :</label>
+	                            <label class="left-control-label">${cashRun1.saleAmt} 元</label>
+	                        </div>
+                            <div class="control-group">
                                 <label class="control-label">备注 :</label>
                                 <label class="left-control-label">${cashRun1.descTxt}</label>
                             </div>
@@ -151,13 +164,22 @@
                                 <label class="left-control-label">${cashRun2.initAmt} 元</label>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">当前销售 :</label>
-                                <label class="left-control-label">${cashRun2.saleAmt} 元</label>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">实际现金 :</label>
-                                <label class="left-control-label">${cashRun2.cashAmt} 元</label>
-                            </div>
+                            	<label class="control-label">销售收现 :</label>
+                            	<label class="left-control-label">${cashRun2.saleCashAmt} 元</label>
+                        	</div>
+                        	<div class="control-group">
+                            	<label class="control-label">账面应有现金 :</label>
+                            	<label class="left-control-label">${cashRun2.carryingCashAmt} 元</label>
+                            	<form:hidden path="carryingCashAmt"/>
+                        	</div>
+                        	<div class="control-group">
+	                            <label class="control-label">实点现金 :</label>
+	                            <label class="left-control-label">${cashRun2.cashAmt} 元</label>
+                        	</div>
+                        	<div class="control-group">
+	                            <label class="control-label">现金盈亏 :</label>
+	                            <label class="left-control-label">${cashRun2.adjustAmt} 元</label>
+	                        </div>
                             <div class="control-group">
                                 <label class="control-label">刷卡金额(单据) :</label>
                                 <label class="left-control-label">
@@ -211,6 +233,10 @@
                                 </c:if> 元
                                 </label>
                             </div>
+                            <div class="control-group">
+	                            <label class="control-label">当班销售金额 :</label>
+	                            <label class="left-control-label">${cashRun2.saleAmt} 元</label>
+	                        </div>
                             <div class="control-group">
                                 <label class="control-label">备注 :</label>
                                 <label class="left-control-label">${cashRun2.descTxt}</label>
