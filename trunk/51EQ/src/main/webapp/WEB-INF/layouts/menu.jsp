@@ -71,7 +71,7 @@
                             </ul>
                         </li>
                     </c:if>
-
+<!-- 
                     <c:if test="${_permIdList.contains('7') || _permIdList.contains('8')}">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">入库信息<b class="caret"></b></a>
@@ -89,16 +89,18 @@
                             </ul>
                         </li>
                     </c:if>
-
+-->
 					<c:if test="${_permIdList.contains('9') || _permIdList.contains('10') || _permIdList.contains('11') || _permIdList.contains('12')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">报表<b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                        	<!-- 
                         	<c:if test="${_permIdList.contains('9')}">
                             <li>
                                 <a href="${sc_ctx}/storeReport">入库信息</a>
                             </li>
                             </c:if>
+                            -->
                             <c:if test="${_permIdList.contains('10')}">
                             <li>
                                 <a href="${sc_ctx}/cardReport">刷卡信息</a>
@@ -132,9 +134,11 @@
                                 <a href="${sc_ctx}/invoiceDraw">发票开具</a>
                             </li>
                             </c:if>
+                            <!-- 
                             <li>
                                 <a href="${sc_ctx}/reqBill">门店要货单</a>
                             </li>
+                            -->
                         </ul>
                     </li>
                     </c:if>
