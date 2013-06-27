@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.CashDaily;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.accounts.CashDailyManager;
 import com.tjhx.web.BaseController;
 
@@ -29,6 +31,9 @@ public class DailyReportController extends BaseController {
 		List<CashDaily> _cashDailyList = cashDailyManager.getCashDailyListByAllOrg(DateUtils.getNextDateFormatDate(
 				DateUtils.getCurFormatDate("yyyy-MM-dd"), -1, "yyyy-MM-dd"));
 		model.addAttribute("cashDailyList", _cashDailyList);
+		
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		model.addAttribute("DEFAULT_RETAINED_AMT", sysConfig.getDefaultRetainedAmt());
 
 		return "report/dailyListReport";
 	}
@@ -41,6 +46,9 @@ public class DailyReportController extends BaseController {
 
 		List<CashDaily> _cashDailyList = cashDailyManager.getCashDailyListByAllOrg(optDateShow);
 		model.addAttribute("cashDailyList", _cashDailyList);
+		
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		model.addAttribute("DEFAULT_RETAINED_AMT", sysConfig.getDefaultRetainedAmt());
 
 		return "report/dailyListReport";
 	}
