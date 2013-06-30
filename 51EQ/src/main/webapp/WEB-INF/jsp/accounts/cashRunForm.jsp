@@ -145,10 +145,9 @@
                 $("#_retainedAmt_label").html(_result + " 元");
                 $("#retainedAmt").val(_result);
             }
-            //当班销售金额 = 实点现金 + 刷卡金额(单据) - 班前余额
+            // 当班销售金额 = 销售收现 + 刷卡金额(单据)
             function saleAmt() {
-            	var _result = numAdd($("#cashAmt").val(), $("#cardAmt").val());
-            	_result = numSub(_result, $("#initAmt").val());
+            	var _result = numAdd($("#saleCashAmt").val(), $("#cardAmt").val());
 
                 $("#_saleAmt").html(_result + " 元");
                 $("#saleAmt").val(_result);
