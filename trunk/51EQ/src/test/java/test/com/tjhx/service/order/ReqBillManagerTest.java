@@ -30,7 +30,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 
 	// ##############################################
 	// ??????????????????????????????????????????????
-	private static String batchId = "20130615";
+	private static String batchId = "20130707";
 
 	@Test
 	@Rollback(false)
@@ -94,16 +94,16 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "05", reqBillList);
 	}
 
-	@Test
-	@Rollback(false)
-	public void test06() throws InvalidFormatException, IOException, SAXException {
-
-		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\06D.xls");
-		if (null == reqBillList || reqBillList.size() == 0) {
-			System.out.println("############无效文件");
-		}
-		reqBillManager.saveReqBillFile(batchId, "06", reqBillList);
-	}
+//	@Test
+//	@Rollback(false)
+//	public void test06() throws InvalidFormatException, IOException, SAXException {
+//
+//		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\06D.xls");
+//		if (null == reqBillList || reqBillList.size() == 0) {
+//			System.out.println("############无效文件");
+//		}
+//		reqBillManager.saveReqBillFile(batchId, "06", reqBillList);
+//	}
 
 	@Test
 	@Rollback(false)
@@ -182,8 +182,43 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "13", reqBillList);
 	}
 
+	private String getOrgId(List<ReqBill> list) {
+		List<String> defOrgIdArr = new ArrayList<String>();
+		defOrgIdArr.add("01");
+		defOrgIdArr.add("02");
+		defOrgIdArr.add("03");
+		defOrgIdArr.add("04");
+		defOrgIdArr.add("05");
+		defOrgIdArr.add("06");
+		defOrgIdArr.add("07");
+		defOrgIdArr.add("08");
+		defOrgIdArr.add("09");
+		defOrgIdArr.add("10");
+		defOrgIdArr.add("11");
+		defOrgIdArr.add("12");
+		defOrgIdArr.add("13");
+
+		List<String> orgIdArr = new ArrayList<String>();
+		for (ReqBill reqBill : list) {
+			orgIdArr.add(reqBill.getOrgId());
+		}
+
+		StringBuffer orgArray = new StringBuffer();
+		for (String org : defOrgIdArr) {
+			if (orgIdArr.contains(org)) {
+				orgArray.append(org);
+			} else {
+				orgArray.append("  ");
+			}
+			orgArray.append("      ");
+		}
+
+		return orgArray.toString();
+	}
+
 	@Test
 	public void output1() throws ParsePropertyException, InvalidFormatException, IOException {
+
 		int _index = 0;
 		List<Supplier> supList = reqBillMyBatisDao.getSupplierListByBatchId(batchId);
 
@@ -196,17 +231,11 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 
 			List<ReqBill> list = reqBillMyBatisDao.getOrgListBySupplier(reqBill);
 
-			StringBuffer orgArray = new StringBuffer();
-			for (ReqBill reqBill2 : list) {
-				orgArray.append(reqBill2.getOrgId());
-				orgArray.append("  ");
-			}
-
 			_index++;
-			ReqBill _reqBill = new ReqBill();// 最总统计单个供应商本次供应多少个门店
+			ReqBill _reqBill = new ReqBill(); // 最总统计单个供应商本次供应多少个门店
 			_reqBill.setIndex(_index);
 			_reqBill.setSupplierName(supplier.getName());
-			_reqBill.setOrgId(orgArray.toString());
+			_reqBill.setOrgId(getOrgId(list));
 			_list.add(_reqBill);
 
 			reqBillManager.writeReqBillFileToHeadOffice(batchId, supplier.getName(), _list);
@@ -240,7 +269,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@全部数据行" + _index);
 	}
 
-	// 生产供应商文件--添加图片
+	// 生产供应商文件
 	@Test
 	public void output3() throws FileNotFoundException, IOException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
@@ -252,15 +281,18 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			reqBill.setSupplierName(supplier.getName());
 			List<ReqBill> list = reqBillMyBatisDao.getReqBillList(reqBill);
 
-			reqBillManager.writeReqBillImageFileToSupplier(sysConfig.getReqBillSupplierOutputPath() + batchId + "/EQ_"
-					+ batchId + ".xls", getImagePathList(sysConfig.getProductImgPath(), list));
+			reqBillManager.writeReqBillImageFileToSupplier(sysConfig.getReqBillSupplierOutputPath() + batchId + "/"
+					+ supplier.getName() + "_" + batchId + ".xls",
+					getImagePathList(sysConfig.getProductImgPath(), list));
 		}
 	}
 
 	private static List<String> getImagePathList(String productImgPath, List<ReqBill> list) {
 		List<String> imagePathList = new ArrayList<String>();
 		for (ReqBill reqBill : list) {
-			imagePathList.add(productImgPath + reqBill.getProductNo());
+
+			//System.out.println(productImgPath + reqBill.getProductNo() + ".jpg");
+			imagePathList.add(productImgPath + reqBill.getProductNo() + ".jpg");
 		}
 		return imagePathList;
 	}
