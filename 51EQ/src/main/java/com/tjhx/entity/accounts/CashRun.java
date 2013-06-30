@@ -36,7 +36,7 @@ public class CashRun extends IdEntity {
 	private Integer jobType;
 	/** 班前余额 */
 	private BigDecimal initAmt = new BigDecimal("0");
-	/** 当前销售-合计（外销收现+刷卡金额-现金盈亏 ） */
+	/** 当前销售-合计（销售现金+刷卡金额 ） */
 	private BigDecimal saleAmt = new BigDecimal("0");
 	/** 销售现金-交班时 */
 	private BigDecimal saleCashAmt = new BigDecimal("0");
@@ -205,9 +205,9 @@ public class CashRun extends IdEntity {
 	}
 
 	/**
-	 * 取得当前销售
+	 * 取得当前销售-合计（销售现金+刷卡金额 ）
 	 * 
-	 * @return saleAmt 当前销售
+	 * @return saleAmt 当前销售-合计（销售现金+刷卡金额 ）
 	 */
 	public BigDecimal getSaleAmt() {
 		return saleAmt;
