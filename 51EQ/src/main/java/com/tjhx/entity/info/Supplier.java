@@ -35,6 +35,8 @@ public class Supplier extends IdEntity {
 	private String regionCode;
 	/** 拼音码 */
 	private String pyCode;
+	/** 行号 */
+	private Integer index;
 
 	/**
 	 * 取得供应商编号-百威
@@ -155,4 +157,23 @@ public class Supplier extends IdEntity {
 		this.regionCode = regionCode;
 	}
 
+	/**
+	 * 取得行号
+	 * 
+	 * @return index 行号
+	 */
+	@NaturalId
+	@Column(name = "_INDEX")
+	public Integer getIndex() {
+		return index;
+	}
+
+	/**
+	 * 设置行号
+	 * 
+	 * @param index 行号
+	 */
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
 }
