@@ -73,7 +73,7 @@ public class ReqBillManager {
 
 		XLSTransformer transformer = new XLSTransformer();
 		transformer.transformXLS(sysConfig.getReqBillSupplierTemplatePath() + XML_CONFIG_WRITE_REQ_BILL_EQ, map,
-				sysConfig.getReqBillSupplierOutputPath() + batchId + "/EQ_" + batchId + ".xls");
+				sysConfig.getReqBillSupplierOutputPath() + batchId + "/#########EQ_" + batchId + ".xls");
 	}
 
 	/**
@@ -114,6 +114,7 @@ public class ReqBillManager {
 		if (!xlsFile.exists()) {// excel文件不存在
 			return;
 		}
+		System.out.println(filePath);
 		// 声明一个工作薄
 		HSSFWorkbook wb = new HSSFWorkbook(new POIFSFileSystem(new FileInputStream(xlsFile)));
 		// 生成一个表格
