@@ -240,7 +240,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@全部数据行" + _index);
 	}
 
-	// 生产供应商文件
+	// 生产供应商文件--添加图片
 	@Test
 	public void output3() throws FileNotFoundException, IOException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
@@ -264,30 +264,29 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		}
 		return imagePathList;
 	}
-	
-	
-//	CREATE TABLE
-//    t_req_bill
-//    (
-//        uuid INT NOT NULL AUTO_INCREMENT,
-//        create_date DATETIME NOT NULL,
-//        create_user_id VARCHAR(32) NOT NULL,
-//        update_date DATETIME NOT NULL,
-//        update_user_id VARCHAR(32) NOT NULL,
-//        version INT NOT NULL,
-//        app_num INT,
-//        barcode VARCHAR(16),
-//        batch_id VARCHAR(16) NOT NULL,
-//        _index INT NOT NULL,
-//        inventory_num INT,
-//        org_id VARCHAR(32) NOT NULL,
-//        product_name VARCHAR(64),
-//        product_no VARCHAR(16),
-//        ref_price DECIMAL(19,2),
-//        remarks VARCHAR(255),
-//        supplier_name VARCHAR(32),
-//        PRIMARY KEY (uuid),
-//        CONSTRAINT batch_id UNIQUE (batch_id, _index, org_id)
-//    )
-//    ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+	// CREATE TABLE
+	// t_req_bill
+	// (
+	// uuid INT NOT NULL AUTO_INCREMENT,
+	// create_date DATETIME NOT NULL,
+	// create_user_id VARCHAR(32) NOT NULL,
+	// update_date DATETIME NOT NULL,
+	// update_user_id VARCHAR(32) NOT NULL,
+	// version INT NOT NULL,
+	// app_num INT,
+	// barcode VARCHAR(16),
+	// batch_id VARCHAR(16) NOT NULL,
+	// _index INT NOT NULL,
+	// inventory_num INT,
+	// org_id VARCHAR(32) NOT NULL,
+	// product_name VARCHAR(64),
+	// product_no VARCHAR(16),
+	// ref_price DECIMAL(19,2),
+	// remarks VARCHAR(255),
+	// supplier_name VARCHAR(32),
+	// PRIMARY KEY (uuid),
+	// CONSTRAINT batch_id UNIQUE (batch_id, _index, org_id)
+	// )
+	// ENGINE=InnoDB DEFAULT CHARSET=utf8
 }

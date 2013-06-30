@@ -72,7 +72,16 @@
 	
 	<!-- 根据批次号取得供应商信息 -->
 	<select id="getSupplierListByBatchId" parameterType="string" resultMap="Result_Map_Supplier">
-		select supplier_name from t_req_bill_tmp where batch_id = #{batchId} group by supplier_name
+		SELECT
+    		req.supplier_name
+		FROM
+    		t_req_bill_tmp req,
+    		t_supplier sup
+		WHERE
+    		req.batch_id = #{batchId}
+    		and req.supplier_name = sup.name
+		GROUP BY req.supplier_name
+    	ORDER BY sup._index asc
 	</select>
 	
 	<!-- 根据批次号取得供应商信息 -->
