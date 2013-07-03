@@ -52,6 +52,10 @@ public class CashDaily extends IdEntity {
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
+	/** 日期-开始时间 */
+	private String optDateStart;
+	/** 日期-结束时间 */
+	private String optDateEnd;
 
 	/**
 	 * 取得机构编号
@@ -329,6 +333,42 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setSaleCashAmt(BigDecimal saleCashAmt) {
 		this.saleCashAmt = saleCashAmt;
+	}
+
+	/**
+	 * 取得日期-开始时间
+	 * 
+	 * @return optDateStart 日期-开始时间
+	 */
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置日期-开始时间
+	 * 
+	 * @param optDateStart 日期-开始时间
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得日期-结束时间
+	 * 
+	 * @return optDateEnd 日期-结束时间
+	 */
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置日期-结束时间
+	 * 
+	 * @param optDateEnd 日期-结束时间
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
 	}
 
 }

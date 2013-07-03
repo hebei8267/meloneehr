@@ -38,20 +38,21 @@ public class CardReportController extends BaseController {
 	public String cashReportSearch_Action(Model model, HttpServletRequest request)
 			throws ServletRequestBindingException {
 		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
-		String optDateShow = ServletRequestUtils.getStringParameter(request, "optDateShow");
+		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
+		String optDateShow_end = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
 		model.addAttribute("orgId", orgId);
-		model.addAttribute("optDateShow", optDateShow);
+		model.addAttribute("optDateShow_start", optDateShow_start);
+		model.addAttribute("optDateShow_end", optDateShow_end);
 
 		CashDaily _cashDaily = new CashDaily();
 		if (StringUtils.isNotBlank(orgId)) {
 			_cashDaily.setOrgId(orgId);
 		}
-		if (StringUtils.isNotBlank(optDateShow)) {
-			String optDateY = DateUtils.transDateFormat(optDateShow, "yyyy-MM", "yyyy");
-			String optDateM = DateUtils.transDateFormat(optDateShow, "yyyy-MM", "MM");
-
-			_cashDaily.setOptDateY(optDateY);
-			_cashDaily.setOptDateM(optDateM);
+		if (StringUtils.isNotBlank(optDateShow_start)) {
+			_cashDaily.setOptDateStart(DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"));
+		}
+		if (StringUtils.isNotBlank(optDateShow_end)) {
+			_cashDaily.setOptDateEnd(DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
 		}
 
 		List<CashDaily> _cashDailyList = cashDailyManager.searchReportList(_cashDaily);
