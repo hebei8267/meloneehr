@@ -22,20 +22,6 @@
         <script src="${ctx}/static/js/jquery.validate-1.10.0.js"></script>
         <script src="${ctx}/static/js/jquery.validate_cn.js"></script>
 
-		<script type="text/javascript">
-		$(document).ready(function() {
-			//$(':input:text:first').focus();
-		
-			$(document).keydown(function(event) {
-				if (event.keyCode == 13) {
-					$('form').each(function() {
-						event.preventDefault();
-					});
-				}
-			});
-		});
-		</script>
-
         <sitemesh:head />
     </head>
     <body>
