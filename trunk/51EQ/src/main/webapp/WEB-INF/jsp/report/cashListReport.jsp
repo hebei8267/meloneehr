@@ -17,16 +17,23 @@
             $(function() {
             	$("#listForm").validate({
                     rules : {
-                    	optDateShow : {
-                    		required : true
+                    	optDateShow_start : {
+                    		required : true,
+                    		date : true                    		
+                        },
+                        optDateShow_end : {
+                    		required : true,
+                    		date : true,
+                    		compareDate : "#optDateShow_start"
                         }
                     }
                 });
             	
-                $('#optDateShow').datepicker({
-                    format : 'yyyy-mm',
-                    viewMode : 1,
-                    minViewMode : 1
+            	$('#optDateShow_start').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
+                $('#optDateShow_end').datepicker({
+                    format : 'yyyy-mm-dd'
                 });
 
                 $("#searchBtn").click(function() {
@@ -52,12 +59,12 @@
                             <h3>销售信息</h3>
                         </legend>
                     </div>
-                    <div class="span3">
+                    <div class="span5">
                         <label class="control-label">销售日期 :</label>
-                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
-                        
+                        <input id="optDateShow_start" name="optDateShow_start" type="text" class="input-medium" value="${optDateShow_start }"/>
+                        ～ <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
                     </div>
-                    <div class="span9">
+                    <div class="span7">
                         <label class="control-label">机构 :</label>
                         <select name="orgId" class="input-medium">
                             <c:forEach items="${orgList}" var="org">
