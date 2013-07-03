@@ -25,7 +25,7 @@
         <result column="sale_amt" property="saleAmt" jdbcType="DECIMAL"/>
         <result column="sale_cash_amt" property="saleCashAmt" jdbcType="DECIMAL"/>
         
-         <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 查询结果字段 -->
@@ -58,13 +58,8 @@
   	<!-- 查询条件 -->
   	<sql id="Where_Clause" >
   		<where>
-  			cash.org_id = org.org_id
-  			<if test="optDateM != null and optDateM !='' ">
-  			AND cash.opt_date_m = #{optDateM}
-  			</if>
-  			<if test="optDateY != null and optDateY !='' ">
-  			AND cash.opt_date_y = #{optDateY}
-  			</if>
+  			cash.org_id = org.org_id  			
+  			<![CDATA[ AND cash.opt_date >= #{optDateStart} AND cash.opt_date  <= #{optDateEnd} ]]>
   			<if test="orgId != null and orgId !='' ">
   			AND cash.org_id = #{orgId}
   			</if>

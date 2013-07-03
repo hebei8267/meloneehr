@@ -69,6 +69,14 @@ jQuery.validator.addMethod("datelessThan", function(value, element, param) {
     return value < param;
 }, '输入日期必须早于 {0}');
 
+jQuery.validator.addMethod("compareDate", function(value, element, param) {
+	var startDate = jQuery(param).val();
+    
+    var date1 = new Date(Date.parse(startDate.replace("-", "/")));
+    var date2 = new Date(Date.parse(value.replace("-", "/")));
+    return date1 <= date2;
+}, '结束日期必须大于开始日期');
+
 jQuery.validator.addMethod("myRequired", function(value, element, param) {
 	var target = $(param)
 	if(target.val() > 0){
