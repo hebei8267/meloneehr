@@ -154,14 +154,6 @@ public class CashRunController extends BaseController {
 	 */
 	@RequestMapping(value = "new")
 	public String initCashRun_Action(Model model, HttpSession session) {
-		try {
-			cashRunManager.cashDailyCheck(getUserInfo(session).getOrganization().getId());
-		} catch (Exception ex) {
-			// 添加错误消息
-			addInfoMsg(model, ex.getMessage());
-
-			return "accounts/cashRunList";
-		}
 
 		CashRun cashRun = new CashRun();
 		cashRun.setSaleCashAmt(null);
@@ -223,6 +215,17 @@ public class CashRunController extends BaseController {
 	@RequestMapping(value = "save")
 	public String saveCashRun_Action(@ModelAttribute("cashRun") CashRun cashRun, Model model, HttpSession session)
 			throws IllegalAccessException, InvocationTargetException {
+		try {
+			cashRunManager.cashDailyCheck(getUserInfo(session).getOrganization().getId());
+		} catch (Exception ex) {
+			// 添加错误消息
+			addInfoMsg(model, ex.getMessage());
+			
+			initJobTypeList(model);
+			initBankCardList(model, getUserInfo(session).getOrganization().getId());
+
+			return "accounts/cashRunForm";
+		}
 
 		if (null == cashRun.getUuid()) {// 新增操作
 			try {
