@@ -1,14 +1,23 @@
 package com.tjhx.service.accounts;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.accounts.CashDailyJpaDao;
@@ -17,6 +26,8 @@ import com.tjhx.dao.accounts.CashRunJpaDao;
 import com.tjhx.dao.accounts.CashRunMyBatisDao;
 import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
+import com.tjhx.entity.receipt.SaleReport;
+import com.tjhx.globals.SysConfig;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,6 +40,8 @@ public class CashDailyManager {
 	private CashDailyJpaDao cashDailyJpaDao;
 	@Resource
 	private CashDailyMyBatisDao cashDailyMyBatisDao;
+	private final static String XML_CONFIG_CASH_DAILY = "/excel/Cash_Daily_Template.xls";
+	private final static String XML_CONFIG_CARD_DAILY = "/excel/Card_Daily_Template.xls";
 
 	/**
 	 * 取得未日结销售流水日结信息
@@ -224,6 +237,16 @@ public class CashDailyManager {
 	}
 
 	/**
+	 * 取得销售流水日结信息
+	 * 
+	 * @param cashDaily
+	 * @return
+	 */
+	public List<CashRun> searchSaleReportList(CashRun cashRun) {
+		return cashRunMyBatisDao.getCashRunList_OptDate_Interval(cashRun);
+	}
+
+	/**
 	 * 合计计算
 	 * 
 	 * @param cashDailyList
@@ -238,6 +261,8 @@ public class CashDailyManager {
 			_cashDaily.setSaleCashAmt(_cashDaily.getSaleCashAmt().add(cashDaily.getSaleCashAmt()));
 			// 刷卡金额(单据)
 			_cashDaily.setCardAmt(_cashDaily.getCardAmt().add(cashDaily.getCardAmt()));
+			// 刷卡金额(电脑统计)
+			_cashDaily.setCardAmtBw(_cashDaily.getCardAmtBw().add(cashDaily.getCardAmtBw()));
 			// 刷卡笔数
 			_cashDaily.setCardNum(_cashDaily.getCardNum() + cashDaily.getCardNum());
 			// 存款金额
@@ -260,5 +285,109 @@ public class CashDailyManager {
 		CashDaily _cashDaily = new CashDaily();
 		_cashDaily.setOptDateShow(dailyDate);
 		return cashDailyMyBatisDao.getCashDailyListByAllOrg(_cashDaily);
+	}
+
+	private void cardTotalProcess(List<CashRun> _list, List<SaleReport> reportList) throws ParseException {
+		String _tmpOrgName = "";
+		String _tmpOptDate = "";
+		int _index = 0;
+
+		SaleReport _saleReport = null;
+		for (CashRun _cashRun : _list) {
+
+			if (!_tmpOrgName.equals(_cashRun.getOrgName()) || !_tmpOptDate.equals(_cashRun.getOptDateShow())) {
+
+				_tmpOrgName = _cashRun.getOrgName();
+				_tmpOptDate = _cashRun.getOptDateShow();
+				_index++;
+
+				_saleReport = new SaleReport();
+				_saleReport.setIndex(_index);
+				reportList.add(_saleReport);
+			}
+			_saleReport.addCashRunInfo_Card(_cashRun);
+		}
+	}
+
+	private void cashTotalProcess(List<CashRun> _list, List<SaleReport> reportList) throws ParseException {
+		int _index = 0;
+
+		for (CashRun _cashRun : _list) {
+			_index++;
+
+			SaleReport _saleReport = new SaleReport();
+			reportList.add(_saleReport);
+
+			_saleReport.setIndex(_index);
+			_saleReport.addCashRunInfo_Cash(_cashRun);
+		}
+	}
+
+	/**
+	 * 创建刷卡流水日结信息文件
+	 * 
+	 * @param _cashRun
+	 * @return
+	 * @throws ParsePropertyException
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public String createCardReportFile(CashRun _cashRun) throws ParsePropertyException, InvalidFormatException,
+			IOException, ParseException {
+		List<CashRun> _list = searchSaleReportList(_cashRun);
+		if (null == _list || _list.size() == 0) {
+			return null;
+		}
+
+		List<SaleReport> reportList = new ArrayList<SaleReport>();
+		cardTotalProcess(_list, reportList);
+
+		Map<String, List<SaleReport>> map = new HashMap<String, List<SaleReport>>();
+		map.put("reportList", reportList);
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		XLSTransformer transformer = new XLSTransformer();
+
+		String tmpFileName = UUID.randomUUID().toString() + ".xls";
+		String tmpFilePath = sysConfig.getReportTmpPath() + tmpFileName;
+		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_CARD_DAILY, map, tmpFilePath);
+
+		return tmpFileName;
+	}
+
+	/**
+	 * 创建销售流水日结信息文件
+	 * 
+	 * @param cashDaily
+	 * @return
+	 * @throws IOException
+	 * @throws InvalidFormatException
+	 * @throws ParsePropertyException
+	 * @throws ParseException
+	 */
+	public String createCashReportFile(CashRun _cashRun) throws ParsePropertyException, InvalidFormatException,
+			IOException, ParseException {
+		List<CashRun> _list = searchSaleReportList(_cashRun);
+		if (null == _list || _list.size() == 0) {
+			return null;
+		}
+
+		List<SaleReport> reportList = new ArrayList<SaleReport>();
+		cashTotalProcess(_list, reportList);
+
+		Map<String, List<SaleReport>> map = new HashMap<String, List<SaleReport>>();
+		map.put("reportList", reportList);
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		XLSTransformer transformer = new XLSTransformer();
+
+		String tmpFileName = UUID.randomUUID().toString() + ".xls";
+		String tmpFilePath = sysConfig.getReportTmpPath() + tmpFileName;
+		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_CASH_DAILY, map, tmpFilePath);
+
+		return tmpFileName;
 	}
 }

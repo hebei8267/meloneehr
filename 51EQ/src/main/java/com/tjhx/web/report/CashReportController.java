@@ -1,11 +1,21 @@
 package com.tjhx.web.report;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jxls.exception.ParsePropertyException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -41,8 +51,7 @@ public class CashReportController extends BaseController {
 		return "report/cashListReport";
 	}
 
-	@RequestMapping(value = "search")
-	public String cashReportSearch_Action(Model model, HttpServletRequest request)
+	private void commonProcess(Model model, HttpServletRequest request, CashDaily _cashDaily)
 			throws ServletRequestBindingException {
 		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
 		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
@@ -51,7 +60,6 @@ public class CashReportController extends BaseController {
 		model.addAttribute("optDateShow_start", optDateShow_start);
 		model.addAttribute("optDateShow_end", optDateShow_end);
 
-		CashDaily _cashDaily = new CashDaily();
 		if (StringUtils.isNotBlank(orgId)) {
 			_cashDaily.setOrgId(orgId);
 		}
@@ -61,6 +69,78 @@ public class CashReportController extends BaseController {
 		if (StringUtils.isNotBlank(optDateShow_end)) {
 			_cashDaily.setOptDateEnd(DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
 		}
+	}
+
+	private void commonProcess(Model model, HttpServletRequest request, CashRun _cashRun)
+			throws ServletRequestBindingException {
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
+		String optDateShow_end = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
+		model.addAttribute("orgId", orgId);
+		model.addAttribute("optDateShow_start", optDateShow_start);
+		model.addAttribute("optDateShow_end", optDateShow_end);
+
+		if (StringUtils.isNotBlank(orgId)) {
+			_cashRun.setOrgId(orgId);
+		}
+		if (StringUtils.isNotBlank(optDateShow_start)) {
+			_cashRun.setOptDateStart(DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"));
+		}
+		if (StringUtils.isNotBlank(optDateShow_end)) {
+			_cashRun.setOptDateEnd(DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
+		}
+	}
+
+	@RequestMapping(value = "export")
+	public void cashReportExport_Action(Model model, HttpServletRequest request, HttpServletResponse response)
+			throws ServletRequestBindingException, ParsePropertyException, InvalidFormatException, IOException,
+			ParseException {
+
+		CashRun _cashRun = new CashRun();
+		commonProcess(model, request, _cashRun);
+
+		String downLoadFileName = cashDailyManager.createCashReportFile(_cashRun);
+
+		if (null == downLoadFileName) {
+			return;
+		}
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+
+		String downLoadPath = sysConfig.getReportTmpPath() + downLoadFileName;
+		System.out.println(downLoadPath);
+		try {
+			long fileLength = new File(downLoadPath).length();
+			response.setContentType("application/x-msdownload;");
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + new String(downLoadFileName.getBytes("utf-8"), "ISO8859-1"));
+			response.setHeader("Content-Length", String.valueOf(fileLength));
+			bis = new BufferedInputStream(new FileInputStream(downLoadPath));
+			bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] buff = new byte[2048];
+			int bytesRead;
+			while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
+				bos.write(buff, 0, bytesRead);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			if (bis != null)
+				bis.close();
+			if (bos != null)
+				bos.close();
+		}
+		return;
+	}
+
+	@RequestMapping(value = "search")
+	public String cashReportSearch_Action(Model model, HttpServletRequest request)
+			throws ServletRequestBindingException {
+
+		CashDaily _cashDaily = new CashDaily();
+		commonProcess(model, request, _cashDaily);
 
 		List<CashDaily> _cashDailyList = cashDailyManager.searchReportList(_cashDaily);
 		model.addAttribute("cashDailyList", _cashDailyList);

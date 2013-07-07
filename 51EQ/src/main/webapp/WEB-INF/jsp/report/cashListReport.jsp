@@ -44,6 +44,15 @@
                     $("#listForm").attr("action", "${sc_ctx}/cashReport/search");
                     $("#listForm").submit();
                 });
+                
+                $("#exportBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#listForm").attr("action", "${sc_ctx}/cashReport/export");
+                    $("#listForm").submit();
+                });
             });
         </script>
     </head>
@@ -77,6 +86,7 @@
                             </c:forEach>
                         </select>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
+                        <button	id="exportBtn" class="btn	btn-warning" type="button">数据导出</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <table class="table	table-striped table-bordered table-condensed mytable">
