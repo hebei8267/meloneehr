@@ -65,13 +65,15 @@ public class CashRunManager {
 	 * 效验昨天是否已做日结
 	 * 
 	 * @param orgId
+	 * @param _date 用户填写日期
 	 * @throws ParseException
 	 */
-	public void cashDailyCheck(String orgId) throws ParseException {
+	public void cashDailyCheck(String orgId, String _date) throws ParseException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		if (sysConfig.getCashDailyModel()) {// 昨天是否已做日结效验
+
 			CashDaily cashDaily = cashDailyJpaDao.findByOrgId_OptDate(orgId,
-					DateUtils.getNextDateFormatDate(DateUtils.getCurFormatDate("yyyyMMdd"), -1, "yyyyMMdd"));
+					DateUtils.getNextDateFormatDate(_date, -1, "yyyyMMdd"));
 			if (null == cashDaily) {
 				throw new ServiceException("ERR_MSG_CASH_RUN_007");
 			}
@@ -268,14 +270,14 @@ public class CashRunManager {
 			// 存款金额
 			_cashRun.setDepositAmt(_cashRun.getDepositAmt().add(cashRun.getDepositAmt()));
 
-//			// 班前余额
-//			_cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
-//			// 实际现金
-//			_cashRun.setCashAmt(_cashRun.getCashAmt().add(cashRun.getCashAmt()));
-//			// 刷卡金额(百威)
-//			_cashRun.setCardAmtBw(_cashRun.getCardAmtBw().add(cashRun.getCardAmtBw()));
-//			// 留存金额
-//			_cashRun.setRetainedAmt(_cashRun.getRetainedAmt().add(cashRun.getRetainedAmt()));
+			// // 班前余额
+			// _cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
+			// // 实际现金
+			// _cashRun.setCashAmt(_cashRun.getCashAmt().add(cashRun.getCashAmt()));
+			// // 刷卡金额(百威)
+			// _cashRun.setCardAmtBw(_cashRun.getCardAmtBw().add(cashRun.getCardAmtBw()));
+			// // 留存金额
+			// _cashRun.setRetainedAmt(_cashRun.getRetainedAmt().add(cashRun.getRetainedAmt()));
 		}
 		return _cashRun;
 	}
