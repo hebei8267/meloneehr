@@ -340,6 +340,7 @@ public class CashDaily extends IdEntity {
 	 * 
 	 * @return optDateStart 日期-开始时间
 	 */
+	@Transient
 	public String getOptDateStart() {
 		return optDateStart;
 	}
@@ -358,6 +359,7 @@ public class CashDaily extends IdEntity {
 	 * 
 	 * @return optDateEnd 日期-结束时间
 	 */
+	@Transient
 	public String getOptDateEnd() {
 		return optDateEnd;
 	}
