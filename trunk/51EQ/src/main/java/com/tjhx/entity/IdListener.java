@@ -4,11 +4,17 @@ import java.util.Date;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.tjhx.entity.member.User;
+import com.tjhx.globals.Constants;
 
 /**
  * 在自动为entity添加审计信息的Hibernate EventListener.
@@ -25,11 +31,13 @@ public class IdListener {
 	public void onSaveOrUpdate(IdEntity entity) throws HibernateException {
 
 		// 如果对象是IdEntity子类,添加审计信息.
-		// String loginName = SpringSecurityUtils.getCurrentUserName();
-		// TODO ?????????
+
 		String loginName = null;
 		if (null == loginName || StringUtils.isBlank(loginName)) {
-			loginName = "1";
+			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+					.getRequest();
+			User user = (User) request.getSession().getAttribute(Constants.SESSION_USER_INFO);
+			loginName = user.getUuid().toString();
 		}
 		if (entity.getUuid() == null) {
 			// 创建新对象
