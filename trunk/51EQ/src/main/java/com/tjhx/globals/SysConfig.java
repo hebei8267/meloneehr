@@ -7,10 +7,11 @@ public class SysConfig {
 
 	private BigDecimal defaultRetainedAmt;
 
-	private String reqBillSupplierTemplatePath;
+	private String excelTemplatePath;
 	private String reqBillSupplierOutputPath;
 	private String reqBillSupplierInputPath;
 	private String productImgPath;
+	private String reportTmpPath;
 
 	/**
 	 * 取得cashDailyModel
@@ -49,21 +50,21 @@ public class SysConfig {
 	}
 
 	/**
-	 * 取得reqBillSupplierTemplatePath
+	 * 取得excelTemplatePath
 	 * 
-	 * @return reqBillSupplierTemplatePath reqBillSupplierTemplatePath
+	 * @return excelTemplatePath excelTemplatePath
 	 */
-	public String getReqBillSupplierTemplatePath() {
-		return reqBillSupplierTemplatePath;
+	public String getExcelTemplatePath() {
+		return excelTemplatePath;
 	}
 
 	/**
-	 * 设置reqBillSupplierTemplatePath
+	 * 设置excelTemplatePath
 	 * 
-	 * @param reqBillSupplierTemplatePath reqBillSupplierTemplatePath
+	 * @param excelTemplatePath excelTemplatePath
 	 */
-	public void setReqBillSupplierTemplatePath(String reqBillSupplierTemplatePath) {
-		this.reqBillSupplierTemplatePath = reqBillSupplierTemplatePath;
+	public void setExcelTemplatePath(String excelTemplatePath) {
+		this.excelTemplatePath = excelTemplatePath;
 	}
 
 	/**
@@ -118,6 +119,24 @@ public class SysConfig {
 	 */
 	public void setProductImgPath(String productImgPath) {
 		this.productImgPath = productImgPath;
+	}
+
+	/**
+	 * 取得reportTmpPath
+	 * 
+	 * @return reportTmpPath reportTmpPath
+	 */
+	public String getReportTmpPath() {
+		return reportTmpPath;
+	}
+
+	/**
+	 * 设置reportTmpPath
+	 * 
+	 * @param reportTmpPath reportTmpPath
+	 */
+	public void setReportTmpPath(String reportTmpPath) {
+		this.reportTmpPath = reportTmpPath;
 	}
 
 }

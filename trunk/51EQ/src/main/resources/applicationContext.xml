@@ -100,12 +100,15 @@
 		<property name="cashDailyModel" value="${cash.daily.model}" />
 		
 		<property name="defaultRetainedAmt" value="${cash.daily.default_retained_amt}" />
+		<!-- 模板文件路径 -->
+		<property name="excelTemplatePath" value="${excel.template.path}" />
 		<!-- 要货单 -->
-		<property name="reqBillSupplierTemplatePath" value="${reqBill.supplier.template.path}" />
 		<property name="reqBillSupplierOutputPath" value="${reqBill.supplier.output.path}" />
 		<property name="reqBillSupplierInputPath" value="${reqBill.supplier.input.path}" />
 		<!-- 货品图片路径 -->
 		<property name="productImgPath" value="${product.img.path}" />
+		<!-- 导出报表信息路径 -->
+		<property name="reportTmpPath" value="${report.tmp.path}" />
 	</bean>
 	
 	
