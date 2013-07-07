@@ -8,4 +8,6 @@ public interface CashRunMyBatisDao {
 
 	public List<CashRun> getCashRunList(CashRun cashRun);
 
+	public List<CashRun> getCashRunList_OptDate_Interval(CashRun cashRun);
+
 }

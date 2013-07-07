@@ -69,6 +69,12 @@ public class CashRun extends IdEntity {
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
+	/** 记录人 */
+	private String userName;
+	/** 日期-开始时间 */
+	private String optDateStart;
+	/** 日期-结束时间 */
+	private String optDateEnd;
 
 	/**
 	 * 取得机构编号
@@ -494,5 +500,62 @@ public class CashRun extends IdEntity {
 	 */
 	public void setCarryingCashAmt(BigDecimal carryingCashAmt) {
 		this.carryingCashAmt = carryingCashAmt;
+	}
+
+	/**
+	 * 取得记录人
+	 * 
+	 * @return userName 记录人
+	 */
+	@Transient
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * 设置记录人
+	 * 
+	 * @param userName 记录人
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * 取得日期-开始时间
+	 * 
+	 * @return optDateStart 日期-开始时间
+	 */
+	@Transient
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置日期-开始时间
+	 * 
+	 * @param optDateStart 日期-开始时间
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得日期-结束时间
+	 * 
+	 * @return optDateEnd 日期-结束时间
+	 */
+	@Transient
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置日期-结束时间
+	 * 
+	 * @param optDateEnd 日期-结束时间
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
 	}
 }

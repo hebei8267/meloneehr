@@ -172,4 +172,41 @@ public class DateUtils {
 	public static long getDateSpanDay(Date dateFrom, Date dateTo) {
 		return (dateTo.getTime() - dateFrom.getTime()) / (1000 * 3600 * 24);
 	}
+
+	/**
+	 * 取得星期数
+	 * 
+	 * @param dt
+	 * @param style
+	 * @return
+	 * @throws ParseException
+	 */
+	public static String getWeekOfDate(String dt, String style) throws ParseException {
+
+		String[] weekDays = { "日", "一", "二", "三", "四", "五", "六" };
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(stringToDate(dt, style));
+		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		if (w < 0) {
+			w = 0;
+		}
+		return weekDays[w];
+	}
+
+	/**
+	 * 取得星期数
+	 * 
+	 * @param dt
+	 * @return
+	 */
+	public static String getWeekOfDate(Date dt) {
+		String[] weekDays = { "日", "一", "二", "三", "四", "五", "六" };
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dt);
+		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		if (w < 0) {
+			w = 0;
+		}
+		return weekDays[w];
+	}
 }
