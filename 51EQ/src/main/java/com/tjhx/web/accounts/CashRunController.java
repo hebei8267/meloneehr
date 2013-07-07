@@ -216,11 +216,12 @@ public class CashRunController extends BaseController {
 	public String saveCashRun_Action(@ModelAttribute("cashRun") CashRun cashRun, Model model, HttpSession session)
 			throws IllegalAccessException, InvocationTargetException {
 		try {
-			cashRunManager.cashDailyCheck(getUserInfo(session).getOrganization().getId());
+			cashRunManager.cashDailyCheck(getUserInfo(session).getOrganization().getId(),
+					DateUtils.transDateFormat(cashRun.getOptDateShow(), "yyyy-MM-dd", "yyyyMMdd"));
 		} catch (Exception ex) {
 			// 添加错误消息
 			addInfoMsg(model, ex.getMessage());
-			
+
 			initJobTypeList(model);
 			initBankCardList(model, getUserInfo(session).getOrganization().getId());
 
