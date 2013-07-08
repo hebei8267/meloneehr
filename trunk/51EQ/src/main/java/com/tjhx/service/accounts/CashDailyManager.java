@@ -252,7 +252,7 @@ public class CashDailyManager {
 	 * @param cashDailyList
 	 * @return
 	 */
-	public CashDaily calTotal(List<CashDaily> cashDailyList) {
+	public CashDaily calTotal_CashDaily(List<CashDaily> cashDailyList) {
 		CashDaily _cashDaily = new CashDaily();
 		for (CashDaily cashDaily : cashDailyList) {
 			// 现金盈亏（调节）
@@ -272,6 +272,27 @@ public class CashDailyManager {
 
 		}
 		return _cashDaily;
+	}
+
+	/**
+	 * 合计计算
+	 * 
+	 * @param reportList
+	 * @return
+	 */
+	public SaleReport calTotal_SaleReport(List<SaleReport> reportList) {
+		SaleReport _saleReport = new SaleReport();
+		for (SaleReport saleReport : reportList) {
+			_saleReport.setSaleCashAmt(_saleReport.getSaleCashAmt().add(saleReport.getSaleCashAmt()));
+			_saleReport.setCashAmt(_saleReport.getCashAmt().add(saleReport.getCashAmt()));
+			_saleReport.setAdjustAmt(_saleReport.getAdjustAmt().add(saleReport.getAdjustAmt()));
+			_saleReport.setCardAmt(_saleReport.getCardAmt().add(saleReport.getCardAmt()));
+			_saleReport.setCardAmtBw(_saleReport.getCardAmtBw().add(saleReport.getCardAmtBw()));
+			_saleReport.setDepositAmt(_saleReport.getDepositAmt().add(saleReport.getDepositAmt()));
+			_saleReport.setSaleAmt(_saleReport.getSaleAmt().add(saleReport.getSaleAmt()));
+			_saleReport.setCardNum(_saleReport.getCardNum() + saleReport.getCardNum());
+		}
+		return _saleReport;
 	}
 
 	/**
@@ -342,9 +363,11 @@ public class CashDailyManager {
 
 		List<SaleReport> reportList = new ArrayList<SaleReport>();
 		cardTotalProcess(_list, reportList);
+		SaleReport _totalSaleReport = calTotal_SaleReport(reportList);
 
-		Map<String, List<SaleReport>> map = new HashMap<String, List<SaleReport>>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reportList", reportList);
+		map.put("totalReport", _totalSaleReport);
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 
@@ -376,9 +399,11 @@ public class CashDailyManager {
 
 		List<SaleReport> reportList = new ArrayList<SaleReport>();
 		cashTotalProcess(_list, reportList);
+		SaleReport _totalSaleReport = calTotal_SaleReport(reportList);
 
-		Map<String, List<SaleReport>> map = new HashMap<String, List<SaleReport>>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reportList", reportList);
+		map.put("totalReport", _totalSaleReport);
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 
