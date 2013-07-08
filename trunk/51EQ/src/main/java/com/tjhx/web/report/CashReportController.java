@@ -144,7 +144,7 @@ public class CashReportController extends BaseController {
 
 		List<CashDaily> _cashDailyList = cashDailyManager.searchReportList(_cashDaily);
 		model.addAttribute("cashDailyList", _cashDailyList);
-		CashDaily totalCashDaily = cashDailyManager.calTotal(_cashDailyList);
+		CashDaily totalCashDaily = cashDailyManager.calTotal_CashDaily(_cashDailyList);
 		model.addAttribute("totalCashDaily", totalCashDaily);
 
 		ReportUtils.initOrgList(orgManager, model);
