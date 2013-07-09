@@ -48,6 +48,8 @@ public class SaleReport {
 	private BigDecimal depositAmt = new BigDecimal("0");
 	/** 留存金额-交班时 */
 	private BigDecimal retainedAmt = new BigDecimal("0");
+	/** 当班销售-合计（销售现金+刷卡金额 ） */
+	private BigDecimal saleAmt = new BigDecimal("0");
 
 	/**
 	 * 取得行号
@@ -391,6 +393,24 @@ public class SaleReport {
 		this.retainedAmt = retainedAmt;
 	}
 
+	/**
+	 * 取得当班销售-合计（销售现金+刷卡金额）
+	 * 
+	 * @return saleAmt 当班销售-合计（销售现金+刷卡金额）
+	 */
+	public BigDecimal getSaleAmt() {
+		return saleAmt;
+	}
+
+	/**
+	 * 设置当班销售-合计（销售现金+刷卡金额）
+	 * 
+	 * @param saleAmt 当班销售-合计（销售现金+刷卡金额）
+	 */
+	public void setSaleAmt(BigDecimal saleAmt) {
+		this.saleAmt = saleAmt;
+	}
+
 	public void addCashRunInfo_Cash(CashRun _cashRun) throws ParseException {
 		// 机构名称
 		this.orgName = _cashRun.getOrgName();
@@ -430,7 +450,8 @@ public class SaleReport {
 		this.depositAmt = _cashRun.getDepositAmt();
 		// 留存现金
 		this.retainedAmt = _cashRun.getRetainedAmt();
-
+		// 当班销售-合计
+		this.saleAmt = _cashRun.getSaleAmt();
 	}
 
 	public void addCashRunInfo_Card(CashRun _cashRun) throws ParseException {
