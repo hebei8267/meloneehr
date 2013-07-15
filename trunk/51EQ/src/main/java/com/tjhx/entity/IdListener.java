@@ -34,10 +34,16 @@ public class IdListener {
 
 		String loginName = null;
 		if (null == loginName || StringUtils.isBlank(loginName)) {
-			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-					.getRequest();
-			User user = (User) request.getSession().getAttribute(Constants.SESSION_USER_INFO);
-			loginName = user.getUuid().toString();
+			ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+					.getRequestAttributes();
+			if (null != servletRequestAttributes) {
+				HttpServletRequest request = servletRequestAttributes.getRequest();
+				User user = (User) request.getSession().getAttribute(Constants.SESSION_USER_INFO);
+				loginName = user.getUuid().toString();
+			} else {
+				loginName = "1";
+			}
+
 		}
 		if (entity.getUuid() == null) {
 			// 创建新对象
