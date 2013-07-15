@@ -80,9 +80,10 @@ public class ReqBillManager {
 		List<ReqBill> _list = new ArrayList<ReqBill>();
 
 		String _tmpOrgId = null;
-		for (ReqBill reqBill : _list) {
+		for (ReqBill reqBill : list) {
 			if (!reqBill.getOrgId().equals(_tmpOrgId)) {
 				if (null != _tmpOrgId) {
+					_list.add(new ReqBill());
 					_list.add(new ReqBill());
 				}
 				_tmpOrgId = reqBill.getOrgId();
