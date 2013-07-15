@@ -232,7 +232,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			List<ReqBill> list = reqBillMyBatisDao.getOrgListBySupplier(reqBill);
 
 			_index++;
-			ReqBill _reqBill = new ReqBill(); // 最总统计单个供应商本次供应多少个门店
+			ReqBill _reqBill = new ReqBill(); // 最终统计单个供应商本次供应多少个门店
 			_reqBill.setIndex(_index);
 			_reqBill.setSupplierName(supplier.getName());
 			_reqBill.setOrgId(getOrgId(list));
