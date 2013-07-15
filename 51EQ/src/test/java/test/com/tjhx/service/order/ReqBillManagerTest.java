@@ -94,16 +94,16 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "05", reqBillList);
 	}
 
-//	@Test
-//	@Rollback(false)
-//	public void test06() throws InvalidFormatException, IOException, SAXException {
-//
-//		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\06D.xls");
-//		if (null == reqBillList || reqBillList.size() == 0) {
-//			System.out.println("############无效文件");
-//		}
-//		reqBillManager.saveReqBillFile(batchId, "06", reqBillList);
-//	}
+	@Test
+	@Rollback(false)
+	public void test06() throws InvalidFormatException, IOException, SAXException {
+
+		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\06D.xls");
+		if (null == reqBillList || reqBillList.size() == 0) {
+			System.out.println("############无效文件");
+		}
+		reqBillManager.saveReqBillFile(batchId, "06", reqBillList);
+	}
 
 	@Test
 	@Rollback(false)
@@ -255,6 +255,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			reqBill.setBatchId(batchId);
 			reqBill.setSupplierName(supplier.getName());
 			List<ReqBill> list = reqBillMyBatisDao.getReqBillList(reqBill);
+			list = addBlankRow(list);
 			reqBillManager.writeReqBillFileToSupplier(batchId, supplier.getName(), list);
 
 			for (ReqBill reqBill2 : list) {
@@ -288,37 +289,31 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 	}
 
 	private static List<String> getImagePathList(String productImgPath, List<ReqBill> list) {
+		list = addBlankRow(list);
 		List<String> imagePathList = new ArrayList<String>();
 		for (ReqBill reqBill : list) {
 
-			//System.out.println(productImgPath + reqBill.getProductNo() + ".jpg");
+			// System.out.println(productImgPath + reqBill.getProductNo() +
+			// ".jpg");
 			imagePathList.add(productImgPath + reqBill.getProductNo() + ".jpg");
 		}
 		return imagePathList;
 	}
 
-	// CREATE TABLE
-	// t_req_bill
-	// (
-	// uuid INT NOT NULL AUTO_INCREMENT,
-	// create_date DATETIME NOT NULL,
-	// create_user_id VARCHAR(32) NOT NULL,
-	// update_date DATETIME NOT NULL,
-	// update_user_id VARCHAR(32) NOT NULL,
-	// version INT NOT NULL,
-	// app_num INT,
-	// barcode VARCHAR(16),
-	// batch_id VARCHAR(16) NOT NULL,
-	// _index INT NOT NULL,
-	// inventory_num INT,
-	// org_id VARCHAR(32) NOT NULL,
-	// product_name VARCHAR(64),
-	// product_no VARCHAR(16),
-	// ref_price DECIMAL(19,2),
-	// remarks VARCHAR(255),
-	// supplier_name VARCHAR(32),
-	// PRIMARY KEY (uuid),
-	// CONSTRAINT batch_id UNIQUE (batch_id, _index, org_id)
-	// )
-	// ENGINE=InnoDB DEFAULT CHARSET=utf8
+	private static List<ReqBill> addBlankRow(List<ReqBill> list) {
+		List<ReqBill> _list = new ArrayList<ReqBill>();
+
+		String _tmpOrgId = null;
+		for (ReqBill reqBill : list) {
+			if (!reqBill.getOrgId().equals(_tmpOrgId)) {
+				if (null != _tmpOrgId) {
+					_list.add(new ReqBill());
+					_list.add(new ReqBill());
+				}
+				_tmpOrgId = reqBill.getOrgId();
+			}
+			_list.add(reqBill);
+		}
+		return _list;
+	}
 }
