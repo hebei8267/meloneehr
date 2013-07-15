@@ -76,6 +76,22 @@ public class ReqBillManager {
 				sysConfig.getReqBillSupplierOutputPath() + batchId + "/#########EQ_" + batchId + ".xls");
 	}
 
+	private List<ReqBill> addBlankRow(List<ReqBill> list) {
+		List<ReqBill> _list = new ArrayList<ReqBill>();
+
+		String _tmpOrgId = null;
+		for (ReqBill reqBill : _list) {
+			if (!reqBill.getOrgId().equals(_tmpOrgId)) {
+				if (null != _tmpOrgId) {
+					_list.add(new ReqBill());
+				}
+				_tmpOrgId = reqBill.getOrgId();
+			}
+			_list.add(reqBill);
+		}
+		return _list;
+	}
+
 	/**
 	 * @param batchId
 	 * @param supplierName
@@ -86,10 +102,11 @@ public class ReqBillManager {
 	 */
 	public void writeReqBillFileToSupplier(String batchId, String supplierName, List<ReqBill> list)
 			throws ParsePropertyException, InvalidFormatException, IOException {
+
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 
 		Map<String, List<ReqBill>> map = new HashMap<String, List<ReqBill>>();
-		map.put("reqBillList", list);
+		map.put("reqBillList", addBlankRow(list));
 
 		// 自动建立文件夹
 		FileUtils.mkdir(sysConfig.getReqBillSupplierOutputPath() + batchId + "/");
