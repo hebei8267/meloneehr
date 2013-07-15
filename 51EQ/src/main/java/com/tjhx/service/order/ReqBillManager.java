@@ -76,23 +76,6 @@ public class ReqBillManager {
 				sysConfig.getReqBillSupplierOutputPath() + batchId + "/#########EQ_" + batchId + ".xls");
 	}
 
-	private List<ReqBill> addBlankRow(List<ReqBill> list) {
-		List<ReqBill> _list = new ArrayList<ReqBill>();
-
-		String _tmpOrgId = null;
-		for (ReqBill reqBill : list) {
-			if (!reqBill.getOrgId().equals(_tmpOrgId)) {
-				if (null != _tmpOrgId) {
-					_list.add(new ReqBill());
-					_list.add(new ReqBill());
-				}
-				_tmpOrgId = reqBill.getOrgId();
-			}
-			_list.add(reqBill);
-		}
-		return _list;
-	}
-
 	/**
 	 * @param batchId
 	 * @param supplierName
@@ -107,7 +90,7 @@ public class ReqBillManager {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 
 		Map<String, List<ReqBill>> map = new HashMap<String, List<ReqBill>>();
-		map.put("reqBillList", addBlankRow(list));
+		map.put("reqBillList", list);
 
 		// 自动建立文件夹
 		FileUtils.mkdir(sysConfig.getReqBillSupplierOutputPath() + batchId + "/");
