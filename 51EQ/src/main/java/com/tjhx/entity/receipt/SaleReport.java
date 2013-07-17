@@ -452,6 +452,8 @@ public class SaleReport {
 		this.retainedAmt = _cashRun.getRetainedAmt();
 		// 当班销售-合计
 		this.saleAmt = _cashRun.getSaleAmt();
+		// 备注
+		this.descTxt = _cashRun.getDescTxt();
 	}
 
 	public void addCashRunInfo_Card(CashRun _cashRun) throws ParseException {
