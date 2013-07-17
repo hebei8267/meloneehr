@@ -65,7 +65,7 @@
                 $("#listForm").attr("action", "${sc_ctx}/storeRun/del");
                 $("#listForm").submit();
             }
-        </script>
+    	</script>
     </head>
     <body>
         <%// 系统菜单  %>
