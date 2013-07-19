@@ -110,7 +110,7 @@ public class CashReportController extends BaseController {
 		BufferedOutputStream bos = null;
 
 		String downLoadPath = sysConfig.getReportTmpPath() + downLoadFileName;
-		System.out.println(downLoadPath);
+
 		try {
 			long fileLength = new File(downLoadPath).length();
 			response.setContentType("application/x-msdownload;");
