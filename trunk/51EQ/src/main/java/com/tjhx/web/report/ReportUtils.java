@@ -25,4 +25,18 @@ public class ReportUtils {
 
 		model.addAttribute("orgList", orgList);
 	}
+
+	public static void initOrgList_Non_All(OrganizationManager orgManager, Model model) {
+		List<Organization> _orgList = orgManager.getAllOrganization();
+
+		Map<String, String> orgList = new LinkedHashMap<String, String>();
+
+		for (Organization _org : _orgList) {
+			if (!Constants.ROOT_ORG_ID.equals(_org.getId())) {
+				orgList.put(_org.getId(), _org.getName());
+			}
+		}
+
+		model.addAttribute("orgList", orgList);
+	}
 }
