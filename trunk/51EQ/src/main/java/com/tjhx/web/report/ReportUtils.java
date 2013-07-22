@@ -11,7 +11,7 @@ import com.tjhx.globals.Constants;
 import com.tjhx.service.struct.OrganizationManager;
 
 public class ReportUtils {
-	public static void initOrgList(OrganizationManager orgManager, Model model) {
+	public static void initOrgList_All(OrganizationManager orgManager, Model model) {
 		List<Organization> _orgList = orgManager.getAllOrganization();
 
 		Map<String, String> orgList = new LinkedHashMap<String, String>();
@@ -33,6 +33,23 @@ public class ReportUtils {
 
 		for (Organization _org : _orgList) {
 			if (!Constants.ROOT_ORG_ID.equals(_org.getId())) {
+
+				orgList.put(_org.getId(), _org.getName());
+			}
+		}
+
+		model.addAttribute("orgList", orgList);
+	}
+
+	public static void initOrgList_Null(OrganizationManager orgManager, Model model) {
+		List<Organization> _orgList = orgManager.getAllOrganization();
+
+		Map<String, String> orgList = new LinkedHashMap<String, String>();
+
+		orgList.put("", "");
+		for (Organization _org : _orgList) {
+			if (!Constants.ROOT_ORG_ID.equals(_org.getId())) {
+
 				orgList.put(_org.getId(), _org.getName());
 			}
 		}

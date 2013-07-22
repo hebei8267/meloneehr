@@ -39,7 +39,7 @@ public class StoreReportController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String storeReportList_Action(Model model) throws ServletRequestBindingException {
 
-		ReportUtils.initOrgList(orgManager, model);
+		ReportUtils.initOrgList_All(orgManager, model);
 
 		return "report/storeListReport";
 	}
@@ -82,7 +82,7 @@ public class StoreReportController extends BaseController {
 		StoreRun totalStoreRun = storeRunManager.calTotal(_storeRunList);
 		model.addAttribute("totalStoreRun", totalStoreRun);
 
-		ReportUtils.initOrgList(orgManager, model);
+		ReportUtils.initOrgList_All(orgManager, model);
 
 		return "report/storeListReport";
 	}
