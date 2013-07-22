@@ -42,7 +42,7 @@ public class CardReportController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String cardReportList_Action(Model model) throws ServletRequestBindingException {
 
-		ReportUtils.initOrgList(orgManager, model);
+		ReportUtils.initOrgList_All(orgManager, model);
 
 		return "report/cardListReport";
 	}
@@ -59,7 +59,7 @@ public class CardReportController extends BaseController {
 		CashDaily totalCashDaily = cashDailyManager.calTotal_CashDaily(_cashDailyList);
 		model.addAttribute("totalCashDaily", totalCashDaily);
 
-		ReportUtils.initOrgList(orgManager, model);
+		ReportUtils.initOrgList_All(orgManager, model);
 
 		return "report/cardListReport";
 	}
