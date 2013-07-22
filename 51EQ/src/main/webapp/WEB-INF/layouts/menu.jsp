@@ -120,7 +120,7 @@
                     </li>
                     </c:if>
                     
-                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') }">
+                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">日常事务<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -139,6 +139,11 @@
                                 <a href="${sc_ctx}/reqBill">门店要货单</a>
                             </li>
                             -->
+                            <c:if test="${_permIdList.contains('15')}">
+                            <li>
+                                <a href="${sc_ctx}/inspect">门店巡查报告</a>
+                            </li>
+                            </c:if>
                         </ul>
                     </li>
                     </c:if>
