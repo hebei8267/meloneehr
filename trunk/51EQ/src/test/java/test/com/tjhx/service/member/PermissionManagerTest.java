@@ -88,6 +88,13 @@ public class PermissionManagerTest extends SpringTransactionalTestCase {
 		perm14.setRole(role);
 		perm14.setFunction(fun14);
 		permissionJpaDao.save(perm14);
+
+		// 门店巡查报告---------------------------------------------
+		Permission perm15 = new Permission();
+		Function fun15 = functionJpaDao.findOne(15);
+		perm15.setRole(role);
+		perm15.setFunction(fun15);
+		permissionJpaDao.save(perm15);
 	}
 
 	// 总部管理人员
@@ -129,6 +136,13 @@ public class PermissionManagerTest extends SpringTransactionalTestCase {
 		perm14.setRole(role);
 		perm14.setFunction(fun14);
 		permissionJpaDao.save(perm14);
+
+		// 门店巡查报告---------------------------------------------
+		Permission perm15 = new Permission();
+		Function fun15 = functionJpaDao.findOne(15);
+		perm15.setRole(role);
+		perm15.setFunction(fun15);
+		permissionJpaDao.save(perm15);
 	}
 
 	// 店长
