@@ -10,93 +10,99 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<script>
-    	$(function() {
-    		$("#listForm").validate({
-                rules : {
-                	optDateShow_start : {
-                		required : true,
-                		date : true                    		
-                    },
-                    optDateShow_end : {
-                		required : true,
-                		date : true,
-                		compareDate : "#optDateShow_start"
+        <script>
+            $(function() {
+                $("#searchForm").validate({
+                    rules : {
+                        optDateShow_start : {
+                            required : true,
+                            date : true
+                        },
+                        optDateShow_end : {
+                            required : true,
+                            date : true,
+                            compareDate : "#optDateShow_start"
+                        }
                     }
-                }
-            });
-    		
-    		
-    		$('#optDateShow_start').datepicker({
-                format : 'yyyy-mm-dd'
-            });
-            $('#optDateShow_end').datepicker({
-                format : 'yyyy-mm-dd'
-            });
-            
-            
-            $("#searchBtn").click(function() {
-                $("input[type='text'],textarea").each(function(i) {
-                    this.value = $.trim(this.value);
+                });
+                
+                $("#listForm").validate({
+                    rules : {
+                        delBtn : {
+                            requiredSelect : 'uuid'
+                        }
+                    }
                 });
 
-                $("#listForm").attr("action", "${sc_ctx}/inspect/search");
-                $("#listForm").submit();
-            });
-            
-          	//-----------------------------------
-            // 全选/全部选
-            //-----------------------------------
-            $("#checkAll").click(function() {
-                $('input[name="uuid"]').attr("checked", this.checked);
-            });
-            var $subCheckBox = $("input[name='uuid']");
-            $subCheckBox.click(function() {
-                $("#checkAll").attr("checked", $subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
-            });
-          	//-----------------------------------
-            // 删除按钮点击
-            //-----------------------------------
-            $("#delBtn").click(function() {
-                if ($("#listForm").valid()) {
-                    $('#__del_confirm').modal({
-                        backdrop : true,
-                        keyboard : true,
-                        show : true
-                    });
-                }
-            });
-    	});
-    	
-    	//-----------------------------------
-        // 删除
-        //-----------------------------------
-        function _del_confirm() {
-            var $subCheckBox = $("input[name='uuid']");
-            var uuids = "";
-            $.each($subCheckBox, function(index, _checkBox) {
-                if (_checkBox.checked) {
-                    uuids += _checkBox.value + ",";
-                }
-            });
-            if (uuids.length > 0) {
-                uuids = uuids.substring(0, uuids.length - 1);
-            }
+                $('#optDateShow_start').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
+                $('#optDateShow_end').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
 
-            $("#uuids").val(uuids);
-            $("#listForm").attr("action", "${sc_ctx}/inspect/del");
-            $("#listForm").submit();
-        }
-    	</script>
+                $("#searchBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#searchForm").attr("action", "${sc_ctx}/inspect/search");
+                    $("#searchForm").submit();
+                });
+
+                //-----------------------------------
+                // 全选/全部选
+                //-----------------------------------
+                $("#checkAll").click(function() {
+                    $('input[name="uuid"]').attr("checked", this.checked);
+                });
+                var $subCheckBox = $("input[name='uuid']");
+                $subCheckBox.click(function() {
+                    $("#checkAll").attr("checked", $subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
+                });
+                //-----------------------------------
+                // 删除按钮点击
+                //-----------------------------------
+                $("#delBtn").click(function() {
+                    if ($("#listForm").valid()) {
+                        $('#__del_confirm').modal({
+                            backdrop : true,
+                            keyboard : true,
+                            show : true
+                        });
+                    }
+                });
+            });
+
+            //-----------------------------------
+            // 删除
+            //-----------------------------------
+            function _del_confirm() {
+                var $subCheckBox = $("input[name='uuid']");
+                var uuids = "";
+                $.each($subCheckBox, function(index, _checkBox) {
+                    if (_checkBox.checked) {
+                        uuids += _checkBox.value + ",";
+                    }
+                });
+                if (uuids.length > 0) {
+                    uuids = uuids.substring(0, uuids.length - 1);
+                }
+
+                $("#uuids").val(uuids);
+                $("#listForm").attr("action", "${sc_ctx}/inspect/del");
+                $("#listForm").submit();
+            }
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
         <page:applyDecorator name="menu" />
-        
+
         <div class="container">
-        	<form method="post"	class="form-inline"	id="listForm">
-        		<div class="row">
-        			<div class="span12">
+            <div class="row">
+                <form method="post"	class="form-inline"	id="searchForm">
+                    <div class="span12">
                         <legend>
                             <h3>门店巡查报告</h3>
                         </legend>
@@ -104,7 +110,8 @@
                     <div class="span5">
                         <label class="control-label">巡查日期 :</label>
                         <input id="optDateShow_start" name="optDateShow_start" type="text" class="input-medium" value="${optDateShow_start }"/>
-                        ～ <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
+                        ～
+                        <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
                     </div>
                     <div class="span7">
                         <label class="control-label">机构 :</label>
@@ -120,20 +127,23 @@
                         </select>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
+                </form>
+                
+                <form method="post" class="form-inline" id="listForm">
                     <div class="span12" style="padding-top: 10px;">
                         <a href="${sc_ctx}/inspect/new"	class="btn btn-primary">新增</a>
                         <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
                     </div>
-                    
+
                     <div class="span12"	style="margin-top: 10px;">
-                    	<input type="hidden" name="uuids" id="uuids"/>
-                    	<table class="table	table-striped table-bordered table-condensed mytable">
+                        <input type="hidden" name="uuids" id="uuids"/>
+                        <table class="table	table-striped table-bordered table-condensed mytable">
                             <thead>
                                 <tr>
-                                	<th	width="25" class="center">
+                                    <th	width="25" class="center">
                                         <input id="checkAll" type="checkbox" />
                                     </th>
-                                	<th>
+                                    <th>
                                         报告流水号
                                     </th>
                                     <th>
@@ -160,52 +170,52 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${inspectList}" var="inspect">
-                         		<tr>
-                        			<td	class="center">
-                               			<input type="checkbox" name="uuid" value="${inspect.uuid}">
-                                	</td>
-                               		<td>
-                                   		${inspect.trsId}
-                                  	</td>
-                              		<td>
-                                   		${inspect.optDateShow}
-                                 	</td>
-                                 	<td>
-                                   		${inspect.inspectPer}
-                                 	</td>
-                              		<td>
-                                     	${inspect.orgId}
-                                	</td>
-                                  	<td>
-                                 		${inspect.dutyPer}
-                               		</td>
-                               		<td>
-	                               		<c:if test="${inspect.cashConclusion == 1}">
-	                                        完全相等
-	                                    </c:if>
-	                                    <c:if test="${inspect.cashConclusion == 2}">
-	                                        基本相等
-	                                    </c:if>
-	                                    <c:if test="${inspect.cashConclusion == 4}">
-	                                        不符，调查原因
-	                                    </c:if>
-                               		</td>
-                               		<td>
-	                               		<c:if test="${inspect.imprestConclusion == 1}">
-	                                        完全相等
-	                                    </c:if>
-	                                    <c:if test="${inspect.imprestConclusion == 2}">
-	                                        基本相等
-	                                    </c:if>
-	                                    <c:if test="${inspect.imprestConclusion == 4}">
-	                                        不符，调查原因
-	                                    </c:if>
-                               		</td>
-                                	<td>
-                                    	<a href="${sc_ctx}/inspect/edit/${inspect.uuid}" class="btn btn-warning"/>修改</a>
-                                 	</td>
-                              	</tr>
+                                <c:forEach items="${inspectList}" var="inspect">
+                                    <tr>
+                                        <td	class="center">
+                                            <input type="checkbox" name="uuid" value="${inspect.uuid}">
+                                        </td>
+                                        <td>
+                                            ${inspect.trsId}
+                                        </td>
+                                        <td>
+                                            ${inspect.optDateShow}
+                                        </td>
+                                        <td>
+                                            ${inspect.inspectPer}
+                                        </td>
+                                        <td>
+                                            ${inspect.orgId}
+                                        </td>
+                                        <td>
+                                            ${inspect.dutyPer}
+                                        </td>
+                                        <td>
+                                            <c:if test="${inspect.cashConclusion == 1}">
+                                                完全相等
+                                            </c:if>
+                                            <c:if test="${inspect.cashConclusion == 2}">
+                                                基本相等
+                                            </c:if>
+                                            <c:if test="${inspect.cashConclusion == 4}">
+                                                不符，调查原因
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${inspect.imprestConclusion == 1}">
+                                                完全相等
+                                            </c:if>
+                                            <c:if test="${inspect.imprestConclusion == 2}">
+                                                基本相等
+                                            </c:if>
+                                            <c:if test="${inspect.imprestConclusion == 4}">
+                                                不符，调查原因
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <a href="${sc_ctx}/inspect/edit/${inspect.uuid}" class="btn btn-warning"/>修改</a>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                             </tbody>
                             <c:if test="${empty	inspectList}" >
@@ -217,10 +227,10 @@
                                     </tr>
                                 </tfoot>
                             </c:if>
-                		</table>
-                	</div>
-        		</div>
-        	</form>
+                        </table>
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </html>
