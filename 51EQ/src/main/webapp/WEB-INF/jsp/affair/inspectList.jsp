@@ -10,6 +10,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<style type="text/css">
+    	._warn1 {
+    		padding: 5px;
+			background-color: #99FF33;
+		}
+		._warn2 {
+			padding: 5px;
+			background-color: #FFCC33;
+		}
+		._warn3 {
+			padding: 5px;
+			background-color: #FF3300;
+		}
+    	</style>
         <script>
             $(function() {
                 $("#searchForm").validate({
@@ -192,24 +206,24 @@
                                         </td>
                                         <td>
                                             <c:if test="${inspect.cashConclusion == 1}">
-                                                完全相等
+                                                <span class='_warn1'>完全相等</span>
                                             </c:if>
                                             <c:if test="${inspect.cashConclusion == 2}">
-                                                基本相等
+                                                <span class='_warn2'>基本相等</span>
                                             </c:if>
                                             <c:if test="${inspect.cashConclusion == 4}">
-                                                不符，调查原因
+                                                <span class='_warn3'>不符，调查原因</span>
                                             </c:if>
                                         </td>
                                         <td>
                                             <c:if test="${inspect.imprestConclusion == 1}">
-                                                完全相等
+                                                <span class='_warn1'>完全相等</span>
                                             </c:if>
                                             <c:if test="${inspect.imprestConclusion == 2}">
-                                                基本相等
+                                                <span class='_warn2'>基本相等</span>
                                             </c:if>
                                             <c:if test="${inspect.imprestConclusion == 4}">
-                                                不符，调查原因
+                                                <span class='_warn3'>不符，调查原因</span>
                                             </c:if>
                                         </td>
                                         <td>
