@@ -152,7 +152,6 @@ public class InspectController extends BaseController {
 		if (null == inspect) {
 			return "inspect:/" + Constants.PAGE_REQUEST_PREFIX + "/inspect/list";
 		} else {
-			System.out.println(inspect.getOrgId());
 			model.addAttribute("inspect", inspect);
 
 			ReportUtils.initOrgList_Null(orgManager, model);
