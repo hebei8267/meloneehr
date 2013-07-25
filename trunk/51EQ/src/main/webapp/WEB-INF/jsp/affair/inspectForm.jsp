@@ -148,7 +148,7 @@
     	// A ～ C 合计金额
         function cashSubtotal() {
          	var _result = numAdd($("#initAmt").val(), $("#cashAmt").val());
-         	var _result = numAdd(_result, $("#depositAmt").val());
+         	var _result = numSub(_result, $("#depositAmt").val());
 
              $("#_cashSubtotal").html(_result + " 元");
              $("#cashSubtotal").val(_result);
@@ -256,7 +256,7 @@
                         	</div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">存款金额 C :</label>
+                            <label class="control-label"><span class="warn2_text">存款金额 C :</span></label>
                            	<div class="controls">
                           		<form:input	path="depositAmt" />
                         	</div>
