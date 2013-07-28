@@ -117,6 +117,18 @@ public class DateUtils {
 	}
 
 	/**
+	 * 转换日历格式
+	 * 
+	 * @param date
+	 * @param toStyle
+	 * @return
+	 */
+	public static String transDateFormat(Date date, String toStyle) {
+		simpleDateFormat.applyPattern(toStyle);
+		return simpleDateFormat.format(date);
+	}
+
+	/**
 	 * String型 ---> Date型変換する
 	 * 
 	 * @param date 入力のString型
