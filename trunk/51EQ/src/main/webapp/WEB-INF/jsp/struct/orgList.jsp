@@ -95,6 +95,9 @@
                                         机构编号
                                     </th>
                                     <th>
+                                        机构编号(中控)
+                                    </th>
+                                    <th>
                                         机构名称
                                     </th>
                                     <th>
@@ -116,6 +119,9 @@
                                         </td>
                                         <td>
                                             ${org.bwId}
+                                        </td>
+                                        <td>
+                                            ${org.zkId}
                                         </td>
                                         <td>
                                             ${org.name}

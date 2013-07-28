@@ -10,6 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<style type="text/css">
+			.form-horizontal .control-label {
+	        	width: 180px;
+	    	}
+	    	.form-horizontal .controls {
+	        	margin-left: 195px;
+	    	}
+    	</style>
         <script>
             $(function() {
                 $("#inputForm").validate({
@@ -17,6 +25,10 @@
                         bwId : {
                             required : true,
                             maxlength : 16
+                        },
+                        zkId : {
+                            required : true,
+                            digits : true
                         },
                         name : {
                             required : true,
@@ -72,6 +84,12 @@
                             <c:if test="${!empty org.uuid}">
                                 <label class="left-control-label">${org.bwId}</label>
                             </c:if>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">机构编号(中控) :</label>
+                            <div class="controls">
+                                <form:input	path="zkId" />
+                            </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">机构名称 :</label>
