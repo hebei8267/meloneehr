@@ -118,6 +118,7 @@ public class OrganizationManager {
 		}
 
 		_dbOrganization.setName(org.getName());
+		_dbOrganization.setZkId(org.getZkId());
 
 		orgJpaDao.save(_dbOrganization);
 
