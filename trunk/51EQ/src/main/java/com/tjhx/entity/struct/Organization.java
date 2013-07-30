@@ -33,6 +33,9 @@ public class Organization extends IdEntity {
 	/** 机构编号-百威 */
 	private String bwId;
 
+	/** 机构编号-中控打卡机 */
+	private Integer zkId;
+
 	/** 机构名称 */
 	private String name;
 
@@ -180,6 +183,24 @@ public class Organization extends IdEntity {
 	 */
 	public void setParentOrg(Organization parentOrg) {
 		this.parentOrg = parentOrg;
+	}
+
+	/**
+	 * 取得机构编号-中控打卡机
+	 * 
+	 * @return zkId 机构编号-中控打卡机
+	 */
+	public Integer getZkId() {
+		return zkId;
+	}
+
+	/**
+	 * 设置机构编号-中控打卡机
+	 * 
+	 * @param zkId 机构编号-中控打卡机
+	 */
+	public void setZkId(Integer zkId) {
+		this.zkId = zkId;
 	}
 
 }
