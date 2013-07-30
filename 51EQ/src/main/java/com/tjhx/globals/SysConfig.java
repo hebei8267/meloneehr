@@ -13,6 +13,13 @@ public class SysConfig {
 	private String productImgPath;
 	private String reportTmpPath;
 
+	/** 考勤计算-开始有效时间(当日时间) */
+	private String punchClockStart;
+	/** 考勤计算-结束有效时间(次日时间) */
+	private String punchClockEnd;
+	/** 考勤计算-重计算天数 */
+	private int punchClockRecalDays;
+
 	/**
 	 * 取得cashDailyModel
 	 * 
@@ -137,6 +144,60 @@ public class SysConfig {
 	 */
 	public void setReportTmpPath(String reportTmpPath) {
 		this.reportTmpPath = reportTmpPath;
+	}
+
+	/**
+	 * 取得考勤计算-开始有效时间(当日时间)
+	 * 
+	 * @return punchClockStart 考勤计算-开始有效时间(当日时间)
+	 */
+	public String getPunchClockStart() {
+		return punchClockStart;
+	}
+
+	/**
+	 * 设置考勤计算-开始有效时间(当日时间)
+	 * 
+	 * @param punchClockStart 考勤计算-开始有效时间(当日时间)
+	 */
+	public void setPunchClockStart(String punchClockStart) {
+		this.punchClockStart = punchClockStart;
+	}
+
+	/**
+	 * 取得考勤计算-结束有效时间(次日时间)
+	 * 
+	 * @return punchClockEnd 考勤计算-结束有效时间(次日时间)
+	 */
+	public String getPunchClockEnd() {
+		return punchClockEnd;
+	}
+
+	/**
+	 * 设置考勤计算-结束有效时间(次日时间)
+	 * 
+	 * @param punchClockEnd 考勤计算-结束有效时间(次日时间)
+	 */
+	public void setPunchClockEnd(String punchClockEnd) {
+		this.punchClockEnd = punchClockEnd;
+	}
+
+	/**
+	 * 取得考勤计算-重计算天数
+	 * 
+	 * @return punchClockRecalDays 考勤计算-重计算天数
+	 */
+	public int getPunchClockRecalDays() {
+		return punchClockRecalDays;
+	}
+
+	/**
+	 * 设置考勤计算-重计算天数
+	 * 
+	 * @param punchClockRecalDays 考勤计算-重计算天数
+	 */
+	public void setPunchClockRecalDays(int punchClockRecalDays) {
+		this.punchClockRecalDays = punchClockRecalDays;
 	}
 
 }
