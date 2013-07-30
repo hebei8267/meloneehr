@@ -133,6 +133,14 @@
 		<property name="productImgPath" value="${product.img.path}" />
 		<!-- 导出报表信息路径 -->
 		<property name="reportTmpPath" value="${report.tmp.path}" />
+		
+		
+		<!-- 考勤计算-开始有效时间(当日时间) -->
+		<property name="punchClockStart" value="${punch.clock.start}" />
+		<!-- 考勤计算-结束有效时间(次日时间) -->
+		<property name="punchClockEnd" value="${punch.clock.end}" />
+		<!-- 考勤计算-重计算天数 -->
+		<property name="punchClockRecalDays" value="${punch.clock.recal.days}" />
 	</bean>
 	
 	
