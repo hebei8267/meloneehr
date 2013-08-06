@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -30,6 +31,13 @@ public class PunchClock extends IdEntity {
 	private String clockTimeD;
 	/** 打卡机编号 */
 	private String sn;
+	// #######################################################
+	/** 机构编号 */
+	private String orgId;
+	/** 机构名称 */
+	private String orgName;
+	/** 员工编号 */
+	private int empUuid;
 
 	public PunchClock() {
 
@@ -154,4 +162,63 @@ public class PunchClock extends IdEntity {
 	public void setSn(String sn) {
 		this.sn = sn;
 	}
+
+	// #######################################################
+	/**
+	 * 取得机构编号
+	 * 
+	 * @return orgId 机构编号
+	 */
+	@Transient
+	public String getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * 设置机构编号
+	 * 
+	 * @param orgId 机构编号
+	 */
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+	/**
+	 * 取得员工编号
+	 * 
+	 * @return empUuid 员工编号
+	 */
+	@Transient
+	public int getEmpUuid() {
+		return empUuid;
+	}
+
+	/**
+	 * 设置员工编号
+	 * 
+	 * @param empUuid 员工编号
+	 */
+	public void setEmpUuid(int empUuid) {
+		this.empUuid = empUuid;
+	}
+
 }
