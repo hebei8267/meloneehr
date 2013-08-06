@@ -29,7 +29,7 @@
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="cronJobDetail" />
 		<!-- 每天上午 9:00 触发 -->
-		<property name="cronExpression" value="0 34 23 * * ?" />
+		<property name="cronExpression" value="0 54 12 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
