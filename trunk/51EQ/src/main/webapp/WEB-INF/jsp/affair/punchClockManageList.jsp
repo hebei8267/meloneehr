@@ -11,6 +11,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<script>
+	        $(function() {
+	        	$("#listForm").validate({
+	                rules : {
+	                	optDateShow : {
+	                		required : true
+	                    }
+	                }
+	            });
+	        	
+	            $('#optDateShow').datepicker({
+	            	format : 'yyyy-mm',
+	            	viewMode : 1,
+	            	minViewMode : 1
+	            });
+	            
+	            $("#searchBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#listForm").attr("action", "${sc_ctx}/punchClock/manage/search");
+                    $("#listForm").submit();
+                });
+	        });
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -22,13 +48,26 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 考勤信息</h3>
+                            <h3>考勤信息</h3>
                         </legend>
                     </div>
-                    <div class="span12 right_text">
-                        <%String nowM =	DateUtils.getCurrentMonth(); %>
-                        <%String lastM=	DateUtils.getNextMonthFormatDate(-1, "yyyy-MM"); %>(考勤日期)
-                        <a href="${sc_ctx}/punchClock/list/<%=nowM	%>"><%=nowM	%></a> | <a	href="${sc_ctx}/punchClock/list/<%=lastM %>"><%=lastM %></a>
+                    <div class="span3">
+                        <label class="control-label">考勤日期 :</label>
+                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
+                    </div>
+                    <div class="span9">
+                        <label class="control-label">机构 :</label>
+                        <select name="orgId" class="input-medium">
+                            <c:forEach items="${orgList}" var="org">
+                                <c:if test="${org.key == orgId}">
+                                    <option value="${org.key }" selected>${org.value }</option>
+                                </c:if>
+                                <c:if test="${org.key != orgId}">
+                                    <option value="${org.key }">${org.value }</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <table class="table	table-striped table-bordered table-condensed mytable">
