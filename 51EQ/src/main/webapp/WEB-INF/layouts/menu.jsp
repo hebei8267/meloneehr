@@ -120,7 +120,7 @@
                     </li>
                     </c:if>
                     
-                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15')}">
+                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15') || _permIdList.contains('16') || _permIdList.contains('17')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">日常事务<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -148,14 +148,16 @@
                             <li class="dropdown-submenu">
     							<a tabindex="-1" href="#">考勤信息</a>
 	    						<ul class="dropdown-menu">
+	    							<c:if test="${_permIdList.contains('16')}">
 	    							<li>
 		                                <a href="${sc_ctx}/punchClock/list">查看</a>
 		                            </li>
-	    						</ul>
-	    						<ul class="dropdown-menu">
-	    							<li>
-		                                <a href="${sc_ctx}/punchClock/list/manage">查看</a>
+		                            </c:if>
+		                            <c:if test="${_permIdList.contains('17')}">
+		                            <li>
+		                                <a href="${sc_ctx}/punchClock/manage">查看</a>
 		                            </li>
+		                            </c:if>
 	    						</ul>
   							</li>
                         </ul>
