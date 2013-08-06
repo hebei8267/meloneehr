@@ -221,4 +221,18 @@ public class DateUtils {
 		}
 		return weekDays[w];
 	}
+
+	public static int getMonthDays(int year, int month) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month - 1);
+		cal.set(Calendar.DATE, 1);
+		cal.roll(Calendar.DATE, -1);
+
+		return cal.get(Calendar.DATE);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(DateUtils.getMonthDays(2012, 2));
+	}
 }
