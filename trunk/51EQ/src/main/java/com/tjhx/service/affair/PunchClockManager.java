@@ -15,6 +15,9 @@ import com.tjhx.dao.affair.PunchClockJpaDao;
 import com.tjhx.dao.affair.PunchClockMyBatisDao;
 import com.tjhx.daozk.CheckInOutMyBatisDao;
 import com.tjhx.entity.affair.PunchClock;
+import com.tjhx.entity.affair.PunchClock_List_Show;
+import com.tjhx.entity.affair.PunchClock_Show;
+import com.tjhx.entity.member.Employee;
 import com.tjhx.entity.zknet.CheckInOut;
 import com.tjhx.globals.SysConfig;
 
@@ -160,6 +163,106 @@ public class PunchClockManager {
 			}
 
 		}
+	}
 
+	/**
+	 * 取得机构指定月份考勤信息表
+	 * 
+	 * @param orgId 机构编号
+	 * @param clockTimeY 打卡时间-年
+	 * @param clockTimeM 打卡时间-月
+	 * @return
+	 */
+	public List<PunchClock_List_Show> getPunchClockList(String orgId, String clockTimeY, String clockTimeM,
+			List<Employee> empList) {
+
+		PunchClock punchClock = new PunchClock();
+		punchClock.setOrgId(orgId);
+		punchClock.setClockTimeY(clockTimeY);
+		punchClock.setClockTimeM(clockTimeM);
+
+		List<PunchClock> _dbList = punchClockMyBatisDao.getPunchClockList(punchClock);
+
+		return formatPunchClockList(clockTimeY, clockTimeM, _dbList, empList);
+	}
+
+	/**
+	 * 调整考勤信息表,准备页面显示
+	 * 
+	 * @param punchClockList
+	 * @return
+	 */
+	private List<PunchClock_List_Show> formatPunchClockList(String clockTimeY, String clockTimeM,
+			List<PunchClock> punchClockList, List<Employee> empList) {
+		int days = DateUtils.getMonthDays(Integer.parseInt(clockTimeY), Integer.parseInt(clockTimeM));
+
+		List<PunchClock_Show> _punchClockList = new ArrayList<PunchClock_Show>();
+		for (int i = 1; i <= days; i++) {
+			for (Employee employee : empList) {
+				_punchClockList.add(new PunchClock_Show(clockTimeY, clockTimeM, String.format("%02d", i), employee
+						.getUuid()));
+			}
+		}
+
+		for (PunchClock_Show punchClock_Show : _punchClockList) {
+			for (PunchClock punchClock : punchClockList) {
+
+				if (myEquals(punchClock_Show, punchClock)) {
+					punchClock_Show.copy(punchClock);
+				}
+			}
+		}
+
+		return formatPunchClockList(_punchClockList, empList.size());
+
+	}
+
+	/**
+	 * 自定义比较方法
+	 * 
+	 * @param punchClock_Show
+	 * @param punchClock
+	 * @return
+	 */
+	private boolean myEquals(PunchClock_Show punchClock_Show, PunchClock punchClock) {
+		if (punchClock_Show.getEmpUuid() != punchClock.getEmpUuid()) {
+			return false;
+		}
+
+		if (!punchClock_Show.getClockTimeY().equals(punchClock.getClockTimeY())) {
+			return false;
+		}
+		if (!punchClock_Show.getClockTimeM().equals(punchClock.getClockTimeM())) {
+			return false;
+		}
+		if (!punchClock_Show.getClockTimeD().equals(punchClock.getClockTimeD())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * 整理考勤信息列表（准备输出）
+	 * 
+	 * @param punchClockList
+	 * @param empListSize
+	 * @return
+	 */
+	private List<PunchClock_List_Show> formatPunchClockList(List<PunchClock_Show> punchClockList, int empListSize) {
+		List<PunchClock_List_Show> _list = new ArrayList<PunchClock_List_Show>();
+
+		PunchClock_List_Show pList = null;
+		for (int i = 0; i < punchClockList.size(); i++) {
+			if (i % empListSize == 0) {
+				pList = new PunchClock_List_Show(punchClockList.get(i).getClockTimeY() + "-"
+						+ punchClockList.get(i).getClockTimeM() + "-" + punchClockList.get(i).getClockTimeD());
+
+				_list.add(pList);
+			}
+			pList.addPunchClockShowObj(punchClockList.get(i));
+		}
+
+		return _list;
 	}
 }
