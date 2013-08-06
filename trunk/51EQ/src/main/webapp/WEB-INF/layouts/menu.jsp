@@ -144,6 +144,20 @@
                                 <a href="${sc_ctx}/inspect">门店巡查报告</a>
                             </li>
                             </c:if>
+                            
+                            <li class="dropdown-submenu">
+    							<a tabindex="-1" href="#">考勤信息</a>
+	    						<ul class="dropdown-menu">
+	    							<li>
+		                                <a href="${sc_ctx}/punchClock/list">查看</a>
+		                            </li>
+	    						</ul>
+	    						<ul class="dropdown-menu">
+	    							<li>
+		                                <a href="${sc_ctx}/punchClock/list/manage">查看</a>
+		                            </li>
+	    						</ul>
+  							</li>
                         </ul>
                     </li>
                     </c:if>
