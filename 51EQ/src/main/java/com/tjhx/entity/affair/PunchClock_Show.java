@@ -138,9 +138,9 @@ public class PunchClock_Show {
 	public void copy(PunchClock clock) {
 
 		if (null == clockTimeStart) {
-			this.clockTimeStart = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd hh:mm:ss");
+			this.clockTimeStart = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd HH:mm:ss");
 		} else {
-			this.clockTimeEnd = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd hh:mm:ss");
+			this.clockTimeEnd = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd HH:mm:ss");
 		}
 	}
 }
