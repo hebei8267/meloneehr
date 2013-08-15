@@ -1,11 +1,19 @@
 package com.tjhx.service.affair;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
@@ -13,6 +21,7 @@ import org.springside.modules.utils.SpringContextHolder;
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.affair.PunchClockJpaDao;
 import com.tjhx.dao.affair.PunchClockMyBatisDao;
+import com.tjhx.dao.member.EmployeeMyBatisDao;
 import com.tjhx.daozk.CheckInOutMyBatisDao;
 import com.tjhx.entity.affair.PunchClock;
 import com.tjhx.entity.affair.PunchClock_List_Show;
@@ -31,7 +40,9 @@ public class PunchClockManager {
 	private PunchClockMyBatisDao punchClockMyBatisDao;
 	@Resource
 	private CheckInOutMyBatisDao checkInOutMyBatisDao;
-
+	@Resource
+	private EmployeeMyBatisDao employeeMyBatisDao;
+	private final static String XML_CONFIG_PUNCH_CLOCK = "/excel/Punch_Clock_Template.xls";
 	/**
 	 * 取得考勤计算-重计算天数（含明天，列表第一个对象）
 	 * 
@@ -264,5 +275,33 @@ public class PunchClockManager {
 		}
 
 		return _list;
+	}
+
+	public String createPunchClockFile(String orgId, String optDateY, String optDateM) throws ParsePropertyException, InvalidFormatException, IOException {
+		PunchClock punchClock = new PunchClock();
+		punchClock.setOrgId(orgId);
+		punchClock.setClockTimeY(optDateY);
+		punchClock.setClockTimeM(optDateM);
+
+		List<Employee> _empList = employeeMyBatisDao.getEmployeeListByOrgId(orgId);
+
+		List<PunchClock> _dbList = punchClockMyBatisDao.getPunchClockList(punchClock);
+
+		List<PunchClock_List_Show> _showList = formatPunchClockList(optDateY, optDateM, _dbList, _empList);
+
+		// ---------------------------文件生成---------------------------
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empList", _empList);
+		map.put("punchClockList", _showList);
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		XLSTransformer transformer = new XLSTransformer();
+
+		String tmpFileName = UUID.randomUUID().toString() + ".xls";
+		String tmpFilePath = sysConfig.getReportTmpPath() + tmpFileName;
+		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_PUNCH_CLOCK, map, tmpFilePath);
+
+		return tmpFileName;
 	}
 }
