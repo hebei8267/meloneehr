@@ -401,6 +401,7 @@ public class CashDailyManager {
 		cashTotalProcess(_list, reportList);
 		SaleReport _totalSaleReport = calTotal_SaleReport(reportList);
 
+		// ---------------------------文件生成---------------------------
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reportList", reportList);
 		map.put("totalReport", _totalSaleReport);
