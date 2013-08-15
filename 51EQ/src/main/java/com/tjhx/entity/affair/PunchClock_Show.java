@@ -10,9 +10,9 @@ public class PunchClock_Show {
 	/** 打卡时间-日 */
 	private String clockTimeD;
 	/** 打卡时间-开始 */
-	private String clockTimeStart;
+	private String clockTimeStart = "";
 	/** 打卡时间-结束 */
-	private String clockTimeEnd;
+	private String clockTimeEnd = "";
 	/** 员工编号 */
 	private int empUuid;
 
@@ -137,7 +137,7 @@ public class PunchClock_Show {
 
 	public void copy(PunchClock clock) {
 
-		if (null == clockTimeStart) {
+		if ("".equals(clockTimeStart)) {
 			this.clockTimeStart = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd HH:mm:ss");
 		} else {
 			this.clockTimeEnd = DateUtils.transDateFormat(clock.getClockTime(), "yyyy/MM/dd HH:mm:ss");
