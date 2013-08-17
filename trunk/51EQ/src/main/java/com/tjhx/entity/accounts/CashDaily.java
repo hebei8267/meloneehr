@@ -49,6 +49,10 @@ public class CashDaily extends IdEntity {
 	private BigDecimal retainedAmt = new BigDecimal("0");
 	/** 现金盈亏（调节） */
 	private BigDecimal adjustAmt = new BigDecimal("0");
+	/** 百威系统销售额 */
+	private BigDecimal bwSaleAmt = new BigDecimal("0");
+	/** 百威系统机构编号 */
+	private String orgBranchNo;
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
@@ -371,6 +375,43 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setOptDateEnd(String optDateEnd) {
 		this.optDateEnd = optDateEnd;
+	}
+
+	/**
+	 * 取得百威系统销售额
+	 * 
+	 * @return bwSaleAmt 百威系统销售额
+	 */
+	public BigDecimal getBwSaleAmt() {
+		return bwSaleAmt;
+	}
+
+	/**
+	 * 设置百威系统销售额
+	 * 
+	 * @param bwSaleAmt 百威系统销售额
+	 */
+	public void setBwSaleAmt(BigDecimal bwSaleAmt) {
+		this.bwSaleAmt = bwSaleAmt;
+	}
+
+	/**
+	 * 取得百威系统机构编号
+	 * 
+	 * @return orgBranchNo 百威系统机构编号
+	 */
+	@Column(length = 6)
+	public String getOrgBranchNo() {
+		return orgBranchNo;
+	}
+
+	/**
+	 * 设置百威系统机构编号
+	 * 
+	 * @param orgBranchNo 百威系统机构编号
+	 */
+	public void setOrgBranchNo(String orgBranchNo) {
+		this.orgBranchNo = orgBranchNo;
 	}
 
 }
