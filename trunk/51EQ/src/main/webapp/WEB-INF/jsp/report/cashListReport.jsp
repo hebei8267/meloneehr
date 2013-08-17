@@ -122,6 +122,9 @@
                                     <th>
                                         当日销售额
                                     </th>
+                                    <th>
+                                        百威对账
+                                    </th>
                                     <th	width="55">
                                         &nbsp;
                                     </th>
@@ -157,8 +160,11 @@
                                         <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
                                         	${cashDaily.retainedAmt}
                                         </td>
-                                        <td>
+                                        <td <c:if test="${cashDaily.saleAmt != cashDaily.bwSaleAmt}">style="background-color:#FFDEAD;color:#00000"</c:if>>
                                         	${cashDaily.saleAmt}
+                                        </td>
+                                        <td>
+                                        	${cashDaily.bwSaleAmt}
                                         </td>
                                         <td>
                                             <a href="${sc_ctx}/cashReport/detail/${cashDaily.optDate}/${cashDaily.orgId}" target="_blank" class="btn btn-warning"/>详细</a>
@@ -190,14 +196,18 @@
                                         <td>
                                             ${totalCashDaily.saleAmt}
                                         </td>
-                                        <td	colspan="2"></td>
+                                        <td>
+                                        	${totalCashDaily.bwSaleAmt}
+                                        </td>
+                                        <td>
+                                        </td>
                                     </tr>
                                 </c:if>
                             </tbody>
                             <c:if test="${empty	cashDailyList}" >
                                 <tfoot>
                                     <tr>
-                                        <td	colspan="11"	class="rounded-foot-left">
+                                        <td	colspan="12"	class="rounded-foot-left">
                                             无记录信息
                                         </td>
                                     </tr>
