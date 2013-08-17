@@ -29,19 +29,16 @@ public class Organization extends IdEntity {
 
 	/** 机构编号 */
 	private String id;
-
 	/** 机构编号-百威 */
 	private String bwId;
-
+	/** 机构编号-百威 */
+	private String bwBranchNo;
 	/** 机构编号-中控打卡机 */
 	private Integer zkId;
-
 	/** 机构名称 */
 	private String name;
-
 	/** Index */
 	private Integer index;
-
 	/** 子机构List */
 	private List<Organization> subOrgList = new ArrayList<Organization>();
 
@@ -85,6 +82,24 @@ public class Organization extends IdEntity {
 	 */
 	public void setBwId(String bwId) {
 		this.bwId = bwId;
+	}
+
+	/**
+	 * 取得机构编号-百威
+	 * 
+	 * @return bwBranchNo 机构编号-百威
+	 */
+	public String getBwBranchNo() {
+		return bwBranchNo;
+	}
+
+	/**
+	 * 设置机构编号-百威
+	 * 
+	 * @param bwBranchNo 机构编号-百威
+	 */
+	public void setBwBranchNo(String bwBranchNo) {
+		this.bwBranchNo = bwBranchNo;
 	}
 
 	/**

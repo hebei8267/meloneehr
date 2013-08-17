@@ -19,6 +19,8 @@ public class SysConfig {
 	private String punchClockEnd;
 	/** 考勤计算-重计算天数 */
 	private int punchClockRecalDays;
+	/** 考勤计算-重计算天数 */
+	private int synBwSaleDays;
 
 	/**
 	 * 取得cashDailyModel
@@ -198,6 +200,24 @@ public class SysConfig {
 	 */
 	public void setPunchClockRecalDays(int punchClockRecalDays) {
 		this.punchClockRecalDays = punchClockRecalDays;
+	}
+
+	/**
+	 * 取得考勤计算-重计算天数
+	 * 
+	 * @return synBwSaleDays 考勤计算-重计算天数
+	 */
+	public int getSynBwSaleDays() {
+		return synBwSaleDays;
+	}
+
+	/**
+	 * 设置考勤计算-重计算天数
+	 * 
+	 * @param synBwSaleDays 考勤计算-重计算天数
+	 */
+	public void setSynBwSaleDays(int synBwSaleDays) {
+		this.synBwSaleDays = synBwSaleDays;
 	}
 
 }
