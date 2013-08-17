@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tjhx.service.affair.PunchClockManager;
 
 /**
+ * (打卡机)
+ * 
  * 被Spring的Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
  */
 public class PunchClockJob {
