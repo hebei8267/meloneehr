@@ -160,7 +160,7 @@
                                         <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
                                         	${cashDaily.retainedAmt}
                                         </td>
-                                        <td <c:if test="${cashDaily.saleAmt != cashDaily.bwSaleAmt}">style="background-color:#FFDEAD;color:#00000"</c:if>>
+                                        <td <c:if test="${((cashDaily.saleAmt - cashDaily.bwSaleAmt) > 0.1) || ((cashDaily.saleAmt - cashDaily.bwSaleAmt) < 0.1)}">style="background-color:#FFDEAD;color:#00000"</c:if>>
                                         	${cashDaily.saleAmt}
                                         </td>
                                         <td>
