@@ -24,7 +24,7 @@
         <result column="retained_amt" property="retainedAmt" jdbcType="DECIMAL"/>
         <result column="sale_amt" property="saleAmt" jdbcType="DECIMAL"/>
         <result column="sale_cash_amt" property="saleCashAmt" jdbcType="DECIMAL"/>
-        
+        <result column="bw_sale_amt" property="bwSaleAmt" jdbcType="DECIMAL"/>
         <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
@@ -51,6 +51,7 @@
     	cash.retained_amt ,
     	cash.sale_amt ,
     	cash.sale_cash_amt ,
+    	cash.bw_sale_amt ,
     	org.org_name AS orgName
 	]]>
   	</sql>

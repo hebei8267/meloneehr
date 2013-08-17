@@ -11,7 +11,8 @@
 		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
-				<ref bean="cronTrigger" />
+				<ref bean="punchClockJobCronTrigger" />
+				<ref bean="bwSaleAmtJobCronTrigger" />
 			</list>
 		</property>
 		<!-- Quartz配置 -->
@@ -25,15 +26,16 @@
 		<property name="startupDelay" value="30" />
 	</bean>
 
+	<!-- ##################################### 打卡机  ###################################### -->
 	<!-- Cron式Trigger定义 -->
-	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="cronJobDetail" />
+	<bean id="punchClockJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="punchClockJobCronJobDetail" />
 		<!-- 每天上午 9:00 触发 -->
 		<property name="cronExpression" value="0 54 12 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
-	<bean id="cronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="punchClockJobCronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="punchClockJob" />
 		<property name="targetMethod" value="execute" />
 		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
@@ -42,4 +44,23 @@
 
 	<!-- 被Cron执行的普通Spring Bean -->
 	<bean id="punchClockJob" class="com.tjhx.schedule.PunchClockJob" />
+	
+	<!-- ##################################### 百威系统销售额  ###################################### -->
+	<!-- Cron式Trigger定义 -->
+	<bean id="bwSaleAmtJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="bwSaleAmtJobCronJobDetail" />
+		<!-- 每天上午 8:00 触发 -->
+		<property name="cronExpression" value="0 07 16 * * ?" />
+	</bean>
+
+	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
+	<bean id="bwSaleAmtJobCronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="bwSaleAmtJob" />
+		<property name="targetMethod" value="execute" />
+		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<!-- 被Cron执行的普通Spring Bean -->
+	<bean id="bwSaleAmtJob" class="com.tjhx.schedule.BwSaleAmtJob" />
 </beans>
