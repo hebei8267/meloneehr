@@ -24,8 +24,10 @@ import com.tjhx.dao.accounts.CashDailyJpaDao;
 import com.tjhx.dao.accounts.CashDailyMyBatisDao;
 import com.tjhx.dao.accounts.CashRunJpaDao;
 import com.tjhx.dao.accounts.CashRunMyBatisDao;
+import com.tjhx.daobw.DailySaleMyBatisDao;
 import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
+import com.tjhx.entity.bw.DailySale;
 import com.tjhx.entity.receipt.SaleReport;
 import com.tjhx.globals.SysConfig;
 
@@ -40,6 +42,9 @@ public class CashDailyManager {
 	private CashDailyJpaDao cashDailyJpaDao;
 	@Resource
 	private CashDailyMyBatisDao cashDailyMyBatisDao;
+	@Resource
+	private DailySaleMyBatisDao dailySaleMyBatisDao;
+
 	private final static String XML_CONFIG_CASH_DAILY = "/excel/Cash_Daily_Template.xls";
 	private final static String XML_CONFIG_CARD_DAILY = "/excel/Card_Daily_Template.xls";
 
@@ -153,7 +158,7 @@ public class CashDailyManager {
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = false)
-	public void cashDailyConfirm(String optDate, String orgId) {
+	public void cashDailyConfirm(String optDate, String orgId, String bwBranchNo) {
 		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.getNotCashDailyByOrgId_OptDate(orgId, optDate, new Sort(
 				new Sort.Order(Sort.Direction.ASC, "jobType")));
 
@@ -197,7 +202,12 @@ public class CashDailyManager {
 			_cashDaily.setAdjustAmt(_cashDaily.getAdjustAmt().add(cashRun.getAdjustAmt()));
 			// 修改销售流水标记
 			cashRun.setDailyFlg(true);
+
 			cashRunJpaDao.save(cashRun);
+			// ############ 20130817-追加 ################
+			// 百威系统机构编号
+			_cashDaily.setOrgBranchNo(bwBranchNo);
+			// ############ 20130817-追加 ################
 		}
 		// 生成销售日结信息
 		cashDailyJpaDao.save(_cashDaily);
@@ -269,7 +279,8 @@ public class CashDailyManager {
 			_cashDaily.setDepositAmt(_cashDaily.getDepositAmt().add(cashDaily.getDepositAmt()));
 			// 当日销售
 			_cashDaily.setSaleAmt(_cashDaily.getSaleAmt().add(cashDaily.getSaleAmt()));
-
+			// 当日销售BW
+			_cashDaily.setBwSaleAmt(_cashDaily.getBwSaleAmt().add(cashDaily.getBwSaleAmt()));
 		}
 		return _cashDaily;
 	}
@@ -415,5 +426,69 @@ public class CashDailyManager {
 		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_CASH_DAILY, map, tmpFilePath);
 
 		return tmpFileName;
+	}
+
+	/**
+	 * 同步百威销售额
+	 * 
+	 * @throws ParseException
+	 */
+	@Transactional(readOnly = false)
+	public void synBwSaleAmt() throws ParseException {
+		// 取得同步百威销售额-重计算天数
+		List<String> optDateList = calOptDate();
+
+		for (String optDate : optDateList) {
+			List<CashDaily> _cashDailyList = cashDailyJpaDao.findByOptDate(optDate);
+
+			List<DailySale> _bwDailySaleList = dailySaleMyBatisDao.getDailySaleList(optDate);
+
+			for (CashDaily _cashDaily : _cashDailyList) {
+				for (DailySale _dailySale : _bwDailySaleList) {
+
+					if (myEquals(_cashDaily, _dailySale)) {
+
+						// 设置百威系统的日销售额度
+						_cashDaily.setBwSaleAmt(_dailySale.getBwSaleAmt());
+
+						cashDailyJpaDao.save(_cashDaily);
+
+					}
+				}
+			}
+
+		}
+
+	}
+
+	private boolean myEquals(CashDaily cashDaily, DailySale dailySale) {
+
+		if (!cashDaily.getOrgBranchNo().equals(dailySale.getOrgBranchNo())) {
+			return false;
+		}
+
+		if (!cashDaily.getOptDate().equals(dailySale.getOperDate())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * 同步百威销售额-重计算天数
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	public List<String> calOptDate() throws ParseException {
+		List<String> _optDateList = new ArrayList<String>();
+
+		String _now = DateUtils.getCurFormatDate("yyyyMMdd");
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		for (int i = 1; i < sysConfig.getSynBwSaleDays() + 1; i++) {
+			_optDateList.add(DateUtils.getNextDateFormatDate(_now, -i, "yyyyMMdd"));
+		}
+		return _optDateList;
 	}
 }

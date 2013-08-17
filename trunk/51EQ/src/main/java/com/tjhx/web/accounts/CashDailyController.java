@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.accounts.CashDaily;
 import com.tjhx.entity.accounts.CashRun;
+import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.accounts.CashDailyManager;
 import com.tjhx.service.info.BankManager;
@@ -77,7 +78,9 @@ public class CashDailyController extends BaseController {
 	@RequestMapping(value = "confirm/{date}")
 	public String cashDailyConfirm_Action(@PathVariable("date") String optDate, HttpSession session) {
 
-		cashDailyManager.cashDailyConfirm(optDate, getUserInfo(session).getOrganization().getId());
+		Organization org = getUserInfo(session).getOrganization();
+
+		cashDailyManager.cashDailyConfirm(optDate, org.getId(), org.getBwBranchNo());
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/cashDaily";
 	}
