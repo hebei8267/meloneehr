@@ -31,7 +31,7 @@
 	<bean id="punchClockJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="punchClockJobCronJobDetail" />
 		<!-- 每天上午 9:00 触发 -->
-		<property name="cronExpression" value="0 54 12 * * ?" />
+		<property name="cronExpression" value="0 0 9 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
@@ -50,7 +50,7 @@
 	<bean id="bwSaleAmtJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="bwSaleAmtJobCronJobDetail" />
 		<!-- 每天上午 8:00 触发 -->
-		<property name="cronExpression" value="0 07 16 * * ?" />
+		<property name="cronExpression" value="0 48 21 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
