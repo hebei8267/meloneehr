@@ -56,6 +56,23 @@ public class OrganizationManager {
 	 * 根据编号取得机构信息
 	 * 
 	 * @param uuid 机构编号
+	 * @return
+	 */
+	public Organization getOrganizationByUuidInCache(Integer uuid) {
+		List<Organization> _orgList = getAllOrganization();
+		for (Organization organization : _orgList) {
+			if (organization.getUuid().equals(uuid)) {
+				return organization;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * 根据编号取得机构信息
+	 * 
+	 * @param uuid 机构编号
 	 * @return 机构信息
 	 */
 	public Organization getOrganizationByUuid(Integer uuid) {
@@ -119,6 +136,7 @@ public class OrganizationManager {
 
 		_dbOrganization.setName(org.getName());
 		_dbOrganization.setZkId(org.getZkId());
+		_dbOrganization.setBwBranchNo(org.getBwBranchNo());
 
 		orgJpaDao.save(_dbOrganization);
 
