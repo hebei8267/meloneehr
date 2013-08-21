@@ -5,29 +5,40 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.common.utils.Encrypter;
 import com.tjhx.dao.member.RoleJpaDao;
 import com.tjhx.dao.member.UserJpaDao;
+import com.tjhx.dao.member.UserMyBatisDao;
 import com.tjhx.dao.struct.OrganizationJpaDao;
 import com.tjhx.entity.member.Role;
 import com.tjhx.entity.member.User;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
+import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
 
 @Service
 @Transactional(readOnly = true)
 public class UserManager {
+	private static Logger logger = LoggerFactory.getLogger(UserManager.class);
+
 	@Resource
 	private UserJpaDao userJpaDao;
+	@Resource
+	private UserMyBatisDao userMyBatisDao;
 	@Resource
 	private RoleJpaDao roleJpaDao;
 	@Resource
 	private OrganizationJpaDao orgJpaDao;
+	@Resource
+	private SpyMemcachedClient spyMemcachedClient;
 
 	/**
 	 * 取得所有用户信息
@@ -37,6 +48,29 @@ public class UserManager {
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUser() {
 		return (List<User>) userJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "loginName")));
+	}
+
+	/**
+	 * 取得所有用户信息
+	 * 
+	 * @return 用户信息列表
+	 */
+	public List<User> getAllUserByCache() {
+		List<User> _userList = spyMemcachedClient.get(MemcachedObjectType.USER_LIST.getObjKey());
+
+		if (null == _userList) {
+			// 从数据库中取出全量机构信息(List格式)
+			_userList = userMyBatisDao.getAllUserList();
+			// 将机构信息Map保存到memcached
+			spyMemcachedClient.set(MemcachedObjectType.USER_LIST.getObjKey(),
+					MemcachedObjectType.USER_LIST.getExpiredTime(), _userList);
+
+			logger.debug("人员信息不在 memcached中,从数据库中取出并放入memcached");
+		} else {
+			logger.debug("从memcached中取出人员信息");
+		}
+		return _userList;
+
 	}
 
 	/**
@@ -56,6 +90,9 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = false)
 	public void delUserByUuid(Integer uuid) {
+		// 消除用户信息缓存
+		spyMemcachedClient.delete(MemcachedObjectType.USER_LIST.getObjKey());
+
 		userJpaDao.delete(uuid);
 	}
 
@@ -80,6 +117,9 @@ public class UserManager {
 		user.setOrganization(org);
 		Role role = roleJpaDao.findOne(Integer.parseInt(user.getRoleUuid()));
 		user.setRole(role);
+
+		// 消除用户信息缓存
+		spyMemcachedClient.delete(MemcachedObjectType.USER_LIST.getObjKey());
 
 		userJpaDao.save(user);
 	}
@@ -152,6 +192,9 @@ public class UserManager {
 		// 用户角色
 		Role role = roleJpaDao.findOne(Integer.parseInt(user.getRoleUuid()));
 		_dbUser.setRole(role);
+
+		// 消除用户信息缓存
+		spyMemcachedClient.delete(MemcachedObjectType.USER_LIST.getObjKey());
 
 		userJpaDao.save(_dbUser);
 	}
