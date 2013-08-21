@@ -31,7 +31,7 @@ public class Organization extends IdEntity {
 	private String id;
 	/** 机构编号-百威 */
 	private String bwId;
-	/** 机构编号-百威 */
+	/** 机构资金-百威 */
 	private String bwBranchNo;
 	/** 机构编号-中控打卡机 */
 	private Integer zkId;
@@ -76,18 +76,18 @@ public class Organization extends IdEntity {
 	}
 
 	/**
-	 * 设置机构编号-百威
+	 * 设置机构资金编号-百威
 	 * 
-	 * @param bwId 机构编号-百威
+	 * @param bwId 机构资金编号-百威
 	 */
 	public void setBwId(String bwId) {
 		this.bwId = bwId;
 	}
 
 	/**
-	 * 取得机构编号-百威
+	 * 取得机构资金编号-百威
 	 * 
-	 * @return bwBranchNo 机构编号-百威
+	 * @return bwBranchNo 机构资金编号-百威
 	 */
 	public String getBwBranchNo() {
 		return bwBranchNo;
