@@ -98,6 +98,9 @@
                                         机构编号(中控)
                                     </th>
                                     <th>
+                                        机构资金编号(百威)
+                                    </th>
+                                    <th>
                                         机构名称
                                     </th>
                                     <th>
@@ -122,6 +125,9 @@
                                         </td>
                                         <td>
                                             ${org.zkId}
+                                        </td>
+                                        <td>
+                                            ${org.bwBranchNo}
                                         </td>
                                         <td>
                                             ${org.name}
