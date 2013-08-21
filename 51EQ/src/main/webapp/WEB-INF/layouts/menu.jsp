@@ -160,6 +160,10 @@
 		                            </c:if>
 	    						</ul>
   							</li>
+  							
+  							<li>
+                                <a href="${sc_ctx}/msgInfo">公告/消息</a>
+                            </li>
                         </ul>
                     </li>
                     </c:if>
