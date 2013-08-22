@@ -167,6 +167,8 @@
 		
 		<!-- 同步百威销售额-重计算天数 -->
 		<property name="synBwSaleDays" value="${syn.bw.sale.days}" />
+		<!-- 与百威销售额-差额-额度 -->
+		<property name="bwSaleDifAmount" value="${bw.sale.difference.amount}" />
 	</bean>
 	
 	
