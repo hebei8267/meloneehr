@@ -1,14 +1,21 @@
 package com.tjhx.web.affair;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,7 +24,6 @@ import com.tjhx.entity.affair.MsgInfo;
 import com.tjhx.entity.member.User;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
-import com.tjhx.service.ServiceException;
 import com.tjhx.service.affair.MsgInfoManager;
 import com.tjhx.service.member.UserManager;
 import com.tjhx.service.struct.OrganizationManager;
@@ -34,8 +40,30 @@ public class MsgInfoController extends BaseController {
 	private MsgInfoManager msgInfoManager;
 
 	@RequestMapping(value = { "list", "" })
-	public String msgInfoList_Action(Model model) {
+	public String msgInfoList_Action(Model model, HttpSession session) {
+		User user = getUserInfo(session);
+
+		List<MsgInfo> _msgInfoList = msgInfoManager.getDefaultMsgInfoList(user.getLoginName());
+		model.addAttribute("msgInfoList", _msgInfoList);
+
+		initMsgTypeList(model);
+
 		return "affair/msgInfoList";
+	}
+
+	/**
+	 * 初始化信息类型下拉列表
+	 * 
+	 * @param model
+	 */
+	public static void initMsgTypeList(Model model) {
+		Map<String, String> msgTypeList = new LinkedHashMap<String, String>();
+
+		msgTypeList.put("", "所有");
+		msgTypeList.put("1", "发信");
+		msgTypeList.put("2", "收信");
+
+		model.addAttribute("msgTypeList", msgTypeList);
 	}
 
 	/**
@@ -82,6 +110,10 @@ public class MsgInfoController extends BaseController {
 
 			return "affair/msgInfoForm_Root";
 		} else {// 门店机构
+
+			List<User> _userList = userManager.getSelfOrgUserByCache(user.getOrganization().getUuid());
+			model.addAttribute("userList", _userList);
+
 			return "affair/msgInfoForm";
 		}
 	}
@@ -99,37 +131,56 @@ public class MsgInfoController extends BaseController {
 	public String saveMsgInfo_Action(@ModelAttribute("msgInfo") MsgInfo msgInfo, Model model, HttpSession session)
 			throws IllegalAccessException, InvocationTargetException {
 		User user = getUserInfo(session);
-		String orgId = user.getOrganization().getId();
 
 		if (null == msgInfo.getUuid()) {// 新增操作
-			try {
-				msgInfoManager.addMsgInfo(msgInfo, user.getLoginName());
-
-			} catch (ServiceException ex) {
-				// 添加错误消息
-				addInfoMsg(model, ex.getMessage());
-
-				if (Constants.ROOT_ORG_ID.equals(orgId)) {// 总部机构
-					return "affair/msgInfoForm_Root";
-				} else {// 门店机构
-					return "affair/msgInfoForm";
-				}
-			}
-		} else {// 修改操作
-			try {
-				msgInfoManager.updateMsgInfo(msgInfo);
-			} catch (ServiceException ex) {
-				// 添加错误消息
-				addInfoMsg(model, ex.getMessage());
-
-				if (Constants.ROOT_ORG_ID.equals(orgId)) {// 总部机构
-					return "affair/msgInfoForm_Root";
-				} else {// 门店机构
-					return "affair/msgInfoForm";
-				}
-			}
+			msgInfoManager.addMsgInfo(msgInfo, user.getLoginName());
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/msgInfo/list";
+	}
+
+	/**
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "search")
+	public String msgInfoSearch_Action(Model model, HttpServletRequest request, HttpSession session)
+			throws ServletRequestBindingException {
+		String msgType = ServletRequestUtils.getStringParameter(request, "msgType");
+		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
+		String optDateShow_end = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
+		model.addAttribute("msgType", msgType);
+		model.addAttribute("optDateShow_start", optDateShow_start);
+		model.addAttribute("optDateShow_end", optDateShow_end);
+
+		User user = getUserInfo(session);
+
+		MsgInfo msgInfo = new MsgInfo();
+		msgInfo.setSendUserLoginName(user.getLoginName());
+		msgInfo.setAcceptUserLoginName(user.getLoginName());
+
+		if (StringUtils.isNotBlank(msgType)) {
+			msgInfo.setMsgType(msgType);
+		}
+		if (StringUtils.isNotBlank(optDateShow_start)) {
+			msgInfo.setOptDateStart(DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"));
+		}
+		if (StringUtils.isNotBlank(optDateShow_end)) {
+			msgInfo.setOptDateEnd(DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
+		}
+
+		List<MsgInfo> _msgInfoList = msgInfoManager.getMsgInfoList(msgInfo);
+		model.addAttribute("msgInfoList", _msgInfoList);
+
+		initMsgTypeList(model);
+
+		return "affair/msgInfoList";
+	}
+
+	@RequestMapping(value = "view/{msgUuid}")
+	public String msgInfoView_Action(@PathVariable("msgUuid") int optDate, Model model) {
+		return "affair/msgInfoView";
 	}
 }
