@@ -1,8 +1,5 @@
 package com.tjhx.entity.affair;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,6 +17,8 @@ public class MsgInfo extends IdEntity {
 	private static final long serialVersionUID = -5755794523836653485L;
 	/** 消息批次号 */
 	private String msgBatchId;
+	/** 日期 */
+	private String optDate;
 	/** 日期-显示 */
 	private String optDateShow;
 	/** 日期-年 */
@@ -40,6 +39,8 @@ public class MsgInfo extends IdEntity {
 	private String msgContent;
 	/** 消息类型 1-发送 2-接受 */
 	private String msgType;
+	/** 阅读标记 0-未读 1-已读 */
+	private String readFlg = "0";
 	// ------------------------------------------------------------------------------
 	/** 发送人-名字 */
 	private String sendUserName;
@@ -55,6 +56,8 @@ public class MsgInfo extends IdEntity {
 	private String[] acceptUserIds;
 	/** 接收类型 1-机构 2-人员 */
 	private String acceptType;
+	private String optDateStart;
+	private String optDateEnd;
 
 	/**
 	 * 取得消息内容
@@ -73,6 +76,25 @@ public class MsgInfo extends IdEntity {
 	 */
 	public void setMsgBatchId(String msgBatchId) {
 		this.msgBatchId = msgBatchId;
+	}
+
+	/**
+	 * 取得日期
+	 * 
+	 * @return optDate 日期
+	 */
+	@Column(length = 8)
+	public String getOptDate() {
+		return optDate;
+	}
+
+	/**
+	 * 设置日期
+	 * 
+	 * @param optDate 日期
+	 */
+	public void setOptDate(String optDate) {
+		this.optDate = optDate;
 	}
 
 	/**
@@ -137,6 +159,7 @@ public class MsgInfo extends IdEntity {
 	 * 
 	 * @return week 星期
 	 */
+	@Column(length = 1)
 	public String getWeek() {
 		return week;
 	}
@@ -263,6 +286,25 @@ public class MsgInfo extends IdEntity {
 	 */
 	public void setMsgType(String msgType) {
 		this.msgType = msgType;
+	}
+
+	/**
+	 * 取得阅读标记0-未读1-已读
+	 * 
+	 * @return readFlg 阅读标记0-未读1-已读
+	 */
+	@Column(length = 1)
+	public String getReadFlg() {
+		return readFlg;
+	}
+
+	/**
+	 * 设置阅读标记0-未读1-已读
+	 * 
+	 * @param readFlg 阅读标记0-未读1-已读
+	 */
+	public void setReadFlg(String readFlg) {
+		this.readFlg = readFlg;
 	}
 
 	// ------------------------------------------------------------------------------
@@ -399,9 +441,41 @@ public class MsgInfo extends IdEntity {
 		this.acceptType = acceptType;
 	}
 
-	public static void main(String[] args) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-ms");
-		String dateString = formatter.format(new Date());
-		System.out.println(dateString);
+	/**
+	 * 取得optDateStart
+	 * 
+	 * @return optDateStart
+	 */
+	@Transient
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置optDateStart
+	 * 
+	 * @param optDateStart
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得optDateEnd
+	 * 
+	 * @return optDateEnd
+	 */
+	@Transient
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置optDateEnd
+	 * 
+	 * @param optDateEnd
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
 	}
 }
