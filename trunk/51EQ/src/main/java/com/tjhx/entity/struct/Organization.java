@@ -89,6 +89,7 @@ public class Organization extends IdEntity {
 	 * 
 	 * @return bwBranchNo 机构资金编号-百威
 	 */
+	@Column(length = 8)
 	public String getBwBranchNo() {
 		return bwBranchNo;
 	}
