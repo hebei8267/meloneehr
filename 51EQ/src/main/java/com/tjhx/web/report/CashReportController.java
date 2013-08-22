@@ -151,6 +151,8 @@ public class CashReportController extends BaseController {
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		model.addAttribute("DEFAULT_RETAINED_AMT", sysConfig.getDefaultRetainedAmt());
+		// 与百威销售额-差额-额度
+		model.addAttribute("BW_SALE_DIF_AMOUNT", sysConfig.getBwSaleDifAmount());
 
 		return "report/cashListReport";
 	}
