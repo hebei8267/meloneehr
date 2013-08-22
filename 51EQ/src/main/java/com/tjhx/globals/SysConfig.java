@@ -21,6 +21,8 @@ public class SysConfig {
 	private int punchClockRecalDays;
 	/** 考勤计算-重计算天数 */
 	private int synBwSaleDays;
+	/** 与百威销售额-差额-额度 */
+	private float bwSaleDifAmount;
 
 	/**
 	 * 取得cashDailyModel
@@ -218,6 +220,24 @@ public class SysConfig {
 	 */
 	public void setSynBwSaleDays(int synBwSaleDays) {
 		this.synBwSaleDays = synBwSaleDays;
+	}
+
+	/**
+	 * 取得与百威销售额-差额-额度
+	 * 
+	 * @return bwSaleDifAmount 与百威销售额-差额-额度
+	 */
+	public float getBwSaleDifAmount() {
+		return bwSaleDifAmount;
+	}
+
+	/**
+	 * 设置与百威销售额-差额-额度
+	 * 
+	 * @param bwSaleDifAmount 与百威销售额-差额-额度
+	 */
+	public void setBwSaleDifAmount(float bwSaleDifAmount) {
+		this.bwSaleDifAmount = bwSaleDifAmount;
 	}
 
 }
