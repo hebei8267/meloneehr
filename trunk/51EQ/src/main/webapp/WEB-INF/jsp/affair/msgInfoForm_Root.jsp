@@ -121,9 +121,7 @@
                         <c:if test="${empty	msgInfo.uuid}">
                             新增
                         </c:if>
-                        <c:if test="${!empty msgInfo.uuid}">
-                            查看
-                        </c:if></h3>
+                        </h3>
                     </legend>
                 </div>
                 <div class="span12"	style="margin-top: 10px;">
