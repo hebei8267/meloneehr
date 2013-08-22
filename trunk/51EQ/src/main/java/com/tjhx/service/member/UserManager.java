@@ -1,6 +1,7 @@
 package com.tjhx.service.member;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -71,6 +72,42 @@ public class UserManager {
 		}
 		return _userList;
 
+	}
+
+	/**
+	 * 取得指定机构的用户信息列表
+	 * 
+	 * @param orgUuid
+	 * @return
+	 */
+	public List<User> getSelfOrgUserByCache(int orgUuid) {
+		List<User> _userList = getAllUserByCache();
+
+		List<User> _reList = new ArrayList<User>();
+		for (User user : _userList) {
+			if (user.getOrgUuid().equals(String.valueOf(orgUuid))) {
+				_reList.add(user);
+			}
+		}
+		return _reList;
+	}
+
+	/**
+	 * 根据用户名取得用户信息
+	 * 
+	 * @param loginName 用户名
+	 * @return
+	 */
+	public User getUserByUuidLoginNameInCache(String loginName) {
+		List<User> _userList = getAllUserByCache();
+
+		for (User user : _userList) {
+			if (user.getLoginName().equals(loginName)) {
+				return user;
+			}
+		}
+
+		return null;
 	}
 
 	/**
