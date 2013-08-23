@@ -1,5 +1,7 @@
 package com.tjhx.web.member;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tjhx.common.utils.Encrypter;
+import com.tjhx.entity.affair.MsgInfo;
 import com.tjhx.entity.member.User;
 import com.tjhx.globals.Constants;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.affair.MsgInfoManager;
 import com.tjhx.service.member.UserManager;
 import com.tjhx.web.BaseController;
 
@@ -22,6 +26,8 @@ import com.tjhx.web.BaseController;
 public class MemberController extends BaseController {
 	@Resource
 	private UserManager userManager;
+	@Resource
+	private MsgInfoManager msgInfoManager;
 
 	/**
 	 * 用户退出
@@ -116,13 +122,18 @@ public class MemberController extends BaseController {
 	}
 
 	/**
-	 * 我的空间 TODO
+	 * 我的空间
 	 * 
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "myspace")
-	public String myspace_Action(Model model) {
+	public String myspace_Action(Model model, HttpSession session) {
+		User user = getUserInfo(session);
+
+		List<MsgInfo> _msgInfoList = msgInfoManager.getDefaultMsgInfoList(user.getLoginName());
+		model.addAttribute("msgInfoList", _msgInfoList);
+
 		return "member/myspace";
 	}
 
