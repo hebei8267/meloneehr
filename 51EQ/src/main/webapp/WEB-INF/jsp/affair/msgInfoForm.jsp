@@ -12,6 +12,9 @@
     <head>
     	<script>
 			$().ready(function() {
+			    $('#msgContent').popover('show')
+				
+				$('#_myTab a:first').tab('show');
 				
 				$("#lMove2").click(function() {
 					moveShowItems('allUserIds', 'acceptUserIds');
@@ -128,39 +131,52 @@
                         <div class="control-group">
                             <label class="control-label">正文 :</label>
                            	<div class="controls">
-                          		<form:textarea path="msgContent" class="input-xlarge" rows="8"/>
+                          		<form:textarea path="msgContent" class="input-xlarge" rows="8" rel="popover" data-content="如：排班、出勤、换还班、兼职安排、卫生、陈列、上货、到货" data-original-title="交班人交办事项及意见"/>
                         	</div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">收信人 :</label>
                            	<div class="controls">
-                          		
-                          		<table>
-                					<tr>
-										<td>全部人员</td>
-										<td></td>
-										<td>发送人员</td>
-									</tr>
-                					<tr>
-                						<td>
-                							<form:select path="allUserIds" multiple="true" class="text ui-widget-content ui-corner-all" size="8">
-                								<c:forEach items="${userList}" var="user">
-                									<option value="${user.loginName}">${user.name} - ( ${user.orgName} )</option>
-                								</c:forEach>
-											</form:select>
-										</td>
-                						<td width="120px" align="center">
-											<table>
-												<tr><td><input type="button" id="lMove2" class="submit" value="->" /></td></tr>
-												<tr><td><input type="button" id="rMove2" class="submit" value="<-" /></td></tr>
-											</table>
-										</td>
-                						<td>
-                							<form:select path="acceptUserIds" multiple="true" class="text ui-widget-content ui-corner-all" size="8">
-											</form:select>
-                						</td>
-                					</tr>
-                				</table>
+                           	
+                           		<div class="bs-docs-example">
+						            <ul id="_myTab" class="nav nav-tabs">
+						            	<li><a href="#per_tab" data-toggle="tab">人员</a></li>
+						            </ul>
+            						<div id="_myTabContent" class="tab-content">
+              							
+              							<div class="tab-pane fade" id="per_tab">
+                							<p>
+                								<table>
+				                					<tr>
+														<td>全部人员</td>
+														<td></td>
+														<td>发送人员</td>
+													</tr>
+				                					<tr>
+				                						<td>
+				                							<form:select path="allUserIds" multiple="true" class="text ui-widget-content ui-corner-all" size="8">
+				                								<c:forEach items="${userList}" var="user">
+				                									<option value="${user.loginName}">${user.name} - ( ${user.orgName} )</option>
+				                								</c:forEach>
+															</form:select>
+														</td>
+				                						<td width="120px" align="center">
+															<table>
+																<tr><td><input type="button" id="lMove2" class="submit" value="->" /></td></tr>
+																<tr><td><input type="button" id="rMove2" class="submit" value="<-" /></td></tr>
+															</table>
+														</td>
+				                						<td>
+				                							<form:select path="acceptUserIds" multiple="true" class="text ui-widget-content ui-corner-all" size="8">
+															</form:select>
+				                						</td>
+				                					</tr>
+				                				</table>
+                							</p>
+              							</div>
+              
+            						</div>
+          						</div>
                           		
                         	</div>
                         </div>

@@ -15,6 +15,10 @@
     		padding: 5px;
 			background-color: #99FF33;
 		}
+		._warn2 {
+			padding: 5px;
+			background-color: #FFCC33;
+		}
     	</style>
     	<script>
             $().ready(function() {
@@ -162,7 +166,7 @@
                                     <th>
                                         主题
                                     </th>
-                                    <th	width="55">
+                                    <th	width="75">
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -177,29 +181,34 @@
                                             ${msgInfo.optDateShow}
                                         </td>
                                         <td class="center">
-                                            周${msgInfo.week}
+                                        	周${msgInfo.week}
                                         </td>
                                         <td class="center">
                                         	<c:if test="${msgInfo.msgType.equals('1')}">
-                                                发信
+                                                <span class='_warn1'>发信</span>
                                             </c:if>
                                             <c:if test="${msgInfo.msgType.equals('2')}">
-                                                收信
+                                                <span class='_warn2'>收信</span>
                                             </c:if>
                                         </td>
                                         <td>
                                         	<c:if test="${msgInfo.msgType.equals('1')}">
-                                                <span class='_warn1'>${msgInfo.sendUserLoginName}</span> / ${msgInfo.acceptNameSet}
+                                                <span class='_warn1'>${msgInfo.sendNameSet}</span> / ${msgInfo.acceptNameSet}
                                             </c:if>
                                             <c:if test="${msgInfo.msgType.equals('2')}">
-                                                ${msgInfo.sendUserLoginName} / <span class='_warn1'>${msgInfo.acceptUserLoginName}</span>
+                                                ${msgInfo.sendNameSet} / <span class='_warn2'>${msgInfo.acceptNameSet}</span>
                                             </c:if>
                                         </td>
                                         <td>
                                             ${msgInfo.msgSubject}
                                         </td>
                                         <td>
-                                            <a href="${sc_ctx}/msgInfo/view/${msgInfo.uuid}" class="btn btn-warning" target="_blank"/>查看</a>
+                                        	<c:if test="${msgInfo.readFlg.equals('0')}">
+                                                <a href="${sc_ctx}/msgInfo/view/${msgInfo.uuid}" class="btn btn-warning" target="_blank"/><i class="icon-ok icon-white"></i> 查看</a>
+                                            </c:if>
+                                            <c:if test="${msgInfo.readFlg.equals('1')}">
+                                                <a href="${sc_ctx}/msgInfo/view/${msgInfo.uuid}" class="btn btn-warning" target="_blank"/><i class="icon-remove icon-white"></i> 查看</a>
+                                            </c:if>
                                         </td>
                                     </tr>
                             	</c:forEach>
