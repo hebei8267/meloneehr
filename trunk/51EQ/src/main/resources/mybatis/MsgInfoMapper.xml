@@ -21,6 +21,7 @@
         <result column="opt_date_y" property="optDateY" jdbcType="VARCHAR"/>
         <result column="read_flg" property="readFlg" jdbcType="VARCHAR"/>
         <result column="send_user_login_name" property="sendUserLoginName" jdbcType="VARCHAR"/>
+        <result column="send_name_set" property="sendNameSet" jdbcType="VARCHAR"/>
         <result column="week" property="week" jdbcType="VARCHAR"/>
 	</resultMap>
 	
@@ -43,6 +44,7 @@
     	opt_date_show ,
     	opt_date_y ,
     	read_flg ,
+    	send_name_set ,
     	send_user_login_name ,
     	week 
 	]]>
