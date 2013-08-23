@@ -43,6 +43,9 @@ public class MsgInfoController extends BaseController {
 	public String msgInfoList_Action(Model model, HttpSession session) {
 		User user = getUserInfo(session);
 
+		// 收信
+		model.addAttribute("msgType", 2);
+
 		List<MsgInfo> _msgInfoList = msgInfoManager.getDefaultMsgInfoList(user.getLoginName());
 		model.addAttribute("msgInfoList", _msgInfoList);
 
@@ -131,8 +134,14 @@ public class MsgInfoController extends BaseController {
 	public String saveMsgInfo_Action(@ModelAttribute("msgInfo") MsgInfo msgInfo, Model model, HttpSession session)
 			throws IllegalAccessException, InvocationTargetException {
 		User user = getUserInfo(session);
+		String orgId = user.getOrganization().getId();
 
 		if (null == msgInfo.getUuid()) {// 新增操作
+
+			if (!Constants.ROOT_ORG_ID.equals(orgId)) {// 门店机构用户
+				msgInfo.setAcceptType("2");
+			}
+
 			msgInfoManager.addMsgInfo(msgInfo, user.getLoginName());
 		}
 
@@ -180,7 +189,16 @@ public class MsgInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = "view/{msgUuid}")
-	public String msgInfoView_Action(@PathVariable("msgUuid") int optDate, Model model) {
+	public String msgInfoView_Action(@PathVariable("msgUuid") int msgUuid, Model model) {
+		MsgInfo _msgInfo = msgInfoManager.getMsgInfoByUuid(msgUuid);
+
+		model.addAttribute("msgInfo", _msgInfo);
 		return "affair/msgInfoView";
+	}
+
+	@RequestMapping(value = "read/{msgUuid}")
+	public String msgInfoRead_Action(@PathVariable("msgUuid") int msgUuid, Model model) {
+		msgInfoManager.updateMsgInfo_ReadFlg(msgUuid);
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/msgInfo/list";
 	}
 }
