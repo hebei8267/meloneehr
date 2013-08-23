@@ -44,12 +44,23 @@ public class MsgInfoManager {
 	}
 
 	/**
+	 * 取得 公告/消息 信息
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	public MsgInfo getMsgInfoByUuid(Integer uuid) {
+		return msgInfoJpaDao.findOne(uuid);
+	}
+
+	/**
 	 * 添加 公告/消息 信息
 	 * 
 	 * @param msgInfo 公告/消息 信息
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
+	@Transactional(readOnly = false)
 	public void addMsgInfo(MsgInfo msgInfo, String sendUserLoginName) throws IllegalAccessException,
 			InvocationTargetException {
 		// 消息批次号
@@ -66,6 +77,11 @@ public class MsgInfoManager {
 		// 发送人
 		msgInfo.setSendUserLoginName(sendUserLoginName);
 
+		User _sendUser = userManager.getUserByLoginNameInCache(sendUserLoginName);
+		String _sendUserName = getUserName(_sendUser);
+		// 发送人名字集合
+		msgInfo.setSendNameSet(_sendUserName);
+
 		if ("1".equals(msgInfo.getAcceptType())) {// 机构
 			addMsgInfo_OrgAcceptType(msgInfo);
 		} else {// 人员
@@ -77,11 +93,19 @@ public class MsgInfoManager {
 
 	}
 
+	private String getUserName(User user) {
+		if (null != user) {
+			return user.getName() + " - (" + user.getOrgName() + "); ";
+		}
+		return "";
+	}
+
 	/**
 	 * 添加 公告/消息 信息(人员模式-指定的人员)
 	 * 
 	 * @param msgInfo
 	 */
+	@Transactional(readOnly = false)
 	private void addMsgInfo_PerAcceptType(MsgInfo msgInfo) {
 		StringBuffer acceptNameBuf = new StringBuffer();
 		for (String userLoginName : msgInfo.getAcceptUserIds()) {
@@ -91,18 +115,25 @@ public class MsgInfoManager {
 			// 接收人
 			_msgInfo.setAcceptUserLoginName(userLoginName);
 
+			User _acceptUser = userManager.getUserByLoginNameInCache(userLoginName);
+			String _acceptUserName = getUserName(_acceptUser);
+			// 接收人名字集合
+			_msgInfo.setAcceptNameSet(_acceptUserName);
+
 			_msgInfo.setMsgType("2");
 			msgInfoJpaDao.save(_msgInfo);
 
-			User user = userManager.getUserByUuidLoginNameInCache(userLoginName);
-			acceptNameBuf.append(user.getName() + "- (" + user.getOrgName() + " ); ");
+			acceptNameBuf.append(_acceptUserName);
 		}
 
 		MsgInfo _msgInfo = new MsgInfo();
 		BeanUtils.copyProperties(msgInfo, _msgInfo);
 		// 接收人名字集合
 		_msgInfo.setAcceptNameSet(acceptNameBuf.toString());
+		// 消息类型1-发送
 		_msgInfo.setMsgType("1");
+		// 设置阅读标记1-已读
+		_msgInfo.setReadFlg("1");
 		msgInfoJpaDao.save(_msgInfo);
 	}
 
@@ -113,6 +144,7 @@ public class MsgInfoManager {
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
+	@Transactional(readOnly = false)
 	private void addMsgInfo_OrgAcceptType(MsgInfo msgInfo) throws IllegalAccessException, InvocationTargetException {
 
 		StringBuffer acceptNameBuf = new StringBuffer();
@@ -126,6 +158,10 @@ public class MsgInfoManager {
 				// 接收人
 				_msgInfo.setAcceptUserLoginName(user.getLoginName());
 
+				String _acceptUserName = getUserName(user);
+				// 接收人名字集合
+				_msgInfo.setAcceptNameSet(_acceptUserName);
+
 				_msgInfo.setMsgType("2");
 				msgInfoJpaDao.save(_msgInfo);
 			}
@@ -137,7 +173,10 @@ public class MsgInfoManager {
 		BeanUtils.copyProperties(msgInfo, _msgInfo);
 		// 接收人名字集合
 		_msgInfo.setAcceptNameSet(acceptNameBuf.toString());
+		// 消息类型1-发送
 		_msgInfo.setMsgType("1");
+		// 设置阅读标记1-已读
+		_msgInfo.setReadFlg("1");
 		msgInfoJpaDao.save(_msgInfo);
 	}
 
@@ -159,5 +198,17 @@ public class MsgInfoManager {
 	public List<MsgInfo> getMsgInfoList(MsgInfo msgInfo) {
 		List<MsgInfo> _msgInfoList = msgInfoMyBatisDao.getMsgInfoList(msgInfo);
 		return _msgInfoList;
+	}
+
+	/**
+	 * 更新信息已读标记
+	 * 
+	 * @param uuid
+	 */
+	@Transactional(readOnly = false)
+	public void updateMsgInfo_ReadFlg(Integer uuid) {
+		MsgInfo msgInfo = msgInfoJpaDao.findOne(uuid);
+		msgInfo.setReadFlg("1");
+		msgInfoJpaDao.save(msgInfo);
 	}
 }
