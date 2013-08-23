@@ -120,7 +120,7 @@
                     </li>
                     </c:if>
                     
-                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15') || _permIdList.contains('16') || _permIdList.contains('17')}">
+                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15') || _permIdList.contains('16') || _permIdList.contains('17') || _permIdList.contains('18')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">日常事务<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -160,10 +160,11 @@
 		                            </c:if>
 	    						</ul>
   							</li>
-  							
+  							<c:if test="${_permIdList.contains('18')}">
   							<li>
                                 <a href="${sc_ctx}/msgInfo">公告/消息</a>
                             </li>
+                            </c:if>
                         </ul>
                     </li>
                     </c:if>
