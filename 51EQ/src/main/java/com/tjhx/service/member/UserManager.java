@@ -98,7 +98,7 @@ public class UserManager {
 	 * @param loginName 用户名
 	 * @return
 	 */
-	public User getUserByUuidLoginNameInCache(String loginName) {
+	public User getUserByLoginNameInCache(String loginName) {
 		List<User> _userList = getAllUserByCache();
 
 		for (User user : _userList) {
