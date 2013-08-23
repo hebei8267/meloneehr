@@ -207,10 +207,10 @@
 		<bean id="bwDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 			destroy-method="close">
 			<!-- Connection Info -->
-			<property name="driverClassName" value="${zk.jdbc.driver}" />
-			<property name="url" value="${zk.jdbc.url}" />
-			<property name="username" value="${zk.jdbc.username}" />
-			<property name="password" value="${zk.jdbc.password}" />
+			<property name="driverClassName" value="${bw.jdbc.driver}" />
+			<property name="url" value="${bw.jdbc.url}" />
+			<property name="username" value="${bw.jdbc.username}" />
+			<property name="password" value="${bw.jdbc.password}" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
 	</beans>
