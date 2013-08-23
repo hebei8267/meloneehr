@@ -31,6 +31,8 @@ public class MsgInfo extends IdEntity {
 	private String sendUserLoginName;
 	/** 接收人 */
 	private String acceptUserLoginName;
+	/** 发送人名字集合 */
+	private String sendNameSet;
 	/** 接收人名字集合 */
 	private String acceptNameSet;
 	/** 主题 */
@@ -210,6 +212,25 @@ public class MsgInfo extends IdEntity {
 	 */
 	public void setAcceptUserLoginName(String acceptUserLoginName) {
 		this.acceptUserLoginName = acceptUserLoginName;
+	}
+
+	/**
+	 * 取得发送人名字集合
+	 * 
+	 * @return sendNameSet 发送人名字集合
+	 */
+	@Column(length = 512)
+	public String getSendNameSet() {
+		return sendNameSet;
+	}
+
+	/**
+	 * 设置发送人名字集合
+	 * 
+	 * @param sendNameSet 发送人名字集合
+	 */
+	public void setSendNameSet(String sendNameSet) {
+		this.sendNameSet = sendNameSet;
 	}
 
 	/**
