@@ -41,6 +41,8 @@ public class User extends IdEntity {
 	private Organization organization;
 	/** 上传用户相片名称 */
 	private String photoName;
+	/** 账户是否有效 */
+	private boolean valid = true;
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
@@ -203,6 +205,24 @@ public class User extends IdEntity {
 	 */
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
+	}
+
+	/**
+	 * 取得账户是否有效
+	 * 
+	 * @return valid 账户是否有效
+	 */
+	public boolean isValid() {
+		return valid;
+	}
+
+	/**
+	 * 设置账户是否有效
+	 * 
+	 * @param valid 账户是否有效
+	 */
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 
 	// ############################################################################################
