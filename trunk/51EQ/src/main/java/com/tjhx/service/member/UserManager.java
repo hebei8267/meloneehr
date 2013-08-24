@@ -229,6 +229,8 @@ public class UserManager {
 		// 用户角色
 		Role role = roleJpaDao.findOne(Integer.parseInt(user.getRoleUuid()));
 		_dbUser.setRole(role);
+		// 账户是否有效
+		_dbUser.setValid(user.isValid());
 
 		// 消除用户信息缓存
 		spyMemcachedClient.delete(MemcachedObjectType.USER_LIST.getObjKey());
