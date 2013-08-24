@@ -10,6 +10,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<style type="text/css">
+    	._warn1 {
+    		padding: 5px;
+			background-color: #99FF33;
+		}
+    	</style>
         <script>
             $().ready(function() {
                 //-----------------------------------
@@ -91,6 +97,9 @@
                                     <th	width="25" class="center">
                                         <input id="checkAll" type="checkbox" />
                                     </th>
+                                    <th width="80">
+                                        账户状态
+                                    </th>
                                     <th>
                                         用户帐号
                                     </th>
@@ -117,6 +126,14 @@
                                                 </input>
                                             </c:if>
                                         </td>
+                                        <td class="center">
+                                        	<c:if test="${user.valid == true}">
+                                        		启用
+                                        	</c:if>
+                                            <c:if test="${user.valid != true}">
+                                            	<span class='_warn1'>停用</span>
+                                        	</c:if>
+                                        </td>
                                         <td>
                                             ${user.loginName}
                                         </td>
@@ -138,7 +155,7 @@
                             <c:if test="${empty	userList}" >
                                 <tfoot>
                                     <tr>
-                                        <td	colspan="6" class="rounded-foot-left">
+                                        <td	colspan="7" class="rounded-foot-left">
                                             无记录信息
                                         </td>
                                     </tr>
