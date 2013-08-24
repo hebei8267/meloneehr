@@ -131,7 +131,7 @@
                         <div class="control-group">
                             <label class="control-label">正文 :</label>
                            	<div class="controls">
-                          		<form:textarea path="msgContent" class="input-xlarge" rows="8" rel="popover" data-content="如：排班、出勤、换还班、兼职安排、卫生、陈列、上货、到货" data-original-title="交班人交办事项及意见"/>
+                          		<form:textarea path="msgContent" class="input-xlarge" rows="8" rel="popover" data-content="如：排班，出勤，换还班，兼职安排，卫生，陈列，上货，到货，库存，订货，要货单，入库单，活动，调价，退货，换货，换条码，顾客订货，顾客投诉，顾客退货，顾客换货，目标完成，账务处理完毕，存款，……" data-original-title="交班人交办事项及意见"/>
                         	</div>
                         </div>
                         <div class="control-group">
