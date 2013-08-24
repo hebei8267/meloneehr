@@ -116,7 +116,8 @@ public class MemberController extends BaseController {
 	 */
 	private boolean checkUserInfo(User user, String loginName, String passWord) {
 		if (null != user) {
-			return user.getLoginName().equals(loginName) && Encrypter.decrypt(user.getPassWord()).equals(passWord);
+			return user.getLoginName().equals(loginName) && Encrypter.decrypt(user.getPassWord()).equals(passWord)
+					&& user.isValid();
 		}
 		return false;
 	}
