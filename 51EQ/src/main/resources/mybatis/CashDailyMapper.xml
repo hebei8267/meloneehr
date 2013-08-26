@@ -59,7 +59,7 @@
   	<!-- 查询条件 -->
   	<sql id="Where_Clause" >
   		<where>
-  			cash.org_id = org.org_id  			
+  			cash.org_id = org.org_id
   			<![CDATA[ AND cash.opt_date >= #{optDateStart} AND cash.opt_date  <= #{optDateEnd} ]]>
   			<if test="orgId != null and orgId !='' ">
   			AND cash.org_id = #{orgId}
@@ -74,6 +74,21 @@
 		from t_cash_daily cash, t_organization org
 		<include refid="Where_Clause" />
 		order by cash.opt_date_show desc, cash.org_id 
+	</select>
+	
+	<!-- 取得t_cash_daily信息(根据参数) -->
+	<select id="getCashDailyChartList" parameterType="com.tjhx.entity.accounts.CashDaily" resultMap="Result_Map_CashDaily">
+		select
+			 cash.uuid ,
+			 cash.opt_date ,
+    		 cash.sale_amt
+		from t_cash_daily cash, t_organization org
+		where
+			 cash.org_id = org.org_id
+  		AND	 cash.org_id = #{orgId}
+  		AND  cash.opt_date_y = #{optDateY}
+  		AND  cash.opt_date_m = #{optDateM}
+		order by cash.opt_date
 	</select>
 	
 	<!-- 取得销售流水日结信息(全机构) -->
