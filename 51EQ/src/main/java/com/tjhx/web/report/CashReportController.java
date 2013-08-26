@@ -91,6 +91,71 @@ public class CashReportController extends BaseController {
 		}
 	}
 
+	/**
+	 * 文件导出-合计
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @throws ServletRequestBindingException
+	 * @throws IOException
+	 * @throws InvalidFormatException
+	 * @throws ParsePropertyException
+	 */
+	@RequestMapping(value = "export2")
+	public void cashReportExport2_Action(Model model, HttpServletRequest request, HttpServletResponse response)
+			throws ServletRequestBindingException, ParsePropertyException, InvalidFormatException, IOException {
+		CashDaily _cashDaily = new CashDaily();
+		commonProcess(model, request, _cashDaily);
+
+		String downLoadFileName = cashDailyManager.createCashReportFile(_cashDaily);
+
+		if (null == downLoadFileName) {
+			return;
+		}
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+
+		String downLoadPath = sysConfig.getReportTmpPath() + downLoadFileName;
+
+		try {
+			long fileLength = new File(downLoadPath).length();
+			response.setContentType("application/x-msdownload;");
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + new String(downLoadFileName.getBytes("utf-8"), "ISO8859-1"));
+			response.setHeader("Content-Length", String.valueOf(fileLength));
+			bis = new BufferedInputStream(new FileInputStream(downLoadPath));
+			bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] buff = new byte[2048];
+			int bytesRead;
+			while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
+				bos.write(buff, 0, bytesRead);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			if (bis != null)
+				bis.close();
+			if (bos != null)
+				bos.close();
+		}
+		return;
+	}
+
+	/**
+	 * 文件导出-明细
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @throws ServletRequestBindingException
+	 * @throws ParsePropertyException
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value = "export")
 	public void cashReportExport_Action(Model model, HttpServletRequest request, HttpServletResponse response)
 			throws ServletRequestBindingException, ParsePropertyException, InvalidFormatException, IOException,
