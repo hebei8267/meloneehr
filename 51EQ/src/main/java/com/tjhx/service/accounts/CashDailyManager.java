@@ -46,6 +46,7 @@ public class CashDailyManager {
 	private DailySaleMyBatisDao dailySaleMyBatisDao;
 
 	private final static String XML_CONFIG_CASH_DAILY = "/excel/Cash_Daily_Template.xls";
+	private final static String XML_CONFIG_CASH_DAILY_2 = "/excel/Cash_Daily_Template_2.xls";
 	private final static String XML_CONFIG_CARD_DAILY = "/excel/Card_Daily_Template.xls";
 
 	/**
@@ -392,7 +393,40 @@ public class CashDailyManager {
 	}
 
 	/**
-	 * 创建销售流水日结信息文件
+	 * 生产销售日结文件-合计
+	 * 
+	 * @param _cashDaily
+	 * @return
+	 * @throws ParsePropertyException
+	 * @throws InvalidFormatException
+	 * @throws IOException
+	 */
+	public String createCashReportFile(CashDaily _cashDaily) throws ParsePropertyException, InvalidFormatException,
+			IOException {
+		List<CashDaily> _cashDailyList = searchReportList(_cashDaily);
+		if (null == _cashDailyList || _cashDailyList.size() == 0) {
+			return null;
+		}
+		CashDaily totalCashDaily = calTotal_CashDaily(_cashDailyList);
+
+		// ---------------------------文件生成---------------------------
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportList", _cashDailyList);
+		map.put("totalReport", totalCashDaily);
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		XLSTransformer transformer = new XLSTransformer();
+
+		String tmpFileName = UUID.randomUUID().toString() + ".xls";
+		String tmpFilePath = sysConfig.getReportTmpPath() + tmpFileName;
+		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_CASH_DAILY_2, map, tmpFilePath);
+
+		return tmpFileName;
+	}
+
+	/**
+	 * 创建销售流水日结信息文件(明细)
 	 * 
 	 * @param cashDaily
 	 * @return
@@ -490,5 +524,15 @@ public class CashDailyManager {
 			_optDateList.add(DateUtils.getNextDateFormatDate(_now, -i, "yyyyMMdd"));
 		}
 		return _optDateList;
+	}
+
+	/**
+	 * 取得销售流水日结信息(准备图形化显示数据)
+	 * 
+	 * @param cashDaily
+	 * @return
+	 */
+	public List<CashDaily> searchChartReportList(CashDaily cashDaily) {
+		return cashDailyMyBatisDao.getCashDailyChartList(cashDaily);
 	}
 }
