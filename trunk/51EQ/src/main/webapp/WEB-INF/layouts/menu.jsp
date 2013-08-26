@@ -109,11 +109,22 @@
                                 <a href="${sc_ctx}/cardReport">刷卡信息</a>
                             </li>
                             </c:if>
+                            
                             <c:if test="${_permIdList.contains('11')}">
-                            <li>
-                                <a href="${sc_ctx}/cashReport">销售信息</a>
-                            </li>
+                            
+                            <li class="dropdown-submenu">
+    							<a tabindex="-1" href="#">销售信息</a>
+	    						<ul class="dropdown-menu">
+	    							<li>
+		                                <a href="${sc_ctx}/cashReport">表格方式</a>
+		                            </li>
+		                            <li>
+		                                <a href="${sc_ctx}/cashChartReport">图形方式</a>
+		                            </li>
+	    						</ul>
+	    					</li>                       
                             </c:if>
+                            
                             <c:if test="${_permIdList.contains('12')}">
                             <li>
                                 <a href="${sc_ctx}/dailyReport">日结信息</a>
