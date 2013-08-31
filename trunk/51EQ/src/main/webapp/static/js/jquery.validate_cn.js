@@ -70,11 +70,12 @@ jQuery.validator.addMethod("datelessThan", function(value, element, param) {
 }, '输入日期必须早于 {0}');
 
 jQuery.validator.addMethod("compareDate", function(value, element, param) {
-	var startDate = jQuery(param).val();
-    
-    var date1 = new Date(Date.parse(startDate.replace("-", "/")));
-    var date2 = new Date(Date.parse(value.replace("-", "/")));
-    return date1 <= date2;
+    var startDate = jQuery(param).val();
+    var d1Arr = startDate.split('-');
+    var d2Arr = value.split('-');
+    var v1 = new Date(d1Arr[0],d1Arr[1],d1Arr[2]);
+    var v2 = new Date(d2Arr[0],d2Arr[1],d2Arr[2]);
+    return v1 <= v2;
 }, '结束日期必须大于开始日期');
 
 jQuery.validator.addMethod("myRequired", function(value, element, param) {
