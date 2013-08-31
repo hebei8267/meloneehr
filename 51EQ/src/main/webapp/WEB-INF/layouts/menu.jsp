@@ -111,18 +111,14 @@
                             </c:if>
                             
                             <c:if test="${_permIdList.contains('11')}">
-                            
-                            <li class="dropdown-submenu">
-    							<a tabindex="-1" href="#">销售信息</a>
-	    						<ul class="dropdown-menu">
-	    							<li>
-		                                <a href="${sc_ctx}/cashReport">表格方式</a>
-		                            </li>
-		                            <li>
-		                                <a href="${sc_ctx}/cashChartReport">图形方式</a>
-		                            </li>
-	    						</ul>
-	    					</li>                       
+                            <li class="divider"></li>
+                            <li>
+		                    	<a href="${sc_ctx}/cashReport">销售信息(表格)</a>
+		                 	</li>
+		                  	<li>
+		                   		<a href="${sc_ctx}/cashChartReport">销售信息(图形)</a>
+		                  	</li>
+		                  	<li class="divider"></li>
                             </c:if>
                             
                             <c:if test="${_permIdList.contains('12')}">
@@ -159,21 +155,23 @@
                             </li>
                             </c:if>
                             
-                            <li class="dropdown-submenu">
-    							<a tabindex="-1" href="#">考勤信息</a>
-	    						<ul class="dropdown-menu">
-	    							<c:if test="${_permIdList.contains('16')}">
-	    							<li>
-		                                <a href="${sc_ctx}/punchClock/list">查看</a>
-		                            </li>
-		                            </c:if>
-		                            <c:if test="${_permIdList.contains('17')}">
-		                            <li>
-		                                <a href="${sc_ctx}/punchClock/manage">查看</a>
-		                            </li>
-		                            </c:if>
-	    						</ul>
-  							</li>
+                            
+	    					<c:if test="${_permIdList.contains('16')}">
+	    					<li class="divider"></li>
+	    					<li>
+		                 		<a href="${sc_ctx}/punchClock/list">考勤信息(查看)</a>
+		                   		<a href="${sc_ctx}/tmpEmployee/list">兼职信息(维护)</a>
+		                   	</li>
+		                   	<li class="divider"></li>
+		                   	</c:if>
+		                    
+		                    
+		                    <c:if test="${_permIdList.contains('17')}">
+		                	<li>
+		                   		<a href="${sc_ctx}/punchClock/manage">考勤信息(查看)</a>
+		                 	</li>
+		                 	</c:if>
+	    					
   							<c:if test="${_permIdList.contains('18')}">
   							<li>
                                 <a href="${sc_ctx}/msgInfo">公告/消息</a>
