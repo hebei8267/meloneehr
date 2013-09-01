@@ -150,7 +150,7 @@ public class InspectController extends BaseController {
 	public String editInspect_Action(@PathVariable("id") Integer id, Model model) {
 		Inspect inspect = inspectManager.getInspectByUuid(id);
 		if (null == inspect) {
-			return "inspect:/" + Constants.PAGE_REQUEST_PREFIX + "/inspect/list";
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/inspect/list";
 		} else {
 			model.addAttribute("inspect", inspect);
 
