@@ -31,34 +31,44 @@
                	$("#listForm").validate({
                     rules : {
                     	name1 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name2 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name3 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name4 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name5 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name6 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name7 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name8 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name9 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         },
                         name10 : {
-                            required : true
+                            required : true,
+                            maxlength : 32
                         }
                     }
                 });
