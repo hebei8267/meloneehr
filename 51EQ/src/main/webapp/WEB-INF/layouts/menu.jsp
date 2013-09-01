@@ -161,6 +161,7 @@
 	    					<li>
 		                 		<a href="${sc_ctx}/punchClock/list">考勤信息(查看)</a>
 		                   		<a href="${sc_ctx}/tmpEmployee/list">兼职信息(维护)</a>
+		                   		<a href="${sc_ctx}/workType/list">上班类型(维护)</a>
 		                   	</li>
 		                   	<li class="divider"></li>
 		                   	</c:if>
