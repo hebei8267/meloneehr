@@ -23,7 +23,7 @@
 	</resultMap>
 	
 	<delete id="delPunchClockInfo" parameterType="com.tjhx.entity.affair.PunchClock">  
-        DELETE FROM t_punch_clock WHERE clock_timey = #{clockTimeY} AND clock_timem = #{clockTimeM} AND clock_timed = #{clockTimeD};  
+        DELETE FROM t_punch_clock WHERE clock_timey = #{clockTimeY} AND clock_timem = #{clockTimeM} AND clock_timed = #{clockTimeD}  
     </delete>
 
 	<select id="getPunchClockList" parameterType="com.tjhx.entity.affair.PunchClock" resultMap="Result_Map_PunchClock">
