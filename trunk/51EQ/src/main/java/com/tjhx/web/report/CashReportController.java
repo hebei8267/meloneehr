@@ -43,7 +43,7 @@ public class CashReportController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String cashReportList_Action(Model model) throws ServletRequestBindingException {
 
-		ReportUtils.initOrgList_All(orgManager, model);
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		model.addAttribute("DEFAULT_RETAINED_AMT", sysConfig.getDefaultRetainedAmt());
@@ -212,7 +212,7 @@ public class CashReportController extends BaseController {
 		CashDaily totalCashDaily = cashDailyManager.calTotal_CashDaily(_cashDailyList);
 		model.addAttribute("totalCashDaily", totalCashDaily);
 
-		ReportUtils.initOrgList_All(orgManager, model);
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		model.addAttribute("DEFAULT_RETAINED_AMT", sysConfig.getDefaultRetainedAmt());
