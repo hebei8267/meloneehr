@@ -77,7 +77,7 @@ public class PunchClockController extends BaseController {
 	@RequestMapping(value = { "manage" })
 	public String punchClockManageList_Action(Model model) {
 
-		ReportUtils.initOrgList_All_Root(orgManager, model);
+		ReportUtils.initOrgList_NonNull_Root(orgManager, model);
 
 		return "affair/punchClockManageList";
 	}
@@ -95,7 +95,7 @@ public class PunchClockController extends BaseController {
 
 		_punchClockListAction(orgId, optDateY, optDateM, model);
 
-		ReportUtils.initOrgList_All_Root(orgManager, model);
+		ReportUtils.initOrgList_NonNull_Root(orgManager, model);
 
 		return "affair/punchClockManageList";
 	}
