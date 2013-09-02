@@ -31,7 +31,7 @@ public class CashChartReportController extends BaseController {
 	@RequestMapping(value = { "list", "" })
 	public String cashChartReportList_Action(Model model) throws ServletRequestBindingException {
 
-		ReportUtils.initOrgList_Null(orgManager, model);
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 		return "report/cashChartReport";
 	}
@@ -46,7 +46,7 @@ public class CashChartReportController extends BaseController {
 		model.addAttribute("orgId", orgId);
 		model.addAttribute("optDateShow", optDateShow);
 
-		ReportUtils.initOrgList_Null(orgManager, model);
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 		if (StringUtils.isNotBlank(orgId)) {
 			_cashDaily.setOrgId(orgId);
