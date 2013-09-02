@@ -37,6 +37,9 @@
                                     <li>
                                         <a href="${sc_ctx}/user">用户管理</a>
                                     </li>
+                                    <li>
+                                        <a href="${sc_ctx}/employee">职员管理</a>
+                                    </li>
                                 </c:if>
                                 <c:if test="${_permIdList.contains('2')}">
                                     <li>
