@@ -3,6 +3,7 @@ package com.tjhx.service.accounts;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -265,7 +266,12 @@ public class CashDailyManager {
 	 */
 	public CashDaily calTotal_CashDaily(List<CashDaily> cashDailyList) {
 		CashDaily _cashDaily = new CashDaily();
+
+		int _index = 0;
 		for (CashDaily cashDaily : cashDailyList) {
+			_index++;
+			cashDaily.setIndex(_index);
+
 			// 现金盈亏（调节）
 			_cashDaily.setAdjustAmt(_cashDaily.getAdjustAmt().add(cashDaily.getAdjustAmt()));
 			// 销售现金-当日（合计）
@@ -407,6 +413,9 @@ public class CashDailyManager {
 		if (null == _cashDailyList || _cashDailyList.size() == 0) {
 			return null;
 		}
+		// 反转列表数据顺序
+		Collections.reverse(_cashDailyList);
+
 		CashDaily totalCashDaily = calTotal_CashDaily(_cashDailyList);
 
 		// ---------------------------文件生成---------------------------
