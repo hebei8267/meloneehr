@@ -48,7 +48,7 @@ public class InvoiceDrawController extends BaseController {
 
 		model.addAttribute("invoiceDrawList", _invoiceDrawList);
 
-		ReportUtils.initOrgList_All(orgManager, model);
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		return "invoice/invoiceDrawList";
 	}
@@ -81,7 +81,7 @@ public class InvoiceDrawController extends BaseController {
 		List<Invoice> _invoiceDrawList = invoiceDrawManager.searchInvoiceDrawList(_invoice);
 		model.addAttribute("invoiceDrawList", _invoiceDrawList);
 
-		ReportUtils.initOrgList_All(orgManager, model);
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		return "invoice/invoiceDrawList";
 	}
