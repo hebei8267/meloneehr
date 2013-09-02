@@ -41,6 +41,11 @@ public class WorkType extends IdEntity {
 	/** 用户关联机构编号 */
 	private Integer orgUuid;
 
+	private String startDateHr;
+	private String startDateMinute;
+	private String endDateHr;
+	private String endDateMinute;
+
 	/**
 	 * 取得上班类型名称
 	 * 
@@ -102,7 +107,7 @@ public class WorkType extends IdEntity {
 	 * 
 	 * @return startDate 上班时间
 	 */
-	@Column(length = 5)
+	@Column(length = 4)
 	public String getStartDate() {
 		return startDate;
 	}
@@ -121,7 +126,7 @@ public class WorkType extends IdEntity {
 	 * 
 	 * @return endDate 下班时间
 	 */
-	@Column(length = 5)
+	@Column(length = 4)
 	public String getEndDate() {
 		return endDate;
 	}
@@ -172,6 +177,82 @@ public class WorkType extends IdEntity {
 	 */
 	public void setOrgUuid(Integer orgUuid) {
 		this.orgUuid = orgUuid;
+	}
+
+	/**
+	 * 取得startDateHr
+	 * 
+	 * @return startDateHr startDateHr
+	 */
+	@Transient
+	public String getStartDateHr() {
+		return startDateHr;
+	}
+
+	/**
+	 * 设置startDateHr
+	 * 
+	 * @param startDateHr startDateHr
+	 */
+	public void setStartDateHr(String startDateHr) {
+		this.startDateHr = startDateHr;
+	}
+
+	/**
+	 * 取得startDateMinute
+	 * 
+	 * @return startDateMinute startDateMinute
+	 */
+	@Transient
+	public String getStartDateMinute() {
+		return startDateMinute;
+	}
+
+	/**
+	 * 设置startDateMinute
+	 * 
+	 * @param startDateMinute startDateMinute
+	 */
+	public void setStartDateMinute(String startDateMinute) {
+		this.startDateMinute = startDateMinute;
+	}
+
+	/**
+	 * 取得endDateHr
+	 * 
+	 * @return endDateHr endDateHr
+	 */
+	@Transient
+	public String getEndDateHr() {
+		return endDateHr;
+	}
+
+	/**
+	 * 设置endDateHr
+	 * 
+	 * @param endDateHr endDateHr
+	 */
+	public void setEndDateHr(String endDateHr) {
+		this.endDateHr = endDateHr;
+	}
+
+	/**
+	 * 取得endDateMinute
+	 * 
+	 * @return endDateMinute endDateMinute
+	 */
+	@Transient
+	public String getEndDateMinute() {
+		return endDateMinute;
+	}
+
+	/**
+	 * 设置endDateMinute
+	 * 
+	 * @param endDateMinute endDateMinute
+	 */
+	public void setEndDateMinute(String endDateMinute) {
+		this.endDateMinute = endDateMinute;
 	}
 
 }
