@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>销售信息</h3>
+                            <h3>销售信息(表格)</h3>
                         </legend>
                     </div>
                     <div class="span5">
