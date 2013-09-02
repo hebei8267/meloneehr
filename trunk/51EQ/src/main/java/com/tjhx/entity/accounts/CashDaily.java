@@ -60,6 +60,8 @@ public class CashDaily extends IdEntity {
 	private String optDateStart;
 	/** 日期-结束时间 */
 	private String optDateEnd;
+	/** 行号 */
+	private Integer index;
 
 	/**
 	 * 取得机构编号
@@ -412,6 +414,25 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setOrgBranchNo(String orgBranchNo) {
 		this.orgBranchNo = orgBranchNo;
+	}
+
+	/**
+	 * 取得行号
+	 * 
+	 * @return index 行号
+	 */
+	@Transient
+	public Integer getIndex() {
+		return index;
+	}
+
+	/**
+	 * 设置行号
+	 * 
+	 * @param index 行号
+	 */
+	public void setIndex(Integer index) {
+		this.index = index;
 	}
 
 }
