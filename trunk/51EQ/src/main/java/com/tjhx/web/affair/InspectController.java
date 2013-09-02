@@ -60,7 +60,7 @@ public class InspectController extends BaseController {
 		List<Inspect> _inspectList = inspectManager.searchInspectList(_inspect);
 		model.addAttribute("inspectList", _inspectList);
 
-		ReportUtils.initOrgList_All(orgManager, model);
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		return "affair/inspectList";
 	}
@@ -76,11 +76,11 @@ public class InspectController extends BaseController {
 		Inspect _inspect = new Inspect();
 		_inspect.setOptDateStart(DateUtils.getCurrentDateShortStr());
 		_inspect.setOptDateEnd(DateUtils.getCurrentDateShortStr());
-		
+
 		List<Inspect> _inspectList = inspectManager.searchInspectList(_inspect);
 		model.addAttribute("inspectList", _inspectList);
-		
-		ReportUtils.initOrgList_All(orgManager, model);
+
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
 		return "affair/inspectList";
 	}
@@ -131,7 +131,7 @@ public class InspectController extends BaseController {
 
 		model.addAttribute("inspect", inspect);
 
-		ReportUtils.initOrgList_Null(orgManager, model);
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 		initConclusionList(model);
 		initJobTypeList(model);
@@ -154,7 +154,7 @@ public class InspectController extends BaseController {
 		} else {
 			model.addAttribute("inspect", inspect);
 
-			ReportUtils.initOrgList_Null(orgManager, model);
+			ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 			initConclusionList(model);
 			initJobTypeList(model);
@@ -200,7 +200,7 @@ public class InspectController extends BaseController {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
 
-				ReportUtils.initOrgList_Null(orgManager, model);
+				ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 				initConclusionList(model);
 				initJobTypeList(model);
@@ -214,7 +214,7 @@ public class InspectController extends BaseController {
 				// 添加错误消息
 				addInfoMsg(model, ex.getMessage());
 
-				ReportUtils.initOrgList_Null(orgManager, model);
+				ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 				initConclusionList(model);
 				initJobTypeList(model);
