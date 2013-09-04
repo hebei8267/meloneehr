@@ -13,7 +13,7 @@ public class Constants {
 	/** 提示消息前缀 */
 	public static final String TIP_MSG_PREFIX = "TIP_MSG";
 	/** 警告消息前缀 */
-	public static final String WARN_MSG_PREFIX = "WARN__MSG";
+	public static final String WARN_MSG_PREFIX = "WARN_MSG";
 
 	/** JSP页面请求前缀 */
 	public static final String PAGE_REQUEST_PREFIX = "sc";
