@@ -18,16 +18,18 @@
         <result column="zk_org_id" property="zkOrgId" jdbcType="INTEGER"/>
         <result column="zkid" property="zkid" jdbcType="INTEGER"/>
         <result column="org_uuid" property="orgUuid" jdbcType="INTEGER"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
-  	
   	<!-- 取得t_employee信息(根据参数) -->
 	<select id="getEmployeeListByOrgId" parameterType="String" resultMap="Result_Map_Employee">
 		SELECT
 			e.name ,
 			e.uuid ,
+			e.code ,
 	    	e.zk_org_id ,
-	    	e.zkid 
+	    	e.zkid ,
+	    	o.org_name
 		FROM 
 			t_employee e , 
 			t_organization o
@@ -36,7 +38,24 @@
 		AND o.org_id = #{orgId}
 		AND e.emp_type = '1'
 		ORDER BY
-			e.uuid
+			o.org_id, e.code
+	</select>
+	<select id="getEmployeeList" resultMap="Result_Map_Employee">
+		SELECT
+			e.name ,
+			e.uuid ,
+			e.code ,
+	    	e.zk_org_id ,
+	    	e.zkid ,
+	    	o.org_name
+		FROM 
+			t_employee e , 
+			t_organization o
+		WHERE
+			e.zk_org_id = o.zk_id
+		AND e.emp_type = '1'
+		ORDER BY
+			o.org_id, e.code
 	</select>
 	
 	<!-- 取得t_employee信息(根据参数) -->
