@@ -8,6 +8,8 @@ public interface EmployeeMyBatisDao {
 
 	public List<Employee> getEmployeeListByOrgId(String orgId);
 
+	public List<Employee> getEmployeeList();
+
 	public List<Employee> getTmpEmployeeListByOrgId(String orgId);
 
 	public void deleteEmployeeByEmpType(String empType);
