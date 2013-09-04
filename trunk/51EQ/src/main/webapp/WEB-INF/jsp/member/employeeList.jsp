@@ -15,6 +15,27 @@
                 width: 70px;
             }
         </style>
+        <script>
+            $().ready(function() {
+            	$("#searchBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#listForm").attr("action", "${sc_ctx}/employee/search");
+                    $("#listForm").submit();
+                });
+            	
+            	$("#zkDataSynBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+
+                    $("#listForm").attr("action", "${sc_ctx}/employee/zkDataSyn");
+                    $("#listForm").submit();
+                });
+            });
+        </script>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -29,7 +50,7 @@
                         </legend>
                     </div>
                     
-                    <div class="span4">
+                    <div class="span6">
                         <label class="control-label">机构 :</label>
                         <select name="orgId" class="input-medium">
                             <c:forEach items="${orgList}" var="org">
@@ -42,36 +63,45 @@
                             </c:forEach>
                         </select>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
+                        <button	id="zkDataSynBtn" class="btn	btn-warning" type="button">数据同步 (中控)</button>
                     </div>
-                    
-                    <div class="span12"	style="margin-top: 10px;">
+                </div>
+                <div class="row"> 
+                    <div class="span6"	style="margin-top: 10px;">
                     	<table class="table	table-striped table-bordered table-condensed mytable">
                             <thead>
                                 <tr>
-                                    <th	width="25" class="center">
-                                        <input id="checkAll" type="checkbox" />
+                                	<th width="55" class="center">
+                                        序号
                                     </th>
-                                    <th width="80">
-                                        账户状态
+                                    <th class="center">
+                                        员工编号
                                     </th>
-                                    <th>
-                                        用户帐号
+                                    <th class="center">
+                                        员工姓名
                                     </th>
-                                    <th>
-                                        用户名称
-                                    </th>
-                                    <th>
-                                        用户角色
-                                    </th>
-                                    <th>
+                                    <th class="center">
                                         所属机构
-                                    </th>
-                                    <th	width="55">
-                                        &nbsp;
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
+                            	<c:forEach items="${empList}" var="emp" varStatus="status">
+                            	<tr>
+                            		<td class="center">
+                                 		${status.index + 1}
+                                	</td>
+                                	<td class="center">
+                                        ${emp.code}
+                                    </td>
+                                    <td class="center">
+                                        ${emp.name}
+                                    </td>
+                                    <td class="center">
+                                        ${emp.orgName}
+                                    </td>
+                                </tr>
+                            	</c:forEach>
                         	</tbody>
                         </table>
                     </div>
