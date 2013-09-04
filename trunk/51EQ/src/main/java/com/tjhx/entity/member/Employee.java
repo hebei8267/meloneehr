@@ -39,6 +39,8 @@ public class Employee extends IdEntity {
 	// ---------------------------------------------
 	/** 用户关联机构编号 */
 	private Integer orgUuid;
+	/** 用户关联机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得用户编号
@@ -210,4 +212,25 @@ public class Employee extends IdEntity {
 		this.orgUuid = orgUuid;
 	}
 
+	/**
+	 * 取得用户关联机构名称
+	 * 
+	 * @return orgName 用户关联机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		if (null != organization) {
+			return organization.getName();
+		}
+		return orgName;
+	}
+
+	/**
+	 * 设置用户关联机构名称
+	 * 
+	 * @param orgName 用户关联机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
 }
