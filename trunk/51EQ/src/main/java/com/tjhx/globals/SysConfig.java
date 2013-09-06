@@ -24,6 +24,9 @@ public class SysConfig {
 	/** 与百威销售额-差额-额度 */
 	private float bwSaleDifAmount;
 
+	/** 可排班天数 */
+	private int workScheduleDays;
+
 	/**
 	 * 取得cashDailyModel
 	 * 
@@ -238,6 +241,24 @@ public class SysConfig {
 	 */
 	public void setBwSaleDifAmount(float bwSaleDifAmount) {
 		this.bwSaleDifAmount = bwSaleDifAmount;
+	}
+
+	/**
+	 * 取得可排班天数
+	 * 
+	 * @return workScheduleDays 可排班天数
+	 */
+	public int getWorkScheduleDays() {
+		return workScheduleDays;
+	}
+
+	/**
+	 * 设置可排班天数
+	 * 
+	 * @param workScheduleDays 可排班天数
+	 */
+	public void setWorkScheduleDays(int workScheduleDays) {
+		this.workScheduleDays = workScheduleDays;
 	}
 
 }
