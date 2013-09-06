@@ -26,6 +26,8 @@ public class SysConfig {
 
 	/** 可排班天数 */
 	private int workScheduleDays;
+	/** 可查看排班天数 */
+	private int workScheduleOverDays;
 
 	/**
 	 * 取得cashDailyModel
@@ -259,6 +261,24 @@ public class SysConfig {
 	 */
 	public void setWorkScheduleDays(int workScheduleDays) {
 		this.workScheduleDays = workScheduleDays;
+	}
+
+	/**
+	 * 取得可查看排班天数
+	 * 
+	 * @return workScheduleOverDays 可查看排班天数
+	 */
+	public int getWorkScheduleOverDays() {
+		return workScheduleOverDays;
+	}
+
+	/**
+	 * 设置可查看排班天数
+	 * 
+	 * @param workScheduleOverDays 可查看排班天数
+	 */
+	public void setWorkScheduleOverDays(int workScheduleOverDays) {
+		this.workScheduleOverDays = workScheduleOverDays;
 	}
 
 }
