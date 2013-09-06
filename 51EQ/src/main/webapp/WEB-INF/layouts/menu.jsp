@@ -158,18 +158,19 @@
                             </li>
                             </c:if>
                             
-                            
+                            <%//门店%>
 	    					<c:if test="${_permIdList.contains('16')}">
 	    					<li class="divider"></li>
 	    					<li>
 		                 		<a href="${sc_ctx}/punchClock/list">考勤信息(查看)</a>
+		                 		<a href="${sc_ctx}/workSchedule/list">排班表(维护)</a>
 		                   		<a href="${sc_ctx}/tmpEmployee/list">兼职信息(维护)</a>
 		                   		<a href="${sc_ctx}/workType/list">上班类型(维护)</a>
 		                   	</li>
 		                   	<li class="divider"></li>
 		                   	</c:if>
 		                    
-		                    
+		                    <%//总部%>
 		                    <c:if test="${_permIdList.contains('17')}">
 		                	<li>
 		                   		<a href="${sc_ctx}/punchClock/manage">考勤信息(查看)</a>
