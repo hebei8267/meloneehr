@@ -17,9 +17,9 @@ import com.tjhx.entity.struct.Organization;
 public class TmpEmployeeManagerTest extends SpringTransactionalTestCase {
 	@Resource
 	private EmployeeJpaDao employeeJpaDao;
-	
+
 	@Resource
-	private EmployeeMyBatisDao  employeeMyBatisDao;
+	private EmployeeMyBatisDao employeeMyBatisDao;
 
 	@Resource
 	private OrganizationJpaDao orgJpaDao;
@@ -41,6 +41,8 @@ public class TmpEmployeeManagerTest extends SpringTransactionalTestCase {
 				emp.setWorkFlg("0");
 				/** 用户关联机构 */
 				emp.setOrganization(organization);
+
+				emp.setCode(organization.getId() + "TMP" + String.format("%02d", i));
 
 				employeeJpaDao.save(emp);
 
