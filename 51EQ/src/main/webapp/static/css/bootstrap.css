@@ -1268,6 +1268,9 @@ textarea::-webkit-input-placeholder {
   /*width: 90px;*/
   width: 70px;
 }
+.input-small2 {
+  width: 100px;
+}
 
 .input-medium {
   width: 150px;
