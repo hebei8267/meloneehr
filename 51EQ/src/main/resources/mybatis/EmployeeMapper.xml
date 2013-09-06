@@ -63,6 +63,7 @@
 		SELECT
 			e.name ,
 			e.uuid ,
+			e.code ,
 	    	e.org_uuid ,
 	    	e.work_flg 
 		FROM 
@@ -81,6 +82,7 @@
 		SELECT
 			e.name ,
 			e.uuid ,
+			e.code ,
 	    	e.org_uuid ,
 	    	e.work_flg 
 		FROM 
