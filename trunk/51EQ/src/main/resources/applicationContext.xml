@@ -169,6 +169,9 @@
 		<property name="synBwSaleDays" value="${syn.bw.sale.days}" />
 		<!-- 与百威销售额-差额-额度 -->
 		<property name="bwSaleDifAmount" value="${bw.sale.difference.amount}" />
+		
+		<!-- 可排班天数 -->
+		<property name="workScheduleDays" value="${work.schedule.days}" />
 	</bean>
 	
 	
