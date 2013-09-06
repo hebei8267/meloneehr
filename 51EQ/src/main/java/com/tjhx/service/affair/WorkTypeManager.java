@@ -18,6 +18,18 @@ public class WorkTypeManager {
 	private WorkTypeJpaDao workTypeJpaDao;
 
 	/**
+	 * 取得指定机构的上班类型信息列表(开启状态)
+	 * 
+	 * @param orgId
+	 * @return
+	 */
+	public List<WorkType> getValidWorkTypeByOrgId(String orgId) {
+		List<WorkType> workTypeList = workTypeJpaDao.getValidWorkTypeByOrgId(orgId);
+		
+		return workTypeList;
+	}
+
+	/**
 	 * 取得指定机构的上班类型信息列表
 	 * 
 	 * @param orgId
