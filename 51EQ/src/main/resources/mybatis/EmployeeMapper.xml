@@ -76,7 +76,26 @@
 			e.uuid
 	</select>
 	
+	<!-- 取得t_employee信息(根据参数) -->
+	<select id="getTmpEmployeeByOrgId_WorkFlg" parameterType="String" resultMap="Result_Map_Employee">
+		SELECT
+			e.name ,
+			e.uuid ,
+	    	e.org_uuid ,
+	    	e.work_flg 
+		FROM 
+			t_employee e , 
+			t_organization o
+		WHERE
+			e.org_uuid = o.uuid
+		AND o.org_id = #{orgId}
+		AND e.emp_type = '2'
+		AND e.work_flg = '1'
+		ORDER BY
+			e.uuid
+	</select>
+	
 	<delete id="deleteEmployeeByEmpType" parameterType="String">  
-        DELETE FROM t_employee WHERE work_flg = #{empType}
+        DELETE FROM t_employee WHERE emp_type = #{empType}
     </delete>
 </mapper>
