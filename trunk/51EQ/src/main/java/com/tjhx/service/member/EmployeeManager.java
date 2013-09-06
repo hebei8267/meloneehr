@@ -41,6 +41,18 @@ public class EmployeeManager {
 		return empList;
 	}
 
+	/**
+	 * 取得本机构的兼职人员信息(启用状态)
+	 * 
+	 * @param orgId
+	 * @return
+	 */
+	public List<Employee> getTmpEmployeeByOrgId_WorkFlg(String orgId) {
+		List<Employee> empList = empMyBatisDao.getTmpEmployeeByOrgId_WorkFlg(orgId);
+
+		return empList;
+	}
+
 	@Transactional(readOnly = false)
 	public void updateTmpEmployeeList(String orgId, List<Employee> empList) {
 		List<Employee> _dbEmpList = empJpaDao.getTmpEmployeeListByOrgId(orgId);
@@ -97,4 +109,7 @@ public class EmployeeManager {
 
 	}
 
+	public List<Employee> getEmployeeListByOrgId(String orgId) {
+		return empMyBatisDao.getEmployeeListByOrgId(orgId);
+	}
 }
