@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>兼职信息 维护</h3>
+                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 兼职信息 维护</h3>
                         </legend>
                     </div>
 
