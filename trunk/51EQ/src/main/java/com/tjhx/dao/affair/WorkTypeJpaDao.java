@@ -12,4 +12,6 @@ public interface WorkTypeJpaDao extends CrudRepository<WorkType, Integer> {
 	@Query("select w from WorkType w, Organization org where w.organization = org and org.id = :orgId")
 	public List<WorkType> getWorkTypeListByOrgId(@Param("orgId") String orgId);
 
+	@Query("select w from WorkType w, Organization org where w.organization = org and org.id = :orgId and w.useFlg = '1'")
+	public List<WorkType> getValidWorkTypeByOrgId(@Param("orgId") String orgId);
 }
