@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
-import com.tjhx.dao.member.EmployeeMyBatisDao;
 import com.tjhx.entity.affair.PunchClock_List_Show;
 import com.tjhx.entity.member.Employee;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.affair.PunchClockManager;
+import com.tjhx.service.member.EmployeeManager;
 import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
 import com.tjhx.web.report.ReportUtils;
@@ -41,7 +41,7 @@ public class PunchClockController extends BaseController {
 	@Resource
 	private PunchClockManager punchClockManager;
 	@Resource
-	private EmployeeMyBatisDao employeeMyBatisDao;
+	private EmployeeManager empManager;
 	@Resource
 	private OrganizationManager orgManager;
 
@@ -65,7 +65,7 @@ public class PunchClockController extends BaseController {
 	}
 
 	private void _punchClockListAction(String orgId, String optDateY, String optDateM, Model model) {
-		List<Employee> _empList = employeeMyBatisDao.getEmployeeListByOrgId(orgId);
+		List<Employee> _empList = empManager.getEmployeeListByOrgId(orgId);
 		model.addAttribute("empList", _empList);
 
 		List<PunchClock_List_Show> _clockList = punchClockManager
