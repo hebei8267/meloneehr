@@ -167,11 +167,11 @@
                                         <td>
                                         	${cashDaily.depositAmt}
                                         </td>
-                                        <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
+                                        <td <c:if test="${cashDaily.retainedAmt > DEFAULT_RETAINED_AMT}">style="background-color:#FFDEAD;color:#00000"</c:if>>
                                         	${cashDaily.retainedAmt}
                                         </td>
                                         <c:set var="_difference" value="${cashDaily.saleAmt - cashDaily.bwSaleAmt }" />
-                                        <td <c:if test="${(_difference > BW_SALE_DIF_AMOUNT) || (_difference < -BW_SALE_DIF_AMOUNT)}">style="background-color:#FFDEAD;color:#00000"</c:if>>
+                                        <td <c:if test="${(_difference > BW_SALE_DIF_AMOUNT) || (_difference < -BW_SALE_DIF_AMOUNT)}">style="background-color:#FF6633;color:#FFFFFF"</c:if>>
                                         	${cashDaily.saleAmt}
                                         </td>
                                         <td>
