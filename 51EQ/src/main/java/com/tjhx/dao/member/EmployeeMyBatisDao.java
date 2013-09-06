@@ -12,6 +12,8 @@ public interface EmployeeMyBatisDao {
 
 	public List<Employee> getTmpEmployeeListByOrgId(String orgId);
 
+	public List<Employee> getTmpEmployeeByOrgId_WorkFlg(String orgId);
+
 	public void deleteEmployeeByEmpType(String empType);
 
 }
