@@ -172,6 +172,8 @@
 		
 		<!-- 可排班天数 -->
 		<property name="workScheduleDays" value="${work.schedule.days}" />
+		<!-- 可查看排班天数 -->
+		<property name="workScheduleOverDays" value="${work.schedule.over.days}" />
 	</bean>
 	
 	
