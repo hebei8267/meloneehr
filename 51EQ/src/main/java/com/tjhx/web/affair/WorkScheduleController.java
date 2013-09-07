@@ -6,16 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springside.modules.mapper.JsonMapper;
 
 import com.tjhx.entity.affair.WorkSchedule_List_Show;
 import com.tjhx.entity.affair.WorkType;
 import com.tjhx.entity.member.Employee;
+import com.tjhx.globals.Constants;
 import com.tjhx.service.affair.WorkScheduleManager;
 import com.tjhx.service.affair.WorkTypeManager;
 import com.tjhx.service.member.EmployeeManager;
@@ -62,6 +66,9 @@ public class WorkScheduleController extends BaseController {
 	 */
 	private void initWorkTypeList(String orgId, Model model) {
 		List<WorkType> _wtList = workTypeManager.getValidWorkTypeByOrgId(orgId);
+		if (null == _wtList || _wtList.size() == 0) {
+			return;
+		}
 
 		Map<String, String> wtList = new LinkedHashMap<String, String>();
 
@@ -73,16 +80,31 @@ public class WorkScheduleController extends BaseController {
 
 		Map<String, String> _wt_data = new LinkedHashMap<String, String>();
 		for (WorkType wt : _wtList) {
-			_wt_data.put(wt.getUuid().toString(),
-					formatDate(wt.getStartDate().substring(0, 2), wt.getStartDate().substring(2, 4)) + " - "
-							+ formatDate(wt.getEndDate().substring(0, 2), wt.getEndDate().substring(2, 4)));
+			if (StringUtils.isNotBlank(wt.getStartDate())) {
+				_wt_data.put(wt.getUuid().toString(), wt.getWorkDate());
+			}
 		}
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("_wt_data_set", mapper.toJson(_wt_data));
 
 	}
 
-	private String formatDate(String dateHr, String dateMin) {
-		return String.format(String.format("%02d:%02d", Integer.valueOf(dateHr), Integer.valueOf(dateMin)));
+	@RequestMapping(value = "save")
+	public String saveWorkScheduleList_Action(HttpServletRequest request, HttpSession session, Model model) {
+		String scheduleDate[] = ServletRequestUtils.getStringParameters(request, "scheduleDate");
+		String empCode[] = ServletRequestUtils.getStringParameters(request, "empCode");
+		String scheduleTimeSelect[] = ServletRequestUtils.getStringParameters(request, "scheduleTimeSelect");
+
+		for (int i = 0; i < scheduleDate.length; i++) {
+
+			System.out.println("scheduleDate          " + scheduleDate[i]);
+			System.out.println("empCode               " + empCode[i]);
+			System.out.println("scheduleTimeSelect    " + scheduleTimeSelect[i]);
+			System.out.println();
+			System.out.println();
+			System.out.println();
+
+		}
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/workSchedule/list";
 	}
 }
