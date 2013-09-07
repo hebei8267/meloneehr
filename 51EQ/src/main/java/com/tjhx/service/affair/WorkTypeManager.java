@@ -25,7 +25,7 @@ public class WorkTypeManager {
 	 */
 	public List<WorkType> getValidWorkTypeByOrgId(String orgId) {
 		List<WorkType> workTypeList = workTypeJpaDao.getValidWorkTypeByOrgId(orgId);
-		
+
 		return workTypeList;
 	}
 
@@ -60,10 +60,18 @@ public class WorkTypeManager {
 					dbWorkType.setStartDate(workType.getStartDate());
 					dbWorkType.setEndDate(workType.getEndDate());
 
+					dbWorkType.set_startDate(workType.get_startDate());
+					dbWorkType.set_endDate(workType.get_endDate());
+					dbWorkType.setWorkDate(workType.getWorkDate());
+
 				} else {
 
 					dbWorkType.setStartDate(null);
 					dbWorkType.setEndDate(null);
+
+					dbWorkType.set_startDate(null);
+					dbWorkType.set_endDate(null);
+					dbWorkType.setWorkDate(null);
 
 				}
 				dbWorkType.setUseFlg(workType.getUseFlg());
