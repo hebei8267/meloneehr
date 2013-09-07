@@ -16,27 +16,28 @@
 				border: 0;
 			}
 			._warn1 {
-				padding: 5px;
+				padding: 10px;
 				background-color: #00DB00;
 			}
-	    	._warn2 {
-	    		padding: 5px;
+			._warn2 {
+				padding: 10px;
 				background-color: #B15BFF;
 			}
 			._warn3 {
-				padding: 5px;
+				padding: 10px;
 				background-color: #FF9224;
 			}
 			._warn4 {
-				padding: 5px;
+				padding: 10px;
 				background-color: #B87070;
 			}
     	</style>
     	<script>
     		function wtChangeTxt(index){
     			var selVal = $("#_wt"+index).val();
+
     			if(selVal != ""){
-    				var cssNo = selVal % 16 ;
+    				var cssNo = selVal % 8 ;
     				
     				if(cssNo == 1) {
     					$("#_wtTxt"+index).removeClass("_warn2");
@@ -83,6 +84,18 @@
         		}
     			return "";
     		}
+    		
+    		$().ready(function() {
+    			
+    			$("#saveBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
+                    $("#listForm").attr("action", "${sc_ctx}/workSchedule/save");
+                    $("#listForm").submit();
+                });
+    			
+    		});
     	</script>
     </head>
     <body>
@@ -98,12 +111,17 @@
                         </legend>
                     </div>
                     
-                    <div class="span3">
+                    <div class="span3" style="padding-top: 10px;">
                     	<span class="_warn1 center">早班</span>
 						<span class="_warn2 center">晚班</span>
                  		<span class="_warn3 center">全天班</span>
                  		<span class="_warn4 center">其它</span>
                  	</div>
+                 	
+                 	<div class="span9" style="text-align: right;">
+                        <button	id="saveBtn" class="btn	btn-large btn-primary" type="submit">保存</button>
+                        &nbsp;<a href="${sc_ctx}/workSchedule/list" class="btn btn-large">重置</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="span12"	style="margin-top: 10px;">
@@ -124,22 +142,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-	                            <c:forEach items="${wsList}" var="ws">
-	                            <tr>
-	                            	<c:if test="${ws.editFlg}">
-	                            	<input type="hidden" name="scheduleDate" value="${ws.scheduleDate}">
-	                            	</c:if>
-	                            	
+	                            <c:forEach items="${wsList}" var="ws" varStatus="status1">
+	                            <tr>	                            	
 	                            	<td class="center">${ws.scheduleDate}</td>
 	                            	<td class="center">${ws.week}</td>
-	                            	<c:forEach items="${ws.scheduleList}" var="subSchedule" varStatus="status">
+	                            	<c:forEach items="${ws.scheduleList}" var="subSchedule" varStatus="status2">
                             		<td class="center">
                             			<c:if test="${ws.editFlg}">
+                            			<input type="hidden" name="scheduleDate" value="${ws.scheduleDate}">
+                            			<input type="hidden" name="empCode" value="${subSchedule.empCode}">
                             			<table class="table myTable" style="margin-bottom :0;border :0">
                             				<tr>
                             					<td class="center">
-                            						<input type="hidden" name="empCode" value="${subSchedule.empCode}">
-			                            			<select class="input-small2" id="_wt${status.index + 1}" onchange="wtChangeTxt(${status.index + 1})">
+			                            			<select name="scheduleTimeSelect" class="input-small2" id="_wt${status1.index + 1}${status2.index + 1}" onchange="wtChangeTxt(${status1.index + 1}${status2.index + 1})">
 							                        	<c:forEach items="${wtList}" var="wt">
 							                        		<option value="${wt.key }">${wt.value }</option>
 							                            </c:forEach>
@@ -147,7 +162,7 @@
                             					</td>
                             				</tr>
                             				<tr>
-                            					<td class="center" id="_wtTxt${status.index + 1}">&nbsp;</td>
+                            					<td class="center" id="_wtTxt${status1.index + 1}${status2.index + 1}">&nbsp;</td>
                             				</tr>
                             			</table>
                             			</c:if>

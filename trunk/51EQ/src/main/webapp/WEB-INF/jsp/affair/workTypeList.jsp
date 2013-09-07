@@ -258,7 +258,7 @@
                                         人员姓名
                                     </th>
                                     <th class="center">
-                                        工作时间
+                                        工作时间 (开始时间 ～ 结束时间)
                                     </th>
                                     <th	width="205">
                                         &nbsp;
