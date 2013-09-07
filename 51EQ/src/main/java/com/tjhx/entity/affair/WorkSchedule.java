@@ -9,28 +9,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.tjhx.entity.IdEntity;
 import com.tjhx.entity.struct.Organization;
 
 /**
- * 上班类型
- * 
- * @author he_bei
- * 
+ * 排班表
  */
 @Entity
-@Table(name = "T_WORK_TYPE")
+@Table(name = "T_WORK_SCHEDULE")
 // 默认的缓存策略.
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class WorkType extends IdEntity {
+public class WorkSchedule extends IdEntity {
 
-	private static final long serialVersionUID = 8717393085158252366L;
-	/** 上班类型名称 */
-	private String name;
-	/** 启用标记 1-启用 0-停用 */
-	private String useFlg;
-	/** 可编辑标记 */
-	private boolean editFlg = false;
+	static final long serialVersionUID = -4223149489944716546L;
+
+	/** 员工编号-自定义 */
+	private String empCode;
+	/** 排班日期 */
+	private String scheduleDate;
+	/** 排班日期 */
+	private String scheduleShow;
 	/** 上班时间 */
 	private String startDate;
 	/** 上班时间 HH:mm */
@@ -47,65 +47,63 @@ public class WorkType extends IdEntity {
 	/** 用户关联机构编号 */
 	private Integer orgUuid;
 
-	private String startDateHr;
-	private String startDateMinute;
-	private String endDateHr;
-	private String endDateMinute;
-
 	/**
-	 * 取得上班类型名称
+	 * 取得员工编号-自定义
 	 * 
-	 * @return name 上班类型名称
+	 * @return empCode 员工编号-自定义
 	 */
-	@Column(length = 32)
-	public String getName() {
-		return name;
+	@NaturalId
+	@Column(length = 16)
+	public String getEmpCode() {
+		return empCode;
 	}
 
 	/**
-	 * 设置上班类型名称
+	 * 设置员工编号-自定义
 	 * 
-	 * @param name 上班类型名称
+	 * @param empCode 员工编号-自定义
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
 	}
 
 	/**
-	 * 取得启用标记1-启用0-停用
+	 * 取得排班日期
 	 * 
-	 * @return useFlg 启用标记1-启用0-停用
+	 * @return scheduleDate 排班日期
 	 */
-	@Column(length = 1)
-	public String getUseFlg() {
-		return useFlg;
+	@NaturalId
+	@Column(length = 8)
+	public String getScheduleDate() {
+		return scheduleDate;
 	}
 
 	/**
-	 * 设置启用标记1-启用0-停用
+	 * 设置排班日期
 	 * 
-	 * @param useFlg 启用标记1-启用0-停用
+	 * @param scheduleDate 排班日期
 	 */
-	public void setUseFlg(String useFlg) {
-		this.useFlg = useFlg;
+	public void setScheduleDate(String scheduleDate) {
+		this.scheduleDate = scheduleDate;
 	}
 
 	/**
-	 * 取得可编辑标记
+	 * 取得排班日期
 	 * 
-	 * @return editFlg 可编辑标记
+	 * @return scheduleShow 排班日期
 	 */
-	public boolean isEditFlg() {
-		return editFlg;
+	@Column(length = 10)
+	public String getScheduleShow() {
+		return scheduleShow;
 	}
 
 	/**
-	 * 设置可编辑标记
+	 * 设置排班日期
 	 * 
-	 * @param editFlg 可编辑标记
+	 * @param scheduleShow 排班日期
 	 */
-	public void setEditFlg(boolean editFlg) {
-		this.editFlg = editFlg;
+	public void setScheduleShow(String scheduleShow) {
+		this.scheduleShow = scheduleShow;
 	}
 
 	/**
@@ -241,81 +239,4 @@ public class WorkType extends IdEntity {
 	public void setOrgUuid(Integer orgUuid) {
 		this.orgUuid = orgUuid;
 	}
-
-	/**
-	 * 取得startDateHr
-	 * 
-	 * @return startDateHr startDateHr
-	 */
-	@Transient
-	public String getStartDateHr() {
-		return startDateHr;
-	}
-
-	/**
-	 * 设置startDateHr
-	 * 
-	 * @param startDateHr startDateHr
-	 */
-	public void setStartDateHr(String startDateHr) {
-		this.startDateHr = startDateHr;
-	}
-
-	/**
-	 * 取得startDateMinute
-	 * 
-	 * @return startDateMinute startDateMinute
-	 */
-	@Transient
-	public String getStartDateMinute() {
-		return startDateMinute;
-	}
-
-	/**
-	 * 设置startDateMinute
-	 * 
-	 * @param startDateMinute startDateMinute
-	 */
-	public void setStartDateMinute(String startDateMinute) {
-		this.startDateMinute = startDateMinute;
-	}
-
-	/**
-	 * 取得endDateHr
-	 * 
-	 * @return endDateHr endDateHr
-	 */
-	@Transient
-	public String getEndDateHr() {
-		return endDateHr;
-	}
-
-	/**
-	 * 设置endDateHr
-	 * 
-	 * @param endDateHr endDateHr
-	 */
-	public void setEndDateHr(String endDateHr) {
-		this.endDateHr = endDateHr;
-	}
-
-	/**
-	 * 取得endDateMinute
-	 * 
-	 * @return endDateMinute endDateMinute
-	 */
-	@Transient
-	public String getEndDateMinute() {
-		return endDateMinute;
-	}
-
-	/**
-	 * 设置endDateMinute
-	 * 
-	 * @param endDateMinute endDateMinute
-	 */
-	public void setEndDateMinute(String endDateMinute) {
-		this.endDateMinute = endDateMinute;
-	}
-
 }
