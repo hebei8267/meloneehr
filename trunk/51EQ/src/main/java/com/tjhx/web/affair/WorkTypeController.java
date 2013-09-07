@@ -66,9 +66,11 @@ public class WorkTypeController extends BaseController {
 
 		Map<String, String> minuteList = new LinkedHashMap<String, String>();
 		minuteList.put("", "");
-		for (int i = 0; i < 60; i++) {
-			minuteList.put(String.format("%02d", i), String.format("%02d", i));
-		}
+		minuteList.put(String.format("%02d", 0), String.format("%02d", 0));
+		minuteList.put(String.format("%02d", 15), String.format("%02d", 15));
+		minuteList.put(String.format("%02d", 30), String.format("%02d", 30));
+		minuteList.put(String.format("%02d", 45), String.format("%02d", 45));
+
 		model.addAttribute("minuteList", minuteList);
 	}
 
@@ -114,9 +116,24 @@ public class WorkTypeController extends BaseController {
 			wt.setStartDate(startDate[i]);
 			wt.setEndDate(endDate[i]);
 
+			wt.set_startDate(formatDate(startDate[i]));
+			wt.set_endDate(formatDate(endDate[i]));
+			wt.setWorkDate(wt.get_startDate() + " - " + wt.get_endDate());
+
 			workTypeList.add(wt);
 		}
 
 		return workTypeList;
+	}
+
+	private String formatDate(String date) {
+		if (StringUtils.isNotBlank(date)) {
+			String dateHr = date.substring(0, 2);
+			String dateMin = date.substring(2, 4);
+			return String.format(String.format("%02d:%02d", Integer.valueOf(dateHr), Integer.valueOf(dateMin)));
+		} else {
+			return "";
+		}
+
 	}
 }
