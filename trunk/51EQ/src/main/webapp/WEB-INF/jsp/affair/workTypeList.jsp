@@ -236,7 +236,7 @@
             	<div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 上班类型 维护</h3>
+                            <h3>${sessionScope.__SESSION_USER_INFO.orgName} 工作时间 维护</h3>
                         </legend>
                     </div>
 
