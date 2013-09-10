@@ -1,6 +1,7 @@
 package com.tjhx.web.affair;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springside.modules.mapper.JsonMapper;
@@ -89,22 +91,33 @@ public class WorkScheduleController extends BaseController {
 
 	}
 
+	/**
+	 * 保存/更新 排班信息
+	 * 
+	 * @param request
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "save")
-	public String saveWorkScheduleList_Action(HttpServletRequest request, HttpSession session, Model model) {
+	public String saveWorkScheduleList_Action(HttpServletRequest request, HttpSession session, Model model)
+			throws ServletRequestBindingException {
 		String scheduleDate[] = ServletRequestUtils.getStringParameters(request, "scheduleDate");
 		String empCode[] = ServletRequestUtils.getStringParameters(request, "empCode");
 		String scheduleTimeSelect[] = ServletRequestUtils.getStringParameters(request, "scheduleTimeSelect");
+		String wtDataString = ServletRequestUtils.getStringParameter(request, "_wt_data_set");
 
-		for (int i = 0; i < scheduleDate.length; i++) {
-
-			System.out.println("scheduleDate          " + scheduleDate[i]);
-			System.out.println("empCode               " + empCode[i]);
-			System.out.println("scheduleTimeSelect    " + scheduleTimeSelect[i]);
-			System.out.println();
-			System.out.println();
-			System.out.println();
-
+		Map<String, String> wtDataMap = null;
+		if (StringUtils.isNotBlank(wtDataString)) {
+			JsonMapper mapper = new JsonMapper();
+			wtDataMap = mapper.fromJson(wtDataString, HashMap.class);
 		}
+
+		workScheduleManager.updateWorkScheduleList(scheduleDate, empCode, scheduleTimeSelect, wtDataMap,
+				getUserInfo(session).getOrganization().getBwId());
+
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/workSchedule/list";
 	}
 }

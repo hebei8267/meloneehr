@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.affair.WorkScheduleMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_WorkSchedule" type="com.tjhx.entity.affair.WorkSchedule">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
+        <result column="end_date" property="endDate" jdbcType="VARCHAR"/>
+        <result column="schedule_date" property="scheduleDate" jdbcType="VARCHAR"/>
+        <result column="schedule_show" property="scheduleShow" jdbcType="VARCHAR"/>
+        <result column="start_date" property="startDate" jdbcType="VARCHAR"/>
+        <result column="work_date" property="workDate" jdbcType="VARCHAR"/>
+        <result column="work_type_uuid" property="workTypeUuid" jdbcType="INTEGER"/>
+        <result column="org_uuid" property="orgUuid" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 查询结果字段 -->
+	<sql id="Base_Column_List" >
+	<![CDATA[
+    	uuid ,
+    	create_date ,
+    	create_user_id ,
+    	update_date ,
+    	update_user_id ,
+    	version ,
+    	emp_code ,
+    	end_date ,
+    	schedule_date ,
+    	schedule_show ,
+    	start_date ,
+    	work_date ,
+    	work_type_uuid ,
+    	org_uuid 
+	]]>
+  	</sql>
+  	
+  	
+  	<!-- 取得t_work_schedule信息(根据参数) -->
+	<select id="getWorkScheduleListByDate" parameterType="String" resultMap="Result_Map_WorkSchedule">
+		select
+		<include refid="Base_Column_List" />
+		from t_work_schedule
+		where schedule_date >= #{scheduleDate}
+	</select>
+</mapper>
