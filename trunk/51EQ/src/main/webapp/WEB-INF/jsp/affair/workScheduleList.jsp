@@ -104,6 +104,7 @@
         
         <div class="container">
             <form method="post"	class="form-horizontal"	id="listForm">
+            	<input type="hidden" name="_wt_data_set" value='${_wt_data_set}'>
                 <div class="row">
                     <div class="span12">
                         <legend>
@@ -156,14 +157,57 @@
                             					<td class="center">
 			                            			<select name="scheduleTimeSelect" class="input-small2" id="_wt${status1.index + 1}${status2.index + 1}" onchange="wtChangeTxt(${status1.index + 1}${status2.index + 1})">
 							                        	<c:forEach items="${wtList}" var="wt">
-							                        		<option value="${wt.key }">${wt.value }</option>
+							                        		<c:if test="${wt.key == subSchedule.workTypeUuid}">
+							                        			<option value="${wt.key }" selected>${wt.value }</option>
+							                                </c:if>
+							                                <c:if test="${wt.key != subSchedule.workTypeUuid}">
+							                                    <option value="${wt.key }">${wt.value }</option>
+							                                </c:if>
 							                            </c:forEach>
 							                        </select>
                             					</td>
                             				</tr>
                             				<tr>
+                            					<c:if test="${empty subSchedule.workTypeUuid }">
                             					<td class="center" id="_wtTxt${status1.index + 1}${status2.index + 1}">&nbsp;</td>
+                            					</c:if>
+                            					
+                            					<c:if test="${!empty subSchedule.workTypeUuid }">
+                            					
+	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 1 }">
+	                            					<td class="center _warn1" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					</c:if>
+	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 2 }">
+	                            					<td class="center _warn2" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					</c:if>
+	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 3 }">
+	                            					<td class="center _warn3" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					</c:if>
+	                            					<c:if test="${((subSchedule.workTypeUuid % 8) != 1) && ((subSchedule.workTypeUuid % 8) != 2) && ((subSchedule.workTypeUuid % 8) != 3) }">
+	                            					<td class="center _warn4" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					</c:if>
+                            					
+                            					</c:if>
                             				</tr>
+                            			</table>
+                            			</c:if>
+                            			
+                            			<c:if test="${!ws.editFlg}">
+                            			<table class="table myTable" style="margin-bottom :0;border :0">
+                            				<tr>
+                            					<td class="center">${subSchedule.workTypeName}</td>
+                            				</tr>
+                            				<tr>
+                            					
+			                            		<c:if test="${empty subSchedule.workTypeUuid }">
+                            					<td class="center">&nbsp;</td>
+                            					</c:if>
+                            					
+                            					<c:if test="${!empty subSchedule.workTypeUuid }">
+	                            					<td class="center">${subSchedule.workDate}</td>
+                            					</c:if>
+                            				</tr>
+                            				
                             			</table>
                             			</c:if>
                             		</td>
