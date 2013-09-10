@@ -3,20 +3,38 @@ package com.tjhx.service.affair;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
+import com.tjhx.dao.affair.WorkScheduleJpaDao;
+import com.tjhx.dao.affair.WorkScheduleMyBatisDao;
+import com.tjhx.dao.struct.OrganizationJpaDao;
+import com.tjhx.entity.affair.WorkSchedule;
 import com.tjhx.entity.affair.WorkSchedule_List_Show;
 import com.tjhx.entity.affair.WorkSchedule_Show;
+import com.tjhx.entity.affair.WorkType;
 import com.tjhx.entity.member.Employee;
+import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.SysConfig;
 
 @Service
 @Transactional(readOnly = true)
 public class WorkScheduleManager {
+	@Resource
+	private WorkScheduleJpaDao wsJpaDao;
+	@Resource
+	private OrganizationJpaDao orgJpaDao;
+	@Resource
+	private WorkScheduleMyBatisDao wsMyBatisDao;
+	@Resource
+	private WorkTypeManager workTypeManager;
 
 	/**
 	 * 取得排班信息列表
@@ -32,7 +50,15 @@ public class WorkScheduleManager {
 		// 取得计算可排班天数（含明天，列表第一个对象）
 		List<String> optDateList = calOptDate(scheduleOverDays, scheduleDays);
 
+		// 页面显示排班表对象列表
 		List<WorkSchedule_List_Show> wsList = new ArrayList<WorkSchedule_List_Show>();
+
+		// 数据库中已保存的排班表对象列表
+		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByDate(DateUtils.transDateFormat(
+				optDateList.get(0), "yyyy-MM-dd", "yyyyMMdd"));
+		// 取得指定机构的上班类型信息Map(开启状态)
+		Map<Integer, WorkType> _dbWtMap = workTypeManager.getValidWorkTypeMapByOrgId(orgId);
+
 		for (int i = 1; i < optDateList.size(); i++) {
 			WorkSchedule_List_Show ws = new WorkSchedule_List_Show();
 			ws.setScheduleDate(optDateList.get(i - 1));
@@ -43,6 +69,10 @@ public class WorkScheduleManager {
 			for (Employee emp : empList) {
 				WorkSchedule_Show subWs = new WorkSchedule_Show();
 				subWs.setEmpCode(emp.getCode());
+				subWs.setScheduleDate(DateUtils.transDateFormat(optDateList.get(i - 1), "yyyy-MM-dd", "yyyyMMdd"));
+
+				workSchedule_Show_ObjCopy(subWs, _dbWsList, _dbWtMap);
+
 				scheduleList.add(subWs);
 			}
 			ws.setScheduleList(scheduleList);
@@ -51,6 +81,21 @@ public class WorkScheduleManager {
 		}
 
 		return wsList;
+	}
+
+	private void workSchedule_Show_ObjCopy(WorkSchedule_Show subWs, List<WorkSchedule> dbWsList,
+			Map<Integer, WorkType> dbWtMap) {
+		for (WorkSchedule ws : dbWsList) {
+			if (subWs.getEmpCode().equals(ws.getEmpCode()) && subWs.getScheduleDate().equals(ws.getScheduleDate())) {
+				subWs.setWorkDate(ws.getWorkDate());
+				subWs.setWorkTypeUuid(ws.getWorkTypeUuid());
+				WorkType _tmpWt = dbWtMap.get(ws.getWorkTypeUuid());
+				if (null != _tmpWt) {
+					subWs.setWorkTypeName(_tmpWt.getName());
+				}
+
+			}
+		}
 	}
 
 	/**
@@ -63,7 +108,7 @@ public class WorkScheduleManager {
 		List<String> _optDateList = new ArrayList<String>();
 
 		String _now = DateUtils.getCurFormatDate("yyyy-MM-dd");
-		for (int i = scheduleOverDays; i > 0; i--) {
+		for (int i = scheduleOverDays; i > 1; i--) {
 			_optDateList.add(DateUtils.getNextDateFormatDate(_now, -i, "yyyy-MM-dd"));
 		}
 
@@ -74,4 +119,139 @@ public class WorkScheduleManager {
 		}
 		return _optDateList;
 	}
+
+	/**
+	 * 保存/更新 排班信息
+	 * 
+	 * @param scheduleDate
+	 * @param empCode
+	 * @param scheduleTimeSelect
+	 */
+	@Transactional(readOnly = false)
+	public void updateWorkScheduleList(String[] scheduleDate, String[] empCode, String[] scheduleTimeSelect,
+			Map<String, String> wtDataMap, String orgBwId) {
+		if (null == wtDataMap) {
+			return;
+		}
+
+		Organization org = orgJpaDao.findByBwId(orgBwId);
+
+		for (int i = 0; i < scheduleDate.length; i++) {
+			String _tmpScDate = DateUtils.transDateFormat(scheduleDate[i], "yyyy-MM-dd", "yyyyMMdd");
+
+			WorkSchedule _dbws = wsJpaDao.findByEmpCodeAndscheduleDate(empCode[i], _tmpScDate);
+
+			if (null == _dbws) {// 未选择排班时间
+				if (StringUtils.isBlank(scheduleTimeSelect[i])) {
+					continue;
+				}
+				// 新增排班信息
+				addWorkSchedule(org, empCode[i], scheduleDate[i], scheduleTimeSelect[i], wtDataMap);
+			} else {
+
+				if (StringUtils.isBlank(scheduleTimeSelect[i])) {
+					// 删除排班信息
+					wsJpaDao.delete(_dbws);
+				} else {
+					// 更新排班信息
+					updateWorkSchedule(_dbws, org, scheduleTimeSelect[i], wtDataMap);
+				}
+
+			}
+		}
+	}
+
+	/**
+	 * 更新排班信息
+	 * 
+	 * @param _dbws
+	 * @param org
+	 * @param scheduleTimeSelect
+	 * @param wtDataMap
+	 */
+	private void updateWorkSchedule(WorkSchedule _dbws, Organization org, String scheduleTimeSelect,
+			Map<String, String> wtDataMap) {
+		// 员工编号-自定义
+		// 排班日期
+		// 排班日期
+
+		// HH:mm格式
+		String[] date1 = getDate1(wtDataMap, scheduleTimeSelect);
+		// 上班时间 HH:mm
+		_dbws.setStartDate(date1[0]);
+		// 下班时间 HH:mm
+		_dbws.setEndDate(date1[1]);
+		// 工作时间 HH:mm - HH:mm
+		_dbws.setWorkDate(getDate(wtDataMap, scheduleTimeSelect));
+		// 用户关联机构
+		_dbws.setOrganization(org);
+		// 上班类型Uuid
+		_dbws.setWorkTypeUuid(Integer.parseInt(scheduleTimeSelect));
+
+		wsJpaDao.save(_dbws);
+	}
+
+	/**
+	 * 新增排班信息
+	 * 
+	 * @param org
+	 * @param empCode
+	 * @param scheduleDate
+	 * @param scheduleTimeSelect
+	 * @param wtDataMap
+	 */
+	private void addWorkSchedule(Organization org, String empCode, String scheduleDate, String scheduleTimeSelect,
+			Map<String, String> wtDataMap) {
+		WorkSchedule ws = new WorkSchedule();
+
+		// 员工编号-自定义
+		ws.setEmpCode(empCode);
+		// 排班日期
+		ws.setScheduleDate(DateUtils.transDateFormat(scheduleDate, "yyyy-MM-dd", "yyyyMMdd"));
+		// 排班日期
+		ws.setScheduleShow(scheduleDate);
+
+		// HH:mm格式
+		String[] date1 = getDate1(wtDataMap, scheduleTimeSelect);
+		// 上班时间 HH:mm
+		ws.setStartDate(date1[0]);
+		// 下班时间 HH:mm
+		ws.setEndDate(date1[1]);
+		// 工作时间 HH:mm - HH:mm
+		ws.setWorkDate(getDate(wtDataMap, scheduleTimeSelect));
+		// 用户关联机构
+		ws.setOrganization(org);
+		// 上班类型Uuid
+		ws.setWorkTypeUuid(Integer.parseInt(scheduleTimeSelect));
+
+		wsJpaDao.save(ws);
+	}
+
+	/**
+	 * 返回 开始/结束时间 HH:mm - HH:mm
+	 * 
+	 * @param wtDataMap
+	 * @param scheduleTimeSelectKey
+	 * @return
+	 */
+	private String getDate(Map<String, String> wtDataMap, String scheduleTimeSelectKey) {
+		return wtDataMap.get(scheduleTimeSelectKey);
+	}
+
+	/**
+	 * 返回 开始/结束时间 HH:mm
+	 * 
+	 * @param wtDataMap
+	 * @param scheduleTimeSelectKey
+	 * @return
+	 */
+	private String[] getDate1(Map<String, String> wtDataMap, String scheduleTimeSelectKey) {
+		String date = wtDataMap.get(scheduleTimeSelectKey);
+		String[] result = new String[2];
+		result[0] = date.substring(0, 5);
+		result[1] = date.substring(8, 13);
+
+		return result;
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.tjhx.service.affair;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,6 +29,22 @@ public class WorkTypeManager {
 		List<WorkType> workTypeList = workTypeJpaDao.getValidWorkTypeByOrgId(orgId);
 
 		return workTypeList;
+	}
+
+	/**
+	 * 取得指定机构的上班类型信息Map(开启状态)
+	 * 
+	 * @param orgId
+	 * @return
+	 */
+	public Map<Integer, WorkType> getValidWorkTypeMapByOrgId(String orgId) {
+		List<WorkType> workTypeList = workTypeJpaDao.getValidWorkTypeByOrgId(orgId);
+
+		Map<Integer, WorkType> wtMap = new HashMap<Integer, WorkType>();
+		for (WorkType workType : workTypeList) {
+			wtMap.put(workType.getUuid(), workType);
+		}
+		return wtMap;
 	}
 
 	/**
