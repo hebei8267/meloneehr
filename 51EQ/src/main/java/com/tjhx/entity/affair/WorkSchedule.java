@@ -31,18 +31,16 @@ public class WorkSchedule extends IdEntity {
 	private String scheduleDate;
 	/** 排班日期 */
 	private String scheduleShow;
-	/** 上班时间 */
-	private String startDate;
 	/** 上班时间 HH:mm */
-	private String _startDate;
-	/** 下班时间 */
-	private String endDate;
+	private String startDate;
 	/** 下班时间 HH:mm */
-	private String _endDate;
+	private String endDate;
 	/** 工作时间 HH:mm - HH:mm */
 	private String workDate;
 	/** 用户关联机构 */
 	private Organization organization;
+	/** 上班类型Uuid */
+	private Integer workTypeUuid;
 	// ---------------------------------------------
 	/** 用户关联机构编号 */
 	private Integer orgUuid;
@@ -107,30 +105,30 @@ public class WorkSchedule extends IdEntity {
 	}
 
 	/**
-	 * 取得上班时间
+	 * 取得上班时间HH:mm
 	 * 
-	 * @return startDate 上班时间
+	 * @return startDate 上班时间HH:mm
 	 */
-	@Column(length = 4)
+	@Column(length = 5)
 	public String getStartDate() {
 		return startDate;
 	}
 
 	/**
-	 * 设置上班时间
+	 * 设置上班时间HH:mm
 	 * 
-	 * @param startDate 上班时间
+	 * @param startDate 上班时间HH:mm
 	 */
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
 	/**
-	 * 取得下班时间
+	 * 取得下班时间HH:mm
 	 * 
-	 * @return endDate 下班时间
+	 * @return endDate 下班时间HH:mm
 	 */
-	@Column(length = 4)
+	@Column(length = 5)
 	public String getEndDate() {
 		return endDate;
 	}
@@ -142,44 +140,6 @@ public class WorkSchedule extends IdEntity {
 	 */
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
-	}
-
-	/**
-	 * 取得上班时间HH:mm
-	 * 
-	 * @return _startDate 上班时间HH:mm
-	 */
-	@Column(length = 5)
-	public String get_startDate() {
-		return _startDate;
-	}
-
-	/**
-	 * 设置上班时间HH:mm
-	 * 
-	 * @param _startDate 上班时间HH:mm
-	 */
-	public void set_startDate(String _startDate) {
-		this._startDate = _startDate;
-	}
-
-	/**
-	 * 取得下班时间HH:mm
-	 * 
-	 * @return _endDate 下班时间HH:mm
-	 */
-	@Column(length = 5)
-	public String get_endDate() {
-		return _endDate;
-	}
-
-	/**
-	 * 设置下班时间HH:mm
-	 * 
-	 * @param _endDate 下班时间HH:mm
-	 */
-	public void set_endDate(String _endDate) {
-		this._endDate = _endDate;
 	}
 
 	/**
@@ -219,6 +179,24 @@ public class WorkSchedule extends IdEntity {
 	 */
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
+	}
+
+	/**
+	 * 取得上班类型Uuid
+	 * 
+	 * @return workTypeUuid 上班类型Uuid
+	 */
+	public Integer getWorkTypeUuid() {
+		return workTypeUuid;
+	}
+
+	/**
+	 * 设置上班类型Uuid
+	 * 
+	 * @param workTypeUuid 上班类型Uuid
+	 */
+	public void setWorkTypeUuid(Integer workTypeUuid) {
+		this.workTypeUuid = workTypeUuid;
 	}
 
 	/**
