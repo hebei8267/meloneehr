@@ -11,9 +11,9 @@
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="clock_time" property="clockTime" jdbcType="TIMESTAMP"/>
-        <result column="clock_timed" property="clockTimeD" jdbcType="VARCHAR"/>
-        <result column="clock_timem" property="clockTimeM" jdbcType="VARCHAR"/>
-        <result column="clock_timey" property="clockTimeY" jdbcType="VARCHAR"/>
+        <result column="clock_time_d" property="clockTimeD" jdbcType="VARCHAR"/>
+        <result column="clock_time_m" property="clockTimeM" jdbcType="VARCHAR"/>
+        <result column="clock_time_y" property="clockTimeY" jdbcType="VARCHAR"/>
         <result column="sn" property="sn" jdbcType="VARCHAR"/>
         <result column="zkid" property="zkid" jdbcType="INTEGER"/>
         
@@ -23,16 +23,16 @@
 	</resultMap>
 	
 	<delete id="delPunchClockInfo" parameterType="com.tjhx.entity.affair.PunchClock">  
-        DELETE FROM t_punch_clock WHERE clock_timey = #{clockTimeY} AND clock_timem = #{clockTimeM} AND clock_timed = #{clockTimeD}  
+        DELETE FROM t_punch_clock WHERE clock_time_y = #{clockTimeY} AND clock_time_m = #{clockTimeM} AND clock_time_d = #{clockTimeD}  
     </delete>
 
 	<select id="getPunchClockList" parameterType="com.tjhx.entity.affair.PunchClock" resultMap="Result_Map_PunchClock">
 		SELECT
 		    o.org_name,
 		    e.uuid as emp_uuid,
-		    pc.clock_timey,
-		    pc.clock_timem,
-		    pc.clock_timed,
+		    pc.clock_time_y,
+		    pc.clock_time_m,
+		    pc.clock_time_d,
 		    pc.clock_time
 		FROM
 		    t_employee e,
@@ -42,12 +42,12 @@
 		    e.zk_org_id = o.zk_id
 		AND pc.zkid = e.zkid
 		AND o.org_id = #{orgId}
-		AND pc.clock_timey = #{clockTimeY}
-		AND pc.clock_timem = #{clockTimeM}
+		AND pc.clock_time_y = #{clockTimeY}
+		AND pc.clock_time_m = #{clockTimeM}
 		ORDER BY
-		    pc.clock_timey,
-		    pc.clock_timem,
-		    pc.clock_timed,
+		    pc.clock_time_y,
+		    pc.clock_time_m,
+		    pc.clock_time_d,
 		    e.uuid,
 		    pc.clock_time
 	</select>
