@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springside.modules.mapper.JsonMapper;
 
@@ -120,4 +121,25 @@ public class WorkScheduleController extends BaseController {
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/workSchedule/list";
 	}
+
+	// --------------------------------------------历史排班表---------------------------------------------------
+
+	@RequestMapping(value = "historyList/{date}")
+	public String workScheduleList_Date_Action(@PathVariable("date") String date, Model model, HttpSession session)
+			throws ParseException {
+
+		String orgId = getUserInfo(session).getOrganization().getId();
+
+		List<Employee> _empList = empManager.getEmployeeListByOrgId(orgId);
+		List<Employee> _tmpEmpList = empManager.getTmpEmployeeByOrgId_WorkFlg(orgId);
+		// 取得本机构正式员工和兼职员工
+		_empList.addAll(_tmpEmpList);
+		model.addAttribute("empList", _empList);
+
+		List<WorkSchedule_List_Show> wsList = workScheduleManager.getWorkScheduleList(orgId, _empList, date);
+		model.addAttribute("wsList", wsList);
+
+		return "affair/workScheduleHistoryList";
+	}
+
 }
