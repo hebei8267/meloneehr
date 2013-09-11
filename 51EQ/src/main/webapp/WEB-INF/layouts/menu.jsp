@@ -4,6 +4,7 @@
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.tjhx.entity.member.Permission" %>
+<%@	page import="com.tjhx.common.utils.DateUtils"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <c:set var="sc_ctx">
     ${ctx}/sc
@@ -164,6 +165,8 @@
 	    					<li>
 		                 		<a href="${sc_ctx}/punchClock/list">考勤信息(查看)</a>
 		                 		<a href="${sc_ctx}/workSchedule/list">排班表(维护)</a>
+		                 		<%String nowM =	DateUtils.getCurrentMonth(); %>
+		                 		<a href="${sc_ctx}/workSchedule/historyList/<%=nowM	%>">排班表(查看)</a>
 		                   		<a href="${sc_ctx}/tmpEmployee/list">兼职信息(维护)</a>
 		                   		<a href="${sc_ctx}/workType/list">工作时间(维护)</a>
 		                   	</li>
