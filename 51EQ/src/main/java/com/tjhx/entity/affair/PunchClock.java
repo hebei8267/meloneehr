@@ -92,7 +92,7 @@ public class PunchClock extends IdEntity {
 	 * 
 	 * @return clockTimeY 打卡时间-年
 	 */
-	@Column(length = 4)
+	@Column(name = "CLOCK_TIME_Y", length = 4)
 	public String getClockTimeY() {
 		return clockTimeY;
 	}
@@ -111,7 +111,7 @@ public class PunchClock extends IdEntity {
 	 * 
 	 * @return clockTimeM 打卡时间-月
 	 */
-	@Column(length = 2)
+	@Column(name = "CLOCK_TIME_M", length = 2)
 	public String getClockTimeM() {
 		return clockTimeM;
 	}
@@ -130,7 +130,7 @@ public class PunchClock extends IdEntity {
 	 * 
 	 * @return clockTimeD 打卡时间-日
 	 */
-	@Column(length = 2)
+	@Column(name = "CLOCK_TIME_D", length = 2)
 	public String getClockTimeD() {
 		return clockTimeD;
 	}
