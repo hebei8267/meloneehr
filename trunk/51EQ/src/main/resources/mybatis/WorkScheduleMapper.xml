@@ -13,6 +13,9 @@
         <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
         <result column="end_date" property="endDate" jdbcType="VARCHAR"/>
         <result column="schedule_date" property="scheduleDate" jdbcType="VARCHAR"/>
+        <result column="schedule_date_m" property="scheduleDateM" jdbcType="VARCHAR"/>
+        <result column="schedule_date_y" property="scheduleDateY" jdbcType="VARCHAR"/>
+        <result column="schedule_date_y_m" property="scheduleDateYM" jdbcType="VARCHAR"/>
         <result column="schedule_show" property="scheduleShow" jdbcType="VARCHAR"/>
         <result column="start_date" property="startDate" jdbcType="VARCHAR"/>
         <result column="work_date" property="workDate" jdbcType="VARCHAR"/>
@@ -32,6 +35,9 @@
     	emp_code ,
     	end_date ,
     	schedule_date ,
+    	schedule_date_m ,
+    	schedule_date_y ,
+    	schedule_date_y_m ,
     	schedule_show ,
     	start_date ,
     	work_date ,
@@ -47,5 +53,13 @@
 		<include refid="Base_Column_List" />
 		from t_work_schedule
 		where schedule_date >= #{scheduleDate}
+	</select>
+	
+	<!-- 取得t_work_schedule信息(根据参数) -->
+	<select id="getWorkScheduleListByYM" parameterType="String" resultMap="Result_Map_WorkSchedule">
+		select
+		<include refid="Base_Column_List" />
+		from t_work_schedule
+		where schedule_date_y_m >= #{scheduleDateYM}
 	</select>
 </mapper>

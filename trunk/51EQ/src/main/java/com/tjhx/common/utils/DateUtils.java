@@ -222,6 +222,13 @@ public class DateUtils {
 		return weekDays[w];
 	}
 
+	/**
+	 * 取得指定月份天数
+	 * 
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public static int getMonthDays(int year, int month) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);

@@ -111,8 +111,8 @@
                             <h3>${sessionScope.__SESSION_USER_INFO.orgName} 排班表 维护</h3>
                         </legend>
                     </div>
-                    
-                    <div class="span3" style="padding-top: 10px;">
+                 	
+                 	<div class="span3" style="padding-top: 10px;">
                     	<span class="_warn1 center">早班</span>
 						<span class="_warn2 center">晚班</span>
                  		<span class="_warn3 center">全天班</span>

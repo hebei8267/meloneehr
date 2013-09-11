@@ -29,6 +29,12 @@ public class WorkSchedule extends IdEntity {
 	private String empCode;
 	/** 排班日期 */
 	private String scheduleDate;
+	/** 排班日期YYYY */
+	private String scheduleDateY;
+	/** 排班日期MM */
+	private String scheduleDateM;
+	/** 排班日期YYYYMM */
+	private String scheduleDateYM;
 	/** 排班日期 */
 	private String scheduleShow;
 	/** 上班时间 HH:mm */
@@ -83,6 +89,63 @@ public class WorkSchedule extends IdEntity {
 	 */
 	public void setScheduleDate(String scheduleDate) {
 		this.scheduleDate = scheduleDate;
+	}
+
+	/**
+	 * 取得排班日期YYYY
+	 * 
+	 * @return scheduleDateY 排班日期YYYY
+	 */
+	@Column(name = "SCHEDULE_DATE_Y", length = 4)
+	public String getScheduleDateY() {
+		return scheduleDateY;
+	}
+
+	/**
+	 * 设置排班日期YYYY
+	 * 
+	 * @param scheduleDateY 排班日期YYYY
+	 */
+	public void setScheduleDateY(String scheduleDateY) {
+		this.scheduleDateY = scheduleDateY;
+	}
+
+	/**
+	 * 取得排班日期MM
+	 * 
+	 * @return scheduleDateM 排班日期MM
+	 */
+	@Column(name = "SCHEDULE_DATE_M", length = 2)
+	public String getScheduleDateM() {
+		return scheduleDateM;
+	}
+
+	/**
+	 * 设置排班日期MM
+	 * 
+	 * @param scheduleDateM 排班日期MM
+	 */
+	public void setScheduleDateM(String scheduleDateM) {
+		this.scheduleDateM = scheduleDateM;
+	}
+
+	/**
+	 * 取得排班日期YYYYMM
+	 * 
+	 * @return scheduleDateYM 排班日期YYYYMM
+	 */
+	@Column(name = "SCHEDULE_DATE_Y_M", length = 6)
+	public String getScheduleDateYM() {
+		return scheduleDateYM;
+	}
+
+	/**
+	 * 设置排班日期YYYYMM
+	 * 
+	 * @param scheduleDateYM 排班日期YYYYMM
+	 */
+	public void setScheduleDateYM(String scheduleDateYM) {
+		this.scheduleDateYM = scheduleDateYM;
 	}
 
 	/**

@@ -211,6 +211,13 @@ public class WorkScheduleManager {
 		// 排班日期
 		ws.setScheduleShow(scheduleDate);
 
+		// 排班日期YYYY */
+		ws.setScheduleDateY(DateUtils.transDateFormat(scheduleDate, "yyyy-MM-dd", "yyyy"));
+		// 排班日期MM */
+		ws.setScheduleDateM(DateUtils.transDateFormat(scheduleDate, "yyyy-MM-dd", "MM"));
+		// 排班日期YYYYMM */
+		ws.setScheduleDateYM(DateUtils.transDateFormat(scheduleDate, "yyyy-MM-dd", "yyyyMM"));
+
 		// HH:mm格式
 		String[] date1 = getDate1(wtDataMap, scheduleTimeSelect);
 		// 上班时间 HH:mm
@@ -219,6 +226,7 @@ public class WorkScheduleManager {
 		ws.setEndDate(date1[1]);
 		// 工作时间 HH:mm - HH:mm
 		ws.setWorkDate(getDate(wtDataMap, scheduleTimeSelect));
+
 		// 用户关联机构
 		ws.setOrganization(org);
 		// 上班类型Uuid
@@ -254,4 +262,60 @@ public class WorkScheduleManager {
 		return result;
 	}
 
+	/**
+	 * 取得排班信息列表(指定日期 yyyy-MM)
+	 * 
+	 * @param orgId
+	 * @param empList
+	 * @param date
+	 * @return
+	 * @throws ParseException
+	 */
+	public List<WorkSchedule_List_Show> getWorkScheduleList(String orgId, List<Employee> empList, String date)
+			throws ParseException {
+		String dateY = DateUtils.transDateFormat(date, "yyyy-MM", "yyyy");
+		String dateM = DateUtils.transDateFormat(date, "yyyy-MM", "MM");
+		List<String> optDateList = calOptDate(dateY, dateM);
+
+		// 页面显示排班表对象列表
+		List<WorkSchedule_List_Show> wsList = new ArrayList<WorkSchedule_List_Show>();
+
+		// 数据库中已保存的排班表对象列表
+		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByYM(dateY + dateM);
+		// 取得指定机构的上班类型信息Map(开启状态)
+		Map<Integer, WorkType> _dbWtMap = workTypeManager.getValidWorkTypeMapByOrgId(orgId);
+
+		for (int i = 1; i <= optDateList.size(); i++) {
+			WorkSchedule_List_Show ws = new WorkSchedule_List_Show();
+			ws.setScheduleDate(DateUtils.transDateFormat(optDateList.get(i - 1), "yyyyMMdd", "yyyy-MM-dd"));
+			ws.setWeek(DateUtils.getWeekOfDate(optDateList.get(i - 1), "yyyyMMdd"));
+			ws.setEditFlg(false);
+
+			List<WorkSchedule_Show> scheduleList = new ArrayList<WorkSchedule_Show>();
+			for (Employee emp : empList) {
+				WorkSchedule_Show subWs = new WorkSchedule_Show();
+				subWs.setEmpCode(emp.getCode());
+				subWs.setScheduleDate(optDateList.get(i - 1));
+
+				workSchedule_Show_ObjCopy(subWs, _dbWsList, _dbWtMap);
+
+				scheduleList.add(subWs);
+			}
+			ws.setScheduleList(scheduleList);
+
+			wsList.add(ws);
+		}
+		return wsList;
+	}
+
+	private List<String> calOptDate(String year, String month) {
+		int days = DateUtils.getMonthDays(Integer.valueOf(year), Integer.valueOf(month));
+
+		List<String> _optDateList = new ArrayList<String>();
+
+		for (int i = 1; i <= days; i++) {
+			_optDateList.add(year + month + String.format("%02d", i));
+		}
+		return _optDateList;
+	}
 }
