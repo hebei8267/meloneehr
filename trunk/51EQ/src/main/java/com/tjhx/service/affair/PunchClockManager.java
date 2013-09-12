@@ -43,6 +43,7 @@ public class PunchClockManager {
 	@Resource
 	private EmployeeMyBatisDao employeeMyBatisDao;
 	private final static String XML_CONFIG_PUNCH_CLOCK = "/excel/Punch_Clock_Template.xls";
+
 	/**
 	 * 取得考勤计算-重计算天数（含明天，列表第一个对象）
 	 * 
@@ -139,17 +140,22 @@ public class PunchClockManager {
 			String _m = null;
 			String _d = null;
 
-			if (_cList.size() > 0) {// 保存首条打卡记录
+			PunchClock p = new PunchClock();
+
+			if (_cList.size() > 1) {// 最后的打卡记录--下班打卡时间
+				CheckInOut _checkInOut = _cList.get(_cList.size() - 1);
+				p.setEndClockTime(_checkInOut.getChecktime());
+			}
+
+			if (_cList.size() > 0) {// 首条打卡记录--上班打卡时间
 				CheckInOut _checkInOut = _cList.get(0);
 
 				_y = DateUtils.transDateFormat(_checkInOut.getChecktime(), "yyyy");
 				_m = DateUtils.transDateFormat(_checkInOut.getChecktime(), "MM");
 				_d = DateUtils.transDateFormat(_checkInOut.getChecktime(), "dd");
 
-				PunchClock p = new PunchClock();
-
 				p.setZkid(_checkInOut.getUserid());
-				p.setClockTime(_checkInOut.getChecktime());
+				p.setStartClockTime(_checkInOut.getChecktime());
 				p.setClockTimeY(_y);
 				p.setClockTimeM(_m);
 				p.setClockTimeD(_d);
@@ -157,22 +163,6 @@ public class PunchClockManager {
 
 				punchClockJpaDao.save(p);
 			}
-
-			if (_cList.size() > 1) {// 有两条以上的记录，保存最后的打卡记录
-				CheckInOut _checkInOut = _cList.get(_cList.size() - 1);
-
-				PunchClock p = new PunchClock();
-
-				p.setZkid(_checkInOut.getUserid());
-				p.setClockTime(_checkInOut.getChecktime());
-				p.setClockTimeY(_y);
-				p.setClockTimeM(_m);
-				p.setClockTimeD(_d);
-				p.setSn(_checkInOut.getSn());
-
-				punchClockJpaDao.save(p);
-			}
-
 		}
 	}
 
@@ -277,7 +267,8 @@ public class PunchClockManager {
 		return _list;
 	}
 
-	public String createPunchClockFile(String orgId, String optDateY, String optDateM) throws ParsePropertyException, InvalidFormatException, IOException {
+	public String createPunchClockFile(String orgId, String optDateY, String optDateM) throws ParsePropertyException,
+			InvalidFormatException, IOException {
 		PunchClock punchClock = new PunchClock();
 		punchClock.setOrgId(orgId);
 		punchClock.setClockTimeY(optDateY);
