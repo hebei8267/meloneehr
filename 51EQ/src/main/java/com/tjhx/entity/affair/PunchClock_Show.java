@@ -10,9 +10,9 @@ public class PunchClock_Show {
 	/** 打卡时间-日 */
 	private String clockTimeD;
 	/** 打卡时间-开始 */
-	private String clockTimeStart = "";
+	private String startClockTime;
 	/** 打卡时间-结束 */
-	private String clockTimeEnd = "";
+	private String endClockTime;
 	/** 员工编号 */
 	private int empUuid;
 
@@ -84,37 +84,37 @@ public class PunchClock_Show {
 	/**
 	 * 取得打卡时间-开始
 	 * 
-	 * @return clockTimeStart 打卡时间-开始
+	 * @return startClockTime 打卡时间-开始
 	 */
-	public String getClockTimeStart() {
-		return clockTimeStart;
+	public String getStartClockTime() {
+		return startClockTime;
 	}
 
 	/**
 	 * 设置打卡时间-开始
 	 * 
-	 * @param clockTimeStart 打卡时间-开始
+	 * @param startClockTime 打卡时间-开始
 	 */
-	public void setClockTimeStart(String clockTimeStart) {
-		this.clockTimeStart = clockTimeStart;
+	public void setStartClockTime(String startClockTime) {
+		this.startClockTime = startClockTime;
 	}
 
 	/**
 	 * 取得打卡时间-结束
 	 * 
-	 * @return clockTimeEnd 打卡时间-结束
+	 * @return endClockTime 打卡时间-结束
 	 */
-	public String getClockTimeEnd() {
-		return clockTimeEnd;
+	public String getEndClockTime() {
+		return endClockTime;
 	}
 
 	/**
 	 * 设置打卡时间-结束
 	 * 
-	 * @param clockTimeEnd 打卡时间-结束
+	 * @param endClockTime 打卡时间-结束
 	 */
-	public void setClockTimeEnd(String clockTimeEnd) {
-		this.clockTimeEnd = clockTimeEnd;
+	public void setEndClockTime(String endClockTime) {
+		this.endClockTime = endClockTime;
 	}
 
 	/**
@@ -136,11 +136,7 @@ public class PunchClock_Show {
 	}
 
 	public void copy(PunchClock clock) {
-
-		if ("".equals(clockTimeStart)) {
-			this.clockTimeStart = DateUtils.transDateFormat(clock.getClockTime(), "HH:mm:ss");
-		} else {
-			this.clockTimeEnd = DateUtils.transDateFormat(clock.getClockTime(), "HH:mm:ss");
-		}
+		this.startClockTime = DateUtils.transDateFormat(clock.getStartClockTime(), "HH:mm:ss");
+		this.endClockTime = DateUtils.transDateFormat(clock.getEndClockTime(), "HH:mm:ss");
 	}
 }

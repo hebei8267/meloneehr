@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.NaturalId;
-
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.IdEntity;
 
@@ -21,8 +19,10 @@ public class PunchClock extends IdEntity {
 	private static final long serialVersionUID = 8758497876481381832L;
 	/** 用户编号 */
 	private Integer zkid;
-	/** 打卡时间 */
-	private Date clockTime;
+	/** 打卡时间-开始 */
+	private Date startClockTime;
+	/** 打卡时间-结束 */
+	private Date endClockTime;
 	/** 打卡时间-年 */
 	private String clockTimeY;
 	/** 打卡时间-月 */
@@ -54,7 +54,6 @@ public class PunchClock extends IdEntity {
 	 * 
 	 * @return zkid 用户编号
 	 */
-	@NaturalId
 	public Integer getZkid() {
 		return zkid;
 	}
@@ -69,22 +68,39 @@ public class PunchClock extends IdEntity {
 	}
 
 	/**
-	 * 取得打卡时间
+	 * 取得打卡时间-开始
 	 * 
-	 * @return clockTime 打卡时间
+	 * @return startClockTime 打卡时间-开始
 	 */
-	@NaturalId
-	public Date getClockTime() {
-		return clockTime;
+	public Date getStartClockTime() {
+		return startClockTime;
 	}
 
 	/**
-	 * 设置打卡时间
+	 * 设置打卡时间-开始
 	 * 
-	 * @param clockTime 打卡时间
+	 * @param startClockTime 打卡时间-开始
 	 */
-	public void setClockTime(Date clockTime) {
-		this.clockTime = clockTime;
+	public void setStartClockTime(Date startClockTime) {
+		this.startClockTime = startClockTime;
+	}
+
+	/**
+	 * 取得打卡时间-结束
+	 * 
+	 * @return endClockTime 打卡时间-结束
+	 */
+	public Date getEndClockTime() {
+		return endClockTime;
+	}
+
+	/**
+	 * 设置打卡时间-结束
+	 * 
+	 * @param endClockTime 打卡时间-结束
+	 */
+	public void setEndClockTime(Date endClockTime) {
+		this.endClockTime = endClockTime;
 	}
 
 	/**
