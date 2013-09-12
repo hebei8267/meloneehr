@@ -124,6 +124,9 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String transDateFormat(Date date, String toStyle) {
+		if (null == date) {
+			return null;
+		}
 		simpleDateFormat.applyPattern(toStyle);
 		return simpleDateFormat.format(date);
 	}
