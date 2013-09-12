@@ -99,7 +99,20 @@
                             <tr>
                             	<td>${punchClock.clockTime}</td>
                             	<c:forEach items="${punchClock.punchClockList}" var="subPunchClock">
-                            	<td class="center">${subPunchClock.clockTimeStart}<br>～<br>${subPunchClock.clockTimeEnd}</td>
+                            	<td class="center">
+									<c:if test="${empty	subPunchClock.startClockTime}">
+	                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+	                            	</c:if>
+	                            	<c:if test="${!empty subPunchClock.startClockTime}">
+	                            	${subPunchClock.startClockTime} ～ 
+	                            	</c:if>
+	                            	<c:if test="${empty	subPunchClock.endClockTime}">
+	                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            	</c:if>
+	                            	<c:if test="${!empty subPunchClock.endClockTime}">
+	                            	${subPunchClock.endClockTime}
+	                            	</c:if>
+								</td>
                             	</c:forEach>
                             </tr>
 							</c:forEach>
