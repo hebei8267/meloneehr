@@ -212,7 +212,11 @@ public class PunchClock_Show {
 	public void timeValidate() throws ParseException {
 		// 99-非预期加班 0-正常 1-迟到 2-早退
 
-		if (StringUtils.isBlank(startScheduleDate) || StringUtils.isBlank(endScheduleDate)) {
+		String curDate = DateUtils.getCurrentDateShortStr();
+		String clockTime = clockTimeY + clockTimeM + clockTimeD;
+		if (Integer.valueOf(curDate) < Integer.valueOf(clockTime)) {// 未来日不做计算
+			punchNormalState = 0;// 正常
+		} else if (StringUtils.isBlank(startScheduleDate) || StringUtils.isBlank(endScheduleDate)) {
 			punchNormalState = 0;// 正常
 
 			if (StringUtils.isNotBlank(startClockTime) || StringUtils.isNotBlank(endClockTime)) {
