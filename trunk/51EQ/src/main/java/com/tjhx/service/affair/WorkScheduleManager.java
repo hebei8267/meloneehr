@@ -37,6 +37,22 @@ public class WorkScheduleManager {
 	private WorkTypeManager workTypeManager;
 
 	/**
+	 * 取得指定日期开始的所有排班信息
+	 * 
+	 * @param orgId
+	 * @param scheduleDate(yyyyMMdd)
+	 * @return
+	 */
+	public List<WorkSchedule> getWorkScheduleListByDate(String orgId, String scheduleDate) {
+		// 数据库中已保存的排班表对象列表
+		WorkSchedule _parmWs = new WorkSchedule();
+		_parmWs.setOrgId(orgId);
+		_parmWs.setScheduleDate(scheduleDate);
+		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByDate(_parmWs);
+		return _dbWsList;
+	}
+
+	/**
 	 * 取得排班信息列表
 	 * 
 	 * @return
@@ -54,8 +70,9 @@ public class WorkScheduleManager {
 		List<WorkSchedule_List_Show> wsList = new ArrayList<WorkSchedule_List_Show>();
 
 		// 数据库中已保存的排班表对象列表
-		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByDate(DateUtils.transDateFormat(
-				optDateList.get(0), "yyyy-MM-dd", "yyyyMMdd"));
+		List<WorkSchedule> _dbWsList = getWorkScheduleListByDate(orgId,
+				DateUtils.transDateFormat(optDateList.get(0), "yyyy-MM-dd", "yyyyMMdd"));
+
 		// 取得指定机构的上班类型信息Map(开启状态)
 		Map<Integer, WorkType> _dbWtMap = workTypeManager.getValidWorkTypeMapByOrgId(orgId);
 
@@ -263,6 +280,22 @@ public class WorkScheduleManager {
 	}
 
 	/**
+	 * 取得指定月份的排班信息
+	 * 
+	 * @param orgId
+	 * @param scheduleDateYM
+	 * @return
+	 */
+	public List<WorkSchedule> getWorkScheduleListByDateYM(String orgId, String scheduleDateYM) {
+		WorkSchedule _parmWs = new WorkSchedule();
+		_parmWs.setOrgId(orgId);
+		_parmWs.setScheduleDateYM(scheduleDateYM);
+		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByDateYM(_parmWs);
+
+		return _dbWsList;
+	}
+
+	/**
 	 * 取得排班信息列表(指定日期 yyyy-MM)
 	 * 
 	 * @param orgId
@@ -281,7 +314,8 @@ public class WorkScheduleManager {
 		List<WorkSchedule_List_Show> wsList = new ArrayList<WorkSchedule_List_Show>();
 
 		// 数据库中已保存的排班表对象列表
-		List<WorkSchedule> _dbWsList = wsMyBatisDao.getWorkScheduleListByYM(dateY + dateM);
+		List<WorkSchedule> _dbWsList = getWorkScheduleListByDateYM(orgId, dateY + dateM);
+
 		// 取得指定机构的上班类型信息Map(开启状态)
 		Map<Integer, WorkType> _dbWtMap = workTypeManager.getValidWorkTypeMapByOrgId(orgId);
 

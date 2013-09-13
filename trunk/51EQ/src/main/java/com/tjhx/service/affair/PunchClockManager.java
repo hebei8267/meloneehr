@@ -26,6 +26,7 @@ import com.tjhx.daozk.CheckInOutMyBatisDao;
 import com.tjhx.entity.affair.PunchClock;
 import com.tjhx.entity.affair.PunchClock_List_Show;
 import com.tjhx.entity.affair.PunchClock_Show;
+import com.tjhx.entity.affair.WorkSchedule;
 import com.tjhx.entity.member.Employee;
 import com.tjhx.entity.zknet.CheckInOut;
 import com.tjhx.globals.SysConfig;
@@ -42,6 +43,9 @@ public class PunchClockManager {
 	private CheckInOutMyBatisDao checkInOutMyBatisDao;
 	@Resource
 	private EmployeeMyBatisDao employeeMyBatisDao;
+	@Resource
+	private WorkScheduleManager workScheduleManager;
+
 	private final static String XML_CONFIG_PUNCH_CLOCK = "/excel/Punch_Clock_Template.xls";
 
 	/**
@@ -173,18 +177,22 @@ public class PunchClockManager {
 	 * @param clockTimeY 打卡时间-年
 	 * @param clockTimeM 打卡时间-月
 	 * @return
+	 * @throws ParseException
 	 */
 	public List<PunchClock_List_Show> getPunchClockList(String orgId, String clockTimeY, String clockTimeM,
-			List<Employee> empList) {
+			List<Employee> empList) throws ParseException {
 
 		PunchClock punchClock = new PunchClock();
 		punchClock.setOrgId(orgId);
 		punchClock.setClockTimeY(clockTimeY);
 		punchClock.setClockTimeM(clockTimeM);
 
-		List<PunchClock> _dbList = punchClockMyBatisDao.getPunchClockList(punchClock);
+		// 打卡信息列表
+		List<PunchClock> _dbClockList = punchClockMyBatisDao.getPunchClockList(punchClock);
+		// 排班信息列表
+		List<WorkSchedule> _dbWsList = workScheduleManager.getWorkScheduleListByDateYM(orgId, clockTimeY + clockTimeM);
 
-		return formatPunchClockList(clockTimeY, clockTimeM, _dbList, empList);
+		return formatPunchClockList(clockTimeY, clockTimeM, _dbClockList, _dbWsList, empList);
 	}
 
 	/**
@@ -192,9 +200,11 @@ public class PunchClockManager {
 	 * 
 	 * @param punchClockList
 	 * @return
+	 * @throws ParseException
 	 */
 	private List<PunchClock_List_Show> formatPunchClockList(String clockTimeY, String clockTimeM,
-			List<PunchClock> punchClockList, List<Employee> empList) {
+			List<PunchClock> punchClockList, List<WorkSchedule> workScheduleList, List<Employee> empList)
+			throws ParseException {
 		int days = DateUtils.getMonthDays(Integer.parseInt(clockTimeY), Integer.parseInt(clockTimeM));
 
 		List<PunchClock_Show> _punchClockList = new ArrayList<PunchClock_Show>();
@@ -208,14 +218,48 @@ public class PunchClockManager {
 		for (PunchClock_Show punchClock_Show : _punchClockList) {
 			for (PunchClock punchClock : punchClockList) {
 
-				if (myEquals(punchClock_Show, punchClock)) {
+				if (myEquals(punchClock_Show, punchClock)) {// 打卡机时间
 					punchClock_Show.copy(punchClock);
 				}
 			}
 		}
 
+		if (null != workScheduleList) {
+			for (PunchClock_Show punchClock_Show : _punchClockList) {
+				for (WorkSchedule workSchedule : workScheduleList) {
+					if (myEquals(punchClock_Show, workSchedule)) {// 排班表时间
+						punchClock_Show.copy(workSchedule);
+					}
+				}
+			}
+
+			for (PunchClock_Show punchClock_Show : _punchClockList) {
+				punchClock_Show.timeValidate();// 计算是否迟到早退等
+			}
+		}
+
 		return formatPunchClockList(_punchClockList, empList.size());
 
+	}
+
+	/**
+	 * 自定义比较方法
+	 * 
+	 * @param punchClock_Show
+	 * @param punchClock
+	 * @return
+	 */
+	private boolean myEquals(PunchClock_Show punchClock_Show, WorkSchedule workSchedule) {
+		if (punchClock_Show.getEmpUuid() != workSchedule.getEmpUuid()) {
+			return false;
+		}
+		String clockTime = punchClock_Show.getClockTimeY() + punchClock_Show.getClockTimeM()
+				+ punchClock_Show.getClockTimeD();
+		if (!clockTime.equals(workSchedule.getScheduleDate())) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -268,7 +312,7 @@ public class PunchClockManager {
 	}
 
 	public String createPunchClockFile(String orgId, String optDateY, String optDateM) throws ParsePropertyException,
-			InvalidFormatException, IOException {
+			InvalidFormatException, IOException, ParseException {
 		PunchClock punchClock = new PunchClock();
 		punchClock.setOrgId(orgId);
 		punchClock.setClockTimeY(optDateY);
@@ -277,8 +321,8 @@ public class PunchClockManager {
 		List<Employee> _empList = employeeMyBatisDao.getEmployeeListByOrgId(orgId);
 
 		List<PunchClock> _dbList = punchClockMyBatisDao.getPunchClockList(punchClock);
-
-		List<PunchClock_List_Show> _showList = formatPunchClockList(optDateY, optDateM, _dbList, _empList);
+		// TODO 考勤数据导出
+		List<PunchClock_List_Show> _showList = formatPunchClockList(optDateY, optDateM, _dbList, null, _empList);
 
 		// ---------------------------文件生成---------------------------
 		Map<String, Object> map = new HashMap<String, Object>();
