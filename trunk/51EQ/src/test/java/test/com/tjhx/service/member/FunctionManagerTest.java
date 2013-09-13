@@ -184,7 +184,7 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 
 		functionJpaDao.save(fun);
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void saveNewFun15() {
@@ -196,7 +196,7 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 
 		functionJpaDao.save(fun);
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void saveNewFun16() {
@@ -208,7 +208,7 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 
 		functionJpaDao.save(fun);
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void saveNewFun17() {
@@ -220,7 +220,7 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 
 		functionJpaDao.save(fun);
 	}
-	
+
 	@Test
 	@Rollback(false)
 	public void saveNewFun18() {
@@ -229,6 +229,18 @@ public class FunctionManagerTest extends SpringTransactionalTestCase {
 		fun.setDisplayName("公告/消息");
 		// 功能URL */
 		fun.setFunUrl("msgInfo/list");
+
+		functionJpaDao.save(fun);
+	}
+
+	@Test
+	@Rollback(false)
+	public void saveNewFun19() {
+		Function fun = new Function();
+		// 功能显示名称
+		fun.setDisplayName("考勤信息-维护");
+		// 功能URL */
+		// fun.setFunUrl();
 
 		functionJpaDao.save(fun);
 	}
