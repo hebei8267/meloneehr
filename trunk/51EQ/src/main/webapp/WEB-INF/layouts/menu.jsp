@@ -148,6 +148,11 @@
                                 <a href="${sc_ctx}/invoiceDraw">发票开具</a>
                             </li>
                             </c:if>
+                            <c:if test="${_permIdList.contains('18')}">
+  							<li>
+                                <a href="${sc_ctx}/msgInfo">公告/消息</a>
+                            </li>
+                            </c:if>
                             <!-- 
                             <li>
                                 <a href="${sc_ctx}/reqBill">门店要货单</a>
@@ -164,13 +169,17 @@
 	    					<li class="divider"></li>
 	    					<li>
 		                 		<a href="${sc_ctx}/punchClock/list">考勤信息(查看)</a>
-		                 		<a href="${sc_ctx}/workSchedule/list">排班表(维护)</a>
 		                 		<%String nowM =	DateUtils.getCurrentMonth(); %>
 		                 		<a href="${sc_ctx}/workSchedule/historyList/<%=nowM	%>">排班表(查看)</a>
+		                   	</li>
+		                   	</c:if>
+		                   	<c:if test="${_permIdList.contains('19')}">
+	    					<li class="divider"></li>
+	    					<li>
+		                 		<a href="${sc_ctx}/workSchedule/list">排班表(维护)</a>
 		                   		<a href="${sc_ctx}/tmpEmployee/list">兼职信息(维护)</a>
 		                   		<a href="${sc_ctx}/workType/list">工作时间(维护)</a>
 		                   	</li>
-		                   	<li class="divider"></li>
 		                   	</c:if>
 		                    
 		                    <%//总部%>
@@ -179,12 +188,6 @@
 		                   		<a href="${sc_ctx}/punchClock/manage">考勤信息(查看)</a>
 		                 	</li>
 		                 	</c:if>
-	    					
-  							<c:if test="${_permIdList.contains('18')}">
-  							<li>
-                                <a href="${sc_ctx}/msgInfo">公告/消息</a>
-                            </li>
-                            </c:if>
                         </ul>
                     </li>
                     </c:if>
