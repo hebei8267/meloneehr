@@ -6,7 +6,19 @@ import com.tjhx.entity.affair.WorkSchedule;
 
 public interface WorkScheduleMyBatisDao {
 
-	public List<WorkSchedule> getWorkScheduleListByDate(String workScheduleDate);
+	/**
+	 * 取得指定日期开始的所有排班信息
+	 * 
+	 * @param workScheduleDate
+	 * @return
+	 */
+	public List<WorkSchedule> getWorkScheduleListByDate(WorkSchedule workSchedule);
 
-	public List<WorkSchedule> getWorkScheduleListByYM(String workScheduleDateYM);
+	/**
+	 * 取得指定月份的排班信息
+	 * 
+	 * @param workScheduleDateYM
+	 * @return
+	 */
+	public List<WorkSchedule> getWorkScheduleListByDateYM(WorkSchedule workSchedule);
 }
