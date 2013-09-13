@@ -46,7 +46,7 @@ public class PunchClockController extends BaseController {
 	private OrganizationManager orgManager;
 
 	@RequestMapping(value = { "list" })
-	public String punchClockList_Action(Model model, HttpSession session) {
+	public String punchClockList_Action(Model model, HttpSession session) throws ParseException {
 
 		_punchClockListAction(getUserInfo(session).getOrganization().getId(), DateUtils.getCurFormatDate("yyyy"),
 				DateUtils.getCurFormatDate("MM"), model);
@@ -55,7 +55,8 @@ public class PunchClockController extends BaseController {
 	}
 
 	@RequestMapping(value = { "list/{date}" })
-	public String punchClockList_Param_Action(@PathVariable("date") String optDate, Model model, HttpSession session) {
+	public String punchClockList_Param_Action(@PathVariable("date") String optDate, Model model, HttpSession session)
+			throws ParseException {
 		String optDateY = DateUtils.transDateFormat(optDate, "yyyy-MM", "yyyy");
 		String optDateM = DateUtils.transDateFormat(optDate, "yyyy-MM", "MM");
 
@@ -64,7 +65,8 @@ public class PunchClockController extends BaseController {
 		return "affair/punchClockList";
 	}
 
-	private void _punchClockListAction(String orgId, String optDateY, String optDateM, Model model) {
+	private void _punchClockListAction(String orgId, String optDateY, String optDateM, Model model)
+			throws ParseException {
 		List<Employee> _empList = empManager.getEmployeeListByOrgId(orgId);
 		model.addAttribute("empList", _empList);
 
@@ -84,7 +86,7 @@ public class PunchClockController extends BaseController {
 
 	@RequestMapping(value = { "manage/search" })
 	public String punchClockManageSearchList_Action(HttpServletRequest request, Model model)
-			throws ServletRequestBindingException {
+			throws ServletRequestBindingException, ParseException {
 		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
 		String optDateShow = ServletRequestUtils.getStringParameter(request, "optDateShow");
 		model.addAttribute("orgId", orgId);
