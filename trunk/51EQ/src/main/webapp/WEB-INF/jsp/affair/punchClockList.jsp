@@ -11,6 +11,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<style type="text/css">
+    		.myTable th, .myTable td {
+				border: 0;
+			}
+			._warn1 {
+				background-color: #FF2400;
+			}
+			._warn2 {
+				background-color: #5FFB17;
+			}
+    	</style>
     </head>
     <body>
         <%// 系统菜单  %>
@@ -49,20 +60,58 @@
                             <c:forEach items="${punchClockList}" var="punchClock">
                             <tr>
                             	<td>${punchClock.clockTime}</td>
+                            	
                             	<c:forEach items="${punchClock.punchClockList}" var="subPunchClock">
-                            	<td class="center">
-	                            	<c:if test="${empty	subPunchClock.startClockTime}">
-	                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
-	                            	</c:if>
-	                            	<c:if test="${!empty subPunchClock.startClockTime}">
-	                            	${subPunchClock.startClockTime} ～ 
-	                            	</c:if>
-	                            	<c:if test="${empty	subPunchClock.endClockTime}">
-	                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                            	</c:if>
-	                            	<c:if test="${!empty subPunchClock.endClockTime}">
-	                            	${subPunchClock.endClockTime}
-	                            	</c:if>
+                            	<td>
+	                            	<table class="table myTable" style="margin-bottom :0;border :0">
+	                            		<tr><td class="center">排班时间</td></tr>
+		                            	<tr>
+		                            		<c:if test="${subPunchClock.punchNormalState == 99}">
+		                            		<td class="center _warn2">
+		                            		</c:if>
+		                            		<c:if test="${subPunchClock.punchNormalState != 99}">
+		                            		<td class="center">
+		                            		</c:if>
+		                            		
+
+				                            	<c:if test="${empty	subPunchClock.startScheduleDate}">
+				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+				                            	</c:if>
+				                            	<c:if test="${!empty subPunchClock.startScheduleDate}">
+				                            	${subPunchClock.startScheduleDate} ～ 
+				                            	</c:if>
+				                            	<c:if test="${empty	subPunchClock.endScheduleDate}">
+				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                            	</c:if>
+				                            	<c:if test="${!empty subPunchClock.endScheduleDate}">
+				                            	${subPunchClock.endScheduleDate}
+				                            	</c:if>
+			                            	</td>
+		                            	</tr>
+		                            	
+	                            		<tr><td class="center">考勤时间</td></tr>
+		                            	<tr>
+		                            		<c:if test="${subPunchClock.punchNormalState != 0 && subPunchClock.punchNormalState != 99}">
+		                            		<td class="center _warn1">
+		                            		</c:if>
+		                            		<c:if test="${subPunchClock.punchNormalState == 0 || subPunchClock.punchNormalState == 99}">
+		                            		<td class="center">
+		                            		</c:if>
+				                            	<c:if test="${empty	subPunchClock.startClockTime}">
+				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+				                            	</c:if>
+				                            	<c:if test="${!empty subPunchClock.startClockTime}">
+				                            	${subPunchClock.startClockTime} ～ 
+				                            	</c:if>
+				                            	<c:if test="${empty	subPunchClock.endClockTime}">
+				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                            	</c:if>
+				                            	<c:if test="${!empty subPunchClock.endClockTime}">
+				                            	${subPunchClock.endClockTime}
+				                            	</c:if>
+			                            	</td>
+		                            	</tr>
+	                            	</table>
                             	</td>
                             	</c:forEach>
                             </tr>
