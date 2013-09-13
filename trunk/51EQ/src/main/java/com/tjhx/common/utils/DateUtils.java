@@ -242,7 +242,47 @@ public class DateUtils {
 		return cal.get(Calendar.DATE);
 	}
 
-	public static void main(String[] args) {
-		System.out.println(DateUtils.getMonthDays(2012, 2));
+	/**
+	 * 返回两个时间差的毫秒数
+	 * 
+	 * @param time1 早一点的时间
+	 * @param style1
+	 * @param time2 晚一点的时间
+	 * @param style2
+	 * @return
+	 * @throws ParseException
+	 */
+	public static long timeBetween(String time1, String style1, String time2, String style2) throws ParseException {
+		SimpleDateFormat dfs1 = new SimpleDateFormat(style1);
+		SimpleDateFormat dfs2 = new SimpleDateFormat(style2);
+		long between = 0;
+
+		java.util.Date date1 = dfs1.parse(time1);
+		java.util.Date date2 = dfs2.parse(time2);
+		between = (date2.getTime() - date1.getTime());// 得到两者的毫秒数
+		return between;
+	}
+
+	/**
+	 * 返回两个时间差的毫秒数
+	 * 
+	 * @param time1 早一点的时间
+	 * @param time2 晚一点的时间
+	 * @param style
+	 * @return
+	 * @throws ParseException
+	 */
+	public static long timeBetween(String time1, String time2, String style) throws ParseException {
+		SimpleDateFormat dfs = new SimpleDateFormat(style);
+		long between = 0;
+
+		java.util.Date date1 = dfs.parse(time1);
+		java.util.Date date2 = dfs.parse(time2);
+		between = (date2.getTime() - date1.getTime());// 得到两者的毫秒数
+		return between;
+	}
+
+	public static void main(String[] args) throws ParseException {
+
 	}
 }
