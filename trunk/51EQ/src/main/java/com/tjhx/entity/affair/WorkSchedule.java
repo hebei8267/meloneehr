@@ -47,9 +47,13 @@ public class WorkSchedule extends IdEntity {
 	private Organization organization;
 	/** 上班类型Uuid */
 	private Integer workTypeUuid;
-	// ---------------------------------------------
+	// #######################################################
 	/** 用户关联机构编号 */
 	private Integer orgUuid;
+	/** 机构编号 */
+	private String orgId;
+	/** 员工编号 */
+	private int empUuid;
 
 	/**
 	 * 取得员工编号-自定义
@@ -280,4 +284,43 @@ public class WorkSchedule extends IdEntity {
 	public void setOrgUuid(Integer orgUuid) {
 		this.orgUuid = orgUuid;
 	}
+
+	/**
+	 * 取得机构编号
+	 * 
+	 * @return orgId 机构编号
+	 */
+	@Transient
+	public String getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * 设置机构编号
+	 * 
+	 * @param orgId 机构编号
+	 */
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * 取得员工编号
+	 * 
+	 * @return empUuid 员工编号
+	 */
+	@Transient
+	public int getEmpUuid() {
+		return empUuid;
+	}
+
+	/**
+	 * 设置员工编号
+	 * 
+	 * @param empUuid 员工编号
+	 */
+	public void setEmpUuid(int empUuid) {
+		this.empUuid = empUuid;
+	}
+
 }
