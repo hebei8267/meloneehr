@@ -104,7 +104,7 @@ public class WorkScheduleManager {
 			Map<Integer, WorkType> dbWtMap) {
 		for (WorkSchedule ws : dbWsList) {
 			if (subWs.getEmpCode().equals(ws.getEmpCode()) && subWs.getScheduleDate().equals(ws.getScheduleDate())) {
-				subWs.setWorkDate(ws.getWorkDate());
+				subWs.setWorkTime(ws.getWorkTime());
 				subWs.setWorkTypeUuid(ws.getWorkTypeUuid());
 				WorkType _tmpWt = dbWtMap.get(ws.getWorkTypeUuid());
 				if (null != _tmpWt) {
@@ -193,13 +193,13 @@ public class WorkScheduleManager {
 		// 排班日期
 
 		// HH:mm格式
-		String[] date1 = getDate1(wtDataMap, scheduleTimeSelect);
+		String[] time1 = getTime1(wtDataMap, scheduleTimeSelect);
 		// 上班时间 HH:mm
-		_dbws.setStartDate(date1[0]);
+		_dbws.setStartTime(time1[0]);
 		// 下班时间 HH:mm
-		_dbws.setEndDate(date1[1]);
+		_dbws.setEndTime(time1[1]);
 		// 工作时间 HH:mm - HH:mm
-		_dbws.setWorkDate(getDate(wtDataMap, scheduleTimeSelect));
+		_dbws.setWorkTime(getDate(wtDataMap, scheduleTimeSelect));
 		// 用户关联机构
 		_dbws.setOrganization(org);
 		// 上班类型Uuid
@@ -236,13 +236,13 @@ public class WorkScheduleManager {
 		ws.setScheduleDateYM(DateUtils.transDateFormat(scheduleDate, "yyyy-MM-dd", "yyyyMM"));
 
 		// HH:mm格式
-		String[] date1 = getDate1(wtDataMap, scheduleTimeSelect);
+		String[] time1 = getTime1(wtDataMap, scheduleTimeSelect);
 		// 上班时间 HH:mm
-		ws.setStartDate(date1[0]);
+		ws.setStartTime(time1[0]);
 		// 下班时间 HH:mm
-		ws.setEndDate(date1[1]);
+		ws.setEndTime(time1[1]);
 		// 工作时间 HH:mm - HH:mm
-		ws.setWorkDate(getDate(wtDataMap, scheduleTimeSelect));
+		ws.setWorkTime(getDate(wtDataMap, scheduleTimeSelect));
 
 		// 用户关联机构
 		ws.setOrganization(org);
@@ -270,7 +270,7 @@ public class WorkScheduleManager {
 	 * @param scheduleTimeSelectKey
 	 * @return
 	 */
-	private String[] getDate1(Map<String, String> wtDataMap, String scheduleTimeSelectKey) {
+	private String[] getTime1(Map<String, String> wtDataMap, String scheduleTimeSelectKey) {
 		String date = wtDataMap.get(scheduleTimeSelectKey);
 		String[] result = new String[2];
 		result[0] = date.substring(0, 5);
