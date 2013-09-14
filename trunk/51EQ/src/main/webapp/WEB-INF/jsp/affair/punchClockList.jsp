@@ -74,17 +74,17 @@
 		                            		</c:if>
 		                            		
 
-				                            	<c:if test="${empty	subPunchClock.startScheduleDate}">
+				                            	<c:if test="${empty	subPunchClock.startScheduleTime}">
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 				                            	</c:if>
-				                            	<c:if test="${!empty subPunchClock.startScheduleDate}">
-				                            	${subPunchClock.startScheduleDate} ～ 
+				                            	<c:if test="${!empty subPunchClock.startScheduleTime}">
+				                            	${subPunchClock.startScheduleTime} ～ 
 				                            	</c:if>
-				                            	<c:if test="${empty	subPunchClock.endScheduleDate}">
+				                            	<c:if test="${empty	subPunchClock.endScheduleTime}">
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				                            	</c:if>
-				                            	<c:if test="${!empty subPunchClock.endScheduleDate}">
-				                            	${subPunchClock.endScheduleDate}
+				                            	<c:if test="${!empty subPunchClock.endScheduleTime}">
+				                            	${subPunchClock.endScheduleTime}
 				                            	</c:if>
 			                            	</td>
 		                            	</tr>
