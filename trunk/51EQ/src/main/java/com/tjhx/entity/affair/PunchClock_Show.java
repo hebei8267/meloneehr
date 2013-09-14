@@ -17,10 +17,12 @@ public class PunchClock_Show {
 	private String startClockTime;
 	/** 打卡时间-结束 */
 	private String endClockTime;
-	/** 上班时间 HH:mm */
-	private String startScheduleDate;
-	/** 下班时间 HH:mm */
-	private String endScheduleDate;
+	/** 排班日期 YYYYMMDD */
+	private String scheduleDate;
+	/** 排班上班时间 HH:mm */
+	private String startScheduleTime;
+	/** 排班下班时间 HH:mm */
+	private String endScheduleTime;
 	/** 员工编号 */
 	private int empUuid;
 	/** 考勤状态 99-非预期加班 0-正常 1-迟到 2-早退 */
@@ -146,39 +148,57 @@ public class PunchClock_Show {
 	}
 
 	/**
-	 * 取得上班时间HH:mm
+	 * 取得排班日期YYYYMMDD
 	 * 
-	 * @return startScheduleDate 上班时间HH:mm
+	 * @return scheduleDate 排班日期YYYYMMDD
 	 */
-	public String getStartScheduleDate() {
-		return startScheduleDate;
+	public String getScheduleDate() {
+		return scheduleDate;
 	}
 
 	/**
-	 * 设置上班时间HH:mm
+	 * 设置排班日期YYYYMMDD
 	 * 
-	 * @param startScheduleDate 上班时间HH:mm
+	 * @param scheduleDate 排班日期YYYYMMDD
 	 */
-	public void setStartScheduleDate(String startScheduleDate) {
-		this.startScheduleDate = startScheduleDate;
+	public void setScheduleDate(String scheduleDate) {
+		this.scheduleDate = scheduleDate;
 	}
 
 	/**
-	 * 取得下班时间HH:mm
+	 * 取得排班上班时间HH:mm
 	 * 
-	 * @return endScheduleDate 下班时间HH:mm
+	 * @return startScheduleTime 排班上班时间HH:mm
 	 */
-	public String getEndScheduleDate() {
-		return endScheduleDate;
+	public String getStartScheduleTime() {
+		return startScheduleTime;
 	}
 
 	/**
-	 * 设置下班时间HH:mm
+	 * 设置排班上班时间HH:mm
 	 * 
-	 * @param endScheduleDate 下班时间HH:mm
+	 * @param startScheduleTime 排班上班时间HH:mm
 	 */
-	public void setEndScheduleDate(String endScheduleDate) {
-		this.endScheduleDate = endScheduleDate;
+	public void setStartScheduleTime(String startScheduleTime) {
+		this.startScheduleTime = startScheduleTime;
+	}
+
+	/**
+	 * 取得排班下班时间HH:mm
+	 * 
+	 * @return endScheduleTime 排班下班时间HH:mm
+	 */
+	public String getEndScheduleTime() {
+		return endScheduleTime;
+	}
+
+	/**
+	 * 设置排班下班时间HH:mm
+	 * 
+	 * @param endScheduleTime 排班下班时间HH:mm
+	 */
+	public void setEndScheduleTime(String endScheduleTime) {
+		this.endScheduleTime = endScheduleTime;
 	}
 
 	/**
@@ -200,13 +220,14 @@ public class PunchClock_Show {
 	}
 
 	public void copy(PunchClock clock) {
-		this.startClockTime = DateUtils.transDateFormat(clock.getStartClockTime(), "HH:mm:ss");
-		this.endClockTime = DateUtils.transDateFormat(clock.getEndClockTime(), "HH:mm:ss");
+		this.startClockTime = DateUtils.transDateFormat(clock.getStartClockTime(), "MM/dd HH:mm:ss");
+		this.endClockTime = DateUtils.transDateFormat(clock.getEndClockTime(), "MM/dd HH:mm:ss");
 	}
 
 	public void copy(WorkSchedule workSchedule) {
-		this.startScheduleDate = workSchedule.getStartDate();
-		this.endScheduleDate = workSchedule.getEndDate();
+		this.startScheduleTime = workSchedule.getStartTime();
+		this.endScheduleTime = workSchedule.getEndTime();
+		this.scheduleDate = workSchedule.getScheduleDate();
 	}
 
 	public void timeValidate() throws ParseException {
@@ -216,7 +237,7 @@ public class PunchClock_Show {
 		String clockTime = clockTimeY + clockTimeM + clockTimeD;
 		if (Integer.valueOf(curDate) < Integer.valueOf(clockTime)) {// 未来日不做计算
 			punchNormalState = 0;// 正常
-		} else if (StringUtils.isBlank(startScheduleDate) || StringUtils.isBlank(endScheduleDate)) {
+		} else if (StringUtils.isBlank(startScheduleTime) || StringUtils.isBlank(endScheduleTime)) {
 			punchNormalState = 0;// 正常
 
 			if (StringUtils.isNotBlank(startClockTime) || StringUtils.isNotBlank(endClockTime)) {
@@ -228,7 +249,8 @@ public class PunchClock_Show {
 			if (StringUtils.isBlank(startClockTime)) {
 				punchNormalState = 1;// 迟到
 			} else {
-				long timeBetween1 = DateUtils.timeBetween(startClockTime, "HH:mm:ss", startScheduleDate, "HH:mm");
+				long timeBetween1 = DateUtils.timeBetween(startClockTime, "MM/dd HH:mm:ss",
+						scheduleDate.substring(4, 8) + " " + startScheduleTime, "MMdd HH:mm");
 				if (timeBetween1 < 0) {
 					punchNormalState = 1;// 迟到
 				}
@@ -238,7 +260,8 @@ public class PunchClock_Show {
 			if (StringUtils.isBlank(endClockTime)) {
 				punchNormalState = 2;// 早退
 			} else {
-				long timeBetween2 = DateUtils.timeBetween(endScheduleDate, "HH:mm", endClockTime, "HH:mm:ss");
+				long timeBetween2 = DateUtils.timeBetween(scheduleDate.substring(4, 8) + " " + endScheduleTime,
+						"MMdd HH:mm", endClockTime, "MM/dd HH:mm:ss");
 				if (timeBetween2 < 0) {
 					punchNormalState = 2;// 早退
 				}
