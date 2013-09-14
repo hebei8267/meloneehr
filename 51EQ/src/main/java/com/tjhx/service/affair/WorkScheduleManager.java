@@ -125,7 +125,7 @@ public class WorkScheduleManager {
 		List<String> _optDateList = new ArrayList<String>();
 
 		String _now = DateUtils.getCurFormatDate("yyyy-MM-dd");
-		for (int i = scheduleOverDays; i >= 1; i--) {
+		for (int i = scheduleOverDays; i > 0; i--) {
 			_optDateList.add(DateUtils.getNextDateFormatDate(_now, -i, "yyyy-MM-dd"));
 		}
 
