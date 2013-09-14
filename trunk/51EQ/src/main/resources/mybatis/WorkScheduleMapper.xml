@@ -11,14 +11,14 @@
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
-        <result column="end_date" property="endDate" jdbcType="VARCHAR"/>
+        <result column="end_time" property="endTime" jdbcType="VARCHAR"/>
         <result column="schedule_date" property="scheduleDate" jdbcType="VARCHAR"/>
         <result column="schedule_date_m" property="scheduleDateM" jdbcType="VARCHAR"/>
         <result column="schedule_date_y" property="scheduleDateY" jdbcType="VARCHAR"/>
         <result column="schedule_date_y_m" property="scheduleDateYM" jdbcType="VARCHAR"/>
         <result column="schedule_show" property="scheduleShow" jdbcType="VARCHAR"/>
-        <result column="start_date" property="startDate" jdbcType="VARCHAR"/>
-        <result column="work_date" property="workDate" jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="VARCHAR"/>
+        <result column="work_time" property="workTime" jdbcType="VARCHAR"/>
         <result column="work_type_uuid" property="workTypeUuid" jdbcType="INTEGER"/>
         <result column="org_uuid" property="orgUuid" jdbcType="INTEGER"/>
         
@@ -36,14 +36,14 @@
     	ws.update_user_id ,
     	ws.version ,
     	ws.emp_code ,
-    	ws.end_date ,
+    	ws.end_time ,
     	ws.schedule_date ,
     	ws.schedule_date_m ,
     	ws.schedule_date_y ,
     	ws.schedule_date_y_m ,
     	ws.schedule_show ,
-    	ws.start_date ,
-    	ws.work_date ,
+    	ws.start_time ,
+    	ws.work_time ,
     	ws.work_type_uuid ,
     	ws.org_uuid ,
     	emp.uuid AS emp_uuid
