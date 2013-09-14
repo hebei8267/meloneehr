@@ -175,16 +175,16 @@
                             					<c:if test="${!empty subSchedule.workTypeUuid }">
                             					
 	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 1 }">
-	                            					<td class="center _warn1" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					<td class="center _warn1" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workTime}</td>
 	                            					</c:if>
 	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 2 }">
-	                            					<td class="center _warn2" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					<td class="center _warn2" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workTime}</td>
 	                            					</c:if>
 	                            					<c:if test="${(subSchedule.workTypeUuid % 8) == 3 }">
-	                            					<td class="center _warn3" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					<td class="center _warn3" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workTime}</td>
 	                            					</c:if>
 	                            					<c:if test="${((subSchedule.workTypeUuid % 8) != 1) && ((subSchedule.workTypeUuid % 8) != 2) && ((subSchedule.workTypeUuid % 8) != 3) }">
-	                            					<td class="center _warn4" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workDate}</td>
+	                            					<td class="center _warn4" id="_wtTxt${status1.index + 1}${status2.index + 1}">${subSchedule.workTime}</td>
 	                            					</c:if>
                             					
                             					</c:if>
@@ -204,7 +204,7 @@
                             					</c:if>
                             					
                             					<c:if test="${!empty subSchedule.workTypeUuid }">
-	                            					<td class="center">${subSchedule.workDate}</td>
+	                            					<td class="center">${subSchedule.workTime}</td>
                             					</c:if>
                             				</tr>
                             				

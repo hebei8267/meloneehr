@@ -70,7 +70,7 @@
                             					</c:if>
                             					
                             					<c:if test="${!empty subSchedule.workTypeUuid }">
-	                            					<td class="center">${subSchedule.workDate}</td>
+	                            					<td class="center">${subSchedule.workTime}</td>
                             					</c:if>
                             				</tr>
                             				
