@@ -10,7 +10,7 @@ public class WorkSchedule_Show {
 	/** 上班类型Uuid */
 	private Integer workTypeUuid;
 	/** 工作时间 HH:mm - HH:mm */
-	private String workDate;
+	private String workTime;
 
 	/**
 	 * 取得上班类型名称
@@ -87,19 +87,19 @@ public class WorkSchedule_Show {
 	/**
 	 * 取得工作时间HH:mm-HH:mm
 	 * 
-	 * @return workDate 工作时间HH:mm-HH:mm
+	 * @return workTime 工作时间HH:mm-HH:mm
 	 */
-	public String getWorkDate() {
-		return workDate;
+	public String getWorkTime() {
+		return workTime;
 	}
 
 	/**
 	 * 设置工作时间HH:mm-HH:mm
 	 * 
-	 * @param workDate 工作时间HH:mm-HH:mm
+	 * @param workTime 工作时间HH:mm-HH:mm
 	 */
-	public void setWorkDate(String workDate) {
-		this.workDate = workDate;
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
 	}
 
 }

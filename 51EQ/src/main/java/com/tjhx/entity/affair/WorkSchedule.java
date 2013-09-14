@@ -38,11 +38,11 @@ public class WorkSchedule extends IdEntity {
 	/** 排班日期 */
 	private String scheduleShow;
 	/** 上班时间 HH:mm */
-	private String startDate;
+	private String startTime;
 	/** 下班时间 HH:mm */
-	private String endDate;
+	private String endTime;
 	/** 工作时间 HH:mm - HH:mm */
-	private String workDate;
+	private String workTime;
 	/** 用户关联机构 */
 	private Organization organization;
 	/** 上班类型Uuid */
@@ -174,58 +174,58 @@ public class WorkSchedule extends IdEntity {
 	/**
 	 * 取得上班时间HH:mm
 	 * 
-	 * @return startDate 上班时间HH:mm
+	 * @return startTime 上班时间HH:mm
 	 */
 	@Column(length = 5)
-	public String getStartDate() {
-		return startDate;
+	public String getStartTime() {
+		return startTime;
 	}
 
 	/**
 	 * 设置上班时间HH:mm
 	 * 
-	 * @param startDate 上班时间HH:mm
+	 * @param startTime 上班时间HH:mm
 	 */
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 	/**
 	 * 取得下班时间HH:mm
 	 * 
-	 * @return endDate 下班时间HH:mm
+	 * @return endTime 下班时间HH:mm
 	 */
 	@Column(length = 5)
-	public String getEndDate() {
-		return endDate;
+	public String getEndTime() {
+		return endTime;
 	}
 
 	/**
-	 * 设置下班时间
+	 * 设置下班时间HH:mm
 	 * 
-	 * @param endDate 下班时间
+	 * @param endTime 下班时间HH:mm
 	 */
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	/**
 	 * 取得工作时间HH:mm-HH:mm
 	 * 
-	 * @return workDate 工作时间HH:mm-HH:mm
+	 * @return workTime 工作时间HH:mm-HH:mm
 	 */
 	@Column(length = 16)
-	public String getWorkDate() {
-		return workDate;
+	public String getWorkTime() {
+		return workTime;
 	}
 
 	/**
 	 * 设置工作时间HH:mm-HH:mm
 	 * 
-	 * @param workDate 工作时间HH:mm-HH:mm
+	 * @param workTime 工作时间HH:mm-HH:mm
 	 */
-	public void setWorkDate(String workDate) {
-		this.workDate = workDate;
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
 	}
 
 	/**
