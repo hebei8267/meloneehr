@@ -49,7 +49,7 @@
                         optDateShow : {
                             required : true,
                             date : true,
-                            datelessThan : $("#_tomorrow_date").val()
+                            dateLessThan : $("#_tomorrow_date").val()
                         },
                         jobType : {
                             required : true

@@ -37,17 +37,17 @@
                         recordDateShow : {
                             required : true,
                             date : true,
-                            datelessThan : $("#_tomorrow_date").val()
+                            dateLessThan : $("#_tomorrow_date").val()
                         },
                         intoDateShow : {
                             required : true,
                             date : true,
-                            datelessThan : $("#_tomorrow_date").val()
+                            dateLessThan : $("#_tomorrow_date").val()
                         },
                         planDateShow : {
                             required : true,
                             date : true,
-                            datelessThan : $("#_tomorrow_date").val()
+                            dateLessThan : $("#_tomorrow_date").val()
                         },
                         recordAmt : {
                             required : true,
