@@ -151,6 +151,7 @@
                             <c:if test="${_permIdList.contains('18')}">
   							<li>
                                 <a href="${sc_ctx}/msgInfo">公告/消息</a>
+                                <a href="${sc_ctx}/pettyCash/list">门店备用金</a>
                             </li>
                             </c:if>
                             <!-- 
