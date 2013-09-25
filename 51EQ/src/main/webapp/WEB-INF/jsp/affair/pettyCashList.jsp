@@ -91,16 +91,17 @@
                                     <th	width="25" class="center">
                                         <input id="checkAll" type="checkbox" />
                                     </th>
-                                    <th width="130">
+                                    <th width="115">
                                         业务编号(UID)
                                     </th>
-                                    <th width="130">
-                                        业务日期
-                                    </th>
-                                    <th width="40" class="center">
+                                    <th width="35" class="center">
                                     星期
                                     </th>
-                                    <th>
+                                    <th width="80">
+                                        业务日期
+                                    </th>
+                                    
+                                    <th width="150">
                                         支出/拨入(金额)
                                     </th>
                                     <th>
@@ -123,17 +124,31 @@
                                         <td>
                                             ${pettyCash.optUid}
                                         </td>
-                                        <td>
-                                            ${pettyCash.optDateShow}
-                                        </td>
                                         <td class="center">
                                             ${pettyCash.week}
+                                        </td>
+                                        <td>
+                                            ${pettyCash.optDateShow}
                                         </td>
                                         <td>
                                             ${pettyCash.optAmt}
                                         </td>
                                         <td>
-                                            ${pettyCash.expReason}
+                                        	<%//操作类型 0-支出 1-拨入 %>
+                                        	<c:if test="${pettyCash.optType == 0}">
+	                            			${pettyCash.expReason}
+	                            			</c:if>
+	                            			<c:if test="${pettyCash.optType == 1}">
+	                            				<c:if test="${pettyCash.incomeSource.equals('1')}">
+	                            				正常拨入
+	                            				</c:if>
+	                            				<c:if test="${pettyCash.incomeSource.equals('2')}">
+	                            				非常拨入
+	                            				</c:if>
+	                            				<c:if test="${pettyCash.incomeSource.equals('4')}">
+	                            				会计调帐
+	                            				</c:if>
+	                                   		</c:if>                                            
                                         </td>
                                         <td>
                                             
