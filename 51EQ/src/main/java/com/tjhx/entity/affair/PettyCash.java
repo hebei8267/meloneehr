@@ -38,7 +38,7 @@ public class PettyCash extends IdEntity {
 	/** 操作类型 0-支出 1-拨入 */
 	private int optType;
 	/** 拨入来源 1-正常拨入 2-非常拨入 4-会计调帐 */
-	private int incomeSources;
+	private String incomeSource;
 	/** 支出事项 */
 	private String expReason;
 	/** 备注 */
@@ -48,6 +48,12 @@ public class PettyCash extends IdEntity {
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
+	/** 门店备用金可编辑天数 */
+	private int editDays;
+	/** 门店备用金可编辑日期 */
+	private String editDate;
+	/** 门店备用金可查看天数 */
+	private int viewDays;
 
 	/**
 	 * 取得业务编号
@@ -236,21 +242,22 @@ public class PettyCash extends IdEntity {
 	}
 
 	/**
-	 * 取得拨入来源1-正常拨入2-非常拨入3-会计调帐
+	 * 取得拨入来源1-正常拨入2-非常拨入4-会计调帐
 	 * 
-	 * @return incomeSources 拨入来源1-正常拨入2-非常拨入3-会计调帐
+	 * @return incomeSource 拨入来源1-正常拨入2-非常拨入4-会计调帐
 	 */
-	public int getIncomeSources() {
-		return incomeSources;
+	@Column(length = 1)
+	public String getIncomeSource() {
+		return incomeSource;
 	}
 
 	/**
-	 * 设置拨入来源1-正常拨入2-非常拨入3-会计调帐
+	 * 设置拨入来源1-正常拨入2-非常拨入4-会计调帐
 	 * 
-	 * @param incomeSources 拨入来源1-正常拨入2-非常拨入3-会计调帐
+	 * @param incomeSource 拨入来源1-正常拨入2-非常拨入4-会计调帐
 	 */
-	public void setIncomeSources(int incomeSources) {
-		this.incomeSources = incomeSources;
+	public void setIncomeSource(String incomeSource) {
+		this.incomeSource = incomeSource;
 	}
 
 	/**
@@ -328,4 +335,60 @@ public class PettyCash extends IdEntity {
 		this.orgName = orgName;
 	}
 
+	/**
+	 * 取得门店备用金可编辑天数
+	 * 
+	 * @return editDays 门店备用金可编辑天数
+	 */
+	@Transient
+	public int getEditDays() {
+		return editDays;
+	}
+
+	/**
+	 * 设置门店备用金可编辑天数
+	 * 
+	 * @param editDays 门店备用金可编辑天数
+	 */
+	public void setEditDays(int editDays) {
+		this.editDays = editDays;
+	}
+
+	/**
+	 * 取得门店备用金可编辑日期
+	 * 
+	 * @return editDate 门店备用金可编辑日期
+	 */
+	@Transient
+	public String getEditDate() {
+		return editDate;
+	}
+
+	/**
+	 * 设置门店备用金可编辑日期
+	 * 
+	 * @param editDate 门店备用金可编辑日期
+	 */
+	public void setEditDate(String editDate) {
+		this.editDate = editDate;
+	}
+
+	/**
+	 * 取得门店备用金可查看天数
+	 * 
+	 * @return viewDays 门店备用金可查看天数
+	 */
+	@Transient
+	public int getViewDays() {
+		return viewDays;
+	}
+
+	/**
+	 * 设置门店备用金可查看天数
+	 * 
+	 * @param viewDays 门店备用金可查看天数
+	 */
+	public void setViewDays(int viewDays) {
+		this.viewDays = viewDays;
+	}
 }

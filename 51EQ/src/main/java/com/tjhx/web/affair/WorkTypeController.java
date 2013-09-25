@@ -55,7 +55,7 @@ public class WorkTypeController extends BaseController {
 		}
 	}
 
-	public void initDateList(Model model) {
+	private void initDateList(Model model) {
 		Map<String, String> hrList = new LinkedHashMap<String, String>();
 
 		hrList.put("", "");

@@ -29,6 +29,13 @@ public class SysConfig {
 	/** 可查看排班天数 */
 	private int workScheduleOverDays;
 
+	/** 门店备用金可编辑天数 */
+	private int pettyCashEditDays;
+	/** 门店备用金可查看天数 */
+	private int pettyCashViewDays;
+	/** 门店备用金重计算天数 */
+	private int pettyCashCalculateDays;
+
 	/**
 	 * 取得cashDailyModel
 	 * 
@@ -279,6 +286,60 @@ public class SysConfig {
 	 */
 	public void setWorkScheduleOverDays(int workScheduleOverDays) {
 		this.workScheduleOverDays = workScheduleOverDays;
+	}
+
+	/**
+	 * 取得门店备用金可编辑天数
+	 * 
+	 * @return pettyCashEditDays 门店备用金可编辑天数
+	 */
+	public int getPettyCashEditDays() {
+		return pettyCashEditDays;
+	}
+
+	/**
+	 * 设置门店备用金可编辑天数
+	 * 
+	 * @param pettyCashEditDays 门店备用金可编辑天数
+	 */
+	public void setPettyCashEditDays(int pettyCashEditDays) {
+		this.pettyCashEditDays = pettyCashEditDays;
+	}
+
+	/**
+	 * 取得门店备用金可查看天数
+	 * 
+	 * @return pettyCashViewDays 门店备用金可查看天数
+	 */
+	public int getPettyCashViewDays() {
+		return pettyCashViewDays;
+	}
+
+	/**
+	 * 设置门店备用金可查看天数
+	 * 
+	 * @param pettyCashViewDays 门店备用金可查看天数
+	 */
+	public void setPettyCashViewDays(int pettyCashViewDays) {
+		this.pettyCashViewDays = pettyCashViewDays;
+	}
+
+	/**
+	 * 取得门店备用金重计算天数
+	 * 
+	 * @return pettyCashCalculateDays 门店备用金重计算天数
+	 */
+	public int getPettyCashCalculateDays() {
+		return pettyCashCalculateDays;
+	}
+
+	/**
+	 * 设置门店备用金重计算天数
+	 * 
+	 * @param pettyCashCalculateDays 门店备用金重计算天数
+	 */
+	public void setPettyCashCalculateDays(int pettyCashCalculateDays) {
+		this.pettyCashCalculateDays = pettyCashCalculateDays;
 	}
 
 }
