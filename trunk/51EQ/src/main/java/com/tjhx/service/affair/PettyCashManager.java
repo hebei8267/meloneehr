@@ -83,7 +83,7 @@ public class PettyCashManager {
 	 */
 	@Transactional(readOnly = false)
 	public void updateNewPettyCash_Pay(PettyCash pettyCash) throws ParseException {
-		PettyCash _dbPettyCash = getPettyCashByOptUid(pettyCash.getOptUid());
+		PettyCash _dbPettyCash = pettyCashJpaDao.findOne(pettyCash.getUuid());
 		// 该门店备用金信息不存在
 		if (null == _dbPettyCash) {
 			throw new ServiceException("ERR_MSG_PETTY_CASH_002");
@@ -143,6 +143,73 @@ public class PettyCashManager {
 	 */
 	public PettyCash getPettyCashByUuid(Integer uuid) {
 		return pettyCashJpaDao.findOne(uuid);
+	}
+
+	/**
+	 * 新增 门店备用金（拨入类型）
+	 * 
+	 * @param pettyCash
+	 * @param userInfo
+	 * @throws ParseException
+	 */
+	@Transactional(readOnly = false)
+	public void addNewPettyCash_Income(PettyCash pettyCash, User user) throws ParseException {
+		// 业务日期
+		String _date = DateUtils.transDateFormat(pettyCash.getOptDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		// 业务日期
+		pettyCash.setOptDate(_date);
+		// 业务日期-年
+		pettyCash.setOptDateY(DateUtils.transDateFormat(_date, "yyyyMMdd", "yyyy"));
+		// 业务日期-月
+		pettyCash.setOptDateM(DateUtils.transDateFormat(_date, "yyyyMMdd", "MM"));
+		// 业务日期-对应的星期
+		pettyCash.setWeek(DateUtils.getWeekOfDate(_date, "yyyyMMdd"));
+		// 操作金额-支出为负数，拨入为正数
+		pettyCash.setOptAmt(pettyCash.getOptAmtShow());
+		// 机构编号
+		pettyCash.setOrgId(user.getOrganization().getId());
+
+		pettyCashJpaDao.save(pettyCash);
+	}
+
+	/**
+	 * 更新 门店备用金（拨入类型）
+	 * 
+	 * @param pettyCash
+	 * @throws ParseException
+	 */
+	@Transactional(readOnly = false)
+	public void updateNewPettyCash_Income(PettyCash pettyCash) throws ParseException {
+		PettyCash _dbPettyCash = pettyCashJpaDao.findOne(pettyCash.getUuid());
+		// 该门店备用金信息不存在
+		if (null == _dbPettyCash) {
+			throw new ServiceException("ERR_MSG_PETTY_CASH_002");
+		}
+
+		// 业务日期
+		String _date = DateUtils.transDateFormat(pettyCash.getOptDateShow(), "yyyy-MM-dd", "yyyyMMdd");
+		_dbPettyCash.setOptDate(_date);
+		// 业务日期-显示
+		_dbPettyCash.setOptDateShow(pettyCash.getOptDateShow());
+		// 业务日期-年
+		_dbPettyCash.setOptDateY(DateUtils.transDateFormat(_date, "yyyyMMdd", "yyyy"));
+		// 业务日期-月
+		_dbPettyCash.setOptDateM(DateUtils.transDateFormat(_date, "yyyyMMdd", "MM"));
+		// 业务日期-对应的星期
+		_dbPettyCash.setWeek(DateUtils.getWeekOfDate(_date, "yyyyMMdd"));
+		// 操作金额-支出为负数，拨入为正数
+		_dbPettyCash.setOptAmt(pettyCash.getOptAmtShow());
+		// 操作金额-全部为正数
+		_dbPettyCash.setOptAmtShow(pettyCash.getOptAmtShow());
+
+		// 拨入来源 1-正常拨入 2-非常拨入 4-会计调帐
+		_dbPettyCash.setIncomeSource(pettyCash.getIncomeSource());
+
+		// 备注
+		_dbPettyCash.setDescTxt(pettyCash.getDescTxt());
+
+		pettyCashJpaDao.save(_dbPettyCash);
+
 	}
 
 }
