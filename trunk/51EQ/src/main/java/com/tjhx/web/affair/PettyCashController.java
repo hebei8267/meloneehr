@@ -47,6 +47,31 @@ public class PettyCashController extends BaseController {
 	}
 
 	/**
+	 * view门店备用金列表信息
+	 * 
+	 * @param model
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "view/{id}")
+	public String viewPettyCash_Action(@PathVariable("id") Integer id, Model model, HttpSession session)
+			throws ParseException {
+		PettyCash pettyCash = pettyCashManager.getPettyCashByUuid(id);
+		if (null == pettyCash) {
+			return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/pettyCash/list";
+		} else {
+			model.addAttribute("pettyCash", pettyCash);
+
+			if (0 == pettyCash.getOptType()) {// 支出
+				return "affair/pettyCashPayViewForm";
+			} else {// 拨入
+				initIncomeSourceList(model);
+				return "affair/pettyCashIncomeViewForm";
+			}
+		}
+	}
+
+	/**
 	 * 编辑门店备用金列表信息
 	 * 
 	 * @param model
@@ -160,9 +185,8 @@ public class PettyCashController extends BaseController {
 	@RequestMapping(value = "del")
 	public String delPettyCash_Action(@RequestParam("uuids") String ids, Model model, HttpSession session) {
 		String[] idArray = ids.split(",");
-		for (int i = 0; i < idArray.length; i++) {
-			pettyCashManager.delPettyCashByUuid(Integer.parseInt(idArray[i]));
-		}
+
+		pettyCashManager.delPettyCashByUuid(idArray, getUserInfo(session));
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/pettyCash/list";
 	}
@@ -196,7 +220,7 @@ public class PettyCashController extends BaseController {
 				}
 			} else {// 修改操作
 				try {
-					pettyCashManager.updateNewPettyCash_Pay(pettyCash);
+					pettyCashManager.updateNewPettyCash_Pay(pettyCash, getUserInfo(session));
 				} catch (ServiceException ex) {
 					// 添加错误消息
 					addInfoMsg(model, ex.getMessage());
@@ -209,7 +233,7 @@ public class PettyCashController extends BaseController {
 				pettyCashManager.addNewPettyCash_Income(pettyCash, getUserInfo(session));
 			} else {// 修改操作
 				try {
-					pettyCashManager.updateNewPettyCash_Income(pettyCash);
+					pettyCashManager.updateNewPettyCash_Income(pettyCash, getUserInfo(session));
 				} catch (ServiceException ex) {
 					// 添加错误消息
 					addInfoMsg(model, ex.getMessage());
