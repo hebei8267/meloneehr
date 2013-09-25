@@ -17,6 +17,10 @@
             .form-horizontal .controls {
                 margin-left: 145px;
             }
+            ._warn1 {
+				background-color: #FFCC33;
+				padding: 5px;
+			}
         </style>
         <script>
             $(function() {
@@ -24,14 +28,16 @@
                     format : 'yyyy-mm-dd'
                 });
             	
-            	$("#inputForm").validate({
+				$("#inputForm").validate({
                     rules : {
                     	optUid : {
+                    		required : true,
                             length7 : true
                         },
                         optDateShow : {
                             required : true,
-                            date : true
+                            date : true,
+                            dateGreaterThan : '${pettyCash.editDate}'
                         },
                         optAmtShow : {
                             required : true,
@@ -66,7 +72,7 @@
             <div class="row">
                 <div class="span12">
                     <legend>
-                        <h3>${sessionScope.__SESSION_USER_INFO.orgName} 门店备用金(支出)信息
+                        <h3>${sessionScope.__SESSION_USER_INFO.orgName} 门店备用金<span class="_warn1">(支出)</span>信息
                         <c:if test="${empty	pettyCash.uuid}">
                             新增
                         </c:if>
@@ -81,7 +87,7 @@
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="pettyCash">
                         <form:hidden path="uuid"/>
                         <%//操作类型 0-支出 1-拨入 %>
-                        <input id="optType" name="optType" type="hidden" value="0"/>                        
+                        <input id="optType" name="optType" type="hidden" value="0"/>
                         <div class="control-group">
                             <label class="control-label">业务编号(UID) :</label>
                             <div class="controls">
@@ -103,7 +109,7 @@
                         <div class="control-group">
                             <label class="control-label">支出金额 :</label>
                             <div class="controls">
-                          		<form:input	path="optAmtShow" />
+                          		<form:input	path="optAmtShow" /> 元
                           	</div>
                         </div>
                         <div class="control-group">
