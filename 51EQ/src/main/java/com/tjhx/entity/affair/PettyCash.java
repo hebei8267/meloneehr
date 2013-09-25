@@ -48,12 +48,10 @@ public class PettyCash extends IdEntity {
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
-	/** 门店备用金可编辑天数 */
-	private int editDays;
 	/** 门店备用金可编辑日期 */
 	private String editDate;
-	/** 门店备用金可查看天数 */
-	private int viewDays;
+	/** 可编辑标记 */
+	private boolean editFlg;
 
 	/**
 	 * 取得业务编号
@@ -323,6 +321,9 @@ public class PettyCash extends IdEntity {
 	 */
 	@Transient
 	public String getOrgName() {
+		if (null == orgName && null != orgId) {
+			orgName = orgId.substring(3, 6);
+		}
 		return orgName;
 	}
 
@@ -333,25 +334,6 @@ public class PettyCash extends IdEntity {
 	 */
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
-	}
-
-	/**
-	 * 取得门店备用金可编辑天数
-	 * 
-	 * @return editDays 门店备用金可编辑天数
-	 */
-	@Transient
-	public int getEditDays() {
-		return editDays;
-	}
-
-	/**
-	 * 设置门店备用金可编辑天数
-	 * 
-	 * @param editDays 门店备用金可编辑天数
-	 */
-	public void setEditDays(int editDays) {
-		this.editDays = editDays;
 	}
 
 	/**
@@ -374,21 +356,21 @@ public class PettyCash extends IdEntity {
 	}
 
 	/**
-	 * 取得门店备用金可查看天数
+	 * 取得可编辑标记
 	 * 
-	 * @return viewDays 门店备用金可查看天数
+	 * @return editFlg 可编辑标记
 	 */
 	@Transient
-	public int getViewDays() {
-		return viewDays;
+	public boolean isEditFlg() {
+		return editFlg;
 	}
 
 	/**
-	 * 设置门店备用金可查看天数
+	 * 设置可编辑标记
 	 * 
-	 * @param viewDays 门店备用金可查看天数
+	 * @param editFlg 可编辑标记
 	 */
-	public void setViewDays(int viewDays) {
-		this.viewDays = viewDays;
+	public void setEditFlg(boolean editFlg) {
+		this.editFlg = editFlg;
 	}
 }
