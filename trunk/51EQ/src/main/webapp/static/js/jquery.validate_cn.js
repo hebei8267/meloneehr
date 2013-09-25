@@ -70,9 +70,13 @@ jQuery.validator.addMethod("digits1", function(value, element) {
 	return this.optional(element) || /^([1-9]{1}\d*)?$/.test(value);
 }, "请输入合法的数字");
 
-jQuery.validator.addMethod("datelessThan", function(value, element, param) {
+jQuery.validator.addMethod("dateLessThan", function(value, element, param) {
     return value < param;
 }, '输入日期必须早于 {0}');
+
+jQuery.validator.addMethod("dateGreaterThan", function(value, element, param) {
+    return value > param;
+}, '输入日期必须晚于 {0}');
 
 jQuery.validator.addMethod("compareDate", function(value, element, param) {
     var startDate = jQuery(param).val();
