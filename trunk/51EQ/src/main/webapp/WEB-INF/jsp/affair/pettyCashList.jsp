@@ -10,6 +10,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<style type="text/css">
+            ._warn1 {
+				background-color: #FF6633;
+				padding: 5px;
+			}
+			._warn2 {
+				background-color: #33FF00;
+				padding: 5px;
+			}
+        </style>
 		<script>
 		$(function() {
             $("#listForm").validate({
@@ -119,7 +129,9 @@
                             	<c:forEach items="${pettyCashList}" var="pettyCash">
                             	<tr>
                                         <td	class="center">
-                                            <input type="checkbox" name="uuid" value="${pettyCash.uuid}">
+                                        	<c:if test="${pettyCash.editFlg}">
+                                        		<input type="checkbox" name="uuid" value="${pettyCash.uuid}">
+                                        	</c:if>
                                         </td>
                                         <td>
                                             ${pettyCash.optUid}
@@ -131,7 +143,15 @@
                                             ${pettyCash.optDateShow}
                                         </td>
                                         <td>
+                                        	<%//操作类型 0-支出 1-拨入 %>
+                                        	<c:if test="${pettyCash.optType == 0}">
+                                        	<span class="_warn1">
+                                        	</c:if>
+                                        	<c:if test="${pettyCash.optType == 1}">
+                                            <span class="_warn2">
+                                        	</c:if>
                                             ${pettyCash.optAmt}
+                                        	</span>
                                         </td>
                                         <td>
                                         	<%//操作类型 0-支出 1-拨入 %>
@@ -151,10 +171,15 @@
 	                                   		</c:if>                                            
                                         </td>
                                         <td>
-                                            
+                                            ${pettyCash.balanceAmt}
                                         </td>
                                         <td>
+                                        	<c:if test="${pettyCash.editFlg}">
                                             <a href="${sc_ctx}/pettyCash/edit/${pettyCash.uuid}" class="btn btn-warning"/>修改</a>
+                                        	</c:if>
+                                        	<c:if test="${!pettyCash.editFlg}">
+                                            <a href="${sc_ctx}/pettyCash/view/${pettyCash.uuid}" target="_blank" class="btn"/>查看</a>
+                                        	</c:if>
                                         </td>
                                     </tr>
                             	</c:forEach>

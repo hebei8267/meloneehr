@@ -18,7 +18,7 @@
                 margin-left: 145px;
             }
             ._warn1 {
-				background-color: #FFCC33;
+				color: #FF6633;
 				padding: 5px;
 			}
         </style>
