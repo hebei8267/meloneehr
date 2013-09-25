@@ -2,6 +2,7 @@ package com.tjhx.service.affair;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,11 +10,13 @@ import javax.annotation.Resource;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.affair.PettyCashJpaDao;
 import com.tjhx.entity.affair.PettyCash;
 import com.tjhx.entity.member.User;
+import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
 
 @Service
@@ -59,6 +62,10 @@ public class PettyCashManager {
 		pettyCash.setOrgId(user.getOrganization().getId());
 
 		pettyCashJpaDao.save(pettyCash);
+
+		// 计算备用金余额
+		calBalanceAmt(user.getOrganization().getId());
+
 	}
 
 	/**
@@ -82,7 +89,7 @@ public class PettyCashManager {
 	 * @throws ParseException
 	 */
 	@Transactional(readOnly = false)
-	public void updateNewPettyCash_Pay(PettyCash pettyCash) throws ParseException {
+	public void updateNewPettyCash_Pay(PettyCash pettyCash, User user) throws ParseException {
 		PettyCash _dbPettyCash = pettyCashJpaDao.findOne(pettyCash.getUuid());
 		// 该门店备用金信息不存在
 		if (null == _dbPettyCash) {
@@ -110,6 +117,9 @@ public class PettyCashManager {
 		_dbPettyCash.setDescTxt(pettyCash.getDescTxt());
 
 		pettyCashJpaDao.save(_dbPettyCash);
+
+		// 计算备用金余额
+		calBalanceAmt(user.getOrganization().getId());
 	}
 
 	/**
@@ -119,10 +129,34 @@ public class PettyCashManager {
 	 * @return
 	 */
 	public List<PettyCash> getPettyCashListByOrgId(String orgId) {
-		// TODO ??????????????
-		List<PettyCash> _list = pettyCashJpaDao.findByOrgId(orgId, new Sort(new Sort.Order(Sort.Direction.DESC,
-				"optDate")));
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		// 门店备用金可查看天数
+		int editDays = sysConfig.getPettyCashEditDays();
+		int viewDays = sysConfig.getPettyCashViewDays() * -1;
+		Date beforeDate = DateUtils.getNextDateFormatDate(viewDays);
+
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgId(orgId, beforeDate, new Sort(new Sort.Order(
+				Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
+
+		setEditFlg_PettyCashList(_list, editDays);
+
 		return _list;
+	}
+
+	/**
+	 * 设置备用金的可编辑标记
+	 * 
+	 * @param pettyCashList
+	 * @param editDays
+	 */
+	private void setEditFlg_PettyCashList(List<PettyCash> pettyCashList, int editDays) {
+		for (PettyCash pettyCash : pettyCashList) {
+			long spanDay = DateUtils.getDateSpanDay(pettyCash.getCreateDate(), DateUtils.getCurrentDate());
+			if (spanDay <= editDays) {
+				pettyCash.setEditFlg(true);
+			}
+		}
+
 	}
 
 	/**
@@ -131,8 +165,12 @@ public class PettyCashManager {
 	 * @param parseInt
 	 */
 	@Transactional(readOnly = false)
-	public void delPettyCashByUuid(Integer uuid) {
-		pettyCashJpaDao.delete(uuid);
+	public void delPettyCashByUuid(String[] idArray, User user) {
+		for (int i = 0; i < idArray.length; i++) {
+			pettyCashJpaDao.delete(Integer.parseInt(idArray[i]));
+		}
+		// 计算备用金余额
+		calBalanceAmt(user.getOrganization().getId());
 	}
 
 	/**
@@ -170,6 +208,9 @@ public class PettyCashManager {
 		pettyCash.setOrgId(user.getOrganization().getId());
 
 		pettyCashJpaDao.save(pettyCash);
+
+		// 计算备用金余额
+		calBalanceAmt(user.getOrganization().getId());
 	}
 
 	/**
@@ -179,7 +220,7 @@ public class PettyCashManager {
 	 * @throws ParseException
 	 */
 	@Transactional(readOnly = false)
-	public void updateNewPettyCash_Income(PettyCash pettyCash) throws ParseException {
+	public void updateNewPettyCash_Income(PettyCash pettyCash, User user) throws ParseException {
 		PettyCash _dbPettyCash = pettyCashJpaDao.findOne(pettyCash.getUuid());
 		// 该门店备用金信息不存在
 		if (null == _dbPettyCash) {
@@ -210,6 +251,34 @@ public class PettyCashManager {
 
 		pettyCashJpaDao.save(_dbPettyCash);
 
+		// 计算备用金余额
+		calBalanceAmt(user.getOrganization().getId());
+
 	}
 
+	/**
+	 * 计算备用金余额
+	 */
+	@Transactional(readOnly = false)
+	private void calBalanceAmt(String orgId) {
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		// 门店备用金重计算天数
+		int calDays = sysConfig.getPettyCashCalculateDays();
+		Date beforeDate = DateUtils.getNextDateFormatDate(calDays * -1);
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgId(orgId, beforeDate, new Sort(new Sort.Order(
+				Sort.Direction.ASC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
+
+		BigDecimal _tmpBalanceAmt = null;
+		for (int i = 0; i < _list.size(); i++) {
+			PettyCash pettyCash = _list.get(i);
+			if (i == 0) {
+				_tmpBalanceAmt = pettyCash.getBalanceAmt();
+				continue;// 第一条记录不计算备用金余额
+			}
+			_tmpBalanceAmt = _tmpBalanceAmt.add(pettyCash.getOptAmt());
+			pettyCash.setBalanceAmt(_tmpBalanceAmt);
+			pettyCashJpaDao.save(pettyCash);
+
+		}
+	}
 }
