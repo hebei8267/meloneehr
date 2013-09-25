@@ -51,6 +51,20 @@ public class DateUtils {
 	 * 取得指定天数后的日期（以当前时间为准）
 	 * 
 	 * @param addDay
+	 * @return
+	 */
+	public static synchronized Date getNextDateFormatDate(int addDay) {
+		Calendar cal = Calendar.getInstance();
+		Date _date = getCurrentDate();
+		cal.setTime(_date);
+		cal.add(Calendar.DATE, addDay);
+		return cal.getTime();
+	}
+
+	/**
+	 * 取得指定天数后的日期（以当前时间为准）
+	 * 
+	 * @param addDay
 	 * @param style
 	 * @return
 	 */
