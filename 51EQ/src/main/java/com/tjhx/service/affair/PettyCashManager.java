@@ -281,4 +281,18 @@ public class PettyCashManager {
 
 		}
 	}
+
+	/**
+	 * 根据查询条件 取得指定门店备用金余额（指定时间段内）
+	 * 
+	 * @param orgId 门店编号
+	 * @param optDate_start 开始时间(yyyyMMdd)
+	 * @param optDate_end 结束时间(yyyyMMdd)
+	 * @return
+	 */
+	public List<PettyCash> searchPettyCashList(String orgId, String optDate_start, String optDate_end) {
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndOptDateInterval(orgId, optDate_start, optDate_end,
+				new Sort(new Sort.Order(Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
+		return _list;
+	}
 }
