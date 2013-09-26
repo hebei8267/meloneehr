@@ -37,7 +37,8 @@
                         optDateShow : {
                             required : true,
                             date : true,
-                            dateGreaterThan : '${pettyCash.editDate}'
+                            dateGreaterThan : '${pettyCash.editDate}',
+                            dateLessThan : $("#_tomorrow_date").val()
                         },
                         optAmtShow : {
                             required : true,
@@ -83,6 +84,7 @@
                     </legend>
                 </div>
                 
+                <input type="hidden" id="_tomorrow_date" value="<%=DateUtils.getNextDateFormatDate(1, "yyyy-MM-dd")%>">
                 <div class="span12"	style="margin-top: 10px;">
                     <form:form method="POST" class="form-horizontal" id="inputForm"	modelAttribute="pettyCash">
                         <form:hidden path="uuid"/>
