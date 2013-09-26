@@ -64,6 +64,10 @@ jQuery.validator.addMethod("isPhone", function(value,element) {
 jQuery.validator.addMethod("money", function(value, element) {
 	return this.optional(element) || /^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(value);
 }, "请输入正确的金额");
+//金额验证
+jQuery.validator.addMethod("negativeMoney", function(value, element) {
+	return this.optional(element) || /^-?(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(value);
+}, "请输入正确的金额");
 
 //大于零的整数验证
 jQuery.validator.addMethod("digits1", function(value, element) {
