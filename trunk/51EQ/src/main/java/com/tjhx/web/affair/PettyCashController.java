@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +26,21 @@ import com.tjhx.globals.Constants;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.ServiceException;
 import com.tjhx.service.affair.PettyCashManager;
+import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
+import com.tjhx.web.report.ReportUtils;
 
 @Controller
 @RequestMapping(value = "/pettyCash")
 public class PettyCashController extends BaseController {
 	@Resource
 	private PettyCashManager pettyCashManager;
+	@Resource
+	private OrganizationManager orgManager;
 
+	// ----------------------------------------------------------------------
+	// 门店
+	// ----------------------------------------------------------------------
 	/**
 	 * 取得门店备用金列表
 	 * 
@@ -244,5 +254,45 @@ public class PettyCashController extends BaseController {
 		}
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/pettyCash/list";
+	}
+
+	// ----------------------------------------------------------------------
+	// 总部
+	// ----------------------------------------------------------------------
+	/**
+	 * 取得门店备用金列表
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "manageList")
+	public String pettyCashManageList_Action(Model model, HttpSession session) {
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
+
+		return "affair/pettyCashManageList";
+	}
+
+	@RequestMapping(value = "search")
+	public String pettyCashSearch_Action(Model model, HttpServletRequest request) throws ServletRequestBindingException {
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
+
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
+		String optDateShow_end = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
+		model.addAttribute("orgId", orgId);
+		model.addAttribute("optDateShow_start", optDateShow_start);
+		model.addAttribute("optDateShow_end", optDateShow_end);
+
+		List<PettyCash> _pettyCashList = pettyCashManager.searchPettyCashList(orgId,
+				DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"),
+				DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
+		
+		
+		for (PettyCash pettyCash : _pettyCashList) {
+			pettyCash.setCreateDateStr(DateUtils.transDateFormat(pettyCash.getCreateDate(), "yyyy-MM-dd"));
+		}
+		model.addAttribute("pettyCashList", _pettyCashList);
+
+		return "affair/pettyCashManageList";
 	}
 }
