@@ -52,6 +52,8 @@ public class PettyCash extends IdEntity {
 	private String editDate;
 	/** 可编辑标记 */
 	private boolean editFlg;
+	/** 业务日期 */
+	private String createDateStr;
 
 	/**
 	 * 取得业务编号
@@ -372,5 +374,24 @@ public class PettyCash extends IdEntity {
 	 */
 	public void setEditFlg(boolean editFlg) {
 		this.editFlg = editFlg;
+	}
+
+	/**
+	 * 取得业务日期
+	 * 
+	 * @return createDateStr 业务日期
+	 */
+	@Transient
+	public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	/**
+	 * 设置业务日期
+	 * 
+	 * @param createDateStr 业务日期
+	 */
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
 	}
 }
