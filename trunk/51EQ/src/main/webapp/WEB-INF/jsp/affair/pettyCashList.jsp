@@ -128,60 +128,64 @@
                             <tbody>
                             	<c:forEach items="${pettyCashList}" var="pettyCash">
                             	<tr>
-                                        <td	class="center">
-                                        	<c:if test="${pettyCash.editFlg}">
-                                        		<input type="checkbox" name="uuid" value="${pettyCash.uuid}">
-                                        	</c:if>
-                                        </td>
-                                        <td>
-                                            ${pettyCash.optUid}
-                                        </td>
-                                        <td class="center">
-                                            ${pettyCash.week}
-                                        </td>
-                                        <td>
-                                            ${pettyCash.optDateShow}
-                                        </td>
-                                        <td>
-                                        	<%//操作类型 0-支出 1-拨入 %>
-                                        	<c:if test="${pettyCash.optType == 0}">
-                                        	<span class="_warn1">
-                                        	</c:if>
-                                        	<c:if test="${pettyCash.optType == 1}">
-                                            <span class="_warn2">
-                                        	</c:if>
-                                            ${pettyCash.optAmt}
-                                        	</span>
-                                        </td>
-                                        <td>
-                                        	<%//操作类型 0-支出 1-拨入 %>
-                                        	<c:if test="${pettyCash.optType == 0}">
-	                            			${pettyCash.expReason}
+                               		<td	class="center">
+                                  	<c:if test="${pettyCash.editFlg}">
+                                   		<input type="checkbox" name="uuid" value="${pettyCash.uuid}">
+                                 	</c:if>
+                                   	</td>
+                                  	<td>
+                              			${pettyCash.optUid}
+                                  	</td>
+                                  	<td class="center">
+                                		${pettyCash.week}
+                                  	</td>
+                                  	<td>
+                                    	${pettyCash.optDateShow}
+                                	</td>
+                                  	<td>
+                                  		<%//操作类型 0-支出 1-拨入 %>
+                                    	<c:if test="${pettyCash.optType == 0}">
+                                      	<span class="_warn1">
+                                     	</c:if>
+                                        
+                                        <c:if test="${pettyCash.optType == 1}">
+                                       	<span class="_warn2">
+                                       	</c:if>
+                                        
+                                        ${pettyCash.optAmt}
+                                       	</span>
+                                 	</td>
+                                  	<td>
+                                       	<%//操作类型 0-支出 1-拨入 %>
+                                       	<c:if test="${pettyCash.optType == 0}">
+	                            		${pettyCash.expReason}
+	                            		</c:if>
+	                            		
+	                            		<c:if test="${pettyCash.optType == 1}">
+	                            			<c:if test="${pettyCash.incomeSource.equals('1')}">
+	                            			正常拨入
 	                            			</c:if>
-	                            			<c:if test="${pettyCash.optType == 1}">
-	                            				<c:if test="${pettyCash.incomeSource.equals('1')}">
-	                            				正常拨入
-	                            				</c:if>
-	                            				<c:if test="${pettyCash.incomeSource.equals('2')}">
-	                            				非常拨入
-	                            				</c:if>
-	                            				<c:if test="${pettyCash.incomeSource.equals('4')}">
-	                            				会计调帐
-	                            				</c:if>
-	                                   		</c:if>                                            
-                                        </td>
-                                        <td>
-                                            ${pettyCash.balanceAmt}
-                                        </td>
-                                        <td>
-                                        	<c:if test="${pettyCash.editFlg}">
-                                            <a href="${sc_ctx}/pettyCash/edit/${pettyCash.uuid}" class="btn btn-warning"/>修改</a>
-                                        	</c:if>
-                                        	<c:if test="${!pettyCash.editFlg}">
-                                            <a href="${sc_ctx}/pettyCash/view/${pettyCash.uuid}" target="_blank" class="btn"/>查看</a>
-                                        	</c:if>
-                                        </td>
-                                    </tr>
+	                            			<c:if test="${pettyCash.incomeSource.equals('2')}">
+	                            			非常拨入
+	                            			</c:if>
+	                            			<c:if test="${pettyCash.incomeSource.equals('4')}">
+	                            			会计调帐
+	                            			</c:if>
+	                                 	</c:if>                                            
+                                 	</td>
+                                 	<td>
+                                      	${pettyCash.balanceAmt}
+                                   	</td>
+                                  	<td>
+                                      	<c:if test="${pettyCash.editFlg}">
+                                      	<a href="${sc_ctx}/pettyCash/edit/${pettyCash.uuid}" class="btn btn-warning"/>修改</a>
+                                     	</c:if>
+                                        	
+                                        <c:if test="${!pettyCash.editFlg}">
+                                  		<a href="${sc_ctx}/pettyCash/view/${pettyCash.uuid}" target="_blank" class="btn"/>查看</a>
+                                  		</c:if>
+                               		</td>
+                                </tr>
                             	</c:forEach>
                             </tbody>
                             <c:if test="${empty	pettyCashList}" >
