@@ -25,4 +25,16 @@ public interface PettyCashJpaDao extends CrudRepository<PettyCash, Integer> {
 	@Query("select p from PettyCash p where p.orgId = :orgId and p.updateDate >= :updateDate")
 	public List<PettyCash> findByOrgId(@Param("orgId") String orgId, @Param("updateDate") Date updateDate, Sort sort);
 
+	/**
+	 * 根据查询条件 取得指定门店备用金余额（指定时间段内）
+	 * 
+	 * @param orgId
+	 * @param optDate_start
+	 * @param optDate_end
+	 * @return
+	 */
+	@Query("select p from PettyCash p where p.orgId = :orgId and p.optDate >= :optDate_start and p.optDate <= :optDate_end")
+	public List<PettyCash> findByOrgIdAndOptDateInterval(@Param("orgId") String orgId,
+			@Param("optDate_start") String optDate_start, @Param("optDate_end") String optDate_end, Sort sort);
+
 }
