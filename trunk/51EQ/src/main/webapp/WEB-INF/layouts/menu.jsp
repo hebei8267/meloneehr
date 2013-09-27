@@ -134,7 +134,10 @@
                     </li>
                     </c:if>
                     
-                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') || _permIdList.contains('15') || _permIdList.contains('16') || _permIdList.contains('17') || _permIdList.contains('18')}">
+                    <c:if test="${_permIdList.contains('13') || _permIdList.contains('14') 
+                    || _permIdList.contains('15') || _permIdList.contains('16') || _permIdList.contains('17') 
+                    || _permIdList.contains('18') || _permIdList.contains('19') || _permIdList.contains('20')
+                    || _permIdList.contains('21')}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">日常事务<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -151,9 +154,25 @@
                             <c:if test="${_permIdList.contains('18')}">
   							<li>
                                 <a href="${sc_ctx}/msgInfo">公告/消息</a>
+                            </li>
+                            </c:if>
+                            
+                            
+                            <c:if test="${_permIdList.contains('20')}">
+  							<li>
+                                <%//门店%>
                                 <a href="${sc_ctx}/pettyCash/list">门店备用金</a>
                             </li>
                             </c:if>
+                            
+                            <c:if test="${_permIdList.contains('21')}">
+  							<li>
+                                <%//门店%>
+                                <a href="${sc_ctx}/pettyCash/manageList">门店备用金</a>
+                            </li>
+                            </c:if>
+                            
+                            
                             <!-- 
                             <li>
                                 <a href="${sc_ctx}/reqBill">门店要货单</a>
