@@ -266,7 +266,7 @@ public class PettyCashManager {
 		int calDays = sysConfig.getPettyCashCalculateDays();
 		Date beforeDate = DateUtils.getNextDateFormatDate(calDays * -1);
 		List<PettyCash> _list = pettyCashJpaDao.findByOrgId(orgId, beforeDate, new Sort(new Sort.Order(
-				Sort.Direction.ASC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
+				Sort.Direction.ASC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
 
 		BigDecimal _tmpBalanceAmt = null;
 		for (int i = 0; i < _list.size(); i++) {
