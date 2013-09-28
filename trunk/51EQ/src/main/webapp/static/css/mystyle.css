@@ -46,6 +46,9 @@ select{
 .mytable tbody tr td.center, .mytable thead  tr th.center {
 	text-align: center;
 }
+.mytable tbody tr td.right, .mytable thead  tr th.right {
+	text-align: right;
+}
 .right_text {
 	text-align: right;
 }
