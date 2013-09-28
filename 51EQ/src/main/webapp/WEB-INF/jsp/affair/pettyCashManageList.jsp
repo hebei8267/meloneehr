@@ -13,12 +13,14 @@
 	<head>
 		<style type="text/css">
 		._warn1 {
-			background-color: #FF6633;
+			color: #006dcc;
 			padding: 5px;
+			font-weight:bold;
 		}
 		._warn2 {
-			background-color: #33FF00;
+			color: #f89406;
 			padding: 5px;
+			font-weight:bold;
 		}
 		._warn3 {
 			background-color: #FFDEAD;
@@ -102,9 +104,9 @@
 									<th width="35" class="center">星期</th>
 									<th width="90" class="center">业务日期</th>
 									<th width="80" class="center">填写时间</th>
-									<th width="150">支出/拨入(金额)</th>
+									<th width="150" class="right">支出/拨入(金额)</th>
 									<th>支出/拨入(事项)</th>
-									<th width="110">备用金余额</th>
+									<th width="110" class="right">备用金余额</th>
 									<th width="55">&nbsp;</th>
 								</tr>
 							</thead>
@@ -123,7 +125,7 @@
 											</c:if>
 										</td>
 										<td>${pettyCash.createDateStr}</td>
-										<td>
+										<td class="right">
 											<% //操作类型 0-支出 1-拨入 %>
 											<c:if test="${pettyCash.optType == 0}">
 											<span class="_warn1">
@@ -154,7 +156,7 @@
 		                            			</c:if>
 											</c:if>
 										</td>
-										<td>${pettyCash.balanceAmt}</td>
+										<td class="right">${pettyCash.balanceAmt}</td>
 										<td><a href="${sc_ctx}/pettyCash/view/${pettyCash.uuid}" target="_blank" class="btn" />查看</a></td>
 									</tr>
 								</c:forEach>
