@@ -31,8 +31,7 @@
 				$("#inputForm").validate({
                     rules : {
                     	optUid : {
-                    		required : true,
-                            length7 : true
+                    		required : true
                         },
                         optDateShow : {
                             required : true,
@@ -53,16 +52,33 @@
                         }
                     }
                 });
-            	
+				$("#optUid").blur(function() {
+					if($("#optUid").val() == ""){
+						return;
+					}
+					$("#optUid").val(addZero($("#optUid").val(), 7));
+					
+					var _val = $("#optUid").val();
+					var _start = _val.length - 7;
+                    var _end = _val.length;
+                                      	
+                   	$("#optUid").val(_val.substring(_start, _end));
+				});
             	$("#saveBtn").click(function() {
                     $("input[type='text'],textarea").each(function(i) {
                         this.value = $.trim(this.value);
                     });
-
+                    
                     $("#inputForm").attr("action", "${sc_ctx}/pettyCash/save");
                     $("#inputForm").submit();
                 });
             });
+            
+            function addZero(num, n) {
+                if ((num + "").length >= n) return num;
+                return addZero("0" + num, n);
+            }
+
         </script>
     </head>
     <body>
