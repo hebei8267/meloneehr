@@ -9,6 +9,7 @@
             <sitemesh:title />
         </title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link type="text/css" href="${ctx}/static/css/bootstrap.css" rel="stylesheet">
