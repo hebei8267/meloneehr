@@ -9,7 +9,15 @@
             <sitemesh:title />
         </title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<% 
+		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
+		response.setHeader("Pragma","no-cache"); //HTTP 1.0 
+		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server 
+		%>
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />    
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />    
+        <META HTTP-EQUIV="Expires" CONTENT="0" />  
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link type="text/css" href="${ctx}/static/css/bootstrap.css" rel="stylesheet">
