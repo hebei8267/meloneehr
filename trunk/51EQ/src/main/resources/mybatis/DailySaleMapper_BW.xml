@@ -3,15 +3,15 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.tjhx.daobw.DailySaleMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_CheckInOut" type="com.tjhx.entity.bw.DailySale">
+	<resultMap id="Result_Map_DailySale" type="com.tjhx.entity.bw.DailySale">
         <result column="oper_date" property="operDate" jdbcType="VARCHAR"/>
         <result column="branch_no" property="orgBranchNo" jdbcType="VARCHAR"/>
         <result column="bw_sale_amt" property="bwSaleAmt" jdbcType="NUMERIC"/>
 	</resultMap>
 	
   	
-  	<!-- 取得checkinout信息 -->
-	<select id="getDailySaleList" parameterType="String" resultMap="Result_Map_CheckInOut">
+  	<!-- 按日/门店编号取得百威系统销售额信息 -->
+	<select id="getDailySaleList" parameterType="String" resultMap="Result_Map_DailySale">
 		SELECT
     		oper_date,
     		branch_no,
