@@ -10,61 +10,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script>
-            $().ready(function() {
-                //-----------------------------------
-                // 表单效验
-                //-----------------------------------
-                $("#listForm").validate({
-                    rules : {
-                        delBtn : {
-                            requiredSelect : 'uuid'
-                        }
-                    }
-                });
-                //-----------------------------------
-                // 全选/全部选
-                //-----------------------------------
-                $("#checkAll").click(function() {
-                    $('input[name="uuid"]').attr("checked", this.checked);
-                });
-                var $subCheckBox = $("input[name='uuid']");
-                $subCheckBox.click(function() {
-                    $("#checkAll").attr("checked", $subCheckBox.length == $("input[name='uuid']:checked").length ? true : false);
-                });
+    	<script>
+            $().ready(function() {            	
+            	$("#bwDataSynBtn").click(function() {
+                    $("input[type='text'],textarea").each(function(i) {
+                        this.value = $.trim(this.value);
+                    });
 
-                //-----------------------------------
-                // 删除按钮点击
-                //-----------------------------------
-                $("#delBtn").click(function() {
-                    if ($("#listForm").valid()) {
-                        $('#__del_confirm').modal({
-                            backdrop : true,
-                            keyboard : true,
-                            show : true
-                        });
-                    }
+                    $("#listForm").attr("action", "${sc_ctx}/supplier/bwDataSynBtn");
+                    $("#listForm").submit();
                 });
             });
-            //-----------------------------------
-            // 删除
-            //-----------------------------------
-            function _del_confirm() {
-                var $subCheckBox = $("input[name='uuid']");
-                var uuids = "";
-                $.each($subCheckBox, function(index, _checkBox) {
-                    if (_checkBox.checked) {
-                        uuids += _checkBox.value + ",";
-                    }
-                });
-                if (uuids.length > 0) {
-                    uuids = uuids.substring(0, uuids.length - 1);
-                }
-
-                $("#uuids").val(uuids);
-                $("#listForm").attr("action", "${sc_ctx}/supplier/del");
-                $("#listForm").submit();
-            }
         </script>
     </head>
     <body>
@@ -80,18 +36,17 @@
                         </legend>
                     </div>
                     <div class="span12">
-                        <a href="${sc_ctx}/supplier/new" class="btn btn-primary">新增</a>
-                        <input id="delBtn" name="delBtn" type="button" class="btn btn-danger" value="删除"/>
+                    	<button	id="bwDataSynBtn" class="btn btn-warning" type="button">数据同步 (百威)</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <input type="hidden" name="uuids" id="uuids"/>
                         <table class="table	table-striped table-bordered table-condensed mytable">
                             <thead>
                                 <tr>
-                                    <th	width="25" class="center">
-                                        <input id="checkAll" type="checkbox" />
+                                    <th	width="45" class="center">
+                                        序号
                                     </th>
-                                    <th>
+                                    <th width="105" class="center">
                                         供应商编号
                                     </th>
                                     <th>
@@ -109,13 +64,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${supplierList}" var="supplier">
+                                <c:forEach items="${supplierList}" var="supplier" varStatus="status">
                                     <tr>
                                         <td	class="center">
-                                            <input type="checkbox" name="uuid" value="${supplier.uuid}">
-                                            </input>
+                                            ${status.index + 1}
                                         </td>
-                                        <td>
+                                        <td class="center">
                                             ${supplier.supplierBwId}
                                         </td>
                                         <td>
