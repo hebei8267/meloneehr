@@ -3,7 +3,7 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.tjhx.daobw.DailySaleTotalMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_DailySaleTotal" type="com.tjhx.entity.bw.DailySaleTotalMyBatisDao">
+	<resultMap id="Result_Map_DailySaleTotal" type="com.tjhx.entity.bw.DailySaleTotal">
         
 		<!-- 机构资金编号 -->
 		<result column="branch_no" property="branchNo" jdbcType="VARCHAR"/>
