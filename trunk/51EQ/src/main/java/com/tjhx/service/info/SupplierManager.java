@@ -14,6 +14,8 @@ import org.springside.modules.cache.memcached.SpyMemcachedClient;
 
 import com.tjhx.dao.info.RegionJpaDao;
 import com.tjhx.dao.info.SupplierJpaDao;
+import com.tjhx.daobw.SupplierCustomMyBatisDao;
+import com.tjhx.entity.bw.SupplierCustom;
 import com.tjhx.entity.info.Region;
 import com.tjhx.entity.info.Supplier;
 import com.tjhx.globals.MemcachedObjectType;
@@ -29,6 +31,8 @@ public class SupplierManager {
 	private RegionJpaDao regionJpaDao;
 	@Resource
 	private SpyMemcachedClient spyMemcachedClient;
+	@Resource
+	private SupplierCustomMyBatisDao supplierCustomMyBatisDao;
 
 	/**
 	 * 取得所有货品供应商信息
@@ -41,8 +45,8 @@ public class SupplierManager {
 
 		if (null == _supplierList) {
 			// 从数据库中取出全量供应商信息(List格式)
-			_supplierList = (List<Supplier>) supplierJpaDao
-					.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "name")));
+			_supplierList = (List<Supplier>) supplierJpaDao.findSupplierList(new Sort(new Sort.Order(
+					Sort.Direction.ASC, "name")));
 			// 将供应商信息Map保存到memcached
 			spyMemcachedClient.set(MemcachedObjectType.SUPPLIER_LIST.getObjKey(),
 					MemcachedObjectType.SUPPLIER_LIST.getExpiredTime(), _supplierList);
@@ -62,7 +66,7 @@ public class SupplierManager {
 	@SuppressWarnings("unchecked")
 	public List<Supplier> getAllSupplier_DB() {
 
-		return (List<Supplier>) supplierJpaDao.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
+		return (List<Supplier>) supplierJpaDao.findSupplierList(new Sort(new Sort.Order(Sort.Direction.ASC, "uuid")));
 	}
 
 	/**
@@ -145,4 +149,89 @@ public class SupplierManager {
 
 		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 	}
+
+	/**
+	 * 同步百威供应商信息
+	 */
+	@Transactional(readOnly = false)
+	public void bwDataSyn() {
+		List<SupplierCustom> _bwList = supplierCustomMyBatisDao.getSupplierCustomList();
+		List<Supplier> _supplierList = (List<Supplier>) supplierJpaDao.findAll();
+
+		for (SupplierCustom supplierCustom : _bwList) {
+			// 见SupplierCustom.java的equals实现
+			if (_supplierList.contains(supplierCustom)) {
+				// 更新供应商信息
+				updateSupplierInfo(supplierCustom);
+			} else {
+				// 新增供应商信息
+				addSupplierInfo(supplierCustom);
+			}
+		}
+
+	}
+
+	/**
+	 * 新增供应商信息
+	 * 
+	 * @param supplierCustom
+	 */
+	private void addSupplierInfo(SupplierCustom supplierCustom) {
+		Supplier _supplier = new Supplier();
+		// 供应商编号-百威
+		_supplier.setSupplierBwId(supplierCustom.getSupcustNo());
+		// 供应商名称
+		_supplier.setName(supplierCustom.getSupName());
+		// 所在区域
+		Region region = regionJpaDao.findByCode(supplierCustom.getRegionNo());
+		_supplier.setRegion(region);
+		// 显示标记 0-正常 1-删除
+		_supplier.setDelFlg(getDelFlg(supplierCustom.getDisplayFlag()));
+
+		supplierJpaDao.save(_supplier);
+
+	}
+
+	/**
+	 * 更新供应商信息
+	 * 
+	 * @param supplierCustom
+	 */
+	private void updateSupplierInfo(SupplierCustom supplierCustom) {
+		Supplier _supplier = supplierJpaDao.findBySupplierBwId(supplierCustom.getSupcustNo());
+		// 供应商名称
+		_supplier.setName(supplierCustom.getSupName());
+		// 所在区域
+		Region region = regionJpaDao.findByCode(supplierCustom.getRegionNo());
+		_supplier.setRegion(region);
+		// 显示标记 0-正常 1-删除
+		_supplier.setDelFlg(getDelFlg(supplierCustom.getDisplayFlag()));
+
+		supplierJpaDao.save(_supplier);
+	}
+
+	private String getDelFlg(String displayFlag) {
+		// 显示标记0-不显示1-显示
+		if ("0".equals(displayFlag)) {
+			return "1";
+		} else {
+			return "0";
+		}
+	}
+
+	// /**
+	// * 自定义比较方法
+	// *
+	// * @param supplierCustom
+	// * @param supplier
+	// * @return
+	// */
+	// private boolean myEquals(SupplierCustom supplierCustom, Supplier
+	// supplier) {
+	// if (supplierCustom.getSupcustNo().equals(supplier.getSupplierBwId())) {
+	// return true;
+	// }
+	//
+	// return false;
+	// }
 }
