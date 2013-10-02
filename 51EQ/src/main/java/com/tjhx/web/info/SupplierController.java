@@ -168,4 +168,19 @@ public class SupplierController extends BaseController {
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/supplier/list";
 	}
+
+	/**
+	 * 同步百威供应商信息
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "bwDataSynBtn")
+	public String bwDataSyn_Action(Model model) {
+		// 同步百威数据库供应商信息
+		supplierManager.bwDataSyn();
+
+		addInfoMsg(model, "TIP_MSG_SUPPLIER_001");
+
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/supplier/list";
+	}
 }
