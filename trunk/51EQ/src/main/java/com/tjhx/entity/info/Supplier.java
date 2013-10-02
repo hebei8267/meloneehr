@@ -37,6 +37,8 @@ public class Supplier extends IdEntity {
 	private String pyCode;
 	/** 行号 */
 	private Integer index;
+	/** 显示标记 0-正常 1-删除 */
+	private String delFlg;
 
 	/**
 	 * 取得供应商编号-百威
@@ -63,7 +65,7 @@ public class Supplier extends IdEntity {
 	 * 
 	 * @return name 供应商名称
 	 */
-	@Column(nullable = false, length = 32, unique = true)
+	@Column(nullable = false, length = 32)
 	public String getName() {
 		return name;
 	}
@@ -176,4 +178,24 @@ public class Supplier extends IdEntity {
 	public void setIndex(Integer index) {
 		this.index = index;
 	}
+
+	/**
+	 * 取得显示标记0-正常1-删除
+	 * 
+	 * @return delFlg 显示标记0-正常1-删除
+	 */
+	@Column(length = 1)
+	public String getDelFlg() {
+		return delFlg;
+	}
+
+	/**
+	 * 设置显示标记0-正常1-删除
+	 * 
+	 * @param delFlg 显示标记0-正常1-删除
+	 */
+	public void setDelFlg(String delFlg) {
+		this.delFlg = delFlg;
+	}
+
 }
