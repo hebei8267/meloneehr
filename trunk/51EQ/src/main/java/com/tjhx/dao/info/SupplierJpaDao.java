@@ -1,6 +1,7 @@
 package com.tjhx.dao.info;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.tjhx.entity.info.Supplier;
@@ -8,7 +9,8 @@ import com.tjhx.entity.info.Supplier;
 public interface SupplierJpaDao extends CrudRepository<Supplier, Integer> {
 
 	@SuppressWarnings("rawtypes")
-	public Iterable findAll(Sort sort);
+	@Query("select s from Supplier s where s.delFlg = '0'")
+	public Iterable findSupplierList(Sort sort);
 
 	/**
 	 * 取得货品供应商信息
