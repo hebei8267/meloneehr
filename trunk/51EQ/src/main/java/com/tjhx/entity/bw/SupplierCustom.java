@@ -1,5 +1,7 @@
 package com.tjhx.entity.bw;
 
+import com.tjhx.entity.info.Supplier;
+
 /**
  * 货品供应商
  */
@@ -85,4 +87,11 @@ public class SupplierCustom {
 		this.displayFlag = displayFlag;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Supplier))
+			return false;
+
+		return this.getSupcustNo().equals(((Supplier) obj).getSupplierBwId());
+	}
 }
