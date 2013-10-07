@@ -24,7 +24,7 @@
 			</props>
 		</property>
 		<!-- 启动时延期30秒开始任务 -->
-		<property name="startupDelay" value="3" />
+		<property name="startupDelay" value="30" />
 	</bean>
 
 	<!-- ##################################### 打卡机  ###################################### -->
@@ -71,7 +71,7 @@
 	<bean id="orgStoreJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="orgStoreJobCronJobDetail" />
 		<!-- 每天上午 8:00 触发 -->
-		<property name="cronExpression" value="0 7 22 * * ?" />
+		<property name="cronExpression" value="0 0 8 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
