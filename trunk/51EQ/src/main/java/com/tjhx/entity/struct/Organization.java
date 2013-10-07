@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.NaturalId;
 
@@ -44,6 +45,14 @@ public class Organization extends IdEntity {
 
 	/** 父机构 */
 	private Organization parentOrg;
+
+	public Organization() {
+
+	}
+
+	public Organization(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * 取得机构编号
@@ -219,4 +228,12 @@ public class Organization extends IdEntity {
 		this.zkId = zkId;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Organization)) {
+			return false;
+		}
+		Organization rhs = (Organization) obj;
+		return new EqualsBuilder().append(this.getId(), rhs.getId()).isEquals();
+	}
 }
