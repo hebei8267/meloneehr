@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.tjhx.daobw.StorageMyBatisDao">
+<mapper namespace="com.tjhx.daobw.StoreMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_Storage" type="com.tjhx.entity.bw.Storage">
+	<resultMap id="Result_Map_Store" type="com.tjhx.entity.bw.Store">
         <result column="item_subno" property="itemSubno" jdbcType="VARCHAR"/>
         <result column="item_barcode" property="itemBarcode" jdbcType="VARCHAR"/>
         <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
@@ -14,7 +14,7 @@
 	</resultMap>
 	
 	<!-- 取得库存信息 -->
-	<select id="getStorageInfoList" parameterType="String" resultMap="Result_Map_Storage">
+	<select id="getStoreInfoList" parameterType="String" resultMap="Result_Map_Store">
 	<![CDATA[
 		SELECT DISTINCT
 		    a.item_subno,
@@ -85,7 +85,7 @@
 		                               '7',
 		                               '8') )
 		AND (
-		        d.branch_no IN (#{fn_branch_area}))
+		        d.branch_no IN (#{bw_branch_no}))
 		ORDER BY
 		    a.item_subno
 	]]>
