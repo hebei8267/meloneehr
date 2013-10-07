@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 库存信息
  */
-public class Storage {
+public class Store {
 	/** 货号 */
 	private String itemSubno;
 	/** 条形码 */
