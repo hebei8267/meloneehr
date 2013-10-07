@@ -103,7 +103,7 @@ public class StoreDayTotal extends IdEntity {
 	 * 
 	 * @return optDateY 日期-年
 	 */
-	@Column(length = 4)
+	@Column(name = "OPT_DATE_Y", length = 4)
 	public String getOptDateY() {
 		return optDateY;
 	}
@@ -122,7 +122,7 @@ public class StoreDayTotal extends IdEntity {
 	 * 
 	 * @return optDateM 日期-月
 	 */
-	@Column(length = 2)
+	@Column(name = "OPT_DATE_M", length = 2)
 	public String getOptDateM() {
 		return optDateM;
 	}

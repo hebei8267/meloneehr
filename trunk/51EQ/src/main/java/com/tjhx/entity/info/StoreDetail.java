@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -47,6 +48,13 @@ public class StoreDetail extends IdEntity {
 	private BigDecimal stockAmt;
 	/** 售价金额 */
 	private BigDecimal itemSaleAmt;
+	// --------------------------------------------------------------
+	/** 库存数量-合计 */
+	private BigDecimal stockTotalQty;
+	/** 库存金额-合计 */
+	private BigDecimal stockTotalAmt;
+	/** 售价金额-合计 */
+	private BigDecimal itemSaleTotalAmt;
 
 	/**
 	 * 取得机构编号
@@ -112,7 +120,7 @@ public class StoreDetail extends IdEntity {
 	 * 
 	 * @return optDateY 日期-年
 	 */
-	@Column(length = 4)
+	@Column(name = "OPT_DATE_Y", length = 4)
 	public String getOptDateY() {
 		return optDateY;
 	}
@@ -131,7 +139,7 @@ public class StoreDetail extends IdEntity {
 	 * 
 	 * @return optDateM 日期-月
 	 */
-	@Column(length = 2)
+	@Column(name = "OPT_DATE_M", length = 2)
 	public String getOptDateM() {
 		return optDateM;
 	}
@@ -294,6 +302,63 @@ public class StoreDetail extends IdEntity {
 	 */
 	public void setItemSaleAmt(BigDecimal itemSaleAmt) {
 		this.itemSaleAmt = itemSaleAmt;
+	}
+
+	/**
+	 * 取得库存数量-合计
+	 * 
+	 * @return stockTotalQty 库存数量-合计
+	 */
+	@Transient
+	public BigDecimal getStockTotalQty() {
+		return stockTotalQty;
+	}
+
+	/**
+	 * 设置库存数量-合计
+	 * 
+	 * @param stockTotalQty 库存数量-合计
+	 */
+	public void setStockTotalQty(BigDecimal stockTotalQty) {
+		this.stockTotalQty = stockTotalQty;
+	}
+
+	/**
+	 * 取得库存金额-合计
+	 * 
+	 * @return stockTotalAmt 库存金额-合计
+	 */
+	@Transient
+	public BigDecimal getStockTotalAmt() {
+		return stockTotalAmt;
+	}
+
+	/**
+	 * 设置库存金额-合计
+	 * 
+	 * @param stockTotalAmt 库存金额-合计
+	 */
+	public void setStockTotalAmt(BigDecimal stockTotalAmt) {
+		this.stockTotalAmt = stockTotalAmt;
+	}
+
+	/**
+	 * 取得售价金额-合计
+	 * 
+	 * @return itemSaleTotalAmt 售价金额-合计
+	 */
+	@Transient
+	public BigDecimal getItemSaleTotalAmt() {
+		return itemSaleTotalAmt;
+	}
+
+	/**
+	 * 设置售价金额-合计
+	 * 
+	 * @param itemSaleTotalAmt 售价金额-合计
+	 */
+	public void setItemSaleTotalAmt(BigDecimal itemSaleTotalAmt) {
+		this.itemSaleTotalAmt = itemSaleTotalAmt;
 	}
 
 }
