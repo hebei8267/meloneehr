@@ -16,7 +16,7 @@
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="stock_amt" property="stockAmt" jdbcType="DECIMAL"/>
         <result column="stock_qty" property="stockQty" jdbcType="DECIMAL"/>
-        <result column="storage_flg" property="storageFlg" jdbcType="VARCHAR"/>
+        <result column="store_flg" property="storeFlg" jdbcType="VARCHAR"/>
         
         <result column="stock_total_qty" property="stockTotalQty" jdbcType="DECIMAL"/>
         <result column="stock_total_amt" property="stockTotalAmt" jdbcType="DECIMAL"/>
@@ -31,7 +31,7 @@
 	    opt_date ,
 	    opt_date_y ,
 	    opt_date_m ,
-	    storage_flg ,
+	    store_flg ,
 	    SUM(stock_qty) AS stock_total_qty ,
 	    SUM(stock_amt) AS stock_total_amt,
 	    SUM(item_sale_amt) AS item_sale_total_amt
@@ -56,6 +56,6 @@
 		<include refid="Base_Column_List" />
 		from t_store_detail
 		<include refid="Where_Clause" />
-		GROUP BY storage_flg
+		GROUP BY store_flg
 	</select>
 </mapper>
