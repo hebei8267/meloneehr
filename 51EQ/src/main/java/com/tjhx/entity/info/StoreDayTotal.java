@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.hibernate.annotations.NaturalId;
 
 import com.tjhx.entity.IdEntity;
@@ -22,6 +24,8 @@ public class StoreDayTotal extends IdEntity {
 	private static final long serialVersionUID = 9047401151413675951L;
 	/** 机构编号 */
 	private String orgId;
+	/** 机构名称 */
+	private String orgName;
 	/** 机构资金-百威 */
 	private String bwBranchNo;
 	/** 日期 */
@@ -31,7 +35,7 @@ public class StoreDayTotal extends IdEntity {
 	/** 日期-月 */
 	private String optDateM;
 	/** 库存标记 0-正库存 1-负库存 */
-	private String storageFlg;
+	private String storeFlg;
 	/** 库存数量 */
 	private BigDecimal stockTotalQty;
 	/** 库存金额 */
@@ -57,6 +61,25 @@ public class StoreDayTotal extends IdEntity {
 	 */
 	public void setOrgId(String orgId) {
 		this.orgId = orgId;
+	}
+
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 
 	/**
@@ -139,21 +162,21 @@ public class StoreDayTotal extends IdEntity {
 	/**
 	 * 取得库存标记0-正库存1-负库存
 	 * 
-	 * @return storageFlg 库存标记0-正库存1-负库存
+	 * @return storeFlg 库存标记0-正库存1-负库存
 	 */
 	@NaturalId
 	@Column(length = 1, nullable = false)
-	public String getStorageFlg() {
-		return storageFlg;
+	public String getStoreFlg() {
+		return storeFlg;
 	}
 
 	/**
 	 * 设置库存标记0-正库存1-负库存
 	 * 
-	 * @param storageFlg 库存标记0-正库存1-负库存
+	 * @param storeFlg 库存标记0-正库存1-负库存
 	 */
-	public void setStorageFlg(String storageFlg) {
-		this.storageFlg = storageFlg;
+	public void setStoreFlg(String storeFlg) {
+		this.storeFlg = storeFlg;
 	}
 
 	/**
@@ -208,5 +231,14 @@ public class StoreDayTotal extends IdEntity {
 	 */
 	public void setItemSaleTotalAmt(BigDecimal itemSaleTotalAmt) {
 		this.itemSaleTotalAmt = itemSaleTotalAmt;
+	}
+
+	public boolean myEquals(Object obj) {
+		if (!(obj instanceof StoreDayTotal)) {
+			return false;
+		}
+		StoreDayTotal rhs = (StoreDayTotal) obj;
+		return new EqualsBuilder().append(this.getOrgId(), rhs.getOrgId()).append(this.getOptDate(), rhs.getOptDate())
+				.isEquals();
 	}
 }
