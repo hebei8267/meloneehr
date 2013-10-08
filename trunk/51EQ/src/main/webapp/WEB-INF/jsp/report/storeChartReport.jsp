@@ -57,9 +57,6 @@
 	                template: "#stockTotalQty#"
 	            },
 	            width: 60,
-	            tooltip: {
-	                template: "#stockTotalQty#"
-	            },
 	            xAxis: {
 	                template: "#orgName#"
 	            },
@@ -100,12 +97,9 @@
 	            label: "#stockTotalAmt#",
 	            color: "#476cee",
 	            tooltip: {
-	                template: "#stockTotalAmt#"
+	                template: "#stockTotalAmt#元"
 	            },
 	            width: 60,
-	            tooltip: {
-	                template: "#stockTotalAmt#"
-	            },
 	            xAxis: {
 	                template: "#orgName#"
 	            },
@@ -134,7 +128,7 @@
 	            label: "-#stockTotalAmt_Minus#",
 	            color: "#ee4339",
 	            tooltip: {
-	                template: "-#stockTotalAmt_Minus#"
+	                template: "-#stockTotalAmt_Minus#元"
 	            }
 	        });
 	        barChart2.parse(_data_set, "json");
@@ -146,12 +140,9 @@
 	            label: "#itemSaleTotalAmt#",
 	            color: "#476cee",
 	            tooltip: {
-	                template: "#itemSaleTotalAmt#"
+	                template: "#itemSaleTotalAmt#元"
 	            },
 	            width: 60,
-	            tooltip: {
-	                template: "#itemSaleTotalAmt#"
-	            },
 	            xAxis: {
 	                template: "#orgName#"
 	            },
@@ -180,7 +171,7 @@
 	            label: "-#itemSaleTotalAmt_Minus#",
 	            color: "#ee4339",
 	            tooltip: {
-	                template: "-#itemSaleTotalAmt_Minus#"
+	                template: "-#itemSaleTotalAmt_Minus#元"
 	            }
 	        });
 	        barChart3.parse(_data_set, "json");
