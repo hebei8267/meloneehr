@@ -84,7 +84,7 @@ public class StoreDetailManager {
 				// 日期-月
 				storeDetail.setOptDateM(optDateM);
 				// 库存标记 0-正库存 1-负库存
-				storeDetail.setStorageFlg(bwStore.getStockQty().compareTo(BigDecimal.ZERO) == 1 ? "0" : "1");
+				storeDetail.setStoreFlg(bwStore.getStockQty().compareTo(BigDecimal.ZERO) == 1 ? "0" : "1");
 				// Index
 				storeDetail.setIndex(++_index);
 				// 货号
@@ -135,7 +135,7 @@ public class StoreDetailManager {
 				// 日期-月
 				_storeDayTotal.setOptDateM(storeDetail.getOptDateM());
 				// 库存标记 0-正库存 1-负库存
-				_storeDayTotal.setStorageFlg(storeDetail.getStorageFlg());
+				_storeDayTotal.setStoreFlg(storeDetail.getStoreFlg());
 				// 库存数量
 				_storeDayTotal.setStockTotalQty(storeDetail.getStockTotalQty());
 				// 库存金额
