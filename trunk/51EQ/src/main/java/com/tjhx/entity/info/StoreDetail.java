@@ -32,7 +32,7 @@ public class StoreDetail extends IdEntity {
 	/** 日期-月 */
 	private String optDateM;
 	/** 库存标记 0-正库存 1-负库存 */
-	private String storageFlg;
+	private String storeFlg;
 	/** Index */
 	private Integer index;
 	// --------------------------------------------------------------
@@ -156,20 +156,20 @@ public class StoreDetail extends IdEntity {
 	/**
 	 * 取得库存标记0-正库存1-负库存
 	 * 
-	 * @return storageFlg 库存标记0-正库存1-负库存
+	 * @return storeFlg 库存标记0-正库存1-负库存
 	 */
 	@Column(length = 1)
-	public String getStorageFlg() {
-		return storageFlg;
+	public String getStoreFlg() {
+		return storeFlg;
 	}
 
 	/**
 	 * 设置库存标记0-正库存1-负库存
 	 * 
-	 * @param storageFlg 库存标记0-正库存1-负库存
+	 * @param storeFlg 库存标记0-正库存1-负库存
 	 */
-	public void setStorageFlg(String storageFlg) {
-		this.storageFlg = storageFlg;
+	public void setStoreFlg(String storeFlg) {
+		this.storeFlg = storeFlg;
 	}
 
 	/**
