@@ -107,9 +107,7 @@
 						title : "销 售 额"
 				    },
 					padding : {
-						left : 70,
-						right : 10,
-						top : 50
+						left : 70
 					}
 				});
 				chart.parse(_data_set, "json");
