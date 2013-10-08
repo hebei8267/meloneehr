@@ -72,13 +72,12 @@
 		                            		<c:if test="${subPunchClock.punchNormalState != 99}">
 		                            		<td class="center">
 		                            		</c:if>
-		                            		
 
 				                            	<c:if test="${empty	subPunchClock.startScheduleTime}">
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 				                            	</c:if>
 				                            	<c:if test="${!empty subPunchClock.startScheduleTime}">
-				                            	${subPunchClock.startScheduleTime} ～ 
+				                            	${subPunchClock.startScheduleTime} <br>～<br>
 				                            	</c:if>
 				                            	<c:if test="${empty	subPunchClock.endScheduleTime}">
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -101,7 +100,7 @@
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
 				                            	</c:if>
 				                            	<c:if test="${!empty subPunchClock.startClockTime}">
-				                            	${subPunchClock.startClockTime} ～ 
+				                            	${subPunchClock.startClockTime} <br>～<br>
 				                            	</c:if>
 				                            	<c:if test="${empty	subPunchClock.endClockTime}">
 				                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
