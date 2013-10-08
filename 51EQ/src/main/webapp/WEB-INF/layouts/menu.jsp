@@ -123,6 +123,10 @@
 		                   		<a href="${sc_ctx}/cashChartReport">销售信息(图形)</a>
 		                  	</li>
 		                  	<li class="divider"></li>
+		                  	<li>
+                                <a href="${sc_ctx}/storeChartReport">库存信息(图形)</a>
+                            </li>
+                            <li class="divider"></li>
                             </c:if>
                             
                             <c:if test="${_permIdList.contains('12')}">
