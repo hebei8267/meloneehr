@@ -83,8 +83,7 @@
             </form>
         </div>
         
-		
-		<script src="${ctx}/static/testdata.js"></script>
+
 		<c:if test="${showFlg == true}">
 		<script>
 			var _data_set = ${data_set}
