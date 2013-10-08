@@ -96,7 +96,7 @@
 					radius : 0,
 					width : 20,
 					tooltip : {
-						template : "#saleAmt#"+"元"
+						template : "#saleAmt#元"
 					},
 					xAxis : {
 						title : "${optDateShow }",
