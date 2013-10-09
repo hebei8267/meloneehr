@@ -33,11 +33,11 @@
                         <div id="chart1" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
                     </div>
                     
-                    <div class="span12"	style="margin-top: 10px;">
+                    <div class="span12"	style="margin-top: 50px;">
                         <div id="chart2" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
                     </div>
                     
-                    <div class="span12"	style="margin-top: 10px;">
+                    <div class="span12"	style="margin-top: 50px;">
                         <div id="chart3" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
                     </div>
                 </div>
