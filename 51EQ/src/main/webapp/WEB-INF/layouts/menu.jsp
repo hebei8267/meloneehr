@@ -124,6 +124,9 @@
 		                  	</li>
 		                  	<li class="divider"></li>
 		                  	<li>
+                                <a href="${sc_ctx}/storeChartReport/list">库存信息(表格)</a>
+                            </li>
+		                  	<li>
                                 <a href="${sc_ctx}/storeChartReport">库存信息(图形)</a>
                             </li>
                             <li class="divider"></li>
