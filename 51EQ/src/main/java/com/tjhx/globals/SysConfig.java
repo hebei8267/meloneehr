@@ -35,6 +35,8 @@ public class SysConfig {
 	private int pettyCashViewDays;
 	/** 门店备用金重计算天数 */
 	private int pettyCashCalculateDays;
+	/** 门店日销售信息重计算天数 */
+	private int salesDayTotalDays;
 
 	/**
 	 * 取得cashDailyModel
@@ -340,6 +342,24 @@ public class SysConfig {
 	 */
 	public void setPettyCashCalculateDays(int pettyCashCalculateDays) {
 		this.pettyCashCalculateDays = pettyCashCalculateDays;
+	}
+
+	/**
+	 * 取得门店日销售信息重计算天数
+	 * 
+	 * @return salesDayTotalDays 门店日销售信息重计算天数
+	 */
+	public int getSalesDayTotalDays() {
+		return salesDayTotalDays;
+	}
+
+	/**
+	 * 设置门店日销售信息重计算天数
+	 * 
+	 * @param salesDayTotalDays 门店日销售信息重计算天数
+	 */
+	public void setSalesDayTotalDays(int salesDayTotalDays) {
+		this.salesDayTotalDays = salesDayTotalDays;
 	}
 
 }
