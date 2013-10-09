@@ -56,7 +56,7 @@ public class StoreDetailManager {
 	 * 取得门店库存信息
 	 */
 	@Transactional(readOnly = false)
-	public synchronized void calOrgStoreDetail() {
+	public void getOrgStoreDetail() {
 		List<Organization> _orgList = getSubOrganization();
 		// ----------------------------------------
 		// for (int i = 0; i < 2; i++) {
