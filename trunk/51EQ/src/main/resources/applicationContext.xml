@@ -181,6 +181,9 @@
 		<property name="pettyCashViewDays" value="${petty.cash.view.days}" />
 		<!-- 门店备用金重计算天数 -->
 		<property name="pettyCashCalculateDays" value="${petty.cash.calculate.days}" />
+	
+		<!-- 门店日销售信息重计算天数 -->
+		<property name="salesDayTotalDays" value="${sales.day.total.days}" />
 	</bean>
 	
 	
