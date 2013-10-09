@@ -25,6 +25,22 @@ public class StoreDayTotal_Show {
 	/** 负售价金额 */
 	private BigDecimal itemSaleTotalAmt_Minus;
 
+	public void initAmt() {
+		// 库存数量
+		this.stockTotalQty = new BigDecimal(0);
+		// 库存金额
+		this.stockTotalAmt = new BigDecimal(0);
+		// 售价金额
+		this.itemSaleTotalAmt = new BigDecimal(0);
+
+		// 负库存数量
+		this.stockTotalQty_Minus = new BigDecimal(0);
+		// 负库存金额
+		this.stockTotalAmt_Minus = new BigDecimal(0);
+		// 负售价金额
+		this.itemSaleTotalAmt_Minus = new BigDecimal(0);
+	}
+
 	/**
 	 * 取得机构编号
 	 * 
@@ -187,7 +203,7 @@ public class StoreDayTotal_Show {
 		this.itemSaleTotalAmt_Minus = itemSaleTotalAmt_Minus;
 	}
 
-	public void copyStoreDayTotalInfo(StoreDayTotal storeDayTotal) {
+	public void copyStoreDayTotalInfo_chart(StoreDayTotal storeDayTotal) {
 		// 机构编号
 		this.orgId = storeDayTotal.getOrgId();
 		// 机构名称
@@ -212,7 +228,33 @@ public class StoreDayTotal_Show {
 			// 负售价金额
 			this.itemSaleTotalAmt_Minus = storeDayTotal.getItemSaleTotalAmt().multiply(new BigDecimal(-1));
 		}
+	}
 
+	public void copyStoreDayTotalInfo_list(StoreDayTotal storeDayTotal) {
+		// 机构编号
+		this.orgId = storeDayTotal.getOrgId();
+		// 机构名称
+		this.orgName = storeDayTotal.getOrgName();
+		// 日期
+		this.optDate = storeDayTotal.getOptDate();
+
+		// 库存标记 0-正库存 1-负库存
+		if ("0".equals(storeDayTotal.getStoreFlg())) {
+			// 库存数量
+			this.stockTotalQty = storeDayTotal.getStockTotalQty();
+			// 库存金额
+			this.stockTotalAmt = storeDayTotal.getStockTotalAmt();
+			// 售价金额
+			this.itemSaleTotalAmt = storeDayTotal.getItemSaleTotalAmt();
+		} else {
+
+			// 负库存数量
+			this.stockTotalQty_Minus = storeDayTotal.getStockTotalQty();
+			// 负库存金额
+			this.stockTotalAmt_Minus = storeDayTotal.getStockTotalAmt();
+			// 负售价金额
+			this.itemSaleTotalAmt_Minus = storeDayTotal.getItemSaleTotalAmt();
+		}
 	}
 
 }
