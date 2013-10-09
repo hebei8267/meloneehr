@@ -12,7 +12,7 @@ import com.tjhx.service.info.StoreDetailManager;
  * 各门店每日库存定时任务
  * 
  */
-public class OrgStoreJob {
+public class OrgStoreJob implements IJob {
 	private static Logger logger = LoggerFactory.getLogger(OrgStoreJob.class);
 	@Autowired
 	private StoreDetailManager storeDetailManager;
@@ -22,10 +22,11 @@ public class OrgStoreJob {
 	 * 
 	 * @throws ParseException
 	 */
+	@Override
 	public void execute() throws ParseException {
 		logger.info("OrgStoreJob Begin");
 		// 取得门店库存信息
-		storeDetailManager.calOrgStoreDetail();
+		storeDetailManager.getOrgStoreDetail();
 		// 计算门店库存合计信息
 		storeDetailManager.calOrgStoreDayTotal();
 		logger.info("OrgStoreJob End");
