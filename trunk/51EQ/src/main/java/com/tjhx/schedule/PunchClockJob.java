@@ -13,7 +13,7 @@ import com.tjhx.service.affair.PunchClockManager;
  * 
  * 被Spring的Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
  */
-public class PunchClockJob {
+public class PunchClockJob implements IJob {
 
 	private static Logger logger = LoggerFactory.getLogger(PunchClockJob.class);
 
@@ -25,6 +25,7 @@ public class PunchClockJob {
 	 * 
 	 * @throws ParseException
 	 */
+	@Override
 	public void execute() throws ParseException {
 		logger.info("PunchClockJob Begin");
 		punchClockManager.recalPunchClock();

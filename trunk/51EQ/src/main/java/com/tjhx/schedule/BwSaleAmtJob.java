@@ -13,11 +13,12 @@ import com.tjhx.service.accounts.CashDailyManager;
  * 
  * 被Spring的Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
  */
-public class BwSaleAmtJob {
+public class BwSaleAmtJob implements IJob {
 	private static Logger logger = LoggerFactory.getLogger(BwSaleAmtJob.class);
 	@Autowired
 	private CashDailyManager cashDailyManager;
 
+	@Override
 	public void execute() throws ParseException {
 		logger.info("BwSaleAmtJob Begin");
 		cashDailyManager.synBwSaleAmt();
