@@ -29,16 +29,16 @@
                     	<h5>库存日期${maxOptDate}</h5>
                     </div>
                     
-                    <div class="span12"	style="margin-top: 10px;">
-                        <div id="chart1" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
+                    <div class="span6"	style="margin-top: 10px;">
+                        <div id="chart1" style="width:500px;height:600px;border:1px solid #A4BED4;"></div>
+                    </div>
+                    
+                    <div class="span6"	style="margin-top: 10px;">
+                        <div id="chart2" style="width:500px;height:600px;border:1px solid #A4BED4;"></div>
                     </div>
                     
                     <div class="span12"	style="margin-top: 50px;">
-                        <div id="chart2" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
-                    </div>
-                    
-                    <div class="span12"	style="margin-top: 50px;">
-                        <div id="chart3" style="width:1200px;height:300px;border:1px solid #A4BED4;"></div>
+                        <div id="chart3" style="width:1100px;height:600px;border:1px solid #A4BED4;"></div>
                     </div>
                 </div>
             </form>
@@ -48,7 +48,7 @@
         	var _data_set = ${data_set}
         	//------------------------------------------------------------
 	        var barChart1 = new dhtmlXChart({
-	            view: "bar",
+	            view: "barH",
 	            container: "chart1",
 	            value: "#stockTotalQty#",
 	            label: "#stockTotalQty#",
@@ -57,10 +57,10 @@
 	                template: "#stockTotalQty#"
 	            },
 	            width: 60,
-	            xAxis: {
+	            yAxis: {
 	                template: "#orgName#"
 	            },
-	            yAxis: {
+	            xAxis: {
 	            	title : "库 存 数 量"
 	            },
 	            padding : {
@@ -91,7 +91,7 @@
 	        barChart1.parse(_data_set, "json");
 	      	//------------------------------------------------------------
 	        var barChart2 = new dhtmlXChart({
-	            view: "bar",
+	            view: "barH",
 	            container: "chart2",
 	            value: "#stockTotalAmt#",
 	            label: "#stockTotalAmt#",
@@ -100,10 +100,10 @@
 	                template: "#stockTotalAmt#元"
 	            },
 	            width: 60,
-	            xAxis: {
+	            yAxis: {
 	                template: "#orgName#"
 	            },
-	            yAxis: {
+	            xAxis: {
 	            	title : "库 存 金 额"
 	            },
 	            padding : {
@@ -134,7 +134,7 @@
 	        barChart2.parse(_data_set, "json");
 	      	//------------------------------------------------------------
 	        var barChart3 = new dhtmlXChart({
-	            view: "bar",
+	            view: "barH",
 	            container: "chart3",
 	            value: "#itemSaleTotalAmt#",
 	            label: "#itemSaleTotalAmt#",
@@ -143,10 +143,10 @@
 	                template: "#itemSaleTotalAmt#元"
 	            },
 	            width: 60,
-	            xAxis: {
+	            yAxis: {
 	                template: "#orgName#"
 	            },
-	            yAxis: {
+	            xAxis: {
 	            	title : "售 价 金 额"
 	            },
 	            padding : {
