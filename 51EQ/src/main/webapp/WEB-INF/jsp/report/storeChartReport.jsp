@@ -37,7 +37,7 @@
                         <div id="chart2" style="width:500px;height:600px;border:1px solid #A4BED4;"></div>
                     </div>
                     
-                    <div class="span12"	style="margin-top: 50px;">
+                    <div class="span12"	style="margin-top: 10px;">
                         <div id="chart3" style="width:1100px;height:600px;border:1px solid #A4BED4;"></div>
                     </div>
                 </div>
