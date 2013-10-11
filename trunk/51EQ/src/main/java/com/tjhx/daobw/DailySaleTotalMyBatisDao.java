@@ -6,6 +6,6 @@ import com.tjhx.entity.bw.DailySaleTotal;
 
 public interface DailySaleTotalMyBatisDao {
 
-	public List<DailySaleTotal> getDailySaleTotalList(String operDate);
+	public List<DailySaleTotal> getDailySaleTotalList(DailySaleTotal dailySaleTotal);
 
 }
