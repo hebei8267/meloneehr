@@ -12,6 +12,7 @@ import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.dao.info.SalesDayTotalJpaDao;
+import com.tjhx.dao.info.SalesDayTotalMyBatisDao;
 import com.tjhx.daobw.DailySaleTotalMyBatisDao;
 import com.tjhx.entity.bw.DailySaleTotal;
 import com.tjhx.entity.info.SalesDayTotal;
@@ -26,6 +27,8 @@ public class SalesDayTotalManager {
 	@Resource
 	private DailySaleTotalMyBatisDao dailySaleTotalMyBatisDao;
 	@Resource
+	private SalesDayTotalMyBatisDao salesDayTotalMyBatisDao;
+	@Resource
 	private SalesDayTotalJpaDao salesDayTotalJpaDao;
 
 	/**
@@ -37,8 +40,12 @@ public class SalesDayTotalManager {
 		// 取得门店日销售计算-重计算天数
 		List<String> optDateList = calOptDate();
 		List<Organization> _orgList = storeDetailManager.getSubOrganization();
-		for (Organization org : _orgList) {
-			for (String optDate : optDateList) {
+
+		for (String optDate : optDateList) {
+			// 删除指定日期的所有门店销售信息
+			salesDayTotalMyBatisDao.delSalesDayTotalInfo(optDate);
+
+			for (Organization org : _orgList) {
 				DailySaleTotal _param = new DailySaleTotal();
 				_param.setOptDate(optDate);
 				_param.setBranchNo(org.getBwBranchNo());
@@ -78,6 +85,8 @@ public class SalesDayTotalManager {
 					_salesDay.setSaleRqty(_bwDailySaleTotal.getSaleRqty());
 					// 实销金额
 					_salesDay.setSaleRamt(_bwDailySaleTotal.getSaleRamt());
+					// 实销价格
+					_salesDay.setSalePrice(_bwDailySaleTotal.getSaleRamt().divide(_bwDailySaleTotal.getSaleRqty()));
 
 					salesDayTotalJpaDao.save(_salesDay);
 				}
