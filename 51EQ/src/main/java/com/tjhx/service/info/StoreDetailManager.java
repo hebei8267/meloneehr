@@ -44,7 +44,7 @@ public class StoreDetailManager {
 	 * 
 	 * @return
 	 */
-	private List<Organization> getSubOrganization() {
+	public List<Organization> getSubOrganization() {
 		List<Organization> _orgList = orgManager.getAllOrganization();
 
 		_orgList.remove(new Organization(Constants.ROOT_ORG_ID));
