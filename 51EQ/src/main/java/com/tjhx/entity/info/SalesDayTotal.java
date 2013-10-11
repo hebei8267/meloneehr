@@ -48,6 +48,8 @@ public class SalesDayTotal extends IdEntity {
 	private BigDecimal saleRqty;
 	/** 实销金额 */
 	private BigDecimal saleRamt;
+	/** 实销价格 */
+	private BigDecimal salePrice;
 
 	/**
 	 * 取得机构编号
@@ -310,6 +312,24 @@ public class SalesDayTotal extends IdEntity {
 	 */
 	public void setSaleRamt(BigDecimal saleRamt) {
 		this.saleRamt = saleRamt;
+	}
+
+	/**
+	 * 取得实销价格
+	 * 
+	 * @return salePrice 实销价格
+	 */
+	public BigDecimal getSalePrice() {
+		return salePrice;
+	}
+
+	/**
+	 * 设置实销价格
+	 * 
+	 * @param salePrice 实销价格
+	 */
+	public void setSalePrice(BigDecimal salePrice) {
+		this.salePrice = salePrice;
 	}
 
 }
