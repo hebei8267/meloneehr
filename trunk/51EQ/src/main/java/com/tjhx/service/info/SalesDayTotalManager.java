@@ -1,5 +1,6 @@
 package com.tjhx.service.info;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,8 @@ public class SalesDayTotalManager {
 					// 实销金额
 					_salesDay.setSaleRamt(_bwDailySaleTotal.getSaleRamt());
 					// 实销价格
-					_salesDay.setSalePrice(_bwDailySaleTotal.getSaleRamt().divide(_bwDailySaleTotal.getSaleRqty()));
+					_salesDay.setSalePrice(_bwDailySaleTotal.getSaleRamt().divide(_bwDailySaleTotal.getSaleRqty(), 2,
+							BigDecimal.ROUND_UP));
 
 					salesDayTotalJpaDao.save(_salesDay);
 				}
