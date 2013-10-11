@@ -87,8 +87,12 @@ public class SalesDayTotalManager {
 					// 实销金额
 					_salesDay.setSaleRamt(_bwDailySaleTotal.getSaleRamt());
 					// 实销价格
-					_salesDay.setSalePrice(_bwDailySaleTotal.getSaleRamt().divide(_bwDailySaleTotal.getSaleRqty(), 2,
-							BigDecimal.ROUND_UP));
+					if (_bwDailySaleTotal.getSaleRqty().compareTo(BigDecimal.ZERO) == 0) {
+						_salesDay.setSalePrice(new BigDecimal(0));
+					} else {
+						_salesDay.setSalePrice(_bwDailySaleTotal.getSaleRamt().divide(_bwDailySaleTotal.getSaleRqty(),
+								2, BigDecimal.ROUND_UP));
+					}
 
 					salesDayTotalJpaDao.save(_salesDay);
 				}
