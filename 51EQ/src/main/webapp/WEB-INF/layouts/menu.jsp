@@ -56,6 +56,9 @@
                                     <li>
                                         <a href="${sc_ctx}/bankCard">银行卡管理</a>
                                     </li>
+                                    <li>
+                                        <a href="${sc_ctx}/itemType">商品类别管理</a>
+                                    </li>
                                 </c:if>
                             </ul>
                         </li>
