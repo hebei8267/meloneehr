@@ -29,6 +29,8 @@ public class OrgStoreJob implements IJob {
 		storeDetailManager.getOrgStoreDetail();
 		// 计算门店库存合计信息
 		storeDetailManager.calOrgStoreDayTotal();
+		// 清理t_store_detail(数据量过大,其数据已汇总到t_store_day_total)
+		storeDetailManager.initTable();
 		logger.info("OrgStoreJob End");
 	}
 }
