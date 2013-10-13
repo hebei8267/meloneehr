@@ -70,8 +70,6 @@ public class SalesDayTotalManager {
 					_salesDay.setOptDateM(optDateM);
 					// 类别编号
 					_salesDay.setItemClsNo(_bwDailySaleTotal.getItemClsNo());
-					// 类别名称
-					_salesDay.setItemClsName(_bwDailySaleTotal.getItemClsName());
 					// 销售数量
 					_salesDay.setSaleQty(_bwDailySaleTotal.getSaleQty());
 					// 销售金额
