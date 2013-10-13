@@ -8,4 +8,7 @@ public interface StoreDetailMyBatisDao {
 
 	public List<StoreDetail> getDayTotalList(StoreDetail storeDetail);
 
+	public void createTable();
+
+	public void dropTable();
 }
