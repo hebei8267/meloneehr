@@ -168,7 +168,7 @@ public class SupplierManager {
 				addSupplierInfo(supplierCustom);
 			}
 		}
-
+		spyMemcachedClient.delete(MemcachedObjectType.SUPPLIER_LIST.getObjKey());
 	}
 
 	/**
