@@ -148,4 +148,13 @@ public class StoreDetailManager {
 		}
 
 	}
+
+	/**
+	 * 清理t_store_detail(数据量过大,其数据已汇总到t_store_day_total)
+	 */
+	@Transactional(readOnly = false)
+	public void initTable() {
+		storeDetailMyBatisDao.dropTable();
+		storeDetailMyBatisDao.createTable();
+	}
 }
