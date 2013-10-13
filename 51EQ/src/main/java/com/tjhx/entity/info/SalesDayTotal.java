@@ -32,8 +32,6 @@ public class SalesDayTotal extends IdEntity {
 	private String optDateM;
 	/** 类别编号 */
 	private String itemClsNo;
-	/** 类别名称 */
-	private String itemClsName;
 	/** 销售数量 */
 	private BigDecimal saleQty;
 	/** 销售金额 */
@@ -167,25 +165,6 @@ public class SalesDayTotal extends IdEntity {
 	 */
 	public void setItemClsNo(String itemClsNo) {
 		this.itemClsNo = itemClsNo;
-	}
-
-	/**
-	 * 取得类别名称
-	 * 
-	 * @return itemClsName 类别名称
-	 */
-	@Column(length = 128)
-	public String getItemClsName() {
-		return itemClsName;
-	}
-
-	/**
-	 * 设置类别名称
-	 * 
-	 * @param itemClsName 类别名称
-	 */
-	public void setItemClsName(String itemClsName) {
-		this.itemClsName = itemClsName;
 	}
 
 	/**
