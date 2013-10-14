@@ -120,7 +120,7 @@
 				barChart1.parse(_sumSaleRamtList, "json");
 				
 				
-				var barChart1 = new dhtmlXChart({
+				var barChart2 = new dhtmlXChart({
 					view : "barH",
 					container : "chart2",
 					value : "#saleRqty#",
@@ -141,7 +141,7 @@
 						right : 30
 					}
 				});
-				barChart1.parse(_sumSaleRqtyList, "json");
+				barChart2.parse(_sumSaleRqtyList, "json");
 			});
 		</script>
 		
