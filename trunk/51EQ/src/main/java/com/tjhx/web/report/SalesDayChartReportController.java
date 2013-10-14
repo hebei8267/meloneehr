@@ -26,11 +26,11 @@ public class SalesDayChartReportController extends BaseController {
 	@Resource
 	private SalesDayTotalManager salesDayTotalManager;
 
-	@RequestMapping(value = { "init", "" })
-	public String salesDayChartReport_Action(Model model) {
+	@RequestMapping(value = "bar_init")
+	public String salesDayChartReport1_Action(Model model) {
 		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
-		return "report/salesDayChartReport";
+		return "report/salesDayChartReport_bar";
 	}
 
 	@RequestMapping(value = "search")
@@ -60,7 +60,25 @@ public class SalesDayChartReportController extends BaseController {
 		model.addAttribute("sumSaleRqtyList", mapper.toJson(_sumSaleRqtyList));
 		model.addAttribute("showFlg", true);
 
-		return "report/salesDayChartReport";
+		return "report/salesDayChartReport_bar";
+	}
+
+	// -------------------------------------------------------------------
+	@RequestMapping(value = "pie_init")
+	public String salesDayChartReport2_Action(Model model) {
+		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
+
+		SalesDayTotal param = new SalesDayTotal();
+		param.setOrgId("00001D");
+		param.setOptDateStart("20130101");
+		param.setOptDateEnd("20131014");
+
+		// 取得合计实销金额（指定时间区间/机构）
+		List<SalesDayTotal> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		JsonMapper mapper = new JsonMapper();
+		model.addAttribute("sumSaleRamtList", mapper.toJson(_sumSaleRamtList));
+
+		return "report/salesDayChartReport_pie";
 	}
 
 }
