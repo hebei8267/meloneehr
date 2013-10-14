@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -48,6 +49,15 @@ public class SalesDayTotal extends IdEntity {
 	private BigDecimal saleRamt;
 	/** 实销价格 */
 	private BigDecimal salePrice;
+	// -----------------------------------------------------------
+	/** 种类名称 */
+	private String itemShortName;
+	/** 种类名称 */
+	private String itemName;
+	/** 日期-开始时间 */
+	private String optDateStart;
+	/** 日期-结束时间 */
+	private String optDateEnd;
 
 	/**
 	 * 取得机构编号
@@ -311,4 +321,80 @@ public class SalesDayTotal extends IdEntity {
 		this.salePrice = salePrice;
 	}
 
+	// -----------------------------------------------------------
+	/**
+	 * 取得种类名称
+	 * 
+	 * @return itemShortName 种类名称
+	 */
+	@Transient
+	public String getItemShortName() {
+		return itemShortName;
+	}
+
+	/**
+	 * 设置种类名称
+	 * 
+	 * @param itemShortName 种类名称
+	 */
+	public void setItemShortName(String itemShortName) {
+		this.itemShortName = itemShortName;
+	}
+
+	/**
+	 * 取得种类名称
+	 * 
+	 * @return itemName 种类名称
+	 */
+	@Transient
+	public String getItemName() {
+		return itemName;
+	}
+
+	/**
+	 * 设置种类名称
+	 * 
+	 * @param itemName 种类名称
+	 */
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	/**
+	 * 取得日期-开始时间
+	 * 
+	 * @return optDateStart 日期-开始时间
+	 */
+	@Transient
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置日期-开始时间
+	 * 
+	 * @param optDateStart 日期-开始时间
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得日期-结束时间
+	 * 
+	 * @return optDateEnd 日期-结束时间
+	 */
+	@Transient
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置日期-结束时间
+	 * 
+	 * @param optDateEnd 日期-结束时间
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
+	}
 }
