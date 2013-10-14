@@ -76,7 +76,7 @@
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                     	<c:if test="${showFlg == true}">
-                        <div id="chart1" style="width:1000px;height:400px;border:1px solid #A4BED4;"></div>
+                        <div id="chart1" style="width:1050px;height:400px;border:1px solid #A4BED4;"></div>
                         </c:if>
                     </div>
                 </div>
