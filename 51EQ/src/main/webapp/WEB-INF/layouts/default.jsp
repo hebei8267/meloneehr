@@ -14,9 +14,9 @@
 		response.setHeader("Pragma","no-cache"); //HTTP 1.0 
 		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server 
 		%>
-        <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />    
-        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />    
-        <META HTTP-EQUIV="Expires" CONTENT="0" />  
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+        <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+        <meta http-equiv="Expires" content="-1" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
