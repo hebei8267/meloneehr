@@ -52,7 +52,7 @@
 	            container: "chart1",
 	            value: "#stockTotalQty#",
 	            label: "#stockTotalQty#",
-	            color: "#476cee",
+	            color: "#d3ee36",
 	            tooltip: {
 	                template: "#stockTotalQty#"
 	            },
@@ -69,10 +69,10 @@
 	            legend: {
 	                values: [{
 	                    text: "正库存",
-	                    color: "#476cee"
+	                    color: "#d3ee36"
 	                }, {
 	                    text: "负库存",
-	                    color: "#ee4339"
+	                    color: "#eed236"
 	                }],
 	                valign: "middle",
 	                align: "right",
@@ -83,7 +83,7 @@
 	        barChart1.addSeries({
 	            value: "#stockTotalQty_Minus#",
 	            label: "-#stockTotalQty_Minus#",
-	            color: "#ee4339",
+	            color: "#eed236",
 	            tooltip: {
 	                template: "-#stockTotalQty_Minus#"
 	            }
