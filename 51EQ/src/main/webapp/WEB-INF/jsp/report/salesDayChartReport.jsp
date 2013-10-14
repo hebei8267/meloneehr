@@ -17,20 +17,22 @@
             $(function() {
             	$("#listForm").validate({
                     rules : {
-                    	optDateShow : {
+                    	optDateShow_start : {
                     		required : true,
                     		date : true                    		
                         },
-                        orgId : {
-                    		required : true                		
+                        optDateShow_end : {
+                    		required : true,
+                    		date : true                    		
                         }
                     }
                 });
             	
-            	$('#optDateShow').datepicker({
-                    format : 'yyyy-mm',
-                    viewMode : 1,
-                    minViewMode : 1
+            	$('#optDateShow_start').datepicker({
+                    format : 'yyyy-mm-dd'
+                });
+                $('#optDateShow_end').datepicker({
+                    format : 'yyyy-mm-dd'
                 });
             	
                 $("#searchBtn").click(function() {
@@ -38,7 +40,7 @@
                         this.value = $.trim(this.value);
                     });
 
-                    $("#listForm").attr("action", "${sc_ctx}/cashChartReport/search");
+                    $("#listForm").attr("action", "${sc_ctx}/salesDayChartReport/search");
                     $("#listForm").submit();
                 });
             });
@@ -53,14 +55,15 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>销售信息(图形)</h3>
+                            <h3>销售信息一览(图形)</h3>
                         </legend>
                     </div>
-                    <div class="span3">
+                    <div class="span5">
                         <label class="control-label">销售日期 :</label>
-                        <input id="optDateShow" name="optDateShow" type="text" class="input-medium" value="${optDateShow }"/>
+                        <input id="optDateShow_start" name="optDateShow_start" type="text" class="input-medium" value="${optDateShow_start }"/>
+                        ～ <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
                     </div>
-                    <div class="span9">
+                    <div class="span7">
                         <label class="control-label">机构 :</label>
                         <select name="orgId" class="input-medium">
                             <c:forEach items="${orgList}" var="org">
@@ -74,11 +77,14 @@
                         </select>
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
+                    <c:if test="${showFlg == true}">
                     <div class="span12"	style="margin-top: 10px;">
-                    	<c:if test="${showFlg == true}">
-                        <div id="chart1" style="width:1000px;height:400px;border:1px solid #A4BED4;"></div>
-                        </c:if>
+                        <div id="chart1" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
                     </div>
+                    <div class="span12"	style="margin-top: 10px;">    
+                        <div id="chart2" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
+                    </div>
+                    </c:if>
                 </div>
             </form>
         </div>
@@ -86,33 +92,59 @@
 
 		<c:if test="${showFlg == true}">
 		<script>
-			var _data_set = ${data_set}
 			$(function() {
-				var chart = new dhtmlXChart({
-					view : "bar",
+				var _sumSaleRamtList = ${sumSaleRamtList}
+				var _sumSaleRqtyList = ${sumSaleRqtyList}
+				
+				var barChart1 = new dhtmlXChart({
+					view : "barH",
 					container : "chart1",
-					value : "#saleAmt#",
-					label : "#saleAmt#",
-					radius : 0,
-					width : 20,
+					value : "#saleRamt#",
+					label : "#saleRamt#",
+					barWidth : 30,
+					radius : 2,
 					tooltip : {
-						template : "#saleAmt#元"
+						template : "#saleRamt#    #itemName#"
 					},
-					xAxis : {
-						title : "${optDateShow }",
-						template : "#optDate#",
-						lines : false
+					yAxis : {
+						template : "#itemShortName#"
 					},
-					yAxis: {
-						title : "销 售 额"
-				    },
+					xAxis: {
+		            	title : "销 售 金 额"
+		            },
 					padding : {
-						left : 70
+						left : 90,
+						right : 30
 					}
 				});
-				chart.parse(_data_set, "json");
+				barChart1.parse(_sumSaleRamtList, "json");
+				
+				
+				var barChart1 = new dhtmlXChart({
+					view : "barH",
+					container : "chart2",
+					value : "#saleRqty#",
+					label : "#saleRqty#",
+					barWidth : 30,
+					radius : 2,
+					tooltip : {
+						template : "#saleRqty#    #itemName#"
+					},
+					yAxis : {
+						template : "#itemShortName#"
+					},
+					xAxis: {
+		            	title : "销 售 数 量"
+		            },
+					padding : {
+						left : 90,
+						right : 30
+					}
+				});
+				barChart1.parse(_sumSaleRqtyList, "json");
 			});
 		</script>
+		
 		</c:if>
     </body>
 </html>
