@@ -118,4 +118,24 @@ public class SalesDayTotalManager {
 
 		return _optDateList;
 	}
+
+	/**
+	 * 取得合计实销金额（指定时间区间/机构）
+	 * 
+	 * @param salesDayTotal
+	 * @return
+	 */
+	public List<SalesDayTotal> getSumSaleRamtList(SalesDayTotal salesDayTotal) {
+		return salesDayTotalMyBatisDao.getSumSaleRamtList(salesDayTotal);
+	}
+
+	/**
+	 * 取得合计实销数量（指定时间区间/机构）
+	 * 
+	 * @param salesDayTotal
+	 * @return
+	 */
+	public List<SalesDayTotal> getSumSaleRqtyList(SalesDayTotal salesDayTotal) {
+		return salesDayTotalMyBatisDao.getSumSaleRqtyList(salesDayTotal);
+	}
 }
