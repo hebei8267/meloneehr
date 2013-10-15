@@ -40,7 +40,7 @@
                         this.value = $.trim(this.value);
                     });
 
-                    $("#listForm").attr("action", "${sc_ctx}/salesDayChartReport/search");
+                    $("#listForm").attr("action", "${sc_ctx}/salesDayChartReport/bar_search");
                     $("#listForm").submit();
                 });
             });
@@ -61,7 +61,8 @@
                     <div class="span5">
                         <label class="control-label">销售日期 :</label>
                         <input id="optDateShow_start" name="optDateShow_start" type="text" class="input-medium" value="${optDateShow_start }"/>
-                        ～ <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
+                        ～
+                        <input id="optDateShow_end" name="optDateShow_end" type="text" class="input-medium" value="${optDateShow_end }"/>
                     </div>
                     <div class="span7">
                         <label class="control-label">机构 :</label>
@@ -78,17 +79,16 @@
                         <button	id="searchBtn" class="btn	btn-primary" type="button">查询</button>
                     </div>
                     <c:if test="${showFlg == true}">
-                    <div class="span12"	style="margin-top: 10px;">
-                        <div id="chart1" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
-                    </div>
-                    <div class="span12"	style="margin-top: 10px;">    
-                        <div id="chart2" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
-                    </div>
+                        <div class="span12"	style="margin-top: 10px;">
+                            <div id="chart1" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
+                        </div>
+                        <div class="span12"	style="margin-top: 10px;">
+                            <div id="chart2" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
+                        </div>
                     </c:if>
                 </div>
             </form>
         </div>
-        
 
 		<c:if test="${showFlg == true}">
 		<script>
@@ -104,7 +104,7 @@
 					barWidth : 30,
 					radius : 2,
 					tooltip : {
-						template : "#saleRamt#    #itemName#"
+						template : "#saleRamt#元    #itemName#"
 					},
 					yAxis : {
 						template : "#itemShortName#"
@@ -128,7 +128,7 @@
 					barWidth : 30,
 					radius : 2,
 					tooltip : {
-						template : "#saleRqty#    #itemName#"
+						template : "#saleRqty#个    #itemName#"
 					},
 					yAxis : {
 						template : "#itemShortName#"
