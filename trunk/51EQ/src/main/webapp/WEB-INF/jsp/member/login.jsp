@@ -61,19 +61,19 @@
                     $("#inputForm").attr("action", "${sc_ctx}/member/login");
                     $("#inputForm").submit();
                 });
-                
-				$('#loginName').focus();
-				
-				$('#loginName').keydown(function(event) {
-					if(event.keyCode == 13){
-						$('#passWord').focus();
-					}
-				});
-				$('#passWord').keydown(function(event) {		
-					if(event.keyCode == 13){
-						$("#loginBtn").click();
-					}
-				});
+
+                $('#loginName').focus();
+
+                $('#loginName').keydown(function(event) {
+                    if (event.keyCode == 13) {
+                        $('#passWord').focus();
+                    }
+                });
+                $('#passWord').keydown(function(event) {
+                    if (event.keyCode == 13) {
+                        $("#loginBtn").click();
+                    }
+                });
             });
         </script>
     </body>

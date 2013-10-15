@@ -97,8 +97,10 @@
                         <div class="control-group">
                             <label class="control-label">账户状态 :</label>
                             <div class="controls">
-                            	<form:radiobutton path="valid" value="true"/> 启用
-                                <form:radiobutton path="valid" value="false"/> 停用
+                                <form:radiobutton path="valid" value="true"/>
+                                启用
+                                <form:radiobutton path="valid" value="false"/>
+                                停用
                             </div>
                         </div>
                         <div class="control-group">

@@ -10,27 +10,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<style type="text/css">
-    	._warn0 {
-			padding: 5px;
-		}
-    	._warn1 {
-			background-color: #99FF33;
-		}
-		._warn2 {
-			background-color: #FFCC33;
-		}
-    	</style>
-    	<script>
+        <style type="text/css">
+            ._warn0 {
+                padding: 5px;
+            }
+            ._warn1 {
+                background-color: #99FF33;
+            }
+            ._warn2 {
+                background-color: #FFCC33;
+            }
+        </style>
+        <script>
             $().ready(function() {
-            	
-                
-              	//-----------------------------------
+
+                //-----------------------------------
                 // 表单效验
                 //-----------------------------------
-               	$("#listForm").validate({
+                $("#listForm").validate({
                     rules : {
-                    	name1 : {
+                        name1 : {
                             required : true,
                             maxlength : 32
                         },
@@ -72,7 +71,7 @@
                         }
                     }
                 });
-                
+
                 $("#saveBtn").click(function() {
                     $("input[type='text'],textarea").each(function(i) {
                         this.value = $.trim(this.value);
@@ -81,24 +80,23 @@
                     $("#listForm").submit();
                 });
             });
-            
-          	
-          	function checkFun(index,value){
-          		if(value=='0'){// 停用
-          			$("#_ss"+index+'1').removeClass("_warn1");
-          			$("#_ss"+index+'0').addClass("_warn2");
-          		} else {
-          			$("#_ss"+index+'1').addClass("_warn1");
-          			$("#_ss"+index+'0').removeClass("_warn2");
-          		}
-          	}
+
+            function checkFun(index, value) {
+                if (value == '0') {// 停用
+                    $("#_ss" + index + '1').removeClass("_warn1");
+                    $("#_ss" + index + '0').addClass("_warn2");
+                } else {
+                    $("#_ss" + index + '1').addClass("_warn1");
+                    $("#_ss" + index + '0').removeClass("_warn2");
+                }
+            }
         </script>
     </head>
     <body>
         <%// 系统菜单  %>
         <page:applyDecorator name="menu" />
-        
-      	<div class="container">
+
+        <div class="container">
             <form method="post" class="form-inline" id="listForm">
                 <div class="row">
                     <div class="span12">
@@ -112,7 +110,7 @@
                         &nbsp;<a href="${sc_ctx}/tmpEmployee/list" class="btn btn-large">重置</a>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="span6" style="padding-top: 10px;">
                         <table class="table	table-striped table-bordered table-condensed mytable">
@@ -133,22 +131,26 @@
                                 <c:forEach items="${empList}" var="emp" varStatus="status">
                                     <tr>
                                         <td class="center">
-                                        	<input type="hidden" name="uuid" value="${emp.uuid}">
+                                            <input type="hidden" name="uuid" value="${emp.uuid}">
                                             ${status.index + 1}
                                         </td>
                                         <td class="center">
                                             <input type="text" name="name${status.index + 1}" value="${emp.name}"/>
                                         </td>
                                         <td class="center">
-                                        	<c:if test="${emp.workFlg.equals('0')}">
-                                        	<input type="radio" name="workFlg[${status.index + 1}]" value="1" onchange="checkFun('${status.index }','1')"> <span id="_ss${status.index }1" class="_warn0">启用</span>&nbsp;&nbsp;
-                                        	<input type="radio" name="workFlg[${status.index + 1}]" value="0" checked onchange="checkFun('${status.index }','0')"> <span id="_ss${status.index }0" class="_warn0 _warn2">停用</span>
-                                        	</c:if>
-											
-											<c:if test="${emp.workFlg.equals('1')}">
-                                        	<input type="radio" name="workFlg[${status.index + 1}]" value="1" checked onchange="checkFun('${status.index }','1')"> <span id="_ss${status.index }1" class="_warn0 _warn1">启用</span>&nbsp;&nbsp;
-                                        	<input type="radio" name="workFlg[${status.index + 1}]" value="0" onchange="checkFun('${status.index }','0')"> <span id="_ss${status.index }0" class="_warn0">停用</span>
-                                        	</c:if>
+                                            <c:if test="${emp.workFlg.equals('0')}">
+                                                <input type="radio" name="workFlg[${status.index + 1}]" value="1" onchange="checkFun('${status.index }','1')">
+                                                <span id="_ss${status.index }1" class="_warn0">启用</span>&nbsp;&nbsp;
+                                                <input type="radio" name="workFlg[${status.index + 1}]" value="0" checked onchange="checkFun('${status.index }','0')">
+                                                <span id="_ss${status.index }0" class="_warn0 _warn2">停用</span>
+                                            </c:if>
+
+                                            <c:if test="${emp.workFlg.equals('1')}">
+                                                <input type="radio" name="workFlg[${status.index + 1}]" value="1" checked onchange="checkFun('${status.index }','1')">
+                                                <span id="_ss${status.index }1" class="_warn0 _warn1">启用</span>&nbsp;&nbsp;
+                                                <input type="radio" name="workFlg[${status.index + 1}]" value="0" onchange="checkFun('${status.index }','0')">
+                                                <span id="_ss${status.index }0" class="_warn0">停用</span>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
