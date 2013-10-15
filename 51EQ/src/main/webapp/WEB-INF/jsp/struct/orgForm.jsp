@@ -10,14 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<style type="text/css">
-			.form-horizontal .control-label {
-	        	width: 180px;
-	    	}
-	    	.form-horizontal .controls {
-	        	margin-left: 195px;
-	    	}
-    	</style>
+        <style type="text/css">
+            .form-horizontal .control-label {
+                width: 180px;
+            }
+            .form-horizontal .controls {
+                margin-left: 195px;
+            }
+        </style>
         <script>
             $(function() {
                 $("#inputForm").validate({
