@@ -10,9 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<script>
-            $().ready(function() {            	
-            	$("#bwDataSynBtn").click(function() {
+        <script>
+            $().ready(function() {
+                $("#bwDataSynBtn").click(function() {
                     $("input[type='text'],textarea").each(function(i) {
                         this.value = $.trim(this.value);
                     });
@@ -36,7 +36,7 @@
                         </legend>
                     </div>
                     <div class="span12">
-                    	<button	id="bwDataSynBtn" class="btn btn-warning" type="button">数据同步 (百威)</button>
+                        <button	id="bwDataSynBtn" class="btn btn-warning" type="button">数据同步 (百威)</button>
                     </div>
                     <div class="span12"	style="margin-top: 10px;">
                         <input type="hidden" name="uuids" id="uuids"/>
