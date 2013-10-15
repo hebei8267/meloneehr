@@ -10,12 +10,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<style type="text/css">
-    	._warn1 {
-    		padding: 5px;
-			background-color: #99FF33;
-		}
-    	</style>
+        <style type="text/css">
+            ._warn1 {
+                padding: 5px;
+                background-color: #99FF33;
+            }
+        </style>
         <script>
             $().ready(function() {
                 //-----------------------------------
@@ -127,12 +127,12 @@
                                             </c:if>
                                         </td>
                                         <td class="center">
-                                        	<c:if test="${user.valid == true}">
-                                        		启用
-                                        	</c:if>
+                                            <c:if test="${user.valid == true}">
+                                                启用
+                                            </c:if>
                                             <c:if test="${user.valid != true}">
-                                            	<span class='_warn1'>停用</span>
-                                        	</c:if>
+                                                <span class='_warn1'>停用</span>
+                                            </c:if>
                                         </td>
                                         <td>
                                             ${user.loginName}
