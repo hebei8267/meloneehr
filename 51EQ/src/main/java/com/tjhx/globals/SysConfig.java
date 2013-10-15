@@ -37,6 +37,8 @@ public class SysConfig {
 	private int pettyCashCalculateDays;
 	/** 门店日销售信息重计算天数 */
 	private int salesDayTotalDays;
+	/** 销售信息对比(图形)页面种类显示个数 */
+	private int salesDayTotalShowNum;
 
 	/**
 	 * 取得cashDailyModel
@@ -360,6 +362,24 @@ public class SysConfig {
 	 */
 	public void setSalesDayTotalDays(int salesDayTotalDays) {
 		this.salesDayTotalDays = salesDayTotalDays;
+	}
+
+	/**
+	 * 取得销售信息对比(图形)页面种类显示个数
+	 * 
+	 * @return salesDayTotalShowNum 销售信息对比(图形)页面种类显示个数
+	 */
+	public int getSalesDayTotalShowNum() {
+		return salesDayTotalShowNum;
+	}
+
+	/**
+	 * 设置销售信息对比(图形)页面种类显示个数
+	 * 
+	 * @param salesDayTotalShowNum 销售信息对比(图形)页面种类显示个数
+	 */
+	public void setSalesDayTotalShowNum(int salesDayTotalShowNum) {
+		this.salesDayTotalShowNum = salesDayTotalShowNum;
 	}
 
 }
