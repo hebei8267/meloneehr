@@ -114,11 +114,9 @@
                                     <th>
                                         销售收现
                                     </th>
-                                    
                                     <th>
                                         刷卡金额(单)
                                     </th>
-                                    
                                     <th>
                                         存款金额
                                     </th>
@@ -171,7 +169,6 @@
                                         <td>
                                             ${cashRun.cardAmt}
                                         </td>
-                                        
                                         <td>
                                             ${cashRun.depositAmt}
                                         </td>
@@ -208,7 +205,7 @@
                                         <td></td>
                                         <td colspan="2">
                                             ${totalCashRun.saleAmt}
-                                        </td>                                        
+                                        </td>
                                     </tr>
                                 </c:if>
                             </tbody>

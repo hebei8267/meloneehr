@@ -107,37 +107,39 @@
                 });
 
                 $("#cashAmt").change(function() {
-                	adjustAmt();
-                	saleAmt();
+                    adjustAmt();
+                    saleAmt();
                     calRetainedAmt();
                 });
                 $("#cardAmt").change(function() {
-                	saleAmt();
+                    saleAmt();
                 });
                 $("#depositAmt").change(function() {
                     calRetainedAmt();
                 });
                 $("#saleCashAmt").change(function() {
-                	carryingCashAmt();
-                	
-                	adjustAmt();
+                    carryingCashAmt();
+
+                    adjustAmt();
                 });
             });
-            
-         	// 账面应有现金 = 班前余额+外销收现
+
+            // 账面应有现金 = 班前余额+外销收现
             function carryingCashAmt() {
                 var _result = numAdd($("#initAmt").val(), $("#saleCashAmt").val());
 
                 $("#_carryingCashAmt").html(_result + " 元");
                 $("#carryingCashAmt").val(_result);
             }
-         	// 现金盈亏 = 实点现金-账面应有现金
+
+            // 现金盈亏 = 实点现金-账面应有现金
             function adjustAmt() {
-                var _result =  numSub($("#cashAmt").val(), $("#carryingCashAmt").val());
+                var _result = numSub($("#cashAmt").val(), $("#carryingCashAmt").val());
 
                 $("#_adjustAmt").html(_result + " 元");
                 $("#adjustAmt").val(_result);
             }
+
             // 留存金额 = 实点现金-存款金额
             function calRetainedAmt() {
                 var _result = numSub($("#cashAmt").val(), $("#depositAmt").val());
@@ -145,9 +147,10 @@
                 $("#_retainedAmt_label").html(_result + " 元");
                 $("#retainedAmt").val(_result);
             }
+
             // 当班销售金额 = 销售收现 + 刷卡金额(单据)
             function saleAmt() {
-            	var _result = numAdd($("#saleCashAmt").val(), $("#cardAmt").val());
+                var _result = numAdd($("#saleCashAmt").val(), $("#cardAmt").val());
 
                 $("#_saleAmt").html(_result + " 元");
                 $("#saleAmt").val(_result);
