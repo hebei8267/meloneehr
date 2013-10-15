@@ -9,22 +9,22 @@
             <sitemesh:title />
         </title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<% 
-		response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
-		response.setHeader("Pragma","no-cache"); //HTTP 1.0 
-		response.setDateHeader ("Expires", 0); //prevents caching at the proxy server 
-		%>
+        <%
+        response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+        response.setHeader("Pragma","no-cache"); //HTTP 1.0
+        response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+        %>
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
         <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
         <meta http-equiv="Expires" content="-1" />
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link type="text/css" href="${ctx}/static/css/bootstrap.css" rel="stylesheet">
         <link type="text/css" href="${ctx}/static/css/bootstrap-responsive.css" rel="stylesheet">
         <link type="text/css" href="${ctx}/static/css/datepicker.css" rel="stylesheet">
         <link type="text/css" href="${ctx}/static/css/mystyle.css" rel="stylesheet">
-		
+
         <script src="${ctx}/static/js/jquery-1.7.2.min.js"></script>
         <script src="${ctx}/static/js/bootstrap.js"></script>
         <script src="${ctx}/static/js/bootstrap-datepicker.js"></script>
