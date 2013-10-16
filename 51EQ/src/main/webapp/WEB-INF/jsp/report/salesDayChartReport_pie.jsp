@@ -62,7 +62,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>销售信息对比(图形)</h3>
+                            <h3>销售金额对比(图形)</h3>
                         </legend>
                     </div>
                     <div class="span12">
@@ -130,7 +130,7 @@
 		            },
 					padding : {
 						left : 90,
-						right : 40
+						right : 50
 					}
 				});
 				barChart${status1.index + 1}.parse(_saleRamtJson${status1.index + 1}, "json");
