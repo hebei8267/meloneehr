@@ -77,4 +77,33 @@
 		ORDER BY
     		sale_rqty DESC
 	</select>
+	
+	
+	<!-- 取得t_sales_day_total信息(根据参数) -->
+	<select id="getSumSalesMonthTotalList" parameterType="com.tjhx.entity.info.SalesDayTotal" resultMap="Result_Map_SalesDayTotal">
+		SELECT
+		    org_id,
+		    branch_no,
+		    item_cls_no,
+		    opt_date_m,
+		    opt_date_y,
+		    SUM(give_qty)   AS give_qty,
+		    SUM(ret_amt)    AS ret_amt,
+		    SUM(ret_qty)    AS ret_qty,
+		    SUM(sale_amt)   AS sale_amt,
+		    SUM(sale_price) AS sale_price,
+		    SUM(sale_qty)   AS sale_qty,
+		    SUM(sale_ramt)  AS sale_ramt,
+		    SUM(sale_rqty)  AS sale_rqty
+		FROM
+		    t_sales_day_total
+		WHERE
+		    org_id = #{orgId}
+		AND opt_date_y = #{optDateY}
+		AND opt_date_m = #{optDateM}
+		GROUP BY
+		    item_cls_no
+		ORDER BY
+		    item_cls_no
+	</select>
 </mapper>
