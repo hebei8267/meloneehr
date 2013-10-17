@@ -19,7 +19,6 @@ import com.tjhx.entity.bw.Store;
 import com.tjhx.entity.info.StoreDayTotal;
 import com.tjhx.entity.info.StoreDetail;
 import com.tjhx.entity.struct.Organization;
-import com.tjhx.globals.Constants;
 import com.tjhx.service.struct.OrganizationManager;
 
 @Service
@@ -40,24 +39,11 @@ public class StoreDetailManager {
 	private StoreDayTotalJpaDao storeDayTotalJpaDao;
 
 	/**
-	 * 取得门店机构（不包含总部机构）
-	 * 
-	 * @return
-	 */
-	public List<Organization> getSubOrganization() {
-		List<Organization> _orgList = orgManager.getAllOrganization();
-
-		_orgList.remove(new Organization(Constants.ROOT_ORG_ID));
-
-		return _orgList;
-	}
-
-	/**
 	 * 取得门店库存信息
 	 */
 	@Transactional(readOnly = false)
 	public void getOrgStoreDetail() {
-		List<Organization> _orgList = getSubOrganization();
+		List<Organization> _orgList = orgManager.getSubOrganization();
 		// ----------------------------------------
 		// for (int i = 0; i < 2; i++) {
 		// Organization org = _orgList.get(i);
@@ -112,7 +98,7 @@ public class StoreDetailManager {
 	 */
 	@Transactional(readOnly = false)
 	public void calOrgStoreDayTotal() {
-		List<Organization> _orgList = getSubOrganization();
+		List<Organization> _orgList = orgManager.getSubOrganization();
 		for (Organization org : _orgList) {
 			// 日期
 			String optDate = DateUtils.getCurrentDateShortStr();

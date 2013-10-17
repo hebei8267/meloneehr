@@ -19,12 +19,13 @@ import com.tjhx.entity.bw.DailySaleTotal;
 import com.tjhx.entity.info.SalesDayTotal;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.SysConfig;
+import com.tjhx.service.struct.OrganizationManager;
 
 @Service
 @Transactional(readOnly = true)
 public class SalesDayTotalManager {
 	@Resource
-	private StoreDetailManager storeDetailManager;
+	private OrganizationManager orgManager;
 	@Resource
 	private DailySaleTotalMyBatisDao dailySaleTotalMyBatisDao;
 	@Resource
@@ -40,7 +41,7 @@ public class SalesDayTotalManager {
 	public void getOrgSalesDayTotal() throws ParseException {
 		// 取得门店日销售计算-重计算天数
 		List<String> optDateList = calOptDate();
-		List<Organization> _orgList = storeDetailManager.getSubOrganization();
+		List<Organization> _orgList = orgManager.getSubOrganization();
 
 		for (String optDate : optDateList) {
 			// 删除指定日期的所有门店销售信息
@@ -104,7 +105,7 @@ public class SalesDayTotalManager {
 	 * @return
 	 * @throws ParseException
 	 */
-	private List<String> calOptDate() throws ParseException {
+	List<String> calOptDate() throws ParseException {
 		List<String> _optDateList = new ArrayList<String>();
 
 		String _now = DateUtils.getCurrentDateShortStr();
@@ -137,5 +138,15 @@ public class SalesDayTotalManager {
 	 */
 	public List<SalesDayTotal> getSumSaleRqtyList(SalesDayTotal salesDayTotal) {
 		return salesDayTotalMyBatisDao.getSumSaleRqtyList(salesDayTotal);
+	}
+
+	/**
+	 * 取得合计实销数量（指定年/月/机构）
+	 * 
+	 * @param _param
+	 * @return
+	 */
+	public List<SalesDayTotal> getSumSalesMonthTotalList(SalesDayTotal salesDayTotal) {
+		return	salesDayTotalMyBatisDao.getSumSalesMonthTotalList(salesDayTotal);
 	}
 }
