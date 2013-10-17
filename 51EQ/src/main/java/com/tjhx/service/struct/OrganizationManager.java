@@ -142,4 +142,17 @@ public class OrganizationManager {
 
 		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
 	}
+	
+	/**
+	 * 取得门店机构（不包含总部机构）
+	 * 
+	 * @return
+	 */
+	public List<Organization> getSubOrganization() {
+		List<Organization> _orgList = getAllOrganization();
+
+		_orgList.remove(new Organization(Constants.ROOT_ORG_ID));
+
+		return _orgList;
+	}
 }
