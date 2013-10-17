@@ -27,8 +27,9 @@ public class PunchClockJob implements IJob {
 	 */
 	@Override
 	public void execute() throws ParseException {
-		logger.info("PunchClockJob Begin");
+		logger.info("重计算打卡记录 Begin");
+		// 重计算打卡记录
 		punchClockManager.recalPunchClock();
-		logger.info("PunchClockJob End");
+		logger.info("重计算打卡记录 End");
 	}
 }

@@ -20,9 +20,9 @@ public class BwSaleAmtJob implements IJob {
 
 	@Override
 	public void execute() throws ParseException {
-		logger.info("BwSaleAmtJob Begin");
+		logger.info("同步百威销售额 Begin");
 		cashDailyManager.synBwSaleAmt();
-		logger.info("BwSaleAmtJob End");
+		logger.info("同步百威销售额 End");
 	}
 
 }
