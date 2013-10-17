@@ -184,6 +184,8 @@
 	
 		<!-- 门店日销售信息重计算天数 -->
 		<property name="salesDayTotalDays" value="${sales.day.total.days}" />
+		<!-- 门店月销售信息重计算月数 -->
+		<property name="salesMonthTotalMonths" value="${sales.month.total.months}" />
 		<!-- 销售信息对比(图形)页面种类显示个数 -->
 		<property name="salesDayTotalShowNum" value="${sales.day.total.show.num}" />
 	</bean>
