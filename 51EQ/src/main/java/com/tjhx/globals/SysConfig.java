@@ -37,6 +37,8 @@ public class SysConfig {
 	private int pettyCashCalculateDays;
 	/** 门店日销售信息重计算天数 */
 	private int salesDayTotalDays;
+	/** 门店月销售信息重计算月数 */
+	private int salesMonthTotalMonths;
 	/** 销售信息对比(图形)页面种类显示个数 */
 	private int salesDayTotalShowNum;
 
@@ -362,6 +364,24 @@ public class SysConfig {
 	 */
 	public void setSalesDayTotalDays(int salesDayTotalDays) {
 		this.salesDayTotalDays = salesDayTotalDays;
+	}
+
+	/**
+	 * 取得门店月销售信息重计算月数
+	 * 
+	 * @return salesMonthTotalMonths 门店月销售信息重计算月数
+	 */
+	public int getSalesMonthTotalMonths() {
+		return salesMonthTotalMonths;
+	}
+
+	/**
+	 * 设置门店月销售信息重计算月数
+	 * 
+	 * @param salesMonthTotalMonths 门店月销售信息重计算月数
+	 */
+	public void setSalesMonthTotalMonths(int salesMonthTotalMonths) {
+		this.salesMonthTotalMonths = salesMonthTotalMonths;
 	}
 
 	/**
