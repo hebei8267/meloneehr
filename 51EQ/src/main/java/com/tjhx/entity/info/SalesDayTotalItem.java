@@ -12,13 +12,13 @@ import org.hibernate.annotations.NaturalId;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 每日各店销售汇总
+ * 每日各店销售汇总(按类别)
  */
 @Entity
-@Table(name = "T_SALES_DAY_TOTAL")
+@Table(name = "T_SALES_DAY_TOTAL_ITEM")
 // 默认的缓存策略.
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class SalesDayTotal extends IdEntity {
+public class SalesDayTotalItem extends IdEntity {
 
 	private static final long serialVersionUID = -1760921041803697302L;
 	/** 机构编号 */

@@ -12,13 +12,13 @@ import org.hibernate.annotations.NaturalId;
 import com.tjhx.entity.IdEntity;
 
 /**
- * 每月各店销售汇总
+ * 每月各店销售汇总(按类别)
  */
 @Entity
-@Table(name = "T_SALES_MONTH_TOTAL")
+@Table(name = "T_SALES_MONTH_TOTAL_ITEM")
 // 默认的缓存策略.
 // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class SalesMonthTotal extends IdEntity {
+public class SalesMonthTotalItem extends IdEntity {
 
 	private static final long serialVersionUID = 1727232321630404094L;
 
