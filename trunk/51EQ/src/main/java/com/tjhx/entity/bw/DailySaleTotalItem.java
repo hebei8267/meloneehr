@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 各店每日销售合计（按大类别）
  */
-public class DailySaleTotal {
+public class DailySaleTotalItem {
 	/** 日期 */
 	private String optDate;
 	/** 机构资金编号 */
