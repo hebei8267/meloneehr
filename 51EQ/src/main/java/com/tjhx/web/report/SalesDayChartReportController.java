@@ -15,7 +15,7 @@ import org.springside.modules.mapper.JsonMapper;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
-import com.tjhx.entity.info.SalesDayTotal;
+import com.tjhx.entity.info.SalesDayTotalItem;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
 import com.tjhx.globals.SysConfig;
@@ -50,15 +50,15 @@ public class SalesDayChartReportController extends BaseController {
 
 		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
-		SalesDayTotal param = new SalesDayTotal();
+		SalesDayTotalItem param = new SalesDayTotalItem();
 		param.setOrgId(orgId);
 		param.setOptDateStart(DateUtils.transDateFormat(optDateStart, "yyyy-MM-dd", "yyyyMMdd"));
 		param.setOptDateEnd(DateUtils.transDateFormat(optDateEnd, "yyyy-MM-dd", "yyyyMMdd"));
 
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotal> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
 		// 取得合计实销数量（指定时间区间/机构）
-		List<SalesDayTotal> _sumSaleRqtyList = salesDayTotalManager.getSumSaleRqtyList(param);
+		List<SalesDayTotalItem> _sumSaleRqtyList = salesDayTotalManager.getSumSaleRqtyList(param);
 
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("sumSaleRamtList", mapper.toJson(_sumSaleRamtList));
@@ -121,11 +121,11 @@ public class SalesDayChartReportController extends BaseController {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		int num = sysConfig.getSalesDayTotalShowNum();
 
-		SalesDayTotal param = new SalesDayTotal();
+		SalesDayTotalItem param = new SalesDayTotalItem();
 		param.setOptDateStart(startDate);
 		param.setOptDateEnd(endDate);
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotal> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
 		if (null != _sumSaleRamtList && _sumSaleRamtList.size() > num) {
 			_sumSaleRamtList = _sumSaleRamtList.subList(0, num);
 		}
@@ -137,12 +137,12 @@ public class SalesDayChartReportController extends BaseController {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
 		int num = sysConfig.getSalesDayTotalShowNum();
 
-		SalesDayTotal param = new SalesDayTotal();
+		SalesDayTotalItem param = new SalesDayTotalItem();
 		param.setOptDateStart(startDate);
 		param.setOptDateEnd(endDate);
 		param.setOrgId(orgId);
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotal> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
 		if (null != _sumSaleRamtList && _sumSaleRamtList.size() > num) {
 			_sumSaleRamtList = _sumSaleRamtList.subList(0, num);
 		}
