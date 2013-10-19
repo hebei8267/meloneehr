@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.tjhx.daobw.DailySaleTotalMyBatisDao">
+<mapper namespace="com.tjhx.daobw.DailySaleTotalItemMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_DailySaleTotal" type="com.tjhx.entity.bw.DailySaleTotal">
+	<resultMap id="Result_Map_DailySaleTotal" type="com.tjhx.entity.bw.DailySaleTotalItem">
         
 		<!-- 机构资金编号 -->
 		<result column="branch_no" property="branchNo" jdbcType="VARCHAR"/>
@@ -29,7 +29,7 @@
 	
 	
 	<!-- 各店每日销售合计（按大类别）信息 -->
-	<select id="getDailySaleTotalList" parameterType="com.tjhx.entity.bw.DailySaleTotal" resultMap="Result_Map_DailySaleTotal">
+	<select id="getDailySaleTotalList" parameterType="com.tjhx.entity.bw.DailySaleTotalItem" resultMap="Result_Map_DailySaleTotal">
 	<![CDATA[
 		SELECT 
 			a.branch_no,
