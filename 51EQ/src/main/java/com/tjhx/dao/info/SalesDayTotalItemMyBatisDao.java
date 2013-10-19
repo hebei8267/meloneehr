@@ -36,4 +36,12 @@ public interface SalesDayTotalItemMyBatisDao {
 	 * @return
 	 */
 	public List<SalesDayTotalItem> getSumSalesMonthTotalList(SalesDayTotalItem salesDayTotal);
+
+	/**
+	 * 取得合计信息（金额/数量/均价）（指定时间区间/机构）
+	 * 
+	 * @param salesDayTotal
+	 * @return
+	 */
+	public List<SalesDayTotalItem> getSumSaleInfoList(SalesDayTotalItem salesDayTotal);
 }
