@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
-import com.tjhx.dao.info.SalesDayTotalJpaDao;
-import com.tjhx.dao.info.SalesDayTotalMyBatisDao;
-import com.tjhx.dao.info.SalesMonthTotalJpaDao;
-import com.tjhx.dao.info.SalesMonthTotalMyBatisDao;
-import com.tjhx.entity.info.SalesDayTotal;
-import com.tjhx.entity.info.SalesMonthTotal;
+import com.tjhx.dao.info.SalesDayTotalItemJpaDao;
+import com.tjhx.dao.info.SalesDayTotalItemMyBatisDao;
+import com.tjhx.dao.info.SalesMonthTotalItemJpaDao;
+import com.tjhx.dao.info.SalesMonthTotalItemMyBatisDao;
+import com.tjhx.entity.info.SalesDayTotalItem;
+import com.tjhx.entity.info.SalesMonthTotalItem;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.struct.OrganizationManager;
@@ -26,15 +26,15 @@ import com.tjhx.service.struct.OrganizationManager;
 @Transactional(readOnly = true)
 public class SalesMonthTotalManager {
 	@Resource
-	private SalesDayTotalJpaDao salesDayTotalJpaDao;
+	private SalesDayTotalItemJpaDao salesDayTotalItemJpaDao;
 	@Resource
-	private SalesDayTotalMyBatisDao salesDayTotalMyBatisDao;
+	private SalesDayTotalItemMyBatisDao salesDayTotalItemMyBatisDao;
 	@Resource
 	private SalesDayTotalManager salesDayTotalManager;
 	@Resource
-	private SalesMonthTotalJpaDao salesMonthTotalJpaDao;
+	private SalesMonthTotalItemJpaDao salesMonthTotalItemJpaDao;
 	@Resource
-	private SalesMonthTotalMyBatisDao salesMonthTotalMyBatisDao;
+	private SalesMonthTotalItemMyBatisDao salesMonthTotalItemMyBatisDao;
 	@Resource
 	private OrganizationManager orgManager;
 
@@ -53,10 +53,10 @@ public class SalesMonthTotalManager {
 
 		for (String _optYM : _optYMList) {
 			// 删除指定年月的所有门店销售信息
-			salesMonthTotalMyBatisDao.delSalesMonthTotalInfo(_optYM);
+			salesMonthTotalItemMyBatisDao.delSalesMonthTotalInfo(_optYM);
 
 			for (Organization org : _orgList) {
-				SalesDayTotal _param = new SalesDayTotal();
+				SalesDayTotalItem _param = new SalesDayTotalItem();
 
 				String optY = DateUtils.transDateFormat(_optYM, "yyyyMM", "yyyy");
 				String optM = DateUtils.transDateFormat(_optYM, "yyyyMM", "MM");
@@ -66,10 +66,10 @@ public class SalesMonthTotalManager {
 				_param.setOptDateM(optM);
 
 				// 取得合计实销数量（指定年/月/机构）
-				List<SalesDayTotal> _monthSaleTotalList = salesDayTotalManager.getSumSalesMonthTotalList(_param);
+				List<SalesDayTotalItem> _monthSaleTotalList = salesDayTotalManager.getSumSalesMonthTotalList(_param);
 
-				for (SalesDayTotal monthSaleTotal : _monthSaleTotalList) {
-					SalesMonthTotal _salesMonthTotal = new SalesMonthTotal();
+				for (SalesDayTotalItem monthSaleTotal : _monthSaleTotalList) {
+					SalesMonthTotalItem _salesMonthTotal = new SalesMonthTotalItem();
 
 					// 机构编号
 					_salesMonthTotal.setOrgId(org.getId());
@@ -103,7 +103,7 @@ public class SalesMonthTotalManager {
 								2, BigDecimal.ROUND_UP));
 					}
 
-					salesMonthTotalJpaDao.save(_salesMonthTotal);
+					salesMonthTotalItemJpaDao.save(_salesMonthTotal);
 				}
 			}
 		}
