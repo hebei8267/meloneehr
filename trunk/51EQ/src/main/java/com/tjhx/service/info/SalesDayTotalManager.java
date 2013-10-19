@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
-import com.tjhx.dao.info.SalesDayTotalJpaDao;
-import com.tjhx.dao.info.SalesDayTotalMyBatisDao;
-import com.tjhx.daobw.DailySaleTotalMyBatisDao;
-import com.tjhx.entity.bw.DailySaleTotal;
-import com.tjhx.entity.info.SalesDayTotal;
+import com.tjhx.dao.info.SalesDayTotalItemJpaDao;
+import com.tjhx.dao.info.SalesDayTotalItemMyBatisDao;
+import com.tjhx.daobw.DailySaleTotalItemMyBatisDao;
+import com.tjhx.entity.bw.DailySaleTotalItem;
+import com.tjhx.entity.info.SalesDayTotalItem;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.struct.OrganizationManager;
@@ -27,11 +27,11 @@ public class SalesDayTotalManager {
 	@Resource
 	private OrganizationManager orgManager;
 	@Resource
-	private DailySaleTotalMyBatisDao dailySaleTotalMyBatisDao;
+	private DailySaleTotalItemMyBatisDao dailySaleTotalItemMyBatisDao;
 	@Resource
-	private SalesDayTotalMyBatisDao salesDayTotalMyBatisDao;
+	private SalesDayTotalItemMyBatisDao salesDayTotalItemMyBatisDao;
 	@Resource
-	private SalesDayTotalJpaDao salesDayTotalJpaDao;
+	private SalesDayTotalItemJpaDao salesDayTotalItemJpaDao;
 
 	/**
 	 * 取得百威系统各门店日销售信息
@@ -45,17 +45,18 @@ public class SalesDayTotalManager {
 
 		for (String optDate : optDateList) {
 			// 删除指定日期的所有门店销售信息
-			salesDayTotalMyBatisDao.delSalesDayTotalInfo(optDate);
+			salesDayTotalItemMyBatisDao.delSalesDayTotalInfo(optDate);
 
 			for (Organization org : _orgList) {
-				DailySaleTotal _param = new DailySaleTotal();
+				DailySaleTotalItem _param = new DailySaleTotalItem();
 				_param.setOptDate(optDate);
 				_param.setBranchNo(org.getBwBranchNo());
 
-				List<DailySaleTotal> _dailySaleTotalList = dailySaleTotalMyBatisDao.getDailySaleTotalList(_param);
+				List<DailySaleTotalItem> _dailySaleTotalList = dailySaleTotalItemMyBatisDao
+						.getDailySaleTotalList(_param);
 
-				for (DailySaleTotal _bwDailySaleTotal : _dailySaleTotalList) {
-					SalesDayTotal _salesDay = new SalesDayTotal();
+				for (DailySaleTotalItem _bwDailySaleTotal : _dailySaleTotalList) {
+					SalesDayTotalItem _salesDay = new SalesDayTotalItem();
 
 					// 机构编号
 					_salesDay.setOrgId(org.getId());
@@ -93,7 +94,7 @@ public class SalesDayTotalManager {
 								2, BigDecimal.ROUND_UP));
 					}
 
-					salesDayTotalJpaDao.save(_salesDay);
+					salesDayTotalItemJpaDao.save(_salesDay);
 				}
 			}
 		}
@@ -126,8 +127,8 @@ public class SalesDayTotalManager {
 	 * @param salesDayTotal
 	 * @return
 	 */
-	public List<SalesDayTotal> getSumSaleRamtList(SalesDayTotal salesDayTotal) {
-		return salesDayTotalMyBatisDao.getSumSaleRamtList(salesDayTotal);
+	public List<SalesDayTotalItem> getSumSaleRamtList(SalesDayTotalItem salesDayTotal) {
+		return salesDayTotalItemMyBatisDao.getSumSaleRamtList(salesDayTotal);
 	}
 
 	/**
@@ -136,8 +137,8 @@ public class SalesDayTotalManager {
 	 * @param salesDayTotal
 	 * @return
 	 */
-	public List<SalesDayTotal> getSumSaleRqtyList(SalesDayTotal salesDayTotal) {
-		return salesDayTotalMyBatisDao.getSumSaleRqtyList(salesDayTotal);
+	public List<SalesDayTotalItem> getSumSaleRqtyList(SalesDayTotalItem salesDayTotal) {
+		return salesDayTotalItemMyBatisDao.getSumSaleRqtyList(salesDayTotal);
 	}
 
 	/**
@@ -146,7 +147,7 @@ public class SalesDayTotalManager {
 	 * @param _param
 	 * @return
 	 */
-	public List<SalesDayTotal> getSumSalesMonthTotalList(SalesDayTotal salesDayTotal) {
-		return	salesDayTotalMyBatisDao.getSumSalesMonthTotalList(salesDayTotal);
+	public List<SalesDayTotalItem> getSumSalesMonthTotalList(SalesDayTotalItem salesDayTotal) {
+		return salesDayTotalItemMyBatisDao.getSumSalesMonthTotalList(salesDayTotal);
 	}
 }
