@@ -58,6 +58,8 @@ public class SalesDayTotalItem extends IdEntity {
 	private String optDateStart;
 	/** 日期-结束时间 */
 	private String optDateEnd;
+	/** 用户关联机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -396,5 +398,27 @@ public class SalesDayTotalItem extends IdEntity {
 	 */
 	public void setOptDateEnd(String optDateEnd) {
 		this.optDateEnd = optDateEnd;
+	}
+
+	/**
+	 * 取得用户关联机构名称
+	 * 
+	 * @return orgName 用户关联机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		if (null == orgName && null != orgId) {
+			orgName = orgId.substring(3, 6);
+		}
+		return orgName;
+	}
+
+	/**
+	 * 设置用户关联机构名称
+	 * 
+	 * @param orgName 用户关联机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 }
