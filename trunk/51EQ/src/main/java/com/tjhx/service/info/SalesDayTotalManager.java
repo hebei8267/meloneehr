@@ -148,7 +148,16 @@ public class SalesDayTotalManager {
 	 * @return
 	 */
 	public List<SalesDayTotalItem> getSumSaleInfoList(SalesDayTotalItem salesDayTotal) {
-		return salesDayTotalItemMyBatisDao.getSumSaleInfoList(salesDayTotal);
+		List<SalesDayTotalItem> _res = salesDayTotalItemMyBatisDao.getSumSaleInfoList(salesDayTotal);
+		for (SalesDayTotalItem salesDayTotalItem : _res) {
+			if (salesDayTotalItem.getSaleRqty().compareTo(BigDecimal.ZERO) == 0) {
+				salesDayTotalItem.setSalePrice(new BigDecimal(0));
+			} else {
+				salesDayTotalItem.setSalePrice(salesDayTotalItem.getSaleRamt().divide(salesDayTotalItem.getSaleRqty(),
+						2, BigDecimal.ROUND_UP));
+			}
+		}
+		return _res;
 	}
 
 	/**
