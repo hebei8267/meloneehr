@@ -140,6 +140,10 @@
                                 <a href="${sc_ctx}/salesDayChartReport/pie_init">销售金额对比(图形)</a>
                             </li>
                             <li class="divider"></li>
+                            <li>
+                                <a href="${sc_ctx}/salesMonthChartReport/bar_init">月销售金额对比(图形)</a>
+                            </li>
+                            <li class="divider"></li>
                             </c:if>
                             
                             <c:if test="${_permIdList.contains('12')}">
