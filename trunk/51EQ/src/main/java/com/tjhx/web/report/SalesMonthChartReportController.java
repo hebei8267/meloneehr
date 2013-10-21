@@ -96,6 +96,9 @@ public class SalesMonthChartReportController extends BaseController {
 		// 各店近三年销售数据
 		getSalesTotalList_ByOrgAndYear(_orgList, optDateYList, _orgSumSalesJsonList, _orgNameList);
 
+		model.addAttribute("optDateYM1", optDateYList.get(0));
+		model.addAttribute("optDateYM2", optDateYList.get(1));
+		model.addAttribute("optDateYM3", optDateYList.get(2));
 		model.addAttribute("orgSumSalesJsonList", _orgSumSalesJsonList);
 		model.addAttribute("orgNameList", _orgNameList);
 
