@@ -104,13 +104,13 @@
 					},
 		            legend: {
 		                values: [{
-		                    text: "2013年",
+		                    text: "${optDateYM1}年",
 		                    color: "#FF8000"
 		                }, {
-		                    text: "2012年",
+		                    text: "${optDateYM2}年",
 		                    color: "#00FF40"
 		                }, {
-		                    text: "2011年",
+		                    text: "${optDateYM3}年",
 		                    color: "#0174DF"
 		                }],
 		                valign: "middle",
