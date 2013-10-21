@@ -109,6 +109,9 @@
 	                                    <th class="right">
 	                                        合计销售金额(元)
 	                                    </th>
+	                                    <th class="right">
+	                                        销售均价(元)
+	                                    </th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
@@ -118,6 +121,7 @@
 	                            		<td width="240" class="center">${optDateShow_start } ～ ${optDateShow_end }</td>
 	                            		<td class="right">${sumSale.saleRqty}</td>
 	                            		<td class="right">${sumSale.saleRamt}</td>
+	                            		<td class="right">${sumSale.salePrice}</td>
 	                            	</tr>
 	                            	</c:forEach>
 	                            </tbody>
