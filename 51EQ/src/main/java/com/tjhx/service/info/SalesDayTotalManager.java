@@ -142,6 +142,16 @@ public class SalesDayTotalManager {
 	}
 
 	/**
+	 * 取得合计信息（金额/数量/均价）（指定时间区间/机构）
+	 * 
+	 * @param salesDayTotal
+	 * @return
+	 */
+	public List<SalesDayTotalItem> getSumSaleInfoList(SalesDayTotalItem salesDayTotal) {
+		return salesDayTotalItemMyBatisDao.getSumSaleInfoList(salesDayTotal);
+	}
+
+	/**
 	 * 取得合计实销数量（指定年/月/机构）
 	 * 
 	 * @param _param
