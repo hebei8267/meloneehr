@@ -39,6 +39,8 @@ public class SysConfig {
 	private int salesDayTotalDays;
 	/** 门店月销售信息重计算月数 */
 	private int salesMonthTotalMonths;
+	/** 月销售信息对比(图形)页面年份显示个数 */
+	private int salesMonthTotalShowYearNum;
 	/** 销售信息对比(图形)页面种类显示个数 */
 	private int salesDayTotalShowNum;
 
@@ -382,6 +384,24 @@ public class SysConfig {
 	 */
 	public void setSalesMonthTotalMonths(int salesMonthTotalMonths) {
 		this.salesMonthTotalMonths = salesMonthTotalMonths;
+	}
+
+	/**
+	 * 取得月销售信息对比(图形)页面年份显示个数
+	 * 
+	 * @return salesMonthTotalShowYearNum 月销售信息对比(图形)页面年份显示个数
+	 */
+	public int getSalesMonthTotalShowYearNum() {
+		return salesMonthTotalShowYearNum;
+	}
+
+	/**
+	 * 设置月销售信息对比(图形)页面年份显示个数
+	 * 
+	 * @param salesMonthTotalShowYearNum 月销售信息对比(图形)页面年份显示个数
+	 */
+	public void setSalesMonthTotalShowYearNum(int salesMonthTotalShowYearNum) {
+		this.salesMonthTotalShowYearNum = salesMonthTotalShowYearNum;
 	}
 
 	/**
