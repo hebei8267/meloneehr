@@ -17,7 +17,6 @@ import org.springside.modules.utils.SpringContextHolder;
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.info.SalesDayTotalItem;
 import com.tjhx.entity.struct.Organization;
-import com.tjhx.globals.Constants;
 import com.tjhx.globals.SysConfig;
 import com.tjhx.service.info.SalesDayTotalManager;
 import com.tjhx.service.struct.OrganizationManager;
@@ -61,12 +60,12 @@ public class SalesDayChartReportController extends BaseController {
 		List<SalesDayTotalItem> _sumSaleRqtyList = salesDayTotalManager.getSumSaleRqtyList(param);
 		// 取得合计信息（金额/数量/均价）（指定时间区间/机构）
 		List<SalesDayTotalItem> _sumSaleList = salesDayTotalManager.getSumSaleInfoList(param);
-		
+
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("sumSaleRamtList", mapper.toJson(_sumSaleRamtList));
 		model.addAttribute("sumSaleRqtyList", mapper.toJson(_sumSaleRqtyList));
 		model.addAttribute("sumSaleList", _sumSaleList);
-		
+
 		model.addAttribute("showFlg", true);
 
 		return "report/salesDayChartReport_bar";
@@ -76,19 +75,6 @@ public class SalesDayChartReportController extends BaseController {
 	@RequestMapping(value = "pie_init")
 	public String salesDayChartReport2_Action(Model model) {
 		return "report/salesDayChartReport_pie";
-	}
-
-	/**
-	 * 取得门店机构（不包含总部机构）
-	 * 
-	 * @return
-	 */
-	public List<Organization> getSubOrganization() {
-		List<Organization> _orgList = orgManager.getAllOrganization();
-
-		_orgList.remove(new Organization(Constants.ROOT_ORG_ID));
-
-		return _orgList;
 	}
 
 	@RequestMapping(value = "pie_search")
@@ -108,7 +94,7 @@ public class SalesDayChartReportController extends BaseController {
 		_jsonStrList.add(getSumSaleRamtJsonStr(_startDate, _endDate));
 		_orgNameList.add("合计");
 
-		List<Organization> _orgList = getSubOrganization();
+		List<Organization> _orgList = orgManager.getSubOrganization();
 		for (Organization org : _orgList) {
 			// 各门店
 			_jsonStrList.add(getSumSaleRamtJsonStr(_startDate, _endDate, org.getId()));
