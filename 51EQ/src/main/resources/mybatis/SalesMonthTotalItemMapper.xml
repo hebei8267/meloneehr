@@ -3,7 +3,7 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.tjhx.dao.info.SalesMonthTotalItemMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_SalesMonthTotal" type="com.tjhx.entity.info.SalesMonthTotalItem">
+	<resultMap id="Result_Map_SalesMonthTotalItem" type="com.tjhx.entity.info.SalesMonthTotalItem">
         <result column="uuid" property="uuid" jdbcType="INTEGER"/>
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
         <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
@@ -14,7 +14,7 @@
         <result column="give_qty" property="giveQty" jdbcType="DECIMAL"/>
         <result column="item_cls_no" property="itemClsNo" jdbcType="VARCHAR"/>
         <result column="opt_date_y" property="optDateY" jdbcType="VARCHAR"/>
-        <result column="opt_date_y_m" property="optDateYm" jdbcType="VARCHAR"/>
+        <result column="opt_date_y_m" property="optDateYM" jdbcType="VARCHAR"/>
         <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
         <result column="ret_amt" property="retAmt" jdbcType="DECIMAL"/>
         <result column="ret_qty" property="retQty" jdbcType="DECIMAL"/>
@@ -28,4 +28,38 @@
 	<delete id="delSalesMonthTotalInfo" parameterType="String">  
         DELETE FROM t_sales_month_total_item WHERE opt_date_y_m = #{optYMDate}
     </delete>
+    
+    <!-- 各店指定年销售数据 -->
+	<select id="getSalesTotalList_ByOrgAndYear" parameterType="com.tjhx.entity.info.SalesMonthTotalItem" resultMap="Result_Map_SalesMonthTotalItem">
+		SELECT
+		    org_id ,
+		    opt_date_y ,
+		    opt_date_y_m ,
+		    SUM(sale_ramt) AS sale_ramt
+		FROM
+		    t_sales_month_total_item
+		WHERE
+		    opt_date_y = #{optDateY}
+		AND org_id = #{orgId}
+		GROUP BY
+		    opt_date_y_m
+		ORDER BY
+		    opt_date_y_m
+	</select>
+	<!-- 全部门店指定月份销售数据 -->
+	<select id="getSalesTotalList_ByYear" parameterType="com.tjhx.entity.info.SalesMonthTotalItem" resultMap="Result_Map_SalesMonthTotalItem">
+		SELECT
+			'000' AS org_id ,
+		    opt_date_y ,
+		    opt_date_y_m ,
+		    SUM(sale_ramt) AS sale_ramt
+		FROM
+		    t_sales_month_total_item
+		WHERE
+		    opt_date_y = #{optDateY}
+		GROUP BY
+		    opt_date_y_m
+		ORDER BY
+		    opt_date_y_m
+	</select>
 </mapper>
