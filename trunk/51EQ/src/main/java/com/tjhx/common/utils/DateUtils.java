@@ -36,6 +36,15 @@ public class DateUtils {
 	}
 
 	/**
+	 * 取得当前时间
+	 * 
+	 * @return 当前日期（String yyyy）
+	 */
+	public static String getCurrentYear() {
+		return getCurFormatDate("yyyy");
+	}
+
+	/**
 	 * 取得当前时间的特定表示格式的字符串
 	 * 
 	 * @param style 时间格式（如：yyyy/MM/dd hh:mm:ss）
@@ -91,6 +100,24 @@ public class DateUtils {
 		Date _date = stringToDate(date, style);
 		cal.setTime(_date);
 		cal.add(Calendar.DATE, addDay);
+		simpleDateFormat.applyPattern(style);
+		return simpleDateFormat.format(cal.getTime());
+	}
+
+	/**
+	 * 取得指定年数后的日期（以指定时间为准）
+	 * 
+	 * @param addDay
+	 * @param style
+	 * @return
+	 * @throws ParseException
+	 */
+	public static synchronized String getNextYearFormatDate(String date, int addDay, String style)
+			throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		Date _date = stringToDate(date, style);
+		cal.setTime(_date);
+		cal.add(Calendar.YEAR, addDay);
 		simpleDateFormat.applyPattern(style);
 		return simpleDateFormat.format(cal.getTime());
 	}
