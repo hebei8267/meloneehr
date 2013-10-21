@@ -130,7 +130,7 @@
 		            },
 					padding : {
 						left : 90,
-						right : 50
+						right : 70
 					}
 				});
 				barChart${status1.index + 1}.parse(_saleRamtJson${status1.index + 1}, "json");
