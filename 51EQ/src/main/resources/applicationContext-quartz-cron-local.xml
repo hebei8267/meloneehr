@@ -24,8 +24,8 @@
 				<prop key="org.quartz.threadPool.threadCount">3</prop>
 			</props>
 		</property>
-		<!-- 启动时延期30秒开始任务 -->
-		<property name="startupDelay" value="30" />
+		<!-- 启动时延期3秒开始任务 -->
+		<property name="startupDelay" value="3" />
 	</bean>
 
 	<!-- ##################################### 打卡机  ###################################### -->
