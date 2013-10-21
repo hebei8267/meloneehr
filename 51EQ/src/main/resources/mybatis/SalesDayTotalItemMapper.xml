@@ -106,4 +106,33 @@
 		ORDER BY
 		    item_cls_no
 	</select>
+	
+	
+	<!-- 查询条件 -->
+  	<sql id="Where_Clause2" >
+  		<where>
+  			sd.org_id = org.org_id
+  			<if test="orgId != null and orgId !='' ">
+  			AND sd.org_id = #{orgId}
+  			</if>
+  			<![CDATA[ AND sd.opt_date >= #{optDateStart} AND sd.opt_date  <= #{optDateEnd} ]]>
+	  	</where>
+  	</sql>
+	<!-- 取得t_sales_day_total信息(根据参数) -->
+	<select id="getSumSaleInfoList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotal">
+		SELECT
+		    sd.org_id,
+		    org.org_name,
+		    SUM(sd.sale_ramt)                   AS sale_ramt,
+		    SUM(sd.sale_rqty)                   AS sale_rqty,
+		    SUM(sd.sale_ramt)/SUM(sd.sale_rqty) AS sale_price
+		FROM
+		    t_sales_day_total_item sd,
+		    t_organization org
+		<include refid="Where_Clause2" />
+		GROUP BY
+		    sd.org_id
+		ORDER BY
+		    sd.org_id
+	</select>
 </mapper>
