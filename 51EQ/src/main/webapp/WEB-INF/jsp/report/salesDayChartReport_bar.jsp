@@ -104,10 +104,10 @@
 	                                        日期
 	                                    </th>
 	                                    <th class="right">
-	                                        销售数量(个)
+	                                        合计销售数量(个)
 	                                    </th>
 	                                    <th class="right">
-	                                        销售金额(元)
+	                                        合计销售金额(元)
 	                                    </th>
 	                                </tr>
 	                            </thead>
