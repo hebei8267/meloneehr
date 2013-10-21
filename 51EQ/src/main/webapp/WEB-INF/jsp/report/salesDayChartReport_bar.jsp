@@ -10,6 +10,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<style type="text/css">
+    	.cash_daily {
+			border-bottom: 3px solid #F89406;
+			margin-top: 40px;
+			margin-bottom: 30px;
+		}
+    	</style>
     	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/dhtmlxchart.css">
     	<script src="${ctx}/static/js/dhtmlxchart.js" type="text/javascript"></script>
 
@@ -85,6 +92,46 @@
                         <div class="span12"	style="margin-top: 10px;">
                             <div id="chart2" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
                         </div>
+                        <div class="span12 cash_daily"></div>
+                        <div class="span12"	style="margin-top: 10px;">
+                        	<table class="table	table-striped table-bordered table-condensed mytable">
+	                            <thead>
+	                                <tr>
+	                                    <th>
+	                                        机构
+	                                    </th>
+	                                    <th class="center">
+	                                        日期
+	                                    </th>
+	                                    <th class="right">
+	                                        销售数量(个)
+	                                    </th>
+	                                    <th class="right">
+	                                        销售金额(元)
+	                                    </th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                            	<c:forEach items="${sumSaleList}" var="sumSale">
+	                            	<tr>
+	                            		<td>${sumSale.orgName}</td>
+	                            		<td width="240" class="center">${optDateShow_start } ～ ${optDateShow_end }</td>
+	                            		<td class="right">${sumSale.saleRqty}</td>
+	                            		<td class="right">${sumSale.saleRamt}</td>
+	                            	</tr>
+	                            	</c:forEach>
+	                            </tbody>
+	                            <c:if test="${empty	sumSaleList}" >
+	                                <tfoot>
+	                                    <tr>
+	                                        <td	colspan="5"	class="rounded-foot-left">
+	                                            无记录信息
+	                                        </td>
+	                                    </tr>
+	                                </tfoot>
+	                            </c:if>
+                            </table>
+                        </div>
                     </c:if>
                 </div>
             </form>
@@ -114,7 +161,7 @@
 		            },
 					padding : {
 						left : 90,
-						right : 30
+						right : 70
 					}
 				});
 				barChart1.parse(_sumSaleRamtList, "json");
@@ -138,7 +185,7 @@
 		            },
 					padding : {
 						left : 90,
-						right : 30
+						right : 70
 					}
 				});
 				barChart2.parse(_sumSaleRqtyList, "json");
