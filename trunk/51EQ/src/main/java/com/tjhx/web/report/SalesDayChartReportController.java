@@ -59,10 +59,14 @@ public class SalesDayChartReportController extends BaseController {
 		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
 		// 取得合计实销数量（指定时间区间/机构）
 		List<SalesDayTotalItem> _sumSaleRqtyList = salesDayTotalManager.getSumSaleRqtyList(param);
-
+		// 取得合计信息（金额/数量/均价）（指定时间区间/机构）
+		List<SalesDayTotalItem> _sumSaleList = salesDayTotalManager.getSumSaleInfoList(param);
+		
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("sumSaleRamtList", mapper.toJson(_sumSaleRamtList));
 		model.addAttribute("sumSaleRqtyList", mapper.toJson(_sumSaleRqtyList));
+		model.addAttribute("sumSaleList", _sumSaleList);
+		
 		model.addAttribute("showFlg", true);
 
 		return "report/salesDayChartReport_bar";

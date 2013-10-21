@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -26,11 +27,12 @@ public class StoreChartReportController extends BaseController {
 	@RequestMapping(value = { "chart", "" })
 	public String storeChartReport_Action(Model model) throws ServletRequestBindingException {
 		String maxOptDate = storeChartReportManager.getMaxOptDate();
-
-		List<StoreDayTotal> _dbStoreDayTotalList = storeChartReportManager.getStoreDayTotalList(maxOptDate);
-
-		model.addAttribute("maxOptDate", DateUtils.transDateFormat(maxOptDate, "yyyyMMdd", "yyyy-MM-dd"));
-		model.addAttribute("data_set", formatStoreDayTotalInfo_chart(_dbStoreDayTotalList));
+		
+		if (StringUtils.isNotBlank(maxOptDate)) {
+			List<StoreDayTotal> _dbStoreDayTotalList = storeChartReportManager.getStoreDayTotalList(maxOptDate);
+			model.addAttribute("maxOptDate", DateUtils.transDateFormat(maxOptDate, "yyyyMMdd", "yyyy-MM-dd"));
+			model.addAttribute("data_set", formatStoreDayTotalInfo_chart(_dbStoreDayTotalList));
+		}
 
 		return "report/storeChartReport";
 	}
@@ -39,14 +41,13 @@ public class StoreChartReportController extends BaseController {
 	public String storeListReport_Action(Model model) throws ServletRequestBindingException {
 		String maxOptDate = storeChartReportManager.getMaxOptDate();
 
-		List<StoreDayTotal> _dbStoreDayTotalList = storeChartReportManager.getStoreDayTotalList(maxOptDate);
-
-		model.addAttribute("maxOptDate", DateUtils.transDateFormat(maxOptDate, "yyyyMMdd", "yyyy-MM-dd"));
-
-		List<StoreDayTotal_Show> _list = formatStoreDayTotalInfo_list(_dbStoreDayTotalList);
-		model.addAttribute("storeDayTotalList", _list);
-
-		calTotal_StoreDayTotal(model, _list);
+		if (StringUtils.isNotBlank(maxOptDate)) {
+			model.addAttribute("maxOptDate", DateUtils.transDateFormat(maxOptDate, "yyyyMMdd", "yyyy-MM-dd"));
+			List<StoreDayTotal> _dbStoreDayTotalList = storeChartReportManager.getStoreDayTotalList(maxOptDate);
+			List<StoreDayTotal_Show> _list = formatStoreDayTotalInfo_list(_dbStoreDayTotalList);
+			model.addAttribute("storeDayTotalList", _list);
+			calTotal_StoreDayTotal(model, _list);
+		}
 
 		return "report/storeChartReport_dateList";
 	}
