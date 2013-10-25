@@ -126,6 +126,9 @@
                                     <th>
                                         当班销售额
                                     </th>
+                                    <th>
+                                        商场汇报销售额
+                                    </th>
                                     <th	width="55">
                                         &nbsp;
                                     </th>
@@ -179,6 +182,9 @@
                                             ${cashRun.saleAmt}
                                         </td>
                                         <td>
+                                            ${cashRun.reportAmt}
+                                        </td>
+                                        <td>
                                             <c:if test="${cashRun.dailyFlg == 'false'	}">
                                                 <a href="${sc_ctx}/cashRun/edit/${cashRun.uuid}" class="btn btn-warning"/>修改</a>
                                             </c:if>
@@ -203,8 +209,11 @@
                                             ${totalCashRun.depositAmt}
                                         </td>
                                         <td></td>
-                                        <td colspan="2">
+                                        <td>
                                             ${totalCashRun.saleAmt}
+                                        </td>
+                                        <td colspan="2">
+                                            ${totalCashRun.reportAmt}
                                         </td>
                                     </tr>
                                 </c:if>
@@ -212,7 +221,7 @@
                             <c:if test="${empty	cashRunList}" >
                                 <tfoot>
                                     <tr>
-                                        <td	colspan="12"	class="rounded-foot-left">
+                                        <td	colspan="13"	class="rounded-foot-left">
                                             无记录信息
                                         </td>
                                     </tr>

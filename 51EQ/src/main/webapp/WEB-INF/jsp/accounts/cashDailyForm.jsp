@@ -109,6 +109,10 @@
                                 <label class="control-label">备注 :</label>
                                 <label class="left-control-label">${cashRun1.descTxt}</label>
                             </div>
+                            <div class="control-group">
+                            	<label class="control-label">商场汇报销售额 :</label>
+                            	<label class="left-control-label">${cashRun1.reportAmt}</label>
+                        	</div>
                         </form:form>
                     </div>
                 </c:if>
@@ -196,6 +200,10 @@
                                 <label class="control-label">备注 :</label>
                                 <label class="left-control-label">${cashRun2.descTxt}</label>
                             </div>
+                            <div class="control-group">
+                            	<label class="control-label">商场汇报销售额 :</label>
+                            	<label class="left-control-label">${cashRun2.reportAmt}</label>
+                        	</div>
                         </form:form>
                     </div>
                 </c:if>

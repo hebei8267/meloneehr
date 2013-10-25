@@ -72,10 +72,10 @@
                                     <th>
                                         当日销售额
                                     </th>
-                                    <th width="55">
-                                        明细
+                                    <th>
+                                        商场汇报销售额
                                     </th>
-                                    <th width="55">
+                                    <th width="120">
                                         &nbsp;
                                     </th>
                                 </tr>
@@ -107,9 +107,11 @@
                                         <td>
                                             ${noCashDaily.saleAmt}
                                         </td>
-                                        <td><a href="${sc_ctx}/cashDaily/detail/${noCashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
+                                        <td>
+                                            ${noCashDaily.reportAmt}
                                         </td>
                                         <td>
+                                        	<a href="${sc_ctx}/cashDaily/detail/${noCashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
                                             <a href="javascript:cashDailyBtn('${noCashDaily.optDate}')" id="cashDailyBtn"	class="btn btn-danger">日结</a>
                                         </td>
                                     </tr>
@@ -163,8 +165,11 @@
                                     <th>
                                         当日销售额
                                     </th>
+                                    <th>
+                                        商场汇报销售额
+                                    </th>
                                     <th width="55">
-                                        明细
+                                        
                                     </th>
                                 </tr>
                             </thead>
@@ -172,7 +177,7 @@
                                 <c:if test="${empty	cashDailyList}" >
                                     <tfoot>
                                         <tr>
-                                            <td	colspan="9" class="rounded-foot-left">
+                                            <td	colspan="10" class="rounded-foot-left">
                                                 无记录信息
                                             </td>
                                         </tr>
@@ -204,7 +209,11 @@
                                         <td>
                                             ${cashDaily.saleAmt}
                                         </td>
-                                        <td><a href="${sc_ctx}/cashDaily/detail/${cashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
+                                        <td>
+                                            ${cashDaily.reportAmt}
+                                        </td>
+                                        <td>
+                                        	<a href="${sc_ctx}/cashDaily/detail/${cashDaily.optDate}" class="btn btn-warning" target="_blank"/>查看</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
