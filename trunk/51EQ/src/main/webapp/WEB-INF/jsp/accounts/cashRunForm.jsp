@@ -93,6 +93,10 @@
                         },
                         descTxt : {
                             maxlength : 255
+                        },
+                        reportAmt : {
+                            required : true,
+                            money : true
                         }
                     }
                 });
@@ -298,6 +302,13 @@
                             <label class="control-label">备注 :</label>
                             <div class="controls">
                                 <form:textarea path="descTxt" class="input-xlarge" rows="4"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">商场汇报销售额 :</label>
+                            <div class="controls">
+                                <form:input	path="reportAmt" />
+                                元
                             </div>
                         </div>
                         <div class="control-group">
