@@ -135,6 +135,9 @@
                                     <th>
                                         百威对账
                                     </th>
+                                    <th>
+                                        商场汇报销售额
+                                    </th>
                                     <th	width="55">
                                         &nbsp;
                                     </th>
@@ -178,6 +181,9 @@
                                         	${cashDaily.bwSaleAmt}
                                         </td>
                                         <td>
+                                        	${cashDaily.reportAmt}
+                                        </td>
+                                        <td>
                                             <a href="${sc_ctx}/cashReport/detail/${cashDaily.optDate}/${cashDaily.orgId}" target="_blank" class="btn btn-warning"/>详细</a>
                                         </td>
                                     </tr>
@@ -211,6 +217,9 @@
                                         	${totalCashDaily.bwSaleAmt}
                                         </td>
                                         <td>
+                                        	${totalCashDaily.reportAmt}
+                                        </td>
+                                        <td>
                                         </td>
                                     </tr>
                                 </c:if>
@@ -218,7 +227,7 @@
                             <c:if test="${empty	cashDailyList}" >
                                 <tfoot>
                                     <tr>
-                                        <td	colspan="12"	class="rounded-foot-left">
+                                        <td	colspan="13"	class="rounded-foot-left">
                                             无记录信息
                                         </td>
                                     </tr>

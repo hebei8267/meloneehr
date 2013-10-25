@@ -30,7 +30,8 @@
                         },
                         optDateShow_end : {
                     		required : true,
-                    		date : true                    		
+                    		date : true,
+                    		compareDate : "#optDateShow_start"
                         }
                     }
                 });
