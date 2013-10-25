@@ -53,6 +53,8 @@ public class CashDaily extends IdEntity {
 	private BigDecimal bwSaleAmt = new BigDecimal("0");
 	/** 百威系统机构编号 */
 	private String orgBranchNo;
+	/** 汇报金额 */
+	private BigDecimal reportAmt = new BigDecimal("0");
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
@@ -284,6 +286,24 @@ public class CashDaily extends IdEntity {
 	 */
 	public void setRetainedAmt(BigDecimal retainedAmt) {
 		this.retainedAmt = retainedAmt;
+	}
+
+	/**
+	 * 取得汇报金额
+	 * 
+	 * @return reportAmt 汇报金额
+	 */
+	public BigDecimal getReportAmt() {
+		return reportAmt;
+	}
+
+	/**
+	 * 设置汇报金额
+	 * 
+	 * @param reportAmt 汇报金额
+	 */
+	public void setReportAmt(BigDecimal reportAmt) {
+		this.reportAmt = reportAmt;
 	}
 
 	/**
