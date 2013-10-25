@@ -52,7 +52,7 @@
 	            container: "chart1",
 	            value: "#stockTotalQty#",
 	            label: "#stockTotalQty#",
-	            color: "#00FF40",
+	            color: "#0174DF",
 	            tooltip: {
 	                template: "#stockTotalQty#"
 	            },
@@ -69,7 +69,7 @@
 	            legend: {
 	                values: [{
 	                    text: "正库存",
-	                    color: "#00FF40"
+	                    color: "#0174DF"
 	                }, {
 	                    text: "负库存",
 	                    color: "#FF8000"
@@ -95,7 +95,7 @@
 	            container: "chart2",
 	            value: "#stockTotalAmt#",
 	            label: "#stockTotalAmt#",
-	            color: "#476cee",
+	            color: "#0174DF",
 	            tooltip: {
 	                template: "#stockTotalAmt#元"
 	            },
@@ -112,10 +112,10 @@
 	            legend: {
 	                values: [{
 	                    text: "正库存",
-	                    color: "#476cee"
+	                    color: "#0174DF"
 	                }, {
 	                    text: "负库存",
-	                    color: "#ee4339"
+	                    color: "#FF8000"
 	                }],
 	                valign: "middle",
 	                align: "right",
@@ -126,7 +126,7 @@
 	        barChart2.addSeries({
 	            value: "#stockTotalAmt_Minus#",
 	            label: "-#stockTotalAmt_Minus#",
-	            color: "#ee4339",
+	            color: "#FF8000",
 	            tooltip: {
 	                template: "-#stockTotalAmt_Minus#元"
 	            }
@@ -138,7 +138,7 @@
 	            container: "chart3",
 	            value: "#itemSaleTotalAmt#",
 	            label: "#itemSaleTotalAmt#",
-	            color: "#476cee",
+	            color: "#0174DF",
 	            tooltip: {
 	                template: "#itemSaleTotalAmt#元"
 	            },
@@ -155,10 +155,10 @@
 	            legend: {
 	                values: [{
 	                    text: "正库存",
-	                    color: "#476cee"
+	                    color: "#0174DF"
 	                }, {
 	                    text: "负库存",
-	                    color: "#ee4339"
+	                    color: "#FF8000"
 	                }],
 	                valign: "middle",
 	                align: "right",
@@ -169,7 +169,7 @@
 	        barChart3.addSeries({
 	            value: "#itemSaleTotalAmt_Minus#",
 	            label: "-#itemSaleTotalAmt_Minus#",
-	            color: "#ee4339",
+	            color: "#FF8000",
 	            tooltip: {
 	                template: "-#itemSaleTotalAmt_Minus#元"
 	            }
