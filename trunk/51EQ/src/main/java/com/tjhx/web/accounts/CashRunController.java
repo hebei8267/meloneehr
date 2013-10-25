@@ -162,6 +162,7 @@ public class CashRunController extends BaseController {
 		cashRun.setCardAmtBw(null);
 		cashRun.setCardNum(null);
 		cashRun.setDepositAmt(null);
+		cashRun.setReportAmt(null);
 		model.addAttribute("cashRun", cashRun);
 
 		initJobTypeList(model);
