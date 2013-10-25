@@ -66,6 +66,8 @@ public class CashRun extends IdEntity {
 	private Boolean dailyFlg = false;
 	/** 现金盈亏（调节） */
 	private BigDecimal adjustAmt = new BigDecimal("0");
+	/** 汇报金额 */
+	private BigDecimal reportAmt = new BigDecimal("0");
 	// ############################################################################################
 	/** 机构名称 */
 	private String orgName;
@@ -500,6 +502,24 @@ public class CashRun extends IdEntity {
 	 */
 	public void setCarryingCashAmt(BigDecimal carryingCashAmt) {
 		this.carryingCashAmt = carryingCashAmt;
+	}
+
+	/**
+	 * 取得汇报金额
+	 * 
+	 * @return reportAmt 汇报金额
+	 */
+	public BigDecimal getReportAmt() {
+		return reportAmt;
+	}
+
+	/**
+	 * 设置汇报金额
+	 * 
+	 * @param reportAmt 汇报金额
+	 */
+	public void setReportAmt(BigDecimal reportAmt) {
+		this.reportAmt = reportAmt;
 	}
 
 	/**
