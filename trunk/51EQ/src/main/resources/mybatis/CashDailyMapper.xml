@@ -26,6 +26,7 @@
         <result column="sale_cash_amt" property="saleCashAmt" jdbcType="DECIMAL"/>
         <result column="bw_sale_amt" property="bwSaleAmt" jdbcType="DECIMAL"/>
         <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="report_amt" property="reportAmt" jdbcType="DECIMAL"/>
 	</resultMap>
 	
 	<!-- 查询结果字段 -->
@@ -52,6 +53,7 @@
     	cash.sale_amt ,
     	cash.sale_cash_amt ,
     	cash.bw_sale_amt ,
+    	cash.report_amt ,
     	org.org_name AS orgName
 	]]>
   	</sql>
@@ -81,6 +83,7 @@
 		select
 			 cash.uuid ,
 			 cash.opt_date ,
+			 cash.report_amt ,
     		 cash.sale_amt
 		from t_cash_daily cash, t_organization org
 		where
@@ -113,6 +116,7 @@
     	cash.org_id ,
     	cash.retained_amt ,
     	cash.sale_amt ,
+    	cash.report_amt ,
     	org.org_name AS orgName
 		from t_organization org left join t_cash_daily cash on org.org_id = cash.org_id
 		and cash.opt_date_show = #{optDateShow}
