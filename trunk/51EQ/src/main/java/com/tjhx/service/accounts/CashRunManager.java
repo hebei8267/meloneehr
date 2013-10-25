@@ -243,8 +243,10 @@ public class CashRunManager {
 		_dbCashRun.setAdjustAmt(cashRun.getAdjustAmt());
 		// 账面应有现金
 		_dbCashRun.setCarryingCashAmt(cashRun.getCarryingCashAmt());
-		// /销售现金-交班时
+		// 销售现金-交班时
 		_dbCashRun.setSaleCashAmt(cashRun.getSaleCashAmt());
+		// 汇报金额
+		_dbCashRun.setReportAmt(cashRun.getReportAmt());
 
 		cashRunJpaDao.save(_dbCashRun);
 	}
@@ -269,7 +271,8 @@ public class CashRunManager {
 			_cashRun.setCardAmt(_cashRun.getCardAmt().add(cashRun.getCardAmt()));
 			// 存款金额
 			_cashRun.setDepositAmt(_cashRun.getDepositAmt().add(cashRun.getDepositAmt()));
-
+			// 汇报金额
+			_cashRun.setReportAmt(_cashRun.getReportAmt().add(cashRun.getReportAmt()));
 			// // 班前余额
 			// _cashRun.setInitAmt(_cashRun.getInitAmt().add(cashRun.getInitAmt()));
 			// // 实际现金
