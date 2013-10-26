@@ -24,13 +24,13 @@ import com.tjhx.service.struct.OrganizationManager;
 
 @Service
 @Transactional(readOnly = true)
-public class SalesMonthTotalManager {
+public class SalesMonthTotalItemManager {
 	@Resource
 	private SalesDayTotalItemJpaDao salesDayTotalItemJpaDao;
 	@Resource
 	private SalesDayTotalItemMyBatisDao salesDayTotalItemMyBatisDao;
 	@Resource
-	private SalesDayTotalManager salesDayTotalManager;
+	private SalesDayTotalItemManager salesDayTotalItemManager;
 	@Resource
 	private SalesMonthTotalItemJpaDao salesMonthTotalItemJpaDao;
 	@Resource
@@ -46,7 +46,7 @@ public class SalesMonthTotalManager {
 	@Transactional(readOnly = false)
 	public void calOrgSalesMonthTotal() throws ParseException {
 		// 取得门店日销售计算-重计算天数
-		List<String> optDateList = salesDayTotalManager.calOptDate();
+		List<String> optDateList = salesDayTotalItemManager.calOptDate();
 		// 取得门店月销售计算-重计算月数
 		List<String> _optYMList = calOptYearMonth(optDateList);
 		List<Organization> _orgList = orgManager.getSubOrganization();
@@ -66,7 +66,8 @@ public class SalesMonthTotalManager {
 				_param.setOptDateM(optM);
 
 				// 取得合计实销数量（指定年/月/机构）
-				List<SalesDayTotalItem> _monthSaleTotalList = salesDayTotalManager.getSumSalesMonthTotalList(_param);
+				List<SalesDayTotalItem> _monthSaleTotalList = salesDayTotalItemManager
+						.getSumSalesMonthTotalList(_param);
 
 				for (SalesDayTotalItem monthSaleTotal : _monthSaleTotalList) {
 					SalesMonthTotalItem _salesMonthTotal = new SalesMonthTotalItem();
@@ -126,7 +127,7 @@ public class SalesMonthTotalManager {
 		}
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		int _month = sysConfig.getSalesMonthTotalMonths();
+		int _month = sysConfig.getSalesMonthTotalItemMonths();
 		if (_optYMList.size() > _month) {// 从计算月份
 			_optYMList = _optYMList.subList(0, _month);
 		}

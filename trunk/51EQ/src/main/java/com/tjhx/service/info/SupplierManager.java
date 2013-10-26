@@ -176,6 +176,7 @@ public class SupplierManager {
 	 * 
 	 * @param supplierCustom
 	 */
+	@Transactional(readOnly = false)
 	private void addSupplierInfo(SupplierCustom supplierCustom) {
 		Supplier _supplier = new Supplier();
 		// 供应商编号-百威
@@ -197,6 +198,7 @@ public class SupplierManager {
 	 * 
 	 * @param supplierCustom
 	 */
+	@Transactional(readOnly = false)
 	private void updateSupplierInfo(SupplierCustom supplierCustom) {
 		Supplier _supplier = supplierJpaDao.findBySupplierBwId(supplierCustom.getSupcustNo());
 		// 供应商名称
