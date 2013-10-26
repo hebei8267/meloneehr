@@ -23,8 +23,8 @@ import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
 
 @Controller
-@RequestMapping(value = "/salesMonthChartReport")
-public class SalesMonthChartReportController extends BaseController {
+@RequestMapping(value = "/salesMonthItemChartReport")
+public class SalesMonthItemChartReportController extends BaseController {
 	@Resource
 	private OrganizationManager orgManager;
 	@Resource

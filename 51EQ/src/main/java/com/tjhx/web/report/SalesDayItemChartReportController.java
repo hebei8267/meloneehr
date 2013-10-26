@@ -18,23 +18,23 @@ import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.info.SalesDayTotalItem;
 import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.SysConfig;
-import com.tjhx.service.info.SalesDayTotalManager;
+import com.tjhx.service.info.SalesDayTotalItemManager;
 import com.tjhx.service.struct.OrganizationManager;
 import com.tjhx.web.BaseController;
 
 @Controller
 @RequestMapping(value = "/salesDayChartReport")
-public class SalesDayChartReportController extends BaseController {
+public class SalesDayItemChartReportController extends BaseController {
 	@Resource
 	private OrganizationManager orgManager;
 	@Resource
-	private SalesDayTotalManager salesDayTotalManager;
+	private SalesDayTotalItemManager salesDayTotalItemManager;
 
 	@RequestMapping(value = "bar_init")
 	public String salesDayChartReport1_Action(Model model) {
 		ReportUtils.initOrgList_All_NonRoot(orgManager, model);
 
-		return "report/salesDayChartReport_bar";
+		return "report/salesDayItemChartReport_bar";
 	}
 
 	@RequestMapping(value = "bar_search")
@@ -55,11 +55,11 @@ public class SalesDayChartReportController extends BaseController {
 		param.setOptDateEnd(DateUtils.transDateFormat(optDateEnd, "yyyy-MM-dd", "yyyyMMdd"));
 
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalItemManager.getSumSaleRamtList(param);
 		// 取得合计实销数量（指定时间区间/机构）
-		List<SalesDayTotalItem> _sumSaleRqtyList = salesDayTotalManager.getSumSaleRqtyList(param);
+		List<SalesDayTotalItem> _sumSaleRqtyList = salesDayTotalItemManager.getSumSaleRqtyList(param);
 		// 取得合计信息（金额/数量/均价）（指定时间区间/机构）
-		List<SalesDayTotalItem> _sumSaleList = salesDayTotalManager.getSumSaleInfoList(param);
+		List<SalesDayTotalItem> _sumSaleList = salesDayTotalItemManager.getSumSaleInfoList(param);
 
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("sumSaleRamtList", mapper.toJson(_sumSaleRamtList));
@@ -68,13 +68,13 @@ public class SalesDayChartReportController extends BaseController {
 
 		model.addAttribute("showFlg", true);
 
-		return "report/salesDayChartReport_bar";
+		return "report/salesDayItemChartReport_bar";
 	}
 
 	// -------------------------------------------------------------------
 	@RequestMapping(value = "pie_init")
 	public String salesDayChartReport2_Action(Model model) {
-		return "report/salesDayChartReport_pie";
+		return "report/salesDayItemChartReport_pie";
 	}
 
 	@RequestMapping(value = "pie_search")
@@ -104,7 +104,7 @@ public class SalesDayChartReportController extends BaseController {
 		model.addAttribute("saleRamtJsonList", _jsonStrList);
 		model.addAttribute("orgNameList", _orgNameList);
 
-		return "report/salesDayChartReport_pie";
+		return "report/salesDayItemChartReport_pie";
 	}
 
 	private String getSumSaleRamtJsonStr(String startDate, String endDate) {
@@ -115,7 +115,7 @@ public class SalesDayChartReportController extends BaseController {
 		param.setOptDateStart(startDate);
 		param.setOptDateEnd(endDate);
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalItemManager.getSumSaleRamtList(param);
 		if (null != _sumSaleRamtList && _sumSaleRamtList.size() > num) {
 			_sumSaleRamtList = _sumSaleRamtList.subList(0, num);
 		}
@@ -132,7 +132,7 @@ public class SalesDayChartReportController extends BaseController {
 		param.setOptDateEnd(endDate);
 		param.setOrgId(orgId);
 		// 取得合计实销金额（指定时间区间/机构）
-		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalManager.getSumSaleRamtList(param);
+		List<SalesDayTotalItem> _sumSaleRamtList = salesDayTotalItemManager.getSumSaleRamtList(param);
 		if (null != _sumSaleRamtList && _sumSaleRamtList.size() > num) {
 			_sumSaleRamtList = _sumSaleRamtList.subList(0, num);
 		}
