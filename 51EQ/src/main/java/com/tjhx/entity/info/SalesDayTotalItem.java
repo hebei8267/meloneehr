@@ -96,7 +96,6 @@ public class SalesDayTotalItem extends IdEntity {
 	 * 
 	 * @param branchNo 机构资金编号
 	 */
-	@Column(length = 8)
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
