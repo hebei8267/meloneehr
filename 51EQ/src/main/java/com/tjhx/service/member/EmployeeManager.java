@@ -89,7 +89,9 @@ public class EmployeeManager {
 	/**
 	 * 同步中控打卡数据库数据
 	 */
+	@Transactional(readOnly = false)
 	public void zkDataSyn() {
+		// 删除所有正式员工信息
 		empMyBatisDao.deleteEmployeeByEmpType("1");
 
 		List<UserInfo> userList = userInfoMyBatisDao.getUserInfoList();
