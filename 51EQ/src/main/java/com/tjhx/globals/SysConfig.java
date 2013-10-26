@@ -35,14 +35,17 @@ public class SysConfig {
 	private int pettyCashViewDays;
 	/** 门店备用金重计算天数 */
 	private int pettyCashCalculateDays;
-	/** 门店日销售信息重计算天数 */
-	private int salesDayTotalDays;
-	/** 门店月销售信息重计算月数 */
-	private int salesMonthTotalMonths;
+	/** 门店日销售信息重计算天数(按类别) */
+	private int salesDayTotalItemDays;
+	/** 门店月销售信息重计算月数(按类别) */
+	private int salesMonthTotalItemMonths;
 	/** 月销售信息对比(图形)页面年份显示个数 */
 	private int salesMonthTotalShowYearNum;
 	/** 销售信息对比(图形)页面种类显示个数 */
 	private int salesDayTotalShowNum;
+
+	/** 门店日销售信息重计算天数(按供应商) */
+	private int salesDayTotalSupDays;
 
 	/**
 	 * 取得cashDailyModel
@@ -351,39 +354,39 @@ public class SysConfig {
 	}
 
 	/**
-	 * 取得门店日销售信息重计算天数
+	 * 取得门店日销售信息重计算天数(按类别)
 	 * 
-	 * @return salesDayTotalDays 门店日销售信息重计算天数
+	 * @return salesDayTotalItemDays 门店日销售信息重计算天数(按类别)
 	 */
-	public int getSalesDayTotalDays() {
-		return salesDayTotalDays;
+	public int getSalesDayTotalItemDays() {
+		return salesDayTotalItemDays;
 	}
 
 	/**
-	 * 设置门店日销售信息重计算天数
+	 * 设置门店日销售信息重计算天数(按类别)
 	 * 
-	 * @param salesDayTotalDays 门店日销售信息重计算天数
+	 * @param salesDayTotalItemDays 门店日销售信息重计算天数(按类别)
 	 */
-	public void setSalesDayTotalDays(int salesDayTotalDays) {
-		this.salesDayTotalDays = salesDayTotalDays;
+	public void setSalesDayTotalItemDays(int salesDayTotalItemDays) {
+		this.salesDayTotalItemDays = salesDayTotalItemDays;
 	}
 
 	/**
-	 * 取得门店月销售信息重计算月数
+	 * 取得门店月销售信息重计算月数(按类别)
 	 * 
-	 * @return salesMonthTotalMonths 门店月销售信息重计算月数
+	 * @return salesMonthTotalItemMonths 门店月销售信息重计算月数(按类别)
 	 */
-	public int getSalesMonthTotalMonths() {
-		return salesMonthTotalMonths;
+	public int getSalesMonthTotalItemMonths() {
+		return salesMonthTotalItemMonths;
 	}
 
 	/**
-	 * 设置门店月销售信息重计算月数
+	 * 设置门店月销售信息重计算月数(按类别)
 	 * 
-	 * @param salesMonthTotalMonths 门店月销售信息重计算月数
+	 * @param salesMonthTotalItemMonths 门店月销售信息重计算月数(按类别)
 	 */
-	public void setSalesMonthTotalMonths(int salesMonthTotalMonths) {
-		this.salesMonthTotalMonths = salesMonthTotalMonths;
+	public void setSalesMonthTotalItemMonths(int salesMonthTotalItemMonths) {
+		this.salesMonthTotalItemMonths = salesMonthTotalItemMonths;
 	}
 
 	/**
@@ -420,6 +423,24 @@ public class SysConfig {
 	 */
 	public void setSalesDayTotalShowNum(int salesDayTotalShowNum) {
 		this.salesDayTotalShowNum = salesDayTotalShowNum;
+	}
+
+	/**
+	 * 取得门店日销售信息重计算天数(按供应商)
+	 * 
+	 * @return salesDayTotalSupDays 门店日销售信息重计算天数(按供应商)
+	 */
+	public int getSalesDayTotalSupDays() {
+		return salesDayTotalSupDays;
+	}
+
+	/**
+	 * 设置门店日销售信息重计算天数(按供应商)
+	 * 
+	 * @param salesDayTotalSupDays 门店日销售信息重计算天数(按供应商)
+	 */
+	public void setSalesDayTotalSupDays(int salesDayTotalSupDays) {
+		this.salesDayTotalSupDays = salesDayTotalSupDays;
 	}
 
 }
