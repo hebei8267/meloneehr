@@ -186,6 +186,7 @@ public class WorkScheduleManager {
 	 * @param scheduleTimeSelect
 	 * @param wtDataMap
 	 */
+	@Transactional(readOnly = false)
 	private void updateWorkSchedule(WorkSchedule _dbws, Organization org, String scheduleTimeSelect,
 			Map<String, String> wtDataMap) {
 		// 员工编号-自定义
@@ -217,6 +218,7 @@ public class WorkScheduleManager {
 	 * @param scheduleTimeSelect
 	 * @param wtDataMap
 	 */
+	@Transactional(readOnly = false)
 	private void addWorkSchedule(Organization org, String empCode, String scheduleDate, String scheduleTimeSelect,
 			Map<String, String> wtDataMap) {
 		WorkSchedule ws = new WorkSchedule();
