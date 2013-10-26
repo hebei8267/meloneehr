@@ -14,7 +14,8 @@
 				<ref bean="punchClockJobCronTrigger" />
 				<ref bean="bwSaleAmtJobCronTrigger" />
 				<ref bean="orgStoreJobCronTrigger" />
-				<ref bean="orgSalesTotalJobCronTrigger" />
+				<ref bean="orgSalesTotalItemJobCronTrigger" />
+				<ref bean="orgSalesTotalSupJobCronTrigger" />
 			</list>
 		</property>
 		<!-- Quartz配置 -->
@@ -87,22 +88,43 @@
 	<bean id="orgStoreJob" class="com.tjhx.schedule.OrgStoreJob" />
 	
 	
-	<!-- ##################################### 门店日销售信息  ###################################### -->
+	<!-- ##################################### 门店日销售信息(按商品类别)  ###################################### -->
 	<!-- Cron式Trigger定义 -->
-	<bean id="orgSalesTotalJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="orgSalesTotalJobDetail" />
+	<bean id="orgSalesTotalItemJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="orgSalesTotalItemJobDetail" />
 		<!-- 每天上午 8:20 触发 -->
 		<property name="cronExpression" value="0 20 8 * * ?" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
-	<bean id="orgSalesTotalJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="orgSalesTotalJob" />
+	<bean id="orgSalesTotalItemJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="orgSalesTotalItemJob" />
 		<property name="targetMethod" value="execute" />
 		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
 		<property name="concurrent" value="true" />
 	</bean>
 
 	<!-- 被Cron执行的普通Spring Bean -->
-	<bean id="orgSalesTotalJob" class="com.tjhx.schedule.OrgSalesTotalJob" />
+	<bean id="orgSalesTotalItemJob" class="com.tjhx.schedule.OrgSalesTotalItemJob" />
+	
+	
+	
+	<!-- ##################################### 门店日销售信息(按供应商)  ###################################### -->
+	<!-- Cron式Trigger定义 -->
+	<bean id="orgSalesTotalSupJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="orgSalesTotalSupJobDetail" />
+		<!-- 每天上午 8:35 触发 -->
+		<property name="cronExpression" value="0 35 8 * * ?" />
+	</bean>
+
+	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
+	<bean id="orgSalesTotalSupJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="orgSalesTotalSupJob" />
+		<property name="targetMethod" value="execute" />
+		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<!-- 被Cron执行的普通Spring Bean -->
+	<bean id="orgSalesTotalSupJob" class="com.tjhx.schedule.OrgSalesTotalSupJob" />
 </beans>
