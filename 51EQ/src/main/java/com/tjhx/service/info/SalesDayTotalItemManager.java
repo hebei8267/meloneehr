@@ -23,7 +23,7 @@ import com.tjhx.service.struct.OrganizationManager;
 
 @Service
 @Transactional(readOnly = true)
-public class SalesDayTotalManager {
+public class SalesDayTotalItemManager {
 	@Resource
 	private OrganizationManager orgManager;
 	@Resource
@@ -38,6 +38,7 @@ public class SalesDayTotalManager {
 	 * 
 	 * @throws ParseException
 	 */
+	@Transactional(readOnly = false)
 	public void getOrgSalesDayTotal() throws ParseException {
 		// 取得门店日销售计算-重计算天数
 		List<String> optDateList = calOptDate();
@@ -110,13 +111,12 @@ public class SalesDayTotalManager {
 		List<String> _optDateList = new ArrayList<String>();
 
 		String _now = DateUtils.getCurrentDateShortStr();
+		_optDateList.add(_now);
 
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		for (int i = 1; i < sysConfig.getSalesDayTotalDays(); i++) {
+		for (int i = 1; i < sysConfig.getSalesDayTotalItemDays(); i++) {
 			_optDateList.add(DateUtils.getNextDateFormatDate(_now, -i, "yyyyMMdd"));
 		}
-
-		_optDateList.add(_now);
 
 		return _optDateList;
 	}

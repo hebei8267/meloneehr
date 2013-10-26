@@ -80,6 +80,7 @@ public class ItemTypeManager {
 	 * 
 	 * @param itemTypeCls
 	 */
+	@Transactional(readOnly = false)
 	private void addItemTypeInfo(ItemTypeCls itemTypeCls) {
 		ItemType _itemType = new ItemType();
 		// 种类编号
@@ -97,6 +98,7 @@ public class ItemTypeManager {
 	 * 
 	 * @param itemTypeCls
 	 */
+	@Transactional(readOnly = false)
 	private void updateItemTypeInfo(ItemTypeCls itemTypeCls) {
 		ItemType _itemType = itemTypeJpaDao.findByItemNo(itemTypeCls.getItemClsno());
 		// 种类编号
