@@ -48,7 +48,7 @@
                         this.value = $.trim(this.value);
                     });
 
-                    $("#listForm").attr("action", "${sc_ctx}/salesDayChartReport/bar_search");
+                    $("#listForm").attr("action", "${sc_ctx}/salesDayItemChartReport/bar_search");
                     $("#listForm").submit();
                 });
             });
