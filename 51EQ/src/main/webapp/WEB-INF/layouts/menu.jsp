@@ -134,10 +134,10 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="${sc_ctx}/salesDayChartReport/bar_init">销售信息一览(图形)</a>
+                                <a href="${sc_ctx}/salesDayItemChartReport/bar_init">销售信息一览(图形)</a>
                             </li>
                             <li>
-                                <a href="${sc_ctx}/salesDayChartReport/pie_init">销售金额对比(图形)</a>
+                                <a href="${sc_ctx}/salesDayItemChartReport/pie_init">销售金额对比(图形)</a>
                             </li>
                             <li class="divider"></li>
                             <li>
