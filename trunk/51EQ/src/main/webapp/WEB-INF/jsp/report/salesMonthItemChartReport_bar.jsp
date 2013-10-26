@@ -19,39 +19,6 @@
     	</style>
     	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/dhtmlxchart.css">
     	<script src="${ctx}/static/js/dhtmlxchart.js" type="text/javascript"></script>
-
-        <script>
-            $(function() {
-            	$("#listForm").validate({
-                    rules : {
-                    	optDateShow_start : {
-                    		required : true,
-                    		date : true                    		
-                        },
-                        optDateShow_end : {
-                    		required : true,
-                    		date : true                    		
-                        }
-                    }
-                });
-            	
-            	$('#optDateShow_start').datepicker({
-                    format : 'yyyy-mm-dd'
-                });
-                $('#optDateShow_end').datepicker({
-                    format : 'yyyy-mm-dd'
-                });
-            	
-                $("#searchBtn").click(function() {
-                    $("input[type='text'],textarea").each(function(i) {
-                        this.value = $.trim(this.value);
-                    });
-
-                    $("#listForm").attr("action", "${sc_ctx}/salesDayChartReport/bar_search");
-                    $("#listForm").submit();
-                });
-            });
-        </script>
     </head>
     <body>
         <%// 系统菜单  %>
