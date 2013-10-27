@@ -102,7 +102,7 @@ public class SalesMonthItemChartReportController extends BaseController {
 		model.addAttribute("orgSumSalesJsonList", _orgSumSalesJsonList);
 		model.addAttribute("orgNameList", _orgNameList);
 
-		return "report/salesMonthChartReport_bar";
+		return "report/salesMonthItemChartReport_bar";
 	}
 
 	private void copyDate2SalesTotalShowList(List<SalesMonthTotal_Show> _salesTotalShowList,
