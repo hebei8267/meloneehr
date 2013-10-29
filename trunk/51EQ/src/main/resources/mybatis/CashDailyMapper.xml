@@ -97,30 +97,49 @@
 	<!-- 取得销售流水日结信息(全机构) -->
 	<select id="getCashDailyListByAllOrg" parameterType="com.tjhx.entity.accounts.CashDaily" resultMap="Result_Map_CashDaily">
 		select
-		cash.uuid ,
-    	cash.create_date ,
-    	cash.create_user_id ,
-    	cash.update_date ,
-    	cash.update_user_id ,
-    	cash.version ,
-    	cash.card_amt ,
-    	cash.card_amt_bw ,
-    	cash.card_num ,
-    	cash.deposit_amt ,
-    	cash.init_amt ,
-    	cash.sale_cash_amt ,
-    	cash.opt_date ,
-    	cash.opt_date_m ,
-    	#{optDateShow} AS opt_date_show ,
-    	cash.opt_date_y ,
-    	cash.org_id ,
-    	cash.retained_amt ,
-    	cash.sale_amt ,
-    	cash.report_amt ,
-    	org.org_name AS orgName
-		from t_organization org left join t_cash_daily cash on org.org_id = cash.org_id
-		and cash.opt_date_show = #{optDateShow}
-		where org.org_id != '000'
-		order by org.org_id
+			cash.uuid ,
+	    	cash.create_date ,
+	    	cash.create_user_id ,
+	    	cash.update_date ,
+	    	cash.update_user_id ,
+	    	cash.version ,
+	    	cash.card_amt ,
+	    	cash.card_amt_bw ,
+	    	cash.card_num ,
+	    	cash.deposit_amt ,
+	    	cash.init_amt ,
+	    	cash.sale_cash_amt ,
+	    	cash.opt_date ,
+	    	cash.opt_date_m ,
+	    	#{optDateShow} AS opt_date_show ,
+	    	cash.opt_date_y ,
+	    	cash.org_id ,
+	    	cash.retained_amt ,
+	    	cash.sale_amt ,
+	    	cash.report_amt ,
+	    	org.org_name AS orgName
+		from 
+			t_organization org left join t_cash_daily cash on org.org_id = cash.org_id
+			and cash.opt_date_show = #{optDateShow}
+		where 
+			org.org_id != '000'
+		order by 
+			org.org_id
 	</select>
+	
+	<!-- 取得指定机构最终销售流水日结信息 -->
+	<select id="getLastCashDailyInfoByOrg" parameterType="String" resultMap="Result_Map_CashDaily">		    
+		SELECT
+		    MAX(cash.opt_date) AS opt_date,
+		    org.org_name       AS orgName
+		FROM
+		    t_cash_daily cash,
+		    t_organization org
+		WHERE
+		    cash.org_id = #{orgId}
+		AND cash.org_id = org.org_id
+	</select>
+	<delete id="delCashDailyInfo" parameterType="com.tjhx.entity.accounts.CashDaily">
+        DELETE FROM t_cash_daily WHERE opt_date = #{optDate} AND org_id = #{orgId}
+    </delete>
 </mapper>
