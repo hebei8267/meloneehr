@@ -146,4 +146,8 @@
     		cash.org_id ,
     		cash.opt_date
 	</select>
+	
+	<delete id="delCashRunInfo" parameterType="com.tjhx.entity.accounts.CashRun">
+        DELETE FROM t_cash_run WHERE opt_date > #{optDate} AND org_id = #{orgId}
+    </delete>
 </mapper>
