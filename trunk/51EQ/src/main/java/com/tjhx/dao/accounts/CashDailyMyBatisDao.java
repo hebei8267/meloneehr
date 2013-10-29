@@ -12,4 +12,18 @@ public interface CashDailyMyBatisDao {
 
 	public List<CashDaily> getCashDailyChartList(CashDaily cashDaily);
 
+	/**
+	 * 取得指定机构最终销售流水日结信息
+	 * 
+	 * @param orgId
+	 * @return
+	 */
+	public CashDaily getLastCashDailyInfoByOrg(String orgId);
+
+	/**
+	 * 删除指定（机构/日期）销售流水日结信息
+	 * 
+	 * @param cashDaily(orgId/optDate)
+	 */
+	public void delCashDailyInfo(CashDaily cashDaily);
 }
