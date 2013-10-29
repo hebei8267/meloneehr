@@ -549,4 +549,41 @@ public class CashDailyManager {
 	public List<CashDaily> searchChartReportList(CashDaily cashDaily) {
 		return cashDailyMyBatisDao.getCashDailyChartList(cashDaily);
 	}
+
+	/**
+	 * 取得指定机构最终销售流水日结信息
+	 * 
+	 * @param orgId
+	 * @return
+	 */
+	public CashDaily getLastCashDailyInfoByOrg(String orgId) {
+		return cashDailyMyBatisDao.getLastCashDailyInfoByOrg(orgId);
+	}
+
+	/**
+	 * 反日结
+	 * 
+	 * @param orgId
+	 * @param optDate
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = false)
+	public void counterDaily(String orgId, String optDate) {
+		CashDaily _dParam = new CashDaily();
+		_dParam.setOrgId(orgId);
+		_dParam.setOptDate(optDate);
+		cashDailyMyBatisDao.delCashDailyInfo(_dParam);
+
+		CashRun _rParam = new CashRun();
+		_rParam.setOrgId(orgId);
+		_rParam.setOptDate(optDate);
+		cashRunMyBatisDao.delCashRunInfo(_rParam);
+
+		List<CashRun> _list = (List<CashRun>) cashRunJpaDao.findByOrgId_OptDate(orgId, optDate, null);
+		for (CashRun cashRun : _list) {
+			cashRun.setDailyFlg(false);
+
+			cashRunJpaDao.save(cashRun);
+		}
+	}
 }
