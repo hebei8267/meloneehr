@@ -59,6 +59,9 @@
                                     <li>
                                         <a href="${sc_ctx}/itemType">商品类别管理</a>
                                     </li>
+                                    <li>
+                                        <a href="${sc_ctx}/cashCounterDaily/init">反日结(销售信息)</a>
+                                    </li>
                                 </c:if>
                             </ul>
                         </li>
