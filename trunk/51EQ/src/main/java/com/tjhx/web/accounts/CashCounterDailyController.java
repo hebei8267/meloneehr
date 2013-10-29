@@ -28,7 +28,7 @@ public class CashCounterDailyController extends BaseController {
 	private CashDailyManager cashDailyManager;
 
 	@RequestMapping(value = "init")
-	public String init_Action(Model model) {
+	public String init_Action(Model model, HttpServletRequest request) {
 		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
 
 		return "accounts/cashCounterDaily";
@@ -55,11 +55,15 @@ public class CashCounterDailyController extends BaseController {
 	 * @throws ServletRequestBindingException
 	 */
 	@RequestMapping(value = "confirm")
-	public String cashCounterDailyConfirm_Action(HttpServletRequest request) throws ServletRequestBindingException {
+	public String cashCounterDailyConfirm_Action(HttpServletRequest request, Model model)
+			throws ServletRequestBindingException {
 		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
 		String optDate = ServletRequestUtils.getStringParameter(request, "optDate");
 
 		cashDailyManager.counterDaily(orgId, optDate);
+
+		// 反日结操作完成-提示信息
+		addInfoMsg(model, "TIP_MSG_CASH_COUNTER_DAILY_001");
 
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/cashCounterDaily/init";
 	}
