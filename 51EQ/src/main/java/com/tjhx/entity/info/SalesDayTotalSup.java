@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -46,6 +47,13 @@ public class SalesDayTotalSup extends IdEntity {
 	private BigDecimal saleAmt;
 	/** 区域编码 */
 	private String regionCode;
+
+	/** 日期-开始时间 */
+	private String optDateStart;
+	/** 日期-结束时间 */
+	private String optDateEnd;
+	/** 供应商名称-百威 */
+	private String supplierName;
 
 	/**
 	 * 取得日期
@@ -289,6 +297,63 @@ public class SalesDayTotalSup extends IdEntity {
 	 */
 	public void setRegionCode(String regionCode) {
 		this.regionCode = regionCode;
+	}
+
+	/**
+	 * 取得日期-开始时间
+	 * 
+	 * @return optDateStart 日期-开始时间
+	 */
+	@Transient
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置日期-开始时间
+	 * 
+	 * @param optDateStart 日期-开始时间
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得日期-结束时间
+	 * 
+	 * @return optDateEnd 日期-结束时间
+	 */
+	@Transient
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置日期-结束时间
+	 * 
+	 * @param optDateEnd 日期-结束时间
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
+	}
+
+	/**
+	 * 取得供应商名称-百威
+	 * 
+	 * @return supplierName 供应商名称-百威
+	 */
+	@Transient
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	/**
+	 * 设置供应商名称-百威
+	 * 
+	 * @param supplierName 供应商名称-百威
+	 */
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
 	}
 
 }
