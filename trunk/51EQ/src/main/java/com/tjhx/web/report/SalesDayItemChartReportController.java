@@ -72,6 +72,8 @@ public class SalesDayItemChartReportController extends BaseController {
 	}
 
 	// -------------------------------------------------------------------
+	//
+	// -------------------------------------------------------------------
 	@RequestMapping(value = "pie_init")
 	public String salesDayChartReport2_Action(Model model) {
 		return "report/salesDayItemChartReport_pie";
