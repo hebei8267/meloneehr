@@ -48,7 +48,7 @@
                         this.value = $.trim(this.value);
                     });
 
-                    $("#listForm").attr("action", "${sc_ctx}/salesDayItemChartReport/bar_search");
+                    $("#listForm").attr("action", "${sc_ctx}/salesDaySupChartReport/bar_search");
                     $("#listForm").submit();
                 });
             });
@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>类别销售信息一览(图形)</h3>
+                            <h3>货商销售信息一览(图形)</h3>
                         </legend>
                     </div>
                     <div class="span5">
@@ -88,54 +88,10 @@
                     </div>
                     <c:if test="${showFlg == true}">
                         <div class="span12"	style="margin-top: 10px;">
-                            <div id="chart1" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
+                            <div id="chart1" style="width:900px;height:2000px;border:1px solid #A4BED4;"></div>
                         </div>
                         <div class="span12"	style="margin-top: 10px;">
-                            <div id="chart2" style="width:900px;height:800px;border:1px solid #A4BED4;"></div>
-                        </div>
-                        <div class="span12 cash_daily"></div>
-                        <div class="span12"	style="margin-top: 10px;">
-                        	<table class="table	table-striped table-bordered table-condensed mytable">
-	                            <thead>
-	                                <tr>
-	                                    <th>
-	                                        机构
-	                                    </th>
-	                                    <th class="center">
-	                                        日期
-	                                    </th>
-	                                    <th class="right">
-	                                        合计销售数量(个)
-	                                    </th>
-	                                    <th class="right">
-	                                        合计销售金额(元)
-	                                    </th>
-	                                    <th class="right">
-	                                        销售均价(元)
-	                                    </th>
-	                                </tr>
-	                            </thead>
-	                            <tbody>
-	                            	<c:forEach items="${sumSaleList}" var="sumSale">
-	                            	<tr>
-	                            		<td>${sumSale.orgName}</td>
-	                            		<td width="240" class="center">${optDateShow_start } ～ ${optDateShow_end }</td>
-	                            		<td class="right">${sumSale.saleRqty}</td>
-	                            		<td class="right">${sumSale.saleRamt}</td>
-	                            		<td class="right">${sumSale.salePrice}</td>
-	                            	</tr>
-	                            	</c:forEach>
-	                            </tbody>
-	                            <c:if test="${empty	sumSaleList}" >
-	                                <tfoot>
-	                                    <tr>
-	                                        <td	colspan="5"	class="rounded-foot-left">
-	                                            无记录信息
-	                                        </td>
-	                                    </tr>
-	                                </tfoot>
-	                            </c:if>
-                            </table>
+                            <div id="chart2" style="width:900px;height:2000px;border:1px solid #A4BED4;"></div>
                         </div>
                     </c:if>
                 </div>
@@ -151,21 +107,21 @@
 				var barChart1 = new dhtmlXChart({
 					view : "barH",
 					container : "chart1",
-					value : "#saleRamt#",
-					label : "#saleRamt#",
+					value : "#saleAmt#",
+					label : "#saleAmt#",
 					barWidth : 30,
 					radius : 2,
 					tooltip : {
-						template : "#saleRamt#元    #itemName#"
+						template : "#saleAmt#元    #supplierName#"
 					},
 					yAxis : {
-						template : "#itemShortName#"
+						template : "#supplierName#"
 					},
 					xAxis: {
 		            	title : "销 售 金 额"
 		            },
 					padding : {
-						left : 90,
+						left : 210,
 						right : 70
 					}
 				});
@@ -175,21 +131,21 @@
 				var barChart2 = new dhtmlXChart({
 					view : "barH",
 					container : "chart2",
-					value : "#saleRqty#",
-					label : "#saleRqty#",
+					value : "#saleQty#",
+					label : "#saleQty#",
 					barWidth : 30,
 					radius : 2,
 					tooltip : {
-						template : "#saleRqty#个    #itemName#"
+						template : "#saleQty#个    #supplierName#"
 					},
 					yAxis : {
-						template : "#itemShortName#"
+						template : "#supplierName#"
 					},
 					xAxis: {
 		            	title : "销 售 数 量"
 		            },
 					padding : {
-						left : 90,
+						left : 210,
 						right : 70
 					}
 				});
