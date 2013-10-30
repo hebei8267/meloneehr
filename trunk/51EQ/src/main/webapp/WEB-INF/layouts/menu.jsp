@@ -119,7 +119,11 @@
                                 <a href="${sc_ctx}/cardReport">刷卡信息</a>
                             </li>
                             </c:if>
-                            
+                            <c:if test="${_permIdList.contains('12')}">
+                            <li>
+                                <a href="${sc_ctx}/dailyReport">日结信息</a>
+                            </li>
+                            </c:if>
                             <c:if test="${_permIdList.contains('11')}">
                             <li class="divider"></li>
                             <li>
@@ -137,21 +141,21 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="${sc_ctx}/salesDayItemChartReport/bar_init">销售信息一览(图形)</a>
+                                <a href="${sc_ctx}/salesDayItemChartReport/bar_init">类别销售信息一览(图形)</a>
                             </li>
                             <li>
-                                <a href="${sc_ctx}/salesDayItemChartReport/pie_init">销售金额对比(图形)</a>
+                                <a href="${sc_ctx}/salesDayItemChartReport/pie_init">类别销售金额对比(图形)</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="${sc_ctx}/salesDaySupChartReport/bar_init">货商销售信息一览(图形)</a>
+                            </li>
+                            <li>
+                                <a href="${sc_ctx}/salesDaySupChartReport/pie_init">货商销售金额对比(图形)</a>
                             </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="${sc_ctx}/salesMonthItemChartReport/bar_init">月销售金额对比(图形)</a>
-                            </li>
-                            <li class="divider"></li>
-                            </c:if>
-                            
-                            <c:if test="${_permIdList.contains('12')}">
-                            <li>
-                                <a href="${sc_ctx}/dailyReport">日结信息</a>
                             </li>
                             </c:if>
                         </ul>
