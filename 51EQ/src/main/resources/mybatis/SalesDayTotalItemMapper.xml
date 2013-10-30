@@ -3,7 +3,7 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.tjhx.dao.info.SalesDayTotalItemMyBatisDao">
 	<!-- mybatis表结构与对象的映射关系 -->
-	<resultMap id="Result_Map_SalesDayTotal" type="com.tjhx.entity.info.SalesDayTotalItem">
+	<resultMap id="Result_Map_SalesDayTotalItem" type="com.tjhx.entity.info.SalesDayTotalItem">
         <result column="uuid" property="uuid" jdbcType="INTEGER"/>
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
         <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
         <result column="sale_ramt" property="saleRamt" jdbcType="DECIMAL"/>
         <result column="sale_rqty" property="saleRqty" jdbcType="DECIMAL"/>
         
-         <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
         <result column="item_short_name" property="itemShortName" jdbcType="VARCHAR"/>
 	</resultMap>
 	
@@ -45,7 +45,7 @@
   	</sql>
   	
   	<!-- 取得t_sales_day_total信息(根据参数) -->
-	<select id="getSumSaleRamtList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotal">
+	<select id="getSumSaleRamtList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotalItem">
 		SELECT
 			sd.item_cls_no,
 	    	it.item_short_name,
@@ -62,7 +62,7 @@
 	</select>
 	
 	<!-- 取得t_sales_day_total信息(根据参数) -->
-	<select id="getSumSaleRqtyList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotal">
+	<select id="getSumSaleRqtyList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotalItem">
 		SELECT
 		    sd.item_cls_no,
 		    it.item_short_name,
@@ -80,7 +80,7 @@
 	
 	
 	<!-- 取得t_sales_day_total信息(根据参数) -->
-	<select id="getSumSalesMonthTotalList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotal">
+	<select id="getSumSalesMonthTotalList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotalItem">
 		SELECT
 		    org_id,
 		    branch_no,
@@ -119,7 +119,7 @@
 	  	</where>
   	</sql>
 	<!-- 取得t_sales_day_total信息(根据参数) -->
-	<select id="getSumSaleInfoList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotal">
+	<select id="getSumSaleInfoList" parameterType="com.tjhx.entity.info.SalesDayTotalItem" resultMap="Result_Map_SalesDayTotalItem">
 		SELECT
 		    sd.org_id,
 		    org.org_name,
