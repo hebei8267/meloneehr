@@ -88,10 +88,10 @@
                     </div>
                     <c:if test="${showFlg == true}">
                         <div class="span12"	style="margin-top: 10px;">
-                            <div id="chart1" style="width:900px;height:2000px;border:1px solid #A4BED4;"></div>
+                            <div id="chart1" style="width:900px;height:2200px;border:1px solid #A4BED4;"></div>
                         </div>
                         <div class="span12"	style="margin-top: 10px;">
-                            <div id="chart2" style="width:900px;height:2000px;border:1px solid #A4BED4;"></div>
+                            <div id="chart2" style="width:900px;height:2200px;border:1px solid #A4BED4;"></div>
                         </div>
                     </c:if>
                 </div>
