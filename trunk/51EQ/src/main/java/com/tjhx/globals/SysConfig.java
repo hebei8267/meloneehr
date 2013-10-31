@@ -41,9 +41,10 @@ public class SysConfig {
 	private int salesMonthTotalItemMonths;
 	/** 月销售信息对比(图形)页面年份显示个数 */
 	private int salesMonthTotalShowYearNum;
-	/** 销售信息对比(图形)页面种类显示个数 */
-	private int salesDayTotalShowNum;
-
+	/** 类别销售信息对比(图形)页面种类显示个数 */
+	private int salesDayItemTotalShowNum;
+	/** 供应商销售信息对比(图形)页面种类显示个数 */
+	private int salesDaySupTotalShowNum;
 	/** 门店日销售信息重计算天数(按供应商) */
 	private int salesDayTotalSupDays;
 
@@ -408,21 +409,39 @@ public class SysConfig {
 	}
 
 	/**
-	 * 取得销售信息对比(图形)页面种类显示个数
+	 * 取得类别销售信息对比(图形)页面种类显示个数
 	 * 
-	 * @return salesDayTotalShowNum 销售信息对比(图形)页面种类显示个数
+	 * @return salesDayItemTotalShowNum 类别销售信息对比(图形)页面种类显示个数
 	 */
-	public int getSalesDayTotalShowNum() {
-		return salesDayTotalShowNum;
+	public int getSalesDayItemTotalShowNum() {
+		return salesDayItemTotalShowNum;
 	}
 
 	/**
-	 * 设置销售信息对比(图形)页面种类显示个数
+	 * 设置类别销售信息对比(图形)页面种类显示个数
 	 * 
-	 * @param salesDayTotalShowNum 销售信息对比(图形)页面种类显示个数
+	 * @param salesDayItemTotalShowNum 类别销售信息对比(图形)页面种类显示个数
 	 */
-	public void setSalesDayTotalShowNum(int salesDayTotalShowNum) {
-		this.salesDayTotalShowNum = salesDayTotalShowNum;
+	public void setSalesDayItemTotalShowNum(int salesDayItemTotalShowNum) {
+		this.salesDayItemTotalShowNum = salesDayItemTotalShowNum;
+	}
+
+	/**
+	 * 取得供应商销售信息对比(图形)页面种类显示个数
+	 * 
+	 * @return salesDaySupTotalShowNum 供应商销售信息对比(图形)页面种类显示个数
+	 */
+	public int getSalesDaySupTotalShowNum() {
+		return salesDaySupTotalShowNum;
+	}
+
+	/**
+	 * 设置供应商销售信息对比(图形)页面种类显示个数
+	 * 
+	 * @param salesDaySupTotalShowNum 供应商销售信息对比(图形)页面种类显示个数
+	 */
+	public void setSalesDaySupTotalShowNum(int salesDaySupTotalShowNum) {
+		this.salesDaySupTotalShowNum = salesDaySupTotalShowNum;
 	}
 
 	/**
