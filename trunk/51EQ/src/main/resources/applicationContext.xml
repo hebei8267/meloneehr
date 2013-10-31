@@ -188,8 +188,10 @@
 		<property name="salesMonthTotalItemMonths" value="${sales.month.total.item.months}" />
 		<!-- 月销售信息对比(图形)页面年份显示个数 -->
 		<property name="salesMonthTotalShowYearNum" value="${sales.month.total.show.year.num}" />
-		<!-- 销售信息对比(图形)页面种类显示个数 -->
-		<property name="salesDayTotalShowNum" value="${sales.day.total.show.num}" />
+		<!-- 类别销售信息对比(图形)页面种类显示个数 -->
+		<property name="salesDayItemTotalShowNum" value="${sales.day.item.total.show.num}" />
+		<!-- 供应商销售信息对比(图形)页面种类显示个数 -->
+		<property name="salesDaySupTotalShowNum" value="${sales.day.sup.total.show.num}" />
 	
 	
 		<!-- 门店日销售信息重计算天数(按供应商) -->
