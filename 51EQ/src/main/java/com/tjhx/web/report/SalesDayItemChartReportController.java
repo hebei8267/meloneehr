@@ -111,7 +111,7 @@ public class SalesDayItemChartReportController extends BaseController {
 
 	private String getSumSaleRamtJsonStr(String startDate, String endDate) {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		int num = sysConfig.getSalesDayTotalShowNum();
+		int num = sysConfig.getSalesDayItemTotalShowNum();
 
 		SalesDayTotalItem param = new SalesDayTotalItem();
 		param.setOptDateStart(startDate);
@@ -127,7 +127,7 @@ public class SalesDayItemChartReportController extends BaseController {
 
 	private String getSumSaleRamtJsonStr(String startDate, String endDate, String orgId) {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		int num = sysConfig.getSalesDayTotalShowNum();
+		int num = sysConfig.getSalesDayItemTotalShowNum();
 
 		SalesDayTotalItem param = new SalesDayTotalItem();
 		param.setOptDateStart(startDate);
