@@ -151,12 +151,13 @@ public class PettyCashManager {
 	 */
 	private void setEditFlg_PettyCashList(List<PettyCash> pettyCashList, int editDays) {
 		for (PettyCash pettyCash : pettyCashList) {
-			long spanDay = DateUtils.getDateSpanDay(pettyCash.getCreateDate(), DateUtils.getCurrentDate());
-			if (spanDay <= editDays) {
-				pettyCash.setEditFlg(true);
+			if (Boolean.FALSE.equals(pettyCash.getCarryOverFlg())) {
+				long spanDay = DateUtils.getDateSpanDay(pettyCash.getCreateDate(), DateUtils.getCurrentDate());
+				if (spanDay <= editDays) {
+					pettyCash.setEditFlg(true);
+				}
 			}
 		}
-
 	}
 
 	/**
@@ -294,5 +295,40 @@ public class PettyCashManager {
 		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndOptDateInterval(orgId, optDate_start, optDate_end,
 				new Sort(new Sort.Order(Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
 		return _list;
+	}
+
+	/**
+	 * 取得指定门店未结转的备用金信息
+	 * 
+	 * @param orgId 门店编号
+	 * @return
+	 */
+	public List<PettyCash> searchPettyCashList_noCarryOver(String orgId) {
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndCarryOverFlg(orgId, new Sort(new Sort.Order(
+				Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
+		return _list;
+	}
+
+	/**
+	 * 备用金信息结转
+	 * 
+	 * @param orgId 门店编号
+	 * @param pettyCashUuid 备用金UUID
+	 * @param inspectTrsId 巡查报告流水号
+	 */
+	@Transactional(readOnly = false)
+	public void pettyCashCarryOver(String orgId, Integer pettyCashUuid, String inspectTrsId) {
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndCarryOverFlg(orgId, new Sort(new Sort.Order(
+				Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
+
+		boolean carryOverFlg = false;
+		for (PettyCash pettyCash : _list) {
+			if (carryOverFlg || pettyCash.getUuid().equals(pettyCashUuid)) {
+				carryOverFlg = true;
+				pettyCash.setCarryOverFlg(true);
+				pettyCash.setInspectTrsId(inspectTrsId);
+				pettyCashJpaDao.save(pettyCash);
+			}
+		}
 	}
 }
