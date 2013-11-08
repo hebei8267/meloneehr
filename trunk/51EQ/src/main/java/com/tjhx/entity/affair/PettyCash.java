@@ -17,6 +17,8 @@ import com.tjhx.entity.IdEntity;
 public class PettyCash extends IdEntity {
 
 	private static final long serialVersionUID = -7793146587669072960L;
+	/** 巡查报告流水号 */
+	private String inspectTrsId;
 	/** 业务编号 */
 	private String optUid;
 	/** 业务日期 */
@@ -45,6 +47,8 @@ public class PettyCash extends IdEntity {
 	private String descTxt;
 	/** 机构编号 */
 	private String orgId;
+	/** 结转标记 */
+	private boolean carryOverFlg;
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
@@ -54,6 +58,25 @@ public class PettyCash extends IdEntity {
 	private boolean editFlg;
 	/** 业务日期 */
 	private String createDateStr;
+
+	/**
+	 * 取得巡查报告流水号
+	 * 
+	 * @return inspectTrsId 巡查报告流水号
+	 */
+	@Column(length = 16)
+	public String getInspectTrsId() {
+		return inspectTrsId;
+	}
+
+	/**
+	 * 设置巡查报告流水号
+	 * 
+	 * @param inspectTrsId 巡查报告流水号
+	 */
+	public void setInspectTrsId(String inspectTrsId) {
+		this.inspectTrsId = inspectTrsId;
+	}
 
 	/**
 	 * 取得业务编号
@@ -313,6 +336,24 @@ public class PettyCash extends IdEntity {
 	 */
 	public void setOrgId(String orgId) {
 		this.orgId = orgId;
+	}
+
+	/**
+	 * 取得结转标记
+	 * 
+	 * @return carryOverFlg 结转标记
+	 */
+	public boolean getCarryOverFlg() {
+		return carryOverFlg;
+	}
+
+	/**
+	 * 设置结转标记
+	 * 
+	 * @param carryOverFlg 结转标记
+	 */
+	public void setCarryOverFlg(boolean carryOverFlg) {
+		this.carryOverFlg = carryOverFlg;
 	}
 
 	// ############################################################################################
