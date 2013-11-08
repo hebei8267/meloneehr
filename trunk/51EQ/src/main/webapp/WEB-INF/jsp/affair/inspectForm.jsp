@@ -143,7 +143,24 @@
     			imprestSubtotal1();
     			imprestSubtotal2();
         	});
+    		
+    		$("#trsId").blur(function() {
+				if($("#trsId").val() == ""){
+					return;
+				}
+				$("#trsId").val(addZero($("#trsId").val(), 8));
+				
+				var _val = $("#trsId").val();
+				var _start = _val.length - 8;
+                var _end = _val.length;
+                                  	
+               	$("#trsId").val(_val.substring(_start, _end));
+			});
   		});
+    	function addZero(num, n) {
+             if ((num + "").length >= n) return num;
+             return addZero("0" + num, n);
+        }
     	 
     	// A ～ C 合计金额
         function cashSubtotal() {
