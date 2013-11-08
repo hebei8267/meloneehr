@@ -57,7 +57,7 @@ public class PettyCashController extends BaseController {
 	}
 
 	/**
-	 * view门店备用金列表信息
+	 * 门店备用金列表信息-明细
 	 * 
 	 * @param model
 	 * @return
@@ -286,13 +286,76 @@ public class PettyCashController extends BaseController {
 		List<PettyCash> _pettyCashList = pettyCashManager.searchPettyCashList(orgId,
 				DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"),
 				DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
-		
-		
+
 		for (PettyCash pettyCash : _pettyCashList) {
 			pettyCash.setCreateDateStr(DateUtils.transDateFormat(pettyCash.getCreateDate(), "yyyy-MM-dd"));
 		}
 		model.addAttribute("pettyCashList", _pettyCashList);
 
 		return "affair/pettyCashManageList";
+	}
+
+	/**
+	 * 备用金结转初始化
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "carryOverInit")
+	public String pettyCashCarryOverInit_Action(Model model, HttpServletRequest request)
+			throws ServletRequestBindingException {
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
+
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		model.addAttribute("orgId", orgId);
+
+		return "affair/pettyCashCarryOverList";
+	}
+
+	/**
+	 * 备用金结转初始化
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "carryOverSearch")
+	public String pettyCashCarryOverSearch_Action(Model model, HttpServletRequest request)
+			throws ServletRequestBindingException {
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
+
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		model.addAttribute("orgId", orgId);
+
+		List<PettyCash> _pettyCashList = pettyCashManager.searchPettyCashList_noCarryOver(orgId);
+		for (PettyCash pettyCash : _pettyCashList) {
+			pettyCash.setCreateDateStr(DateUtils.transDateFormat(pettyCash.getCreateDate(), "yyyy-MM-dd"));
+		}
+		model.addAttribute("pettyCashList", _pettyCashList);
+
+		return "affair/pettyCashCarryOverList";
+	}
+
+	/**
+	 * 备用金结转
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "carryOverConfirm")
+	public String pettyCashCarryOverConfirm_Action(Model model, HttpServletRequest request)
+			throws ServletRequestBindingException {
+		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
+		Integer uuid = ServletRequestUtils.getIntParameter(request, "uuid");
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		String inspectTrsId = ServletRequestUtils.getStringParameter(request, "inspectTrsId");
+
+		pettyCashManager.pettyCashCarryOver(orgId, uuid, inspectTrsId);
+		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/pettyCash/carryOverSearch?orgId=" + orgId;
 	}
 }
