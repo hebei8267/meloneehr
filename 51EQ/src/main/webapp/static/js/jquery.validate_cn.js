@@ -37,6 +37,10 @@ jQuery.validator.addMethod("length7", function(value, element) {
 jQuery.validator.addMethod("requiredSelect", function(value, element, param) {
 	 return $("input[name='"+ param +"']:checked").length > 0;
 }, "请选择至少一个操作对象");
+// 列表单选,必选
+jQuery.validator.addMethod("requiredOneSelect", function(value, element, param) {
+	 return $("input[name='"+ param +"']:checked").length > 0;
+}, "请选择一个操作对象");
 
 //手机号码验证       
 jQuery.validator.addMethod("isMobile", function(value, element) {       
