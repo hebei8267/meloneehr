@@ -24,6 +24,12 @@ public class OrgStoreJob implements IJob {
 	 */
 	@Override
 	public void execute() throws ParseException {
+		logger.info("清理t_store_detail Begin");
+		// 清理t_store_detail(数据量过大,其数据已汇总到t_store_day_total)
+		storeDetailManager.initTable();
+		logger.info("清理t_store_detail End");
+
+		// ##########################################################
 		logger.info("取得门店库存信息 Begin");
 		// 取得门店库存信息
 		storeDetailManager.getOrgStoreDetail();
@@ -35,10 +41,5 @@ public class OrgStoreJob implements IJob {
 		storeDetailManager.calOrgStoreDayTotal();
 		logger.info("计算门店库存合计信息 End");
 
-		// ##########################################################
-		logger.info("清理t_store_detail Begin");
-		// 清理t_store_detail(数据量过大,其数据已汇总到t_store_day_total)
-		storeDetailManager.initTable();
-		logger.info("清理t_store_detail End");
 	}
 }
