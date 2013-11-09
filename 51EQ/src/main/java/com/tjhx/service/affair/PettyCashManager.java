@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.utils.SpringContextHolder;
 
 import com.tjhx.common.utils.DateUtils;
+import com.tjhx.dao.affair.InspectJpaDao;
 import com.tjhx.dao.affair.PettyCashJpaDao;
+import com.tjhx.entity.affair.Inspect;
 import com.tjhx.entity.affair.PettyCash;
 import com.tjhx.entity.member.User;
 import com.tjhx.globals.SysConfig;
@@ -24,7 +26,9 @@ import com.tjhx.service.ServiceException;
 public class PettyCashManager {
 	@Resource
 	private PettyCashJpaDao pettyCashJpaDao;
-
+	@Resource
+	private InspectJpaDao inspectJpaDao;
+	
 	/**
 	 * 取得 门店备用金
 	 * 
@@ -283,6 +287,9 @@ public class PettyCashManager {
 		}
 	}
 
+	// -------------------------------------------------------------------------
+	// -------------------------备用金信息结转-----------------------------------
+	// -------------------------------------------------------------------------
 	/**
 	 * 根据查询条件 取得指定门店备用金余额（指定时间段内）
 	 * 
@@ -318,6 +325,13 @@ public class PettyCashManager {
 	 */
 	@Transactional(readOnly = false)
 	public void pettyCashCarryOver(String orgId, Integer pettyCashUuid, String inspectTrsId) {
+		
+		Inspect _dbInspect = inspectJpaDao.findByTrsId(inspectTrsId);
+		if (null == _dbInspect) {
+			// 门店巡查报告不存在!
+			throw new ServiceException("ERR_MSG_INSPECT_002");
+		}
+		
 		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndCarryOverFlg(orgId, new Sort(new Sort.Order(
 				Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
 

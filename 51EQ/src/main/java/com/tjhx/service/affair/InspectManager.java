@@ -53,7 +53,7 @@ public class InspectManager {
 	@Transactional(readOnly = false)
 	public void addNewInspect(Inspect inspect, User user) {
 		Inspect _dbInspect = inspectJpaDao.findByTrsId(inspect.getTrsId());
-		// 该销售流水已存在!
+		// 该门店巡查报告信息已存在
 		if (null != _dbInspect) {
 			throw new ServiceException("ERR_MSG_INSPECT_001");
 		}
