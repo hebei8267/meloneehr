@@ -194,11 +194,13 @@
                             </c:if>
                             
                             <c:if test="${_permIdList.contains('21')}">
+                            <li class="divider"></li>
   							<li>
                                 <%//总部%>
                                 <a href="${sc_ctx}/pettyCash/manageList">门店备用金</a>
                                 <a href="${sc_ctx}/pettyCash/carryOverInit">门店备用金(结转)</a>
                             </li>
+                            <li class="divider"></li>
                             </c:if>
                             
                             
