@@ -85,7 +85,7 @@
 		                               '7',
 		                               '8') )
 		AND (
-		        d.branch_no IN (#{bw_branch_no}))
+		        LEFT(d.branch_no,2) IN ( SELECT branch_no FROM fn_branch_area (#{bw_branch_no}) ))
 		ORDER BY
 		    a.item_subno
 	]]>
