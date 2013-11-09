@@ -295,6 +295,9 @@ public class PettyCashController extends BaseController {
 		return "affair/pettyCashManageList";
 	}
 
+	// ----------------------------------------------------------------------
+	// 总部-备用金结转
+	// ----------------------------------------------------------------------
 	/**
 	 * 备用金结转初始化
 	 * 
@@ -354,8 +357,12 @@ public class PettyCashController extends BaseController {
 		Integer uuid = ServletRequestUtils.getIntParameter(request, "uuid");
 		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
 		String inspectTrsId = ServletRequestUtils.getStringParameter(request, "inspectTrsId");
-
-		pettyCashManager.pettyCashCarryOver(orgId, uuid, inspectTrsId);
+		try {
+			pettyCashManager.pettyCashCarryOver(orgId, uuid, inspectTrsId);
+		} catch (ServiceException ex) {
+			// 添加错误消息
+			addInfoMsg(model, ex.getMessage());
+		}
 		return "redirect:/" + Constants.PAGE_REQUEST_PREFIX + "/pettyCash/carryOverSearch?orgId=" + orgId;
 	}
 }
