@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -39,6 +40,15 @@ public class SalesDayTotalGoods extends IdEntity {
 	private BigDecimal posQty;
 	/** 销售金额 */
 	private BigDecimal posAmt;
+	// ----------------------------------------------------------
+	/** 日期-开始时间 */
+	private String optDateStart;
+	/** 日期-结束时间 */
+	private String optDateEnd;
+	/** 日均销量 */
+	private BigDecimal averageDailySales;
+	/** 机构名称 */
+	private String orgName;
 
 	/**
 	 * 取得机构编号
@@ -210,6 +220,82 @@ public class SalesDayTotalGoods extends IdEntity {
 	 */
 	public void setPosAmt(BigDecimal posAmt) {
 		this.posAmt = posAmt;
+	}
+
+	/**
+	 * 取得日期-开始时间
+	 * 
+	 * @return optDateStart 日期-开始时间
+	 */
+	@Transient
+	public String getOptDateStart() {
+		return optDateStart;
+	}
+
+	/**
+	 * 设置日期-开始时间
+	 * 
+	 * @param optDateStart 日期-开始时间
+	 */
+	public void setOptDateStart(String optDateStart) {
+		this.optDateStart = optDateStart;
+	}
+
+	/**
+	 * 取得日期-结束时间
+	 * 
+	 * @return optDateEnd 日期-结束时间
+	 */
+	@Transient
+	public String getOptDateEnd() {
+		return optDateEnd;
+	}
+
+	/**
+	 * 设置日期-结束时间
+	 * 
+	 * @param optDateEnd 日期-结束时间
+	 */
+	public void setOptDateEnd(String optDateEnd) {
+		this.optDateEnd = optDateEnd;
+	}
+
+	/**
+	 * 取得日均销量
+	 * 
+	 * @return averageDailySales 日均销量
+	 */
+	@Transient
+	public BigDecimal getAverageDailySales() {
+		return averageDailySales;
+	}
+
+	/**
+	 * 设置日均销量
+	 * 
+	 * @param averageDailySales 日均销量
+	 */
+	public void setAverageDailySales(BigDecimal averageDailySales) {
+		this.averageDailySales = averageDailySales;
+	}
+
+	/**
+	 * 取得机构名称
+	 * 
+	 * @return orgName 机构名称
+	 */
+	@Transient
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * 设置机构名称
+	 * 
+	 * @param orgName 机构名称
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
 	}
 
 }
