@@ -1,5 +1,6 @@
 package com.tjhx.service.info;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,5 +104,26 @@ public class SalesDayTotalGoodsManager {
 		}
 
 		return _optDateList;
+	}
+
+	/**
+	 * 取得各店指定时间区间内的销售信息（按商品）
+	 * 
+	 * @param salesDayTotalGoods
+	 * @return
+	 */
+	public List<SalesDayTotalGoods> getSumSaleInfoList(SalesDayTotalGoods salesDayTotalGoods) {
+		// 取得各店指定时间区间内的销售信息（按商品）
+		List<SalesDayTotalGoods> _sumSaleList = salesDayTotalGoodsMyBatisDao.getSumSaleInfoList(salesDayTotalGoods);
+		for (SalesDayTotalGoods _salesGoods : _sumSaleList) {
+			// 实销价格
+			if (_salesGoods.getPosQty().compareTo(BigDecimal.ZERO) == 0) {
+				_salesGoods.setAverageDailySales(new BigDecimal(0));
+			} else {
+				_salesGoods.setAverageDailySales(_salesGoods.getPosAmt().divide(_salesGoods.getPosQty(), 2,
+						BigDecimal.ROUND_UP));
+			}
+		}
+		return _sumSaleList;
 	}
 }
