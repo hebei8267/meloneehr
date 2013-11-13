@@ -35,16 +35,22 @@ public class SysConfig {
 	private int pettyCashViewDays;
 	/** 门店备用金重计算天数 */
 	private int pettyCashCalculateDays;
+
 	/** 门店日销售信息重计算天数(按类别) */
 	private int salesDayTotalItemDays;
 	/** 门店月销售信息重计算月数(按类别) */
 	private int salesMonthTotalItemMonths;
+
+	/** 门店日销售信息重计算天数(按商品) */
+	private int salesDayTotalGoodsDays;
+
 	/** 月销售信息对比(图形)页面年份显示个数 */
 	private int salesMonthTotalShowYearNum;
 	/** 类别销售信息对比(图形)页面种类显示个数 */
 	private int salesDayItemTotalShowNum;
 	/** 供应商销售信息对比(图形)页面种类显示个数 */
 	private int salesDaySupTotalShowNum;
+
 	/** 门店日销售信息重计算天数(按供应商) */
 	private int salesDayTotalSupDays;
 
@@ -460,6 +466,24 @@ public class SysConfig {
 	 */
 	public void setSalesDayTotalSupDays(int salesDayTotalSupDays) {
 		this.salesDayTotalSupDays = salesDayTotalSupDays;
+	}
+
+	/**
+	 * 取得门店日销售信息重计算天数(按商品)
+	 * 
+	 * @return salesDayTotalGoodsDays 门店日销售信息重计算天数(按商品)
+	 */
+	public int getSalesDayTotalGoodsDays() {
+		return salesDayTotalGoodsDays;
+	}
+
+	/**
+	 * 设置门店日销售信息重计算天数(按商品)
+	 * 
+	 * @param salesDayTotalGoodsDays 门店日销售信息重计算天数(按商品)
+	 */
+	public void setSalesDayTotalGoodsDays(int salesDayTotalGoodsDays) {
+		this.salesDayTotalGoodsDays = salesDayTotalGoodsDays;
 	}
 
 }
