@@ -141,6 +141,10 @@
                             </li>
                             <li class="divider"></li>
                             <li>
+                                <a href="${sc_ctx}/salesDayGoodsReport">商品销售信息一览(表格)</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
                                 <a href="${sc_ctx}/salesDayItemChartReport/bar_init">类别销售信息一览(图形)</a>
                             </li>
                             <li>
