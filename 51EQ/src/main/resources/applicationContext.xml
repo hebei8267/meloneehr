@@ -186,6 +186,7 @@
 		<property name="salesDayTotalItemDays" value="${sales.day.total.item.days}" />
 		<!-- 门店月销售信息重计算月数(按类别) -->
 		<property name="salesMonthTotalItemMonths" value="${sales.month.total.item.months}" />
+		
 		<!-- 月销售信息对比(图形)页面年份显示个数 -->
 		<property name="salesMonthTotalShowYearNum" value="${sales.month.total.show.year.num}" />
 		<!-- 类别销售信息对比(图形)页面种类显示个数 -->
@@ -196,6 +197,9 @@
 	
 		<!-- 门店日销售信息重计算天数(按供应商) -->
 		<property name="salesDayTotalSupDays" value="${sales.day.total.sup.days}" />
+		
+		<!-- 门店日销售信息重计算天数(按商品) -->
+		<property name="salesDayTotalGoodsDays" value="${sales.day.total.goods.days}" />
 		
 	</bean>
 	
