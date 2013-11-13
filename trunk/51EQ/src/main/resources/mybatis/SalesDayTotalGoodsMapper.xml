@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.tjhx.dao.info.SalesDayTotalGoodsMyBatisDao">
+	<!-- mybatis表结构与对象的映射关系 -->
+	<resultMap id="Result_Map_SalesDayTotalGoods" type="com.tjhx.entity.info.SalesDayTotalGoods">
+        <result column="uuid" property="uuid" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="branch_no" property="branchNo" jdbcType="VARCHAR"/>
+        <result column="item_barcode" property="itemBarcode" jdbcType="VARCHAR"/>
+        <result column="item_subno" property="itemSubno" jdbcType="VARCHAR"/>
+        <result column="opt_date" property="optDate" jdbcType="VARCHAR"/>
+        <result column="opt_date_m" property="optDateM" jdbcType="VARCHAR"/>
+        <result column="opt_date_y" property="optDateY" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="VARCHAR"/>
+        <result column="pos_amt" property="posAmt" jdbcType="DECIMAL"/>
+        <result column="pos_qty" property="posQty" jdbcType="DECIMAL"/>
+	</resultMap>
+	
+	<delete id="delSalesDayTotalInfo" parameterType="String">  
+        DELETE FROM t_sales_day_total_goods WHERE opt_date = #{optDate}
+    </delete>
+</mapper>
