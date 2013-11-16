@@ -49,6 +49,8 @@ public class SalesDayTotalGoods extends IdEntity {
 	private BigDecimal averageDailySales;
 	/** 机构名称 */
 	private String orgName;
+	/** 商品名字 */
+	private String goodsName;
 
 	/**
 	 * 取得机构编号
@@ -296,6 +298,25 @@ public class SalesDayTotalGoods extends IdEntity {
 	 */
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	/**
+	 * 取得商品名字
+	 * 
+	 * @return goodsName 商品名字
+	 */
+	@Transient
+	public String getGoodsName() {
+		return goodsName;
+	}
+
+	/**
+	 * 设置商品名字
+	 * 
+	 * @param goodsName 商品名字
+	 */
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
 
 }
