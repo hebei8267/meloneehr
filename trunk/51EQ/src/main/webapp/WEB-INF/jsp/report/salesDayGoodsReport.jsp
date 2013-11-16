@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>商品销售信息一览(图形)</h3>
+                            <h3>商品销售信息一览(按条码)</h3>
                         </legend>
                     </div>
                     <div class="span5">
