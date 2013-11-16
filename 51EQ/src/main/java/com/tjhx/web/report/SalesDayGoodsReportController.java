@@ -54,10 +54,10 @@ public class SalesDayGoodsReportController extends BaseController {
 		// 取得各店指定时间区间内的销售信息（按商品）
 		List<SalesDayTotalGoods> _sumSaleList = salesDayTotalGoodsManager.getSumSaleInfoList(param);
 		model.addAttribute("sumSaleList", _sumSaleList);
-		
+
 		JsonMapper mapper = new JsonMapper();
 		model.addAttribute("saleRamtJson", mapper.toJson(_sumSaleList));
-
+		model.addAttribute("showFlg", true);
 		return "report/salesDayGoodsReport";
 	}
 }
