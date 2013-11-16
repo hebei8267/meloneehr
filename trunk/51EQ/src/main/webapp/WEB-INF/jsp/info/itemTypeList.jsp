@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>商品类别</h3>
+                            <h3>商品类别管理</h3>
                         </legend>
                     </div>
                     <div class="span12">
