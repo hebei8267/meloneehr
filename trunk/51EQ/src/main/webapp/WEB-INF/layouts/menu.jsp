@@ -147,7 +147,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="${sc_ctx}/salesDayGoodsReport">商品销售信息一览(表格)</a>
+                                <a href="${sc_ctx}/salesDayGoodsReport">商品销售信息一览(按条码)</a>
                             </li>
                             <li class="divider"></li>
                             <li>
