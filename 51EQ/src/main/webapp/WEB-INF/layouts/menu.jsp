@@ -42,6 +42,7 @@
                                         <a href="${sc_ctx}/employee">职员管理</a>
                                     </li>
                                 </c:if>
+                                <li class="divider"></li>
                                 <c:if test="${_permIdList.contains('2')}">
                                     <li>
                                         <a href="${sc_ctx}/organization">机构管理</a>
@@ -56,9 +57,14 @@
                                     <li>
                                         <a href="${sc_ctx}/bankCard">银行卡管理</a>
                                     </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="${sc_ctx}/goods">商品管理</a>
+                                    </li>
                                     <li>
                                         <a href="${sc_ctx}/itemType">商品类别管理</a>
                                     </li>
+                                    <li class="divider"></li>
                                     <li>
                                         <a href="${sc_ctx}/cashCounterDaily/init">反日结(销售信息)</a>
                                     </li>
