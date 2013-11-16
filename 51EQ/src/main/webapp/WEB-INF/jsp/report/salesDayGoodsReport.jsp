@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/dhtmlxchart.css">
+    	<script src="${ctx}/static/js/dhtmlxchart.js" type="text/javascript"></script>
+    	
     	<script>
     	$(function() {
     		$("#listForm").validate({
@@ -101,7 +104,7 @@
                                     	${sumSale.orgName}
                                     </td>
                                     <td>
-                                    	${sumSale.itemSubno} / 
+                                    	${sumSale.itemSubno} / ${sumSale.goodsName}
                                     </td>
                                     <td>
                                     	${sumSale.posQty}
@@ -117,8 +120,38 @@
                             </tbody>
                         </table>
                     </div>
+                    
+                    <div class="span6"	style="margin-top: 10px;">
+                    	<c:if test="${showFlg == true}">
+	                	<div id="chart1" style="width:500px;height:400px;border:1px solid #A4BED4;"></div>
+	                	</c:if>
+	             	</div>
                 </div>
             </form>
         </div>
+        <c:if test="${showFlg == true}">
+        <script>
+			$(function() {
+				var _saleRamtJson = ${saleRamtJson}
+				
+				var pieChart = new dhtmlXChart({
+					view : "pie",
+					container : "chart1",
+					value : "#posAmt#",
+					labelOffset : -30,
+					label : function(obj) {
+						var sum = pieChart.sum("#posAmt#");
+						var text = Math.round(parseFloat(obj.posAmt) / sum * 100) + "%";
+						return "<div class='label' style='border:1px solid'>" + text + "</div>";
+					},
+					tooltip: "#posAmt#元    #orgName#",
+					legend: "#orgName#"
+				});
+				pieChart.parse(_saleRamtJson, "json");
+				
+				
+			});
+		</script>
+		</c:if>
     </body>
 </html>
