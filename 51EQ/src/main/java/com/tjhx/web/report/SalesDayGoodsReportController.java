@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springside.modules.mapper.JsonMapper;
 
 import com.tjhx.common.utils.DateUtils;
 import com.tjhx.entity.info.SalesDayTotalGoods;
@@ -53,6 +54,9 @@ public class SalesDayGoodsReportController extends BaseController {
 		// 取得各店指定时间区间内的销售信息（按商品）
 		List<SalesDayTotalGoods> _sumSaleList = salesDayTotalGoodsManager.getSumSaleInfoList(param);
 		model.addAttribute("sumSaleList", _sumSaleList);
+		
+		JsonMapper mapper = new JsonMapper();
+		model.addAttribute("saleRamtJson", mapper.toJson(_sumSaleList));
 
 		return "report/salesDayGoodsReport";
 	}
