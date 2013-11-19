@@ -49,6 +49,20 @@ public class PettyCash extends IdEntity {
 	private String orgId;
 	/** 结转标记 */
 	private boolean carryOverFlg;
+	/** 审查标记-账记对应 0-正确 1-错误 */
+	private Integer examineFlg1;
+	/** 审查标记-大小写完整规范 0-正确 1-错误 */
+	private Integer examineFlg2;
+	/** 审查标记-摘要清晰 0-正确 1-错误 */
+	private Integer examineFlg3;
+	/** 审查标记-附件或监督完整 0-正确 1-错误 */
+	private Integer examineFlg4;
+	/** 审查标记-记录序时 0-正确 1-错误 */
+	private Integer examineFlg5;
+	/** 审查标记-UID正确 0-正确 1-错误 */
+	private Integer examineFlg6;
+	/** 审查标记-装订正确 0-正确 1-错误 */
+	private Integer examineFlg7;
 	// ############################################################################################
 	/** 用户关联机构名称 */
 	private String orgName;
@@ -354,6 +368,132 @@ public class PettyCash extends IdEntity {
 	 */
 	public void setCarryOverFlg(boolean carryOverFlg) {
 		this.carryOverFlg = carryOverFlg;
+	}
+
+	/**
+	 * 取得审查标记-账记对应0-正确1-错误
+	 * 
+	 * @return examineFlg1 审查标记-账记对应0-正确1-错误
+	 */
+	public Integer getExamineFlg1() {
+		return examineFlg1;
+	}
+
+	/**
+	 * 设置审查标记-账记对应0-正确1-错误
+	 * 
+	 * @param examineFlg1 审查标记-账记对应0-正确1-错误
+	 */
+	public void setExamineFlg1(Integer examineFlg1) {
+		this.examineFlg1 = examineFlg1;
+	}
+
+	/**
+	 * 取得审查标记-大小写完整规范0-正确1-错误
+	 * 
+	 * @return examineFlg2 审查标记-大小写完整规范0-正确1-错误
+	 */
+	public Integer getExamineFlg2() {
+		return examineFlg2;
+	}
+
+	/**
+	 * 设置审查标记-大小写完整规范0-正确1-错误
+	 * 
+	 * @param examineFlg2 审查标记-大小写完整规范0-正确1-错误
+	 */
+	public void setExamineFlg2(Integer examineFlg2) {
+		this.examineFlg2 = examineFlg2;
+	}
+
+	/**
+	 * 取得审查标记-摘要清晰0-正确1-错误
+	 * 
+	 * @return examineFlg3 审查标记-摘要清晰0-正确1-错误
+	 */
+	public Integer getExamineFlg3() {
+		return examineFlg3;
+	}
+
+	/**
+	 * 设置审查标记-摘要清晰0-正确1-错误
+	 * 
+	 * @param examineFlg3 审查标记-摘要清晰0-正确1-错误
+	 */
+	public void setExamineFlg3(Integer examineFlg3) {
+		this.examineFlg3 = examineFlg3;
+	}
+
+	/**
+	 * 取得审查标记-附件或监督完整0-正确1-错误
+	 * 
+	 * @return examineFlg4 审查标记-附件或监督完整0-正确1-错误
+	 */
+	public Integer getExamineFlg4() {
+		return examineFlg4;
+	}
+
+	/**
+	 * 设置审查标记-附件或监督完整0-正确1-错误
+	 * 
+	 * @param examineFlg4 审查标记-附件或监督完整0-正确1-错误
+	 */
+	public void setExamineFlg4(Integer examineFlg4) {
+		this.examineFlg4 = examineFlg4;
+	}
+
+	/**
+	 * 取得审查标记-记录序时0-正确1-错误
+	 * 
+	 * @return examineFlg5 审查标记-记录序时0-正确1-错误
+	 */
+	public Integer getExamineFlg5() {
+		return examineFlg5;
+	}
+
+	/**
+	 * 设置审查标记-记录序时0-正确1-错误
+	 * 
+	 * @param examineFlg5 审查标记-记录序时0-正确1-错误
+	 */
+	public void setExamineFlg5(Integer examineFlg5) {
+		this.examineFlg5 = examineFlg5;
+	}
+
+	/**
+	 * 取得审查标记-UID正确0-正确1-错误
+	 * 
+	 * @return examineFlg6 审查标记-UID正确0-正确1-错误
+	 */
+	public Integer getExamineFlg6() {
+		return examineFlg6;
+	}
+
+	/**
+	 * 设置审查标记-UID正确0-正确1-错误
+	 * 
+	 * @param examineFlg6 审查标记-UID正确0-正确1-错误
+	 */
+	public void setExamineFlg6(Integer examineFlg6) {
+		this.examineFlg6 = examineFlg6;
+	}
+
+	/**
+	 * 取得审查标记-装订正确0-正确1-错误
+	 * 
+	 * @return examineFlg7 审查标记-装订正确0-正确1-错误
+	 */
+	public Integer getExamineFlg7() {
+		return examineFlg7;
+	}
+
+	/**
+	 * 设置审查标记-装订正确0-正确1-错误
+	 * 
+	 * @param examineFlg7 审查标记-装订正确0-正确1-错误
+	 */
+	public void setExamineFlg7(Integer examineFlg7) {
+		this.examineFlg7 = examineFlg7;
 	}
 
 	// ############################################################################################
