@@ -295,6 +295,30 @@ public class PettyCashController extends BaseController {
 		return "affair/pettyCashManageList";
 	}
 
+	/**
+	 * 备用金审核
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
+	@RequestMapping(value = "audit")
+	public String pettyCashAudit_Action(Model model, HttpServletRequest request) throws ServletRequestBindingException {
+		int[] uuids = ServletRequestUtils.getIntParameters(request, "uuid");
+		int[] examineFlgs1 = ServletRequestUtils.getIntParameters(request, "examineFlg1");
+		int[] examineFlgs2 = ServletRequestUtils.getIntParameters(request, "examineFlg2");
+		int[] examineFlgs3 = ServletRequestUtils.getIntParameters(request, "examineFlg3");
+		int[] examineFlgs4 = ServletRequestUtils.getIntParameters(request, "examineFlg4");
+		int[] examineFlgs5 = ServletRequestUtils.getIntParameters(request, "examineFlg5");
+		int[] examineFlgs6 = ServletRequestUtils.getIntParameters(request, "examineFlg6");
+		int[] examineFlgs7 = ServletRequestUtils.getIntParameters(request, "examineFlg7");
+
+		pettyCashManager.auditPettyCash(uuids, examineFlgs1, examineFlgs2, examineFlgs3, examineFlgs4, examineFlgs5,
+				examineFlgs6, examineFlgs7);
+		return pettyCashSearch_Action(model, request);
+	}
+
 	// ----------------------------------------------------------------------
 	// 总部-备用金结转
 	// ----------------------------------------------------------------------
