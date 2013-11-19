@@ -61,7 +61,32 @@
 					$("#listForm").attr("action", "${sc_ctx}/pettyCash/search");
 					$("#listForm").submit();
 				});
+				
+				$("#auditBtn").click(function() {
+					$("input[type='text'],textarea").each(function(i) {
+						this.value = $.trim(this.value);
+					});
+		
+					$("#listForm").attr("action", "${sc_ctx}/pettyCash/audit");
+					$("#listForm").submit();
+				});
 			});
+			
+			function examineFlg_btn_click(index){
+				var _css = $("#ex_btn"+index).hasClass("btn-info");
+
+				if(_css){
+					$("#ex_btn"+index).removeClass("btn-info");
+					$("#ex_btn"+index).addClass("btn-danger");
+					$("#ex_btn"+index).val("错误");
+					$("#examineFlg"+index).val("1");
+				} else {
+					$("#ex_btn"+index).removeClass("btn-danger");
+					$("#ex_btn"+index).addClass("btn-info");
+					$("#ex_btn"+index).val("正确");
+					$("#examineFlg"+index).val("0");
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -93,26 +118,34 @@
 								</c:if>
 							</c:forEach>
 						</select>
-						<button id="searchBtn" class="btn	btn-primary" type="button">查询</button>
+						<button id="searchBtn" class="btn btn-primary" type="button">查询</button>
 					</div>
 	
 					<div class="span12" style="margin-top: 10px;">
 						<table class="table	table-striped table-bordered table-condensed mytable">
 							<thead>
 								<tr>
-									<th width="115">业务编号(UID)</th>
+									<th width="45">UID</th>
 									<th width="35" class="center">星期</th>
 									<th width="90" class="center">业务日期</th>
-									<th width="80" class="center">填写时间</th>
-									<th width="150" class="right">支出/拨入(金额)</th>
+									<th width="90" class="center">填写日期</th>
+									<th width="130" class="right">支出/拨入(金额)</th>
 									<th>支出/拨入(事项)</th>
-									<th width="110" class="right">备用金余额</th>
-									<th width="55">&nbsp;</th>
+									<th width="90" class="right">备用金余额</th>
+									<th width="30">&nbsp;</th>
+									<th width="30">账记对应</th>
+									<th width="30">书写规范</th>
+									<th width="30">摘要清晰</th>
+									<th width="30">附件监督</th>
+									<th width="30">记录序时</th>
+									<th width="30">UID正确</th>
+									<th width="30">装订正确</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${pettyCashList}" var="pettyCash">
+								<c:forEach items="${pettyCashList}" var="pettyCash" varStatus="status1">
 									<tr>
+										<input type="hidden" name="uuid" value="${pettyCash.uuid }">
 										<td>${pettyCash.optUid}</td>
 										<td class="center">${pettyCash.week}</td>
 										<td>
@@ -158,6 +191,82 @@
 										</td>
 										<td class="right">${pettyCash.balanceAmt}</td>
 										<td><a href="${sc_ctx}/pettyCash/view/${pettyCash.uuid}" target="_blank" class="btn" />查看</a></td>
+										
+										<c:if test="${pettyCash.optType == 0}">
+										<td>
+											<c:if test="${pettyCash.examineFlg1 == 0}">
+											<input type="button" id="ex_btn1_${status1.index + 1}" onclick="examineFlg_btn_click('1_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg1 == 1}">
+											<input type="button" id="ex_btn1_${status1.index + 1}" onclick="examineFlg_btn_click('1_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg1" id="examineFlg1_${status1.index + 1}" value="${pettyCash.examineFlg1 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg2 == 0}">
+											<input type="button" id="ex_btn2_${status1.index + 1}" onclick="examineFlg_btn_click('2_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg2 == 1}">
+											<input type="button" id="ex_btn2_${status1.index + 1}" onclick="examineFlg_btn_click('2_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg2" id="examineFlg2_${status1.index + 1}" value="${pettyCash.examineFlg2 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg3 == 0}">
+											<input type="button" id="ex_btn3_${status1.index + 1}" onclick="examineFlg_btn_click('3_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg3 == 1}">
+											<input type="button" id="ex_btn3_${status1.index + 1}" onclick="examineFlg_btn_click('3_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg3" id="examineFlg3_${status1.index + 1}" value="${pettyCash.examineFlg3 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg4 == 0}">
+											<input type="button" id="ex_btn4_${status1.index + 1}" onclick="examineFlg_btn_click('4_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg4 == 1}">
+											<input type="button" id="ex_btn4_${status1.index + 1}" onclick="examineFlg_btn_click('4_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg4" id="examineFlg4_${status1.index + 1}" value="${pettyCash.examineFlg4 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg5 == 0}">
+											<input type="button" id="ex_btn5_${status1.index + 1}" onclick="examineFlg_btn_click('5_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg5 == 1}">
+											<input type="button" id="ex_btn5_${status1.index + 1}" onclick="examineFlg_btn_click('5_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg5" id="examineFlg5_${status1.index + 1}" value="${pettyCash.examineFlg5 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg6 == 0}">
+											<input type="button" id="ex_btn6_${status1.index + 1}" onclick="examineFlg_btn_click('6_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg6 == 1}">
+											<input type="button" id="ex_btn6_${status1.index + 1}" onclick="examineFlg_btn_click('6_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg6" id="examineFlg6_${status1.index + 1}" value="${pettyCash.examineFlg6 }">
+										</td>
+										
+										<td>
+											<c:if test="${pettyCash.examineFlg7 == 0}">
+											<input type="button" id="ex_btn7_${status1.index + 1}" onclick="examineFlg_btn_click('7_${status1.index + 1}')" class="btn btn-info" value="正确">
+											</c:if>
+											<c:if test="${pettyCash.examineFlg7 == 1}">
+											<input type="button" id="ex_btn7_${status1.index + 1}" onclick="examineFlg_btn_click('7_${status1.index + 1}')" class="btn btn-danger" value="错误">
+											</c:if>
+											<input type="hidden" name="examineFlg7" id="examineFlg7_${status1.index + 1}" value="${pettyCash.examineFlg7 }">
+										</td>
+										</c:if>
+										
+										<c:if test="${pettyCash.optType == 1}">
+										<td colspan="7"></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -170,6 +279,11 @@
 							</c:if>
 						</table>
 					</div>
+					<c:if test="${!empty	pettyCashList}">
+					<div class="span12" style="text-align: right;">
+					<button id="auditBtn" class="btn btn-large btn-warning" type="button">审核</button>
+					</div>
+					</c:if>
 				</div>
 			</form>
 		</div>
