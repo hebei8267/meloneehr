@@ -28,7 +28,7 @@ public class PettyCashManager {
 	private PettyCashJpaDao pettyCashJpaDao;
 	@Resource
 	private InspectJpaDao inspectJpaDao;
-	
+
 	/**
 	 * 取得 门店备用金
 	 * 
@@ -64,6 +64,24 @@ public class PettyCashManager {
 		pettyCash.setOptAmt(pettyCash.getOptAmtShow().multiply(new BigDecimal(-1)));
 		// 机构编号
 		pettyCash.setOrgId(user.getOrganization().getId());
+
+		// ---------------------------------------------------------------------------------
+		// 默认审查通过
+		// ---------------------------------------------------------------------------------
+		// 审查标记-账记对应
+		pettyCash.setExamineFlg1(0);
+		// 审查标记-大小写完整规范
+		pettyCash.setExamineFlg2(0);
+		// 审查标记-摘要清晰
+		pettyCash.setExamineFlg3(0);
+		// 审查标记-附件或监督完整
+		pettyCash.setExamineFlg4(0);
+		// 审查标记-记录序时
+		pettyCash.setExamineFlg5(0);
+		// 审查标记-UID正确
+		pettyCash.setExamineFlg6(0);
+		// 审查标记-装订正确
+		pettyCash.setExamineFlg7(0);
 
 		pettyCashJpaDao.save(pettyCash);
 
@@ -300,7 +318,7 @@ public class PettyCashManager {
 	 */
 	public List<PettyCash> searchPettyCashList(String orgId, String optDate_start, String optDate_end) {
 		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndOptDateInterval(orgId, optDate_start, optDate_end,
-				new Sort(new Sort.Order(Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
+				new Sort(new Sort.Order(Sort.Direction.ASC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
 		return _list;
 	}
 
@@ -325,13 +343,13 @@ public class PettyCashManager {
 	 */
 	@Transactional(readOnly = false)
 	public void pettyCashCarryOver(String orgId, Integer pettyCashUuid, String inspectTrsId) {
-		
+
 		Inspect _dbInspect = inspectJpaDao.findByTrsId(inspectTrsId);
 		if (null == _dbInspect) {
 			// 门店巡查报告不存在!
 			throw new ServiceException("ERR_MSG_INSPECT_002");
 		}
-		
+
 		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndCarryOverFlg(orgId, new Sort(new Sort.Order(
 				Sort.Direction.DESC, "optDate"), new Sort.Order(Sort.Direction.DESC, "uuid")));
 
@@ -344,5 +362,42 @@ public class PettyCashManager {
 				pettyCashJpaDao.save(pettyCash);
 			}
 		}
+	}
+
+	/**
+	 * 备用金审核
+	 * 
+	 * @param uuids
+	 * @param examineFlgs1
+	 * @param examineFlgs2
+	 * @param examineFlgs3
+	 * @param examineFlgs4
+	 * @param examineFlgs5
+	 * @param examineFlgs6
+	 * @param examineFlgs7
+	 */
+	@Transactional(readOnly = false)
+	public void auditPettyCash(int[] uuids, int[] examineFlgs1, int[] examineFlgs2, int[] examineFlgs3,
+			int[] examineFlgs4, int[] examineFlgs5, int[] examineFlgs6, int[] examineFlgs7) {
+		for (int i = 0; i < uuids.length; i++) {
+			int uuid = uuids[i];
+			PettyCash _pettyCash = pettyCashJpaDao.findOne(uuid);
+
+			// 审查标记-账记对应
+			_pettyCash.setExamineFlg1(examineFlgs1[i]);
+			// 审查标记-大小写完整规范
+			_pettyCash.setExamineFlg2(examineFlgs2[i]);
+			// 审查标记-摘要清晰
+			_pettyCash.setExamineFlg3(examineFlgs3[i]);
+			// 审查标记-附件或监督完整
+			_pettyCash.setExamineFlg4(examineFlgs4[i]);
+			// 审查标记-记录序时
+			_pettyCash.setExamineFlg5(examineFlgs5[i]);
+			// 审查标记-UID正确
+			_pettyCash.setExamineFlg6(examineFlgs6[i]);
+			// 审查标记-装订正确
+			_pettyCash.setExamineFlg7(examineFlgs7[i]);
+		}
+
 	}
 }
