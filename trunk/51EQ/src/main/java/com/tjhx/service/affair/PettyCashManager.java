@@ -1,12 +1,20 @@
 package com.tjhx.service.affair;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +36,7 @@ public class PettyCashManager {
 	private PettyCashJpaDao pettyCashJpaDao;
 	@Resource
 	private InspectJpaDao inspectJpaDao;
+	private final static String XML_CONFIG_PETTY_CASH = "/excel/Petty_Cash_Template.xls";
 
 	/**
 	 * 取得 门店备用金
@@ -399,5 +408,36 @@ public class PettyCashManager {
 			_pettyCash.setExamineFlg7(examineFlgs7[i]);
 		}
 
+	}
+
+	/**
+	 * 创建备用金信息文件
+	 * 
+	 * @param orgId
+	 * @param optDate_start
+	 * @param optDate_end
+	 * @return
+	 * @throws IOException
+	 * @throws InvalidFormatException
+	 * @throws ParsePropertyException
+	 */
+	public String createPettyCashFile(String orgId, String optDate_start, String optDate_end)
+			throws ParsePropertyException, InvalidFormatException, IOException {
+		List<PettyCash> _list = pettyCashJpaDao.findByOrgIdAndOptDateInterval(orgId, optDate_start, optDate_end,
+				new Sort(new Sort.Order(Sort.Direction.ASC, "optDate"), new Sort.Order(Sort.Direction.ASC, "uuid")));
+
+		// ---------------------------文件生成---------------------------
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pettyCashList", _list);
+
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		XLSTransformer transformer = new XLSTransformer();
+
+		String tmpFileName = UUID.randomUUID().toString() + ".xls";
+		String tmpFilePath = sysConfig.getReportTmpPath() + tmpFileName;
+		transformer.transformXLS(sysConfig.getExcelTemplatePath() + XML_CONFIG_PETTY_CASH, map, tmpFilePath);
+
+		return tmpFileName;
 	}
 }
