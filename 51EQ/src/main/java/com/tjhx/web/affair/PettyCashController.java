@@ -1,5 +1,10 @@
 package com.tjhx.web.affair;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.LinkedHashMap;
@@ -8,8 +13,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.jxls.exception.ParsePropertyException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -272,6 +281,74 @@ public class PettyCashController extends BaseController {
 		return "affair/pettyCashManageList";
 	}
 
+	/**
+	 * 备用金信息文件导出
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @throws ServletRequestBindingException
+	 * @throws IOException
+	 * @throws InvalidFormatException
+	 * @throws ParsePropertyException
+	 */
+	@RequestMapping(value = "export")
+	public void pettyCashExport_Action(Model model, HttpServletRequest request, HttpServletResponse response)
+			throws ServletRequestBindingException, IOException, ParsePropertyException, InvalidFormatException {
+		String orgId = ServletRequestUtils.getStringParameter(request, "orgId");
+		String optDateShow_start = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
+		String optDateShow_end = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
+		model.addAttribute("orgId", orgId);
+		model.addAttribute("optDateShow_start", optDateShow_start);
+		model.addAttribute("optDateShow_end", optDateShow_end);
+
+		// 创建备用金信息文件
+		String downLoadFileName = pettyCashManager.createPettyCashFile(orgId,
+				DateUtils.transDateFormat(optDateShow_start, "yyyy-MM-dd", "yyyyMMdd"),
+				DateUtils.transDateFormat(optDateShow_end, "yyyy-MM-dd", "yyyyMMdd"));
+
+		if (null == downLoadFileName) {
+			return;
+		}
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+
+		String downLoadPath = sysConfig.getReportTmpPath() + downLoadFileName;
+
+		try {
+			long fileLength = new File(downLoadPath).length();
+			response.setContentType("application/x-msdownload;");
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + new String(downLoadFileName.getBytes("utf-8"), "ISO8859-1"));
+			response.setHeader("Content-Length", String.valueOf(fileLength));
+			bis = new BufferedInputStream(new FileInputStream(downLoadPath));
+			bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] buff = new byte[2048];
+			int bytesRead;
+			while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
+				bos.write(buff, 0, bytesRead);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			if (bis != null)
+				bis.close();
+			if (bos != null)
+				bos.close();
+		}
+		return;
+	}
+
+	/**
+	 * 取得门店备用金列表
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ServletRequestBindingException
+	 */
 	@RequestMapping(value = "search")
 	public String pettyCashSearch_Action(Model model, HttpServletRequest request) throws ServletRequestBindingException {
 		ReportUtils.initOrgList_Null_NoNRoot(orgManager, model);
