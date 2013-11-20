@@ -70,6 +70,15 @@
 					$("#listForm").attr("action", "${sc_ctx}/pettyCash/audit");
 					$("#listForm").submit();
 				});
+				
+				$("#exportBtn").click(function() {
+					$("input[type='text'],textarea").each(function(i) {
+						this.value = $.trim(this.value);
+					});
+		
+					$("#listForm").attr("action", "${sc_ctx}/pettyCash/export");
+					$("#listForm").submit();
+				});
 			});
 			
 			function examineFlg_btn_click(index){
@@ -119,6 +128,8 @@
 							</c:forEach>
 						</select>
 						<button id="searchBtn" class="btn btn-primary" type="button">查询</button>
+						<button	id="exportBtn" class="btn btn-warning" type="button">数据导出</button>
+						
 					</div>
 	
 					<div class="span12" style="margin-top: 10px;">
@@ -145,7 +156,10 @@
 							<tbody>
 								<c:forEach items="${pettyCashList}" var="pettyCash" varStatus="status1">
 									<tr>
+										<c:if test="${pettyCash.optType == 0}">
 										<input type="hidden" name="uuid" value="${pettyCash.uuid }">
+										</c:if>
+										
 										<td>${pettyCash.optUid}</td>
 										<td class="center">${pettyCash.week}</td>
 										<td>
