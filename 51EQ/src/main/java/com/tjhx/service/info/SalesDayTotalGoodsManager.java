@@ -111,16 +111,21 @@ public class SalesDayTotalGoodsManager {
 	 * 
 	 * @param salesDayTotalGoods
 	 * @return
+	 * @throws ParseException
 	 */
-	public List<SalesDayTotalGoods> getSumSaleInfoList(SalesDayTotalGoods salesDayTotalGoods) {
+	public List<SalesDayTotalGoods> getSumSaleInfoList(SalesDayTotalGoods salesDayTotalGoods) throws ParseException {
 		// 取得各店指定时间区间内的销售信息（按商品）
 		List<SalesDayTotalGoods> _sumSaleList = salesDayTotalGoodsMyBatisDao.getSumSaleInfoList(salesDayTotalGoods);
+		Long _span = DateUtils.getDateSpanDay(salesDayTotalGoods.getOptDateStart(), salesDayTotalGoods.getOptDateEnd(), "yyyyMMdd");
+		if (0 == _span) {
+			_span = (long) 1;
+		}
 		for (SalesDayTotalGoods _salesGoods : _sumSaleList) {
 			// 实销价格
 			if (_salesGoods.getPosQty().compareTo(BigDecimal.ZERO) == 0) {
 				_salesGoods.setAverageDailySales(new BigDecimal(0));
 			} else {
-				_salesGoods.setAverageDailySales(_salesGoods.getPosAmt().divide(_salesGoods.getPosQty(), 2,
+				_salesGoods.setAverageDailySales(_salesGoods.getPosQty().divide(new BigDecimal(_span), 2,
 						BigDecimal.ROUND_UP));
 			}
 		}
