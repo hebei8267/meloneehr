@@ -62,7 +62,20 @@
 					$("#listForm").submit();
 				});
 				
-				$("#auditBtn").click(function() {
+				//-----------------------------------
+                // 审核按钮点击
+                //-----------------------------------
+                $("#auditBtn").click(function() {
+                    if ($("#listForm").valid()) {
+                        $('#__audit_confirm').modal({
+                            backdrop : true,
+                            keyboard : true,
+                            show : true
+                        });
+                    }
+                });
+				
+				$("#__audit_confirm_Btn").click(function() {
 					$("input[type='text'],textarea").each(function(i) {
 						this.value = $.trim(this.value);
 					});
@@ -88,12 +101,12 @@
 					$("#ex_btn"+index).removeClass("btn-info");
 					$("#ex_btn"+index).addClass("btn-danger");
 					$("#ex_btn"+index).val("错误");
-					$("#examineFlg"+index).val("1");
+					$("#examineFlg"+index).val("0");
 				} else {
 					$("#ex_btn"+index).removeClass("btn-danger");
 					$("#ex_btn"+index).addClass("btn-info");
 					$("#ex_btn"+index).val("正确");
-					$("#examineFlg"+index).val("0");
+					$("#examineFlg"+index).val("1");
 				}
 			}
 		</script>
@@ -208,70 +221,70 @@
 										
 										<c:if test="${pettyCash.optType == 0}">
 										<td>
-											<c:if test="${pettyCash.examineFlg1 == 0}">
+											<c:if test="${pettyCash.examineFlg1 == 1}">
 											<input type="button" id="ex_btn1_${status1.index + 1}" onclick="examineFlg_btn_click('1_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg1 == 1}">
+											<c:if test="${pettyCash.examineFlg1 == 0}">
 											<input type="button" id="ex_btn1_${status1.index + 1}" onclick="examineFlg_btn_click('1_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg1" id="examineFlg1_${status1.index + 1}" value="${pettyCash.examineFlg1 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg2 == 0}">
+											<c:if test="${pettyCash.examineFlg2 == 1}">
 											<input type="button" id="ex_btn2_${status1.index + 1}" onclick="examineFlg_btn_click('2_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg2 == 1}">
+											<c:if test="${pettyCash.examineFlg2 == 0}">
 											<input type="button" id="ex_btn2_${status1.index + 1}" onclick="examineFlg_btn_click('2_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg2" id="examineFlg2_${status1.index + 1}" value="${pettyCash.examineFlg2 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg3 == 0}">
+											<c:if test="${pettyCash.examineFlg3 == 1}">
 											<input type="button" id="ex_btn3_${status1.index + 1}" onclick="examineFlg_btn_click('3_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg3 == 1}">
+											<c:if test="${pettyCash.examineFlg3 == 0}">
 											<input type="button" id="ex_btn3_${status1.index + 1}" onclick="examineFlg_btn_click('3_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg3" id="examineFlg3_${status1.index + 1}" value="${pettyCash.examineFlg3 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg4 == 0}">
+											<c:if test="${pettyCash.examineFlg4 == 1}">
 											<input type="button" id="ex_btn4_${status1.index + 1}" onclick="examineFlg_btn_click('4_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg4 == 1}">
+											<c:if test="${pettyCash.examineFlg4 == 0}">
 											<input type="button" id="ex_btn4_${status1.index + 1}" onclick="examineFlg_btn_click('4_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg4" id="examineFlg4_${status1.index + 1}" value="${pettyCash.examineFlg4 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg5 == 0}">
+											<c:if test="${pettyCash.examineFlg5 == 1}">
 											<input type="button" id="ex_btn5_${status1.index + 1}" onclick="examineFlg_btn_click('5_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg5 == 1}">
+											<c:if test="${pettyCash.examineFlg5 == 0}">
 											<input type="button" id="ex_btn5_${status1.index + 1}" onclick="examineFlg_btn_click('5_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg5" id="examineFlg5_${status1.index + 1}" value="${pettyCash.examineFlg5 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg6 == 0}">
+											<c:if test="${pettyCash.examineFlg6 == 1}">
 											<input type="button" id="ex_btn6_${status1.index + 1}" onclick="examineFlg_btn_click('6_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg6 == 1}">
+											<c:if test="${pettyCash.examineFlg6 == 0}">
 											<input type="button" id="ex_btn6_${status1.index + 1}" onclick="examineFlg_btn_click('6_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg6" id="examineFlg6_${status1.index + 1}" value="${pettyCash.examineFlg6 }">
 										</td>
 										
 										<td>
-											<c:if test="${pettyCash.examineFlg7 == 0}">
+											<c:if test="${pettyCash.examineFlg7 == 1}">
 											<input type="button" id="ex_btn7_${status1.index + 1}" onclick="examineFlg_btn_click('7_${status1.index + 1}')" class="btn btn-info" value="正确">
 											</c:if>
-											<c:if test="${pettyCash.examineFlg7 == 1}">
+											<c:if test="${pettyCash.examineFlg7 == 0}">
 											<input type="button" id="ex_btn7_${status1.index + 1}" onclick="examineFlg_btn_click('7_${status1.index + 1}')" class="btn btn-danger" value="错误">
 											</c:if>
 											<input type="hidden" name="examineFlg7" id="examineFlg7_${status1.index + 1}" value="${pettyCash.examineFlg7 }">
@@ -300,6 +313,24 @@
 					</c:if>
 				</div>
 			</form>
+		</div>
+		
+		<div class="modal hide fade  __model37" id="__audit_confirm">
+		    <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h4>系统消息</h4>
+		    </div>
+		    <div class="modal-body">
+		        <center>
+		            <p class="error">
+		                确定要提交审核信息吗？
+		            </p>
+		        </center>
+		    </div>
+		    <div class="modal-footer">
+		        <input type="button" class="btn btn-primary" id="__audit_confirm_Btn" value="确定">
+		        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+		    </div>
 		</div>
 	</body>
 </html>
