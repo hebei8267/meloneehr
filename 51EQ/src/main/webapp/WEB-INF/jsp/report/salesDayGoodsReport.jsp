@@ -92,8 +92,11 @@
                                     <th width="75">
                                         销售金额
                                     </th>
+                                    <th width="75">
+                                        日均销量
+                                    </th>
                                     <th width="60">
-                                        日销量
+                                        库存量
                                     </th>
                                 </tr>
                             </thead>
@@ -114,6 +117,9 @@
                                     </td>
                                     <td>
                                     	${sumSale.averageDailySales}
+                                    </td>
+                                    <td>
+                                    	${sumSale.stockQty}
                                     </td>
                                 </tr>
                                 </c:forEach>
