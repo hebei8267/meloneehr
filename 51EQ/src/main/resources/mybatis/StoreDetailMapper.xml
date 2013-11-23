@@ -84,7 +84,8 @@
         stock_qty DECIMAL(19,2),
         store_flg VARCHAR(1),
         PRIMARY KEY (uuid),
-        CONSTRAINT _index UNIQUE (_index, opt_date, org_id)
+        CONSTRAINT _index UNIQUE (_index, opt_date, org_id),
+        INDEX item_barcode (item_barcode, org_id)
     )
     ENGINE=InnoDB DEFAULT CHARSET=utf8
     ]]>
