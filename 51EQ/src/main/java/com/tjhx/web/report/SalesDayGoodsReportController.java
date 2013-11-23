@@ -37,7 +37,7 @@ public class SalesDayGoodsReportController extends BaseController {
 
 	@RequestMapping(value = "search")
 	public String salesDayGoodsReportSearch_Action(Model model, HttpServletRequest request)
-			throws ServletRequestBindingException {
+			throws ServletRequestBindingException, ParseException {
 		String optDateStart = ServletRequestUtils.getStringParameter(request, "optDateShow_start");
 		String optDateEnd = ServletRequestUtils.getStringParameter(request, "optDateShow_end");
 		String barcode = ServletRequestUtils.getStringParameter(request, "barcode");
