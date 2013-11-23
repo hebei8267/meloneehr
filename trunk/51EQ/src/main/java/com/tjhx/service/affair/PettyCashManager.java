@@ -78,19 +78,19 @@ public class PettyCashManager {
 		// 默认审查通过
 		// ---------------------------------------------------------------------------------
 		// 审查标记-账记对应
-		pettyCash.setExamineFlg1(0);
+		pettyCash.setExamineFlg1(1);
 		// 审查标记-大小写完整规范
-		pettyCash.setExamineFlg2(0);
+		pettyCash.setExamineFlg2(1);
 		// 审查标记-摘要清晰
-		pettyCash.setExamineFlg3(0);
+		pettyCash.setExamineFlg3(1);
 		// 审查标记-附件或监督完整
-		pettyCash.setExamineFlg4(0);
+		pettyCash.setExamineFlg4(1);
 		// 审查标记-记录序时
-		pettyCash.setExamineFlg5(0);
+		pettyCash.setExamineFlg5(1);
 		// 审查标记-UID正确
-		pettyCash.setExamineFlg6(0);
+		pettyCash.setExamineFlg6(1);
 		// 审查标记-装订正确
-		pettyCash.setExamineFlg7(0);
+		pettyCash.setExamineFlg7(1);
 
 		pettyCashJpaDao.save(pettyCash);
 
