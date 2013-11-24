@@ -136,7 +136,7 @@ public class BankCardManager {
 		}
 
 		BankCard _dbBankCard2 = bankCardJpaDao.findByBankCardNo(bankCard.getBankCardNo());
-		if (_dbBankCard.getUuid() != _dbBankCard2.getUuid()) {
+		if (null != _dbBankCard2 && _dbBankCard.getUuid() != _dbBankCard2.getUuid()) {
 			throw new ServiceException("ERR_MSG_BANK_CARD_001");
 		}
 
