@@ -157,7 +157,7 @@
 									<th>支出/拨入(事项)</th>
 									<th width="90" class="right">备用金余额</th>
 									<th width="30">&nbsp;</th>
-									<th width="30">账记对应</th>
+									<th width="30">账证对应</th>
 									<th width="30">书写规范</th>
 									<th width="30">摘要清晰</th>
 									<th width="30">附件监督</th>
