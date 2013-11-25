@@ -77,7 +77,7 @@ public class PettyCashManager {
 		// ---------------------------------------------------------------------------------
 		// 默认审查通过
 		// ---------------------------------------------------------------------------------
-		// 审查标记-账记对应
+		// 审查标记-账证对应
 		pettyCash.setExamineFlg1(1);
 		// 审查标记-大小写完整规范
 		pettyCash.setExamineFlg2(1);
@@ -392,7 +392,7 @@ public class PettyCashManager {
 			int uuid = uuids[i];
 			PettyCash _pettyCash = pettyCashJpaDao.findOne(uuid);
 
-			// 审查标记-账记对应
+			// 审查标记-账证对应
 			_pettyCash.setExamineFlg1(examineFlgs1[i]);
 			// 审查标记-大小写完整规范
 			_pettyCash.setExamineFlg2(examineFlgs2[i]);
