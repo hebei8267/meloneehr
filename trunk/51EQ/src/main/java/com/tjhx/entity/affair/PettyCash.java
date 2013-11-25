@@ -49,7 +49,7 @@ public class PettyCash extends IdEntity {
 	private String orgId;
 	/** 结转标记 */
 	private boolean carryOverFlg;
-	/** 审查标记-账记对应 1-正确 0-错误 */
+	/** 审查标记-账证对应 1-正确 0-错误 */
 	private Integer examineFlg1;
 	/** 审查标记-大小写完整规范 1-正确 0-错误 */
 	private Integer examineFlg2;
@@ -371,18 +371,18 @@ public class PettyCash extends IdEntity {
 	}
 
 	/**
-	 * 取得审查标记-账记对应1-正确 0-错误
+	 * 取得审查标记-账证对应1-正确 0-错误
 	 * 
-	 * @return examineFlg1 审查标记-账记对应1-正确 0-错误
+	 * @return examineFlg1 审查标记-账证对应1-正确 0-错误
 	 */
 	public Integer getExamineFlg1() {
 		return examineFlg1;
 	}
 
 	/**
-	 * 设置审查标记-账记对应1-正确 0-错误
+	 * 设置审查标记-账证对应1-正确 0-错误
 	 * 
-	 * @param examineFlg1 审查标记-账记对应1-正确 0-错误
+	 * @param examineFlg1 审查标记-账证对应1-正确 0-错误
 	 */
 	public void setExamineFlg1(Integer examineFlg1) {
 		this.examineFlg1 = examineFlg1;
