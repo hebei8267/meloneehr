@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tjhx.dao.member.EmployeeJpaDao;
 import com.tjhx.dao.member.EmployeeMyBatisDao;
+import com.tjhx.dao.struct.OrganizationJpaDao;
 import com.tjhx.daozk.UserInfoMyBatisDao;
 import com.tjhx.entity.member.Employee;
+import com.tjhx.entity.struct.Organization;
 import com.tjhx.entity.zknet.UserInfo;
 
 @Service
@@ -24,6 +26,8 @@ public class EmployeeManager {
 
 	@Resource
 	private EmployeeJpaDao empJpaDao;
+	@Resource
+	private OrganizationJpaDao orgJpaDao;
 	@Resource
 	private EmployeeMyBatisDao empMyBatisDao;
 	@Resource
@@ -113,5 +117,50 @@ public class EmployeeManager {
 
 	public List<Employee> getEmployeeListByOrgId(String orgId) {
 		return empMyBatisDao.getEmployeeListByOrgId(orgId);
+	}
+
+	/**
+	 * 初始化新机构的关联兼职人员信息
+	 * 
+	 * @param orgUuid
+	 */
+	public void initNewOrgTmpEmployee(Integer orgUuid) {
+		Organization org = orgJpaDao.findOne(orgUuid);
+		if (null == org) {
+			return;
+		}
+		for (int i = 1; i < 11; i++) {
+			Employee emp = new Employee();
+
+			emp.setName("兼职人员" + i);
+			// 2-兼职
+			emp.setEmpType("2");
+			// 0-离职
+			emp.setWorkFlg("0");
+			/** 用户关联机构 */
+			emp.setOrganization(org);
+
+			emp.setCode(org.getId() + "TMP" + String.format("%02d", i));
+
+			empJpaDao.save(emp);
+
+		}
+	}
+
+	/**
+	 * 清除机构的关联兼职人员信息
+	 * 
+	 * @param orgUuid
+	 */
+	public void cleanOrgTmpEmployee(Integer orgUuid) {
+		Organization org = orgJpaDao.findOne(orgUuid);
+		if (null == org) {
+			return;
+		}
+		// 删除原有机构的关联兼职人员信息
+		List<Employee> empList = empJpaDao.getTmpEmployeeListByOrgId(org.getId());
+		if (null != empList && empList.size() > 0) {
+			empJpaDao.delete(empList);
+		}
 	}
 }
