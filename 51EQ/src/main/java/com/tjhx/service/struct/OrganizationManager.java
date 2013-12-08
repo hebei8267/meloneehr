@@ -17,6 +17,8 @@ import com.tjhx.entity.struct.Organization;
 import com.tjhx.globals.Constants;
 import com.tjhx.globals.MemcachedObjectType;
 import com.tjhx.service.ServiceException;
+import com.tjhx.service.affair.WorkTypeManager;
+import com.tjhx.service.member.EmployeeManager;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,6 +29,10 @@ public class OrganizationManager {
 	private OrganizationJpaDao orgJpaDao;
 	@Resource
 	private SpyMemcachedClient spyMemcachedClient;
+	@Resource
+	private WorkTypeManager workTypeManager;
+	@Resource
+	private EmployeeManager employeeManager;
 
 	/**
 	 * 取得所有机构信息
@@ -86,6 +92,11 @@ public class OrganizationManager {
 	 */
 	@Transactional(readOnly = false)
 	public void delOrganizationByUuid(Integer uuid) {
+		// 清除机构的关联上班类型信息
+		workTypeManager.cleanOrgWorkType(uuid);
+		// 清除机构的关联兼职人员信息
+		employeeManager.cleanOrgTmpEmployee(uuid);
+
 		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
 
 		orgJpaDao.delete(uuid);
@@ -117,6 +128,11 @@ public class OrganizationManager {
 		orgJpaDao.save(org);
 
 		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
+
+		// 初始化新机构的关联上班类型信息
+		workTypeManager.initNewOrgWorkType(org.getUuid());
+		// 初始化新机构的关联兼职人员信息
+		employeeManager.initNewOrgTmpEmployee(org.getUuid());
 	}
 
 	/**
@@ -142,7 +158,7 @@ public class OrganizationManager {
 
 		spyMemcachedClient.delete(MemcachedObjectType.ORG_LIST.getObjKey());
 	}
-	
+
 	/**
 	 * 取得门店机构（不包含总部机构）
 	 * 
