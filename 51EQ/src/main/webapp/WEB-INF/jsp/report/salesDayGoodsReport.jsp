@@ -86,8 +86,8 @@
                                     <th>
                                         货号 / 商品名称
                                     </th>
-                                    <th width="75">
-                                        销售数量
+                                    <th width="60">
+                                        销售量
                                     </th>
                                     <th width="75">
                                         销售金额
@@ -97,6 +97,12 @@
                                     </th>
                                     <th width="60">
                                         库存量
+                                    </th>
+                                    <th width="75">
+                                        库存金额
+                                    </th>
+                                    <th width="120">
+                                        进价 / 售价
                                     </th>
                                 </tr>
                             </thead>
@@ -123,6 +129,9 @@
                                     </td>
                                     <td>
                                     	${sumSale.stockAmt}
+                                    </td>
+                                    <td>
+                                    	${sumSale.stockAmt/sumSale.stockQty} / ${sumSale.posAmt/sumSale.posQty}
                                     </td>
                                 </tr>
                                 </c:forEach>
