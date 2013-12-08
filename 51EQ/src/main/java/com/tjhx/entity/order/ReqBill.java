@@ -1,10 +1,12 @@
 package com.tjhx.entity.order;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -42,6 +44,9 @@ public class ReqBill extends IdEntity {
 	private String supplierName;
 	/** 备注 */
 	private String remarks;
+	// -----------------------------------------------------
+	/** 机构编号列表 */
+	private List<String> orgIdList;
 
 	/**
 	 * 取得处理批次号
@@ -249,6 +254,25 @@ public class ReqBill extends IdEntity {
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	/**
+	 * 取得机构编号列表
+	 * 
+	 * @return orgIdList 机构编号列表
+	 */
+	@Transient
+	public List<String> getOrgIdList() {
+		return orgIdList;
+	}
+
+	/**
+	 * 设置机构编号列表
+	 * 
+	 * @param orgIdList 机构编号列表
+	 */
+	public void setOrgIdList(List<String> orgIdList) {
+		this.orgIdList = orgIdList;
 	}
 
 }
