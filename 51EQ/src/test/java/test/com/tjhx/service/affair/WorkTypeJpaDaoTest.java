@@ -30,7 +30,7 @@ public class WorkTypeJpaDaoTest extends SpringTransactionalTestCase {
 			WorkType w1 = new WorkType();
 
 			w1.setName("早班");
-			w1.setUseFlg("1");
+			w1.setUseFlg("0");
 			w1.setOrganization(organization);
 
 			workTypeJpaDao.save(w1);
@@ -38,7 +38,7 @@ public class WorkTypeJpaDaoTest extends SpringTransactionalTestCase {
 			WorkType w2 = new WorkType();
 
 			w2.setName("晚班");
-			w2.setUseFlg("1");
+			w2.setUseFlg("0");
 			w2.setOrganization(organization);
 
 			workTypeJpaDao.save(w2);
@@ -46,7 +46,7 @@ public class WorkTypeJpaDaoTest extends SpringTransactionalTestCase {
 			WorkType w3 = new WorkType();
 
 			w3.setName("全天班");
-			w3.setUseFlg("1");
+			w3.setUseFlg("0");
 			w3.setOrganization(organization);
 
 			workTypeJpaDao.save(w3);
