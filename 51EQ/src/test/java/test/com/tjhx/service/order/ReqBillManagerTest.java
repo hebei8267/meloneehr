@@ -30,7 +30,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 
 	// ##############################################
 	// ??????????????????????????????????????????????
-	private static String batchId = "20130707";
+	private static String batchId = "20131208";
 
 	@Test
 	@Rollback(false)
@@ -182,7 +182,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "13", reqBillList);
 	}
 
-	private String getOrgId(List<ReqBill> list) {
+	private List<String> getOrgIdList(List<ReqBill> list) {
 		List<String> defOrgIdArr = new ArrayList<String>();
 		defOrgIdArr.add("01");
 		defOrgIdArr.add("02");
@@ -203,17 +203,16 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			orgIdArr.add(reqBill.getOrgId());
 		}
 
-		StringBuffer orgArray = new StringBuffer();
+		List<String> _orgList = new ArrayList<String>();
 		for (String org : defOrgIdArr) {
 			if (orgIdArr.contains(org)) {
-				orgArray.append(org);
+				_orgList.add(org);
 			} else {
-				orgArray.append("  ");
+				_orgList.add("");
 			}
-			orgArray.append("      ");
 		}
 
-		return orgArray.toString();
+		return _orgList;
 	}
 
 	@Test
@@ -235,7 +234,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			ReqBill _reqBill = new ReqBill(); // 最终统计单个供应商本次供应多少个门店
 			_reqBill.setIndex(_index);
 			_reqBill.setSupplierName(supplier.getName());
-			_reqBill.setOrgId(getOrgId(list));
+			_reqBill.setOrgIdList(getOrgIdList(list));
 			_list.add(_reqBill);
 
 			reqBillManager.writeReqBillFileToHeadOffice(batchId, supplier.getName(), _list);
@@ -270,7 +269,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@全部数据行" + _index);
 	}
 
-	// 生产供应商文件
+	// 生产供应商文件-插入图片
 	@Test
 	public void output3() throws FileNotFoundException, IOException {
 		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
