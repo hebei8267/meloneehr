@@ -80,7 +80,8 @@ public class WorkScheduleManager {
 			WorkSchedule_List_Show ws = new WorkSchedule_List_Show();
 			ws.setScheduleDate(optDateList.get(i - 1));
 			ws.setWeek(DateUtils.getWeekOfDate(optDateList.get(i - 1), "yyyy-MM-dd"));
-			ws.setEditFlg(i > scheduleOverDays);
+			// 开始可排版日期(以当前时间为基准-可编辑3天后的日期)
+			ws.setEditFlg(i - 3 > scheduleOverDays);
 
 			List<WorkSchedule_Show> scheduleList = new ArrayList<WorkSchedule_Show>();
 			for (Employee emp : empList) {
