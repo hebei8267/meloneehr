@@ -53,6 +53,8 @@ public class SalesDayTotalGoods extends IdEntity {
 	private String goodsName;
 	/** 库存数量 */
 	private BigDecimal stockQty;
+	/** 库存金额 */
+	private BigDecimal stockAmt;
 
 	/**
 	 * 取得机构编号
@@ -338,6 +340,25 @@ public class SalesDayTotalGoods extends IdEntity {
 	 */
 	public void setStockQty(BigDecimal stockQty) {
 		this.stockQty = stockQty;
+	}
+
+	/**
+	 * 取得库存金额
+	 * 
+	 * @return stockAmt 库存金额
+	 */
+	@Transient
+	public BigDecimal getStockAmt() {
+		return stockAmt;
+	}
+
+	/**
+	 * 设置库存金额
+	 * 
+	 * @param stockAmt 库存金额
+	 */
+	public void setStockAmt(BigDecimal stockAmt) {
+		this.stockAmt = stockAmt;
 	}
 
 }
