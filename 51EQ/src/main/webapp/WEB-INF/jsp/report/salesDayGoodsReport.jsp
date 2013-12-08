@@ -121,6 +121,9 @@
                                     <td>
                                     	${sumSale.stockQty}
                                     </td>
+                                    <td>
+                                    	${sumSale.stockAmt}
+                                    </td>
                                 </tr>
                                 </c:forEach>
                             </tbody>
