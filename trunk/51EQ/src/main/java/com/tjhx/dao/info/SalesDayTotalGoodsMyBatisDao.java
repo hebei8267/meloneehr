@@ -19,4 +19,12 @@ public interface SalesDayTotalGoodsMyBatisDao {
 	 * @return
 	 */
 	public List<SalesDayTotalGoods> getSumSaleInfoList(SalesDayTotalGoods salesDayTotalGoods);
+
+	/**
+	 * 取得各店指定时间区间内(周)的销售信息（按商品）
+	 * 
+	 * @param salesDayTotalGoods
+	 * @return
+	 */
+	public List<SalesDayTotalGoods> getSumSaleInfoList_Week(SalesDayTotalGoods salesDayTotalGoods);
 }
