@@ -21,6 +21,12 @@
         <result column="ref_price" property="refPrice" jdbcType="DECIMAL"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="supplier_name" property="supplierName" jdbcType="VARCHAR"/>
+        
+        <result column="pos_qty1" property="posQty1" jdbcType="DECIMAL"/>
+        <result column="pos_qty2" property="posQty2" jdbcType="DECIMAL"/>
+        <result column="pos_qty3" property="posQty3" jdbcType="DECIMAL"/>
+        <result column="pos_qty4" property="posQty4" jdbcType="DECIMAL"/>
+        <result column="stock_qty" property="stockQty" jdbcType="DECIMAL"/>
 	</resultMap>
 	
 	<resultMap id="Result_Map_Supplier" type="com.tjhx.entity.info.Supplier">
@@ -86,11 +92,40 @@
 	
 	<!-- 根据批次号取得供应商信息 -->
 	<select id="getReqBillList" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
-		select
-		<include refid="Base_Column_List" />
-		from t_req_bill_tmp
-		<include refid="Where_Clause" />
-		order by org_id
+		SELECT
+		    good1.pos_qty AS pos_qty1 ,
+		    good2.pos_qty AS pos_qty2 ,
+		    good3.pos_qty AS pos_qty3 ,
+		    good4.pos_qty AS pos_qty4 ,
+		    sd.stock_qty ,
+		    bill.app_num ,
+		    bill.barcode ,
+		    bill.batch_id ,
+		    bill._index ,
+		    bill.inventory_num ,
+		    bill.org_id ,
+		    bill.product_name ,
+		    bill.product_no ,
+		    bill.ref_price ,
+		    bill.remarks ,
+		    bill.supplier_name
+		FROM
+		    t_req_bill_tmp bill
+		LEFT JOIN
+		    t_sales_week_total_goods_1 good1 ON bill.barcode = good1.item_barcode
+		LEFT JOIN
+		    t_sales_week_total_goods_2 good2 ON bill.barcode = good2.item_barcode
+		LEFT JOIN
+		    t_sales_week_total_goods_3 good3 ON bill.barcode = good3.item_barcode
+		LEFT JOIN
+		    t_sales_week_total_goods_4 good4 ON bill.barcode = good4.item_barcode
+		LEFT JOIN
+    		t_store_detail sd ON bill.barcode = sd.item_barcode AND bill.org_id = sd.org_id
+		WHERE
+		    batch_id = #{batchId}
+		AND supplier_name = #{supplierName}
+		ORDER BY
+		    org_id
 	</select>
 	
 	<select id="getOrgListBySupplier" parameterType="com.tjhx.entity.order.ReqBill" resultMap="Result_Map_ReqBill">
