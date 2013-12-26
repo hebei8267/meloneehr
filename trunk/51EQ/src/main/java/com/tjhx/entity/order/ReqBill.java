@@ -47,6 +47,16 @@ public class ReqBill extends IdEntity {
 	// -----------------------------------------------------
 	/** 机构编号列表 */
 	private List<String> orgIdList;
+	/** 销售数量-近1周 */
+	private BigDecimal posQty1;
+	/** 销售数量-近2周 */
+	private BigDecimal posQty2;
+	/** 销售数量-近3周 */
+	private BigDecimal posQty3;
+	/** 销售数量-近4周 */
+	private BigDecimal posQty4;
+	/** 库存数量 */
+	private BigDecimal stockQty;
 
 	/**
 	 * 取得处理批次号
@@ -273,6 +283,116 @@ public class ReqBill extends IdEntity {
 	 */
 	public void setOrgIdList(List<String> orgIdList) {
 		this.orgIdList = orgIdList;
+	}
+
+	/**
+	 * 取得销售数量-近1周
+	 * 
+	 * @return posQty1 销售数量-近1周
+	 */
+	@Transient
+	public BigDecimal getPosQty1() {
+		if (null == posQty1) {
+			return new BigDecimal(0);
+		}
+		return posQty1;
+	}
+
+	/**
+	 * 设置销售数量-近1周
+	 * 
+	 * @param posQty1 销售数量-近1周
+	 */
+	public void setPosQty1(BigDecimal posQty1) {
+		this.posQty1 = posQty1;
+	}
+
+	/**
+	 * 取得销售数量-近2周
+	 * 
+	 * @return posQty2 销售数量-近2周
+	 */
+	@Transient
+	public BigDecimal getPosQty2() {
+		if (null == posQty2) {
+			return new BigDecimal(0);
+		}
+		return posQty2;
+	}
+
+	/**
+	 * 设置销售数量-近2周
+	 * 
+	 * @param posQty2 销售数量-近2周
+	 */
+	public void setPosQty2(BigDecimal posQty2) {
+		this.posQty2 = posQty2;
+	}
+
+	/**
+	 * 取得销售数量-近3周
+	 * 
+	 * @return posQty3 销售数量-近3周
+	 */
+	@Transient
+	public BigDecimal getPosQty3() {
+		if (null == posQty3) {
+			return new BigDecimal(0);
+		}
+		return posQty3;
+	}
+
+	/**
+	 * 设置销售数量-近3周
+	 * 
+	 * @param posQty3 销售数量-近3周
+	 */
+	public void setPosQty3(BigDecimal posQty3) {
+		this.posQty3 = posQty3;
+	}
+
+	/**
+	 * 取得销售数量-近4周
+	 * 
+	 * @return posQty4 销售数量-近4周
+	 */
+	@Transient
+	public BigDecimal getPosQty4() {
+		if (null == posQty4) {
+			return new BigDecimal(0);
+		}
+		return posQty4;
+	}
+
+	/**
+	 * 设置销售数量-近4周
+	 * 
+	 * @param posQty4 销售数量-近4周
+	 */
+	public void setPosQty4(BigDecimal posQty4) {
+		this.posQty4 = new BigDecimal(0);
+	}
+
+	/**
+	 * 取得库存数量
+	 * 
+	 * @return stockQty 库存数量
+	 */
+	@Transient
+	public BigDecimal getStockQty() {
+		if (null == stockQty) {
+			return new BigDecimal(0);
+		}
+		return stockQty;
+	}
+
+	/**
+	 * 设置库存数量
+	 * 
+	 * @param stockQty 库存数量
+	 */
+	public void setStockQty(BigDecimal stockQty) {
+		this.stockQty = new BigDecimal(0);
 	}
 
 }
