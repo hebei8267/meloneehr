@@ -32,8 +32,6 @@ public class SalesWeekTotalGoods_1 extends IdEntity {
 	private String itemBarcode;
 	/** 销售数量-近1周 */
 	private BigDecimal posQty;
-	/** 库存数量 */
-	private BigDecimal stockQty;
 
 	/**
 	 * 取得机构编号
@@ -151,21 +149,4 @@ public class SalesWeekTotalGoods_1 extends IdEntity {
 		this.posQty = posQty;
 	}
 
-	/**
-	 * 取得库存数量
-	 * 
-	 * @return stockQty 库存数量
-	 */
-	public BigDecimal getStockQty() {
-		return stockQty;
-	}
-
-	/**
-	 * 设置库存数量
-	 * 
-	 * @param stockQty 库存数量
-	 */
-	public void setStockQty(BigDecimal stockQty) {
-		this.stockQty = stockQty;
-	}
 }
