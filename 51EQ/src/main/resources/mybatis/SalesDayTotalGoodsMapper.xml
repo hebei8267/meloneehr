@@ -75,15 +75,11 @@
 	    g.branch_no ,
 	    g.item_subno ,
 	    g.item_barcode ,
-	    SUM(g.pos_qty) AS pos_qty ,
-	    sd.stock_qty
+	    SUM(g.pos_qty) AS pos_qty
 	FROM
-	    t_sales_day_total_goods g ,
-	    t_store_detail sd
+	    t_sales_day_total_goods g
 	WHERE
-	    g.org_id = sd.org_id
-	AND g.item_barcode = sd.item_barcode
-	AND g.opt_date >= #{optDateStart}
+	    g.opt_date >= #{optDateStart}
 	AND g.opt_date <= #{optDateEnd}
 	GROUP BY
     	g.item_subno
