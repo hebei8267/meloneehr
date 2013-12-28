@@ -24,6 +24,7 @@
         <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
         <result column="stock_qty" property="stockQty" jdbcType="DECIMAL"/>
         <result column="stock_amt" property="stockAmt" jdbcType="DECIMAL"/>
+        <result column="item_sale_amt" property="saleAmt" jdbcType="DECIMAL"/>
 	</resultMap>
 	
 	<delete id="delSalesDayTotalInfo" parameterType="String">  
@@ -35,14 +36,15 @@
 	<![CDATA[
 		SELECT
 		    g.branch_no ,
-		    g.item_barcode ,
-		    g.item_subno ,
-		    g.org_id ,
+		    sd.item_barcode ,
+		    sd.item_subno ,
+		    sd.org_id ,
 		    SUM(g.pos_amt) AS pos_amt ,
 		    SUM(g.pos_qty) AS pos_qty ,
-		    org.org_name,
+		    org.org_name ,
 		    sd.stock_qty ,
-		    sd.stock_amt,
+		    sd.stock_amt ,
+		    sd.item_sale_amt ,
 		    gs.name AS goods_name
 		FROM
 		    t_organization org,
