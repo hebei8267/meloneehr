@@ -29,41 +29,36 @@
 	<delete id="delSalesDayTotalInfo" parameterType="String">  
         DELETE FROM t_sales_day_total_goods WHERE opt_date = #{optDate}
     </delete>
-    
-  	
-  	<!-- 查询条件 -->
-  	<sql id="Where_Clause" >
-  		<where>
-  			( g.item_barcode = #{itemBarcode} OR g.item_subno = #{itemSubno} )
-  			AND g.org_id = org.org_id
-  			AND g.item_barcode = gs.barcode
-  			AND g.org_id = sd.org_id
-  			AND g.item_barcode = sd.item_barcode
-  			<![CDATA[ AND g.opt_date >= #{optDateStart} AND g.opt_date  <= #{optDateEnd} ]]>
-	  	</where>
-  	</sql>
   	
     <!-- 取得t_sales_day_total_goods信息(根据参数) -->
 	<select id="getSumSaleInfoList" parameterType="com.tjhx.entity.info.SalesDayTotalGoods" resultMap="Result_Map_SalesDayTotalGoods">
-		select
-			g.branch_no ,
+	<![CDATA[
+		SELECT
+		    g.branch_no ,
 		    g.item_barcode ,
 		    g.item_subno ,
 		    g.org_id ,
 		    SUM(g.pos_amt) AS pos_amt ,
 		    SUM(g.pos_qty) AS pos_qty ,
-		    org.org_name ,
+		    org.org_name,
 		    sd.stock_qty ,
-		    sd.stock_amt ,
+		    sd.stock_amt,
 		    gs.name AS goods_name
-		from 
-			t_sales_day_total_goods g ,
-			t_organization org ,
-			t_goods gs ,
-			t_store_detail sd
-			<include refid="Where_Clause" />
+		FROM
+		    t_organization org,
+		    t_store_detail sd LEFT JOIN t_sales_day_total_goods g ON sd.item_barcode = g.item_barcode
+																 AND sd.org_id = g.org_id
+													    		 AND g.opt_date >= #{optDateStart} 
+													    		 AND g.opt_date  <= #{optDateEnd} ,
+		    t_goods gs
+		WHERE
+		    org.org_id != '000'
+		AND ( sd.item_barcode = #{itemBarcode} OR  sd.item_subno = #{itemSubno} )
+		AND org.org_id = sd.org_id
+		AND sd.item_barcode = gs.barcode
 		GROUP BY
-    		g.org_id
+		    org.org_id
+	]]>
 	</select>
 	
 	
