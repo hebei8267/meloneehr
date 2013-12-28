@@ -2,6 +2,7 @@ package test.com.tjhx.service.order;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,16 +51,18 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "01", reqBillList);
 	}
 
-	@Test
-	@Rollback(false)
-	public void test02() throws InvalidFormatException, IOException, SAXException {
-
-		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\02D.xls");
-		if (null == reqBillList || reqBillList.size() == 0) {
-			System.out.println("############无效文件");
-		}
-		reqBillManager.saveReqBillFile(batchId, "02", reqBillList);
-	}
+	// @Test
+	// @Rollback(false)
+	// public void test02() throws InvalidFormatException, IOException,
+	// SAXException {
+	//
+	// List<ReqBill> reqBillList =
+	// reqBillManager.readReqBillFile("D:\\门店要货单-输入\\02D.xls");
+	// if (null == reqBillList || reqBillList.size() == 0) {
+	// System.out.println("############无效文件");
+	// }
+	// reqBillManager.saveReqBillFile(batchId, "02", reqBillList);
+	// }
 
 	@Test
 	@Rollback(false)
@@ -160,27 +163,31 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		reqBillManager.saveReqBillFile(batchId, "11", reqBillList);
 	}
 
-	@Test
-	@Rollback(false)
-	public void test12() throws InvalidFormatException, IOException, SAXException {
-
-		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\12D.xls");
-		if (null == reqBillList || reqBillList.size() == 0) {
-			System.out.println("############无效文件");
-		}
-		reqBillManager.saveReqBillFile(batchId, "12", reqBillList);
-	}
-
-	@Test
-	@Rollback(false)
-	public void test13() throws InvalidFormatException, IOException, SAXException {
-
-		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\13D.xls");
-		if (null == reqBillList || reqBillList.size() == 0) {
-			System.out.println("############无效文件");
-		}
-		reqBillManager.saveReqBillFile(batchId, "13", reqBillList);
-	}
+	// @Test
+	// @Rollback(false)
+	// public void test12() throws InvalidFormatException, IOException,
+	// SAXException {
+	//
+	// List<ReqBill> reqBillList =
+	// reqBillManager.readReqBillFile("D:\\门店要货单-输入\\12D.xls");
+	// if (null == reqBillList || reqBillList.size() == 0) {
+	// System.out.println("############无效文件");
+	// }
+	// reqBillManager.saveReqBillFile(batchId, "12", reqBillList);
+	// }
+	//
+	// @Test
+	// @Rollback(false)
+	// public void test13() throws InvalidFormatException, IOException,
+	// SAXException {
+	//
+	// List<ReqBill> reqBillList =
+	// reqBillManager.readReqBillFile("D:\\门店要货单-输入\\13D.xls");
+	// if (null == reqBillList || reqBillList.size() == 0) {
+	// System.out.println("############无效文件");
+	// }
+	// reqBillManager.saveReqBillFile(batchId, "13", reqBillList);
+	// }
 
 	private List<String> getOrgIdList(List<ReqBill> list) {
 		List<String> defOrgIdArr = new ArrayList<String>();
@@ -254,6 +261,9 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 			reqBill.setBatchId(batchId);
 			reqBill.setSupplierName(supplier.getName());
 			List<ReqBill> list = reqBillMyBatisDao.getReqBillList(reqBill);
+			// 计算建议采购数量
+			calPurchase(list);
+
 			list = addBlankRow(list);
 			reqBillManager.writeReqBillFileToSupplier(batchId, supplier.getName(), list);
 
@@ -267,6 +277,26 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		}
 
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@全部数据行" + _index);
+	}
+
+	/**
+	 * 计算建议采购数量
+	 */
+	private void calPurchase(List<ReqBill> list) {
+		for (ReqBill reqBill : list) {
+			if (reqBill.getStockQty().compareTo(BigDecimal.ZERO) == -1) {// 小于零，负库存
+				continue;// 不处理
+			}
+
+			BigDecimal _posQty = reqBill.getPosQty1().add(reqBill.getPosQty2()).add(reqBill.getPosQty3())
+					.add(reqBill.getPosQty4());
+			_posQty = _posQty.divide(new BigDecimal(4), BigDecimal.ROUND_DOWN);
+
+			// 建议采购数量-低（平均值×1）
+			reqBill.setLowPurchase(_posQty.subtract(reqBill.getStockQty()));
+			// 建议采购数量-高（平均值×2）
+			reqBill.setHighPurchase(_posQty.multiply(new BigDecimal(2)).subtract(reqBill.getStockQty()));
+		}
 	}
 
 	// 生产供应商文件-插入图片
