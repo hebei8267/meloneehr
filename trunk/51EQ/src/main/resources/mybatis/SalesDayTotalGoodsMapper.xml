@@ -79,7 +79,7 @@
 	    g.opt_date >= #{optDateStart}
 	AND g.opt_date <= #{optDateEnd}
 	GROUP BY
-    	g.item_subno
+    	g.org_id, g.item_subno
     ]]>
 	</select>
 </mapper>

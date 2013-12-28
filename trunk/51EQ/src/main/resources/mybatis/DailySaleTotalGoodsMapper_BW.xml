@@ -23,11 +23,11 @@
 	<select id="getDailySaleTotalList" parameterType="com.tjhx.entity.bw.DailySaleTotalGoods" resultMap="Result_Map_DailySaleTotal">
 	<![CDATA[
 		SELECT
-		    b.item_name,
-		    b.item_subno,
-		    b.item_barcode,
-		    a.pos_qty,
-		    a.pos_amt,
+		    b.item_name ,
+		    b.item_subno ,
+		    b.item_barcode ,		    
+		    a.pos_qty - a.pos_ret_qty as pos_qty ,
+		    a.pos_amt - a.pos_ret_amt as pos_amt ,
 		    a.branch_no
 		FROM
 		    view_sale_daysum_item a ,
