@@ -112,13 +112,13 @@
 		FROM
 		    t_req_bill_tmp bill
 		LEFT JOIN
-		    t_sales_week_total_goods_1 good1 ON bill.barcode = good1.item_barcode
+		    t_sales_week_total_goods_1 good1 ON bill.barcode = good1.item_barcode AND bill.org_id = good1.org_id
 		LEFT JOIN
-		    t_sales_week_total_goods_2 good2 ON bill.barcode = good2.item_barcode
+		    t_sales_week_total_goods_2 good2 ON bill.barcode = good2.item_barcode AND bill.org_id = good2.org_id
 		LEFT JOIN
-		    t_sales_week_total_goods_3 good3 ON bill.barcode = good3.item_barcode
+		    t_sales_week_total_goods_3 good3 ON bill.barcode = good3.item_barcode AND bill.org_id = good3.org_id
 		LEFT JOIN
-		    t_sales_week_total_goods_4 good4 ON bill.barcode = good4.item_barcode
+		    t_sales_week_total_goods_4 good4 ON bill.barcode = good4.item_barcode AND bill.org_id = good4.org_id
 		LEFT JOIN
     		t_store_detail sd ON bill.barcode = sd.item_barcode AND bill.org_id = sd.org_id
 		WHERE
