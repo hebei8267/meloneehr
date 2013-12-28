@@ -55,6 +55,8 @@ public class SalesDayTotalGoods extends IdEntity {
 	private BigDecimal stockQty;
 	/** 库存金额 */
 	private BigDecimal stockAmt;
+	/** 销售金额 */
+	private BigDecimal saleAmt;
 
 	/**
 	 * 取得机构编号
@@ -198,6 +200,9 @@ public class SalesDayTotalGoods extends IdEntity {
 	 * @return posQty 销售数量
 	 */
 	public BigDecimal getPosQty() {
+		if (null == posQty) {
+			return new BigDecimal(0);
+		}
 		return posQty;
 	}
 
@@ -216,6 +221,9 @@ public class SalesDayTotalGoods extends IdEntity {
 	 * @return posAmt 销售金额
 	 */
 	public BigDecimal getPosAmt() {
+		if (null == posAmt) {
+			return new BigDecimal(0);
+		}
 		return posAmt;
 	}
 
@@ -359,6 +367,25 @@ public class SalesDayTotalGoods extends IdEntity {
 	 */
 	public void setStockAmt(BigDecimal stockAmt) {
 		this.stockAmt = stockAmt;
+	}
+
+	/**
+	 * 取得销售金额
+	 * 
+	 * @return saleAmt 销售金额
+	 */
+	@Transient
+	public BigDecimal getSaleAmt() {
+		return saleAmt;
+	}
+
+	/**
+	 * 设置销售金额
+	 * 
+	 * @param saleAmt 销售金额
+	 */
+	public void setSaleAmt(BigDecimal saleAmt) {
+		this.saleAmt = saleAmt;
 	}
 
 }
