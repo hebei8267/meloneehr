@@ -31,7 +31,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 
 	// ##############################################
 	// ??????????????????????????????????????????????
-	private static String batchId = "20131208";
+	private static String batchId = "20131222";
 
 	@Test
 	@Rollback(false)
@@ -48,21 +48,19 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "01", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00001D", reqBillList);
 	}
 
-	// @Test
-	// @Rollback(false)
-	// public void test02() throws InvalidFormatException, IOException,
-	// SAXException {
-	//
-	// List<ReqBill> reqBillList =
-	// reqBillManager.readReqBillFile("D:\\门店要货单-输入\\02D.xls");
-	// if (null == reqBillList || reqBillList.size() == 0) {
-	// System.out.println("############无效文件");
-	// }
-	// reqBillManager.saveReqBillFile(batchId, "02", reqBillList);
-	// }
+	@Test
+	@Rollback(false)
+	public void test02() throws InvalidFormatException, IOException, SAXException {
+
+		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\02D.xls");
+		if (null == reqBillList || reqBillList.size() == 0) {
+			System.out.println("############无效文件");
+		}
+		reqBillManager.saveReqBillFile(batchId, "00002D", reqBillList);
+	}
 
 	@Test
 	@Rollback(false)
@@ -72,7 +70,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "03", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00003D", reqBillList);
 	}
 
 	@Test
@@ -83,7 +81,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "04", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00004D", reqBillList);
 	}
 
 	@Test
@@ -94,7 +92,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "05", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00005D", reqBillList);
 	}
 
 	@Test
@@ -105,7 +103,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "06", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00006D", reqBillList);
 	}
 
 	@Test
@@ -116,7 +114,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "07", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00007D", reqBillList);
 	}
 
 	@Test
@@ -127,7 +125,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "08", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00008D", reqBillList);
 	}
 
 	@Test
@@ -138,7 +136,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "09", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00009D", reqBillList);
 	}
 
 	@Test
@@ -149,7 +147,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "10", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00010D", reqBillList);
 	}
 
 	@Test
@@ -160,7 +158,7 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 		if (null == reqBillList || reqBillList.size() == 0) {
 			System.out.println("############无效文件");
 		}
-		reqBillManager.saveReqBillFile(batchId, "11", reqBillList);
+		reqBillManager.saveReqBillFile(batchId, "00011D", reqBillList);
 	}
 
 	// @Test
@@ -173,37 +171,47 @@ public class ReqBillManagerTest extends SpringTransactionalTestCase {
 	// if (null == reqBillList || reqBillList.size() == 0) {
 	// System.out.println("############无效文件");
 	// }
-	// reqBillManager.saveReqBillFile(batchId, "12", reqBillList);
+	// reqBillManager.saveReqBillFile(batchId, "00012D", reqBillList);
 	// }
-	//
-	// @Test
-	// @Rollback(false)
-	// public void test13() throws InvalidFormatException, IOException,
-	// SAXException {
-	//
-	// List<ReqBill> reqBillList =
-	// reqBillManager.readReqBillFile("D:\\门店要货单-输入\\13D.xls");
-	// if (null == reqBillList || reqBillList.size() == 0) {
-	// System.out.println("############无效文件");
-	// }
-	// reqBillManager.saveReqBillFile(batchId, "13", reqBillList);
-	// }
+
+	@Test
+	@Rollback(false)
+	public void test13() throws InvalidFormatException, IOException, SAXException {
+
+		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\13D.xls");
+		if (null == reqBillList || reqBillList.size() == 0) {
+			System.out.println("############无效文件");
+		}
+		reqBillManager.saveReqBillFile(batchId, "00013D", reqBillList);
+	}
+
+	@Test
+	@Rollback(false)
+	public void test15() throws InvalidFormatException, IOException, SAXException {
+
+		List<ReqBill> reqBillList = reqBillManager.readReqBillFile("D:\\门店要货单-输入\\15D.xls");
+		if (null == reqBillList || reqBillList.size() == 0) {
+			System.out.println("############无效文件");
+		}
+		reqBillManager.saveReqBillFile(batchId, "00015D", reqBillList);
+	}
 
 	private List<String> getOrgIdList(List<ReqBill> list) {
 		List<String> defOrgIdArr = new ArrayList<String>();
-		defOrgIdArr.add("01");
-		defOrgIdArr.add("02");
-		defOrgIdArr.add("03");
-		defOrgIdArr.add("04");
-		defOrgIdArr.add("05");
-		defOrgIdArr.add("06");
-		defOrgIdArr.add("07");
-		defOrgIdArr.add("08");
-		defOrgIdArr.add("09");
-		defOrgIdArr.add("10");
-		defOrgIdArr.add("11");
-		defOrgIdArr.add("12");
-		defOrgIdArr.add("13");
+		defOrgIdArr.add("00001D");
+		defOrgIdArr.add("00002D");
+		defOrgIdArr.add("00003D");
+		defOrgIdArr.add("00004D");
+		defOrgIdArr.add("00005D");
+		defOrgIdArr.add("00006D");
+		defOrgIdArr.add("00007D");
+		defOrgIdArr.add("00008D");
+		defOrgIdArr.add("00009D");
+		defOrgIdArr.add("00010D");
+		defOrgIdArr.add("00011D");
+		defOrgIdArr.add("00012D");
+		defOrgIdArr.add("00013D");
+		defOrgIdArr.add("00015D");
 
 		List<String> orgIdArr = new ArrayList<String>();
 		for (ReqBill reqBill : list) {
