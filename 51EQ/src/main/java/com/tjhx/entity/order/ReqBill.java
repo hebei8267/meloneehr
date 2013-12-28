@@ -374,7 +374,7 @@ public class ReqBill extends IdEntity {
 	 * @param posQty4 销售数量-近4周
 	 */
 	public void setPosQty4(BigDecimal posQty4) {
-		this.posQty4 = new BigDecimal(0);
+		this.posQty4 = posQty4;
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class ReqBill extends IdEntity {
 	 * @param stockQty 库存数量
 	 */
 	public void setStockQty(BigDecimal stockQty) {
-		this.stockQty = new BigDecimal(0);
+		this.stockQty = stockQty;
 	}
 
 	/**
