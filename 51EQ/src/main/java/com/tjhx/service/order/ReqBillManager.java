@@ -131,7 +131,7 @@ public class ReqBillManager {
 			if (!imgFile.exists()) {// image文件不存在
 				continue;
 			}
-			_insertImage(wb, patriarch, _getImageData(ImageIO.read(imgFile)), _index, 8);
+			_insertImage(wb, patriarch, _getImageData(ImageIO.read(imgFile)), _index, 15);
 		}
 
 		FileOutputStream fout = new FileOutputStream(filePath);
