@@ -131,7 +131,7 @@
                                     	${sumSale.stockAmt}
                                     </td>
                                     <td>
-                                    	${sumSale.stockAmt/sumSale.stockQty} / ${sumSale.posAmt/sumSale.posQty}
+                                    	${sumSale.stockAmt/sumSale.stockQty} / ${sumSale.saleAmt}
                                     </td>
                                 </tr>
                                 </c:forEach>
