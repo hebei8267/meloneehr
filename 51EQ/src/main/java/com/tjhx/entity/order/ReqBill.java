@@ -57,6 +57,10 @@ public class ReqBill extends IdEntity {
 	private BigDecimal posQty4;
 	/** 库存数量 */
 	private BigDecimal stockQty;
+	/** 建议采购数量-低（平均值×1） */
+	private BigDecimal lowPurchase;
+	/** 建议采购数量-高（平均值×2） */
+	private BigDecimal highPurchase;
 
 	/**
 	 * 取得处理批次号
@@ -393,6 +397,50 @@ public class ReqBill extends IdEntity {
 	 */
 	public void setStockQty(BigDecimal stockQty) {
 		this.stockQty = new BigDecimal(0);
+	}
+
+	/**
+	 * 取得建议采购数量-低（平均值×1）
+	 * 
+	 * @return lowPurchase 建议采购数量-低（平均值×1）
+	 */
+	@Transient
+	public BigDecimal getLowPurchase() {
+		if (null == lowPurchase) {
+			return new BigDecimal(0);
+		}
+		return lowPurchase;
+	}
+
+	/**
+	 * 设置建议采购数量-低（平均值×1）
+	 * 
+	 * @param lowPurchase 建议采购数量-低（平均值×1）
+	 */
+	public void setLowPurchase(BigDecimal lowPurchase) {
+		this.lowPurchase = lowPurchase;
+	}
+
+	/**
+	 * 取得建议采购数量-高（平均值×2）
+	 * 
+	 * @return highPurchase 建议采购数量-高（平均值×2）
+	 */
+	@Transient
+	public BigDecimal getHighPurchase() {
+		if (null == highPurchase) {
+			return new BigDecimal(0);
+		}
+		return highPurchase;
+	}
+
+	/**
+	 * 设置建议采购数量-高（平均值×2）
+	 * 
+	 * @param highPurchase 建议采购数量-高（平均值×2）
+	 */
+	public void setHighPurchase(BigDecimal highPurchase) {
+		this.highPurchase = highPurchase;
 	}
 
 }
