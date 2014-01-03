@@ -79,6 +79,9 @@
 		                }, {
 		                    text: "${optDateYM3}年",
 		                    color: "#0174DF"
+		                }, {
+		                    text: "${optDateYM4}年",
+		                    color: "#FFCC00"
 		                }],
 		                valign: "middle",
 		                align: "right",
@@ -100,6 +103,14 @@
 		            color: "#0174DF",
 		            tooltip: {
 		            	template: "#saleRamt3#元(#optDateYM3#)"
+		            }
+		        });
+				barChart1${status1.index + 1}.addSeries({
+		            value: "#saleRamt4#",
+		            label: "#saleRamt4#",
+		            color: "#FFCC00",
+		            tooltip: {
+		            	template: "#saleRamt4#元(#optDateYM4#)"
 		            }
 		        });
 		        barChart1${status1.index + 1}.parse(orgSumSalesJson${status1.index + 1}, "json");
