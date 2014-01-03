@@ -16,12 +16,16 @@ public class SalesMonthTotal_Show {
 	private String optDateYM2;
 	/** 日期 */
 	private String optDateYM3;
+	/** 日期 */
+	private String optDateYM4;
 	/** 实销金额 */
 	private BigDecimal saleRamt1 = new BigDecimal(0);
 	/** 实销金额 */
 	private BigDecimal saleRamt2 = new BigDecimal(0);
 	/** 实销金额 */
 	private BigDecimal saleRamt3 = new BigDecimal(0);
+	/** 实销金额 */
+	private BigDecimal saleRamt4 = new BigDecimal(0);
 
 	/**
 	 * 取得机构编号
@@ -185,6 +189,42 @@ public class SalesMonthTotal_Show {
 		this.saleRamt3 = saleRamt3;
 	}
 
+	/**
+	 * 取得日期
+	 * 
+	 * @return optDateYM4 日期
+	 */
+	public String getOptDateYM4() {
+		return optDateYM4;
+	}
+
+	/**
+	 * 设置日期
+	 * 
+	 * @param optDateYM4 日期
+	 */
+	public void setOptDateYM4(String optDateYM4) {
+		this.optDateYM4 = optDateYM4;
+	}
+
+	/**
+	 * 取得实销金额
+	 * 
+	 * @return saleRamt4 实销金额
+	 */
+	public BigDecimal getSaleRamt4() {
+		return saleRamt4;
+	}
+
+	/**
+	 * 设置实销金额
+	 * 
+	 * @param saleRamt4 实销金额
+	 */
+	public void setSaleRamt4(BigDecimal saleRamt4) {
+		this.saleRamt4 = saleRamt4;
+	}
+
 	public int myEquals(Object obj) {
 
 		if (!(obj instanceof SalesMonthTotalItem))
@@ -204,6 +244,9 @@ public class SalesMonthTotal_Show {
 		if (this.getOptDateYM3().equals(rhs.getOptDateYM()))
 			return 3;
 
+		if (this.getOptDateYM4().equals(rhs.getOptDateYM()))
+			return 4;
+
 		return 0;
 	}
 
@@ -216,6 +259,9 @@ public class SalesMonthTotal_Show {
 
 		if (3 == equalsRes)
 			saleRamt3 = _salesMonthTotalItem.getSaleRamt();
+
+		if (4 == equalsRes)
+			saleRamt4 = _salesMonthTotalItem.getSaleRamt();
 
 	}
 }
