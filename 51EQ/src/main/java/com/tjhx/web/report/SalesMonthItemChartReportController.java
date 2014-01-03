@@ -85,8 +85,11 @@ public class SalesMonthItemChartReportController extends BaseController {
 
 	@RequestMapping(value = "bar_init")
 	public String salesDayChartReport1_Action(Model model) throws ParseException {
+		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
+		int _yearNum = sysConfig.getSalesMonthTotalShowYearNum();
+
 		List<Organization> _orgList = orgManager.getSubOrganization();
-		List<String> optDateYList = calOptDateY();
+		List<String> optDateYList = calOptDateY(_yearNum);
 
 		List<String> _orgSumSalesJsonList = new ArrayList<String>();
 		List<String> _orgNameList = new ArrayList<String>();
@@ -96,9 +99,13 @@ public class SalesMonthItemChartReportController extends BaseController {
 		// 各店近三年销售数据
 		getSalesTotalList_ByOrgAndYear(_orgList, optDateYList, _orgSumSalesJsonList, _orgNameList);
 
-		model.addAttribute("optDateYM1", optDateYList.get(0));
-		model.addAttribute("optDateYM2", optDateYList.get(1));
-		model.addAttribute("optDateYM3", optDateYList.get(2));
+		for (int i = 0; i < _yearNum; i++) {
+			model.addAttribute("optDateYM" + (i + 1), optDateYList.get(i));
+			model.addAttribute("optDateYM" + (i + 1), optDateYList.get(i));
+			model.addAttribute("optDateYM" + (i + 1), optDateYList.get(i));
+			model.addAttribute("optDateYM" + (i + 1), optDateYList.get(i));
+		}
+
 		model.addAttribute("orgSumSalesJsonList", _orgSumSalesJsonList);
 		model.addAttribute("orgNameList", _orgNameList);
 
@@ -144,14 +151,13 @@ public class SalesMonthItemChartReportController extends BaseController {
 	 * @return
 	 * @throws ParseException
 	 */
-	private List<String> calOptDateY() throws ParseException {
+	private List<String> calOptDateY(int _yearNum) throws ParseException {
 		List<String> _optDateYList = new ArrayList<String>();
 
 		String _now = DateUtils.getCurrentYear();
 		_optDateYList.add(_now);
 
-		SysConfig sysConfig = SpringContextHolder.getBean("sysConfig");
-		for (int i = 1; i < sysConfig.getSalesMonthTotalShowYearNum(); i++) {
+		for (int i = 1; i < _yearNum; i++) {
 			_optDateYList.add(DateUtils.getNextYearFormatDate(_now, -i, "yyyy"));
 		}
 
