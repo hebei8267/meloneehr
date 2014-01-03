@@ -140,6 +140,8 @@ public class SalesMonthItemChartReportController extends BaseController {
 			_salesTotalShow.setOptDateYM2(optDateYList.get(1) + String.format("%02d", i));
 			// 年月3
 			_salesTotalShow.setOptDateYM3(optDateYList.get(2) + String.format("%02d", i));
+			// 年月4
+			_salesTotalShow.setOptDateYM4(optDateYList.get(3) + String.format("%02d", i));
 			_salesTotalShowList.add(_salesTotalShow);
 		}
 
