@@ -12,6 +12,8 @@ public class ItemGoods {
 	private String itemName;
 	/** 商品名称-拼音缩写 */
 	private String itemSubname;
+	/** 商品种类编号 */
+	private String itemClsno;
 
 	/**
 	 * 取得短条码
@@ -83,6 +85,24 @@ public class ItemGoods {
 	 */
 	public void setItemSubname(String itemSubname) {
 		this.itemSubname = itemSubname;
+	}
+
+	/**
+	 * 取得商品种类编号
+	 * 
+	 * @return itemClsno 商品种类编号
+	 */
+	public String getItemClsno() {
+		return itemClsno;
+	}
+
+	/**
+	 * 设置商品种类编号
+	 * 
+	 * @param itemClsno 商品种类编号
+	 */
+	public void setItemClsno(String itemClsno) {
+		this.itemClsno = itemClsno;
 	}
 
 }
