@@ -16,7 +16,7 @@
             .form-signin {
                 max-width: 300px;
                 padding: 19px 29px 29px;
-                margin: 70px auto 20px;
+                margin: 50px auto 20px;
                 background-color: #fff;
                 border: 1px solid #e5e5e5;
                 -webkit-border-radius: 5px;
@@ -44,7 +44,14 @@
                 <input type="text" class="input-block-level" name="loginName" id="loginName" placeholder="User ID" value="">
                 <input type="password" class="input-block-level" name="passWord" id="passWord" placeholder="Password" value="">
                 <input type="submit" value="登录" id="loginBtn" class="btn btn-large btn-primary"/>
+                
+                
             </form>
+            <center>
+            <a href="${ctx}/map.jsp" target="_blank" title="各门店详细地址信息">
+				<img src="${ctx}/static/img/search-map.png" />
+			</a>
+			</center>
         </div>
         <script>
             $(function() {
