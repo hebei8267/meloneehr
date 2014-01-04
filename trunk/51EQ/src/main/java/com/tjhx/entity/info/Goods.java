@@ -26,6 +26,8 @@ public class Goods extends IdEntity {
 	private String name;
 	/** 商品名称-拼音缩写 */
 	private String pyName;
+	/** 商品种类编号 */
+	private String itemNo;
 
 	/**
 	 * 取得短条码
@@ -102,6 +104,25 @@ public class Goods extends IdEntity {
 	 */
 	public void setPyName(String pyName) {
 		this.pyName = pyName;
+	}
+
+	/**
+	 * 取得商品种类编号
+	 * 
+	 * @return itemNo 商品种类编号
+	 */
+	@Column(length = 8)
+	public String getItemNo() {
+		return itemNo;
+	}
+
+	/**
+	 * 设置商品种类编号
+	 * 
+	 * @param itemNo 商品种类编号
+	 */
+	public void setItemNo(String itemNo) {
+		this.itemNo = itemNo;
 	}
 
 }
