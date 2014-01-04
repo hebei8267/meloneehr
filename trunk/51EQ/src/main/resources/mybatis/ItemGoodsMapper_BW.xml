@@ -12,6 +12,8 @@
 		<result column="item_barcode" property="itemBarcode" jdbcType="VARCHAR"/>
 		<!-- 商品名称-拼音缩写 -->
 		<result column="item_subname" property="itemSubname" jdbcType="VARCHAR"/>
+		<!-- 商品种类编号 -->
+		<result column="item_clsno" property="itemClsno" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	
@@ -22,6 +24,7 @@
 		    item_subno ,
 			item_barcode ,
 			item_name ,
+			item_clsno ,
 			item_subname
 		FROM
 		    view_item_info
