@@ -65,6 +65,8 @@ public class GoodsManager {
 		_goods.setName(_itemGoods.getItemName());
 		// 商品名称-拼音缩写
 		_goods.setPyName(_itemGoods.getItemSubname());
+		// 商品种类编号
+		_goods.setItemNo(_itemGoods.getItemClsno());
 
 		goodsJpaDao.save(_goods);
 
