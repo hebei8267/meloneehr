@@ -167,6 +167,10 @@
                             <li>
                                 <a href="${sc_ctx}/salesMonthItemChartReport/bar_init">月销售金额对比(图形)</a>
                             </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="${sc_ctx}/salesWeekTotal/reCalInit">计算周销售信息</a>
+                            </li>
                             </c:if>
                         </ul>
                     </li>
