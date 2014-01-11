@@ -13,8 +13,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/eq/static/css/dhtmlxchart.css">
-    	<script src="/eq/static/js/dhtmlxchart.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="${ctx}/static/css/dhtmlxchart.css">
+    	<script src="${ctx}/static/js/dhtmlxchart.js" type="text/javascript"></script>
     </head>
     <body>
         <%// 系统菜单  %>
