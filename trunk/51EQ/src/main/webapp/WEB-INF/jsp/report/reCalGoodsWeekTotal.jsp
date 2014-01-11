@@ -33,7 +33,9 @@
                         </legend>
                     </div>
                     <div class="span12">
-                    <button	id="reCalBtn" class="btn	btn-primary" type="button">查询</button>
+                    <center>
+                    <button	id="reCalBtn" class="btn btn-large btn-primary" type="button">查询</button>
+                    </center>
                     </div>
                 </div>
             </form>
