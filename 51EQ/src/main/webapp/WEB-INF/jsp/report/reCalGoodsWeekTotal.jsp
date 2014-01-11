@@ -29,13 +29,11 @@
                 <div class="row">
                     <div class="span12">
                         <legend>
-                            <h3>计算周销售信息</h3>
+                            <h3>商品周销售信息＆重计算</h3>
                         </legend>
                     </div>
-                    <div class="span12">
-                    <center>
-                    <button	id="reCalBtn" class="btn btn-large btn-primary" type="button">查询</button>
-                    </center>
+                    <div class="span4"><br><br>
+                    <button	id="reCalBtn" class="btn btn-large btn-primary btn-block" type="button">商品周销售信息＆重计算</button>
                     </div>
                 </div>
             </form>
