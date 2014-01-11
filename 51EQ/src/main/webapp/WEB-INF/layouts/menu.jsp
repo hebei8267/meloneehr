@@ -169,7 +169,10 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="${sc_ctx}/salesWeekTotal/reCalInit">计算周销售信息</a>
+                                <a href="${sc_ctx}/salesWeekGoodsTotalReport/init">商品周销售信息一览</a>
+                            </li>
+                            <li>
+                                <a href="${sc_ctx}/salesWeekTotal/reCalInit">商品周销售信息＆重计算</a>
                             </li>
                             </c:if>
                         </ul>
