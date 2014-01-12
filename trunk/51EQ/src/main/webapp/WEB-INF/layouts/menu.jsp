@@ -133,6 +133,9 @@
                             <c:if test="${_permIdList.contains('11')}">
                             <li class="divider"></li>
                             <li>
+		                    	<a href="${sc_ctx}/bankCheck/init">存款信息</a>
+		                 	</li>
+                            <li>
 		                    	<a href="${sc_ctx}/cashReport">销售信息(表格)</a>
 		                 	</li>
 		                  	<li>
